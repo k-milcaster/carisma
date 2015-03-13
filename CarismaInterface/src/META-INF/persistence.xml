@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="CarismaInterfacePU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>carismainterface.entity.Rakobat</class>
+    <class>carismainterface.entity.Detailobat</class>
+    <class>carismainterface.entity.Provinsi</class>
+    <class>carismainterface.entity.Kunjungan</class>
+    <class>carismainterface.entity.Kota</class>
+    <class>carismainterface.entity.Penyakit</class>
+    <class>carismainterface.entity.PasienKamar</class>
+    <class>carismainterface.entity.Dokter</class>
+    <class>carismainterface.entity.User</class>
+    <class>carismainterface.entity.Detailtransaksijualobat</class>
+    <class>carismainterface.entity.Detailtransaksibeliobat</class>
+    <class>carismainterface.entity.Jadwalpegawai</class>
+    <class>carismainterface.entity.Antrian</class>
+    <class>carismainterface.entity.Resep</class>
+    <class>carismainterface.entity.Poli</class>
+    <class>carismainterface.entity.Pegawai</class>
+    <class>carismainterface.entity.Pasien</class>
+    <class>carismainterface.entity.Obat</class>
+    <class>carismainterface.entity.Transaksijualobat</class>
+    <class>carismainterface.entity.Kartupasien</class>
+    <class>carismainterface.entity.Transaksibeliobat</class>
+    <class>carismainterface.entity.Kamar</class>
+    <class>carismainterface.entity.Jadwaldokter</class>
+    <class>carismainterface.entity.Rekammedik</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/carisma?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>

@@ -1,0 +1,146 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package carismainterface.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ *
+ * @author K-MiL Caster
+ */
+@Entity
+@Table(name = "antrian")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Antrian.findAll", query = "SELECT a FROM Antrian a"),
+    @NamedQuery(name = "Antrian.findByIdAntrian", query = "SELECT a FROM Antrian a WHERE a.idAntrian = :idAntrian"),
+    @NamedQuery(name = "Antrian.findByNomorAntrian", query = "SELECT a FROM Antrian a WHERE a.nomorAntrian = :nomorAntrian"),
+    @NamedQuery(name = "Antrian.findByJenisAntrian", query = "SELECT a FROM Antrian a WHERE a.jenisAntrian = :jenisAntrian"),
+    @NamedQuery(name = "Antrian.findByTglAntrian", query = "SELECT a FROM Antrian a WHERE a.tglAntrian = :tglAntrian")})
+public class Antrian implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "id_antrian")
+    private String idAntrian;
+    @Basic(optional = false)
+    @Column(name = "nomor_antrian")
+    private int nomorAntrian;
+    @Basic(optional = false)
+    @Column(name = "jenis_antrian")
+    private String jenisAntrian;
+    @Basic(optional = false)
+    @Column(name = "tgl_antrian")
+    @Temporal(TemporalType.DATE)
+    private Date tglAntrian;
+    @JoinColumn(name = "dokter_id_dokter", referencedColumnName = "id_dokter")
+    @ManyToOne(optional = false)
+    private Dokter dokterIdDokter;
+    @JoinColumn(name = "pasien_id_pasien", referencedColumnName = "id_pasien")
+    @ManyToOne(optional = false)
+    private Pasien pasienIdPasien;
+
+    public Antrian() {
+    }
+
+    public Antrian(String idAntrian) {
+        this.idAntrian = idAntrian;
+    }
+
+    public Antrian(String idAntrian, int nomorAntrian, String jenisAntrian, Date tglAntrian) {
+        this.idAntrian = idAntrian;
+        this.nomorAntrian = nomorAntrian;
+        this.jenisAntrian = jenisAntrian;
+        this.tglAntrian = tglAntrian;
+    }
+
+    public String getIdAntrian() {
+        return idAntrian;
+    }
+
+    public void setIdAntrian(String idAntrian) {
+        this.idAntrian = idAntrian;
+    }
+
+    public int getNomorAntrian() {
+        return nomorAntrian;
+    }
+
+    public void setNomorAntrian(int nomorAntrian) {
+        this.nomorAntrian = nomorAntrian;
+    }
+
+    public String getJenisAntrian() {
+        return jenisAntrian;
+    }
+
+    public void setJenisAntrian(String jenisAntrian) {
+        this.jenisAntrian = jenisAntrian;
+    }
+
+    public Date getTglAntrian() {
+        return tglAntrian;
+    }
+
+    public void setTglAntrian(Date tglAntrian) {
+        this.tglAntrian = tglAntrian;
+    }
+
+    public Dokter getDokterIdDokter() {
+        return dokterIdDokter;
+    }
+
+    public void setDokterIdDokter(Dokter dokterIdDokter) {
+        this.dokterIdDokter = dokterIdDokter;
+    }
+
+    public Pasien getPasienIdPasien() {
+        return pasienIdPasien;
+    }
+
+    public void setPasienIdPasien(Pasien pasienIdPasien) {
+        this.pasienIdPasien = pasienIdPasien;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idAntrian != null ? idAntrian.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Antrian)) {
+            return false;
+        }
+        Antrian other = (Antrian) object;
+        if ((this.idAntrian == null && other.idAntrian != null) || (this.idAntrian != null && !this.idAntrian.equals(other.idAntrian))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "carismainterface.entity.Antrian[ idAntrian=" + idAntrian + " ]";
+    }
+    
+}
