@@ -35,6 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Transaksibeliobat.findByDateTransaksibeli", query = "SELECT t FROM Transaksibeliobat t WHERE t.dateTransaksibeli = :dateTransaksibeli"),
     @NamedQuery(name = "Transaksibeliobat.findByKeterangan", query = "SELECT t FROM Transaksibeliobat t WHERE t.keterangan = :keterangan")})
 public class Transaksibeliobat implements Serializable {
+    @Column(name = "hargabeli_obat")
+    private Integer hargabeliObat;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -111,6 +113,14 @@ public class Transaksibeliobat implements Serializable {
     @Override
     public String toString() {
         return "carismainterface.entity.Transaksibeliobat[ idTransaksibeliobat=" + idTransaksibeliobat + " ]";
+    }
+
+    public Integer getHargabeliObat() {
+        return hargabeliObat;
+    }
+
+    public void setHargabeliObat(Integer hargabeliObat) {
+        this.hargabeliObat = hargabeliObat;
     }
     
 }

@@ -52,6 +52,15 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dokter.findByGajilemburDokter", query = "SELECT d FROM Dokter d WHERE d.gajilemburDokter = :gajilemburDokter"),
     @NamedQuery(name = "Dokter.findByGajikonsulDokter", query = "SELECT d FROM Dokter d WHERE d.gajikonsulDokter = :gajikonsulDokter")})
 public class Dokter implements Serializable {
+    @Basic(optional = false)
+    @Column(name = "tgllahir_dokter")
+    @Temporal(TemporalType.DATE)
+    private String tgllahirDokter;
+    @Lob
+    @Column(name = "foto_dokter")
+    private byte[] fotoDokter;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dokterIdDokter")
+    private Collection<Rekammedik> rekammedikCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -76,10 +85,6 @@ public class Dokter implements Serializable {
     @Column(name = "tempatlahir_dokter")
     private String tempatlahirDokter;
     @Basic(optional = false)
-    @Column(name = "tgllahir_dokter")
-    @Temporal(TemporalType.DATE)
-    private String tgllahirDokter;
-    @Basic(optional = false)
     @Column(name = "kelamin_dokter")
     private String kelaminDokter;
     @Basic(optional = false)
@@ -89,9 +94,6 @@ public class Dokter implements Serializable {
     private String bankDokter;
     @Column(name = "norek_dokter")
     private String norekDokter;
-    @Lob
-    @Column(name = "foto_dokter")
-    private byte[] fotoDokter;
     @Column(name = "gajifix_dokter")
     private Integer gajifixDokter;
     @Column(name = "gajilembur_dokter")
@@ -331,6 +333,15 @@ public class Dokter implements Serializable {
     @Override
     public String toString() {
         return "carismainterface.entity.Dokter[ idDokter=" + idDokter + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Rekammedik> getRekammedikCollection() {
+        return rekammedikCollection;
+    }
+
+    public void setRekammedikCollection(Collection<Rekammedik> rekammedikCollection) {
+        this.rekammedikCollection = rekammedikCollection;
     }
     
 }

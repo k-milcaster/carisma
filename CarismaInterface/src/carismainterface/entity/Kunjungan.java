@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Kunjungan.findByTanggaljamKunjungan", query = "SELECT k FROM Kunjungan k WHERE k.tanggaljamKunjungan = :tanggaljamKunjungan"),
     @NamedQuery(name = "Kunjungan.findByBiayaKunjungan", query = "SELECT k FROM Kunjungan k WHERE k.biayaKunjungan = :biayaKunjungan")})
 public class Kunjungan implements Serializable {
+    @JoinColumn(name = "rekammedik_id_rekammedik", referencedColumnName = "id_rekammedik")
+    @ManyToOne(optional = false)
+    private Rekammedik rekammedikIdRekammedik;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -148,6 +151,14 @@ public class Kunjungan implements Serializable {
     @Override
     public String toString() {
         return "carismainterface.entity.Kunjungan[ idKunjungan=" + idKunjungan + " ]";
+    }
+
+    public Rekammedik getRekammedikIdRekammedik() {
+        return rekammedikIdRekammedik;
+    }
+
+    public void setRekammedikIdRekammedik(Rekammedik rekammedikIdRekammedik) {
+        this.rekammedikIdRekammedik = rekammedikIdRekammedik;
     }
     
 }

@@ -30,44 +30,44 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author K-MiL Caster
  */
 @Entity
-@Table(name = "rekammedis")
+@Table(name = "rekammedik")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Rekammedis.findAll", query = "SELECT r FROM Rekammedis r"),
-    @NamedQuery(name = "Rekammedis.findByIdRekammedis", query = "SELECT r FROM Rekammedis r WHERE r.idRekammedis = :idRekammedis"),
-    @NamedQuery(name = "Rekammedis.findByTglRekammedis", query = "SELECT r FROM Rekammedis r WHERE r.tglRekammedis = :tglRekammedis"),
-    @NamedQuery(name = "Rekammedis.findByKeluhanRekammedis", query = "SELECT r FROM Rekammedis r WHERE r.keluhanRekammedis = :keluhanRekammedis"),
-    @NamedQuery(name = "Rekammedis.findByPemeriksaanRekammedis", query = "SELECT r FROM Rekammedis r WHERE r.pemeriksaanRekammedis = :pemeriksaanRekammedis"),
-    @NamedQuery(name = "Rekammedis.findByTerapiRekammedis", query = "SELECT r FROM Rekammedis r WHERE r.terapiRekammedis = :terapiRekammedis"),
-    @NamedQuery(name = "Rekammedis.findByAlergiobatRekammedis", query = "SELECT r FROM Rekammedis r WHERE r.alergiobatRekammedis = :alergiobatRekammedis"),
-    @NamedQuery(name = "Rekammedis.findByKesimpulanRekammedis", query = "SELECT r FROM Rekammedis r WHERE r.kesimpulanRekammedis = :kesimpulanRekammedis"),
-    @NamedQuery(name = "Rekammedis.findByKondisipasienkeluarRekammedis", query = "SELECT r FROM Rekammedis r WHERE r.kondisipasienkeluarRekammedis = :kondisipasienkeluarRekammedis")})
+    @NamedQuery(name = "Rekammedik_1.findAll", query = "SELECT r FROM Rekammedik_1 r"),
+    @NamedQuery(name = "Rekammedik_1.findByIdRekammedik", query = "SELECT r FROM Rekammedik_1 r WHERE r.idRekammedik = :idRekammedik"),
+    @NamedQuery(name = "Rekammedik_1.findByTglRekammedik", query = "SELECT r FROM Rekammedik_1 r WHERE r.tglRekammedik = :tglRekammedik"),
+    @NamedQuery(name = "Rekammedik_1.findByKeluhanRekammedik", query = "SELECT r FROM Rekammedik_1 r WHERE r.keluhanRekammedik = :keluhanRekammedik"),
+    @NamedQuery(name = "Rekammedik_1.findByPemeriksaanRekammedik", query = "SELECT r FROM Rekammedik_1 r WHERE r.pemeriksaanRekammedik = :pemeriksaanRekammedik"),
+    @NamedQuery(name = "Rekammedik_1.findByTerapiRekammedik", query = "SELECT r FROM Rekammedik_1 r WHERE r.terapiRekammedik = :terapiRekammedik"),
+    @NamedQuery(name = "Rekammedik_1.findByAlergiobatRekammedik", query = "SELECT r FROM Rekammedik_1 r WHERE r.alergiobatRekammedik = :alergiobatRekammedik"),
+    @NamedQuery(name = "Rekammedik_1.findByKesimpulanRekammedis", query = "SELECT r FROM Rekammedik_1 r WHERE r.kesimpulanRekammedis = :kesimpulanRekammedis"),
+    @NamedQuery(name = "Rekammedik_1.findByKondisipasienkeluarRekammedis", query = "SELECT r FROM Rekammedik_1 r WHERE r.kondisipasienkeluarRekammedis = :kondisipasienkeluarRekammedis")})
 public class Rekammedik implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id_rekammedis")
-    private String idRekammedis;
+    @Column(name = "id_rekammedik")
+    private String idRekammedik;
     @Basic(optional = false)
-    @Column(name = "tgl_rekammedis")
+    @Column(name = "tgl_rekammedik")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date tglRekammedis;
-    @Column(name = "keluhan_rekammedis")
-    private String keluhanRekammedis;
-    @Column(name = "pemeriksaan_rekammedis")
-    private String pemeriksaanRekammedis;
-    @Column(name = "terapi_rekammedis")
-    private String terapiRekammedis;
-    @Column(name = "alergiobat_rekammedis")
-    private String alergiobatRekammedis;
+    private Date tglRekammedik;
+    @Column(name = "keluhan_rekammedik")
+    private String keluhanRekammedik;
+    @Column(name = "pemeriksaan_rekammedik")
+    private String pemeriksaanRekammedik;
+    @Column(name = "terapi_rekammedik")
+    private String terapiRekammedik;
+    @Column(name = "alergiobat_rekammedik")
+    private String alergiobatRekammedik;
     @Column(name = "kesimpulan_rekammedis")
     private String kesimpulanRekammedis;
     @Basic(optional = false)
     @Column(name = "kondisipasienkeluar_rekammedis")
     private String kondisipasienkeluarRekammedis;
-    @ManyToMany(mappedBy = "rekammedisCollection")
+    @ManyToMany(mappedBy = "rekammedikCollection")
     private Collection<Penyakit> penyakitCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rekammedisIdRekammedis")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rekammedikIdRekammedik")
     private Collection<Kunjungan> kunjunganCollection;
     @JoinColumn(name = "resep_id_resep", referencedColumnName = "id_resep")
     @ManyToOne(optional = false)
@@ -82,62 +82,62 @@ public class Rekammedik implements Serializable {
     public Rekammedik() {
     }
 
-    public Rekammedik(String idRekammedis) {
-        this.idRekammedis = idRekammedis;
+    public Rekammedik(String idRekammedik) {
+        this.idRekammedik = idRekammedik;
     }
 
-    public Rekammedik(String idRekammedis, Date tglRekammedis, String kondisipasienkeluarRekammedis) {
-        this.idRekammedis = idRekammedis;
-        this.tglRekammedis = tglRekammedis;
+    public Rekammedik(String idRekammedik, Date tglRekammedik, String kondisipasienkeluarRekammedis) {
+        this.idRekammedik = idRekammedik;
+        this.tglRekammedik = tglRekammedik;
         this.kondisipasienkeluarRekammedis = kondisipasienkeluarRekammedis;
     }
 
-    public String getIdRekammedis() {
-        return idRekammedis;
+    public String getIdRekammedik() {
+        return idRekammedik;
     }
 
-    public void setIdRekammedis(String idRekammedis) {
-        this.idRekammedis = idRekammedis;
+    public void setIdRekammedik(String idRekammedik) {
+        this.idRekammedik = idRekammedik;
     }
 
-    public Date getTglRekammedis() {
-        return tglRekammedis;
+    public Date getTglRekammedik() {
+        return tglRekammedik;
     }
 
-    public void setTglRekammedis(Date tglRekammedis) {
-        this.tglRekammedis = tglRekammedis;
+    public void setTglRekammedik(Date tglRekammedik) {
+        this.tglRekammedik = tglRekammedik;
     }
 
-    public String getKeluhanRekammedis() {
-        return keluhanRekammedis;
+    public String getKeluhanRekammedik() {
+        return keluhanRekammedik;
     }
 
-    public void setKeluhanRekammedis(String keluhanRekammedis) {
-        this.keluhanRekammedis = keluhanRekammedis;
+    public void setKeluhanRekammedik(String keluhanRekammedik) {
+        this.keluhanRekammedik = keluhanRekammedik;
     }
 
-    public String getPemeriksaanRekammedis() {
-        return pemeriksaanRekammedis;
+    public String getPemeriksaanRekammedik() {
+        return pemeriksaanRekammedik;
     }
 
-    public void setPemeriksaanRekammedis(String pemeriksaanRekammedis) {
-        this.pemeriksaanRekammedis = pemeriksaanRekammedis;
+    public void setPemeriksaanRekammedik(String pemeriksaanRekammedik) {
+        this.pemeriksaanRekammedik = pemeriksaanRekammedik;
     }
 
-    public String getTerapiRekammedis() {
-        return terapiRekammedis;
+    public String getTerapiRekammedik() {
+        return terapiRekammedik;
     }
 
-    public void setTerapiRekammedis(String terapiRekammedis) {
-        this.terapiRekammedis = terapiRekammedis;
+    public void setTerapiRekammedik(String terapiRekammedik) {
+        this.terapiRekammedik = terapiRekammedik;
     }
 
-    public String getAlergiobatRekammedis() {
-        return alergiobatRekammedis;
+    public String getAlergiobatRekammedik() {
+        return alergiobatRekammedik;
     }
 
-    public void setAlergiobatRekammedis(String alergiobatRekammedis) {
-        this.alergiobatRekammedis = alergiobatRekammedis;
+    public void setAlergiobatRekammedik(String alergiobatRekammedik) {
+        this.alergiobatRekammedik = alergiobatRekammedik;
     }
 
     public String getKesimpulanRekammedis() {
@@ -201,7 +201,7 @@ public class Rekammedik implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idRekammedis != null ? idRekammedis.hashCode() : 0);
+        hash += (idRekammedik != null ? idRekammedik.hashCode() : 0);
         return hash;
     }
 
@@ -212,7 +212,7 @@ public class Rekammedik implements Serializable {
             return false;
         }
         Rekammedik other = (Rekammedik) object;
-        if ((this.idRekammedis == null && other.idRekammedis != null) || (this.idRekammedis != null && !this.idRekammedis.equals(other.idRekammedis))) {
+        if ((this.idRekammedik == null && other.idRekammedik != null) || (this.idRekammedik != null && !this.idRekammedik.equals(other.idRekammedik))) {
             return false;
         }
         return true;
@@ -220,7 +220,7 @@ public class Rekammedik implements Serializable {
 
     @Override
     public String toString() {
-        return "carismainterface.entity.Rekammedis[ idRekammedis=" + idRekammedis + " ]";
+        return "carismainterface.entity.Rekammedik_1[ idRekammedik=" + idRekammedik + " ]";
     }
     
 }

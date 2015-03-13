@@ -46,6 +46,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pegawai.findByGajifixPegawai", query = "SELECT p FROM Pegawai p WHERE p.gajifixPegawai = :gajifixPegawai"),
     @NamedQuery(name = "Pegawai.findByGajilemburPegawai", query = "SELECT p FROM Pegawai p WHERE p.gajilemburPegawai = :gajilemburPegawai")})
 public class Pegawai implements Serializable {
+    @Lob
+    @Column(name = "foto_pegawai")
+    private byte[] fotoPegawai;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -85,9 +88,6 @@ public class Pegawai implements Serializable {
     private String bankPegawai;
     @Column(name = "norek_pegawai")
     private String norekPegawai;
-    @Lob
-    @Column(name = "foto_pegawai")
-    private byte[] fotoPegawai;
     @Column(name = "gajifix_pegawai")
     private Integer gajifixPegawai;
     @Column(name = "gajilembur_pegawai")
@@ -293,5 +293,6 @@ public class Pegawai implements Serializable {
     public String toString() {
         return "carismainterface.entity.Pegawai[ idPegawai=" + idPegawai + " ]";
     }
+
     
 }

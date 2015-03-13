@@ -47,6 +47,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pasien.findByDarahPasien", query = "SELECT p FROM Pasien p WHERE p.darahPasien = :darahPasien"),
     @NamedQuery(name = "Pasien.findByRegdatePasien", query = "SELECT p FROM Pasien p WHERE p.regdatePasien = :regdatePasien")})
 public class Pasien implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pasienIdPasien")
+    private Collection<Rekammedik> rekammedikCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -290,6 +292,15 @@ public class Pasien implements Serializable {
     @Override
     public String toString() {
         return "carismainterface.entity.Pasien[ idPasien=" + idPasien + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Rekammedik> getRekammedikCollection() {
+        return rekammedikCollection;
+    }
+
+    public void setRekammedikCollection(Collection<Rekammedik> rekammedikCollection) {
+        this.rekammedikCollection = rekammedikCollection;
     }
     
 }

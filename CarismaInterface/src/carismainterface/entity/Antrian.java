@@ -34,6 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Antrian.findByJenisAntrian", query = "SELECT a FROM Antrian a WHERE a.jenisAntrian = :jenisAntrian"),
     @NamedQuery(name = "Antrian.findByTglAntrian", query = "SELECT a FROM Antrian a WHERE a.tglAntrian = :tglAntrian")})
 public class Antrian implements Serializable {
+    @Column(name = "hadir")
+    private String hadir;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -141,6 +143,14 @@ public class Antrian implements Serializable {
     @Override
     public String toString() {
         return "carismainterface.entity.Antrian[ idAntrian=" + idAntrian + " ]";
+    }
+
+    public String getHadir() {
+        return hadir;
+    }
+
+    public void setHadir(String hadir) {
+        this.hadir = hadir;
     }
     
 }

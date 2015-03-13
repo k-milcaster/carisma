@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,6 +41,20 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByLastlogin", query = "SELECT u FROM User u WHERE u.lastlogin = :lastlogin"),
     @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role")})
 public class User implements Serializable {
+    @Basic(optional = false)
+    @Column(name = "registered")
+    @Temporal(TemporalType.TIMESTAMP)
+    private String registered;
+    @Basic(optional = false)
+    @Column(name = "lastlogin")
+    @Temporal(TemporalType.TIMESTAMP)
+    private String lastlogin;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userIdUser")
+    private Pegawai pegawai;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userIdUser")
+    private Pasien pasien;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userIdUser")
+    private Dokter dokter;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,14 +67,6 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
-    @Basic(optional = false)
-    @Column(name = "registered")
-    @Temporal(TemporalType.TIMESTAMP)
-    private String registered;
-    @Basic(optional = false)
-    @Column(name = "lastlogin")
-    @Temporal(TemporalType.TIMESTAMP)
-    private String lastlogin;
     @Basic(optional = false)
     @Column(name = "role")
     private String role;
@@ -120,21 +128,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(String registered) {
-        this.registered = registered;
-    }
-
-    public String getLastlogin() {
-        return lastlogin;
-    }
-
-    public void setLastlogin(String lastlogin) {
-        this.lastlogin = lastlogin;
-    }
 
     public String getRole() {
         return role;
@@ -194,6 +187,46 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "carismainterface.entity.User[ idUser=" + idUser + " ]";
+    }
+
+    public String getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(String registered) {
+        this.registered = registered;
+    }
+
+    public String getLastlogin() {
+        return lastlogin;
+    }
+
+    public void setLastlogin(String lastlogin) {
+        this.lastlogin = lastlogin;
+    }
+
+    public Pegawai getPegawai() {
+        return pegawai;
+    }
+
+    public void setPegawai(Pegawai pegawai) {
+        this.pegawai = pegawai;
+    }
+
+    public Pasien getPasien() {
+        return pasien;
+    }
+
+    public void setPasien(Pasien pasien) {
+        this.pasien = pasien;
+    }
+
+    public Dokter getDokter() {
+        return dokter;
+    }
+
+    public void setDokter(Dokter dokter) {
+        this.dokter = dokter;
     }
     
 }

@@ -35,6 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Obat.findByKeterangan", query = "SELECT o FROM Obat o WHERE o.keterangan = :keterangan"),
     @NamedQuery(name = "Obat.findByHargajualObat", query = "SELECT o FROM Obat o WHERE o.hargajualObat = :hargajualObat")})
 public class Obat implements Serializable {
+    @Column(name = "hargajual_obat")
+    private Integer hargajualObat;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -48,8 +50,6 @@ public class Obat implements Serializable {
     private String jenisObat;
     @Column(name = "keterangan")
     private String keterangan;
-    @Column(name = "hargajual_obat")
-    private String hargajualObat;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "obat")
     private Collection<Detailtransaksijualobat> detailtransaksijualobatCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "obat")
@@ -106,11 +106,11 @@ public class Obat implements Serializable {
         this.keterangan = keterangan;
     }
 
-    public String getHargajualObat() {
+    public int getHargajualObat() {
         return hargajualObat;
     }
 
-    public void setHargajualObat(String hargajualObat) {
+    public void setHargajualObat(int hargajualObat) {
         this.hargajualObat = hargajualObat;
     }
 
@@ -173,6 +173,10 @@ public class Obat implements Serializable {
     @Override
     public String toString() {
         return "carismainterface.entity.Obat[ idObat=" + idObat + " ]";
+    }
+
+    public void setHargajualObat(Integer hargajualObat) {
+        this.hargajualObat = hargajualObat;
     }
     
 }
