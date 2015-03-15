@@ -161,7 +161,6 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
             statement.setString(1, dok);
             ResultSet result = statement.executeQuery();
             Dokter dokter = null;
-            User user = null;
             if (result.next()) {
                 dokter = new Dokter();                                
                 dokter.setIdDokter(result.getString("id_dokter"));                
