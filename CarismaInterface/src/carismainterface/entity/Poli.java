@@ -43,7 +43,7 @@ public class Poli implements Serializable {
     @Column(name = "keterangan")
     private String keterangan;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "poliIdPoli")
-    private Collection<Dokter> dokterCollection;
+    private String dokterCollection;
 
     public Poli() {
     }
@@ -82,11 +82,11 @@ public class Poli implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Dokter> getDokterCollection() {
+    public String getDokterCollection() {
         return dokterCollection;
     }
 
-    public void setDokterCollection(Collection<Dokter> dokterCollection) {
+    public void setDokterCollection(String dokterCollection) {
         this.dokterCollection = dokterCollection;
     }
 

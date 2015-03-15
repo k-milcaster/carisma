@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Kunjungan implements Serializable {
     @JoinColumn(name = "rekammedik_id_rekammedik", referencedColumnName = "id_rekammedik")
     @ManyToOne(optional = false)
-    private Rekammedik rekammedikIdRekammedik;
+    private String rekammedikIdRekammedik;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,21 +44,21 @@ public class Kunjungan implements Serializable {
     @Basic(optional = false)
     @Column(name = "tanggaljam_kunjungan")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date tanggaljamKunjungan;
+    private String tanggaljamKunjungan;
     @Column(name = "biaya_kunjungan")
     private Integer biayaKunjungan;
     @JoinColumn(name = "pasien_kamar_id_peminjaman", referencedColumnName = "id_peminjaman")
     @ManyToOne
-    private PasienKamar pasienKamarIdPeminjaman;
+    private String pasienKamarIdPeminjaman;
     @JoinColumn(name = "transaksijualobat_id_transaksijual", referencedColumnName = "id_transaksijual")
     @ManyToOne
-    private Transaksijualobat transaksijualobatIdTransaksijual;
+    private String transaksijualobatIdTransaksijual;
     @JoinColumn(name = "rekammedis_id_rekammedis", referencedColumnName = "id_rekammedis")
     @ManyToOne(optional = false)
-    private Rekammedik rekammedisIdRekammedis;
+    private String rekammedisIdRekammedis;
     @JoinColumn(name = "pasien_id_pasien", referencedColumnName = "id_pasien")
     @ManyToOne(optional = false)
-    private Pasien pasienIdPasien;
+    private String pasienIdPasien;
 
     public Kunjungan() {
     }
@@ -67,7 +67,7 @@ public class Kunjungan implements Serializable {
         this.idKunjungan = idKunjungan;
     }
 
-    public Kunjungan(String idKunjungan, Date tanggaljamKunjungan) {
+    public Kunjungan(String idKunjungan, String tanggaljamKunjungan) {
         this.idKunjungan = idKunjungan;
         this.tanggaljamKunjungan = tanggaljamKunjungan;
     }
@@ -80,11 +80,11 @@ public class Kunjungan implements Serializable {
         this.idKunjungan = idKunjungan;
     }
 
-    public Date getTanggaljamKunjungan() {
+    public String getTanggaljamKunjungan() {
         return tanggaljamKunjungan;
     }
 
-    public void setTanggaljamKunjungan(Date tanggaljamKunjungan) {
+    public void setTanggaljamKunjungan(String tanggaljamKunjungan) {
         this.tanggaljamKunjungan = tanggaljamKunjungan;
     }
 
@@ -96,35 +96,35 @@ public class Kunjungan implements Serializable {
         this.biayaKunjungan = biayaKunjungan;
     }
 
-    public PasienKamar getPasienKamarIdPeminjaman() {
+    public String getPasienKamarIdPeminjaman() {
         return pasienKamarIdPeminjaman;
     }
 
-    public void setPasienKamarIdPeminjaman(PasienKamar pasienKamarIdPeminjaman) {
+    public void setPasienKamarIdPeminjaman(String pasienKamarIdPeminjaman) {
         this.pasienKamarIdPeminjaman = pasienKamarIdPeminjaman;
     }
 
-    public Transaksijualobat getTransaksijualobatIdTransaksijual() {
+    public String getTransaksijualobatIdTransaksijual() {
         return transaksijualobatIdTransaksijual;
     }
 
-    public void setTransaksijualobatIdTransaksijual(Transaksijualobat transaksijualobatIdTransaksijual) {
+    public void setTransaksijualobatIdTransaksijual(String transaksijualobatIdTransaksijual) {
         this.transaksijualobatIdTransaksijual = transaksijualobatIdTransaksijual;
     }
 
-    public Rekammedik getRekammedisIdRekammedis() {
+    public String getRekammedisIdRekammedis() {
         return rekammedisIdRekammedis;
     }
 
-    public void setRekammedisIdRekammedis(Rekammedik rekammedisIdRekammedis) {
+    public void setRekammedisIdRekammedis(String rekammedisIdRekammedis) {
         this.rekammedisIdRekammedis = rekammedisIdRekammedis;
     }
 
-    public Pasien getPasienIdPasien() {
+    public String getPasienIdPasien() {
         return pasienIdPasien;
     }
 
-    public void setPasienIdPasien(Pasien pasienIdPasien) {
+    public void setPasienIdPasien(String pasienIdPasien) {
         this.pasienIdPasien = pasienIdPasien;
     }
 
@@ -153,11 +153,11 @@ public class Kunjungan implements Serializable {
         return "carismainterface.entity.Kunjungan[ idKunjungan=" + idKunjungan + " ]";
     }
 
-    public Rekammedik getRekammedikIdRekammedik() {
+    public String getRekammedikIdRekammedik() {
         return rekammedikIdRekammedik;
     }
 
-    public void setRekammedikIdRekammedik(Rekammedik rekammedikIdRekammedik) {
+    public void setRekammedikIdRekammedik(String rekammedikIdRekammedik) {
         this.rekammedikIdRekammedik = rekammedikIdRekammedik;
     }
     

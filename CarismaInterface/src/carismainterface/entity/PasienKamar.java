@@ -45,18 +45,18 @@ public class PasienKamar implements Serializable {
     @Basic(optional = false)
     @Column(name = "datein_pasien_kamar")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateinPasienKamar;
+    private String dateinPasienKamar;
     @Basic(optional = false)
     @Column(name = "dateout_pasien_kamar")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateoutPasienKamar;
+    private String dateoutPasienKamar;
     @Column(name = "keterangan")
     private String keterangan;
     @OneToMany(mappedBy = "pasienKamarIdPeminjaman")
-    private Collection<Kunjungan> kunjunganCollection;
+    private String kunjunganCollection;
     @JoinColumn(name = "kamar_id_kamar", referencedColumnName = "id_kamar")
     @ManyToOne(optional = false)
-    private Kamar kamarIdKamar;
+    private String kamarIdKamar;
 
     public PasienKamar() {
     }
@@ -65,7 +65,7 @@ public class PasienKamar implements Serializable {
         this.idPeminjaman = idPeminjaman;
     }
 
-    public PasienKamar(String idPeminjaman, Date dateinPasienKamar, Date dateoutPasienKamar) {
+    public PasienKamar(String idPeminjaman, String dateinPasienKamar, String dateoutPasienKamar) {
         this.idPeminjaman = idPeminjaman;
         this.dateinPasienKamar = dateinPasienKamar;
         this.dateoutPasienKamar = dateoutPasienKamar;
@@ -79,19 +79,19 @@ public class PasienKamar implements Serializable {
         this.idPeminjaman = idPeminjaman;
     }
 
-    public Date getDateinPasienKamar() {
+    public String getDateinPasienKamar() {
         return dateinPasienKamar;
     }
 
-    public void setDateinPasienKamar(Date dateinPasienKamar) {
+    public void setDateinPasienKamar(String dateinPasienKamar) {
         this.dateinPasienKamar = dateinPasienKamar;
     }
 
-    public Date getDateoutPasienKamar() {
+    public String getDateoutPasienKamar() {
         return dateoutPasienKamar;
     }
 
-    public void setDateoutPasienKamar(Date dateoutPasienKamar) {
+    public void setDateoutPasienKamar(String dateoutPasienKamar) {
         this.dateoutPasienKamar = dateoutPasienKamar;
     }
 
@@ -104,19 +104,19 @@ public class PasienKamar implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Kunjungan> getKunjunganCollection() {
+    public String getKunjunganCollection() {
         return kunjunganCollection;
     }
 
-    public void setKunjunganCollection(Collection<Kunjungan> kunjunganCollection) {
+    public void setKunjunganCollection(String kunjunganCollection) {
         this.kunjunganCollection = kunjunganCollection;
     }
 
-    public Kamar getKamarIdKamar() {
+    public String getKamarIdKamar() {
         return kamarIdKamar;
     }
 
-    public void setKamarIdKamar(Kamar kamarIdKamar) {
+    public void setKamarIdKamar(String kamarIdKamar) {
         this.kamarIdKamar = kamarIdKamar;
     }
 

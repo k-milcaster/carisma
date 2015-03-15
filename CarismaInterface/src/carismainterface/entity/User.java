@@ -50,11 +50,11 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private String lastlogin;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "userIdUser")
-    private Pegawai pegawai;
+    private String pegawai;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "userIdUser")
-    private Pasien pasien;
+    private String pasien;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "userIdUser")
-    private Dokter dokter;
+    private String dokter;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,11 +71,11 @@ public class User implements Serializable {
     @Column(name = "role")
     private String role;
     @OneToMany(mappedBy = "userIdUser")
-    private Collection<Pegawai> pegawaiCollection;
+    private String pegawaiCollection;
     @OneToMany(mappedBy = "userIdUser")
-    private Collection<Pasien> pasienCollection;
+    private String pasienCollection;
     @OneToMany(mappedBy = "userIdUser")
-    private Collection<Dokter> dokterCollection;
+    private String dokterCollection;
 
     public User() {
 
@@ -138,29 +138,29 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Pegawai> getPegawaiCollection() {
+    public String getPegawaiCollection() {
         return pegawaiCollection;
     }
 
-    public void setPegawaiCollection(Collection<Pegawai> pegawaiCollection) {
+    public void setPegawaiCollection(String pegawaiCollection) {
         this.pegawaiCollection = pegawaiCollection;
     }
 
     @XmlTransient
-    public Collection<Pasien> getPasienCollection() {
+    public String getPasienCollection() {
         return pasienCollection;
     }
 
-    public void setPasienCollection(Collection<Pasien> pasienCollection) {
+    public void setPasienCollection(String pasienCollection) {
         this.pasienCollection = pasienCollection;
     }
 
     @XmlTransient
-    public Collection<Dokter> getDokterCollection() {
+    public String getDokterCollection() {
         return dokterCollection;
     }
 
-    public void setDokterCollection(Collection<Dokter> dokterCollection) {
+    public void setDokterCollection(String dokterCollection) {
         this.dokterCollection = dokterCollection;
     }
 
@@ -205,27 +205,27 @@ public class User implements Serializable {
         this.lastlogin = lastlogin;
     }
 
-    public Pegawai getPegawai() {
+    public String getPegawai() {
         return pegawai;
     }
 
-    public void setPegawai(Pegawai pegawai) {
+    public void setPegawai(String pegawai) {
         this.pegawai = pegawai;
     }
 
-    public Pasien getPasien() {
+    public String getPasien() {
         return pasien;
     }
 
-    public void setPasien(Pasien pasien) {
+    public void setPasien(String pasien) {
         this.pasien = pasien;
     }
 
-    public Dokter getDokter() {
+    public String getDokter() {
         return dokter;
     }
 
-    public void setDokter(Dokter dokter) {
+    public void setDokter(String dokter) {
         this.dokter = dokter;
     }
     

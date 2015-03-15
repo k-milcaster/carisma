@@ -44,11 +44,11 @@ public class Transaksibeliobat implements Serializable {
     private String idTransaksibeliobat;
     @Column(name = "date_transaksibeli")
     @Temporal(TemporalType.DATE)
-    private Date dateTransaksibeli;
+    private String dateTransaksibeli;
     @Column(name = "keterangan")
     private String keterangan;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "transaksibeliobat")
-    private Collection<Detailtransaksibeliobat> detailtransaksibeliobatCollection;
+    private String detailtransaksibeliobatCollection;
 
     public Transaksibeliobat() {
     }
@@ -65,11 +65,11 @@ public class Transaksibeliobat implements Serializable {
         this.idTransaksibeliobat = idTransaksibeliobat;
     }
 
-    public Date getDateTransaksibeli() {
+    public String getDateTransaksibeli() {
         return dateTransaksibeli;
     }
 
-    public void setDateTransaksibeli(Date dateTransaksibeli) {
+    public void setDateTransaksibeli(String dateTransaksibeli) {
         this.dateTransaksibeli = dateTransaksibeli;
     }
 
@@ -82,11 +82,11 @@ public class Transaksibeliobat implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Detailtransaksibeliobat> getDetailtransaksibeliobatCollection() {
+    public String getDetailtransaksibeliobatCollection() {
         return detailtransaksibeliobatCollection;
     }
 
-    public void setDetailtransaksibeliobatCollection(Collection<Detailtransaksibeliobat> detailtransaksibeliobatCollection) {
+    public void setDetailtransaksibeliobatCollection(String detailtransaksibeliobatCollection) {
         this.detailtransaksibeliobatCollection = detailtransaksibeliobatCollection;
     }
 

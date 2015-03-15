@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pasien.findByRegdatePasien", query = "SELECT p FROM Pasien p WHERE p.regdatePasien = :regdatePasien")})
 public class Pasien implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pasienIdPasien")
-    private Collection<Rekammedik> rekammedikCollection;
+    private String rekammedikCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -76,7 +76,7 @@ public class Pasien implements Serializable {
     @Basic(optional = false)
     @Column(name = "tgllahir_pasien")
     @Temporal(TemporalType.DATE)
-    private Date tgllahirPasien;
+    private String tgllahirPasien;
     @Basic(optional = false)
     @Column(name = "kelamin_pasien")
     private String kelaminPasien;
@@ -86,21 +86,21 @@ public class Pasien implements Serializable {
     @Basic(optional = false)
     @Column(name = "regdate_pasien")
     @Temporal(TemporalType.DATE)
-    private Date regdatePasien;
+    private String regdatePasien;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pasienIdPasien")
-    private Collection<Kunjungan> kunjunganCollection;
+    private String kunjunganCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pasienIdPasien")
-    private Collection<Rekammedik> rekammedisCollection;
+    private String rekammedisCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pasienIdPasien")
-    private Collection<Antrian> antrianCollection;
+    private String antrianCollection;
     @JoinColumn(name = "user_id_user", referencedColumnName = "id_user")
     @ManyToOne
-    private User userIdUser;
+    private String userIdUser;
     @JoinColumn(name = "kota_id_kota", referencedColumnName = "id_kota")
     @ManyToOne(optional = false)
-    private Kota kotaIdKota;
+    private String kotaIdKota;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pasien")
-    private Kartupasien kartupasien;
+    private String kartupasien;
 
     public Pasien() {
     }
@@ -109,7 +109,7 @@ public class Pasien implements Serializable {
         this.idPasien = idPasien;
     }
 
-    public Pasien(String idPasien, String namaPasien, String alamatPasien, String kartuidPasien, String nokartuidPasien, String tempatlahirPasien, Date tgllahirPasien, String kelaminPasien, String darahPasien, Date regdatePasien) {
+    public Pasien(String idPasien, String namaPasien, String alamatPasien, String kartuidPasien, String nokartuidPasien, String tempatlahirPasien, String tgllahirPasien, String kelaminPasien, String darahPasien, String regdatePasien) {
         this.idPasien = idPasien;
         this.namaPasien = namaPasien;
         this.alamatPasien = alamatPasien;
@@ -186,11 +186,11 @@ public class Pasien implements Serializable {
         this.tempatlahirPasien = tempatlahirPasien;
     }
 
-    public Date getTgllahirPasien() {
+    public String getTgllahirPasien() {
         return tgllahirPasien;
     }
 
-    public void setTgllahirPasien(Date tgllahirPasien) {
+    public void setTgllahirPasien(String tgllahirPasien) {
         this.tgllahirPasien = tgllahirPasien;
     }
 
@@ -210,62 +210,62 @@ public class Pasien implements Serializable {
         this.darahPasien = darahPasien;
     }
 
-    public Date getRegdatePasien() {
+    public String getRegdatePasien() {
         return regdatePasien;
     }
 
-    public void setRegdatePasien(Date regdatePasien) {
+    public void setRegdatePasien(String regdatePasien) {
         this.regdatePasien = regdatePasien;
     }
 
     @XmlTransient
-    public Collection<Kunjungan> getKunjunganCollection() {
+    public String getKunjunganCollection() {
         return kunjunganCollection;
     }
 
-    public void setKunjunganCollection(Collection<Kunjungan> kunjunganCollection) {
+    public void setKunjunganCollection(String kunjunganCollection) {
         this.kunjunganCollection = kunjunganCollection;
     }
 
     @XmlTransient
-    public Collection<Rekammedik> getRekammedisCollection() {
+    public String getRekammedisCollection() {
         return rekammedisCollection;
     }
 
-    public void setRekammedisCollection(Collection<Rekammedik> rekammedisCollection) {
+    public void setRekammedisCollection(String rekammedisCollection) {
         this.rekammedisCollection = rekammedisCollection;
     }
 
     @XmlTransient
-    public Collection<Antrian> getAntrianCollection() {
+    public String getAntrianCollection() {
         return antrianCollection;
     }
 
-    public void setAntrianCollection(Collection<Antrian> antrianCollection) {
+    public void setAntrianCollection(String antrianCollection) {
         this.antrianCollection = antrianCollection;
     }
 
-    public User getUserIdUser() {
+    public String getUserIdUser() {
         return userIdUser;
     }
 
-    public void setUserIdUser(User userIdUser) {
+    public void setUserIdUser(String userIdUser) {
         this.userIdUser = userIdUser;
     }
 
-    public Kota getKotaIdKota() {
+    public String getKotaIdKota() {
         return kotaIdKota;
     }
 
-    public void setKotaIdKota(Kota kotaIdKota) {
+    public void setKotaIdKota(String kotaIdKota) {
         this.kotaIdKota = kotaIdKota;
     }
 
-    public Kartupasien getKartupasien() {
+    public String getKartupasien() {
         return kartupasien;
     }
 
-    public void setKartupasien(Kartupasien kartupasien) {
+    public void setKartupasien(String kartupasien) {
         this.kartupasien = kartupasien;
     }
 
@@ -295,11 +295,11 @@ public class Pasien implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Rekammedik> getRekammedikCollection() {
+    public String getRekammedikCollection() {
         return rekammedikCollection;
     }
 
-    public void setRekammedikCollection(Collection<Rekammedik> rekammedikCollection) {
+    public void setRekammedikCollection(String rekammedikCollection) {
         this.rekammedikCollection = rekammedikCollection;
     }
     

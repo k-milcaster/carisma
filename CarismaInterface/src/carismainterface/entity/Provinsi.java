@@ -40,7 +40,7 @@ public class Provinsi implements Serializable {
     @Column(name = "nama_provinsi")
     private String namaProvinsi;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "provinsi")
-    private Collection<Kota> kotaCollection;
+    private String kotaCollection;
 
     public Provinsi() {
     }
@@ -71,11 +71,11 @@ public class Provinsi implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Kota> getKotaCollection() {
+    public String getKotaCollection() {
         return kotaCollection;
     }
 
-    public void setKotaCollection(Collection<Kota> kotaCollection) {
+    public void setKotaCollection(String kotaCollection) {
         this.kotaCollection = kotaCollection;
     }
 

@@ -51,7 +51,7 @@ public class Rekammedik implements Serializable {
     @Basic(optional = false)
     @Column(name = "tgl_rekammedik")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date tglRekammedik;
+    private String tglRekammedik;
     @Column(name = "keluhan_rekammedik")
     private String keluhanRekammedik;
     @Column(name = "pemeriksaan_rekammedik")
@@ -66,18 +66,18 @@ public class Rekammedik implements Serializable {
     @Column(name = "kondisipasienkeluar_rekammedis")
     private String kondisipasienkeluarRekammedis;
     @ManyToMany(mappedBy = "rekammedikCollection")
-    private Collection<Penyakit> penyakitCollection;
+    private String penyakitCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rekammedikIdRekammedik")
-    private Collection<Kunjungan> kunjunganCollection;
+    private String kunjunganCollection;
     @JoinColumn(name = "resep_id_resep", referencedColumnName = "id_resep")
     @ManyToOne(optional = false)
-    private Resep resepIdResep;
+    private String resepIdResep;
     @JoinColumn(name = "pasien_id_pasien", referencedColumnName = "id_pasien")
     @ManyToOne(optional = false)
-    private Pasien pasienIdPasien;
+    private String pasienIdPasien;
     @JoinColumn(name = "dokter_id_dokter", referencedColumnName = "id_dokter")
     @ManyToOne(optional = false)
-    private Dokter dokterIdDokter;
+    private String dokterIdDokter;
 
     public Rekammedik() {
     }
@@ -86,7 +86,7 @@ public class Rekammedik implements Serializable {
         this.idRekammedik = idRekammedik;
     }
 
-    public Rekammedik(String idRekammedik, Date tglRekammedik, String kondisipasienkeluarRekammedis) {
+    public Rekammedik(String idRekammedik, String tglRekammedik, String kondisipasienkeluarRekammedis) {
         this.idRekammedik = idRekammedik;
         this.tglRekammedik = tglRekammedik;
         this.kondisipasienkeluarRekammedis = kondisipasienkeluarRekammedis;
@@ -100,11 +100,11 @@ public class Rekammedik implements Serializable {
         this.idRekammedik = idRekammedik;
     }
 
-    public Date getTglRekammedik() {
+    public String getTglRekammedik() {
         return tglRekammedik;
     }
 
-    public void setTglRekammedik(Date tglRekammedik) {
+    public void setTglRekammedik(String tglRekammedik) {
         this.tglRekammedik = tglRekammedik;
     }
 
@@ -157,44 +157,44 @@ public class Rekammedik implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Penyakit> getPenyakitCollection() {
+    public String getPenyakitCollection() {
         return penyakitCollection;
     }
 
-    public void setPenyakitCollection(Collection<Penyakit> penyakitCollection) {
+    public void setPenyakitCollection(String penyakitCollection) {
         this.penyakitCollection = penyakitCollection;
     }
 
     @XmlTransient
-    public Collection<Kunjungan> getKunjunganCollection() {
+    public String getKunjunganCollection() {
         return kunjunganCollection;
     }
 
-    public void setKunjunganCollection(Collection<Kunjungan> kunjunganCollection) {
+    public void setKunjunganCollection(String kunjunganCollection) {
         this.kunjunganCollection = kunjunganCollection;
     }
 
-    public Resep getResepIdResep() {
+    public String getResepIdResep() {
         return resepIdResep;
     }
 
-    public void setResepIdResep(Resep resepIdResep) {
+    public void setResepIdResep(String resepIdResep) {
         this.resepIdResep = resepIdResep;
     }
 
-    public Pasien getPasienIdPasien() {
+    public String getPasienIdPasien() {
         return pasienIdPasien;
     }
 
-    public void setPasienIdPasien(Pasien pasienIdPasien) {
+    public void setPasienIdPasien(String pasienIdPasien) {
         this.pasienIdPasien = pasienIdPasien;
     }
 
-    public Dokter getDokterIdDokter() {
+    public String getDokterIdDokter() {
         return dokterIdDokter;
     }
 
-    public void setDokterIdDokter(Dokter dokterIdDokter) {
+    public void setDokterIdDokter(String dokterIdDokter) {
         this.dokterIdDokter = dokterIdDokter;
     }
 

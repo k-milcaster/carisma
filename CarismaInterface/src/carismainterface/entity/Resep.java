@@ -41,7 +41,7 @@ public class Resep implements Serializable {
     @Column(name = "keterangan")
     private String keterangan;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "resepIdResep")
-    private Collection<Rekammedik> rekammedisCollection;
+    private String rekammedisCollection;
 
     public Resep() {
     }
@@ -67,11 +67,11 @@ public class Resep implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Rekammedik> getRekammedisCollection() {
+    public String getRekammedisCollection() {
         return rekammedisCollection;
     }
 
-    public void setRekammedisCollection(Collection<Rekammedik> rekammedisCollection) {
+    public void setRekammedisCollection(String rekammedisCollection) {
         this.rekammedisCollection = rekammedisCollection;
     }
 

@@ -94,9 +94,9 @@ public class Pegawai implements Serializable {
     private Integer gajilemburPegawai;
     @JoinColumn(name = "user_id_user", referencedColumnName = "id_user")
     @ManyToOne
-    private User userIdUser;
+    private String userIdUser;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pegawai")
-    private Jadwalpegawai jadwalpegawai;
+    private String jadwalpegawai;
 
     public Pegawai() {
     }
@@ -253,19 +253,19 @@ public class Pegawai implements Serializable {
         this.gajilemburPegawai = gajilemburPegawai;
     }
 
-    public User getUserIdUser() {
+    public String getUserIdUser() {
         return userIdUser;
     }
 
-    public void setUserIdUser(User userIdUser) {
+    public void setUserIdUser(String userIdUser) {
         this.userIdUser = userIdUser;
     }
 
-    public Jadwalpegawai getJadwalpegawai() {
+    public String getJadwalpegawai() {
         return jadwalpegawai;
     }
 
-    public void setJadwalpegawai(Jadwalpegawai jadwalpegawai) {
+    public void setJadwalpegawai(String jadwalpegawai) {
         this.jadwalpegawai = jadwalpegawai;
     }
 

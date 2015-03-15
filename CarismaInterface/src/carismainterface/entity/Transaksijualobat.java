@@ -42,13 +42,13 @@ public class Transaksijualobat implements Serializable {
     private String idTransaksijual;
     @Column(name = "date_transaksijual")
     @Temporal(TemporalType.DATE)
-    private Date dateTransaksijual;
+    private String dateTransaksijual;
     @Column(name = "keterangan")
     private String keterangan;
     @OneToMany(mappedBy = "transaksijualobatIdTransaksijual")
-    private Collection<Kunjungan> kunjunganCollection;
+    private String kunjunganCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "transaksijualobat")
-    private Collection<Detailtransaksijualobat> detailtransaksijualobatCollection;
+    private String detailtransaksijualobatCollection;
 
     public Transaksijualobat() {
     }
@@ -65,11 +65,11 @@ public class Transaksijualobat implements Serializable {
         this.idTransaksijual = idTransaksijual;
     }
 
-    public Date getDateTransaksijual() {
+    public String getDateTransaksijual() {
         return dateTransaksijual;
     }
 
-    public void setDateTransaksijual(Date dateTransaksijual) {
+    public void setDateTransaksijual(String dateTransaksijual) {
         this.dateTransaksijual = dateTransaksijual;
     }
 
@@ -82,20 +82,20 @@ public class Transaksijualobat implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Kunjungan> getKunjunganCollection() {
+    public String getKunjunganCollection() {
         return kunjunganCollection;
     }
 
-    public void setKunjunganCollection(Collection<Kunjungan> kunjunganCollection) {
+    public void setKunjunganCollection(String kunjunganCollection) {
         this.kunjunganCollection = kunjunganCollection;
     }
 
     @XmlTransient
-    public Collection<Detailtransaksijualobat> getDetailtransaksijualobatCollection() {
+    public String getDetailtransaksijualobatCollection() {
         return detailtransaksijualobatCollection;
     }
 
-    public void setDetailtransaksijualobatCollection(Collection<Detailtransaksijualobat> detailtransaksijualobatCollection) {
+    public void setDetailtransaksijualobatCollection(String detailtransaksijualobatCollection) {
         this.detailtransaksijualobatCollection = detailtransaksijualobatCollection;
     }
 

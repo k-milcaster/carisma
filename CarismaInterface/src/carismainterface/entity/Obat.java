@@ -51,13 +51,13 @@ public class Obat implements Serializable {
     @Column(name = "keterangan")
     private String keterangan;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "obat")
-    private Collection<Detailtransaksijualobat> detailtransaksijualobatCollection;
+    private String detailtransaksijualobatCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "obat")
-    private Collection<Detailtransaksibeliobat> detailtransaksibeliobatCollection;
+    private String detailtransaksibeliobatCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "obatIdObat")
-    private Collection<Detailobat> detailobatCollection;
+    private String detailobatCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "obatIdObat")
-    private Collection<Rakobat> rakobatCollection;
+    private String rakobatCollection;
 
     public Obat() {
     }
@@ -115,38 +115,38 @@ public class Obat implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Detailtransaksijualobat> getDetailtransaksijualobatCollection() {
+    public String getDetailtransaksijualobatCollection() {
         return detailtransaksijualobatCollection;
     }
 
-    public void setDetailtransaksijualobatCollection(Collection<Detailtransaksijualobat> detailtransaksijualobatCollection) {
+    public void setDetailtransaksijualobatCollection(String detailtransaksijualobatCollection) {
         this.detailtransaksijualobatCollection = detailtransaksijualobatCollection;
     }
 
     @XmlTransient
-    public Collection<Detailtransaksibeliobat> getDetailtransaksibeliobatCollection() {
+    public String getDetailtransaksibeliobatCollection() {
         return detailtransaksibeliobatCollection;
     }
 
-    public void setDetailtransaksibeliobatCollection(Collection<Detailtransaksibeliobat> detailtransaksibeliobatCollection) {
+    public void setDetailtransaksibeliobatCollection(String detailtransaksibeliobatCollection) {
         this.detailtransaksibeliobatCollection = detailtransaksibeliobatCollection;
     }
 
     @XmlTransient
-    public Collection<Detailobat> getDetailobatCollection() {
+    public String getDetailobatCollection() {
         return detailobatCollection;
     }
 
-    public void setDetailobatCollection(Collection<Detailobat> detailobatCollection) {
+    public void setDetailobatCollection(String detailobatCollection) {
         this.detailobatCollection = detailobatCollection;
     }
 
     @XmlTransient
-    public Collection<Rakobat> getRakobatCollection() {
+    public String getRakobatCollection() {
         return rakobatCollection;
     }
 
-    public void setRakobatCollection(Collection<Rakobat> rakobatCollection) {
+    public void setRakobatCollection(String rakobatCollection) {
         this.rakobatCollection = rakobatCollection;
     }
 
