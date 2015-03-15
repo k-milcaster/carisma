@@ -1,12 +1,16 @@
 package carismaserver.boundaries;
 
 import carismainterface.entity.Dokter;
+import carismaserver.controllers.DatabaseConnection;
 import carismaserver.entity.DokterEntity;
+import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.rmi.RemoteException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -25,11 +29,12 @@ public class DoctorManagement extends javax.swing.JFrame {
     private DokterEntity dokterService;
     public Main ui;
     private File file;
-
+    private DatabaseConnection databaseConnection;
     public DoctorManagement(final Main ui) throws RemoteException {
         this.ui = ui;
         initComponents();
         control.getDokter(this);
+        setComboBox();
         tableDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
@@ -62,6 +67,34 @@ public class DoctorManagement extends javax.swing.JFrame {
                 }
             }
         });
+    }
+
+    public void setComboBox() {
+        comboUsername.removeAllItems();
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = (Statement) databaseConnection.getConnection().createStatement();
+            resultSet = statement.executeQuery("SELECT id_user, username FROM user");
+            while (resultSet.next()) {
+                String userName = resultSet.getString("id_user")+" "+resultSet.getString("username");
+                comboUsername.addItem(userName);
+            }
+        } catch (SQLException ex) {
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException ex) {
+            }
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
     }
 
     /**
@@ -448,6 +481,7 @@ public class DoctorManagement extends javax.swing.JFrame {
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
         try {
+            String userid = comboUsername.getSelectedItem().toString().substring(0, comboUsername.getSelectedItem().toString().indexOf(" ")); 
             String id = fieldId.getText();
             String nama = fieldNama.getText();
             String alamat = fieldAlamat.getText();
@@ -465,7 +499,7 @@ public class DoctorManagement extends javax.swing.JFrame {
             int gfix = Integer.parseInt(fieldGajiFix.getText());
             int glembur = Integer.parseInt(fieldGajiLembur.getText());
             double gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
-            control.insertDokter(this, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
+            control.insertDokter(this, userid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
             control.getDokter(this);
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);

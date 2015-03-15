@@ -44,9 +44,9 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
                     "INSERT INTO dokter (poli_id_poli, user_id_user, id_dokter, nama_dokter, alamat_dokter, nokartuid_dokter, telp_dokter, hp1_dokter, hp2_dokter, tempatlahir_dokter, tgllahir_dokter, kelamin_dokter, darah_dokter, bank_dokter, norek_dokter, foto_dokter, gajifix_dokter, gajilembur_dokter, gajikonsul_dokter) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
             );
             //statement.setString(1, (dokter.getPoliIdPoli()).toString());
-            statement.setString(1, "sp1");
+            statement.setString(1, "RAD");
             //statement.setInt(2, Integer.parseInt((dokter.getUserIdUser()).toString()));
-            statement.setString(2, "2");
+            statement.setInt(2, dokter.getUserIdUser().getIdUser());
             statement.setString(3, dokter.getIdDokter());
             statement.setString(4, dokter.getNamaDokter());
             statement.setString(5, dokter.getAlamatDokter());
