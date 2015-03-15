@@ -62,7 +62,7 @@ public class DokterManagement {
             User user = new User();
             Dokter dokter = new Dokter();
             user.setIdUser(Integer.parseInt(username));
-            dokter.setUserIdUser(user);
+
             dokter.setIdDokter(id);
             dokter.setNamaDokter(nama);
             dokter.setAlamatDokter(alamat);
