@@ -25,7 +25,7 @@ public class DoctorManagement extends javax.swing.JFrame {
     private DokterEntity dokterService;
     public Main ui;
     private File file;
-    
+
     public DoctorManagement(final Main ui) throws RemoteException {
         this.ui = ui;
         initComponents();
@@ -51,9 +51,9 @@ public class DoctorManagement extends javax.swing.JFrame {
                         comboDarah.setSelectedItem(selected.getDarahDokter());
                         fieldBank.setText(selected.getBankDokter());
                         fieldNorek.setText(selected.getNorekDokter());
-                        fieldGajiFix.setText((String)selected.getGajifixDokter().toString());
-                        fieldGajiLembur.setText((String)selected.getGajilemburDokter().toString());
-                        fieldGajiKonsul.setText((String)selected.getGajikonsulDokter().toString());
+                        fieldGajiFix.setText((String) selected.getGajifixDokter().toString());
+                        fieldGajiLembur.setText((String) selected.getGajilemburDokter().toString());
+                        fieldGajiKonsul.setText((String) selected.getGajikonsulDokter().toString());
                         //comboUsername.setSelectedItem(selected.getUsername());
                     } catch (RemoteException ex) {
                         Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,7 +63,6 @@ public class DoctorManagement extends javax.swing.JFrame {
             }
         });
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -462,11 +461,11 @@ public class DoctorManagement extends javax.swing.JFrame {
             String darah = comboDarah.getSelectedItem().toString();
             String bank = fieldBank.getText();
             String norek = fieldNorek.getText();
-            byte[] foto = Files.readAllBytes(file.toPath());
+            byte[] img = extractBytes(file.toPath().toString());
             int gfix = Integer.parseInt(fieldGajiFix.getText());
             int glembur = Integer.parseInt(fieldGajiLembur.getText());
             double gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
-            control.insertDokter(this,id,nama,alamat,nokartu,telp,hp1,hp2,tempat,tanggal,kelamin,darah,bank,norek,gfix,glembur,gkonsul,foto);
+            control.insertDokter(this, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
             control.getDokter(this);
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -501,19 +500,25 @@ public class DoctorManagement extends javax.swing.JFrame {
 
     private void buttonAttachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAttachActionPerformed
         int o = jFileChooser1.showOpenDialog(this);
-        if(0==jFileChooser1.APPROVE_OPTION){
-            file =jFileChooser1.getSelectedFile();
+        if (0 == jFileChooser1.APPROVE_OPTION) {
+            file = jFileChooser1.getSelectedFile();
             Image img = null;
             try {
                 img = ImageIO.read(file);
             } catch (IOException e) {
                 //e.printStackTrace();
             }
-            Image dimg = img.getScaledInstance(72, 102,Image.SCALE_SMOOTH);
+            //System.out.println(file.toPath());
+            Image dimg = img.getScaledInstance(72, 102, Image.SCALE_SMOOTH);
             foto.setIcon(new ImageIcon(dimg));
         }
     }//GEN-LAST:event_buttonAttachActionPerformed
+    private byte[] extractBytes(String ImageName) throws IOException {
+        File fi = new File(ImageName);
+        byte[] fileContent = Files.readAllBytes(fi.toPath());
 
+        return fileContent;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAttach;
