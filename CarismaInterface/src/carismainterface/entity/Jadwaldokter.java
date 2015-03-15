@@ -46,7 +46,7 @@ public class Jadwaldokter implements Serializable {
     private String keterangan;
     @JoinColumn(name = "dokter_id_dokter", referencedColumnName = "id_dokter", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Dokter dokter;
+    private String dokter;
 
     public Jadwaldokter() {
     }
@@ -93,11 +93,11 @@ public class Jadwaldokter implements Serializable {
         this.keterangan = keterangan;
     }
 
-    public Dokter getDokter() {
+    public String getDokter() {
         return dokter;
     }
 
-    public void setDokter(Dokter dokter) {
+    public void setDokter(String dokter) {
         this.dokter = dokter;
     }
 

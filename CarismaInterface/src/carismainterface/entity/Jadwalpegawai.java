@@ -46,7 +46,7 @@ public class Jadwalpegawai implements Serializable {
     private String keterangan;
     @JoinColumn(name = "pegawai_id_pegawai", referencedColumnName = "id_pegawai", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Pegawai pegawai;
+    private String pegawai;
 
     public Jadwalpegawai() {
     }
@@ -93,11 +93,11 @@ public class Jadwalpegawai implements Serializable {
         this.keterangan = keterangan;
     }
 
-    public Pegawai getPegawai() {
+    public String getPegawai() {
         return pegawai;
     }
 
-    public void setPegawai(Pegawai pegawai) {
+    public void setPegawai(String pegawai) {
         this.pegawai = pegawai;
     }
 

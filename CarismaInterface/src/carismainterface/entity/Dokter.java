@@ -109,10 +109,10 @@ public class Dokter implements Serializable {
     private Collection<Antrian> antrianCollection;
     @JoinColumn(name = "user_id_user", referencedColumnName = "id_user")
     @ManyToOne
-    private User userIdUser;
+    private Integer userIdUser;
     @JoinColumn(name = "poli_id_poli", referencedColumnName = "id_poli")
     @ManyToOne(optional = false)
-    private Poli poliIdPoli;
+    private String poliIdPoli;
 
     public Dokter() {
     }
@@ -313,19 +313,19 @@ public class Dokter implements Serializable {
         this.antrianCollection = antrianCollection;
     }
 
-    public User getUserIdUser() {
+    public Integer getUserIdUser() {
         return userIdUser;
     }
 
-    public void setUserIdUser(User userIdUser) {
+    public void setUserIdUser(Integer userIdUser) {
         this.userIdUser = userIdUser;
     }
 
-    public Poli getPoliIdPoli() {
+    public String getPoliIdPoli() {
         return poliIdPoli;
     }
 
-    public void setPoliIdPoli(Poli poliIdPoli) {
+    public void setPoliIdPoli(String poliIdPoli) {
         this.poliIdPoli = poliIdPoli;
     }
 

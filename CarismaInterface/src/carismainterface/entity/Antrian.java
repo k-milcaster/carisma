@@ -53,10 +53,10 @@ public class Antrian implements Serializable {
     private Date tglAntrian;
     @JoinColumn(name = "dokter_id_dokter", referencedColumnName = "id_dokter")
     @ManyToOne(optional = false)
-    private Dokter dokterIdDokter;
+    private String dokterIdDokter;
     @JoinColumn(name = "pasien_id_pasien", referencedColumnName = "id_pasien")
     @ManyToOne(optional = false)
-    private Pasien pasienIdPasien;
+    private String pasienIdPasien;
 
     public Antrian() {
     }
@@ -104,19 +104,19 @@ public class Antrian implements Serializable {
         this.tglAntrian = tglAntrian;
     }
 
-    public Dokter getDokterIdDokter() {
+    public String getDokterIdDokter() {
         return dokterIdDokter;
     }
 
-    public void setDokterIdDokter(Dokter dokterIdDokter) {
+    public void setDokterIdDokter(String dokterIdDokter) {
         this.dokterIdDokter = dokterIdDokter;
     }
 
-    public Pasien getPasienIdPasien() {
+    public String getPasienIdPasien() {
         return pasienIdPasien;
     }
 
-    public void setPasienIdPasien(Pasien pasienIdPasien) {
+    public void setPasienIdPasien(String pasienIdPasien) {
         this.pasienIdPasien = pasienIdPasien;
     }
 

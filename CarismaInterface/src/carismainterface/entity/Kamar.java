@@ -48,7 +48,7 @@ public class Kamar implements Serializable {
     @Column(name = "tarif")
     private int tarif;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "kamarIdKamar")
-    private Collection<PasienKamar> pasienKamarCollection;
+    private String pasienKamarCollection;
 
     public Kamar() {
     }
@@ -97,11 +97,11 @@ public class Kamar implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PasienKamar> getPasienKamarCollection() {
+    public String getPasienKamarCollection() {
         return pasienKamarCollection;
     }
 
-    public void setPasienKamarCollection(Collection<PasienKamar> pasienKamarCollection) {
+    public void setPasienKamarCollection(String pasienKamarCollection) {
         this.pasienKamarCollection = pasienKamarCollection;
     }
 

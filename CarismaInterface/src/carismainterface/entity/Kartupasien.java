@@ -48,7 +48,7 @@ public class Kartupasien implements Serializable {
     private Date berlakusampaiKartupasien;
     @JoinColumn(name = "pasien_id_pasien", referencedColumnName = "id_pasien", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Pasien pasien;
+    private String pasien;
 
     public Kartupasien() {
     }
@@ -87,11 +87,11 @@ public class Kartupasien implements Serializable {
         this.berlakusampaiKartupasien = berlakusampaiKartupasien;
     }
 
-    public Pasien getPasien() {
+    public String getPasien() {
         return pasien;
     }
 
-    public void setPasien(Pasien pasien) {
+    public void setPasien(String pasien) {
         this.pasien = pasien;
     }
 

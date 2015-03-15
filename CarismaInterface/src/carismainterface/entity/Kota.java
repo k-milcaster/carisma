@@ -44,7 +44,7 @@ public class Kota implements Serializable {
     @ManyToOne(optional = false)
     private Provinsi provinsi;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "kotaIdKota")
-    private Collection<Pasien> pasienCollection;
+    private String pasienCollection;
 
     public Kota() {
     }
@@ -87,11 +87,11 @@ public class Kota implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Pasien> getPasienCollection() {
+    public String getPasienCollection() {
         return pasienCollection;
     }
 
-    public void setPasienCollection(Collection<Pasien> pasienCollection) {
+    public void setPasienCollection(String pasienCollection) {
         this.pasienCollection = pasienCollection;
     }
 

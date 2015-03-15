@@ -42,7 +42,7 @@ public class Detailobat implements Serializable {
     private Date tglkadaluarsaDetail;
     @JoinColumn(name = "obat_id_obat", referencedColumnName = "id_obat")
     @ManyToOne(optional = false)
-    private Obat obatIdObat;
+    private Integer obatIdObat;
 
     public Detailobat() {
     }
@@ -67,11 +67,11 @@ public class Detailobat implements Serializable {
         this.tglkadaluarsaDetail = tglkadaluarsaDetail;
     }
 
-    public Obat getObatIdObat() {
+    public Integer getObatIdObat() {
         return obatIdObat;
     }
 
-    public void setObatIdObat(Obat obatIdObat) {
+    public void setObatIdObat(Integer obatIdObat) {
         this.obatIdObat = obatIdObat;
     }
 
