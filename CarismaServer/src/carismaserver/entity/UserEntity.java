@@ -84,12 +84,15 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO user (username, password, registered, role) values (?,?,?,?)"
+                    "INSERT INTO user (id_user, username, password, registered, lastlogin, role) values (?,?,?,?,?,?)"
             );
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
-            statement.setString(3, user.getRegistered().toString());
-            statement.setString(4, user.getRole());
+            statement.setString(1, null);
+            statement.setString(2, user.getUsername());
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getRegistered().toString());
+            statement.setString(5, user.getRegistered().toString());
+            statement.setString(6, user.getRole());
+            //System.out.println(statement);
             statement.executeUpdate();
             return user;
         } catch (SQLException exception) {
@@ -121,7 +124,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getRole());
             statement.setInt(4, user.getIdUser());
-
+            //System.out.println(statement);
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -137,16 +140,16 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
     }
 
     @Override
-    public void deleteUser(String user) throws RemoteException {
-        ui.act.append("Client Execute deleteUser (" + user + ") \n");
+    public void deleteUser(User user) throws RemoteException {
+        ui.act.append("Client Execute deleteUser (" + user.toString() + ") \n");
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "DELETE FROM user WHERE username = ?");
-            statement.setString(1, user);
+                    "DELETE FROM user WHERE id_user = ?");
+            statement.setInt(1, user.getIdUser());
             statement.executeUpdate();
         } catch (SQLException e) {
-            ui.act.append("deleteCustomers Error \n");
+            ui.act.append("deleteUser Error \n");
         } finally {
             if (statement != null) {
                 try {

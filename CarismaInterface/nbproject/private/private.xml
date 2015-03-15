@@ -3,19 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/entity/User.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/server/AntrianService.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/entity/Pegawai.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/entity/Dokter.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/entity/Antrian.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/server/UserService.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/server/PegawaiService.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/entity/Penyakit.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/entity/Obat.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/server/DokterService.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/server/KunjunganService.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/server/RekammedikService.java</file>
-            <file>file:/C:/Users/K-MiL%20Caster/OneDrive/Documents/Semester%206/Pengembangan%20Sistem%20Informasi/Work/carisma/CarismaInterface/src/carismainterface/server/DetailobatService.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/CarismaInterface/src/carismainterface/server/DokterService.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/CarismaInterface/src/carismainterface/entity/Dokter.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/CarismaInterface/src/carismainterface/entity/User.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/CarismaInterface/src/carismainterface/server/UserService.java</file>
         </group>
     </open-files>
 </project-private>

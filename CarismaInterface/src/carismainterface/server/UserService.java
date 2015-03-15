@@ -19,7 +19,7 @@ public interface UserService extends Remote {
 
     void updateUser(User user) throws RemoteException;
 
-    void deleteUser(String user) throws RemoteException;
+    void deleteUser(User user) throws RemoteException;
 
     User getUser(String user) throws RemoteException;
 

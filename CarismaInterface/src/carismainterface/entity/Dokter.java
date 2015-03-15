@@ -116,7 +116,26 @@ public class Dokter implements Serializable {
 
     public Dokter() {
     }
-
+    
+    public Dokter(Dokter dokter) {
+        this.idDokter = dokter.idDokter;
+        this.namaDokter = dokter.namaDokter;
+        this.alamatDokter = dokter.alamatDokter;
+        this.nokartuidDokter = dokter.nokartuidDokter;
+        this.telpDokter = dokter.telpDokter;
+        this.hp1Dokter = dokter.hp1Dokter;
+        this.hp2Dokter = dokter.hp2Dokter;
+        this.tempatlahirDokter = dokter.tempatlahirDokter;
+        this.tgllahirDokter = dokter.tgllahirDokter;
+        this.kelaminDokter = dokter.kelaminDokter;
+        this.darahDokter = dokter.darahDokter;
+        this.bankDokter = dokter.bankDokter;
+        this.norekDokter = dokter.norekDokter;
+        this.gajifixDokter = dokter.gajifixDokter;
+        this.gajilemburDokter = dokter.gajilemburDokter;
+        this.gajikonsulDokter = dokter.gajikonsulDokter;
+    }
+    
     public Dokter(String idDokter) {
         this.idDokter = idDokter;
     }
