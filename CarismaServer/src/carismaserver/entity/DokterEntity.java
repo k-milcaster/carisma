@@ -47,7 +47,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
             //statement.setString(1, (dokter.getPoliIdPoli()).toString());
             statement.setString(1, "RAD");
             //statement.setInt(2, Integer.parseInt((dokter.getUserIdUser()).toString()));
-            statement.setInt(2, dokter.getUserIdUser().getIdUser());
+            statement.setInt(2, dokter.getUserIdUser());
             statement.setString(3, dokter.getIdDokter());
             statement.setString(4, dokter.getNamaDokter());
             statement.setString(5, dokter.getAlamatDokter());
@@ -163,12 +163,9 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
             Dokter dokter = null;
             User user = null;
             if (result.next()) {
-                dokter = new Dokter();
-                user = new User();
-                user.setIdUser(result.getInt("user_id_user"));
+                dokter = new Dokter();                                
                 dokter.setIdDokter(result.getString("id_dokter"));                
-                dokter.setUserIdUser(user);
-                System.out.println(dokter.getUserIdUser().getIdUser());
+                dokter.setUserIdUser(result.getInt("user_id_user"));
                 dokter.setNamaDokter(result.getString("nama_dokter"));
                 dokter.setAlamatDokter(result.getString("alamat_dokter"));
                 dokter.setNokartuidDokter(result.getString("nokartuid_dokter"));
