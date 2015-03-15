@@ -1,6 +1,7 @@
 package carismaserver.boundaries;
 
 import carismainterface.entity.Dokter;
+import carismainterface.entity.User;
 import carismaserver.controllers.DatabaseConnection;
 import carismaserver.entity.DokterEntity;
 import com.mysql.jdbc.Statement;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.rmi.RemoteException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -30,6 +32,7 @@ public class DoctorManagement extends javax.swing.JFrame {
     public Main ui;
     private File file;
     private DatabaseConnection databaseConnection;
+
     public DoctorManagement(final Main ui) throws RemoteException {
         this.ui = ui;
         initComponents();
@@ -43,6 +46,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                     try {
                         dokterService = new DokterEntity(ui);
                         Dokter selected = new Dokter(dokterService.getDokter(tableDokter.getValueAt(row, 1).toString()));
+                        System.out.println(selected.getUserIdUser().toString()); 
                         fieldId.setText(selected.getIdDokter());
                         fieldNama.setText(selected.getNamaDokter());
                         fieldAlamat.setText(selected.getAlamatDokter());
@@ -59,6 +63,9 @@ public class DoctorManagement extends javax.swing.JFrame {
                         fieldGajiFix.setText((String) selected.getGajifixDokter().toString());
                         fieldGajiLembur.setText((String) selected.getGajilemburDokter().toString());
                         fieldGajiKonsul.setText((String) selected.getGajikonsulDokter().toString());
+                        
+                        
+                        //setComboBox();
                         //comboUsername.setSelectedItem(selected.getUsername());
                     } catch (RemoteException ex) {
                         Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,8 +84,36 @@ public class DoctorManagement extends javax.swing.JFrame {
             statement = (Statement) databaseConnection.getConnection().createStatement();
             resultSet = statement.executeQuery("SELECT id_user, username FROM user");
             while (resultSet.next()) {
-                String userName = resultSet.getString("id_user")+" "+resultSet.getString("username");
+                String userName = resultSet.getString("id_user") + " " + resultSet.getString("username");
                 comboUsername.addItem(userName);
+            }
+        } catch (SQLException ex) {
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException ex) {
+            }
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+
+    public void setComboBox(String id_user) {
+        setComboBox();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = databaseConnection.getConnection().prepareStatement("SELECT id_user, username FROM user WHERE ud_user = ?");
+            statement.setString(1, id_user);
+            while (resultSet.next()) {
+                String userName = resultSet.getString("id_user") + " " + resultSet.getString("username");
+                comboUsername.setSelectedItem(userName);
             }
         } catch (SQLException ex) {
         } finally {
@@ -481,7 +516,7 @@ public class DoctorManagement extends javax.swing.JFrame {
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
         try {
-            String userid = comboUsername.getSelectedItem().toString().substring(0, comboUsername.getSelectedItem().toString().indexOf(" ")); 
+            String userid = comboUsername.getSelectedItem().toString().substring(0, comboUsername.getSelectedItem().toString().indexOf(" "));
             String id = fieldId.getText();
             String nama = fieldNama.getText();
             String alamat = fieldAlamat.getText();

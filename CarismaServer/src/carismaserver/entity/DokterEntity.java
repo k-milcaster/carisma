@@ -7,6 +7,7 @@
 package carismaserver.entity;
 
 import carismainterface.entity.Dokter;
+import carismainterface.entity.User;
 import carismainterface.server.DokterService;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
@@ -160,9 +161,14 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
             statement.setString(1, dok);
             ResultSet result = statement.executeQuery();
             Dokter dokter = null;
+            User user = null;
             if (result.next()) {
                 dokter = new Dokter();
-                dokter.setIdDokter(result.getString("id_dokter"));
+                user = new User();
+                user.setIdUser(result.getInt("user_id_user"));
+                dokter.setIdDokter(result.getString("id_dokter"));                
+                dokter.setUserIdUser(user);
+                System.out.println(dokter.getUserIdUser().getIdUser());
                 dokter.setNamaDokter(result.getString("nama_dokter"));
                 dokter.setAlamatDokter(result.getString("alamat_dokter"));
                 dokter.setNokartuidDokter(result.getString("nokartuid_dokter"));
