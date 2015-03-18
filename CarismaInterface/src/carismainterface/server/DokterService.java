@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface DokterService {
 
-    Dokter insertDokter(Dokter dokter) throws RemoteException;
+    void insertDokter(Dokter dokter) throws RemoteException;
 
     void updateDokter(Dokter dokter) throws RemoteException;
 
-    void deleteDokter(Dokter dokter) throws RemoteException;
+    void deleteDokter(String dokter) throws RemoteException;
 
     Dokter getDokter(String dokter) throws RemoteException;
 

@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismainterface.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,7 +44,7 @@ public class Antrian implements Serializable {
     @Basic(optional = false)
     @Column(name = "tgl_antrian")
     @Temporal(TemporalType.DATE)
-    private Date tglAntrian;
+    private String tglAntrian;
     @JoinColumn(name = "dokter_id_dokter", referencedColumnName = "id_dokter")
     @ManyToOne(optional = false)
     private String dokterIdDokter;
@@ -65,7 +59,7 @@ public class Antrian implements Serializable {
         this.idAntrian = idAntrian;
     }
 
-    public Antrian(String idAntrian, int nomorAntrian, String jenisAntrian, Date tglAntrian) {
+    public Antrian(String idAntrian, int nomorAntrian, String jenisAntrian, String tglAntrian) {
         this.idAntrian = idAntrian;
         this.nomorAntrian = nomorAntrian;
         this.jenisAntrian = jenisAntrian;
@@ -96,11 +90,11 @@ public class Antrian implements Serializable {
         this.jenisAntrian = jenisAntrian;
     }
 
-    public Date getTglAntrian() {
+    public String getTglAntrian() {
         return tglAntrian;
     }
 
-    public void setTglAntrian(Date tglAntrian) {
+    public void setTglAntrian(String tglAntrian) {
         this.tglAntrian = tglAntrian;
     }
 

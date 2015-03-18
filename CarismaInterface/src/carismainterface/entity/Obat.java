@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismainterface.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,6 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Obat.findByKeterangan", query = "SELECT o FROM Obat o WHERE o.keterangan = :keterangan"),
     @NamedQuery(name = "Obat.findByHargajualObat", query = "SELECT o FROM Obat o WHERE o.hargajualObat = :hargajualObat")})
 public class Obat implements Serializable {
+
     @Column(name = "hargajual_obat")
     private Integer hargajualObat;
     private static final long serialVersionUID = 1L;
@@ -60,6 +55,15 @@ public class Obat implements Serializable {
     private String rakobatCollection;
 
     public Obat() {
+    }
+
+    public Obat(Obat obat) {
+        this.idObat = obat.idObat;
+        this.namaObat = obat.namaObat;
+        this.qtyObat = obat.qtyObat;
+        this.jenisObat = obat.jenisObat;
+        this.keterangan = obat.keterangan;
+        this.hargajualObat = obat.hargajualObat;        
     }
 
     public Obat(Integer idObat) {
@@ -178,5 +182,5 @@ public class Obat implements Serializable {
     public void setHargajualObat(Integer hargajualObat) {
         this.hargajualObat = hargajualObat;
     }
-    
+
 }

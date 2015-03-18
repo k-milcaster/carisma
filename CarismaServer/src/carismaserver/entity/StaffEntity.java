@@ -36,7 +36,7 @@ public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
      
     
     @Override
-    public Pegawai insertPegawai(Pegawai pegawai) throws RemoteException {
+    public void insertPegawai(Pegawai pegawai) throws RemoteException {
         ui.act.append("Client Execute insertPegawai " + pegawai.getIdPegawai() + "\n");
 
         PreparedStatement statement = null;
@@ -63,13 +63,10 @@ public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
             statement.setBytes(16, pegawai.getFotoPegawai());
             statement.setInt(17, pegawai.getGajifixPegawai());
             statement.setInt(18, pegawai.getGajilemburPegawai());
-            System.out.println(statement);
             statement.executeUpdate();
-            return pegawai;
         } catch (SQLException exception) {
             ui.act.append("InsertUser Error \n");
             exception.printStackTrace();
-            return null;
         } finally {
             if (statement != null) {
                 try {
@@ -94,7 +91,7 @@ public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
                     + "WHERE id_pegawai = ?"
             );
             statement.setString(1, (pegawai.getJabatanPegawai()).toString());
-            statement.setInt(2, Integer.parseInt((pegawai.getUserIdUser()).toString()));
+            statement.setInt(2, pegawai.getUserIdUser());
             statement.setString(19, pegawai.getIdPegawai());
             statement.setString(3, pegawai.getNamaPegawai());
             statement.setString(4, pegawai.getAlamatPegawai());
@@ -127,13 +124,13 @@ public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
     }
 
     @Override
-    public void deletePegawai(Pegawai pegawai) throws RemoteException {
-        ui.act.append("Client Execute deleteUser (" + pegawai.toString() + ") \n");
+    public void deletePegawai(String pegawai) throws RemoteException {
+        ui.act.append("Client Execute deleteUser (" + pegawai+ ") \n");
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "DELETE FROM pegawai WHERE id_pegawai = ?");
-            statement.setString(1, pegawai.getIdPegawai());
+            statement.setString(1, pegawai);
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deletePegawai Error \n");

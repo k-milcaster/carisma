@@ -15,7 +15,7 @@ public interface UserService extends Remote {
 
     Boolean userLogIn(String userName, String password, String role) throws RemoteException;
 
-    User insertUser(User user) throws RemoteException;
+    void insertUser(User user) throws RemoteException;
 
     void updateUser(User user) throws RemoteException;
 

@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import carismaserver.controllers.ServerSocket;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 /**
  *
@@ -182,6 +183,8 @@ public class Main extends javax.swing.JFrame {
         try {
             new DoctorManagement(this).show();
         } catch (RemoteException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton4ActionPerformed

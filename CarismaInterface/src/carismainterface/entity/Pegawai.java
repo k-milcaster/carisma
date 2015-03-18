@@ -46,6 +46,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pegawai.findByGajifixPegawai", query = "SELECT p FROM Pegawai p WHERE p.gajifixPegawai = :gajifixPegawai"),
     @NamedQuery(name = "Pegawai.findByGajilemburPegawai", query = "SELECT p FROM Pegawai p WHERE p.gajilemburPegawai = :gajilemburPegawai")})
 public class Pegawai implements Serializable {
+
     @Lob
     @Column(name = "foto_pegawai")
     private byte[] fotoPegawai;
@@ -94,7 +95,7 @@ public class Pegawai implements Serializable {
     private Integer gajilemburPegawai;
     @JoinColumn(name = "user_id_user", referencedColumnName = "id_user")
     @ManyToOne
-    private String userIdUser;
+    private int userIdUser;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pegawai")
     private String jadwalpegawai;
 
@@ -103,6 +104,19 @@ public class Pegawai implements Serializable {
 
     public Pegawai(String idPegawai) {
         this.idPegawai = idPegawai;
+    }
+
+    public Pegawai(Pegawai pegawai) {
+        this.idPegawai = pegawai.idPegawai;
+        this.namaPegawai = pegawai.namaPegawai;
+        this.alamatPegawai = pegawai.alamatPegawai;
+        this.nokartuidPegawai = pegawai.nokartuidPegawai;
+        this.tempatlahirPegawai = pegawai.tempatlahirPegawai;
+        this.tgllahirPegawai = pegawai.tgllahirPegawai;
+        this.kelaminPegawai = pegawai.kelaminPegawai;
+        this.darahPegawai = pegawai.darahPegawai;
+        this.jabatanPegawai = pegawai.jabatanPegawai;
+        this.userIdUser = pegawai.userIdUser;
     }
 
     public Pegawai(String idPegawai, String namaPegawai, String alamatPegawai, String nokartuidPegawai, String tempatlahirPegawai, String tgllahirPegawai, String kelaminPegawai, String darahPegawai, String jabatanPegawai) {
@@ -253,11 +267,11 @@ public class Pegawai implements Serializable {
         this.gajilemburPegawai = gajilemburPegawai;
     }
 
-    public String getUserIdUser() {
+    public int getUserIdUser() {
         return userIdUser;
     }
 
-    public void setUserIdUser(String userIdUser) {
+    public void setUserIdUser(int userIdUser) {
         this.userIdUser = userIdUser;
     }
 
@@ -294,5 +308,4 @@ public class Pegawai implements Serializable {
         return "carismainterface.entity.Pegawai[ idPegawai=" + idPegawai + " ]";
     }
 
-    
 }

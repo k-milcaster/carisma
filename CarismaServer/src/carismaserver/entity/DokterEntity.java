@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaserver.entity;
 
 import carismainterface.entity.Dokter;
-import carismainterface.entity.User;
 import carismainterface.server.DokterService;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
@@ -24,10 +17,10 @@ import java.util.List;
  *
  * @author kepoterz
  */
-public class DokterEntity extends UnicastRemoteObject implements DokterService{
+public class DokterEntity extends UnicastRemoteObject implements DokterService {
 
     public Main ui;
-    
+
     public DokterEntity() throws RemoteException {
 
     }
@@ -35,8 +28,9 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
     public DokterEntity(Main ui) throws RemoteException {
         this.ui = ui;
     }
+
     @Override
-    public Dokter insertDokter(Dokter dokter) throws RemoteException {
+    public void insertDokter(Dokter dokter) throws RemoteException {
         ui.act.append("Client Execute insertDokter " + dokter.getIdDokter() + "\n");
 
         PreparedStatement statement = null;
@@ -44,9 +38,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "INSERT INTO dokter (poli_id_poli, user_id_user, id_dokter, nama_dokter, alamat_dokter, nokartuid_dokter, telp_dokter, hp1_dokter, hp2_dokter, tempatlahir_dokter, tgllahir_dokter, kelamin_dokter, darah_dokter, bank_dokter, norek_dokter, foto_dokter, gajifix_dokter, gajilembur_dokter, gajikonsul_dokter) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
             );
-            //statement.setString(1, (dokter.getPoliIdPoli()).toString());
-            statement.setString(1, "RAD");
-            //statement.setInt(2, Integer.parseInt((dokter.getUserIdUser()).toString()));
+            statement.setString(1, dokter.getPoliIdPoli());
             statement.setInt(2, dokter.getUserIdUser());
             statement.setString(3, dokter.getIdDokter());
             statement.setString(4, dokter.getNamaDokter());
@@ -65,13 +57,10 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
             statement.setInt(17, dokter.getGajifixDokter());
             statement.setInt(18, dokter.getGajilemburDokter());
             statement.setDouble(19, dokter.getGajikonsulDokter());
-            System.out.println(statement);
             statement.executeUpdate();
-            return dokter;
         } catch (SQLException exception) {
-            ui.act.append("InsertUser Error \n");
+            ui.act.append("InsertDokter Error \n");
             exception.printStackTrace();
-            return null;
         } finally {
             if (statement != null) {
                 try {
@@ -85,7 +74,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
 
     @Override
     public void updateDokter(Dokter dokter) throws RemoteException {
-        ui.act.append("Client Execute updateCustomers(" + dokter.toString() + ") \n");
+        ui.act.append("Client Execute updateDokter(" + dokter.toString() + ") \n");
 
         PreparedStatement statement = null;
         try {
@@ -96,7 +85,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
                     + "WHERE id_dokter = ?"
             );
             statement.setString(1, (dokter.getPoliIdPoli()).toString());
-            statement.setInt(2, Integer.parseInt((dokter.getUserIdUser()).toString()));
+            statement.setInt(2, dokter.getUserIdUser());
             statement.setString(19, dokter.getIdDokter());
             statement.setString(3, dokter.getNamaDokter());
             statement.setString(4, dokter.getAlamatDokter());
@@ -114,7 +103,6 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
             statement.setInt(16, dokter.getGajifixDokter());
             statement.setInt(17, dokter.getGajilemburDokter());
             statement.setDouble(18, dokter.getGajikonsulDokter());
-            //System.out.println(statement);
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -130,13 +118,13 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
     }
 
     @Override
-    public void deleteDokter(Dokter dokter) throws RemoteException {
-        ui.act.append("Client Execute deleteUser (" + dokter.toString() + ") \n");
+    public void deleteDokter(String dokter) throws RemoteException {
+        ui.act.append("Client Execute deleteDokter (" + dokter + ") \n");
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "DELETE FROM dokter WHERE id_dokter = ?");
-            statement.setString(1, dokter.getIdDokter());
+            statement.setString(1, dokter);
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteDokter Error \n");
@@ -162,8 +150,8 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
             ResultSet result = statement.executeQuery();
             Dokter dokter = null;
             if (result.next()) {
-                dokter = new Dokter();                                
-                dokter.setIdDokter(result.getString("id_dokter"));                
+                dokter = new Dokter();
+                dokter.setIdDokter(result.getString("id_dokter"));
                 dokter.setUserIdUser(result.getInt("user_id_user"));
                 dokter.setNamaDokter(result.getString("nama_dokter"));
                 dokter.setAlamatDokter(result.getString("alamat_dokter"));
@@ -181,7 +169,6 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
                 dokter.setGajilemburDokter(result.getInt("gajilembur_dokter"));
                 dokter.setGajikonsulDokter(result.getDouble("gajikonsul_dokter"));
             }
-            System.out.println("here is getDokter");
             return dokter;
         } catch (SQLException exception) {
             ui.act.append("getDokter Error \n");
@@ -230,13 +217,10 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
                 list.add(dokter);
             }
             result.close();
-
             return list;
 
         } catch (SQLException exception) {
-            
             ui.act.append("getDokterList Error \n");
-            System.out.println(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -247,7 +231,5 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
             }
         }
     }
-    
-    
-    
+
 }

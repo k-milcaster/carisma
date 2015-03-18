@@ -78,7 +78,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
     }
 
     @Override
-    public User insertUser(User user) throws RemoteException {
+    public void insertUser(User user) throws RemoteException {
         ui.act.append("Client Execute insertUser " + user.toString() + "\n");
 
         PreparedStatement statement = null;
@@ -94,10 +94,8 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             statement.setString(6, user.getRole());
             //nyoba branch
             statement.executeUpdate();
-            return user;
         } catch (SQLException exception) {
             ui.act.append("InsertUser Error \n");
-            return null;
         } finally {
             if (statement != null) {
                 try {

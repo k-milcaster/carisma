@@ -134,6 +134,7 @@ public class Dokter implements Serializable {
         this.gajifixDokter = dokter.gajifixDokter;
         this.gajilemburDokter = dokter.gajilemburDokter;
         this.gajikonsulDokter = dokter.gajikonsulDokter;
+        this.userIdUser = dokter.userIdUser;
     }
     
     public Dokter(String idDokter) {

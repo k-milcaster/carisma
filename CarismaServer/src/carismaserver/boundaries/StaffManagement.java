@@ -3,11 +3,15 @@ package carismaserver.boundaries;
 import carismainterface.entity.Pegawai;
 import carismaserver.controllers.DatabaseConnection;
 import carismaserver.entity.StaffEntity;
+import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.rmi.RemoteException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -26,12 +30,12 @@ public class StaffManagement extends javax.swing.JFrame {
     public Main ui;
     private File file;
     private DatabaseConnection databaseConnection;
-    
-    public StaffManagement(final Main ui) throws RemoteException {
+
+    public StaffManagement(final Main ui) throws RemoteException, SQLException {
         this.ui = ui;
         initComponents();
         control.getPegawai(this);
-        //setComboBox();
+        setComboBox();
         tablePegawai.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
@@ -40,7 +44,6 @@ public class StaffManagement extends javax.swing.JFrame {
                     try {
                         staffService = new StaffEntity(ui);
                         Pegawai selected = new Pegawai(staffService.getPegawai(tablePegawai.getValueAt(row, 1).toString()));
-                        System.out.println(selected.getUserIdUser().toString()); 
                         fieldId.setText(selected.getIdPegawai());
                         fieldNama.setText(selected.getNamaPegawai());
                         fieldAlamat.setText(selected.getAlamatPegawai());
@@ -55,27 +58,80 @@ public class StaffManagement extends javax.swing.JFrame {
                         fieldBank.setText(selected.getBankPegawai());
                         fieldNorek.setText(selected.getNorekPegawai());
                         fieldGajiFix.setText((String) selected.getGajifixPegawai().toString());
-                        fieldGajiLembur.setText((String) selected.getGajilemburPegawai().toString());
-                        
-                        
-                        //setComboBox();
-                        //comboUsername.setSelectedItem(selected.getUsername());
+                        fieldGajiLembur.setText((String) selected.getGajilemburPegawai().toString());                        
+                        setComboBox(selected.getUserIdUser());
                     } catch (RemoteException ex) {
                         Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(StaffManagement.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 }
             }
         });
     }
-    
-    
+
+    public void setComboBox() throws SQLException {
+        comboUsername.removeAllItems();
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = (Statement) databaseConnection.getConnection().createStatement();
+            resultSet = statement.executeQuery("SELECT id_user, username FROM user");
+            while (resultSet.next()) {
+                String userName = resultSet.getString("id_user") + " " + resultSet.getString("username");
+                comboUsername.addItem(userName);
+            }
+        } catch (SQLException ex) {
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException ex) {
+            }
+            if (statement != null) {
+                statement.close();
+            }
+        }
+    }
+
+    public void setComboBox(int id_user) throws SQLException {
+        setComboBox();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = databaseConnection.getConnection().prepareStatement("SELECT id_user, username FROM user WHERE id_user = ?");
+            statement.setInt(1, id_user);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String userName = resultSet.getString("id_user") + " " + resultSet.getString("username");
+                comboUsername.setSelectedItem(userName);
+            }
+        } catch (SQLException ex) {
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException ex) {
+            }
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+
     private byte[] extractBytes(String ImageName) throws IOException {
         File fi = new File(ImageName);
         byte[] fileContent = Files.readAllBytes(fi.toPath());
 
         return fileContent;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -466,15 +522,15 @@ public class StaffManagement extends javax.swing.JFrame {
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         //        try {
-            //            int id = Integer.parseInt(fieldId.getText());
-            //            String user = fieldUsername.getText();
-            //            String pass = fieldPassword.getText();
-            //            String role = (String)comboRole.getItemAt(comboRole.getSelectedIndex());
-            //            control.updateUser(this, id, user, pass, role);
-            //            control.getUsers(this);
-            //        } catch (RemoteException ex) {
-            //            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
-            //        }
+        //            int id = Integer.parseInt(fieldId.getText());
+        //            String user = fieldUsername.getText();
+        //            String pass = fieldPassword.getText();
+        //            String role = (String)comboRole.getItemAt(comboRole.getSelectedIndex());
+        //            control.updateUser(this, id, user, pass, role);
+        //            control.getUsers(this);
+        //        } catch (RemoteException ex) {
+        //            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        //        }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
@@ -496,8 +552,8 @@ public class StaffManagement extends javax.swing.JFrame {
 //            byte[] img = extractBytes(file.toPath().toString());
 //            int gfix = Integer.parseInt(fieldGajiFix.getText());
 //            int glembur = Integer.parseInt(fieldGajiLembur.getText());
-            //control.insertPegawai(this, userid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
-            //control.getPegawai(this);
+        //control.insertPegawai(this, userid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
+        //control.getPegawai(this);
 //        } catch (RemoteException ex) {
 //            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
 //        } catch (IOException ex) {
@@ -507,12 +563,12 @@ public class StaffManagement extends javax.swing.JFrame {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         //        try {
-            //            int id = Integer.parseInt(fieldId.getText());;
-            //            control.deleteUser(this, id);
-            //            control.getUsers(this);
-            //        } catch (RemoteException ex) {
-            //            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
-            //        }
+        //            int id = Integer.parseInt(fieldId.getText());;
+        //            control.deleteUser(this, id);
+        //            control.getUsers(this);
+        //        } catch (RemoteException ex) {
+        //            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        //        }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

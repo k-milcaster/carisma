@@ -10,13 +10,11 @@ import java.util.List;
  */
 public interface AntrianService {
 
-    Antrian insertAntrian(Antrian antrian) throws RemoteException;
+    void insertAntrian(Antrian antrian) throws RemoteException;
 
-    void updateAntrian(Antrian antrian) throws RemoteException;
-
-    void hadirAntrian(String antrian) throws RemoteException;
-
-    void deleteAntrian(Antrian antrian) throws RemoteException;
+    void deleteAntrian(String antrian) throws RemoteException;
+    
+    void antrianHadir(String antrian) throws RemoteException;
 
     Antrian getAntrian(String antrian) throws RemoteException;
 

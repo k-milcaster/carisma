@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface RekammedikService {
 
-    User insertRekamMedik(Rekammedik rekamMedik) throws RemoteException;
+    void insertRekamMedik(Rekammedik rekamMedik) throws RemoteException;
 
     void updateRekamMedik(Rekammedik rekamMedik) throws RemoteException;
 
