@@ -92,7 +92,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             statement.setString(4, user.getRegistered().toString());
             statement.setString(5, user.getRegistered().toString());
             statement.setString(6, user.getRole());
-            //System.out.println(statement);
+            //nyoba branch
             statement.executeUpdate();
             return user;
         } catch (SQLException exception) {
