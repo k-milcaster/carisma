@@ -235,7 +235,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService{
 
         } catch (SQLException exception) {
             
-            ui.act.append("getCustomersList Error \n");
+            ui.act.append("getDokterList Error \n");
             System.out.println(exception.toString());
             return null;
         } finally {
