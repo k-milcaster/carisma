@@ -38,7 +38,7 @@ public class Rakobat implements Serializable {
     private String namaRak;
     @JoinColumn(name = "obat_id_obat", referencedColumnName = "id_obat")
     @ManyToOne(optional = false)
-    private String obatIdObat;
+    private Integer obatIdObat;
 
     public Rakobat() {
     }
@@ -63,11 +63,11 @@ public class Rakobat implements Serializable {
         this.namaRak = namaRak;
     }
 
-    public String getObatIdObat() {
+    public Integer getObatIdObat() {
         return obatIdObat;
     }
 
-    public void setObatIdObat(String obatIdObat) {
+    public void setObatIdObat(Integer obatIdObat) {
         this.obatIdObat = obatIdObat;
     }
 

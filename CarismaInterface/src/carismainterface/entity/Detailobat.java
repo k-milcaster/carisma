@@ -34,7 +34,7 @@ public class Detailobat implements Serializable {
     private Integer idDetail;
     @Column(name = "tglkadaluarsa_detail")
     @Temporal(TemporalType.DATE)
-    private Date tglkadaluarsaDetail;
+    private String tglkadaluarsaDetail;
     @JoinColumn(name = "obat_id_obat", referencedColumnName = "id_obat")
     @ManyToOne(optional = false)
     private Integer obatIdObat;
@@ -54,11 +54,11 @@ public class Detailobat implements Serializable {
         this.idDetail = idDetail;
     }
 
-    public Date getTglkadaluarsaDetail() {
+    public String getTglkadaluarsaDetail() {
         return tglkadaluarsaDetail;
     }
 
-    public void setTglkadaluarsaDetail(Date tglkadaluarsaDetail) {
+    public void setTglkadaluarsaDetail(String tglkadaluarsaDetail) {
         this.tglkadaluarsaDetail = tglkadaluarsaDetail;
     }
 

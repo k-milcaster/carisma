@@ -110,11 +110,11 @@ public class Obat implements Serializable {
         this.keterangan = keterangan;
     }
 
-    public int getHargajualObat() {
+    public Integer getHargajualObat() {
         return hargajualObat;
     }
 
-    public void setHargajualObat(int hargajualObat) {
+    public void setHargajualObat(Integer hargajualObat) {
         this.hargajualObat = hargajualObat;
     }
 
@@ -179,8 +179,5 @@ public class Obat implements Serializable {
         return "carismainterface.entity.Obat[ idObat=" + idObat + " ]";
     }
 
-    public void setHargajualObat(Integer hargajualObat) {
-        this.hargajualObat = hargajualObat;
-    }
 
 }

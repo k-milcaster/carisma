@@ -41,7 +41,7 @@ public class Detailtransaksibeliobat implements Serializable {
     private Integer obat;
     @JoinColumn(name = "transaksibeliobat_id_transaksibeliobat", referencedColumnName = "id_transaksibeliobat", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Transaksibeliobat transaksibeliobat;
+    private String transaksibeliobat;
 
     public Detailtransaksibeliobat() {
     }
@@ -83,11 +83,11 @@ public class Detailtransaksibeliobat implements Serializable {
         this.obat = obat;
     }
 
-    public Transaksibeliobat getTransaksibeliobat() {
+    public String getTransaksibeliobat() {
         return transaksibeliobat;
     }
 
-    public void setTransaksibeliobat(Transaksibeliobat transaksibeliobat) {
+    public void setTransaksibeliobat(String transaksibeliobat) {
         this.transaksibeliobat = transaksibeliobat;
     }
 
