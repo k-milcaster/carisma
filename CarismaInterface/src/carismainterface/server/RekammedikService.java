@@ -1,7 +1,6 @@
 package carismainterface.server;
 
 import carismainterface.entity.Rekammedik;
-import carismainterface.entity.User;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -23,11 +22,9 @@ public interface RekammedikService {
     
     List<Rekammedik> getRekamMedikByTahun(String tahun) throws RemoteException;
     
-    List<Rekammedik> getRekamMedikByBulan(String bulan) throws RemoteException;
+    List<Rekammedik> getRekamMedikByBulan(String bulan, String tahun) throws RemoteException;
     
-    List<Rekammedik> getRekamMedikByTahun(String pasien, String tahun) throws RemoteException;
-    
-    List<Rekammedik> getRekamMedikByBulan(String pasien, String bulan) throws RemoteException;    
+    List<Rekammedik> getRekamMedikByTahun(String bulan, String tahun, String pasien) throws RemoteException;    
 
     List<Rekammedik> getRekamMedik() throws RemoteException;
 }
