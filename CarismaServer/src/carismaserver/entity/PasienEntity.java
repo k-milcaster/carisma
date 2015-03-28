@@ -34,7 +34,7 @@ public class PasienEntity implements PasienService {
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO pasien (id_pasien, kota_id_kota, user_id_user, nama_pasien, alamat_pasien, kartuid_pasien, nokartuid_pasien, telp_pasien, hp_pasien, tempatlahir_pasien, tgllahir_pasien, kelamin_pasien, darah_pasien, regdate_pasien) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+                    "INSERT INTO pasien (id_pasien, kota_id_kota, user_id_user, nama_pasien, alamat_pasien, kartuid_pasien, nokartuid_pasien, telp_pasien, hp_pasien, tempatlahir_pasien, tgllahir_pasien, kelamin_pasien, darah_pasien, berat_pasien, tinggi_pasien, regdate_pasien) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
             );
             statement.setString(1, pasien.getIdPasien());
             statement.setString(2, pasien.getKotaIdKota());
@@ -49,7 +49,9 @@ public class PasienEntity implements PasienService {
             statement.setString(11, pasien.getTgllahirPasien());
             statement.setString(12, pasien.getKelaminPasien());
             statement.setString(13, pasien.getDarahPasien());
-            statement.setString(14, pasien.getRegdatePasien());
+            statement.setInt(14, pasien.getBeratPasien());
+            statement.setInt(15, pasien.getTinggiPasien());
+            statement.setString(16, pasien.getRegdatePasien());
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertPasien Error \n");
@@ -71,7 +73,7 @@ public class PasienEntity implements PasienService {
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "UPDATE pasien SET kota_id_kota = ?, user_id_user = ?, nama_pasien = ?, alamat_pasien = ?, kartuid_pasien = ?, nokartuid_pasien = ?, telp_pasien = ?, hp_pasien = ?, tempatlahir_pasien = ?, tgllahir_pasien = ?, kelamin_pasien = ?, darah_pasien = ?, regdate_pasien = ? WHERE id_pasien = ?"
+                    "UPDATE pasien SET kota_id_kota = ?, user_id_user = ?, nama_pasien = ?, alamat_pasien = ?, kartuid_pasien = ?, nokartuid_pasien = ?, telp_pasien = ?, hp_pasien = ?, tempatlahir_pasien = ?, tgllahir_pasien = ?, kelamin_pasien = ?, darah_pasien = ?, berat_pasien = ?, tinggi_pasien = ?, regdate_pasien = ? WHERE id_pasien = ?"
             );
             statement.setString(1, pasien.getKotaIdKota());
             statement.setString(2, pasien.getUserIdUser());
@@ -85,8 +87,10 @@ public class PasienEntity implements PasienService {
             statement.setString(10, pasien.getTgllahirPasien());
             statement.setString(11, pasien.getKelaminPasien());
             statement.setString(12, pasien.getDarahPasien());
-            statement.setString(13, pasien.getRegdatePasien());
-            statement.setString(14, pasien.getIdPasien());
+            statement.setInt(13, pasien.getBeratPasien());
+            statement.setInt(14, pasien.getTinggiPasien());
+            statement.setString(15, pasien.getRegdatePasien());
+            statement.setString(16, pasien.getIdPasien());
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("UpdatePasien Error \n");
@@ -148,6 +152,8 @@ public class PasienEntity implements PasienService {
                 pasi.setTgllahirPasien(result.getString("tgllahir_pasien"));
                 pasi.setKelaminPasien(result.getString("kelamin_pasien"));
                 pasi.setDarahPasien(result.getString("darah_pasien"));
+                pasi.setBeratPasien(result.getInt("berat_pasien"));
+                pasi.setTinggiPasien(result.getInt("tinggi_pasien"));
                 pasi.setRegdatePasien(result.getString("regdate_pasien"));
             }
             return pasi;
@@ -190,6 +196,8 @@ public class PasienEntity implements PasienService {
                 pasi.setTgllahirPasien(result.getString("tgllahir_pasien"));
                 pasi.setKelaminPasien(result.getString("kelamin_pasien"));
                 pasi.setDarahPasien(result.getString("darah_pasien"));
+                pasi.setBeratPasien(result.getInt("berat_pasien"));
+                pasi.setTinggiPasien(result.getInt("tinggi_pasien"));
                 pasi.setRegdatePasien(result.getString("regdate_pasien"));
                 list.add(pasi);
             }
@@ -214,7 +222,7 @@ public class PasienEntity implements PasienService {
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM pasien WHERE nama_pasien LIKE('%"+pasien+"%')");
+                    "SELECT * FROM pasien WHERE nama_pasien LIKE('%" + pasien + "%')");
             ResultSet result = statement.executeQuery();
             List<Pasien> list = new ArrayList<Pasien>();
             Pasien pasi = null;
@@ -233,6 +241,8 @@ public class PasienEntity implements PasienService {
                 pasi.setTgllahirPasien(result.getString("tgllahir_pasien"));
                 pasi.setKelaminPasien(result.getString("kelamin_pasien"));
                 pasi.setDarahPasien(result.getString("darah_pasien"));
+                pasi.setBeratPasien(result.getInt("berat_pasien"));
+                pasi.setTinggiPasien(result.getInt("tinggi_pasien"));
                 pasi.setRegdatePasien(result.getString("regdate_pasien"));
                 list.add(pasi);
             }

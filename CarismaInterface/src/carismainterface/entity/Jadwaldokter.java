@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismainterface.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -31,6 +29,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Jadwaldokter.findByShiftJadwaldokter", query = "SELECT j FROM Jadwaldokter j WHERE j.shiftJadwaldokter = :shiftJadwaldokter"),
     @NamedQuery(name = "Jadwaldokter.findByKeterangan", query = "SELECT j FROM Jadwaldokter j WHERE j.keterangan = :keterangan")})
 public class Jadwaldokter implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @JoinColumn(name = "jadwal_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Jadwal jadwalId;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -101,10 +107,30 @@ public class Jadwaldokter implements Serializable {
         this.dokter = dokter;
     }
 
+    public Jadwaldokter(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Jadwal getJadwalId() {
+        return jadwalId;
+    }
+
+    public void setJadwalId(Jadwal jadwalId) {
+        this.jadwalId = jadwalId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (dokterIdDokter != null ? dokterIdDokter.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -115,7 +141,7 @@ public class Jadwaldokter implements Serializable {
             return false;
         }
         Jadwaldokter other = (Jadwaldokter) object;
-        if ((this.dokterIdDokter == null && other.dokterIdDokter != null) || (this.dokterIdDokter != null && !this.dokterIdDokter.equals(other.dokterIdDokter))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -123,7 +149,7 @@ public class Jadwaldokter implements Serializable {
 
     @Override
     public String toString() {
-        return "carismainterface.entity.Jadwaldokter[ dokterIdDokter=" + dokterIdDokter + " ]";
+        return "carismainterface.entity.Jadwaldokter[ id=" + id + " ]";
     }
     
 }

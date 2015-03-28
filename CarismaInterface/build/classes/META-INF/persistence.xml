@@ -26,6 +26,8 @@
     <class>carismainterface.entity.Kamar</class>
     <class>carismainterface.entity.Jadwaldokter</class>
     <class>carismainterface.entity.Rekammedik</class>
+    <class>carismainterface.entity.Jadwal</class>
+    <class>carismainterface.entity.Detailresep</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/carisma?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value=""/>

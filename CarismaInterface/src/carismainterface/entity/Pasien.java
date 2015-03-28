@@ -47,6 +47,18 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pasien.findByDarahPasien", query = "SELECT p FROM Pasien p WHERE p.darahPasien = :darahPasien"),
     @NamedQuery(name = "Pasien.findByRegdatePasien", query = "SELECT p FROM Pasien p WHERE p.regdatePasien = :regdatePasien")})
 public class Pasien implements Serializable {
+    @Basic(optional = false)
+    @Column(name = "tgllahir_pasien")
+    @Temporal(TemporalType.DATE)
+    private String tgllahirPasien;
+    @Column(name = "berat_pasien")
+    private Integer beratPasien;
+    @Column(name = "tinggi_pasien")
+    private Integer tinggiPasien;
+    @Basic(optional = false)
+    @Column(name = "regdate_pasien")
+    @Temporal(TemporalType.DATE)
+    private String regdatePasien;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pasienIdPasien")
     private String rekammedikCollection;
     private static final long serialVersionUID = 1L;
@@ -74,19 +86,11 @@ public class Pasien implements Serializable {
     @Column(name = "tempatlahir_pasien")
     private String tempatlahirPasien;
     @Basic(optional = false)
-    @Column(name = "tgllahir_pasien")
-    @Temporal(TemporalType.DATE)
-    private String tgllahirPasien;
-    @Basic(optional = false)
     @Column(name = "kelamin_pasien")
     private String kelaminPasien;
     @Basic(optional = false)
     @Column(name = "darah_pasien")
     private String darahPasien;
-    @Basic(optional = false)
-    @Column(name = "regdate_pasien")
-    @Temporal(TemporalType.DATE)
-    private String regdatePasien;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pasienIdPasien")
     private String kunjunganCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pasienIdPasien")
@@ -302,5 +306,20 @@ public class Pasien implements Serializable {
     public void setRekammedikCollection(String rekammedikCollection) {
         this.rekammedikCollection = rekammedikCollection;
     }
-    
+
+    public Integer getBeratPasien() {
+        return beratPasien;
+    }
+
+    public void setBeratPasien(Integer beratPasien) {
+        this.beratPasien = beratPasien;
+    }
+
+    public Integer getTinggiPasien() {
+        return tinggiPasien;
+    }
+
+    public void setTinggiPasien(Integer tinggiPasien) {
+        this.tinggiPasien = tinggiPasien;
+    }   
 }
