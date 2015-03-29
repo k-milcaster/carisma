@@ -1,6 +1,5 @@
 package carismaserver.entity;
 
-import carismainterface.entity.Detailtransaksibeliobat;
 import carismainterface.entity.Rekammedik;
 import carismainterface.server.RekammedikService;
 import carismaserver.boundaries.Main;

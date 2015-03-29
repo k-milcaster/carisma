@@ -1,7 +1,6 @@
 package carismaserver.entity;
 
 import carismainterface.entity.Detailresep;
-import carismainterface.entity.Pasien;
 import carismainterface.server.DetailresepService;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
