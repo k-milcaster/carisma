@@ -36,7 +36,7 @@ public class Jadwalpegawai implements Serializable {
     private Integer id;
     @JoinColumn(name = "jadwal_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Jadwal jadwalId;
+    private Integer jadwalId;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -119,11 +119,11 @@ public class Jadwalpegawai implements Serializable {
         this.id = id;
     }
 
-    public Jadwal getJadwalId() {
+    public Integer getJadwalId() {
         return jadwalId;
     }
 
-    public void setJadwalId(Jadwal jadwalId) {
+    public void setJadwalId(Integer jadwalId) {
         this.jadwalId = jadwalId;
     }
 

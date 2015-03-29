@@ -10,13 +10,13 @@ import java.util.List;
  */
 public interface JadwalpegawaiService {
 
-    void insertJadwalPegawai(Jadwalpegawai jp) throws RemoteException;
+    void insertJadwalpegawai(Jadwalpegawai jadwalpegawai) throws RemoteException;
 
-    void deleteJadwalPegawai(String jp) throws RemoteException;
+    void updateJadwalpegawai(Jadwalpegawai jadwalpegawai) throws RemoteException;
 
-    void updateJadwalPegawai(String jp) throws RemoteException;
+    void deleteJadwalpegawai(String idjadwalpegawai) throws RemoteException;
 
-    List<Jadwalpegawai> getJadwalPegawai(String jp) throws RemoteException;
+    Jadwalpegawai getJadwalpegawai(String idjadwalpegawai) throws RemoteException;
 
-    List<Jadwalpegawai> getJadwalPegawai() throws RemoteException;
+    List<Jadwalpegawai> getJadwalpegawai() throws RemoteException;
 }

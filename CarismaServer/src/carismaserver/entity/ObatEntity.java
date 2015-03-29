@@ -91,13 +91,13 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
     }
 
     @Override
-    public void deleteObat(String obat) throws RemoteException {
-        ui.act.append("Client Execute deleteObat (" + obat + ") \n");
+    public void deleteObat(String idobat) throws RemoteException {
+        ui.act.append("Client Execute deleteObat (" + idobat + ") \n");
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "DELETE FROM obat WHERE id_obat = ?");
-            statement.setString(1, obat);
+            statement.setString(1, idobat);
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteObat Error \n");

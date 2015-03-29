@@ -56,7 +56,7 @@ public class PasienKamar implements Serializable {
     private String kunjunganCollection;
     @JoinColumn(name = "kamar_id_kamar", referencedColumnName = "id_kamar")
     @ManyToOne(optional = false)
-    private String kamarIdKamar;
+    private Integer kamarIdKamar;
 
     public PasienKamar() {
     }
@@ -112,11 +112,11 @@ public class PasienKamar implements Serializable {
         this.kunjunganCollection = kunjunganCollection;
     }
 
-    public String getKamarIdKamar() {
+    public Integer getKamarIdKamar() {
         return kamarIdKamar;
     }
 
-    public void setKamarIdKamar(String kamarIdKamar) {
+    public void setKamarIdKamar(Integer kamarIdKamar) {
         this.kamarIdKamar = kamarIdKamar;
     }
 
