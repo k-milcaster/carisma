@@ -7,10 +7,13 @@
 package carismaserver.controllers;
 
 import carismainterface.entity.Pegawai;
+import carismainterface.entity.User;
 import carismaserver.entity.StaffEntity;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,9 +22,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PegawaiManagement {
     public void getPegawai(carismaserver.boundaries.StaffManagement ui) throws RemoteException {
-        StaffEntity dokterService = new StaffEntity(ui.ui);
+        StaffEntity pegawaiService = new StaffEntity(ui.ui);
         List<Pegawai> list = new ArrayList<Pegawai>();
-        list = dokterService.getPegawai();
+        list = pegawaiService.getPegawai();
         DefaultTableModel model = new DefaultTableModel();      
         model.addColumn("No."); 
         model.addColumn("Nama"); 
@@ -46,5 +49,34 @@ public class PegawaiManagement {
             System.out.println("lewat");
         }
         ui.tablePegawai.setModel(model);
+    }
+    
+    public void insertPegawai(carismaserver.boundaries.StaffManagement ui, String username, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String jabatan, String bank, String norek, int gfix, int glembur, byte[] foto) throws RemoteException {
+        StaffEntity pegawaiService = new StaffEntity(ui.ui);        
+        try {
+            User user = new User();
+            Pegawai pegawai = new Pegawai();
+            user.setIdUser(Integer.parseInt(username));
+            pegawai.setIdPegawai(id);
+            pegawai.setNamaPegawai(nama);
+            pegawai.setAlamatPegawai(alamat);
+            pegawai.setNokartuidPegawai(nokartu);
+            pegawai.setTelpPegawai(telp);
+            pegawai.setHp1Pegawai(hp1);
+            pegawai.setHp2Pegawai(hp2);
+            pegawai.setTempatlahirPegawai(tempat);
+            pegawai.setTgllahirPegawai(tanggal);
+            pegawai.setKelaminPegawai(kelamin);
+            pegawai.setDarahPegawai(darah);
+            pegawai.setJabatanPegawai(jabatan);
+            pegawai.setBankPegawai(bank);
+            pegawai.setNorekPegawai(norek);
+            pegawai.setGajifixPegawai(gfix);
+            pegawai.setGajilemburPegawai(glembur);
+            pegawai.setFotoPegawai(foto);
+            pegawaiService.insertPegawai(pegawai);
+        } catch (RemoteException ex) {
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

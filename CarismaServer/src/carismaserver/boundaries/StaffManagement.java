@@ -534,31 +534,32 @@ public class StaffManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
-//        try {
-//            String userid = comboUsername.getSelectedItem().toString().substring(0, comboUsername.getSelectedItem().toString().indexOf(" "));
-//            String id = fieldId.getText();
-//            String nama = fieldNama.getText();
-//            String alamat = fieldAlamat.getText();
-//            String nokartu = fieldNokartuid.getText();
-//            String telp = fieldTelepon.getText();
-//            String hp1 = fieldHP1.getText();
-//            String hp2 = fieldHP2.getText();
-//            String tempat = fieldTempat.getText();
-//            String tanggal = fieldTanggal.getText();
-//            String kelamin = comboKelamin.getSelectedItem().toString();
-//            String darah = comboDarah.getSelectedItem().toString();
-//            String bank = fieldBank.getText();
-//            String norek = fieldNorek.getText();
-//            byte[] img = extractBytes(file.toPath().toString());
-//            int gfix = Integer.parseInt(fieldGajiFix.getText());
-//            int glembur = Integer.parseInt(fieldGajiLembur.getText());
-        //control.insertPegawai(this, userid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
-        //control.getPegawai(this);
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            String userid = comboUsername.getSelectedItem().toString().substring(0, comboUsername.getSelectedItem().toString().indexOf(" "));
+            String id = fieldId.getText();
+            String nama = fieldNama.getText();
+            String alamat = fieldAlamat.getText();
+            String nokartu = fieldNokartuid.getText();
+            String telp = fieldTelepon.getText();
+            String hp1 = fieldHP1.getText();
+            String hp2 = fieldHP2.getText();
+            String tempat = fieldTempat.getText();
+            String tanggal = fieldTanggal.getText();
+            String kelamin = comboKelamin.getSelectedItem().toString();
+            String darah = comboDarah.getSelectedItem().toString();
+            String jabatan = fieldJabatan.getText();
+            String bank = fieldBank.getText();
+            String norek = fieldNorek.getText();
+            byte[] img = extractBytes(file.toPath().toString());
+            int gfix = Integer.parseInt(fieldGajiFix.getText());
+            int glembur = Integer.parseInt(fieldGajiLembur.getText());
+        control.insertPegawai(this, userid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, jabatan, bank, norek, gfix, glembur, img);
+        control.getPegawai(this);
+        } catch (RemoteException ex) {
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonInsertActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
