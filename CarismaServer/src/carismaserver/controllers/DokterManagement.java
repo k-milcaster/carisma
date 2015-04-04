@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package carismaserver.controllers;
 
 import carismainterface.entity.Dokter;
@@ -24,17 +23,17 @@ import javax.swing.table.DefaultTableModel;
  * @author kepoterz
  */
 public class DokterManagement {
-    
+
     public void getDokter(carismaserver.boundaries.DoctorManagement ui) throws RemoteException {
         DokterEntity dokterService = new DokterEntity(ui.ui);
         List<Dokter> list = new ArrayList<Dokter>();
         list = dokterService.getDokter();
-        DefaultTableModel model = new DefaultTableModel();      
-        model.addColumn("No."); 
-        model.addColumn("Nama"); 
-        model.addColumn("Alamat"); 
-        model.addColumn("No Kartu ID"); 
-        model.addColumn("Telepon"); 
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("No.");
+        model.addColumn("Nama");
+        model.addColumn("Alamat");
+        model.addColumn("No Kartu ID");
+        model.addColumn("Telepon");
         model.addColumn("HP1");
         model.addColumn("HP2");
         model.addColumn("Tempat Lahir");
@@ -48,16 +47,15 @@ public class DokterManagement {
         model.addColumn("Gaji Konsul");
         for (int i = 0; i < list.size(); i++) {
             model.addRow(new Object[]{i, list.get(i).getNamaDokter(), list.get(i).getAlamatDokter(), list.get(i).getNokartuidDokter(), list.get(i).getTelpDokter(), list.get(i).getHp1Dokter(),
-            list.get(i).getHp2Dokter(), list.get(i).getTempatlahirDokter(), list.get(i).getTgllahirDokter(), list.get(i).getKelaminDokter(), list.get(i).getDarahDokter(),
-            list.get(i).getBankDokter(), list.get(i).getNorekDokter(), list.get(i).getGajifixDokter(), list.get(i).getGajilemburDokter(), list.get(i).getGajikonsulDokter()});
+                list.get(i).getHp2Dokter(), list.get(i).getTempatlahirDokter(), list.get(i).getTgllahirDokter(), list.get(i).getKelaminDokter(), list.get(i).getDarahDokter(),
+                list.get(i).getBankDokter(), list.get(i).getNorekDokter(), list.get(i).getGajifixDokter(), list.get(i).getGajilemburDokter(), list.get(i).getGajikonsulDokter()});
             System.out.println("lewat");
         }
         ui.tableDokter.setModel(model);
     }
-    
-    
+
     public void insertDokter(carismaserver.boundaries.DoctorManagement ui, String username, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
-        DokterEntity dokterService = new DokterEntity(ui.ui);        
+        DokterEntity dokterService = new DokterEntity(ui.ui);
         try {
             User user = new User();
             Dokter dokter = new Dokter();
@@ -84,5 +82,10 @@ public class DokterManagement {
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void deleteDokter(carismaserver.boundaries.DoctorManagement ui, String id) throws RemoteException {
+        DokterEntity dokterService = new DokterEntity(ui.ui);
+        dokterService.deleteDokter(id);
     }
 }

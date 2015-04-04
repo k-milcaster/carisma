@@ -548,13 +548,12 @@ public class DoctorManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-//        try {
-//            int id = Integer.parseInt(fieldId.getText());;
-//            control.deleteUser(this, id);
-//            control.getUsers(this);
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            String id = fieldId.getText();;
+            control.deleteDokter(this, id);
+        } catch (RemoteException ex) {
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonAttachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAttachActionPerformed
