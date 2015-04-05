@@ -55,7 +55,7 @@ public class lihatantrian extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        Nama = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
@@ -192,13 +192,13 @@ public class lihatantrian extends javax.swing.JFrame {
         jPanel10.add(jLabel11);
         jLabel11.setBounds(40, 210, 70, 14);
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        Nama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                NamaActionPerformed(evt);
             }
         });
-        jPanel10.add(jTextField8);
-        jTextField8.setBounds(160, 50, 210, 20);
+        jPanel10.add(Nama);
+        Nama.setBounds(160, 50, 210, 20);
         jPanel10.add(jTextField9);
         jTextField9.setBounds(160, 80, 210, 20);
 
@@ -244,9 +244,9 @@ public class lihatantrian extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void NamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_NamaActionPerformed
 
     private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
         // TODO add your handling code here:
@@ -291,6 +291,7 @@ public class lihatantrian extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Nama;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -328,7 +329,6 @@ public class lihatantrian extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }
