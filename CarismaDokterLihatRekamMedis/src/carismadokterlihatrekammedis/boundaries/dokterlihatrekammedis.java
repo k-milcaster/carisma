@@ -40,7 +40,7 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         jTextField13 = new javax.swing.JTextField();
         jTextField14 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        namaPasien = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -118,9 +118,9 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18))); // NOI18N
         jPanel1.setLayout(null);
 
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(40, 100, 34, 14);
+        namaPasien.setText("jLabel1");
+        jPanel1.add(namaPasien);
+        namaPasien.setBounds(40, 100, 34, 14);
 
         jTextField1.setText("jTextField1");
         jPanel1.add(jTextField1);
@@ -348,7 +348,6 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -385,5 +384,6 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel namaPasien;
     // End of variables declaration//GEN-END:variables
 }
