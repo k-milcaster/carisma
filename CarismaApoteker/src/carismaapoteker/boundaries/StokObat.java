@@ -37,10 +37,6 @@ public class StokObat extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         fieldSearch = new javax.swing.JTextField();
-        jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         fieldQuantity = new javax.swing.JTextField();
@@ -147,33 +143,6 @@ public class StokObat extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 210, 270, 40);
-
-        jToolBar1.setRollover(true);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1426717487_save.png"))); // NOI18N
-        jButton1.setText("SAVE");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton1);
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1428222456_icon-compose-32.png"))); // NOI18N
-        jButton2.setText("EDIT");
-        jButton2.setFocusable(false);
-        jToolBar1.add(jButton2);
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1426717770_circle_close_delete-24.png"))); // NOI18N
-        jButton3.setText("DELETE");
-        jButton3.setFocusable(false);
-        jToolBar1.add(jButton3);
-
-        getContentPane().add(jToolBar1);
-        jToolBar1.setBounds(290, 200, 240, 44);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Input Data Obat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
 
@@ -358,10 +327,6 @@ public class StokObat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_fieldSearchActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -387,9 +352,6 @@ public class StokObat extends javax.swing.JFrame {
     private javax.swing.JTextField fieldPrice;
     private javax.swing.JTextField fieldQuantity;
     private javax.swing.JTextField fieldSearch;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -405,7 +367,6 @@ public class StokObat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel labelApotekerName;
     private javax.swing.JTable tableMedicine;
     // End of variables declaration//GEN-END:variables
