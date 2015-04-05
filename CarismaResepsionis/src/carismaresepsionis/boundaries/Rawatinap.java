@@ -44,7 +44,7 @@ public class Rawatinap extends javax.swing.JFrame {
         carnampas = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablepasien = new javax.swing.JTable();
-        idpas = new javax.swing.JTextField();
+        idpasien = new javax.swing.JTextField();
         namapasien = new javax.swing.JTextField();
         kategoripenypasien = new javax.swing.JTextField();
         typekamar = new javax.swing.JTextField();
@@ -140,9 +140,9 @@ public class Rawatinap extends javax.swing.JFrame {
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(10, 179, 406, 402);
 
-        idpas.setText("ID Pasien");
-        getContentPane().add(idpas);
-        idpas.setBounds(896, 179, 449, 32);
+        idpasien.setText("ID Pasien");
+        getContentPane().add(idpasien);
+        idpasien.setBounds(896, 179, 449, 32);
 
         namapasien.setText("Nama Pasien");
         getContentPane().add(namapasien);
@@ -174,7 +174,7 @@ public class Rawatinap extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 1400, 700);
+        jLabel3.setBounds(-70, 10, 1400, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -216,7 +216,7 @@ public class Rawatinap extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField carnampas;
-    private javax.swing.JTextField idpas;
+    private javax.swing.JTextField idpasien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
