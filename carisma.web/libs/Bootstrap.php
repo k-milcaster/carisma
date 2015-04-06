@@ -27,11 +27,9 @@ class Bootstrap {
         if ($url[0] === 'administrator' && !isset($url[1])) {
             $controller->loadModel($url[0]);
             $controller->index();
-        } 
-        else if ($url[0] === 'notification') {
+        } else if ($url[0] === 'notification') {
             $controller->{$url[1]}($url[2], $url[3]);
         } else {
-            
             $controller->loadModel($url[0]);
             if (isset($url[2])) {
                 $controller->{$url[1]}($url[2]);
