@@ -75,8 +75,6 @@ return String.valueOf(umurini);}
         TinggiPasien = new javax.swing.JTextField();
         BeratPasien = new javax.swing.JTextField();
         TambahAntri = new javax.swing.JButton();
-        Jenis_Kartu = new javax.swing.JTextField();
-        No_Kartu = new javax.swing.JTextField();
         CariPasien = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelPasien = new javax.swing.JTable();
@@ -87,7 +85,19 @@ return String.valueOf(umurini);}
         Kamar = new javax.swing.JTextField();
         KelasKamar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -104,7 +114,7 @@ return String.valueOf(umurini);}
             }
         });
         getContentPane().add(Nama_Pasien);
-        Nama_Pasien.setBounds(631, 169, 685, 32);
+        Nama_Pasien.setBounds(740, 150, 580, 32);
 
         Tempat_Lahir.setText("Tempat");
         Tempat_Lahir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,11 +132,11 @@ return String.valueOf(umurini);}
 
         ID.setText("ID PASIEN");
         getContentPane().add(ID);
-        ID.setBounds(1134, 119, 79, 32);
+        ID.setBounds(1140, 110, 79, 32);
 
         Tempat_ID.setText("SD002-BKI-8890");
         getContentPane().add(Tempat_ID);
-        Tempat_ID.setBounds(1217, 119, 99, 32);
+        Tempat_ID.setBounds(1220, 110, 99, 32);
 
         Alamat.setColumns(20);
         Alamat.setRows(5);
@@ -146,10 +156,15 @@ return String.valueOf(umurini);}
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(631, 402, 685, 71);
 
-        No_Hp.setText("No_HP");
+        No_Hp.setText("No_Telp");
         No_Hp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 No_HpMouseClicked(evt);
+            }
+        });
+        No_Hp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                No_HpActionPerformed(evt);
             }
         });
         No_Hp.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -158,9 +173,9 @@ return String.valueOf(umurini);}
             }
         });
         getContentPane().add(No_Hp);
-        No_Hp.setBounds(631, 326, 340, 32);
+        No_Hp.setBounds(741, 326, 230, 32);
 
-        No_tele.setText("No_Telp");
+        No_tele.setText("No_Hp");
         No_tele.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 No_teleMouseClicked(evt);
@@ -172,7 +187,7 @@ return String.valueOf(umurini);}
             }
         });
         getContentPane().add(No_tele);
-        No_tele.setBounds(981, 326, 335, 32);
+        No_tele.setBounds(1086, 326, 230, 32);
 
         TanggalLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Tanggal -", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
         getContentPane().add(TanggalLahir);
@@ -193,11 +208,11 @@ return String.valueOf(umurini);}
 
         Jenis_Kelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Jenis Kelamin-", "Laki-Laki", "Perempuan" }));
         getContentPane().add(Jenis_Kelamin);
-        Jenis_Kelamin.setBounds(631, 529, 134, 32);
+        Jenis_Kelamin.setBounds(630, 560, 134, 32);
 
         goldar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Golongan Darah-", "A", "B", "AB", "O" }));
         getContentPane().add(goldar);
-        goldar.setBounds(775, 529, 130, 32);
+        goldar.setBounds(780, 560, 130, 32);
 
         UmurPasien.setText("Umur");
         UmurPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +221,7 @@ return String.valueOf(umurini);}
             }
         });
         getContentPane().add(UmurPasien);
-        UmurPasien.setBounds(915, 567, 97, 32);
+        UmurPasien.setBounds(1220, 560, 97, 32);
 
         TinggiPasien.setText("Tinggi Badan");
         TinggiPasien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -220,7 +235,7 @@ return String.valueOf(umurini);}
             }
         });
         getContentPane().add(TinggiPasien);
-        TinggiPasien.setBounds(631, 567, 134, 32);
+        TinggiPasien.setBounds(960, 560, 120, 32);
 
         BeratPasien.setText("Berat Badan");
         BeratPasien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -234,41 +249,18 @@ return String.valueOf(umurini);}
             }
         });
         getContentPane().add(BeratPasien);
-        BeratPasien.setBounds(775, 567, 130, 32);
+        BeratPasien.setBounds(1090, 560, 120, 32);
 
         TambahAntri.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         TambahAntri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428227814_checked_checkbox.png"))); // NOI18N
         TambahAntri.setText("Konfirmasi Keluar");
+        TambahAntri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TambahAntriActionPerformed(evt);
+            }
+        });
         getContentPane().add(TambahAntri);
         TambahAntri.setBounds(158, 605, 167, 40);
-
-        Jenis_Kartu.setText("Jenis Kartu");
-        Jenis_Kartu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Jenis_KartuMouseClicked(evt);
-            }
-        });
-        Jenis_Kartu.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                Jenis_KartuFocusGained(evt);
-            }
-        });
-        getContentPane().add(Jenis_Kartu);
-        Jenis_Kartu.setBounds(631, 364, 340, 32);
-
-        No_Kartu.setText("Nomor_Kartu");
-        No_Kartu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                No_KartuMouseClicked(evt);
-            }
-        });
-        No_Kartu.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                No_KartuFocusGained(evt);
-            }
-        });
-        getContentPane().add(No_Kartu);
-        No_Kartu.setBounds(981, 364, 335, 32);
 
         CariPasien.setText("- Cari Nama Pasien -");
         getContentPane().add(CariPasien);
@@ -311,7 +303,7 @@ return String.valueOf(umurini);}
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(45, 155, 558, 444);
 
-        Find.setText("FIND");
+        Find.setText("CARI");
         getContentPane().add(Find);
         Find.setBounds(508, 105, 95, 32);
 
@@ -336,7 +328,7 @@ return String.valueOf(umurini);}
             }
         });
         getContentPane().add(Kamar);
-        Kamar.setBounds(631, 207, 685, 32);
+        Kamar.setBounds(740, 190, 580, 32);
 
         KelasKamar.setText("Kelas Kamar");
         KelasKamar.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -345,7 +337,7 @@ return String.valueOf(umurini);}
             }
         });
         getContentPane().add(KelasKamar);
-        KelasKamar.setBounds(631, 245, 685, 32);
+        KelasKamar.setBounds(740, 230, 580, 32);
 
         jLabel1.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -353,9 +345,57 @@ return String.valueOf(umurini);}
         getContentPane().add(jLabel1);
         jLabel1.setBounds(50, 30, 305, 58);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        jLabel3.setText("Nama Pasien");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(630, 160, 90, 20);
+
+        jLabel4.setText("Kamar");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(630, 200, 30, 14);
+
+        jLabel5.setText("Kelas Kamar");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(630, 240, 60, 14);
+
+        jLabel6.setText("Tempat/Tangal Lahir");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(630, 270, 120, 14);
+
+        jLabel7.setText("Nomor HP");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(980, 340, 50, 14);
+
+        jLabel8.setText("Nomor Telepon");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(630, 340, 80, 14);
+
+        jLabel2.setText("Alamat Tinggal");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1360, 700);
+        jLabel2.setBounds(630, 380, 100, 14);
+
+        jLabel9.setText("Jenis Kelamin");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(630, 540, 80, 14);
+
+        jLabel10.setText("Golongan Darah");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(780, 540, 90, 14);
+
+        jLabel11.setText("Tinggi");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(960, 540, 28, 14);
+
+        jLabel12.setText("Berat");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(1090, 540, 40, 14);
+
+        jLabel13.setText("Umur");
+        getContentPane().add(jLabel13);
+        jLabel13.setBounds(1220, 540, 25, 14);
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(0, 0, 1360, 690);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -446,26 +486,6 @@ if(c.equals(Alamat.getText())){
 }
     }//GEN-LAST:event_TahunLahirActionPerformed
 
-    private void Jenis_KartuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Jenis_KartuFocusGained
-        if(h.equals(Jenis_Kartu.getText())){
-    Jenis_Kartu.setText("");}
-    }//GEN-LAST:event_Jenis_KartuFocusGained
-
-    private void Jenis_KartuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jenis_KartuMouseClicked
-        if(h.equals(Jenis_Kartu.getText())){
-    Jenis_Kartu.setText("");}
-    }//GEN-LAST:event_Jenis_KartuMouseClicked
-
-    private void No_KartuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_No_KartuFocusGained
-        if(i.equals(No_Kartu.getText())){
-    No_Kartu.setText("");}
-    }//GEN-LAST:event_No_KartuFocusGained
-
-    private void No_KartuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_No_KartuMouseClicked
-        if(i.equals(No_Kartu.getText())){
-    No_Kartu.setText("");}
-    }//GEN-LAST:event_No_KartuMouseClicked
-
     private void KamarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_KamarFocusGained
          if(j.equals(Kamar.getText())){
     Kamar.setText("");}
@@ -475,6 +495,14 @@ if(c.equals(Alamat.getText())){
         if(j.equals(Kamar.getText())){
     KelasKamar.setText("");}
     }//GEN-LAST:event_KelasKamarFocusGained
+
+    private void TambahAntriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahAntriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TambahAntriActionPerformed
+
+    private void No_HpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_No_HpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_No_HpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -518,14 +546,12 @@ if(c.equals(Alamat.getText())){
     private javax.swing.JTextField CariPasien;
     private javax.swing.JButton Find;
     private javax.swing.JLabel ID;
-    private javax.swing.JTextField Jenis_Kartu;
     private javax.swing.JComboBox Jenis_Kelamin;
     private javax.swing.JTextField Kamar;
     private javax.swing.JTextField KelasKamar;
     private javax.swing.JComboBox Kota;
     private javax.swing.JTextField Nama_Pasien;
     private javax.swing.JTextField No_Hp;
-    private javax.swing.JTextField No_Kartu;
     private javax.swing.JTextField No_tele;
     private javax.swing.JComboBox Provinsi;
     private javax.swing.JTable TabelPasien;
@@ -539,7 +565,19 @@ if(c.equals(Alamat.getText())){
     private javax.swing.JComboBox goldar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
