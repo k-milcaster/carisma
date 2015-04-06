@@ -219,7 +219,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextArea act;
-    private javax.swing.JLabel iPLabel;
+    public javax.swing.JLabel iPLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
@@ -236,7 +236,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JList loggedInList;
-    private javax.swing.JLabel portLabel;
+    public javax.swing.JLabel portLabel;
     private javax.swing.JLabel who;
     // End of variables declaration//GEN-END:variables
 }
