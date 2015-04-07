@@ -1,0 +1,14 @@
+Feature : Mencatat rekam medis pasien yang sedang diperiksa
+Skenario : Mencatat diagnosa pasien
+
+Given Saya masuk pada antarmuka Rekam Medis Pasien
+When Saya memasukkan ID Pasien
+Then Data Identitas pasien ditampilkan 
+When Data Identitas pasien sudah ditampilkan
+Then Field input keluhan pasien, diagnosa pasien, terapi, kesimpulan pemeriksaan, resep obat, dan nama penyakit "enable"
+And Saya mengisi keluhan pasien, diagnosa pasien, terapi, dan kesimpulan pemeriksaan
+And Saya menginputkan obat dan nama penyakit dari JCombo Box (untuk obat/nama penyakit yang sering diinputkan) atau
+    menggunakan field "pencarian" jika obat yang akan diinputkan belum pernah diinputkan sebelumnya
+Then Obat dan nama penyakit yang telah diinputkan akan ditampilkan pada tabel
+When Saya mengklik tombol "Save"
+Then Data diagnosa pasien tersimpan pada sistem

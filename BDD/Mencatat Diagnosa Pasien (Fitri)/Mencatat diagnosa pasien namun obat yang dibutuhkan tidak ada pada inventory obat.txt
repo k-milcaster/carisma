@@ -1,0 +1,13 @@
+Skenario : Mencatat diagnosa pasien namun obat yang dibutuhkan tidak ada pada inventory obat
+
+Given Saya masuk pada antarmuka Rekam Medis Pasien
+When Saya memasukkan ID Pasien
+Then Data identitas pasien ditampilkan
+When Data Identitas pasien sudah ditampilkan
+Then Field input keluhan pasien, diagnosa pasien, terapi, kesimpulan pemeriksaan, resep obat, dan nama penyakit "enable"
+And Saya mengisi keluhan pasien, diagnosa pasien, terapi, dan kesimpulan pemeriksaan
+When Obat yang saya butuhkan tidak ada pada inventory obat
+Then Sistem mengeluarkan pesan "obat yang anda butuhkan tidak ditemukan"
+And Saya memasukkan nama penyakit dari JCombo Box atau mencari nama penyakit pada field "pencarian"
+When Saya mengklik tombol "save"
+Then Data diagnosa pasien tersimpan pada sistem tanpa ada obat yang dibutuhkan
