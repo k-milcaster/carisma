@@ -1,0 +1,18 @@
+Skenario : Mengambil nomor antrean
+
+Given saya berada di halaman utama Carisma
+When saya menavigasikan (scroll) ke bagian (section) dokter
+Then saya harusnya melihat nama-nama beserta bio singkat dokter
+When saya klik salah satu nama dokter
+Then saya harusnya melihat detail sekaligus jadwal praktek dokter yang saya klik
+When saya klik "Book Now"
+Then saya harusnya melihat halaman "booking form"
+And tanggal yang tersedia terkait dengan dokter
+When saya pilih salah satu tanggal
+Then tanggal harusnya terpilih
+When saya klik "submit"
+Then saya harusnya melihat tombol konfirmasi yes/no
+When saya klik yes
+Then saya diberi perintah untuk mencetak summary booking
+And saya diberi konfirmasi bahwa saya berhasil masuk ke dalam antrean
+And saya diarahkan ke halaman detail dokter
