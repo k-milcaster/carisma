@@ -1,0 +1,12 @@
+SCENARIO : Pendaftaran Pasien Baru
+
+Given : Saya sudah login dan masuk menu pendaftaran
+When : Saya mengisi field data pasien
+And : Saya klik tombol confirm
+Then : Saya melihat POP UP konfirmasi data disetujui untuk disimpan
+And : Saya klik Yes
+Then : Saya melihat konfirmasi penyimpanan data
+And : Saya melihat tampilan bukti cetak kartu pasien untuk dicetak
+And : Saya kembali ke halaman awal dan nama pasien masuk ke table "Nama Pasien"
+
+

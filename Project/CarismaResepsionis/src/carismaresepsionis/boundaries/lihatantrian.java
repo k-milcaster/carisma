@@ -64,7 +64,7 @@ public class lihatantrian extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -232,14 +232,14 @@ public class lihatantrian extends javax.swing.JFrame {
         jPanel10.setBounds(380, 70, 540, 300);
 
         jButton1.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismalihatantrian/picture/1426718664_circle_back_arrow_-24.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton1.setText("Back");
         getContentPane().add(jButton1);
-        jButton1.setBounds(940, 330, 51, 40);
+        jButton1.setBounds(940, 330, 90, 40);
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismalihatantrian/picture/background2.png"))); // NOI18N
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(0, -30, 1400, 770);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel13);
+        jLabel13.setBounds(0, 0, 1360, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -296,7 +296,7 @@ public class lihatantrian extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

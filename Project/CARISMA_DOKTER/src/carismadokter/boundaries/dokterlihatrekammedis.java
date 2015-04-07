@@ -64,7 +64,7 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
         jPanel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,20 +121,18 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         namaPasien.setText("jLabel1");
         jPanel1.add(namaPasien);
         namaPasien.setBounds(40, 100, 34, 14);
-
-        jTextField1.setText("jTextField1");
         jPanel1.add(jTextField1);
         jTextField1.setBounds(90, 80, 180, 40);
-
-        jTextField2.setText("jTextField2");
         jPanel1.add(jTextField2);
         jTextField2.setBounds(90, 130, 180, 40);
 
-        jTextField3.setText("jTextField3");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTextField3);
         jTextField3.setBounds(90, 180, 180, 40);
-
-        jTextField4.setText("jTextField4");
         jPanel1.add(jTextField4);
         jTextField4.setBounds(90, 230, 180, 40);
 
@@ -149,16 +147,12 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         jLabel4.setText("jLabel4");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(40, 240, 34, 14);
-
-        jTextField5.setText("jTextField5");
         jPanel1.add(jTextField5);
         jTextField5.setBounds(380, 80, 160, 40);
 
         jLabel5.setText("jLabel5");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(340, 90, 34, 14);
-
-        jTextField6.setText("jTextField6");
         jPanel1.add(jTextField6);
         jTextField6.setBounds(380, 130, 160, 40);
 
@@ -289,7 +283,7 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(140, 390, 600, 30);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokterlihatrekammedis/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton1.setText("Back");
         getContentPane().add(jButton1);
         jButton1.setBounds(930, 650, 90, 40);
@@ -300,9 +294,9 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         getContentPane().add(jLabel11);
         jLabel11.setBounds(140, 40, 270, 30);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokterlihatrekammedis/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(0, -10, 1380, 720);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 1360, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -310,6 +304,10 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
     private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField12ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,7 +346,7 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

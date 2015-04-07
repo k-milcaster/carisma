@@ -61,6 +61,7 @@ public class isirekammedis extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,7 +126,7 @@ public class isirekammedis extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(33, 30, 0, 0);
+        jPanel4.setBounds(33, 30, 459, 124);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Diagnosa Dokter", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 12))); // NOI18N
 
@@ -146,7 +147,7 @@ public class isirekammedis extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(542, 30, 0, 0);
+        jPanel5.setBounds(542, 30, 459, 124);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Terapi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 12))); // NOI18N
 
@@ -167,7 +168,7 @@ public class isirekammedis extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel6);
-        jPanel6.setBounds(30, 160, 459, 0);
+        jPanel6.setBounds(30, 160, 459, 124);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Obat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 12))); // NOI18N
         jPanel7.setLayout(null);
@@ -195,7 +196,7 @@ public class isirekammedis extends javax.swing.JFrame {
         );
 
         jPanel7.add(jPanel8);
-        jPanel8.setBounds(30, 20, 0, 30);
+        jPanel8.setBounds(30, 20, 194, 30);
 
         jPanel7.add(jComboBox1);
         jComboBox1.setBounds(240, 20, 200, 30);
@@ -225,10 +226,10 @@ public class isirekammedis extends javax.swing.JFrame {
         jScrollPane2.setBounds(30, 60, 410, 90);
 
         jButton3.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaisirekammedis/picture/tombol-delete.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/tombol-delete.png"))); // NOI18N
         jButton3.setText("Delete");
         jPanel7.add(jButton3);
-        jButton3.setBounds(460, 110, 100, 23);
+        jButton3.setBounds(460, 110, 100, 40);
 
         jPanel2.add(jPanel7);
         jPanel7.setBounds(540, 160, 580, 160);
@@ -277,10 +278,10 @@ public class isirekammedis extends javax.swing.JFrame {
         jScrollPane3.setBounds(30, 60, 410, 80);
 
         jButton2.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaisirekammedis/picture/tombol-delete.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/tombol-delete.png"))); // NOI18N
         jButton2.setText("Delete");
         jPanel13.add(jButton2);
-        jButton2.setBounds(460, 100, 100, 23);
+        jButton2.setBounds(460, 100, 100, 40);
 
         jPanel2.add(jPanel13);
         jPanel13.setBounds(540, 330, 580, 150);
@@ -318,7 +319,7 @@ public class isirekammedis extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel10);
-        jPanel10.setBounds(530, 40, 0, 0);
+        jPanel10.setBounds(530, 40, 0, 100);
 
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
 
@@ -417,13 +418,13 @@ public class isirekammedis extends javax.swing.JFrame {
         jLabel8.setBounds(50, 10, 270, 40);
 
         jButton1.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaisirekammedis/picture/1426717487_save.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426717487_save.png"))); // NOI18N
         jButton1.setText("Save");
         getContentPane().add(jButton1);
         jButton1.setBounds(1190, 590, 90, 40);
 
         jButton4.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaisirekammedis/picture/1426717770_circle_close_delete-24.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton4.setText("Cancel");
         getContentPane().add(jButton4);
         jButton4.setBounds(1190, 640, 90, 40);
@@ -431,6 +432,10 @@ public class isirekammedis extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaisirekammedis/picture/background2.png"))); // NOI18N
         getContentPane().add(jLabel11);
         jLabel11.setBounds(0, 0, 0, 700);
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(0, 0, 1360, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -470,6 +475,7 @@ public class isirekammedis extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
