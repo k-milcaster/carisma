@@ -1,0 +1,6 @@
+Fitur	: Resepsionis melihat antrian pasien di menu resepsionis
+Skenario : Melihat antrian pasien 
+
+Given Resepsionis sudah login ke sistem
+When  Resepsionis ingin melihat antrian yang hadir di menu resepsionis
+Then  Harusnya Menu Resepsionis sudah menampilkan Daftar Antrian yang masuk hari ini

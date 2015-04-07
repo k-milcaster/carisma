@@ -1,0 +1,9 @@
+Fitur	 : Resepsionis melihat antrian pasien yang akan masuk sesi
+Skenario : Melihat antrian pasien 
+
+Given	Resepsionis sudah login ke sistem
+When	Resepsionis buka Antrian Pasien
+Then	Menu Antrian Pasien akan tampil  
+And 	Resepsionis dapat melihat pasien yang akan segera masuk sesi
+And	Antrian berikutnya sudah tampil 
+And 	Total antrian pasien juga tampil 
