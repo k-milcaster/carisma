@@ -1,0 +1,28 @@
+Insan Kamil 		: 1. Pengambilan Nomor Antrean OnLine (5 point)
+			  2. Pembayaran Pasien (21 point)
+			  3. Login Desktop (3 point)
+
+M. Fiqhi Darmawan 	: 1. Pendaftaran Pasien Baru (8 point)
+			  2. Pengambilan Nomor Antrean OffLine (5 point)
+
+Fitriana Dzulfaidah	: 1. Pencatatan Diagnosis Pasien (8 point)
+			  2. Mengelola Absensi (2 point)
+
+Anes Dirsi Eka		: 1. Melihat Rekammedik (3 point)
+			  2. Melihat Jadwal Dokter (2 point)
+
+Sinta Eka L.		: 1. Mengelola penjualan obat (5 point)
+
+Novita Priandini 	: 1. Pendaftaran Pasien Rawat Inap (5 point)
+
+Hana Mahrifah		: 1. Mengelola Pemesanan Obat (5 point)
+			  2. Mengelola Data Obat (2 point)
+
+Devan Astiko		: 1. Melihat Jadwal Dokter Web (5 point)
+			  2. Melihat Profil Dokter Web (5 point)
+			  3. Login Web (5 point)
+
+Adinda Mustika		: 1. Melihat Antrean Pasien (2 point)
+			  2. Menandai Kehadiran Pasien (3 point)
+
+Franzvilosya R.		: 1. Server (Infinity)
