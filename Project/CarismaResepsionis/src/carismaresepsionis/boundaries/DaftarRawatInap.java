@@ -38,8 +38,6 @@ return String.valueOf(umurini);}
         e=No_tele.getText();
         f=TinggiPasien.getText();
         g=BeratPasien.getText();
-        h=Jenis_Kartu.getText();
-        i=No_Kartu.getText();
         j = Kamar.getText();
         k= KelasKamar.getText();
         
