@@ -1,0 +1,16 @@
+1. Standardisasi GUI by Fiqhi Dharmawan
+
+2. Tim GUI 	: a. Fiqhi Dharmawan (Penanggung Jawab)
+	     	  b. Devan Astiko
+	          c. Fitriana Dzulfaidah
+
+3. Tim Server	: a. Franzvilosya (Penanggung Jawab)
+	 	  b. Kamil
+
+4. Standardisasi WorkFlow GitHub by Franzvilosya
+
+5. Tim Database System : a. Kamil (Penanggung Jawab)
+			 b. Fitriana Dzulfaidah (Pekerja View)
+			 c. Devan Astiko (Pekerja Trigger)
+
+6. Segala Dokumentasi dan proposal by Novita Priandini

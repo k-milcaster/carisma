@@ -1,0 +1,10 @@
+Skenario : Mengambil nomor antrean ketika user belum login
+
+Given saya berada di halaman utama Carisma
+When saya menavigasikan (scroll) ke bagian (section) dokter
+Then saya harusnya melihat nama-nama beserta bio singkat dokter
+When saya klik salah satu nama dokter
+Then saya harusnya melihat detail sekaligus jadwal praktek dokter yang saya klik
+When saya klik "Book Now"
+Then saya diarahkan ke halaman login
+And saya harusnya melihat informasi bahwa saya belum melakukan login

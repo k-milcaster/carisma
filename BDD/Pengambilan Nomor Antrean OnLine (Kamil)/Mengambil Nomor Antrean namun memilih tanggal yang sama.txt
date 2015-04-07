@@ -1,0 +1,17 @@
+Skenario : Mengambil nomor antrean namun memilih tanggal yang sama
+
+Given saya berada di halaman utama Carisma
+When saya menavigasikan (scroll) ke bagian (section) dokter
+Then saya harusnya melihat nama-nama beserta bio singkat dokter
+When saya klik salah satu nama dokter
+Then saya harusnya melihat detail sekaligus jadwal praktek dokter yang saya klik
+When saya klik "Book Now"
+Then saya harusnya melihat halaman "booking form"
+And tanggal yang tersedia terkait dengan dokter
+When saya pilih salah satu tanggal
+Then tanggal harusnya terpilih
+When saya klik "submit"
+Then saya mendapat peringatan bahwa tidak bisa mengambil antrean untuk tanggal tersebut karena sudah ada pada antrean
+And tombol OK
+When saya klik tombol OK
+Then saya diarahkan kembali ke pemilihan tanggal
