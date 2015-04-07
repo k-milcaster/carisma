@@ -55,10 +55,9 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
                 count++;
             }
             if (count == 1) {
-                DefaultListModel empty = new DefaultListModel();
-                empty = (DefaultListModel) ui.loggedInList.getModel();
-                empty.addElement(userName + " as " + role);
-                ui.loggedInList.setModel(empty);
+                //ListModel empty = (DefaultListModel) ui.loggedInList.getModel();
+                //empty.addElement(userName + " as " + role);
+                //ui.loggedInList.setModel(empty);
                 return true;
             } else {
                 return false;

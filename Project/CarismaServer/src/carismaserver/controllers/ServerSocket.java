@@ -42,7 +42,7 @@ public class ServerSocket {
 //            ProductsServerService product = new ProductsServerService(ui);
 //            ProductlinesServerService productLines = new ProductlinesServerService(ui);
 
-            server.rebind("userServer", user);
+            server.rebind("userRequest", user);
 //            server.rebind("employeeServer", employee);
 //            server.rebind("officeServer", office);
 //            server.rebind("orderDetailsPKServer", orderDetailsPK);

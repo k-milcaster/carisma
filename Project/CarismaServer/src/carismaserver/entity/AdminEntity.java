@@ -25,10 +25,10 @@ public class AdminEntity {
             statement.setString(2, password);
             ResultSet result = statement.executeQuery();
             System.out.println("lewat " + userName + ", " + password);
-            User users = null;
+            
             int count = 0;
             if (result.next()) {
-                users = new User();
+                User users = new User();
                 users.setUsername(result.getString("username"));
                 users.setPassword(result.getString("password"));
                 users.setRole(result.getString("role"));

@@ -6,8 +6,6 @@
 package carismainterface.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -55,7 +53,7 @@ public class User implements Serializable {
     private String pasien;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "userIdUser")
     private String dokter;
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
