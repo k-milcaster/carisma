@@ -14,6 +14,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
     @SuppressWarnings("unchecked")
@@ -67,7 +68,7 @@ public class Login extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if (username.getText().equalsIgnoreCase("") || password.getText().equalsIgnoreCase("")) {
-            
+
         } else {
             LogIn login = new LogIn(username.getText(), password.getText());
             try {

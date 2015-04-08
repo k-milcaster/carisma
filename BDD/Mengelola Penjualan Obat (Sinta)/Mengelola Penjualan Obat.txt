@@ -1,0 +1,16 @@
+Fitur		: Apoteker melakukan pengelolaan penjualan obat yang dijual pada Klinik
+Skenario 1	: Mengelola Penjualan Obat
+
+Given	Saya masuk pada menu utama apoteker
+When	Saya memilih menu penjulan obat
+Then	Saya masuk pada menu penjualan obat
+And	Saya memilih no ID psien pada Jcombo Box
+And	Saya memasukkan tanggal penjualan
+When	Saya memasukkan obat pasien
+Then	Harga obat ditampilkan sesuai dengan obat yang saya masukkan
+And	Saya melakukan penyiapan dan peracikan obat dan pemberian label pada obat
+When	Saya memilih tombol simpan
+Then	Menampilkan pesan bahwa data transaksi penjualan telah tersimpan
+And	Transaksi penjualan terintegrasi ke kasir dan obat diserahkan kepada pasien
+
+

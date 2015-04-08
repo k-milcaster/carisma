@@ -17,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -36,6 +35,7 @@ public class DoctorManagement extends javax.swing.JFrame {
     public DoctorManagement(final Main ui) throws RemoteException, SQLException {
         this.ui = ui;
         initComponents();
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         control.getDokter(this);
         setComboBox();
         tableDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -45,7 +45,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                 if (row != -1) {
                     try {
                         dokterService = new DokterEntity(ui);
-                        Dokter selected = new Dokter(dokterService.getDokter(tableDokter.getValueAt(row, 1).toString()));                        
+                        Dokter selected = new Dokter(dokterService.getDokter(tableDokter.getValueAt(row, 1).toString()));
                         fieldId.setText(selected.getIdDokter());
                         fieldNama.setText(selected.getNamaDokter());
                         fieldAlamat.setText(selected.getAlamatDokter());
@@ -127,6 +127,7 @@ public class DoctorManagement extends javax.swing.JFrame {
             }
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

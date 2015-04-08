@@ -19,6 +19,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.who.setText(administrator);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         socket = new ServerSocket(this);
         try {
             socket.Start();

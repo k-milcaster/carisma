@@ -1,0 +1,5 @@
+Given Client terkoneksi pada server
+And Server telah terkoneksi pada database
+When Client menjalankan fungsi get
+Then Database telah gagal me-return suatu data tertentu
+And Server mencatat kegagalan get client

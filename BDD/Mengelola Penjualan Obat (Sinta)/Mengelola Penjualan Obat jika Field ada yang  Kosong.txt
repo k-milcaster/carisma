@@ -1,0 +1,9 @@
+Skenario 2	: Mengelola Penjualan Obat jika Field ada yang Kosong
+
+Given	Saya masuk pada menu utama apoteker
+When	Saya memilih menu penjualan obat
+Then	Saya masuk pada menu penjualan obat
+And	Saya memilih no ID pasien pada Jcombo Box
+When	Field yang saya isi tidak lengkap
+Then	Memberikan informasi kesalahan apabila beberapa field yang belum terisi
+And	Data tidak tersimpan

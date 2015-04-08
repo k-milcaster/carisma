@@ -1,0 +1,5 @@
+Given Client terkoneksi pada server
+And Server telah terkoneksi pada database
+When Client menjalankan fungsi get<list>
+Then Database me-return suatu tabel data tertentu
+And Server mencatat kegiatan get<list> client

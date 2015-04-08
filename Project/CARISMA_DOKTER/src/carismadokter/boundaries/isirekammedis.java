@@ -1,13 +1,37 @@
 package carismadokter.boundaries;
 
+import carismadokter.controller.ClientSocket;
+import carismainterface.server.UserService;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.UIManager;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class isirekammedis extends javax.swing.JFrame {
 
-    public isirekammedis() {
+    private ClientSocket client;
+    private UserService login;
+    private String username;
+
+    public isirekammedis(ClientSocket client, final String username) {
+        this.client = client;
+        this.login = this.client.getUserService();
+        this.username = username;
         initComponents();
+        this.jLabel1.setText(username);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                try {
+                    login.userLogOut(username, "dokter");
+                } catch (RemoteException ex) {
+                    Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -57,10 +81,10 @@ public class isirekammedis extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -322,6 +346,7 @@ public class isirekammedis extends javax.swing.JFrame {
         jPanel10.setBounds(530, 40, 0, 100);
 
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
+        jPanel11.setLayout(null);
 
         jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -357,56 +382,38 @@ public class isirekammedis extends javax.swing.JFrame {
                 .addComponent(jLabel3))
         );
 
+        jPanel11.add(jPanel12);
+        jPanel12.setBounds(20, 30, 220, 30);
+
         jLabel4.setText("Nama");
+        jPanel11.add(jLabel4);
+        jLabel4.setBounds(20, 70, 50, 20);
 
         jLabel5.setText("No ");
+        jPanel11.add(jLabel5);
+        jLabel5.setBounds(20, 100, 50, 20);
+        jPanel11.add(jTextField7);
+        jTextField7.setBounds(70, 70, 170, 30);
+        jPanel11.add(jTextField8);
+        jTextField8.setBounds(70, 100, 170, 30);
 
         jLabel6.setText("Alamat");
+        jPanel11.add(jLabel6);
+        jLabel6.setBounds(310, 70, 60, 14);
 
         jLabel7.setText("Pekerjaan");
+        jPanel11.add(jLabel7);
+        jLabel7.setBounds(310, 100, 60, 20);
+        jPanel11.add(jTextField9);
+        jTextField9.setBounds(370, 70, 180, 30);
+        jPanel11.add(jTextField10);
+        jTextField10.setBounds(370, 100, 180, 30);
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1428524407_check_book.png"))); // NOI18N
+        jButton5.setText("Lihat Rekam Medis");
+        jPanel11.add(jButton5);
+        jButton5.setBounds(370, 20, 180, 41);
 
         getContentPane().add(jPanel11);
         jPanel11.setBounds(580, 60, 600, 140);
@@ -429,13 +436,9 @@ public class isirekammedis extends javax.swing.JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(1190, 640, 90, 40);
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaisirekammedis/picture/background2.png"))); // NOI18N
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(0, 0, 0, 700);
-
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(0, 0, 1360, 700);
+        jLabel10.setBounds(0, 0, 1359, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -454,29 +457,16 @@ public class isirekammedis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextField6FocusLost
 
-    public static void main(String args[]) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } 
-        catch(Exception ex){
-            System.out.println("Look & Feel exception");
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new isirekammedis().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

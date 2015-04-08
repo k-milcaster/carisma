@@ -1,0 +1,8 @@
+Feature		: Resepsionis melakukan pencatatan data identitas pasien dan kamar yang tersedia di klinik untuk pasien rawat inap serta dapatmelihat daftar pasien 		yang di rawat inap
+Scenario3	: Pendaftaran Pasien Rawat Inap Jika Kamar Kosong Tidak Tersedia
+
+Given saya berada pada halaman menu Resepsionis
+When  saya menekan tombol "registrasi pasien rawat inap"
+Then  saya harus mendapat pesan "Registrasi rawat Inap tidak tersedia"
+And   saya harus mendapat pesan "Kamar rawat Inap Kosong"
+ 

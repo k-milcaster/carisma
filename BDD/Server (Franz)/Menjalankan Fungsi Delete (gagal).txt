@@ -1,0 +1,5 @@
+Given Client terkoneksi pada server
+And Server telah terkoneksi pada database
+When Client menjalankan fungsi delete
+Then Database telah menghapus data tertentu
+And Server mencatat kegagalan delete client

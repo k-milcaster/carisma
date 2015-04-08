@@ -1,0 +1,5 @@
+Given Client terkoneksi pada server
+And Server telah terkoneksi pada database
+When Client menjalankan fungsi update
+Then Database telah gagal mengubah data tertentu
+And Server mencatat kegagalan update client

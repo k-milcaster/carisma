@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
@@ -55,9 +56,13 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
                 count++;
             }
             if (count == 1) {
-                //ListModel empty = (DefaultListModel) ui.loggedInList.getModel();
-                //empty.addElement(userName + " as " + role);
-                //ui.loggedInList.setModel(empty);
+                DefaultListModel model = new DefaultListModel();
+                for (int i = 0; i < ui.loggedInList.getModel().getSize(); i++) {
+                    Object item = ui.loggedInList.getModel().getElementAt(i);
+                    model.addElement(item.toString());
+                }
+                model.addElement(userName + " as " + role);
+                ui.loggedInList.setModel(model);
                 return true;
             } else {
                 return false;
@@ -74,6 +79,18 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             }
         }
 
+    }
+
+    @Override
+    public void userLogOut(String userName, String role) {
+        ui.act.append("Client Execute UserLogOut " + userName + "\n");
+        DefaultListModel model = new DefaultListModel();
+        for (int i = 0; i < ui.loggedInList.getModel().getSize(); i++) {
+            Object item = ui.loggedInList.getModel().getElementAt(i);
+            model.addElement(item.toString());
+        }
+        model.removeElement(userName + " as " + role);
+        ui.loggedInList.setModel(model);        
     }
 
     @Override
