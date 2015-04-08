@@ -29,6 +29,7 @@ public class UserManagement extends javax.swing.JFrame {
     public UserManagement(final Main ui) throws RemoteException {
         this.ui = ui;
         initComponents();
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         control.getUsers(this);
         tableUser.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -217,13 +218,13 @@ public class UserManagement extends javax.swing.JFrame {
             Date date = new Date();
             String now = dateFormat.format(date);
             System.out.println(now);
-            String role = (String)comboRole.getItemAt(comboRole.getSelectedIndex());
+            String role = (String) comboRole.getItemAt(comboRole.getSelectedIndex());
             control.insertUser(this, user, pass, now, role);
             control.getUsers(this);
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
+
     }//GEN-LAST:event_buttonInsertActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
@@ -231,7 +232,7 @@ public class UserManagement extends javax.swing.JFrame {
             int id = Integer.parseInt(fieldId.getText());
             String user = fieldUsername.getText();
             String pass = fieldPassword.getText();
-            String role = (String)comboRole.getItemAt(comboRole.getSelectedIndex());
+            String role = (String) comboRole.getItemAt(comboRole.getSelectedIndex());
             control.updateUser(this, id, user, pass, role);
             control.getUsers(this);
         } catch (RemoteException ex) {

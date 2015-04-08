@@ -35,6 +35,7 @@ public class StaffManagement extends javax.swing.JFrame {
         this.ui = ui;
         initComponents();
         control.getPegawai(this);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         setComboBox();
         tablePegawai.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -58,7 +59,7 @@ public class StaffManagement extends javax.swing.JFrame {
                         fieldBank.setText(selected.getBankPegawai());
                         fieldNorek.setText(selected.getNorekPegawai());
                         fieldGajiFix.setText((String) selected.getGajifixPegawai().toString());
-                        fieldGajiLembur.setText((String) selected.getGajilemburPegawai().toString());                        
+                        fieldGajiLembur.setText((String) selected.getGajilemburPegawai().toString());
                         setComboBox(selected.getUserIdUser());
                     } catch (RemoteException ex) {
                         Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -553,8 +554,8 @@ public class StaffManagement extends javax.swing.JFrame {
             byte[] img = extractBytes(file.toPath().toString());
             int gfix = Integer.parseInt(fieldGajiFix.getText());
             int glembur = Integer.parseInt(fieldGajiLembur.getText());
-        control.insertPegawai(this, userid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, jabatan, bank, norek, gfix, glembur, img);
-        control.getPegawai(this);
+            control.insertPegawai(this, userid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, jabatan, bank, norek, gfix, glembur, img);
+            control.getPegawai(this);
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

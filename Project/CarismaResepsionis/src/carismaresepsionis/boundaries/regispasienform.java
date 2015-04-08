@@ -7,39 +7,41 @@ import javax.swing.JOptionPane;
  * @author devan
  */
 public class regispasienform extends javax.swing.JFrame {
-String a,b,c,d,e,f,g,h,i;
-settergetter simpanan =new settergetter();
-String hitungumur(){
-    int umur;
-    umur=Integer.parseInt((String)TahunLahir.getSelectedItem());
-    int umurini=2015-umur;
+
+    String a, b, c, d, e, f, g, h, i;
+    settergetter simpanan = new settergetter();
+
+    String hitungumur() {
+        int umur;
+        umur = Integer.parseInt((String) TahunLahir.getSelectedItem());
+        int umurini = 2015 - umur;
    // System.out.println(umurini);
-return String.valueOf(umurini);}
+        return String.valueOf(umurini);
+    }
 
     /**
      * Creates new form regispasienform
      */
     public regispasienform() {
         initComponents();
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         Find.requestFocus();
         Tempat_ID.setEditable(false);
         UmurPasien.setEditable(false);
-        a=Nama_Pasien.getText();
-        b=Tempat_Lahir.getText();
-        c=Alamat.getText();
-        d=No_Hp.getText();
-        e=No_tele.getText();
-        f=TinggiPasien.getText();
-        g=BeratPasien.getText();
-        h=Jenis_Kartu.getText();
-        i=No_Kartu.getText();
-        
-        
-    //   tanggalkustom();
-    }
-    
-//    void awalan
+        a = Nama_Pasien.getText();
+        b = Tempat_Lahir.getText();
+        c = Alamat.getText();
+        d = No_Hp.getText();
+        e = No_tele.getText();
+        f = TinggiPasien.getText();
+        g = BeratPasien.getText();
+        h = Jenis_Kartu.getText();
+        i = No_Kartu.getText();
 
+        //   tanggalkustom();
+    }
+
+//    void awalan
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -370,38 +372,41 @@ return String.valueOf(umurini);}
     }// </editor-fold>//GEN-END:initComponents
 
     private void Nama_PasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Nama_PasienMouseClicked
-    
-    if(a.equals(Nama_Pasien.getText())){
-    Nama_Pasien.setText("");
-}
-        
+
+        if (a.equals(Nama_Pasien.getText())) {
+            Nama_Pasien.setText("");
+        }
+
     }//GEN-LAST:event_Nama_PasienMouseClicked
 
     private void Tempat_LahirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tempat_LahirMouseClicked
-   if(b.equals(Tempat_Lahir.getText())){
-    Tempat_Lahir.setText("");
-}
+        if (b.equals(Tempat_Lahir.getText())) {
+            Tempat_Lahir.setText("");
+        }
     }//GEN-LAST:event_Tempat_LahirMouseClicked
 
     private void Tempat_LahirFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Tempat_LahirFocusGained
-  if("Tempat".equals(Tempat_Lahir.getText())){
-    Tempat_Lahir.setText("");
-}
+        if ("Tempat".equals(Tempat_Lahir.getText())) {
+            Tempat_Lahir.setText("");
+        }
     }//GEN-LAST:event_Tempat_LahirFocusGained
 
     private void Nama_PasienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Nama_PasienFocusGained
-    if(a.equals(Nama_Pasien.getText())){
-    Nama_Pasien.setText("");}
+        if (a.equals(Nama_Pasien.getText())) {
+            Nama_Pasien.setText("");
+        }
     }//GEN-LAST:event_Nama_PasienFocusGained
 
     private void AlamatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AlamatMouseClicked
-    if(c.equals(Alamat.getText())){
-    Alamat.setText("");}
+        if (c.equals(Alamat.getText())) {
+            Alamat.setText("");
+        }
     }//GEN-LAST:event_AlamatMouseClicked
 
     private void AlamatFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AlamatFocusGained
-if(c.equals(Alamat.getText())){
-    Alamat.setText("");}
+        if (c.equals(Alamat.getText())) {
+            Alamat.setText("");
+        }
     }//GEN-LAST:event_AlamatFocusGained
 
     private void UmurPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UmurPasienActionPerformed
@@ -409,120 +414,129 @@ if(c.equals(Alamat.getText())){
     }//GEN-LAST:event_UmurPasienActionPerformed
 
     private void No_HpFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_No_HpFocusGained
-      if(d.equals(No_Hp.getText())){
-    No_Hp.setText("");}
+        if (d.equals(No_Hp.getText())) {
+            No_Hp.setText("");
+        }
     }//GEN-LAST:event_No_HpFocusGained
 
     private void No_teleFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_No_teleFocusGained
-          if(e.equals(No_tele.getText())){
-    No_tele.setText("");}
+        if (e.equals(No_tele.getText())) {
+            No_tele.setText("");
+        }
     }//GEN-LAST:event_No_teleFocusGained
 
     private void No_HpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_No_HpMouseClicked
-         if(d.equals(No_Hp.getText())){
-    No_Hp.setText("");}
+        if (d.equals(No_Hp.getText())) {
+            No_Hp.setText("");
+        }
     }//GEN-LAST:event_No_HpMouseClicked
 
     private void No_teleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_No_teleMouseClicked
-          if(e.equals(No_tele.getText())){
-    No_tele.setText("");}
+        if (e.equals(No_tele.getText())) {
+            No_tele.setText("");
+        }
     }//GEN-LAST:event_No_teleMouseClicked
 
     private void TinggiPasienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TinggiPasienFocusGained
-        if(f.equals(TinggiPasien.getText())){
-    TinggiPasien.setText("");}
+        if (f.equals(TinggiPasien.getText())) {
+            TinggiPasien.setText("");
+        }
     }//GEN-LAST:event_TinggiPasienFocusGained
 
     private void TinggiPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TinggiPasienMouseClicked
-        if(f.equals(TinggiPasien.getText())){
-    TinggiPasien.setText("");}
+        if (f.equals(TinggiPasien.getText())) {
+            TinggiPasien.setText("");
+        }
     }//GEN-LAST:event_TinggiPasienMouseClicked
 
     private void BeratPasienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BeratPasienFocusGained
-        if(g.equals(BeratPasien.getText())){
-    BeratPasien.setText("");}
+        if (g.equals(BeratPasien.getText())) {
+            BeratPasien.setText("");
+        }
     }//GEN-LAST:event_BeratPasienFocusGained
 
     private void BeratPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BeratPasienMouseClicked
-         if(g.equals(BeratPasien.getText())){
-    BeratPasien.setText("");}
+        if (g.equals(BeratPasien.getText())) {
+            BeratPasien.setText("");
+        }
     }//GEN-LAST:event_BeratPasienMouseClicked
 
     private void TahunLahirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TahunLahirActionPerformed
-     if(TahunLahir.getSelectedIndex()!=0){
-    
-    UmurPasien.setText(hitungumur());
-}
+        if (TahunLahir.getSelectedIndex() != 0) {
+
+            UmurPasien.setText(hitungumur());
+        }
     }//GEN-LAST:event_TahunLahirActionPerformed
 
     private void ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmActionPerformed
-        
-        
-        //lek default
-        if(f.equals(TinggiPasien.getText())||(g.equals(BeratPasien.getText()))||("".equals(UmurPasien.getText()))||("".equals(Tempat_ID.getText()))||(a.equals(Nama_Pasien.getText()))
-           ||(b.equals(Tempat_Lahir.getText()))||(c.equals(Alamat.getText()))||(BulanLahir.getSelectedIndex()==0)||(TanggalLahir.getSelectedIndex()==0)||(TahunLahir.getSelectedIndex()==0)
-                ||(Provinsi.getSelectedIndex()==0)||(Kota.getSelectedIndex()==0)||(Jenis_Kelamin.getSelectedIndex()==0)||(goldar.getSelectedIndex()==0)
-                ||(d.equals(No_Hp.getText()))&&(e.equals(No_tele.getText()))||(h.equals(Jenis_Kartu.getText()))&&(i.equals(No_Kartu.getText()))){
-                     JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
 
-            
-        }
-        //lek kosong
-        else if ("".equals(TinggiPasien.getText())||("".equals(BeratPasien.getText()))||("".equals(UmurPasien.getText()))||("".equals(Tempat_ID.getText()))||("".equals(Nama_Pasien.getText()))
-           ||("".equals(Tempat_Lahir.getText()))||("".equals(Alamat.getText()))||(BulanLahir.getSelectedIndex()==0)||(TanggalLahir.getSelectedIndex()==0)||(TahunLahir.getSelectedIndex()==0)
-                ||(Provinsi.getSelectedIndex()==0)||(Kota.getSelectedIndex()==0)||(Jenis_Kelamin.getSelectedIndex()==0)||(goldar.getSelectedIndex()==0)
-                ||("".equals(No_Hp.getText()))&&("".equals(No_tele.getText()))||("".equals(Jenis_Kartu.getText()))&&("".equals(No_Kartu.getText()))){
+        //lek default
+        if (f.equals(TinggiPasien.getText()) || (g.equals(BeratPasien.getText())) || ("".equals(UmurPasien.getText())) || ("".equals(Tempat_ID.getText())) || (a.equals(Nama_Pasien.getText()))
+                || (b.equals(Tempat_Lahir.getText())) || (c.equals(Alamat.getText())) || (BulanLahir.getSelectedIndex() == 0) || (TanggalLahir.getSelectedIndex() == 0) || (TahunLahir.getSelectedIndex() == 0)
+                || (Provinsi.getSelectedIndex() == 0) || (Kota.getSelectedIndex() == 0) || (Jenis_Kelamin.getSelectedIndex() == 0) || (goldar.getSelectedIndex() == 0)
+                || (d.equals(No_Hp.getText())) && (e.equals(No_tele.getText())) || (h.equals(Jenis_Kartu.getText())) && (i.equals(No_Kartu.getText()))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
-        }
-//         int tinggi,bert,umur;
-//   String id,nama,tempat,bulanlahir,tanggal,tahun,hp,telp,kk,klain,aamat,provinsi,kota,jeniskelamin,goldar;
-        else{
-           simpanan.setNama(Nama_Pasien.getText());simpanan.setTempat(Tempat_Lahir.getText());simpanan.setBulanlahir((String) BulanLahir.getSelectedItem());
-           simpanan.setTanggal((String) TanggalLahir.getSelectedItem());simpanan.setBulanlahir((String) BulanLahir.getSelectedItem());
-           simpanan.setTahun((String) TahunLahir.getSelectedItem());simpanan.setProvinsi((String) Provinsi.getSelectedItem());simpanan.setKota((String) Kota.getSelectedItem());
-           simpanan.setJeniskelamin((String) Jenis_Kelamin.getSelectedItem());simpanan.setGoldar((String) goldar.getSelectedItem());simpanan.setAamat((String) Alamat.getText());
-           simpanan.setTinggi(Integer.parseInt(TinggiPasien.getText()));simpanan.setUmur(Integer.parseInt(UmurPasien.getText()));simpanan.setBert(Integer.parseInt( BeratPasien.getText()));
-           if(h.equals(Jenis_Kartu.getText())){
-               simpanan.setKlain(No_Kartu.getText());
-                    if(d.equals(No_Hp.getText())){
-                            simpanan.setTelp(No_tele.getText());
-                    }
-                    else{
-                            simpanan.setHp(No_Hp.getText());
-                    }
-           }
-           else if (i.equals(No_Kartu.getText())) {
-               simpanan.setKk(Jenis_Kartu.getText());
-                     if(d.equals(No_Hp.getText())){
-                            simpanan.setTelp(No_tele.getText());
-                     }
-                     else{
-                            simpanan.setHp(No_Hp.getText());
-                    }
-           }
-           else{
+
+        } //lek kosong
+        else if ("".equals(TinggiPasien.getText()) || ("".equals(BeratPasien.getText())) || ("".equals(UmurPasien.getText())) || ("".equals(Tempat_ID.getText())) || ("".equals(Nama_Pasien.getText()))
+                || ("".equals(Tempat_Lahir.getText())) || ("".equals(Alamat.getText())) || (BulanLahir.getSelectedIndex() == 0) || (TanggalLahir.getSelectedIndex() == 0) || (TahunLahir.getSelectedIndex() == 0)
+                || (Provinsi.getSelectedIndex() == 0) || (Kota.getSelectedIndex() == 0) || (Jenis_Kelamin.getSelectedIndex() == 0) || (goldar.getSelectedIndex() == 0)
+                || ("".equals(No_Hp.getText())) && ("".equals(No_tele.getText())) || ("".equals(Jenis_Kartu.getText())) && ("".equals(No_Kartu.getText()))) {
+            JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
+        } //         int tinggi,bert,umur;
+        //   String id,nama,tempat,bulanlahir,tanggal,tahun,hp,telp,kk,klain,aamat,provinsi,kota,jeniskelamin,goldar;
+        else {
+            simpanan.setNama(Nama_Pasien.getText());
+            simpanan.setTempat(Tempat_Lahir.getText());
+            simpanan.setBulanlahir((String) BulanLahir.getSelectedItem());
+            simpanan.setTanggal((String) TanggalLahir.getSelectedItem());
+            simpanan.setBulanlahir((String) BulanLahir.getSelectedItem());
+            simpanan.setTahun((String) TahunLahir.getSelectedItem());
+            simpanan.setProvinsi((String) Provinsi.getSelectedItem());
+            simpanan.setKota((String) Kota.getSelectedItem());
+            simpanan.setJeniskelamin((String) Jenis_Kelamin.getSelectedItem());
+            simpanan.setGoldar((String) goldar.getSelectedItem());
+            simpanan.setAamat((String) Alamat.getText());
+            simpanan.setTinggi(Integer.parseInt(TinggiPasien.getText()));
+            simpanan.setUmur(Integer.parseInt(UmurPasien.getText()));
+            simpanan.setBert(Integer.parseInt(BeratPasien.getText()));
+            if (h.equals(Jenis_Kartu.getText())) {
+                simpanan.setKlain(No_Kartu.getText());
+                if (d.equals(No_Hp.getText())) {
+                    simpanan.setTelp(No_tele.getText());
+                } else {
+                    simpanan.setHp(No_Hp.getText());
+                }
+            } else if (i.equals(No_Kartu.getText())) {
+                simpanan.setKk(Jenis_Kartu.getText());
+                if (d.equals(No_Hp.getText())) {
+                    simpanan.setTelp(No_tele.getText());
+                } else {
+                    simpanan.setHp(No_Hp.getText());
+                }
+            } else {
                 simpanan.setKlain(No_Kartu.getText());
                 simpanan.setKk(Jenis_Kartu.getText());
                 simpanan.setTelp(No_tele.getText());
                 simpanan.setHp(No_Hp.getText());
-           }
-           
-int dialogButton = JOptionPane.YES_NO_OPTION;           
-int dialogResult = JOptionPane.showConfirmDialog (null, "\nNama : "+simpanan.getNama()+"\nTempat dan Tanggal Lahir : "
-        +simpanan.getTempat()+" "+simpanan.getTanggal()+" "+simpanan.getBulanlahir()+" "+simpanan.getTahun()+"\nNo HP/Telp : "+simpanan.getHp()+" dan "+simpanan.getTelp()
-        +"\n No Kartu kk / Pengenal lain : "+simpanan.getKk()+" "+simpanan.getKlain()+"\n Alamat : "+simpanan.getAamat()+" "+simpanan.getKota()+" "+simpanan.getProvinsi()
-        +"\n Gender : "+simpanan.getJeniskelamin() +"\n Gol. darah : "+simpanan.getGoldar()+
-        "\n tinggi : "+simpanan.getTinggi()+" Berat : "+simpanan.getBert()+"\n Umur : "+simpanan.getUmur()+"\nApakah Data Tersebut benar?","Warning",dialogButton);
-if(dialogResult == JOptionPane.YES_OPTION){
-    
+            }
+
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "\nNama : " + simpanan.getNama() + "\nTempat dan Tanggal Lahir : "
+                    + simpanan.getTempat() + " " + simpanan.getTanggal() + " " + simpanan.getBulanlahir() + " " + simpanan.getTahun() + "\nNo HP/Telp : " + simpanan.getHp() + " dan " + simpanan.getTelp()
+                    + "\n No Kartu kk / Pengenal lain : " + simpanan.getKk() + " " + simpanan.getKlain() + "\n Alamat : " + simpanan.getAamat() + " " + simpanan.getKota() + " " + simpanan.getProvinsi()
+                    + "\n Gender : " + simpanan.getJeniskelamin() + "\n Gol. darah : " + simpanan.getGoldar()
+                    + "\n tinggi : " + simpanan.getTinggi() + " Berat : " + simpanan.getBert() + "\n Umur : " + simpanan.getUmur() + "\nApakah Data Tersebut benar?", "Warning", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+
                 TinggiPasien.setText(f);
                 BeratPasien.setText(g);
                 UmurPasien.setText("Umur");
                 Tempat_ID.setText("dxdiag-0897-6TUX");
-                        Nama_Pasien.setText(a);
-                        Alamat.setText(c);
+                Nama_Pasien.setText(a);
+                Alamat.setText(c);
                 Tempat_Lahir.setText(b);
-                
+
                 BulanLahir.setSelectedIndex(0);
                 TanggalLahir.setSelectedIndex(0);
                 TahunLahir.setSelectedIndex(0);
@@ -534,34 +548,34 @@ if(dialogResult == JOptionPane.YES_OPTION){
                 No_tele.setText(e);
                 Jenis_Kartu.setText(h);
                 No_Kartu.setText(i);
-               
-}
 
-           
-           
-           
-           
+            }
+
         }
     }//GEN-LAST:event_ConfirmActionPerformed
 
     private void Jenis_KartuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Jenis_KartuFocusGained
-        if(h.equals(Jenis_Kartu.getText())){
-    Jenis_Kartu.setText("");}
+        if (h.equals(Jenis_Kartu.getText())) {
+            Jenis_Kartu.setText("");
+        }
     }//GEN-LAST:event_Jenis_KartuFocusGained
 
     private void Jenis_KartuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jenis_KartuMouseClicked
-        if(h.equals(Jenis_Kartu.getText())){
-    Jenis_Kartu.setText("");}
+        if (h.equals(Jenis_Kartu.getText())) {
+            Jenis_Kartu.setText("");
+        }
     }//GEN-LAST:event_Jenis_KartuMouseClicked
 
     private void No_KartuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_No_KartuFocusGained
-        if(i.equals(No_Kartu.getText())){
-    No_Kartu.setText("");}
+        if (i.equals(No_Kartu.getText())) {
+            No_Kartu.setText("");
+        }
     }//GEN-LAST:event_No_KartuFocusGained
 
     private void No_KartuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_No_KartuMouseClicked
-        if(i.equals(No_Kartu.getText())){
-    No_Kartu.setText("");}
+        if (i.equals(No_Kartu.getText())) {
+            No_Kartu.setText("");
+        }
     }//GEN-LAST:event_No_KartuMouseClicked
 
     private void goldarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goldarActionPerformed

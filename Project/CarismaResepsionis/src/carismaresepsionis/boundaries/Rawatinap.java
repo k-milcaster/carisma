@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaresepsionis.boundaries;
 
 import carismaresepsionis.boundaries.*;
@@ -16,19 +10,17 @@ import javax.swing.JOptionPane;
  */
 public class Rawatinap extends javax.swing.JFrame {
 
-
     /**
      * Creates new form regispasienform
      */
     public Rawatinap() {
         initComponents();
-      
-        
-    //   tanggalkustom();
-    }
-    
-//    void awalan
+        this.setExtendedState(this.MAXIMIZED_BOTH);
 
+        //   tanggalkustom();
+    }
+
+//    void awalan
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -1,13 +1,18 @@
 package carismadokter.boundaries;
 
+import carismadokter.controller.ClientSocket;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.UIManager;
 
 public class isirekammedis extends javax.swing.JFrame {
 
-    public isirekammedis() {
+    private ClientSocket client;
+
+    public isirekammedis(ClientSocket client, String username) {
+        this.client = client;
         initComponents();
+        this.jLabel1.setText(username);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
     @SuppressWarnings("unchecked")
@@ -454,19 +459,6 @@ public class isirekammedis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextField6FocusLost
 
-    public static void main(String args[]) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } 
-        catch(Exception ex){
-            System.out.println("Look & Feel exception");
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new isirekammedis().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

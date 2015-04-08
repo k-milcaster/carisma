@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismaresepsionis.boundaries;
 
 /**
@@ -15,6 +11,7 @@ public class lihatantrian extends javax.swing.JFrame {
      */
     public lihatantrian() {
         initComponents();
+        this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
     /**

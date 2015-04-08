@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaresepsionis.boundaries;
 
 import carismaresepsionis.boundaries.*;
@@ -15,19 +9,18 @@ import javax.swing.JOptionPane;
  */
 public class Menursepsionis extends javax.swing.JFrame {
 
-
     /**
      * Creates new form regispasienform
      */
     public Menursepsionis() {
         initComponents();
-     Namanya.setEditable(false);
-        
-    //   tanggalkustom();
-    }
-    
-//    void awalan
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        Namanya.setEditable(false);
 
+        //   tanggalkustom();
+    }
+
+//    void awalan
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,8 +177,8 @@ public class Menursepsionis extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-String a = JOptionPane.showInputDialog("Masukkan Nama Pasien", "");
-        
+        String a = JOptionPane.showInputDialog("Masukkan Nama Pasien", "");
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
