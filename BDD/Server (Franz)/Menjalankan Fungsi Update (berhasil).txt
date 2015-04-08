@@ -1,0 +1,5 @@
+Given Client terkoneksi pada server
+And Server telah terkoneksi pada database
+When Client menjalankan fungsi update
+Then Database telah mengubah data tertentu
+And Server mencatat kegiatan update client

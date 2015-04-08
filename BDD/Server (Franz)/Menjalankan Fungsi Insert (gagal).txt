@@ -1,0 +1,5 @@
+Given Client terkoneksi pada server
+And Server telah terkoneksi pada database
+When Client menjalankan fungsi insert
+Then Database telah gagal menambahkan data baru
+And Server mencatat kegagalan insert client

@@ -1,0 +1,5 @@
+Given Client terkoneksi pada server
+When Client menjalankan fungsi
+And Server tidak terkoneksi dengan database
+Then Server gagal menjalankan query SQL karena tidak terkoneksi dengan database
+And Server mencatat kegagalan koneksi ke database
