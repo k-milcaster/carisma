@@ -1,0 +1,8 @@
+Skenario Login bila belum terdaftar
+
+Given	: saya ingin melihat akun pribadi saya pada web carisma
+Then	: saya menekkan tombol login pada web carisma
+When	: setelah carisma web menampilkan halaman login
+Then	: saya menginputkan username dan password 
+And	: saya menekan tombol confirm
+When	: web carisma menampilkan halaman yang sama dengan keterangan pop up bahwa username / password belum terdaftar

@@ -1,0 +1,7 @@
+Skenario Profil dokter
+Given 	: Saya ingin melihat profil dokter pada halaman web charisma
+Then 	: Saya menekan tombol Doctor pada web carisma
+When	: Saya dapat melihat profi list nama dokkter pada halaman doctor
+Then	: saya ingin melihat detail profil dokter dan track record
+And	: saya click foto profil doctor atau saya click nama dokter yang saya ingin tahu profilnya
+When	: Saya dapat melihat profil doctor dengan jelas

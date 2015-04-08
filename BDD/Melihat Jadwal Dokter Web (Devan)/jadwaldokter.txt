@@ -1,0 +1,7 @@
+Skenario Jadwal Dokter
+Given 	: Saya ingin melihat jadwal dokter
+Then 	: Saya menekan tombol Doctor pada web carisma
+When	: Saya dapat melihat profi list nama dokkter pada halaman doctor
+Then	: saya ingin melihat detail jam praktek dokter pada klinik carisma tiap dokter
+And	: saya click foto profil doctor atau saya click nama dokter yang saya ingin tahu jadwal prakteknya
+When	: Saya dapat melihat jam praktek dokter yang sedang praktek di klinik carisma
