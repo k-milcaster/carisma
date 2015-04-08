@@ -139,7 +139,7 @@ public class dokterform extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Data Dokter");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 60, 260, 58);
+        jLabel1.setBounds(50, 70, 260, 58);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(null);
@@ -281,17 +281,18 @@ public class dokterform extends javax.swing.JFrame {
         jPanel4.add(jPanel6);
         jPanel6.setBounds(400, 20, 159, 197);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismajadwaldokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton2.setText("Back");
         jPanel4.add(jButton2);
-        jButton2.setBounds(470, 410, 55, 40);
+        jButton2.setBounds(435, 410, 90, 40);
 
         getContentPane().add(jPanel4);
         jPanel4.setBounds(570, 180, 580, 460);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/background2.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismajadwaldokter/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, -30, 1360, 760);
+        jLabel2.setBounds(0, 0, 1359, 698);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -312,34 +313,9 @@ public class dokterform extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dokterform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dokterform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dokterform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dokterform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new dokterform().setVisible(true);
