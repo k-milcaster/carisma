@@ -1,0 +1,15 @@
+DROP TRIGGER IF EXISTS `obatmasuk`;
+DELIMITER 
+CREATE TRIGGER `obatmasuk` AFTER INSERT ON `transaksibeliobat`
+ FOR EACH ROW BEGIN
+DECLARE id_padaobat int;
+DECLARE qty_obat int;
+DECLARE qty_masuk int;
+SET id_padaobat = (SELECT id_obat from obat
+where id_obat = NEW.obat_id_obat);
+SET qty_obat = (SELECT qty from obat
+where id_obat = NEW.obat_id_obat);
+SET qty_masuk = NEW.qty+qty_obat;
+IF ( NEW.obat_id_obat == id_padaobat )THEN
+UPDATE `obat` SET `qty`=qty_masuk WHERE NEW.obat_id_obat = id_padaobat
+END IF;
