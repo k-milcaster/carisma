@@ -1,0 +1,11 @@
+Features : Melihat rekam medis pasien
+
+Scenario : Dokter melihat rekam medis pasien namun id pasien tidak ditemukan
+
+- Given dokter melakukan login sistem
+- When dokter memilih menu fungsi melihat rekam medis
+- Then dokter ingin mencari rekam medis pasien
+- When dokter memasukkan ID pasien ke dalam menu pencarian
+- And dokter mengklik cari
+- Then dokter berada di menu rekam medis pasien
+- And dokter tidak dapat melihat rekam medis karena pencarian id pasien yang diinginkan tidak ditemukan
