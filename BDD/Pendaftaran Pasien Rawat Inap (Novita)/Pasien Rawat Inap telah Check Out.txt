@@ -1,0 +1,12 @@
+Feature		: Resepsionis melakukan pencatatan data identitas pasien dan kamar yang tersedia di klinik untuk pasien rawat inap serta dapatmelihat daftar pasien 		yang di rawat inap
+Scenario4	: Pasien Rawat Inap telah Check Out
+
+Given saya berada pada halaman menu Resepsionis
+When  saya menekan tombol "Daftar Rawat Inap"
+Then  saya harus berada pada halaman "Daftar Rawat Inap"
+When  saya mengetikan nama pasien pada kolom cari
+Then  saya harus melihat daftar nama pasien pada tebel nama pasien
+When  saya memilih salah satu nama pasien
+Then  saya harus melihat semua kolom data sudah terisi
+When  saya menekan tombol "konfirmasi keluar"
+Then  saya harus mendapat pesan "Konfirmasi Keluar untuk (ID Pasien) telah berhasil" 
