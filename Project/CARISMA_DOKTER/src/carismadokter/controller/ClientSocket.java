@@ -12,8 +12,7 @@ import java.util.logging.Logger;
  *
  * @author K-MiL Caster
  */
-public class ClientSocket {
-    public dokterform dokterform;
+public class ClientSocket {    
     private String host = "localhost";
     private int port = 2015;
     public Login login;

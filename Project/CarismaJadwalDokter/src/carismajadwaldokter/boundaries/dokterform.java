@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package carismadokter.boundaries;
+package carismajadwaldokter.boundaries;
 
 /**
  *
@@ -295,7 +295,7 @@ public class dokterform extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton2.setText("Back");
         jPanel4.add(jButton2);
-        jButton2.setBounds(470, 410, 83, 40);
+        jButton2.setBounds(470, 410, 55, 40);
 
         getContentPane().add(jPanel4);
         jPanel4.setBounds(570, 180, 580, 460);
