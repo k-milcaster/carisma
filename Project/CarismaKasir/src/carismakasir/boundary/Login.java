@@ -89,6 +89,7 @@ public class Login extends javax.swing.JFrame {
             }
             if (success) {
                 new Kasir(this.client, username.getText()).show();
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "User Name atau Password anda salah!");
             }

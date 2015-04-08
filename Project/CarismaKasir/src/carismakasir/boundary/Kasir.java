@@ -1,6 +1,12 @@
 package carismakasir.boundary;
 
+import carismainterface.server.UserService;
 import carismakasir.controller.ClientSocket;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -9,14 +15,24 @@ import carismakasir.controller.ClientSocket;
 public class Kasir extends javax.swing.JFrame {
 
     private ClientSocket client;
-
-    public Kasir(ClientSocket client, String username) {
+    private UserService login;
+    public Kasir(ClientSocket client, final String username) {
         
         this.client = client;
+        this.login = client.getUserService();
         initComponents();
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.jLabel8.setText(username);
+                this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                try {
+                    login.userLogOut(username, "kasir");
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Kasir.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")

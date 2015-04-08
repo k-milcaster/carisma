@@ -1,18 +1,37 @@
 package carismadokter.boundaries;
 
 import carismadokter.controller.ClientSocket;
+import carismainterface.server.UserService;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class isirekammedis extends javax.swing.JFrame {
 
     private ClientSocket client;
+    private UserService login;
+    private String username;
 
-    public isirekammedis(ClientSocket client, String username) {
+    public isirekammedis(ClientSocket client, final String username) {
         this.client = client;
+        this.login = this.client.getUserService();
+        this.username = username;
         initComponents();
         this.jLabel1.setText(username);
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                try {
+                    login.userLogOut(username, "dokter");
+                } catch (RemoteException ex) {
+                    Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -65,7 +84,6 @@ public class isirekammedis extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -434,10 +452,6 @@ public class isirekammedis extends javax.swing.JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(1190, 640, 90, 40);
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaisirekammedis/picture/background2.png"))); // NOI18N
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(0, 0, 0, 700);
-
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel10);
         jLabel10.setBounds(0, 0, 1360, 700);
@@ -468,7 +482,6 @@ public class isirekammedis extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
