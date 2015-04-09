@@ -152,10 +152,10 @@ public class dokterform extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(null);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Informasi Dokter");
         jPanel4.add(jLabel5);
-        jLabel5.setBounds(11, 1, 102, 17);
+        jLabel5.setBounds(11, 1, 140, 17);
 
         jLabel6.setText("Nama Dokter");
         jPanel4.add(jLabel6);
