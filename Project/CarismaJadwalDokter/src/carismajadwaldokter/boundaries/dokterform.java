@@ -1,12 +1,20 @@
 package carismajadwaldokter.boundaries;
 
+import carismajadwaldokter.controller.ClientSocket;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Fiqhi Darmawan
  */
 public class dokterform extends javax.swing.JFrame {
-
-    public dokterform() {
+    private ClientSocket client;
+    public dokterform() throws RemoteException, NotBoundException {
+        client = new ClientSocket();
+        
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
     }
@@ -318,7 +326,13 @@ public class dokterform extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dokterform().setVisible(true);
+                try {
+                    new dokterform().setVisible(true);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NotBoundException ex) {
+                    Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -4,7 +4,6 @@ import carismaapoteker.controller.ClientSocket;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 
 /**
  *
