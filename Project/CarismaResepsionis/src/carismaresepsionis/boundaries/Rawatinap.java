@@ -36,47 +36,51 @@ public class Rawatinap extends javax.swing.JFrame {
         nokamar = new javax.swing.JTextField();
         ok = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        tombolCari = new javax.swing.JButton();
+        tarif = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         tablelistkamarpasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Block Nomor", "Type"
+                "Block Nomor", "Type", "Tarif", "Fasilitas"
             }
         ));
         jScrollPane1.setViewportView(tablelistkamarpasien);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(426, 179, 452, 402);
+        jScrollPane1.setBounds(426, 179, 540, 402);
 
         jLabel1.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -85,8 +89,13 @@ public class Rawatinap extends javax.swing.JFrame {
         jLabel1.setBounds(426, 133, 452, 40);
 
         carnampas.setText("Cari Nama Pasien");
+        carnampas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carnampasActionPerformed(evt);
+            }
+        });
         getContentPane().add(carnampas);
-        carnampas.setBounds(10, 133, 406, 40);
+        carnampas.setBounds(10, 130, 330, 40);
 
         tablepasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,30 +135,35 @@ public class Rawatinap extends javax.swing.JFrame {
         jScrollPane2.setBounds(10, 179, 406, 402);
 
         idpasien.setText("ID Pasien");
+        idpasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idpasienActionPerformed(evt);
+            }
+        });
         getContentPane().add(idpasien);
-        idpasien.setBounds(896, 179, 449, 32);
+        idpasien.setBounds(990, 190, 360, 32);
 
         namapasien.setText("Nama Pasien");
         getContentPane().add(namapasien);
-        namapasien.setBounds(896, 217, 449, 32);
+        namapasien.setBounds(990, 230, 360, 32);
 
         kategoripenypasien.setText("Kategori Penyakit Pasien");
         getContentPane().add(kategoripenypasien);
-        kategoripenypasien.setBounds(896, 255, 449, 31);
+        kategoripenypasien.setBounds(990, 270, 360, 31);
 
         typekamar.setText("Type");
         getContentPane().add(typekamar);
-        typekamar.setBounds(896, 292, 284, 32);
+        typekamar.setBounds(990, 370, 170, 32);
 
         nokamar.setText("Block Nomor");
         getContentPane().add(nokamar);
-        nokamar.setBounds(1186, 292, 159, 32);
+        nokamar.setBounds(990, 330, 170, 32);
 
         ok.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428228446_ok.png"))); // NOI18N
         ok.setText("OK");
         getContentPane().add(ok);
-        ok.setBounds(1235, 336, 110, 41);
+        ok.setBounds(990, 460, 110, 41);
 
         jLabel2.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -157,12 +171,45 @@ public class Rawatinap extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(20, 30, 360, 50);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        tombolCari.setText("CARI");
+        getContentPane().add(tombolCari);
+        tombolCari.setBounds(350, 130, 57, 40);
+
+        tarif.setText("Tarif ");
+        tarif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tarifActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tarif);
+        tarif.setBounds(990, 410, 170, 30);
+
+        jLabel3.setText("Data Kamar");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(-70, 10, 1400, 700);
+        jLabel3.setBounds(990, 310, 90, 14);
+
+        jLabel4.setText("Data Pasien");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(990, 170, 90, 14);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(0, 0, 1370, 690);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tarifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarifActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tarifActionPerformed
+
+    private void carnampasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carnampasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_carnampasActionPerformed
+
+    private void idpasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idpasienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idpasienActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField carnampas;
@@ -170,6 +217,8 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField kategoripenypasien;
@@ -178,6 +227,8 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JButton ok;
     private javax.swing.JTable tablelistkamarpasien;
     private javax.swing.JTable tablepasien;
+    private javax.swing.JTextField tarif;
+    private javax.swing.JButton tombolCari;
     private javax.swing.JTextField typekamar;
     // End of variables declaration//GEN-END:variables
 }

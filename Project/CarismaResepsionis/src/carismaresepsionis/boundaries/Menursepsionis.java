@@ -28,11 +28,11 @@ public class Menursepsionis extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
         List_Antrian = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        RegisPasienReg = new javax.swing.JButton();
+        RegisPasienInap = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        LihatPasienInap = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
@@ -92,23 +92,23 @@ public class Menursepsionis extends javax.swing.JFrame {
         getContentPane().add(List_Antrian);
         List_Antrian.setBounds(20, 559, 350, 50);
 
-        jButton1.setText("Registrasi/ Daftar Pasien");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        RegisPasienReg.setText("Registrasi Pasien Reguler");
+        RegisPasienReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                RegisPasienRegActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(1120, 100, 225, 50);
+        getContentPane().add(RegisPasienReg);
+        RegisPasienReg.setBounds(1120, 100, 225, 50);
 
-        jButton2.setText("Rawat Inap");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        RegisPasienInap.setText("Registrasi Pasien Rawat Inap");
+        RegisPasienInap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                RegisPasienInapActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(1120, 160, 225, 50);
+        getContentPane().add(RegisPasienInap);
+        RegisPasienInap.setBounds(1120, 160, 225, 50);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428228543_unlock.png"))); // NOI18N
@@ -125,14 +125,14 @@ public class Menursepsionis extends javax.swing.JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(1120, 280, 225, 50);
 
-        jButton6.setText("Lihat Pasien Rawat Inap");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        LihatPasienInap.setText("Lihat Pasien Rawat Inap");
+        LihatPasienInap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                LihatPasienInapActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6);
-        jButton6.setBounds(1120, 220, 225, 50);
+        getContentPane().add(LihatPasienInap);
+        LihatPasienInap.setBounds(1120, 220, 225, 50);
         getContentPane().add(jTextField1);
         jTextField1.setBounds(174, 517, 334, 36);
 
@@ -190,27 +190,27 @@ public class Menursepsionis extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void RegisPasienRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienRegActionPerformed
         new regispasienform(this.client, this.userName).show();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_RegisPasienRegActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void RegisPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienInapActionPerformed
         new Rawatinap(this.client, this.userName).show();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_RegisPasienInapActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void LihatPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatPasienInapActionPerformed
         new DaftarRawatInap(this.client, this.userName).show();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_LihatPasienInapActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LihatPasienInap;
     private javax.swing.JComboBox List_Antrian;
     private javax.swing.JTextField Namanya;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton RegisPasienInap;
+    private javax.swing.JButton RegisPasienReg;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
