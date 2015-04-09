@@ -15,3 +15,4 @@ And jenis obat muncul dilayar
 And keterangan obat muncul dilayar
 And harga jual obat muncul dilayar
 And tanggal kadaluarsa muncul dilayar
+And stok kritis muncul dilayar
