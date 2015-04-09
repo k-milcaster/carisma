@@ -1,6 +1,9 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package carismaapoteker.boundaries;
 
-import carismaapoteker.controller.ClientSocket;
 import java.util.Date;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -12,13 +15,9 @@ import javax.swing.table.DefaultTableModel;
 public class TransaksiJualObat extends javax.swing.JFrame {
 
     private DefaultTableModel tableOfSales;
-    private ClientSocket Client;
-    private String userName;
     private int total = 0;
     public int row = 0;
-    public TransaksiJualObat(ClientSocket Client, String userName) {
-        this.Client = Client;
-        this.userName = userName;
+    public TransaksiJualObat() {
         initComponents();
         setLocationRelativeTo(this);
         Date date = new Date();
@@ -259,6 +258,23 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         
         //fieldTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } 
+        catch(Exception ex){
+            System.out.println("Look & Feel exception");
+        }
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TransaksiJualObat().setVisible(true);
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox comboPatientNumber;
     private com.toedter.calendar.JDateChooser dateOfSales;
