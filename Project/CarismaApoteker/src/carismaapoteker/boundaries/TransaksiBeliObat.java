@@ -1,10 +1,16 @@
 package carismaapoteker.boundaries;
 
+import carismaapoteker.controller.ClientSocket;
 import javax.swing.UIManager;
 
 public class TransaksiBeliObat extends javax.swing.JFrame {
 
-    public TransaksiBeliObat() {
+    private ClientSocket Client;
+    private String userName;
+
+    public TransaksiBeliObat(ClientSocket Client, String userName) {
+        this.Client = Client;
+        this.userName = userName;
         initComponents();
         setLocationRelativeTo(this);
     }
@@ -254,19 +260,6 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } 
-        catch(Exception ex){
-            System.out.println("Look & Feel exception");
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TransaksiBeliObat().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox boxNamaObat;
     private javax.swing.JTextField fieldHargaBeli;
