@@ -10,13 +10,13 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class isirekammedis extends javax.swing.JFrame {
+public class IsiRekamMedis extends javax.swing.JFrame {
 
     private ClientSocket client;
     private UserService login;
     private String username;
 
-    public isirekammedis(ClientSocket client, final String username) {
+    public IsiRekamMedis(ClientSocket client, final String username) {
         this.client = client;
         this.login = this.client.getUserService();
         this.username = username;
@@ -28,7 +28,7 @@ public class isirekammedis extends javax.swing.JFrame {
                 try {
                     login.userLogOut(username, "dokter");
                 } catch (RemoteException ex) {
-                    Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(IsiRekamMedis.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -506,7 +506,7 @@ public class isirekammedis extends javax.swing.JFrame {
         );
 
         jPanel11.add(jPanel12);
-        jPanel12.setBounds(20, 30, 220, 30);
+        jPanel12.setBounds(20, 30, 0, 0);
 
         jLabel4.setText("No ");
         jPanel11.add(jLabel4);
