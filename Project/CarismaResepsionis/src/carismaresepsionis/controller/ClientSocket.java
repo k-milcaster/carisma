@@ -17,7 +17,11 @@ public class ClientSocket {
     private int port = 2015;
     public Login login;
     private UserService userService;
+<<<<<<< HEAD
+    private PasienService pasienService;
+=======
     private AntrianService antrianService;
+>>>>>>> origin/develop
     
     public ClientSocket() throws RemoteException, NotBoundException{
         this.Connect();
@@ -31,8 +35,14 @@ public class ClientSocket {
                 Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
             }            
             userService = (UserService) registry.lookup("userRequest");
+<<<<<<< HEAD
+            pasienService = (PasienService) registry.lookup("pasienRequest");
+            
+                       
+=======
             antrianService = (AntrianService) registry.lookup("antrianRequest");
             
+>>>>>>> origin/develop
         } catch (RemoteException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
@@ -42,6 +52,12 @@ public class ClientSocket {
     
     public UserService getUserService(){
         return this.userService;
+        
+    }
+    
+    public PasienService getPasienService(){
+        return this.pasienService;
+        
     }
     public AntrianService getAntrianService(){
         return this.antrianService;
