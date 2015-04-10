@@ -19,7 +19,9 @@ public class ClientSocket {
     private int port = 2015;
     public Login login;
     private UserService userService;
-
+    private TransaksibeliobatService transaksibeliobatService;
+    private ObatService obatService;
+    
     public ClientSocket() throws RemoteException, NotBoundException {
         this.Connect();
     }
@@ -33,7 +35,9 @@ public class ClientSocket {
                 Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
             }
             userService = (UserService) registry.lookup("userRequest");
-
+            transaksibeliobatService = (TransaksibeliobatService) registry.lookup("transaksibeliobatRequest");
+            obatService = (ObatService) registry.lookup("obatRequest");
+            
         } catch (RemoteException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
@@ -43,5 +47,11 @@ public class ClientSocket {
 
     public UserService getUserService() {
         return this.userService;
+    }
+    public TransaksibeliobatService getTransaksibeliobatService(){
+        return this.transaksibeliobatService;
+    }
+    public ObatService getObatService(){
+        return this.obatService;
     }
 }
