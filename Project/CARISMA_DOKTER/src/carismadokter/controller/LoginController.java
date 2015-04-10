@@ -19,12 +19,20 @@ public class LoginController {
         this.password = password;
     }
 
-    public boolean logIn() throws RemoteException {        
-        boolean success = user.userLogIn(userName, password, "apoteker");
+    public LoginController(UserService login, String userName) {
+        this.user = login;
+        this.userName = userName;
+    }
+
+    public boolean logIn() throws RemoteException {
+        boolean success = user.userLogIn(userName, password, "dokter");
         if (success) {
             user.updateLastLogIn(userName);
         }
         return success;
     }
 
+    public void logOut() throws RemoteException {
+        user.userLogOut(this.userName, "dokter");
+    }
 }

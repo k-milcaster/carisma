@@ -1,14 +1,38 @@
 package carismadokter.boundaries;
 
+import carismadokter.controller.ClientSocket;
+import carismadokter.controller.LoginController;
+import carismainterface.server.UserService;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Fiqhi Darmawan
  */
 public class dokterlihatrekammedis extends javax.swing.JFrame {
-
-    public dokterlihatrekammedis() {
+    private ClientSocket client;    
+    private String userName;
+    private UserService login;
+    public dokterlihatrekammedis(ClientSocket client, final String userName) {
+        this.client = client;
+        this.userName = userName;
+        this.login = client.getUserService();
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
+                this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                LoginController log = new LoginController(login, userName);
+                try {
+                    log.logOut();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(dokterlihatrekammedis.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")

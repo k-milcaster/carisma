@@ -1,6 +1,7 @@
 package carismadokter.boundaries;
 
 import carismadokter.controller.ClientSocket;
+import carismadokter.controller.LoginController;
 import carismainterface.server.UserService;
 import java.awt.Color;
 import java.awt.Font;
@@ -23,12 +24,13 @@ public class IsiRekamMedis extends javax.swing.JFrame {
         initComponents();
         this.jLabel1.setText(username);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        this.addWindowListener(new WindowAdapter() {
+                this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+                LoginController log = new LoginController(login, username);
                 try {
-                    login.userLogOut(username, "dokter");
+                    log.logOut();
                 } catch (RemoteException ex) {
-                    Logger.getLogger(IsiRekamMedis.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(dokterlihatrekammedis.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -506,7 +508,7 @@ public class IsiRekamMedis extends javax.swing.JFrame {
         );
 
         jPanel11.add(jPanel12);
-        jPanel12.setBounds(20, 30, 0, 0);
+        jPanel12.setBounds(20, 30, 220, 30);
 
         jLabel4.setText("No ");
         jPanel11.add(jLabel4);
@@ -581,7 +583,7 @@ public class IsiRekamMedis extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField6FocusLost
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        new dokterlihatrekammedis(this.client, this.username).show();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
