@@ -38,6 +38,7 @@ public class ClientSocket {
             userService = (UserService) registry.lookup("userRequest");
             transaksibeliobatService = (TransaksibeliobatService) registry.lookup("transaksibeliobatRequest");
             obatService = (ObatService) registry.lookup("obatRequest");
+            transaksijualobatService = (TransaksijualobatService) registry.lookup("transaksijualobatRequest");
             
         } catch (RemoteException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
