@@ -6,6 +6,7 @@ import carismainterface.entity.Rekammedikpenyakit;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,15 +17,15 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public class RekammedikpenyakitEntity implements RekammedikpenyakitService {
+public class RekammedikpenyakitEntity extends UnicastRemoteObject implements RekammedikpenyakitService {
 
     public Main ui;
 
-    public RekammedikpenyakitEntity() {
+    public RekammedikpenyakitEntity() throws RemoteException {
 
     }
 
-    public RekammedikpenyakitEntity(Main ui) {
+    public RekammedikpenyakitEntity(Main ui) throws RemoteException {
         this.ui = ui;
     }
 
@@ -82,7 +83,7 @@ public class RekammedikpenyakitEntity implements RekammedikpenyakitService {
                 } catch (SQLException exception) {
                 }
             }
-        }        
+        }
     }
 
     @Override
@@ -103,6 +104,6 @@ public class RekammedikpenyakitEntity implements RekammedikpenyakitService {
                 } catch (SQLException exception) {
                 }
             }
-        }        
+        }
     }
 }

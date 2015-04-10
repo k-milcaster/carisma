@@ -5,6 +5,7 @@ import carismainterface.server.AntrianService;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,15 +16,15 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public class AntrianEntity implements AntrianService {
+public class AntrianEntity extends UnicastRemoteObject implements AntrianService {
 
     public Main ui;
 
-    public AntrianEntity() {
+    public AntrianEntity() throws RemoteException {
 
     }
 
-    public AntrianEntity(Main ui) {
+    public AntrianEntity(Main ui) throws RemoteException{
         this.ui = ui;
     }
 

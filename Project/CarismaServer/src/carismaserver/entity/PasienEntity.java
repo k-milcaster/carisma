@@ -5,6 +5,7 @@ import carismainterface.server.PasienService;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,15 +16,15 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public class PasienEntity implements PasienService {
+public class PasienEntity extends UnicastRemoteObject implements PasienService {
 
     public Main ui;
 
-    public PasienEntity() {
+    public PasienEntity() throws RemoteException {
 
     }
 
-    public PasienEntity(Main ui) {
+    public PasienEntity(Main ui) throws RemoteException {
         this.ui = ui;
     }
 

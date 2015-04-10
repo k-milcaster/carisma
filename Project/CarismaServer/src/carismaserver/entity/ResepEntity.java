@@ -5,6 +5,7 @@ import carismainterface.entity.Resep;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -12,15 +13,15 @@ import java.sql.SQLException;
  *
  * @author K-MiL Caster
  */
-public class ResepEntity implements ResepService {
+public class ResepEntity extends UnicastRemoteObject implements ResepService {
 
     public Main ui;
 
-    public ResepEntity() {
+    public ResepEntity() throws RemoteException {
 
     }
 
-    public ResepEntity(Main ui) {
+    public ResepEntity(Main ui) throws RemoteException {
         this.ui = ui;
     }
 

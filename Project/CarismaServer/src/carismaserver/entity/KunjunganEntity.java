@@ -6,6 +6,7 @@ import carismainterface.server.KunjunganService;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,15 +17,15 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public class KunjunganEntity implements KunjunganService {
+public class KunjunganEntity extends UnicastRemoteObject implements KunjunganService {
 
     public Main ui;
 
-    public KunjunganEntity() {
+    public KunjunganEntity() throws RemoteException {
 
     }
 
-    public KunjunganEntity(Main ui) {
+    public KunjunganEntity(Main ui) throws RemoteException {
         this.ui = ui;
     }
 
