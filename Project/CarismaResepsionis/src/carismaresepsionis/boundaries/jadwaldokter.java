@@ -366,14 +366,14 @@ public class jadwaldokter extends javax.swing.JFrame {
         getContentPane().add(jPanel6);
         jPanel6.setBounds(630, 530, 250, 71);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismajadwaldokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton1.setText("Back");
         getContentPane().add(jButton1);
-        jButton1.setBounds(770, 303, 83, 40);
+        jButton1.setBounds(770, 303, 90, 40);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismajadwaldokter/image/background2.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, -10, 1360, 720);
+        jLabel1.setBounds(0, 0, 1360, 690);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
