@@ -20,7 +20,7 @@ public class StokObat extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        control.getObats(this);
+        control.getObats();
     }
 
     @SuppressWarnings("unchecked")

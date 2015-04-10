@@ -1,6 +1,9 @@
 package carismaapoteker.boundaries;
 
 import carismaapoteker.controller.ClientSocket;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 /**
@@ -95,8 +98,10 @@ public class MenuApoteker extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new StokObat(this.client, this.userName).setVisible(true);
-        this.dispose();
+        try {
+            new StokObat(this.client, this.userName).setVisible(true);
+        } 
+        catch (RemoteException ex){};
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
