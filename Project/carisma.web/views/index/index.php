@@ -222,7 +222,7 @@
 <!---- contact ---->
 <div id="contact" class="contact">
     <div class="map">
-        <iframe src="#" > </iframe>
+        <iframe src="" > </iframe>
         <div class="contact-info">
             <div class="container">
                 <!---- contact-grids ---->
