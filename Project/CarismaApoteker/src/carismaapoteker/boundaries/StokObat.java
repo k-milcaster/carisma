@@ -3,6 +3,7 @@ package carismaapoteker.boundaries;
 import carismaapoteker.controller.ClientSocket;
 import java.awt.Color;
 import java.awt.Font;
+import java.rmi.RemoteException;
 import javax.swing.JTextField;
 
 /**
@@ -12,12 +13,14 @@ import javax.swing.JTextField;
 public class StokObat extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
-    public StokObat(ClientSocket Client, String userName) {
+    private carismaapoteker.controller.StokObatController control = new carismaapoteker.controller.StokObatController(client);
+    public StokObat(ClientSocket Client, String userName) throws RemoteException {
         this.client = Client;
         this.userName = userName;
         initComponents();
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        control.getObats(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -51,6 +54,8 @@ public class StokObat extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         labelApotekerName = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,7 +95,7 @@ public class StokObat extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableMedicine);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 472, 1346, 217);
+        jScrollPane1.setBounds(10, 472, 1030, 217);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -306,6 +311,31 @@ public class StokObat extends javax.swing.JFrame {
         getContentPane().add(jLabel12);
         jLabel12.setBounds(-530, 50, 1346, 47);
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(1050, 470, 320, 210);
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/background.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 1366, 700);
@@ -366,7 +396,9 @@ public class StokObat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelApotekerName;
-    private javax.swing.JTable tableMedicine;
+    public javax.swing.JTable tableMedicine;
     // End of variables declaration//GEN-END:variables
 }
