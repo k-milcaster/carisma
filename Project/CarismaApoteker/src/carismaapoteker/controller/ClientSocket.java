@@ -20,6 +20,7 @@ public class ClientSocket {
     public Login login;
     private UserService userService;
     private TransaksibeliobatService transaksibeliobatService;
+    private TransaksijualobatService transaksijualobatService;
     private ObatService obatService;
     
     public ClientSocket() throws RemoteException, NotBoundException {
