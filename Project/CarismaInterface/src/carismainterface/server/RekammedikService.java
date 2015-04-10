@@ -1,6 +1,7 @@
 package carismainterface.server;
 
 import carismainterface.entity.Rekammedik;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public interface RekammedikService {
+public interface RekammedikService extends Remote {
 
     void insertRekamMedik(Rekammedik rekamMedik) throws RemoteException;
 

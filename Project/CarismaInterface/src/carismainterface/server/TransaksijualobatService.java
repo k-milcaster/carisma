@@ -7,6 +7,7 @@
 package carismainterface.server;
 
 import carismainterface.entity.Transaksijualobat;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author kepoterz
  */
-public interface TransaksijualobatService {
+public interface TransaksijualobatService extends Remote {
     void insertTransaksijualbat(Transaksijualobat transaksijualobat) throws RemoteException;
 
     void updateTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException;

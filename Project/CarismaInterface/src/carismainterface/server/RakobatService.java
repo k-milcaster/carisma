@@ -7,6 +7,7 @@
 package carismainterface.server;
 
 import carismainterface.entity.Rakobat;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author kepoterz
  */
-public interface RakobatService {
+public interface RakobatService extends Remote {
     void insertRakobat(Rakobat rakobat) throws RemoteException;
 
     void updateRakobat(Rakobat rakobat) throws RemoteException;

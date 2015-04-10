@@ -1,6 +1,7 @@
 package carismainterface.server;
 
 import carismainterface.entity.Detailobat;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public interface DetailobatService {
+public interface DetailobatService extends Remote {
     void insertDetailobat(Detailobat detailobat) throws RemoteException;
 
     void updateDetailobat(Detailobat detailobat) throws RemoteException;

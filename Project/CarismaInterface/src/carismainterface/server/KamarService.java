@@ -7,6 +7,7 @@
 package carismainterface.server;
 
 import carismainterface.entity.Kamar;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author kepoterz
  */
-public interface KamarService {
+public interface KamarService extends Remote {
     void insertKamar(Kamar kamar) throws RemoteException;
 
     void updateKamar(Kamar kamar) throws RemoteException;
