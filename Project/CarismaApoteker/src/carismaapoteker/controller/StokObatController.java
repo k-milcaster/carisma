@@ -24,7 +24,7 @@ public class StokObatController {
         Obat obat = new Obat();
         this.obatService = client.getObatService();
     }
-    public void getObat() throws RemoteException{
+    public void getObats() throws RemoteException{
         List<Obat> list = new ArrayList<Obat>();
         list = obatService.getObat();
         DefaultTableModel model = new DefaultTableModel();
