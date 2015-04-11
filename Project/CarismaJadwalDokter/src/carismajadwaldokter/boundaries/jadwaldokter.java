@@ -48,7 +48,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Dokter", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 3, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Dokter", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
         jLabel2.setText("Nama");
 
@@ -56,7 +56,7 @@ public class jadwaldokter extends javax.swing.JFrame {
 
         jLabel4.setText("Alamat");
 
-        jLabel5.setText("jLabel5");
+        jLabel5.setText("No. HP");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,7 +111,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(76, 144, 492, 210);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Foto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 3, 14))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Foto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -140,7 +140,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(80, 60, 390, 44);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selasa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 3, 14))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selasa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
         jTextField5.setText("     08.00 - 15.00");
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +168,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         getContentPane().add(jPanel5);
         jPanel5.setBounds(270, 430, 160, 80);
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 3, 14))); // NOI18N
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
         jTextField7.setText("     08.00 - 15.00");
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +196,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         getContentPane().add(jPanel7);
         jPanel7.setBounds(80, 430, 150, 80);
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rabu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 3, 14))); // NOI18N
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rabu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
         jTextField13.setText("     08.00 - 15.00");
         jTextField13.addActionListener(new java.awt.event.ActionListener() {
@@ -222,9 +222,9 @@ public class jadwaldokter extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel9);
-        jPanel9.setBounds(490, 430, 150, 80);
+        jPanel9.setBounds(470, 430, 150, 80);
 
-        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Jum'at", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 3, 14))); // NOI18N
+        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Jum'at", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -243,15 +243,16 @@ public class jadwaldokter extends javax.swing.JFrame {
         getContentPane().add(jPanel14);
         jPanel14.setBounds(80, 530, 150, 70);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Kamis", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 3, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Kamis", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(119, 119, 119))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,14 +262,14 @@ public class jadwaldokter extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(670, 430, 130, 76);
+        jPanel3.setBounds(650, 430, 150, 76);
 
         jLabel8.setFont(new java.awt.Font("Trajan Pro", 1, 26)); // NOI18N
         jLabel8.setText("praktek");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(80, 380, 150, 27);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sabtu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 3, 14))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sabtu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -287,7 +288,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         getContentPane().add(jPanel4);
         jPanel4.setBounds(270, 530, 160, 70);
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Minggu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 3, 14))); // NOI18N
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Minggu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -304,7 +305,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel6);
-        jPanel6.setBounds(490, 530, 150, 71);
+        jPanel6.setBounds(470, 530, 150, 71);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismajadwaldokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton1.setText("Back");

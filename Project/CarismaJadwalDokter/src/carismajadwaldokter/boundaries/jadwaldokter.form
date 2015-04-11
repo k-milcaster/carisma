@@ -29,7 +29,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Data Dokter">
-              <Font PropertyName="font" name="Agency FB" size="14" style="3"/>
+              <Font PropertyName="font" name="Calibri" size="14" style="3"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -110,7 +110,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel5"/>
+            <Property name="text" type="java.lang.String" value="No. HP"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
@@ -140,7 +140,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Foto">
-              <Font PropertyName="font" name="Agency FB" size="14" style="3"/>
+              <Font PropertyName="font" name="Calibri" size="14" style="3"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -203,7 +203,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Selasa">
-              <Font PropertyName="font" name="Agency FB" size="14" style="3"/>
+              <Font PropertyName="font" name="Calibri" size="14" style="3"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -249,7 +249,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Senin">
-              <Font PropertyName="font" name="Agency FB" size="14" style="3"/>
+              <Font PropertyName="font" name="Calibri" size="14" style="3"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -295,14 +295,14 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Rabu">
-              <Font PropertyName="font" name="Agency FB" size="14" style="3"/>
+              <Font PropertyName="font" name="Calibri" size="14" style="3"/>
             </TitledBorder>
           </Border>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="490" y="430" width="150" height="-1"/>
+          <AbsoluteConstraints x="470" y="430" width="150" height="-1"/>
         </Constraint>
       </Constraints>
 
@@ -341,7 +341,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Jum&apos;at">
-              <Font PropertyName="font" name="Agency FB" size="14" style="3"/>
+              <Font PropertyName="font" name="Calibri" size="14" style="3"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -378,14 +378,14 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Kamis">
-              <Font PropertyName="font" name="Agency FB" size="14" style="3"/>
+              <Font PropertyName="font" name="Calibri" size="14" style="3"/>
             </TitledBorder>
           </Border>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="670" y="430" width="130" height="-1"/>
+          <AbsoluteConstraints x="650" y="430" width="150" height="-1"/>
         </Constraint>
       </Constraints>
 
@@ -393,8 +393,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTextField11" min="-2" pref="99" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -430,7 +431,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Sabtu">
-              <Font PropertyName="font" name="Agency FB" size="14" style="3"/>
+              <Font PropertyName="font" name="Calibri" size="14" style="3"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -467,14 +468,14 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Minggu">
-              <Font PropertyName="font" name="Agency FB" size="14" style="3"/>
+              <Font PropertyName="font" name="Calibri" size="14" style="3"/>
             </TitledBorder>
           </Border>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="490" y="530" width="150" height="-1"/>
+          <AbsoluteConstraints x="470" y="530" width="150" height="-1"/>
         </Constraint>
       </Constraints>
 

@@ -40,4 +40,7 @@ public class ClientSocket {
         }
         
     }
+     public JadwaldokterService getJadwaldokterService(){
+        return this.melihatjadwaldokterService;
+    }
 }
