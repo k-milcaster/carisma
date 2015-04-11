@@ -56,4 +56,7 @@ public class ClientSocket {
     public ObatService getObatService(){
         return this.obatService;
     }
+    public TransaksijualobatService getTransaksijualobatService(){
+        return this.transaksijualobatService;
+    }
 }
