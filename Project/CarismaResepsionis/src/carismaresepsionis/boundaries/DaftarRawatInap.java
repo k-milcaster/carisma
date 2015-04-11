@@ -36,6 +36,8 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         e = No_tele.getText();
         f = TinggiPasien.getText();
         g = BeratPasien.getText();
+        h = Jenis_Kartu.getText();
+        i = No_Kartu.getText();
         j = Kamar.getText();
         k = KelasKamar.getText();
 
@@ -84,7 +86,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        Jenis_Kartu = new javax.swing.JTextField();
+        No_Kartu = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -141,7 +146,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         jScrollPane1.setViewportView(Alamat);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(631, 402, 685, 71);
+        jScrollPane1.setBounds(631, 423, 685, 50);
 
         No_Hp.setText("No_Telp");
         No_Hp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -358,7 +363,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
 
         jLabel2.setText("Alamat Tinggal");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(630, 380, 100, 14);
+        jLabel2.setBounds(630, 410, 100, 14);
 
         jLabel9.setText("Jenis Kelamin");
         getContentPane().add(jLabel9);
@@ -380,9 +385,41 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(jLabel13);
         jLabel13.setBounds(1220, 540, 25, 14);
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(0, 0, 1360, 690);
+        Jenis_Kartu.setText("Jenis Kartu");
+        Jenis_Kartu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Jenis_KartuMouseClicked(evt);
+            }
+        });
+        Jenis_Kartu.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Jenis_KartuFocusGained(evt);
+            }
+        });
+        getContentPane().add(Jenis_Kartu);
+        Jenis_Kartu.setBounds(740, 370, 230, 32);
+
+        No_Kartu.setText("Nomor_Kartu");
+        No_Kartu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                No_KartuMouseClicked(evt);
+            }
+        });
+        No_Kartu.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                No_KartuFocusGained(evt);
+            }
+        });
+        getContentPane().add(No_Kartu);
+        No_Kartu.setBounds(1085, 370, 230, 32);
+
+        jLabel15.setText("Jenis Kartu");
+        getContentPane().add(jLabel15);
+        jLabel15.setBounds(630, 380, 80, 14);
+
+        jLabel16.setText("Nomor Kartu");
+        getContentPane().add(jLabel16);
+        jLabel16.setBounds(980, 380, 60, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -503,6 +540,31 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private void No_HpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_No_HpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_No_HpActionPerformed
+
+    private void Jenis_KartuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jenis_KartuMouseClicked
+        if (h.equals(Jenis_Kartu.getText())) {
+            Jenis_Kartu.setText("");
+        }
+    }//GEN-LAST:event_Jenis_KartuMouseClicked
+
+    private void Jenis_KartuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Jenis_KartuFocusGained
+        if (h.equals(Jenis_Kartu.getText())) {
+            Jenis_Kartu.setText("");
+        }
+    }//GEN-LAST:event_Jenis_KartuFocusGained
+
+    private void No_KartuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_No_KartuMouseClicked
+        if (i.equals(No_Kartu.getText())) {
+            No_Kartu.setText("");
+        }
+    }//GEN-LAST:event_No_KartuMouseClicked
+
+    private void No_KartuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_No_KartuFocusGained
+        if (i.equals(No_Kartu.getText())) {
+            No_Kartu.setText("");
+        }
+    }//GEN-LAST:event_No_KartuFocusGained
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alamat;
     private javax.swing.JTextField BeratPasien;
@@ -510,12 +572,14 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private javax.swing.JTextField CariPasien;
     private javax.swing.JButton Find;
     private javax.swing.JLabel ID;
+    private javax.swing.JTextField Jenis_Kartu;
     private javax.swing.JComboBox Jenis_Kelamin;
     private javax.swing.JTextField Kamar;
     private javax.swing.JTextField KelasKamar;
     private javax.swing.JComboBox Kota;
     private javax.swing.JTextField Nama_Pasien;
     private javax.swing.JTextField No_Hp;
+    private javax.swing.JTextField No_Kartu;
     private javax.swing.JTextField No_tele;
     private javax.swing.JComboBox Provinsi;
     private javax.swing.JTable TabelPasien;
@@ -533,7 +597,8 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
