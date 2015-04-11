@@ -1,7 +1,9 @@
 package carismaapoteker.boundaries;
 
 import carismaapoteker.controller.ClientSocket;
+import carismaapoteker.controller.TransaksiJualObatController;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -251,7 +253,17 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        if ((fieldIdOfSales.getText().equals("")||fieldDescription.getText().equals(""))){
+            JOptionPane.showMessageDialog(null, "Field yang anda isi tidak lengkap","Peringatan",JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            try {
+                TransaksiJualObatController transaksijual = new TransaksiJualObatController(Client);
+                
+                
+            } catch (Exception e) {
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
