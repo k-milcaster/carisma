@@ -1,5 +1,7 @@
 package carismaresepsionis.boundaries;
 
+import carismainterface.entity.Pasien;
+import carismainterface.entity.PasienKamar;
 import carismaresepsionis.controller.ClientSocket;
 
 /**
@@ -172,6 +174,11 @@ public class Rawatinap extends javax.swing.JFrame {
         jLabel2.setBounds(20, 30, 360, 50);
 
         tombolCari.setText("CARI");
+        tombolCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolCariActionPerformed(evt);
+            }
+        });
         getContentPane().add(tombolCari);
         tombolCari.setBounds(350, 130, 57, 40);
 
@@ -210,6 +217,15 @@ public class Rawatinap extends javax.swing.JFrame {
     private void idpasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idpasienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idpasienActionPerformed
+
+    private void tombolCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolCariActionPerformed
+        Pasien model = (Pasien)tablepasien.getModel();  
+        String query=null;  
+        query="lower(nama) like '%"+ carnampas.getText()+"%' ";  
+        model.setNamaPasien(query);  
+        //if(model.getNamaPasien() > 0){ tablepasien.setRowSelectionInterval(0,0);}  
+        tablepasien.getModel(); 
+    }//GEN-LAST:event_tombolCariActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField carnampas;
