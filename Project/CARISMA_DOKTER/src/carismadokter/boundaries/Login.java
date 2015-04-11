@@ -87,7 +87,7 @@ public class Login extends javax.swing.JFrame {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (success) {
-                new IsiRekamMedis(this.client, username.getText()).show();
+                new isirekammedis(this.client, username.getText()).show();
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "User Name atau Password anda salah!");

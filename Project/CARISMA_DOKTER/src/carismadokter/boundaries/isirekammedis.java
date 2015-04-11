@@ -4,6 +4,7 @@ import carismadokter.controller.ClientSocket;
 import carismadokter.controller.DetailResepController;
 import carismadokter.controller.IsiRekamMedisController;
 import carismadokter.controller.LoginController;
+import carismadokter.controller.PenyakitRekamMedis;
 import carismadokter.controller.ResepController;
 import carismainterface.server.UserService;
 import java.awt.Color;
@@ -11,6 +12,7 @@ import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,8 +22,8 @@ public class isirekammedis extends javax.swing.JFrame {
     private ClientSocket client;
     private UserService login;
     private String username;
-    private String idRekamMedis;
-    private String idDokter;
+    private String idRekamMedis = "REK001";
+    private String idDokter = "DOK";
     private String idPasien;
     private String idResep;
     private String idDetailResep;
@@ -482,6 +484,11 @@ public class isirekammedis extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426717487_save.png"))); // NOI18N
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
@@ -722,6 +729,26 @@ public class isirekammedis extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_textAreaKondisiPasienMouseMoved
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (fieldIdPasien.getText().equals("") || textAreaKeluhan.getText().equals("") || textAreaPemeriksaan.getText().equals("") || 
+            textAreaTerapi.getText().equals("") || textAreaAlergiObat.getText().equals("") || textAreaKesimpulan.getText().equals("") ||
+            textAreaKondisiPasien.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Isi Data Rekam Medis dengan Lengkap", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else {
+            try {
+                IsiRekamMedisController rekamMedisController = new IsiRekamMedisController(client);
+                PenyakitRekamMedis penyakitRekamMedisController = new PenyakitRekamMedis(client);
+                rekamMedisController.insertRekamMedis(idRekamMedis, idDokter, idPasien, String.valueOf(new Date(dateRekamMedis.getDate().getTime())), 
+                                                      textAreaKeluhan.getText(), textAreaPemeriksaan.getText(), textAreaTerapi.getText(), textAreaAlergiObat.getText(), 
+                                                      textAreaKesimpulan.getText(), textAreaKondisiPasien.getText(), idResep);
+                penyakitRekamMedisController.insertRekamMedisPenyakit(idRekamMedis, "A001");
+                JOptionPane.showMessageDialog(null, "Data Rekam Medis Sudah Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonSimpanResep;
