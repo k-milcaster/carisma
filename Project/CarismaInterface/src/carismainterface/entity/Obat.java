@@ -32,6 +32,7 @@ public class Obat implements Serializable {
 
     @Column(name = "hargajual_obat")
     private Integer hargajualObat;
+    private Integer stokkritisObat;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -116,6 +117,14 @@ public class Obat implements Serializable {
 
     public void setHargajualObat(Integer hargajualObat) {
         this.hargajualObat = hargajualObat;
+    }
+
+    public Integer getStokkritisObat() {
+        return stokkritisObat;
+    }
+
+    public void setStokkritisObat(Integer stokkritisObat) {
+        this.stokkritisObat = stokkritisObat;
     }
 
     @XmlTransient
