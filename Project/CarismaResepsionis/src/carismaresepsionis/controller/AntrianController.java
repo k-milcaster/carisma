@@ -28,8 +28,8 @@ public class AntrianController {
         list = antrian.getAntrian();
         DefaultTableModel tabel = new DefaultTableModel();
         tabel.addColumn("Id Antrian");
-        tabel.addColumn("Pasien id_pasien");
-        tabel.addColumn("Dokter id_dokter");
+        tabel.addColumn("Id_pasien");
+        tabel.addColumn("Id_dokter");
         tabel.addColumn("Nomor Antrian");
         tabel.addColumn("Jenis Antrian");
         tabel.addColumn("Tanggal Antrian");
