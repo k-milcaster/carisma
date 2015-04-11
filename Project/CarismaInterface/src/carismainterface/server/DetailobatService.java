@@ -17,6 +17,8 @@ public interface DetailobatService extends Remote {
     void deleteDetailobat(int iddetailobat) throws RemoteException;
 
     Detailobat getDetailobat(int iddetailobat) throws RemoteException;
+    
+    Detailobat getDetailobatbyIdObat(int idobat) throws RemoteException;
 
     List<Detailobat> getDetailobat() throws RemoteException;
 }
