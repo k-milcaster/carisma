@@ -255,7 +255,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if ((fieldIdOfSales.getText().equals("")||fieldDescription.getText().equals(""))){
+        if ((fieldIdOfSales.getText().equals("")||fieldDescription.getText().equals("")||jTextField1.getText().equals(""))){
             JOptionPane.showMessageDialog(null, "Field yang anda isi tidak lengkap","Peringatan",JOptionPane.WARNING_MESSAGE);
         }
         else{
