@@ -23,19 +23,48 @@ public class StokObat extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
     private ObatService os;
+  
+    
     private DefaultTableModel tableObat = new DefaultTableModel();
+  
     
     public StokObat(ClientSocket Client, String userName) throws RemoteException {
-        
+    //    
         this.client = Client;
         StokObatController control = new StokObatController(this.client);
+        os = client.getObatService();
         this.userName = userName;
-        //labelApotekerName.setText(this.userName);
         initComponents();
+        labelApotekerName.setText(this.userName);
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         
         control.getObats(this);
+       
+       tableMedicine.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+            public void valueChanged(ListSelectionEvent e) {
+                int row = tableMedicine.getSelectedRow();
+                 if(row != -1){
+                    try {
+                        Obat selected = new Obat(os.getObat(tableMedicine.getValueAt(row, 0).toString()));
+                        fieldIdMedicine.setText(selected.getIdObat().toString());
+                        fieldMedicineName.setText(selected.getNamaObat());
+                        fieldQuantity.setText(selected.getQtyObat().toString());
+                        fieldMedicineType.setText(selected.getJenisObat());
+                        fieldDescribtion.setText(selected.getKeterangan());
+                        fieldPrice.setText(selected.getHargajualObat().toString());
+                        if (selected.getStokkritisObat() != null) {
+                            fieldStokKritis.setText(selected.getStokkritisObat()+"");
+                        }                        
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                  fieldIdMedicine.getText();
+                  
+                 }
+            }
+       });
     }
 
     @SuppressWarnings("unchecked")
@@ -61,8 +90,6 @@ public class StokObat extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         fieldDescribtion = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        dateExpired = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
         fieldStokKritis = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -202,20 +229,13 @@ public class StokObat extends javax.swing.JFrame {
         fieldDescribtion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldDescribtion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Tanggal Kadaluarsa");
-
-        dateExpired.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
-        dateExpired.setDateFormatString("yyyy-MM-dd");
-        dateExpired.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Stok Kritis");
 
         fieldStokKritis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldStokKritis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
-        jButton1.setText("Update");
+        jButton1.setText("Update Stok Kritis");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -246,47 +266,42 @@ public class StokObat extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(fieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(57, 57, 57)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13))
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dateExpired, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                            .addComponent(fieldStokKritis)))
-                    .addComponent(jButton1))
-                .addContainerGap(68, Short.MAX_VALUE))
+                        .addGap(333, 333, 333)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fieldStokKritis, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(fieldIdMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(fieldMedicineType, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel11))
-                    .addComponent(dateExpired, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(fieldIdMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldMedicineType, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel13)
+                    .addComponent(fieldStokKritis, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fieldMedicineName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel9)
                     .addComponent(fieldDescribtion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(fieldStokKritis, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(fieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
                         .addComponent(jLabel10))
-                    .addComponent(fieldPrice)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(fieldPrice))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -308,7 +323,7 @@ public class StokObat extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(10, 255, 1346, 206);
+        jPanel3.setBounds(10, 255, 1346, 207);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Apoteker :");
@@ -385,7 +400,6 @@ public class StokObat extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldSearchActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser dateExpired;
     private javax.swing.JTextField fieldDescribtion;
     private javax.swing.JTextField fieldIdMedicine;
     private javax.swing.JTextField fieldMedicineName;
@@ -396,7 +410,6 @@ public class StokObat extends javax.swing.JFrame {
     private javax.swing.JTextField fieldStokKritis;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
