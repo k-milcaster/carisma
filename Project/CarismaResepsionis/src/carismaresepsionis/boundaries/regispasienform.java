@@ -5,7 +5,6 @@ import carismaresepsionis.controller.regispasiencontroller;
 import java.rmi.RemoteException;
 import java.util.Date;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Fiqhi Darmawan

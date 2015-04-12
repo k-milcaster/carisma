@@ -2,10 +2,15 @@ package carismaresepsionis.boundaries;
 
 import carismainterface.entity.Pasien;
 import carismainterface.entity.Kamar;
+import carismainterface.server.*;
 import carismaresepsionis.controller.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,13 +19,17 @@ import java.util.logging.Logger;
 public class Rawatinap extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
-    public Rawatinap(ClientSocket client, String userName) {
+    private PasienService ps;
+    private DefaultTableModel tablePasien = new DefaultTableModel();
+    
+    public Rawatinap(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
+        RawatinapController control = new RawatinapController(this.client);
+        ps = client.getPasienService();
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-
-        //   tanggalkustom();
+        //control.getNamaPasien();
     }
 
 //    void awalan
@@ -41,7 +50,6 @@ public class Rawatinap extends javax.swing.JFrame {
         namaKamar = new javax.swing.JTextField();
         ok = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        tombolCari = new javax.swing.JButton();
         tarif = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -98,14 +106,29 @@ public class Rawatinap extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(426, 133, 452, 40);
 
+        carnampas.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        carnampas.setForeground(new java.awt.Color(204, 204, 204));
         carnampas.setText("Cari Nama Pasien");
         carnampas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 carnampasActionPerformed(evt);
             }
         });
+        carnampas.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                carnampasFocusLost(evt);
+            }
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                carnampasFocusGained(evt);
+            }
+        });
+        carnampas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                carnampasKeyReleased(evt);
+            }
+        });
         getContentPane().add(carnampas);
-        carnampas.setBounds(10, 130, 330, 40);
+        carnampas.setBounds(10, 130, 410, 40);
 
         tablepasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -186,15 +209,6 @@ public class Rawatinap extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(20, 30, 360, 50);
 
-        tombolCari.setText("CARI");
-        tombolCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tombolCariActionPerformed(evt);
-            }
-        });
-        getContentPane().add(tombolCari);
-        tombolCari.setBounds(350, 130, 57, 40);
-
         tarif.setText("Tarif ");
         tarif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,22 +238,20 @@ public class Rawatinap extends javax.swing.JFrame {
     }//GEN-LAST:event_tarifActionPerformed
 
     private void carnampasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carnampasActionPerformed
-        // TODO add your handling code here:
+       if (evt.getSource() instanceof JTextField) {
+            
+        }
     }//GEN-LAST:event_carnampasActionPerformed
 
     private void idpasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idpasienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idpasienActionPerformed
-
-    private void tombolCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolCariActionPerformed
-        Pasien model = (Pasien)tablepasien.getModel();  
+ /*Pasien model = (Pasien)tablepasien.getModel();  
         String query=null;  
         query="lower(nama) like '%"+ carnampas.getText()+"%' ";  
         model.setNamaPasien(query);  
         //if(model.getNamaPasien() > 0){ tablepasien.setRowSelectionInterval(0,0);}  
-        tablepasien.setValueAt(model, WIDTH, WIDTH); 
-    }//GEN-LAST:event_tombolCariActionPerformed
-
+        tablepasien.setValueAt(model, WIDTH, WIDTH);*/ 
     private void tablepasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepasienMouseClicked
         RawatinapController ambilData;
         try {
@@ -278,6 +290,26 @@ public class Rawatinap extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tablelistkamarpasienMouseClicked
 
+    private void carnampasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_carnampasFocusGained
+        if (carnampas.getText().equals("Cari Nama Pasien")) {
+            carnampas.setText("");
+        }
+    }//GEN-LAST:event_carnampasFocusGained
+
+    private void carnampasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_carnampasFocusLost
+        if (carnampas.getText().equals("")) {
+            carnampas.setText("Cari Nama Pasien");
+            carnampas.setForeground(Color.gray);
+            carnampas.setFont(new Font("Tahoma", 2, 12));
+        }
+        
+    }//GEN-LAST:event_carnampasFocusLost
+
+    private void carnampasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_carnampasKeyReleased
+        carnampas.setForeground(Color.black);
+        carnampas.setFont(new Font("Tahoma", 0, 12));
+    }//GEN-LAST:event_carnampasKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField NamaPenyakitpasien;
     private javax.swing.JTextField carnampas;
@@ -296,6 +328,5 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JTable tablelistkamarpasien;
     private javax.swing.JTable tablepasien;
     private javax.swing.JTextField tarif;
-    private javax.swing.JButton tombolCari;
     // End of variables declaration//GEN-END:variables
 }

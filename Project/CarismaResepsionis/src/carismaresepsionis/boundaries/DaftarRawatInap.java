@@ -296,6 +296,11 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         jScrollPane2.setBounds(45, 155, 558, 444);
 
         Find.setText("CARI");
+        Find.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FindActionPerformed(evt);
+            }
+        });
         getContentPane().add(Find);
         Find.setBounds(508, 105, 95, 32);
 
@@ -564,6 +569,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
             No_Kartu.setText("");
         }
     }//GEN-LAST:event_No_KartuFocusGained
+
+    private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FindActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alamat;
