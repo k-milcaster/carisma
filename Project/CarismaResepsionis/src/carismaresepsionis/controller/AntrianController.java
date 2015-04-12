@@ -5,7 +5,11 @@
 package carismaresepsionis.controller;
 
 import carismainterface.entity.Antrian;
+import carismainterface.entity.Dokter;
+import carismainterface.entity.Pasien;
 import carismainterface.server.AntrianService;
+import carismainterface.server.DokterService;
+import carismainterface.server.PasienService;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +21,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AntrianController {
     private AntrianService antrianService;
+    private PasienService pasienService;
+    private DokterService dokterService;
    
     public AntrianController(ClientSocket client) throws RemoteException{
         this.antrianService = client.getAntrianService();
+        this.dokterService = client.getDokterService();
+        this.pasienService = client.getPasienService();
         
                                 
     }
@@ -34,6 +42,16 @@ public class AntrianController {
         antrian.setHadir(hadir);
         antrianService.insertAntrian(antrian);
     
+    }
+    public String getIdPasien(){
+        Pasien pasien = new Pasien();
+        String idPasien = pasien.getIdPasien();
+        return idPasien;
+    }
+    public String getIdDokter(){
+        Dokter dokter = new Dokter();
+        String idDokter = dokter.getIdDokter();
+        return idDokter;
     }
 
 }
