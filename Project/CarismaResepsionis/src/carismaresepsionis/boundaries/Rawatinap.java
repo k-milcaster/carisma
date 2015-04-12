@@ -1,7 +1,7 @@
 package carismaresepsionis.boundaries;
 
 import carismainterface.entity.Pasien;
-import carismainterface.entity.PasienKamar;
+import carismainterface.entity.Kamar;
 import carismaresepsionis.controller.*;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
@@ -239,13 +239,15 @@ public class Rawatinap extends javax.swing.JFrame {
         RawatinapController ambilData;
         try {
             ambilData = new RawatinapController (client);
-            Pasien model = (Pasien)tablelistkamarpasien.getModel(); 
+            Kamar model = (Kamar)tablelistkamarpasien.getModel();
+            tablelistkamarpasien.setValueAt(model, WIDTH, WIDTH);
             int row = tablepasien.getSelectedRow();
             String namaPasien = " ";
             namaPasien = String.valueOf(tablepasien.getValueAt(row, 0));
             idpasien.setText(ambilData.getIdPasien());
             namapasien.setText(ambilData.getNamaPasien());
             NamaPenyakitpasien.setText(ambilData.getNamaPenyakit());
+            
             
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
