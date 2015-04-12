@@ -29,7 +29,7 @@ public class StokObat extends javax.swing.JFrame {
   
     
     public StokObat(ClientSocket Client, String userName) throws RemoteException {
-        
+    //    
         this.client = Client;
         StokObatController control = new StokObatController(this.client);
         os = client.getObatService();
@@ -235,7 +235,7 @@ public class StokObat extends javax.swing.JFrame {
         fieldStokKritis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldStokKritis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
-        jButton1.setText("Update");
+        jButton1.setText("Update Stok Kritis");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -275,7 +275,7 @@ public class StokObat extends javax.swing.JFrame {
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(fieldStokKritis, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +323,7 @@ public class StokObat extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(10, 255, 1346, 206);
+        jPanel3.setBounds(10, 255, 1346, 207);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Apoteker :");
