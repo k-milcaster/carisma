@@ -45,7 +45,7 @@ public class ClientSocket {
             detailResepService = (DetailresepService) registry.lookup("detailresepRequest");
             rekamMedisPenyakit = (RekammedikpenyakitService) registry.lookup("rekammedikpenyakitRequest");
             obatService = (ObatService) registry.lookup("obatRequest");
-           // penyakitService = (PenyakitService) registry.lookup("penyakitRequest");
+            penyakitService = (PenyakitService) registry.lookup("penyakitRequest");
             dokterService = (DokterService) registry.lookup("dokterRequest");
         } catch (RemoteException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,9 +78,9 @@ public class ClientSocket {
         return obatService;
     }
     
-//    public PenyakitService getPenyakitService(){
-//        return penyakitService;
-//    }
+    public PenyakitService getPenyakitService(){
+        return penyakitService;
+    }
 
     public DokterService getDokterService(){
         return dokterService;
