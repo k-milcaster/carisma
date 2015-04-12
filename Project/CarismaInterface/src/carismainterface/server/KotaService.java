@@ -11,11 +11,7 @@ import java.util.List;
  */
 public interface KotaService extends Remote {
 
-    void insertKota(Kota kota) throws RemoteException;
-
-    void deleteKota(String kota) throws RemoteException;
-
-    Kota getKota(String kota) throws RemoteException;
+    Kota getKota(String idkota) throws RemoteException;
 
     List<Kota> getKota() throws RemoteException;
 }
