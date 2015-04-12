@@ -23,10 +23,10 @@ public class isirekammedis extends javax.swing.JFrame {
     private UserService login;
     private String username;
     private String idRekamMedis = "REK001";
-    private String idDokter = "DOK";
-    private String idPasien;
-    private String idResep;
-    private String idDetailResep;
+    private String idDokter = "DOK001";
+    private String idPasien = "PAS002";
+    private String idResep = "RES001";
+    private String idDetailResep = "DR0001";
 
     public isirekammedis(ClientSocket client, final String username) {
         this.client = client;

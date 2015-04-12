@@ -10,15 +10,11 @@ When	Saya memilih menu penjulan obat
 
 Then	Saya masuk pada menu transaksi penjualan obat
 
-And	Saya memilih no ID pasien pada Jcombo Box
-
 And	Saya memasukkan tanggal jual obat
 
 When	Saya memasukkan obat pasien
 
 Then	Harga obat ditampilkan sesuai dengan obat yang saya masukkan
-
-And	Menmpilkan total biaya yang harus dibayar oleh pasien
 And	Saya melakukan penyiapan dan peracikan obat dan pemberian label pada obat
 
 When	Saya memilih tombol simpan
