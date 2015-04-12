@@ -42,7 +42,7 @@ public class IsiRekamMedisController {
         rekamMedisPenyakitService = client.getRekamMedisPenyakitService();
         resepService = client.getResepService();
         obatService = client.getObatService();
-       // penyakitService = client.getPenyakitService();
+        penyakitService = client.getPenyakitService();
         dokterService = client.getDokterService();
     }
     
@@ -90,13 +90,13 @@ public class IsiRekamMedisController {
         }               
     }
     
-//    public void getNamaPenyakit(isirekammedis ui) throws RemoteException{
-//        List<Penyakit> list = new ArrayList<Penyakit>();
-//        list = penyakitService.getPenyakit();
-//        for (int i = 0; i < list.size(); i++) {            
-//            ui.comboBoxPenyakit.addItem(list.get(i).getNamaPenyakit());
-//        }
-//    }
+    public void getNamaPenyakit(isirekammedis ui) throws RemoteException{
+        List<Penyakit> list = new ArrayList<Penyakit>();
+        list = penyakitService.getPenyakit();
+        for (int i = 0; i < list.size(); i++) {            
+            ui.comboBoxPenyakit.addItem(list.get(i).getNamaPenyakit());
+        }
+    }
     
     public String getIdDokter(String userName) throws RemoteException{
         String idDokter = dokterService.getIdDokter(userName);
