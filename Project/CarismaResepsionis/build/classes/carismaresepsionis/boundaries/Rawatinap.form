@@ -74,6 +74,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablelistkamarpasienMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -175,7 +178,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="typekamar">
+    <Component class="javax.swing.JTextField" name="kelasKamar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Kelas Kamar"/>
       </Properties>
@@ -185,7 +188,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="nokamar">
+    <Component class="javax.swing.JTextField" name="namaKamar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nama Kamar"/>
       </Properties>

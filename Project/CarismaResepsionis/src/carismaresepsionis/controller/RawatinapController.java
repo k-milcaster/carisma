@@ -48,10 +48,11 @@ public class RawatinapController {
         String KelasKamar = kamar.getKelas();
         return KelasKamar;
     }
-    public int getTarifKamar(){
+    public String getTarifKamar(){
         Kamar kamar = new Kamar();
         int TarifKamar = kamar.getTarif();
-        return TarifKamar;
+        String gantiParameterTarif = String.valueOf(TarifKamar);
+        return gantiParameterTarif;
     }
     
     

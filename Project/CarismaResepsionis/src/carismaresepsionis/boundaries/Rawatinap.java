@@ -37,8 +37,8 @@ public class Rawatinap extends javax.swing.JFrame {
         idpasien = new javax.swing.JTextField();
         namapasien = new javax.swing.JTextField();
         NamaPenyakitpasien = new javax.swing.JTextField();
-        typekamar = new javax.swing.JTextField();
-        nokamar = new javax.swing.JTextField();
+        kelasKamar = new javax.swing.JTextField();
+        namaKamar = new javax.swing.JTextField();
         ok = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         tombolCari = new javax.swing.JButton();
@@ -82,6 +82,11 @@ public class Rawatinap extends javax.swing.JFrame {
                 "Nama Kamar", "Kelas Kamar", "Tarif", "Fasilitas"
             }
         ));
+        tablelistkamarpasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablelistkamarpasienMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablelistkamarpasien);
 
         getContentPane().add(jScrollPane1);
@@ -161,13 +166,13 @@ public class Rawatinap extends javax.swing.JFrame {
         getContentPane().add(NamaPenyakitpasien);
         NamaPenyakitpasien.setBounds(990, 270, 360, 31);
 
-        typekamar.setText("Kelas Kamar");
-        getContentPane().add(typekamar);
-        typekamar.setBounds(990, 370, 170, 32);
+        kelasKamar.setText("Kelas Kamar");
+        getContentPane().add(kelasKamar);
+        kelasKamar.setBounds(990, 370, 170, 32);
 
-        nokamar.setText("Nama Kamar");
-        getContentPane().add(nokamar);
-        nokamar.setBounds(990, 330, 170, 32);
+        namaKamar.setText("Nama Kamar");
+        getContentPane().add(namaKamar);
+        namaKamar.setBounds(990, 330, 170, 32);
 
         ok.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428228446_ok.png"))); // NOI18N
@@ -250,10 +255,28 @@ public class Rawatinap extends javax.swing.JFrame {
             
             
         } catch (RemoteException ex) {
-            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, "ada salah disini", ex);
         }
         
     }//GEN-LAST:event_tablepasienMouseClicked
+
+    private void tablelistkamarpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistkamarpasienMouseClicked
+        RawatinapController ambilData;
+        try {
+            ambilData = new RawatinapController (client);
+            
+            int row = tablelistkamarpasien.getSelectedRow();
+            String listKamar = " ";
+            listKamar = String.valueOf(tablelistkamarpasien.getValueAt(row, 0));
+            namaKamar.setText(ambilData.getNamaKamar());
+            kelasKamar.setText(ambilData.getKelasKamar());
+            tarif.setText(ambilData.getTarifKamar());
+            
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, "ada salah disini", ex);
+        }
+    }//GEN-LAST:event_tablelistkamarpasienMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField NamaPenyakitpasien;
@@ -266,13 +289,13 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField kelasKamar;
+    private javax.swing.JTextField namaKamar;
     private javax.swing.JTextField namapasien;
-    private javax.swing.JTextField nokamar;
     private javax.swing.JButton ok;
     private javax.swing.JTable tablelistkamarpasien;
     private javax.swing.JTable tablepasien;
     private javax.swing.JTextField tarif;
     private javax.swing.JButton tombolCari;
-    private javax.swing.JTextField typekamar;
     // End of variables declaration//GEN-END:variables
 }
