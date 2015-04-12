@@ -51,7 +51,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertRekammedik Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -79,6 +79,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteRekamMedik Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -116,7 +117,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             return rm;
         } catch (SQLException exception) {
             ui.act.append("getgetRekamMedik Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -157,7 +158,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             return rms;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikByPasien Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -197,7 +198,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             return rms;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikBytahun Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -237,7 +238,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             return rms;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikByBulan Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -277,7 +278,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             return rms;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikByTahun Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -317,7 +318,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             return rms;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikList Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

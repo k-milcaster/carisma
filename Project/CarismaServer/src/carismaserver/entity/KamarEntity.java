@@ -53,7 +53,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertKamar Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -85,6 +85,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
 
         } catch (SQLException e) {
             ui.act.append("UpdateKamar Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -106,6 +107,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteKamar Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -139,7 +141,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
             return kamar;
         } catch (SQLException exception) {
             ui.act.append("getKamar Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -178,6 +180,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
 
         } catch (SQLException exception) {
             ui.act.append("getKamarList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

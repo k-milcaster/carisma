@@ -46,6 +46,7 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertDetailresep Error \n");
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -80,6 +81,7 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
             return list;
         } catch (SQLException exception) {
             ui.act.append("getDetaiResep Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -116,6 +118,7 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
             return list;
         } catch (SQLException exception) {
             ui.act.append("getDetailresepByPasien \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

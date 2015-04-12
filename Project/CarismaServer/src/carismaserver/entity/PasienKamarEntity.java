@@ -52,7 +52,7 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertPasienKamar Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -83,6 +83,7 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
 
         } catch (SQLException e) {
             ui.act.append("UpdatePasienKamar Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -104,6 +105,7 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deletePasienKamar Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -136,7 +138,7 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
             return pasienKamar;
         } catch (SQLException exception) {
             ui.act.append("getPasienKamar Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -174,6 +176,7 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
 
         } catch (SQLException exception) {
             ui.act.append("getPasienKamarList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

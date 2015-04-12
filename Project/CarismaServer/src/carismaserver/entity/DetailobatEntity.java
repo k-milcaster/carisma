@@ -49,6 +49,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertDetailobat Error \n");
+            ui.act.append(exception.toString());
             exception.printStackTrace();
         } finally {
             if (statement != null) {
@@ -79,6 +80,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
 
         } catch (SQLException e) {
             ui.act.append("UpdateDetailobat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -100,6 +102,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteDetailobat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -130,7 +133,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
             return detailobat;
         } catch (SQLException exception) {
             ui.act.append("getDetailobat Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -166,6 +169,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
 
         } catch (SQLException exception) {
             ui.act.append("getDetailobatList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -197,7 +201,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
             return detailobat;
         } catch (SQLException exception) {
             ui.act.append("getDetailobat Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

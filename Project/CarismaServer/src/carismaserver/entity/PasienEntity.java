@@ -56,6 +56,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertPasien Error \n");
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -95,6 +96,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("UpdatePasien Error \n");
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -117,6 +119,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deletePasien Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -160,6 +163,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             return pasi;
         } catch (SQLException exception) {
             ui.act.append("getPasien Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -205,6 +209,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             return list;
         } catch (SQLException exception) {
             ui.act.append("getPasienList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -250,6 +255,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             return list;
         } catch (SQLException exception) {
             ui.act.append("getPasienListByName Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

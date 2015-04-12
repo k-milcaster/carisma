@@ -39,6 +39,7 @@ public class ResepEntity extends UnicastRemoteObject implements ResepService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertResep Error \n");
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {

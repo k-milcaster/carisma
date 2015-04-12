@@ -49,6 +49,7 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertKunjungan Error \n");
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -85,6 +86,7 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             return list;
         } catch (SQLException exception) {
             ui.act.append("getKunjunganByPasien Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -119,6 +121,7 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             return kunjungan;
         } catch (SQLException exception) {
             ui.act.append("getKunjungan Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -155,6 +158,7 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             return list;
         } catch (SQLException exception) {
             ui.act.append("getKunjunganByPasien Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

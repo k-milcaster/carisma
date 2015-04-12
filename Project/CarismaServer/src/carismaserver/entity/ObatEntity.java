@@ -49,7 +49,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertObat Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -82,6 +82,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
 
         } catch (SQLException e) {
             ui.act.append("UpdateObat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -103,6 +104,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteObat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -137,7 +139,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             return obat;
         } catch (SQLException exception) {
             ui.act.append("getObat Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -212,7 +214,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             return obat;
         } catch (SQLException exception) {
             ui.act.append("getObatbyName Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

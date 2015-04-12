@@ -60,7 +60,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertDokter Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -107,6 +107,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 
         } catch (SQLException e) {
             ui.act.append("UpdateDokter Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -128,6 +129,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteDokter Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -172,7 +174,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             return dokter;
         } catch (SQLException exception) {
             ui.act.append("getDokter Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -221,6 +223,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 
         } catch (SQLException exception) {
             ui.act.append("getDokterList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -249,6 +252,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             return idDokter;
         } catch (SQLException e) {
             ui.act.append("getIdDokter Error\n");
+            ui.act.append(e.toString());
             return null;
         }finally{
             if (state != null) {

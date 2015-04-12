@@ -69,6 +69,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             }
         } catch (SQLException exception) {
             ui.act.append("userLogIn Error \n");
+            ui.act.append(exception.toString());
             return false;
         } finally {
             if (statement != null) {
@@ -112,6 +113,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertUser Error \n");
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -143,6 +145,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
 
         } catch (SQLException e) {
             ui.act.append("UpdateUser Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -164,6 +167,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteUser Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -198,7 +202,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             return users;
         } catch (SQLException exception) {
             ui.act.append("getUser Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -224,7 +228,8 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             statement.setString(2, userName);
             statement.executeUpdate();
         } catch (SQLException exception) {
-            System.out.println(exception.toString());
+            ui.act.append("updateLastLogIn Error \n");
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -263,8 +268,8 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             return list;
 
         } catch (SQLException exception) {
-            //ui.act.append("getCustomersList Error \n");
-            System.out.println(exception.toString());
+            ui.act.append("getUserList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

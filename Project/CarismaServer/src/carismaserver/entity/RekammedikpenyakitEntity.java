@@ -43,7 +43,7 @@ public class RekammedikpenyakitEntity extends UnicastRemoteObject implements Rek
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertRekammedikPenyakit Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -75,6 +75,7 @@ public class RekammedikpenyakitEntity extends UnicastRemoteObject implements Rek
             return list;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikPenyakit Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -97,6 +98,7 @@ public class RekammedikpenyakitEntity extends UnicastRemoteObject implements Rek
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteRekamMedikPenyakit Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
