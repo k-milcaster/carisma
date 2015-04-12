@@ -16,24 +16,23 @@ import javax.swing.table.DefaultTableModel;
  * @author Adinda
  */
 public class AntrianController {
-    private AntrianService antrian;
+    private AntrianService antrianService;
    
     public AntrianController(ClientSocket client) throws RemoteException{
-        this.antrian = client.getAntrianService();
-        Antrian antrian = new Antrian();
+        this.antrianService = client.getAntrianService();
+        
                                 
     }
-    public void lihatAntrian() throws RemoteException{
-     List<Antrian> list = new ArrayList<Antrian>();
-        list = antrian.getAntrian();
-        DefaultTableModel tabel = new DefaultTableModel();
-        tabel.addColumn("Id Antrian");
-        tabel.addColumn("Id_pasien");
-        tabel.addColumn("Id_dokter");
-        tabel.addColumn("Nomor Antrian");
-        tabel.addColumn("Jenis Antrian");
-        tabel.addColumn("Tanggal Antrian");
-        tabel.addColumn("Hadir");
+    public void insertAntrian(String id_antrian, String pasien_id_pasien,String dokter_id_dokter, int nomor_antrian, String jenis_antrian, String tanggal_antrian, String hadir) throws RemoteException {
+        Antrian antrian = new Antrian();
+        antrian.setIdAntrian(id_antrian);
+        antrian.setPasienIdPasien(pasien_id_pasien);
+        antrian.setDokterIdDokter(dokter_id_dokter);
+        antrian.setNomorAntrian(nomor_antrian);
+        antrian.setJenisAntrian(jenis_antrian);
+        antrian.setTglAntrian(tanggal_antrian);
+        antrian.setHadir(hadir);
+        antrianService.insertAntrian(antrian);
     
     }
 
