@@ -53,6 +53,7 @@ public class ServerSocket {
             TransaksibeliobatEntity transaksibeliobat = new TransaksibeliobatEntity(ui);
             TransaksijualobatEntity transaksijualobat = new TransaksijualobatEntity(ui);
             UserEntity user = new UserEntity(ui);
+            PenyakitEntity penyakit = new PenyakitEntity(ui);
 
             server.rebind("userRequest", user);
             server.rebind("antrianRequest", antrian);
@@ -76,6 +77,7 @@ public class ServerSocket {
             server.rebind("staffRequest", staff);
             server.rebind("transaksibeliobatRequest", transaksibeliobat);
             server.rebind("transaksijualobatRequest", transaksijualobat);
+            server.rebind("penyakitRequest", penyakit);
 
             ui.act.append("Server Started \n");
         } catch (RemoteException ex) {
