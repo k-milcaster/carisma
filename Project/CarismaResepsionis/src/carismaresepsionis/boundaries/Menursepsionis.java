@@ -1,6 +1,9 @@
 package carismaresepsionis.boundaries;
 
 import carismaresepsionis.controller.ClientSocket;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -191,7 +194,11 @@ public class Menursepsionis extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void RegisPasienRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienRegActionPerformed
-        new regispasienform(this.client, this.userName).show();
+        try {
+            new regispasienform(this.client, this.userName).show();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_RegisPasienRegActionPerformed
 
     private void RegisPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienInapActionPerformed
