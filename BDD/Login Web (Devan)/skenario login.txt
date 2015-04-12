@@ -1,0 +1,9 @@
+Skenario Login pada WEB Carisma
+
+Given 	: saya ingin melihat akun pribadi saya pada web carisma
+Then	: saya menekkan tombol login pada web carisma
+When	: setelah carisma web menampilkan halaman login
+Then	: saya menginputkan username dan password 
+And	: saya menekan tombol confirm
+When	: saya bisa melihat akun pribadi saya pada web carisma
+
