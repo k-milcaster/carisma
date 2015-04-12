@@ -43,7 +43,7 @@ public class StokObatController {
         ui.tableMedicine.setModel(model);
         return model;
     }
-        
+       
     }
    
 
