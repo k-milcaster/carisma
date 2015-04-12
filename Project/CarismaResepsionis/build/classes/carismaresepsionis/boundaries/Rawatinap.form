@@ -40,8 +40,8 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="25">
-                <Column editable="true" title="Block Nomor" type="java.lang.Object"/>
-                <Column editable="true" title="Type" type="java.lang.Object"/>
+                <Column editable="true" title="Nama Kamar" type="java.lang.Object"/>
+                <Column editable="true" title="Kelas Kamar" type="java.lang.Object"/>
                 <Column editable="true" title="Tarif" type="java.lang.Object"/>
                 <Column editable="true" title="Fasilitas" type="java.lang.Object"/>
               </Table>
@@ -136,6 +136,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablepasienMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -162,9 +165,9 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="kategoripenypasien">
+    <Component class="javax.swing.JTextField" name="NamaPenyakitpasien">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Kategori Penyakit Pasien"/>
+        <Property name="text" type="java.lang.String" value="Nama Penyakit"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -174,7 +177,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="typekamar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Type"/>
+        <Property name="text" type="java.lang.String" value="Kelas Kamar"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -184,7 +187,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="nokamar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Block Nomor"/>
+        <Property name="text" type="java.lang.String" value="Nama Kamar"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

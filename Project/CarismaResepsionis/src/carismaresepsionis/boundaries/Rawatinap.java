@@ -2,7 +2,10 @@ package carismaresepsionis.boundaries;
 
 import carismainterface.entity.Pasien;
 import carismainterface.entity.PasienKamar;
-import carismaresepsionis.controller.ClientSocket;
+import carismaresepsionis.controller.*;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,7 +36,7 @@ public class Rawatinap extends javax.swing.JFrame {
         tablepasien = new javax.swing.JTable();
         idpasien = new javax.swing.JTextField();
         namapasien = new javax.swing.JTextField();
-        kategoripenypasien = new javax.swing.JTextField();
+        NamaPenyakitpasien = new javax.swing.JTextField();
         typekamar = new javax.swing.JTextField();
         nokamar = new javax.swing.JTextField();
         ok = new javax.swing.JButton();
@@ -76,7 +79,7 @@ public class Rawatinap extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Block Nomor", "Type", "Tarif", "Fasilitas"
+                "Nama Kamar", "Kelas Kamar", "Tarif", "Fasilitas"
             }
         ));
         jScrollPane1.setViewportView(tablelistkamarpasien);
@@ -131,6 +134,11 @@ public class Rawatinap extends javax.swing.JFrame {
                 "Nama Pasien"
             }
         ));
+        tablepasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablepasienMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablepasien);
 
         getContentPane().add(jScrollPane2);
@@ -149,15 +157,15 @@ public class Rawatinap extends javax.swing.JFrame {
         getContentPane().add(namapasien);
         namapasien.setBounds(990, 230, 360, 32);
 
-        kategoripenypasien.setText("Kategori Penyakit Pasien");
-        getContentPane().add(kategoripenypasien);
-        kategoripenypasien.setBounds(990, 270, 360, 31);
+        NamaPenyakitpasien.setText("Nama Penyakit");
+        getContentPane().add(NamaPenyakitpasien);
+        NamaPenyakitpasien.setBounds(990, 270, 360, 31);
 
-        typekamar.setText("Type");
+        typekamar.setText("Kelas Kamar");
         getContentPane().add(typekamar);
         typekamar.setBounds(990, 370, 170, 32);
 
-        nokamar.setText("Block Nomor");
+        nokamar.setText("Nama Kamar");
         getContentPane().add(nokamar);
         nokamar.setBounds(990, 330, 170, 32);
 
@@ -224,10 +232,29 @@ public class Rawatinap extends javax.swing.JFrame {
         query="lower(nama) like '%"+ carnampas.getText()+"%' ";  
         model.setNamaPasien(query);  
         //if(model.getNamaPasien() > 0){ tablepasien.setRowSelectionInterval(0,0);}  
-        tablepasien.getModel(); 
+        tablepasien.setValueAt(model, WIDTH, WIDTH); 
     }//GEN-LAST:event_tombolCariActionPerformed
 
+    private void tablepasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepasienMouseClicked
+        RawatinapController ambilData;
+        try {
+            ambilData = new RawatinapController (client);
+            Pasien model = (Pasien)tablelistkamarpasien.getModel(); 
+            int row = tablepasien.getSelectedRow();
+            String namaPasien = " ";
+            namaPasien = String.valueOf(tablepasien.getValueAt(row, 0));
+            idpasien.setText(ambilData.getIdPasien());
+            namapasien.setText(ambilData.getNamaPasien());
+            NamaPenyakitpasien.setText(ambilData.getNamaPenyakit());
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_tablepasienMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField NamaPenyakitpasien;
     private javax.swing.JTextField carnampas;
     private javax.swing.JTextField idpasien;
     private javax.swing.JLabel jLabel1;
@@ -237,7 +264,6 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField kategoripenypasien;
     private javax.swing.JTextField namapasien;
     private javax.swing.JTextField nokamar;
     private javax.swing.JButton ok;
