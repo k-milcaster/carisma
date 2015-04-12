@@ -78,16 +78,18 @@ public class AbsensiPegawai extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Tanggal");
 
+        radioButtonTidak.setBackground(new java.awt.Color(255, 255, 255));
         radioButtonTidak.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        radioButtonTidak.setText("Tidak");
+        radioButtonTidak.setText("Lembur");
         radioButtonTidak.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 radioButtonTidakItemStateChanged(evt);
             }
         });
 
+        radioButtonYa.setBackground(new java.awt.Color(255, 255, 255));
         radioButtonYa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        radioButtonYa.setText("Ya");
+        radioButtonYa.setText("Reguler");
         radioButtonYa.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 radioButtonYaItemStateChanged(evt);
@@ -108,13 +110,13 @@ public class AbsensiPegawai extends javax.swing.JFrame {
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(comboBoxIdPegawai, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(jPanel1Layout.createSequentialGroup()
-                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jDateChooser1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(jPanel1Layout.createSequentialGroup()
                                 .add(radioButtonYa)
                                 .add(45, 45, 45)
-                                .add(radioButtonTidak))
-                            .add(jDateChooser1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 180, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(0, 93, Short.MAX_VALUE)))
+                                .add(radioButtonTidak)))
+                        .add(0, 84, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(

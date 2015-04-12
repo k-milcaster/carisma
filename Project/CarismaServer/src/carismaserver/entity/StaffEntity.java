@@ -66,7 +66,7 @@ public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertUser Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -113,6 +113,7 @@ public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
 
         } catch (SQLException e) {
             ui.act.append("UpdatePegawai Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -134,6 +135,7 @@ public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deletePegawai Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -179,7 +181,7 @@ public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
             return pegawai;
         } catch (SQLException exception) {
             ui.act.append("getPegawai Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -229,9 +231,8 @@ public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
             return list;
 
         } catch (SQLException exception) {
-            
             ui.act.append("getPegawai List Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

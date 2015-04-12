@@ -1,5 +1,7 @@
 <html>
+    
     <head>
+        
         <title>Carisma Project | <?php echo $this->title; ?></title>
         <link href="<?php echo URL; ?>public/css/bootstrap.css" rel='stylesheet' type='text/css' />
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

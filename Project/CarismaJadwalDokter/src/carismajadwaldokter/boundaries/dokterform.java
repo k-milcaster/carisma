@@ -1,12 +1,20 @@
 package carismajadwaldokter.boundaries;
 
+import carismajadwaldokter.controller.ClientSocket;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Fiqhi Darmawan
  */
 public class dokterform extends javax.swing.JFrame {
-
-    public dokterform() {
+    private ClientSocket client;
+    public dokterform() throws RemoteException, NotBoundException {
+        client = new ClientSocket();
+        
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
     }
@@ -35,8 +43,6 @@ public class dokterform extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
@@ -53,6 +59,8 @@ public class dokterform extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,7 +74,7 @@ public class dokterform extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Agency FB", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
         jLabel3.setText("Cari");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -76,7 +84,7 @@ public class dokterform extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -87,7 +95,7 @@ public class dokterform extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(50, 130, 225, 40);
+        jPanel2.setBounds(50, 130, 226, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,19 +143,19 @@ public class dokterform extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(50, 180, 490, 460);
 
-        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Trajan Pro", 1, 28)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Data Dokter");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 70, 260, 58);
+        jLabel1.setBounds(50, 60, 260, 58);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(null);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Informasi Dokter");
         jPanel4.add(jLabel5);
-        jLabel5.setBounds(11, 1, 102, 17);
+        jLabel5.setBounds(11, 1, 140, 17);
 
         jLabel6.setText("Nama Dokter");
         jPanel4.add(jLabel6);
@@ -155,35 +163,35 @@ public class dokterform extends javax.swing.JFrame {
 
         jLabel7.setText("Tempat Lahir");
         jPanel4.add(jLabel7);
-        jLabel7.setBounds(20, 80, 190, 14);
+        jLabel7.setBounds(20, 70, 190, 14);
 
         jLabel8.setText("Tanggal Lahir");
         jPanel4.add(jLabel8);
-        jLabel8.setBounds(20, 120, 200, 14);
+        jLabel8.setBounds(20, 110, 200, 14);
 
-        jLabel9.setText("Kelamin");
+        jLabel9.setText("Jenis Kelamin");
         jPanel4.add(jLabel9);
-        jLabel9.setBounds(20, 160, 160, 14);
+        jLabel9.setBounds(20, 150, 160, 14);
 
         jLabel10.setText("Golongan Darah ");
         jPanel4.add(jLabel10);
-        jLabel10.setBounds(20, 200, 220, 14);
+        jLabel10.setBounds(20, 190, 220, 14);
 
-        jLabel11.setText("Telefon ");
+        jLabel11.setText("No. Telp");
         jPanel4.add(jLabel11);
-        jLabel11.setBounds(20, 240, 200, 14);
+        jLabel11.setBounds(20, 230, 200, 14);
 
-        jLabel12.setText("Handphone 1");
+        jLabel12.setText("No. HP 1");
         jPanel4.add(jLabel12);
-        jLabel12.setBounds(20, 280, 280, 14);
+        jLabel12.setBounds(20, 270, 280, 14);
 
-        jLabel13.setText("Handphone 2");
+        jLabel13.setText("No. HP 2");
         jPanel4.add(jLabel13);
-        jLabel13.setBounds(20, 320, 260, 14);
+        jLabel13.setBounds(20, 310, 260, 14);
 
-        jLabel14.setText("Alamat Email");
+        jLabel14.setText("E-mail");
         jPanel4.add(jLabel14);
-        jLabel14.setBounds(20, 360, 290, 14);
+        jLabel14.setBounds(20, 350, 290, 14);
 
         jLabel15.setText("Hari Praktek");
         jPanel4.add(jLabel15);
@@ -198,16 +206,6 @@ public class dokterform extends javax.swing.JFrame {
         jTextField2.setBounds(110, 24, 271, 30);
         jPanel4.add(jTextField3);
         jTextField3.setBounds(110, 60, 271, 30);
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jTextField4);
-        jTextField4.setBounds(110, 100, 271, 30);
-        jPanel4.add(jTextField5);
-        jTextField5.setBounds(110, 140, 271, 30);
         jPanel4.add(jTextField6);
         jTextField6.setBounds(110, 180, 272, 30);
         jPanel4.add(jTextField7);
@@ -287,6 +285,12 @@ public class dokterform extends javax.swing.JFrame {
         jPanel4.add(jButton2);
         jButton2.setBounds(435, 410, 90, 40);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pria", "Wanita", " " }));
+        jPanel4.add(jComboBox1);
+        jComboBox1.setBounds(110, 150, 59, 20);
+        jPanel4.add(jDateChooser1);
+        jDateChooser1.setBounds(110, 110, 91, 20);
+
         getContentPane().add(jPanel4);
         jPanel4.setBounds(570, 180, 580, 460);
 
@@ -301,10 +305,6 @@ public class dokterform extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
@@ -318,7 +318,13 @@ public class dokterform extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dokterform().setVisible(true);
+                try {
+                    new dokterform().setVisible(true);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NotBoundException ex) {
+                    Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -331,6 +337,8 @@ public class dokterform extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JComboBox jComboBox1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -356,8 +364,6 @@ public class dokterform extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;

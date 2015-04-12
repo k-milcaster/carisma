@@ -49,6 +49,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertDetailobat Error \n");
+            ui.act.append(exception.toString());
             exception.printStackTrace();
         } finally {
             if (statement != null) {
@@ -79,6 +80,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
 
         } catch (SQLException e) {
             ui.act.append("UpdateDetailobat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -100,6 +102,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteDetailobat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -111,14 +114,14 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
     }
 
     @Override
-    public Detailobat getDetailobat(int detail) throws RemoteException {
-        ui.act.append("Client Execute getDetailobat (" + detail + ") \n");
+    public Detailobat getDetailobat(int iddetailobat) throws RemoteException {
+        ui.act.append("Client Execute getDetailobat (" + iddetailobat + ") \n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "SELECT * FROM detailobat WHERE id_detail = ?");
-            statement.setInt(1, detail);
+            statement.setInt(1, iddetailobat);
             ResultSet result = statement.executeQuery();
             Detailobat detailobat = null;
             if (result.next()) {
@@ -130,7 +133,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
             return detailobat;
         } catch (SQLException exception) {
             ui.act.append("getDetailobat Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -166,6 +169,39 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
 
         } catch (SQLException exception) {
             ui.act.append("getDetailobatList Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public Detailobat getDetailobatbyIdObat(int idobat) throws RemoteException {
+        ui.act.append("Client Execute getDetailobatbyIdObat (" + idobat + ") \n");
+
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT * FROM detailobat WHERE obat_id_obat = ?");
+            statement.setInt(1, idobat);
+            ResultSet result = statement.executeQuery();
+            Detailobat detailobat = null;
+            if (result.next()) {
+                detailobat = new Detailobat();
+                detailobat.setIdDetail(result.getInt("id_detail"));
+                detailobat.setObatIdObat(result.getInt("obat_id_obat"));
+                detailobat.setTglkadaluarsaDetail(result.getString("tglkadaluarsa_detail"));
+            }
+            return detailobat;
+        } catch (SQLException exception) {
+            ui.act.append("getDetailobat Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

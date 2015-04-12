@@ -1,6 +1,7 @@
 package carismainterface.server;
 
 import carismainterface.entity.Pasien;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public interface PasienService {
+public interface PasienService extends Remote {
 
     void insertPasien(Pasien pasien) throws RemoteException;
 

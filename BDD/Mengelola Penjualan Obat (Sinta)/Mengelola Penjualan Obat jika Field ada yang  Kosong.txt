@@ -4,6 +4,7 @@ Skenario 2	: Mengelola Penjualan Obat jika Field ada yang Kosong
 
 Given	Saya masuk pada menu utama apoteker
 
+<<<<<<< HEAD
 When	Saya masuk pada pilihan menu didalam menu apoteker
 
 Then	Saya memilih menu penjualan obat
@@ -14,4 +15,15 @@ When	Field yang saya isi tidak lengkap
 
 Then	Memberikan informasi kesalahan apabila beberapa field yang belum terisi
 
+=======
+When	Saya memilih menu penjualan obat
+
+Then	Saya masuk pada menu transaksi penjualan obat
+
+
+When	Field yang saya isi tidak lengkap
+
+Then	Memberikan informasi kesalahan apabila beberapa field ada yang belum terisi
+
+>>>>>>> develop
 And	Data tidak tersimpan

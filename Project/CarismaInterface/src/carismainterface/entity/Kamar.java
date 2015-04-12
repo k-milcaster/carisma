@@ -33,6 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Kamar.findByKelas", query = "SELECT k FROM Kamar k WHERE k.kelas = :kelas"),
     @NamedQuery(name = "Kamar.findByTarif", query = "SELECT k FROM Kamar k WHERE k.tarif = :tarif")})
 public class Kamar implements Serializable {
+    private Integer isiKamar;
+    private String fasilitasKamar;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -88,12 +90,28 @@ public class Kamar implements Serializable {
         this.kelas = kelas;
     }
 
-    public int getTarif() {
+    public Integer getTarif() {
         return tarif;
     }
 
-    public void setTarif(int tarif) {
+    public void setTarif(Integer tarif) {
         this.tarif = tarif;
+    }
+
+    public Integer getIsiKamar() {
+        return isiKamar;
+    }
+
+    public void setIsiKamar(Integer isiKamar) {
+        this.isiKamar = isiKamar;
+    }
+
+    public String getFasilitasKamar() {
+        return fasilitasKamar;
+    }
+
+    public void setFasilitasKamar(String fasilitasKamar) {
+        this.fasilitasKamar = fasilitasKamar;
     }
 
     @XmlTransient

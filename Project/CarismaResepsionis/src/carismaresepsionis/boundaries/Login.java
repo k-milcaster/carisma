@@ -1,12 +1,26 @@
 package carismaresepsionis.boundaries;
 
+import carismainterface.server.UserService;
+import carismaresepsionis.controller.ClientSocket;
+import carismaresepsionis.controller.LoginController;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author K-MiL Caster
  */
 public class Login extends javax.swing.JFrame {
 
-    public Login() {
+    private ClientSocket client;
+    private UserService login;
+
+    public Login() throws RemoteException, NotBoundException {
+        client = new ClientSocket();
+        this.login = client.getUserService();
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -62,14 +76,29 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-
+        if (username.getText().equalsIgnoreCase("") || password.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(null, "User Name atau Password anda belum terisi!");
+        } else {
+            LoginController login = new LoginController(this.login, username.getText(), password.getText());
+            boolean success = false;
+            try {
+                success = login.logIn();
+            } catch (RemoteException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (success) {
+                try {
+                    new Menursepsionis(this.client, username.getText()).show();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "User Name atau Password anda salah!");
+            }
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -87,14 +116,16 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                try {
+                    new Login().setVisible(true);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NotBoundException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

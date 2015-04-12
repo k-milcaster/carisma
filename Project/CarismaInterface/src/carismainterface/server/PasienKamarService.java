@@ -7,6 +7,7 @@
 package carismainterface.server;
 
 import carismainterface.entity.PasienKamar;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author kepoterz
  */
-public interface PasienKamarService {
+public interface PasienKamarService extends Remote {
     void insertPasienKamar(PasienKamar pasienKamar) throws RemoteException;
 
     void updatePasienKamar(PasienKamar pasienKamar) throws RemoteException;

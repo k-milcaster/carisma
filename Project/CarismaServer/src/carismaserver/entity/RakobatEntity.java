@@ -50,7 +50,7 @@ public class RakobatEntity extends UnicastRemoteObject implements RakobatService
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertRakobat Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -100,6 +100,7 @@ public class RakobatEntity extends UnicastRemoteObject implements RakobatService
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteRakobat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -130,7 +131,7 @@ public class RakobatEntity extends UnicastRemoteObject implements RakobatService
             return rakobat;
         } catch (SQLException exception) {
             ui.act.append("getRakobat Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -166,6 +167,7 @@ public class RakobatEntity extends UnicastRemoteObject implements RakobatService
 
         } catch (SQLException exception) {
             ui.act.append("getRakobatList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

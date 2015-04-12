@@ -60,7 +60,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertDokter Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -107,6 +107,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 
         } catch (SQLException e) {
             ui.act.append("UpdateDokter Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -128,6 +129,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteDokter Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -172,7 +174,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             return dokter;
         } catch (SQLException exception) {
             ui.act.append("getDokter Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -221,12 +223,42 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 
         } catch (SQLException exception) {
             ui.act.append("getDokterList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public String getIdDokter(String username) throws RemoteException {
+        ui.act.append("Client Execute getIdDokter(" + username + ") \n");
+        String idDokter = " ";
+        Statement state = null;
+        ResultSet resultSet = null;
+        
+        try {
+            state = DatabaseConnection.getConnection().createStatement();
+            resultSet = state.executeQuery("SELECT D.id_dokter FROM `dokter` AS D, user AS "
+                    + "WHERE D.user_id_user = 2 AND U.username = '"+username+"'");
+            while (resultSet.next()) {
+                idDokter = resultSet.getString(1);
+            }
+            return idDokter;
+        } catch (SQLException e) {
+            ui.act.append("getIdDokter Error\n");
+            ui.act.append(e.toString());
+            return null;
+        }finally{
+            if (state != null) {
+                try {
+                    state.close();
+                } catch (SQLException e) {
                 }
             }
         }

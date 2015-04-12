@@ -4,6 +4,9 @@ Skenario 1	: Mengelola Penjualan Obat
 
 
 
+<<<<<<< HEAD
+
+
 Given	Saya masuk pada menu utama apoteker
 
 When	Saya masuk pada pilihan menu didalam menu apoteker
@@ -25,5 +28,15 @@ When	Saya memilih tombol simpan
 Then	Menampilkan pesan bahwa data transaksi penjualan telah tersimpan
 
 And	Transaksi penjualan terintegrasi ke kasir dan obat diserahkan kepada pasien
+=======
+Given	Saya masuk pada menu utama apoteker
+>>>>>>> develop
 
+When	Saya memilih menu penjulan obat
 
+Then	Saya masuk pada menu transaksi penjualan obat
+
+And	Saya memasukkan id transaksi jual obat, tanggal jual obat, keterangan dan quantity
+
+When	Ketika saya menekan tombol simpan, maka transaksi jual obat dan detail transaksi jual obat tersimpan
+Then	Data transaksi jual obat dan detail transaksi jual obat ditampilkan

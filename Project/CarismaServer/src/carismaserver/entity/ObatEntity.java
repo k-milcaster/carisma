@@ -37,7 +37,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO obat (id_obat, nama_obat, qty_obat, jenis_obat, keterangan, hargajual_obat) values (?,?,?,?,?,?)"
+                    "INSERT INTO obat (id_obat, nama_obat, qty_obat, jenis_obat, keterangan, hargajual_obat, stokkritis_obat) values (?,?,?,?,?,?,?)"
             );
             statement.setInt(1, obat.getIdObat());
             statement.setString(2, obat.getNamaObat());
@@ -45,10 +45,11 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             statement.setString(4, obat.getJenisObat());
             statement.setString(5, obat.getKeterangan());
             statement.setInt(6, obat.getHargajualObat());
+            statement.setInt(7, obat.getStokkritisObat());
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertObat Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -67,7 +68,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "UPDATE obat SET nama_obat = ?, qty_obat = ?, jenis_obat = ?, keterangan = ?, hargajual_obat = ? "
+                    "UPDATE obat SET nama_obat = ?, qty_obat = ?, jenis_obat = ?, keterangan = ?, hargajual_obat = ?, stokkritis_obat= ? "
                     + "WHERE id_obat = ?"
             );
             statement.setInt(6, obat.getIdObat());
@@ -76,10 +77,12 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             statement.setString(3, obat.getJenisObat());
             statement.setString(4, obat.getKeterangan());
             statement.setInt(5, obat.getHargajualObat());
+            statement.setInt(6, obat.getStokkritisObat());
             statement.executeUpdate();
 
         } catch (SQLException e) {
             ui.act.append("UpdateObat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -101,6 +104,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteObat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -130,11 +134,12 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
                 obat.setJenisObat(result.getString("jenis_obat"));
                 obat.setKeterangan(result.getString("keterangan"));
                 obat.setHargajualObat(result.getInt("hargajual_obat"));
+                obat.setStokkritisObat(result.getInt("stokkritis_obat"));
             }
             return obat;
         } catch (SQLException exception) {
             ui.act.append("getObat Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -165,7 +170,8 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
                 obat.setQtyObat(result.getInt("qty_obat"));
                 obat.setJenisObat(result.getString("jenis_obat"));
                 obat.setKeterangan(result.getString("keterangan"));
-                obat.setHargajualObat(result.getInt("hp1_obat"));
+                obat.setHargajualObat(result.getInt("hargajual_obat"));
+                obat.setStokkritisObat(result.getInt("stokkritis_obat"));
                 list.add(obat);
             }
             result.close();
@@ -173,6 +179,42 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
 
         } catch (SQLException exception) {
             ui.act.append("getObatList Error \n");
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public Obat getObatbyName(String namaobat) throws RemoteException {
+        ui.act.append("Client Execute getObatbyName (" + namaobat + ") \n");
+
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT * FROM obat WHERE nama_obat LIKE ('% ? %')");
+            statement.setString(1, namaobat);
+            ResultSet result = statement.executeQuery();
+            Obat obat = null;
+            if (result.next()) {
+                obat = new Obat();
+                obat.setIdObat(result.getInt("id_obat"));
+                obat.setNamaObat(result.getString("nama_obat"));
+                obat.setQtyObat(result.getInt("qty_obat"));
+                obat.setJenisObat(result.getString("jenis_obat"));
+                obat.setKeterangan(result.getString("keterangan"));
+                obat.setHargajualObat(result.getInt("hargajual_obat"));
+                obat.setStokkritisObat(result.getInt("stokkritis_obat"));
+            }
+            return obat;
+        } catch (SQLException exception) {
+            ui.act.append("getObatbyName Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

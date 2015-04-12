@@ -6,6 +6,7 @@ import carismainterface.entity.Rekammedikpenyakit;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,15 +17,15 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public class RekammedikpenyakitEntity implements RekammedikpenyakitService {
+public class RekammedikpenyakitEntity extends UnicastRemoteObject implements RekammedikpenyakitService {
 
     public Main ui;
 
-    public RekammedikpenyakitEntity() {
+    public RekammedikpenyakitEntity() throws RemoteException {
 
     }
 
-    public RekammedikpenyakitEntity(Main ui) {
+    public RekammedikpenyakitEntity(Main ui) throws RemoteException {
         this.ui = ui;
     }
 
@@ -42,7 +43,7 @@ public class RekammedikpenyakitEntity implements RekammedikpenyakitService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertRekammedikPenyakit Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -74,6 +75,7 @@ public class RekammedikpenyakitEntity implements RekammedikpenyakitService {
             return list;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikPenyakit Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -82,7 +84,7 @@ public class RekammedikpenyakitEntity implements RekammedikpenyakitService {
                 } catch (SQLException exception) {
                 }
             }
-        }        
+        }
     }
 
     @Override
@@ -96,6 +98,7 @@ public class RekammedikpenyakitEntity implements RekammedikpenyakitService {
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteRekamMedikPenyakit Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -103,6 +106,6 @@ public class RekammedikpenyakitEntity implements RekammedikpenyakitService {
                 } catch (SQLException exception) {
                 }
             }
-        }        
+        }
     }
 }

@@ -45,12 +45,39 @@ public class Kota implements Serializable {
     private Provinsi provinsi;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "kotaIdKota")
     private String pasienCollection;
+    private String id_kota;
+    private String provinsi_id_provinsi;
+    private String nama_kota;
 
     public Kota() {
     }
 
     public Kota(KotaPK kotaPK) {
         this.kotaPK = kotaPK;
+    }
+
+    public String getId_kota() {
+        return id_kota;
+    }
+
+    public void setId_kota(String id_kota) {
+        this.id_kota = id_kota;
+    }
+
+    public String getProvinsi_id_provinsi() {
+        return provinsi_id_provinsi;
+    }
+
+    public void setProvinsi_id_provinsi(String provinsi_id_provinsi) {
+        this.provinsi_id_provinsi = provinsi_id_provinsi;
+    }
+
+    public String getNama_kota() {
+        return nama_kota;
+    }
+
+    public void setNama_kota(String nama_kota) {
+        this.nama_kota = nama_kota;
     }
 
     public Kota(KotaPK kotaPK, String namaKota) {

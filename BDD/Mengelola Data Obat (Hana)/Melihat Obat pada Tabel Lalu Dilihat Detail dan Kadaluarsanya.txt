@@ -1,0 +1,18 @@
+Fitur: Mengelola data obat
+
+Skenario: Melihat Obat pada Tabel Lalu Dilihat Detail dan Kadaluarsanya
+
+Given apoteker telah login ke sistem
+And apoteker masuk ke menu utama apoteker
+When apoteker memilih inventory obat
+Then apoteker berada pada menu data obat
+And nama apoteker muncul dilayar
+When apoteker memilih obat pada tabel
+Then id obat muncul dilayar
+And nama obat muncul dilayar
+And quantity obat muncul dilayar
+And jenis obat muncul dilayar
+And keterangan obat muncul dilayar
+And harga jual obat muncul dilayar
+And stok kritis muncul dilayar
+And id detail obat dan tanggal kadaluarsa obat yang dipilih muncul ditabel

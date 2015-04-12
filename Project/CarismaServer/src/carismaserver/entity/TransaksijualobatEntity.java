@@ -49,7 +49,7 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertTransaksijualobat Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -78,6 +78,7 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
 
         } catch (SQLException e) {
             ui.act.append("UpdateTransaksijualbat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -99,6 +100,7 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteTansaksijualobat Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -129,7 +131,7 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
             return transaksijualobat;
         } catch (SQLException exception) {
             ui.act.append("getTransaksijualbat Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -165,6 +167,7 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
 
         } catch (SQLException exception) {
             ui.act.append("getTransaksijualobatList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

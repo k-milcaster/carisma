@@ -5,6 +5,7 @@ import carismainterface.server.AntrianService;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,15 +16,15 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public class AntrianEntity implements AntrianService {
+public class AntrianEntity extends UnicastRemoteObject implements AntrianService {
 
     public Main ui;
 
-    public AntrianEntity() {
+    public AntrianEntity() throws RemoteException {
 
     }
 
-    public AntrianEntity(Main ui) {
+    public AntrianEntity(Main ui) throws RemoteException{
         this.ui = ui;
     }
 
@@ -47,6 +48,7 @@ public class AntrianEntity implements AntrianService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertUser Error \n");
+            ui.act.append(exception.toString());
             exception.printStackTrace();
         } finally {
             if (statement != null) {
@@ -70,6 +72,7 @@ public class AntrianEntity implements AntrianService {
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteAntrian Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -105,6 +108,7 @@ public class AntrianEntity implements AntrianService {
             return antri;
         } catch (SQLException exception) {
             ui.act.append("getAntrian Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -141,6 +145,7 @@ public class AntrianEntity implements AntrianService {
             return list;
         } catch (SQLException exception) {
             ui.act.append("getAntrianList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -166,6 +171,7 @@ public class AntrianEntity implements AntrianService {
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("antrianHadir Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {

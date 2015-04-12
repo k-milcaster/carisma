@@ -50,7 +50,7 @@ public class JadwalEntity extends UnicastRemoteObject implements JadwalService{
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertJadwal Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -70,7 +70,7 @@ public class JadwalEntity extends UnicastRemoteObject implements JadwalService{
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "UPDATE jadwal SET hari_jadwalpegawai = ?, shift_jadwalpegawai = ? "
-                    + "WHERE id_ = ?"
+                    + "WHERE id = ?"
             );
             statement.setInt(3, jadwal.getId());
             statement.setString(1, jadwal.getHariJadwalpegawai());
@@ -79,6 +79,7 @@ public class JadwalEntity extends UnicastRemoteObject implements JadwalService{
 
         } catch (SQLException e) {
             ui.act.append("UpdateJadwal Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -100,6 +101,7 @@ public class JadwalEntity extends UnicastRemoteObject implements JadwalService{
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteJadwal Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -130,7 +132,7 @@ public class JadwalEntity extends UnicastRemoteObject implements JadwalService{
             return jadwal;
         } catch (SQLException exception) {
             ui.act.append("getJadwal Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -166,6 +168,7 @@ public class JadwalEntity extends UnicastRemoteObject implements JadwalService{
 
         } catch (SQLException exception) {
             ui.act.append("getJadwalList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

@@ -5,6 +5,7 @@ import carismainterface.server.RekammedikService;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public class RekammedikEntity implements RekammedikService {
+public class RekammedikEntity extends UnicastRemoteObject implements RekammedikService {
 
     public Main ui;
 
@@ -50,7 +51,7 @@ public class RekammedikEntity implements RekammedikService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertRekammedik Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -78,6 +79,7 @@ public class RekammedikEntity implements RekammedikService {
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteRekamMedik Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -115,7 +117,7 @@ public class RekammedikEntity implements RekammedikService {
             return rm;
         } catch (SQLException exception) {
             ui.act.append("getgetRekamMedik Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -156,7 +158,7 @@ public class RekammedikEntity implements RekammedikService {
             return rms;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikByPasien Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -196,7 +198,7 @@ public class RekammedikEntity implements RekammedikService {
             return rms;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikBytahun Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -236,7 +238,7 @@ public class RekammedikEntity implements RekammedikService {
             return rms;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikByBulan Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -276,7 +278,7 @@ public class RekammedikEntity implements RekammedikService {
             return rms;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikByTahun Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -316,7 +318,7 @@ public class RekammedikEntity implements RekammedikService {
             return rms;
         } catch (SQLException exception) {
             ui.act.append("getRekamMedikList Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

@@ -2,6 +2,7 @@ package carismakasir.boundary;
 
 import carismainterface.server.UserService;
 import carismakasir.controller.ClientSocket;
+import carismakasir.controller.LoginController;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
@@ -16,18 +17,20 @@ public class Kasir extends javax.swing.JFrame {
 
     private ClientSocket client;
     private UserService login;
+
     public Kasir(ClientSocket client, final String username) {
-        
+
         this.client = client;
         this.login = client.getUserService();
         initComponents();
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.jLabel8.setText(username);
-                this.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+                LoginController log = new LoginController(login, username);
                 try {
-                    login.userLogOut(username, "kasir");
+                    log.logOut();
                 } catch (RemoteException ex) {
                     Logger.getLogger(Kasir.class.getName()).log(Level.SEVERE, null, ex);
                 }

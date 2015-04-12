@@ -1,17 +1,10 @@
 Fitur: Mengelola data obat
 
-Skenario: Memilih data obat pada tabel
+Skenario: Melihat Obat pada Tabel
 
 Given apoteker telah login ke sistem
 And apoteker masuk ke menu utama apoteker
 When apoteker memilih inventory obat
 Then apoteker berada pada menu data obat
 And nama apoteker muncul dilayar
-When apoteker memilih obat pada tabel
-Then id obat muncul dilayar
-And nama obat muncul dilayar
-And quantity obat muncul dilayar
-And jenis obat muncul dilayar
-And keterangan obat muncul dilayar
-And harga jual obat muncul dilayar
-And tanggal kadaluarsa muncul dilayar
+And apoteker melihat data-data obat pada tabel obat

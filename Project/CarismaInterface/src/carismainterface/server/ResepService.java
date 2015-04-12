@@ -1,13 +1,14 @@
 package carismainterface.server;
 
 import carismainterface.entity.Resep;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
  *
  * @author K-MiL Caster
  */
-public interface ResepService {
+public interface ResepService extends Remote {
 
     void insertResep(Resep resep) throws RemoteException;
     

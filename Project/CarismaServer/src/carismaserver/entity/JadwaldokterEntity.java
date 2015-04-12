@@ -50,7 +50,7 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertJadwaldokter Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -79,6 +79,7 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
 
         } catch (SQLException e) {
             ui.act.append("UpdateJadwaldokter Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -100,6 +101,7 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteJadwaldokter Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -130,7 +132,7 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
             return jadwaldokter;
         } catch (SQLException exception) {
             ui.act.append("getJadwaldokter Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -166,6 +168,7 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
 
         } catch (SQLException exception) {
             ui.act.append("getJadwaldokterList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

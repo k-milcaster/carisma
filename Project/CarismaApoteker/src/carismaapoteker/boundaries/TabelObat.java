@@ -148,10 +148,10 @@ public class TabelObat extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int count = idObat.size();
         for (int i = 0; i < count; i++) {
-            ui.jTableOfSales.setValueAt(idObat.get(i), ui.row, 0);
-            ui.jTableOfSales.setValueAt(namaObat.get(i), ui.row, 1);
-            ui.jTableOfSales.setValueAt(hargaObat.get(i), ui.row, 3);
-            ui.row ++;
+//            ui.jTableOfSales.setValueAt(idObat.get(i), ui.row, 0);
+//            ui.jTableOfSales.setValueAt(namaObat.get(i), ui.row, 1);
+//            ui.jTableOfSales.setValueAt(hargaObat.get(i), ui.row, 3);
+//            ui.row ++;
         }
         
         

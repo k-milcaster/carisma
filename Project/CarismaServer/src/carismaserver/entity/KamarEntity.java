@@ -42,16 +42,18 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO kamar (id_kamar, nama_kamar, kelas, tarif) values (?,?,?,?)"
+                    "INSERT INTO kamar (id_kamar, nama_kamar, kelas, isi_kamar, fasilitas_kamar, tarif) values (?,?,?,?,?,?)"
             );
             statement.setInt(1, kamar.getIdKamar());
             statement.setString(2, kamar.getNamaKamar());
             statement.setString(3, kamar.getKelas());
-            statement.setInt(4, kamar.getTarif());
+            statement.setInt(4, kamar.getIsiKamar());
+            statement.setString(5, kamar.getFasilitasKamar());
+            statement.setInt(6, kamar.getTarif());
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertKamar Error \n");
-            exception.printStackTrace();
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -70,17 +72,20 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "UPDATE kamar SET nama_kamar = ?, kelas = ?, tarif = ? "
+                    "UPDATE kamar SET nama_kamar = ?, kelas = ?, isi_kamar = ?, fasilitas_kamar = ?, tarif = ? "
                     + "WHERE id_kamar = ?"
             );
-            statement.setInt(4, kamar.getIdKamar());
+            statement.setInt(6, kamar.getIdKamar());
             statement.setString(1, kamar.getNamaKamar());
             statement.setString(2, kamar.getKelas());
-            statement.setInt(3, kamar.getTarif());
+            statement.setInt(3, kamar.getIsiKamar());
+            statement.setString(4, kamar.getFasilitasKamar());
+            statement.setInt(5, kamar.getTarif());
             statement.executeUpdate();
 
         } catch (SQLException e) {
             ui.act.append("UpdateKamar Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -102,6 +107,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
             statement.executeUpdate();
         } catch (SQLException e) {
             ui.act.append("deleteKamar Error \n");
+            ui.act.append(e.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -128,12 +134,14 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
                 kamar.setIdKamar(result.getInt("id_kamar"));
                 kamar.setNamaKamar(result.getString("nama_kamar"));
                 kamar.setKelas(result.getString("kelas"));
+                kamar.setIsiKamar(result.getInt("isi_kamar"));
+                kamar.setFasilitasKamar(result.getString("fasilitas_kamar"));
                 kamar.setTarif(result.getInt("tarif"));
             }
             return kamar;
         } catch (SQLException exception) {
             ui.act.append("getKamar Error \n");
-            System.out.println(exception.toString());
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -162,6 +170,8 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
                 kamar.setIdKamar(result.getInt("id_kamar"));
                 kamar.setNamaKamar(result.getString("nama_kamar"));
                 kamar.setKelas(result.getString("kelas"));
+                kamar.setIsiKamar(result.getInt("isi_kamar"));
+                kamar.setFasilitasKamar(result.getString("fasilitas_kamar"));
                 kamar.setTarif(result.getInt("tarif"));
                 list.add(kamar);
             }
@@ -170,6 +180,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
 
         } catch (SQLException exception) {
             ui.act.append("getKamarList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

@@ -7,6 +7,7 @@
 package carismainterface.server;
 
 import carismainterface.entity.Jadwal;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author kepoterz
  */
-public interface JadwalService {
+public interface JadwalService extends Remote {
     void insertJadwal(Jadwal jadwal) throws RemoteException;
 
     void updateJadwal(Jadwal jadwal) throws RemoteException;

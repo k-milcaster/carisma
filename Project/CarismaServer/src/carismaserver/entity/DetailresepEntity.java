@@ -5,6 +5,7 @@ import carismainterface.server.DetailresepService;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,15 +16,15 @@ import java.util.List;
  *
  * @author K-MiL Caster
  */
-public class DetailresepEntity implements DetailresepService {
+public class DetailresepEntity extends UnicastRemoteObject implements DetailresepService {
 
     public Main ui;
 
-    public DetailresepEntity() {
+    public DetailresepEntity() throws RemoteException {
 
     }
 
-    public DetailresepEntity(Main ui) {
+    public DetailresepEntity(Main ui) throws RemoteException {
         this.ui = ui;
     }
 
@@ -45,6 +46,7 @@ public class DetailresepEntity implements DetailresepService {
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertDetailresep Error \n");
+            ui.act.append(exception.toString());
         } finally {
             if (statement != null) {
                 try {
@@ -79,6 +81,7 @@ public class DetailresepEntity implements DetailresepService {
             return list;
         } catch (SQLException exception) {
             ui.act.append("getDetaiResep Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
@@ -115,6 +118,7 @@ public class DetailresepEntity implements DetailresepService {
             return list;
         } catch (SQLException exception) {
             ui.act.append("getDetailresepByPasien \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {
