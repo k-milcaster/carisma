@@ -2,7 +2,8 @@ package carismaresepsionis.boundaries;
 
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.regispasiencontroller;
-import java.sql.Date;
+import java.rmi.RemoteException;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,8 +27,10 @@ public class regispasienform extends javax.swing.JFrame {
     /**
      * Creates new form regispasienform
      */
-    public regispasienform(ClientSocket client, String userName) {
+    public regispasienform(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
+        //regispasiencontroller control = new regispasiencontroller(this.client);
+        //control.getIdUser(this);
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -43,6 +46,11 @@ public class regispasienform extends javax.swing.JFrame {
         g = BeratPasien.getText();
         h = Kartu_id.getText();
         i = No_Kartu.getText();
+        Date tanggal = new Date();
+        tgl_regpasien.setDate(tanggal);
+//        Date date = new Date(tgl_lahir.getDate().getTime());
+//        System.out.println(String.valueOf(date));
+        
         
         //   tanggalkustom();
     }
@@ -74,11 +82,12 @@ public class regispasienform extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        kartu_iduser = new javax.swing.JComboBox();
         ListPasien = new java.awt.List();
         tgl_lahir = new com.toedter.calendar.JDateChooser();
         tgl_regpasien = new com.toedter.calendar.JDateChooser();
+        kartu_iduser = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -294,20 +303,24 @@ public class regispasienform extends javax.swing.JFrame {
         jLabel3.setText("Tgl Registrasi Pasien");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(580, 500, 100, 14);
-
-        kartu_iduser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-User ID-", "1", "2", "3", "4", "5", "6" }));
-        getContentPane().add(kartu_iduser);
-        kartu_iduser.setBounds(820, 490, 110, 30);
         getContentPane().add(ListPasien);
         ListPasien.setBounds(20, 100, 550, 420);
+
+        tgl_lahir.setDateFormatString("yyyy-MM-dd");
         getContentPane().add(tgl_lahir);
         tgl_lahir.setBounds(810, 170, 130, 30);
         getContentPane().add(tgl_regpasien);
-        tgl_regpasien.setBounds(700, 490, 100, 30);
+        tgl_regpasien.setBounds(700, 490, 140, 30);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        kartu_iduser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-ID User-", "1", "2", "3", "4", "5", "6" }));
+        getContentPane().add(kartu_iduser);
+        kartu_iduser.setBounds(870, 490, 100, 30);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1359, 700);
+        jLabel2.setBounds(870, 60, 110, 100);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(0, 0, 1360, 690);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -376,8 +389,7 @@ public class regispasienform extends javax.swing.JFrame {
 
     private void TinggiPasienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TinggiPasienFocusGained
         if (f.equals(TinggiPasien.getText())) {
-            TinggiPasien.setText(
-                    "");
+            TinggiPasien.setText("");
         }
     }//GEN-LAST:event_TinggiPasienFocusGained
 
@@ -492,7 +504,6 @@ public class regispasienform extends javax.swing.JFrame {
                 ListPasien.add(Nama_Pasien.getText());
                 Tempat_ID.setText("");
                 Kota.setSelectedItem(0);
-                kartu_iduser.setSelectedItem(0);
                 Nama_Pasien.setText("");
                 Alamat.setText("");
                 Kartu_id.setText("");
@@ -572,6 +583,7 @@ public class regispasienform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox kartu_iduser;
     private com.toedter.calendar.JDateChooser tgl_lahir;
