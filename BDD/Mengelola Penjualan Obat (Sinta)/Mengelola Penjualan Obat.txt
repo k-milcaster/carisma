@@ -10,17 +10,7 @@ When	Saya memilih menu penjulan obat
 
 Then	Saya masuk pada menu transaksi penjualan obat
 
-And	Saya memasukkan tanggal jual obat
+And	Saya memasukkan id transaksi jual obat, tanggal jual obat, keterangan dan quantity
 
-When	Saya memasukkan obat pasien
-
-Then	Harga obat ditampilkan sesuai dengan obat yang saya masukkan
-And	Saya melakukan penyiapan dan peracikan obat dan pemberian label pada obat
-
-When	Saya memilih tombol simpan
-
-Then	Menampilkan pesan bahwa data transaksi penjualan telah tersimpan
-
-And	Transaksi penjualan terintegrasi ke kasir dan obat diserahkan kepada pasien
-
-
+When	Ketika saya menekan tombol simpan, maka transaksi jual obat dan detail transaksi jual obat tersimpan
+Then	Data transaksi jual obat dan detail transaksi jual obat ditampilkan
