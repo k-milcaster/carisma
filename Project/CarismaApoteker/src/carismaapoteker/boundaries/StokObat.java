@@ -1,10 +1,19 @@
 package carismaapoteker.boundaries;
 
 import carismaapoteker.controller.ClientSocket;
+import carismaapoteker.controller.StokObatController;
+import carismainterface.entity.Obat;
+import carismainterface.entity.User;
+import carismainterface.server.ObatService;
 import java.awt.Color;
 import java.awt.Font;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,14 +22,20 @@ import javax.swing.JTextField;
 public class StokObat extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
-    private carismaapoteker.controller.StokObatController control = new carismaapoteker.controller.StokObatController(client);
+    private ObatService os;
+    private DefaultTableModel tableObat = new DefaultTableModel();
+    
     public StokObat(ClientSocket Client, String userName) throws RemoteException {
+        
         this.client = Client;
+        StokObatController control = new StokObatController(this.client);
         this.userName = userName;
+        //labelApotekerName.setText(this.userName);
         initComponents();
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        control.getObats();
+        
+        control.getObats(this);
     }
 
     @SuppressWarnings("unchecked")
