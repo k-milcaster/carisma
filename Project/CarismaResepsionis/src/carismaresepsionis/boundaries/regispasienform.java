@@ -3,6 +3,7 @@ package carismaresepsionis.boundaries;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.regispasiencontroller;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -11,8 +12,10 @@ import javax.swing.JOptionPane;
  * @author Fiqhi Darmawan
  */
 public class regispasienform extends javax.swing.JFrame {
+
     private ClientSocket client;
     private String userName;
+    private regispasiencontroller registrasicontrol;
     String a, b, c, d, e, f, g, h, i;
     settergetter simpanan = new settergetter();
 
@@ -23,12 +26,12 @@ public class regispasienform extends javax.swing.JFrame {
 //   // System.out.println(umurini);
 //        return String.valueOf(umurini);
 //    }
-
     /**
      * Creates new form regispasienform
      */
     public regispasienform(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
+        registrasicontrol = new regispasiencontroller(this.client);
         //regispasiencontroller control = new regispasiencontroller(this.client);
         //control.getIdUser(this);
         this.userName = userName;
@@ -36,7 +39,7 @@ public class regispasienform extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Find.requestFocus();
         Tempat_ID.setEditable(false);
-        
+
         a = Nama_Pasien.getText();
         b = Tempat_Lahir.getText();
         c = Alamat.getText();
@@ -48,12 +51,13 @@ public class regispasienform extends javax.swing.JFrame {
         i = No_Kartu.getText();
         Date tanggal = new Date();
         tgl_regpasien.setDate(tanggal);
-//        Date date = new Date(tgl_lahir.getDate().getTime());
-//        System.out.println(String.valueOf(date));
-        
-        
+
+        registrasicontrol.setComboBoxKota(this);
+
+
         //   tanggalkustom();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -414,15 +418,15 @@ public class regispasienform extends javax.swing.JFrame {
     private void ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmActionPerformed
 
         //lek default
-        if (f.equals(TinggiPasien.getText()) || (g.equals(BeratPasien.getText())) ||  ("".equals(Tempat_ID.getText())) || (a.equals(Nama_Pasien.getText()))
-                || (b.equals(Tempat_Lahir.getText())) || (c.equals(Alamat.getText())) ||  (Kota.getSelectedIndex() == 0) || (Jenis_Kelamin.getSelectedIndex() == 0) || (goldar.getSelectedIndex() == 0)
+        if (f.equals(TinggiPasien.getText()) || (g.equals(BeratPasien.getText())) || ("".equals(Tempat_ID.getText())) || (a.equals(Nama_Pasien.getText()))
+                || (b.equals(Tempat_Lahir.getText())) || (c.equals(Alamat.getText())) || (Kota.getSelectedIndex() == 0) || (Jenis_Kelamin.getSelectedIndex() == 0) || (goldar.getSelectedIndex() == 0)
                 || (d.equals(No_Hp.getText())) && (e.equals(No_tele.getText())) || (h.equals(Kartu_id.getText())) && (i.equals(No_Kartu.getText()))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
             System.out.println("1");
 
         } //lek kosong
-        else if ("".equals(TinggiPasien.getText()) || ("".equals(BeratPasien.getText())) ||  ("".equals(Tempat_ID.getText())) || ("".equals(Nama_Pasien.getText()))
-                || ("".equals(Tempat_Lahir.getText())) || ("".equals(Alamat.getText())) ||  (Kota.getSelectedIndex() == 0) || (Jenis_Kelamin.getSelectedIndex() == 0) || (goldar.getSelectedIndex() == 0)
+        else if ("".equals(TinggiPasien.getText()) || ("".equals(BeratPasien.getText())) || ("".equals(Tempat_ID.getText())) || ("".equals(Nama_Pasien.getText()))
+                || ("".equals(Tempat_Lahir.getText())) || ("".equals(Alamat.getText())) || (Kota.getSelectedIndex() == 0) || (Jenis_Kelamin.getSelectedIndex() == 0) || (goldar.getSelectedIndex() == 0)
                 || ("".equals(No_Hp.getText())) && ("".equals(No_tele.getText())) || ("".equals(Kartu_id.getText())) && ("".equals(No_Kartu.getText()))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
             System.out.println("2");
@@ -494,32 +498,37 @@ public class regispasienform extends javax.swing.JFrame {
 //
 //            }
             try {
-                regispasiencontroller registrasicontrol = new regispasiencontroller(client);
-                registrasicontrol.InsertNamaPasien(Tempat_ID.getText(), String.valueOf(Kota.getSelectedItem()), String.valueOf(kartu_iduser.getSelectedItem()), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), String.valueOf(new Date (tgl_lahir.getDate().getTime())), String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), String.valueOf(new Date(tgl_regpasien.getDate().getTime())));
-            
-                int pilihan =  JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?" , "Konfirmasi Penyimpanan" , JOptionPane.YES_NO_OPTION);
-                if (pilihan == 0){
-                    System.out.println("3");   
-                    JOptionPane.showMessageDialog(null, ""+Nama_Pasien.getText()+"\n"+Alamat.getText()+"\n"+Tempat_ID.getText()+"/n"+String.valueOf(Jenis_Kelamin.getSelectedItem()),"Cetak Pasien",JOptionPane.INFORMATION_MESSAGE);
-                ListPasien.add(Nama_Pasien.getText());
-                Tempat_ID.setText("");
-                Kota.setSelectedItem(0);
-                Nama_Pasien.setText("");
-                Alamat.setText("");
-                Kartu_id.setText("");
-                No_Kartu.setText("");
-                No_tele.setText("");
-                No_Hp.setText("");
-                Tempat_Lahir.setText("");
-                tgl_lahir.setDate(null);
-                Jenis_Kelamin.setSelectedItem(0);
-                goldar.setSelectedItem(0);
-                BeratPasien.setText("");
-                TinggiPasien.setText("");
-                tgl_regpasien.setDate(null);
-                                        
+                Date date = new Date(tgl_lahir.getDate().getTime());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String lah = sdf.format(date);
+                Date now = tgl_regpasien.getDate();
+                String hariIni = sdf.format(now);
+
+                int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
+                if (pilihan == 0) {
+                    registrasicontrol.InsertNamaPasien(Tempat_ID.getText(), String.valueOf(Kota.getSelectedItem()), String.valueOf(kartu_iduser.getSelectedItem()), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), lah, String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), hariIni);
+                    System.out.println("3");
+                    JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
+                    ListPasien.add(Nama_Pasien.getText());
+                    Tempat_ID.setText("");
+                    Kota.setSelectedItem(0);
+                    Nama_Pasien.setText("");
+                    Alamat.setText("");
+                    Kartu_id.setText("");
+                    No_Kartu.setText("");
+                    No_tele.setText("");
+                    No_Hp.setText("");
+                    Tempat_Lahir.setText("");
+                    tgl_lahir.setDate(null);
+                    Jenis_Kelamin.setSelectedItem(0);
+                    goldar.setSelectedItem(0);
+                    BeratPasien.setText("");
+                    TinggiPasien.setText("");
+                    tgl_regpasien.setDate(null);
+
                 }
             } catch (Exception e) {
+                System.out.println(e.toString());
             }
         }
     }//GEN-LAST:event_ConfirmActionPerformed
@@ -555,8 +564,6 @@ public class regispasienform extends javax.swing.JFrame {
     private void BeratPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeratPasienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BeratPasienActionPerformed
-    
-        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alamat;
     private javax.swing.JTextField BeratPasien;
@@ -566,7 +573,7 @@ public class regispasienform extends javax.swing.JFrame {
     private javax.swing.JLabel ID;
     private javax.swing.JComboBox Jenis_Kelamin;
     private javax.swing.JTextField Kartu_id;
-    private javax.swing.JComboBox Kota;
+    public javax.swing.JComboBox Kota;
     private java.awt.List ListPasien;
     private javax.swing.JTextField Nama_Pasien;
     private javax.swing.JTextField No_Hp;
