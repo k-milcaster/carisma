@@ -8,7 +8,6 @@ When	Saya memilih menu penjualan obat
 
 Then	Saya masuk pada menu transaksi penjualan obat
 
-And	Saya memilih no ID pasien pada Jcombo Box
 
 When	Field yang saya isi tidak lengkap
 
