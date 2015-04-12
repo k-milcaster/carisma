@@ -35,7 +35,7 @@ public class isirekammedis extends javax.swing.JFrame {
         this.username = username;
         initComponents();
         isiRekamMedisController.getNamaObat(this);
-        //isiRekamMedisController.getNamaPenyakit(this);
+        isiRekamMedisController.getNamaPenyakit(this);
         this.jLabel1.setText(username);
         fieldIdDokter.setText(this.username);
         this.setExtendedState(this.MAXIMIZED_BOTH);
