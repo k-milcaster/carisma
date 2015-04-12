@@ -73,11 +73,11 @@ public class regispasienform extends javax.swing.JFrame {
         Confirm = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        tgl_lahir = new com.toedter.calendar.JDateChooser();
-        tgl_regpasien = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         kartu_iduser = new javax.swing.JComboBox();
         ListPasien = new java.awt.List();
+        tgl_lahir = new com.toedter.calendar.JDateChooser();
+        tgl_regpasien = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -171,7 +171,7 @@ public class regispasienform extends javax.swing.JFrame {
         getContentPane().add(No_tele);
         No_tele.setBounds(930, 210, 335, 32);
 
-        Jenis_Kelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Jenis Kelamin-", "Laki-Laki", "Perempuan" }));
+        Jenis_Kelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Jenis Kelamin-", "L", "P" }));
         getContentPane().add(Jenis_Kelamin);
         Jenis_Kelamin.setBounds(580, 390, 134, 32);
 
@@ -290,10 +290,6 @@ public class regispasienform extends javax.swing.JFrame {
         jButton2.setPreferredSize(new java.awt.Dimension(89, 23));
         getContentPane().add(jButton2);
         jButton2.setBounds(1170, 550, 90, 40);
-        getContentPane().add(tgl_lahir);
-        tgl_lahir.setBounds(810, 170, 200, 30);
-        getContentPane().add(tgl_regpasien);
-        tgl_regpasien.setBounds(680, 490, 120, 30);
 
         jLabel3.setText("Tgl Registrasi Pasien");
         getContentPane().add(jLabel3);
@@ -304,10 +300,14 @@ public class regispasienform extends javax.swing.JFrame {
         kartu_iduser.setBounds(820, 490, 110, 30);
         getContentPane().add(ListPasien);
         ListPasien.setBounds(20, 100, 550, 420);
+        getContentPane().add(tgl_lahir);
+        tgl_lahir.setBounds(810, 170, 130, 30);
+        getContentPane().add(tgl_regpasien);
+        tgl_regpasien.setBounds(700, 490, 100, 30);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 0, 1360, 670);
+        jLabel2.setBounds(0, 0, 1359, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
