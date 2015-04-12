@@ -33,4 +33,14 @@ public class DaftarRawatInapController {
        Pasien ambilPasien = new Pasien();
        pasienService.getPasien();
    }
+   
+   public String kamarKosong (String parameterA){
+       String kamar = "";
+       if (parameterA.equals("coba")){
+        kamar = "kosong";}
+       else {
+        kamar = "ada isinya";
+       }
+       return kamar;
+   }
 }

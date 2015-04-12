@@ -200,6 +200,11 @@ public class Rawatinap extends javax.swing.JFrame {
         ok.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428228446_ok.png"))); // NOI18N
         ok.setText("OK");
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okActionPerformed(evt);
+            }
+        });
         getContentPane().add(ok);
         ok.setBounds(990, 460, 110, 41);
 
@@ -309,6 +314,10 @@ public class Rawatinap extends javax.swing.JFrame {
         carnampas.setForeground(Color.black);
         carnampas.setFont(new Font("Tahoma", 0, 12));
     }//GEN-LAST:event_carnampasKeyReleased
+
+    private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
+        
+    }//GEN-LAST:event_okActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField NamaPenyakitpasien;

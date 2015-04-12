@@ -1,6 +1,7 @@
 package carismaresepsionis.boundaries;
 
 import carismaresepsionis.controller.ClientSocket;
+import carismaresepsionis.controller.DaftarRawatInapController;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +15,8 @@ public class Menursepsionis extends javax.swing.JFrame {
 
     private ClientSocket client;
     private String userName;
-    public Menursepsionis(ClientSocket client, String userName) {
+   
+    public Menursepsionis(ClientSocket client, String userName) throws RemoteException{
         this.client = client;
         this.userName = userName;
         initComponents();
@@ -202,11 +204,35 @@ public class Menursepsionis extends javax.swing.JFrame {
     }//GEN-LAST:event_RegisPasienRegActionPerformed
 
     private void RegisPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienInapActionPerformed
-        new Rawatinap(this.client, this.userName).show();
+        try {
+            new Rawatinap(this.client, this.userName).show();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_RegisPasienInapActionPerformed
 
     private void LihatPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatPasienInapActionPerformed
-        new DaftarRawatInap(this.client, this.userName).show();
+        DaftarRawatInapController control;
+        try {
+            control = new DaftarRawatInapController (this.client);
+            String a = "coba";
+            //control.kamarKosong(a);
+            if (control.kamarKosong(a).equals("ada isinya")) {
+                
+                //if (tampilUser().equals("benar") && tampilPass() == true) {
+                    new DaftarRawatInap(this.client, this.userName).show();
+                    this.dispose();
+                //} else {
+               // JOptionPane.showMessageDialog(null, "TERJADI ERROR \n Username atau Password Salah", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                //}
+            }
+            else {
+            JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }//GEN-LAST:event_LihatPasienInapActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
