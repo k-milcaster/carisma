@@ -1,0 +1,11 @@
+Features : Melihat jadwal dokter
+
+Scenario : Resepsionis melihat jadwal dokter
+
+- Given resepsionis melakukan login sistem
+- When resepsionis memilih menu fungsi jadwal dokter
+- Then resepsionis ingin mencari jadwal dokter 
+- When resepsionis memilih poli yang diinginkan oleh pasien
+- And resepsionis memilih nama dokter yang dicari
+- Then resepsionis berada di menu jadwal dokter
+- And resepsionis melihat jadwal dokter yang ingin dilihat oleh pasien
