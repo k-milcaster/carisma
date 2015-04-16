@@ -179,6 +179,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
 
         } catch (SQLException exception) {
             ui.act.append("getObatList Error \n");
+            ui.act.append(exception.toString());
             return null;
         } finally {
             if (statement != null) {

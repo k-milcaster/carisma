@@ -16,4 +16,6 @@ public interface DetailresepService extends Remote {
     List<Detailresep> getDetailresep(String idResep) throws RemoteException;
 
     List<Detailresep> getDetailresepByPasien(String idPasien) throws RemoteException;
+    
+    String getLastIdDetailResep() throws RemoteException;
 }

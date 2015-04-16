@@ -64,7 +64,8 @@ public class Obat implements Serializable {
         this.qtyObat = obat.qtyObat;
         this.jenisObat = obat.jenisObat;
         this.keterangan = obat.keterangan;
-        this.hargajualObat = obat.hargajualObat;        
+        this.hargajualObat = obat.hargajualObat;
+        this.stokkritisObat = obat.stokkritisObat;
     }
 
     public Obat(Integer idObat) {
