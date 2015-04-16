@@ -36,7 +36,7 @@ public class ResepController {
         List<Obat> list = new ArrayList<Obat>();
         list = obatService.getObat();
         for (int i = 0; i < list.size(); i++) {            
-            ui.comboBoxObat.addItem(list.get(i).getNamaObat());
+           // ui.comboBoxObat.addItem(list.get(i).getNamaObat());
         }               
     }
 }

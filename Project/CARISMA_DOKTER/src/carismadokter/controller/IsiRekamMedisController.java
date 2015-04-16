@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 package carismadokter.controller;
+import carismadokter.boundaries.IsiResep;
 import carismadokter.boundaries.isirekammedis;
+import carismainterface.entity.Detailresep;
 import carismainterface.entity.Dokter;
 import carismainterface.entity.Obat;
 import carismainterface.entity.Pasien;
@@ -12,6 +14,7 @@ import carismainterface.entity.Rekammedik;
 import carismainterface.entity.Rekammedikpenyakit;
 import carismainterface.entity.Resep;
 import carismainterface.entity.User;
+import carismainterface.server.DetailresepService;
 import carismainterface.server.DokterService;
 import carismainterface.server.ObatService;
 import carismainterface.server.PenyakitService;
@@ -35,6 +38,7 @@ public class IsiRekamMedisController {
     private ObatService obatService;
     private PenyakitService penyakitService;
     private DokterService dokterService;
+    private DetailresepService detailResepService;
     
     
     public IsiRekamMedisController(ClientSocket client) throws RemoteException{
@@ -44,6 +48,7 @@ public class IsiRekamMedisController {
         obatService = client.getObatService();
         penyakitService = client.getPenyakitService();
         dokterService = client.getDokterService();
+        detailResepService = client.getDetailResepService();
     }
     
     public void insertRekamMedis(String idRekammedik, String idDokter, String idPasien, String tglRekamMedis, String keluhan, String pemeriksaan, String terapi, String alergiObat, String kesimpulanPemeriksaan, String kondisiPasien, String idResep) throws RemoteException{
@@ -63,9 +68,8 @@ public class IsiRekamMedisController {
     }
     
     public void insertRekamMedisPenyakit(String idRekamMedis, String idPenyakit) throws RemoteException{
-        Rekammedikpenyakit rekamMedisPenyakit = new Rekammedikpenyakit();
-        rekamMedisPenyakit.setRekammedikIdRekammedik(idRekamMedis);
-        rekamMedisPenyakit.setRekammedikIdRekammedik(idPenyakit);
+        System.out.println("Eh kesini kook");
+        Rekammedikpenyakit rekamMedisPenyakit = new Rekammedikpenyakit(idRekamMedis, idPenyakit);
         rekamMedisPenyakitService.insertRekamMedikPenyakit(rekamMedisPenyakit);
     }
      
@@ -76,13 +80,27 @@ public class IsiRekamMedisController {
         resepService.insertResep(resep);
     }
     
-    public String getIdResep(){
-        Resep resep = new Resep();
-        String idResep = resep.getIdResep();
+    public void insertDetailResep(String idDetailResep, String idResep, String namaObat, int quantity, String aturanPakai)throws RemoteException{
+        Detailresep detailResep = new Detailresep();
+        detailResep.setIdDetailresep(idDetailResep);
+        detailResep.setResepIdResep(idResep);
+        detailResep.setNamaobatResep(namaObat);
+        detailResep.setQtyResep(quantity);
+        detailResep.setAturanpakaiResep(aturanPakai);
+        detailResepService.insertDetailresep(detailResep);
+    }
+    
+    public String getIdDetailResep() throws RemoteException{
+        String idDetailResep = detailResepService.getAutoNumberDetailResep();
+        return idDetailResep;
+    }
+    
+    public String getIdResep() throws RemoteException{
+        String idResep = resepService.getAutoIdResep();
         return idResep;
     }
     
-    public void getNamaObat(isirekammedis ui)throws RemoteException{
+    public void getNamaObat(IsiResep ui)throws RemoteException{
         List<Obat> list = new ArrayList<Obat>();
         list = obatService.getObat();
         for (int i = 0; i < list.size(); i++) {            
@@ -94,7 +112,7 @@ public class IsiRekamMedisController {
         List<Penyakit> list = new ArrayList<Penyakit>();
         list = penyakitService.getPenyakit();
         for (int i = 0; i < list.size(); i++) {            
-            ui.comboBoxPenyakit.addItem(list.get(i).getNamaPenyakit());
+            ui.comboBoxPenyakit.addItem(list.get(i).getIdPenyakit() + " " + list.get(i).getNamaPenyakit());
         }
     }
     
