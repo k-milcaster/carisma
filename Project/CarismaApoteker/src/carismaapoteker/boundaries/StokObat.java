@@ -22,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
 public class StokObat extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
-    private ObatService os;
+    public ObatService os;
+
   
     
     private DefaultTableModel tableObat = new DefaultTableModel();
@@ -54,9 +55,10 @@ public class StokObat extends javax.swing.JFrame {
                         fieldMedicineType.setText(selected.getJenisObat());
                         fieldDescribtion.setText(selected.getKeterangan());
                         fieldPrice.setText(selected.getHargajualObat().toString());
-                        if (selected.getStokkritisObat() != null) {
-                            fieldStokKritis.setText(selected.getStokkritisObat()+"");
-                        }                        
+                        //if (selected.getStokkritisObat() != null) {
+                          //  System.out.println("masuk if "+selected.getStokkritisObat());
+                            fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));
+                        //}                        
                     } catch (RemoteException ex) {
                         Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -236,6 +238,11 @@ public class StokObat extends javax.swing.JFrame {
         fieldStokKritis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
         jButton1.setText("Update Stok Kritis");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -399,6 +406,29 @@ public class StokObat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_fieldSearchActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//       try {
+//           int id = Integer.parseInt(fieldIdMedicine.getText());
+//           int stok = Integer.parseInt(fieldStokKritis.getText());
+//           
+//       }
+        try {
+            StokObatController controller = new StokObatController(client);
+            int row = tableMedicine.getSelectedRow();
+            if(row == -1){
+                return;
+            }
+            int id = Integer.parseInt(fieldIdMedicine.getText());
+            int stok = Integer.parseInt(fieldStokKritis.getText());
+            controller.updateStokObat(id, stok);
+            controller.getObats(this);
+            fieldStokKritis.setText("");
+        } catch (Exception e) {
+        }
+         
+         
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField fieldDescribtion;
     private javax.swing.JTextField fieldIdMedicine;
