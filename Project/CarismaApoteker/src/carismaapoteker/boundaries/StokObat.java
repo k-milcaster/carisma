@@ -193,6 +193,8 @@ public class StokObat extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        fieldQuantity.setEditable(false);
+        fieldQuantity.setBackground(new java.awt.Color(255, 255, 255));
         fieldQuantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldQuantity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
@@ -205,9 +207,13 @@ public class StokObat extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Jenis");
 
+        fieldMedicineName.setEditable(false);
+        fieldMedicineName.setBackground(new java.awt.Color(255, 255, 255));
         fieldMedicineName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldMedicineName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
+        fieldPrice.setEditable(false);
+        fieldPrice.setBackground(new java.awt.Color(255, 255, 255));
         fieldPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
@@ -219,6 +225,8 @@ public class StokObat extends javax.swing.JFrame {
         fieldIdMedicine.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldIdMedicine.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
+        fieldMedicineType.setEditable(false);
+        fieldMedicineType.setBackground(new java.awt.Color(255, 255, 255));
         fieldMedicineType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldMedicineType.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
@@ -228,6 +236,8 @@ public class StokObat extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Nama Obat");
 
+        fieldDescribtion.setEditable(false);
+        fieldDescribtion.setBackground(new java.awt.Color(255, 255, 255));
         fieldDescribtion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldDescribtion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
@@ -419,9 +429,19 @@ public class StokObat extends javax.swing.JFrame {
                 return;
             }
             int id = Integer.parseInt(fieldIdMedicine.getText());
-            int stok = Integer.parseInt(fieldStokKritis.getText());
-            controller.updateStokObat(id, stok);
+            String nama = fieldMedicineName.getText();
+            int qty = Integer.parseInt(fieldQuantity.getText());
+            String jenis = fieldMedicineType.getText();
+            String keterangan = fieldDescribtion.getText();
+            int hargaJual = Integer.parseInt(fieldPrice.getText());
+            int stokKritis = Integer.parseInt(fieldStokKritis.getText());
+            controller.updateStokObat(id, nama, qty, jenis, keterangan, hargaJual, stokKritis);
             controller.getObats(this);
+//            fieldMedicineName.setText("");
+//            fieldQuantity.setText("");
+//            fieldMedicineType.setText("");
+//            fieldDescribtion.setText("");
+//            fieldPrice.setText("");
             fieldStokKritis.setText("");
         } catch (Exception e) {
         }
