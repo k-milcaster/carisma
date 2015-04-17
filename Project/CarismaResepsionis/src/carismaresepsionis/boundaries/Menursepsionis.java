@@ -28,6 +28,7 @@ public class Menursepsionis extends javax.swing.JFrame {
         this.userName = userName;
         AntrianController control = new AntrianController(this.client);
         ps = client.getPasienService();
+        control.getNamaPasien(this);
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
@@ -92,6 +93,11 @@ public class Menursepsionis extends javax.swing.JFrame {
                 "Daftar Antrian"
             }
         ));
+        tableDaftarAntrian.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDaftarAntrianMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableDaftarAntrian);
 
         getContentPane().add(jScrollPane1);
@@ -254,6 +260,11 @@ public class Menursepsionis extends javax.swing.JFrame {
   
     }//GEN-LAST:event_List_AntrianActionPerformed
 
+    private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
+        int row = tableDaftarAntrian.getSelectedRow();
+        new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 0))).setVisible(true);
+    }//GEN-LAST:event_tableDaftarAntrianMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LihatPasienInap;
     private javax.swing.JComboBox List_Antrian;
@@ -271,6 +282,6 @@ public class Menursepsionis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tableDaftarAntrian;
+    public javax.swing.JTable tableDaftarAntrian;
     // End of variables declaration//GEN-END:variables
 }
