@@ -42,13 +42,24 @@ public class StokObatController {
         ui.tableMedicine.setModel(model);
         return model;
     }
-    public void updateStokObat (int idObat, int stok) throws RemoteException{   
+    public void updateStokObat (int idObat, String namaObat, int qtyObat, String jenisObat, String keterangan, int hargaJualObat, int stokKritis) throws RemoteException{   
             Obat obat = new Obat();
             obat.setIdObat(idObat);
-            obat.setStokkritisObat(stok);
+            obat.setNamaObat(namaObat);
+            obat.setQtyObat(qtyObat);
+            obat.setJenisObat(jenisObat);
+            obat.setKeterangan(keterangan);
+            obat.setHargajualObat(hargaJualObat);
+            obat.setStokkritisObat(stokKritis);
             obatService.updateObat(obat);
     
     }
+//    public DefaultTableModel getObatbyName (String nama) throws RemoteException{
+//        List<Obat> list = new ArrayList<Obat>();
+//        list = obatService.getObatbyName(nama);
+//        
+//    } 
+
        
     }
    
