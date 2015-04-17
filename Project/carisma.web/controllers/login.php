@@ -7,12 +7,14 @@ class Login extends Controller {
         Session::init();
         $this->view->title = "Login";
         $this->view->render('login/index', 1, 0);
+//        Session::get($key)
+        
     }
 
     function index() {
         Index::__construct();
     }
-
+    
 }
 
 ?>
