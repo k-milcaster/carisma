@@ -12,8 +12,9 @@ class singleDoctor extends Controller {
         $masukindums = "";
 
         $this->loadModel("Dokter");
+//        $this->loadModel("Jadwaldokter");
         $rak = $this->model->getDokter($param);
-        //$rakdua = $this->model->
+        $rakdua = $this->model->getJadwalDokter($param);
         foreach ($rak as $key => $value) {
             $masukindums = $masukindums . '<div class="container">
         <div class="header about-header text-center">
@@ -37,13 +38,16 @@ class singleDoctor extends Controller {
                         Phone : ' . $value[6] . ' <br>
                         Sex : ' . $value[11] . ' <br>
                         Blood : ' . $value[12] . ' <br>
-                        <br>
-                        Schedule : Monday 09:00 - 15:00 | Wednesday 16:00 - 23:00 </p> <a href="#">BOOK NOW!!</a>               
+                        <br>';
+            foreach ($rakdua as $key=>$value){
+                $masukindums = $masukindums.'Schedule  =  '.$value[1].' || '.$value[2].'</p> <a href="#">BOOK NOW!!</a>               
             </div>
             <div class="clearfix"> </div>
         </div>
         <!---- About-grids ---->
     </div>';
+            }
+                        
         }
 
 

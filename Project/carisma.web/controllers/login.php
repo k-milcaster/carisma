@@ -9,8 +9,6 @@ class Login extends Controller {
         $this->view->render('login/index', 1, 0);
 //        Session::get($key)
         
-        
-        
     }
 
     function index() {
