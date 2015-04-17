@@ -10,6 +10,7 @@ import carismainterface.entity.Pasien;
 import carismainterface.server.AntrianService;
 import carismainterface.server.DokterService;
 import carismainterface.server.PasienService;
+import carismaresepsionis.boundaries.Menursepsionis;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,18 +32,32 @@ public class AntrianController {
         
                                 
     }
-    public void insertAntrian(String id_antrian, String pasien_id_pasien,String dokter_id_dokter, int nomor_antrian, String jenis_antrian, String tanggal_antrian, String hadir) throws RemoteException {
-        Antrian antrian = new Antrian();
-        antrian.setIdAntrian(id_antrian);
-        antrian.setPasienIdPasien(pasien_id_pasien);
-        antrian.setDokterIdDokter(dokter_id_dokter);
-        antrian.setNomorAntrian(nomor_antrian);
-        antrian.setJenisAntrian(jenis_antrian);
-        antrian.setTglAntrian(tanggal_antrian);
-        antrian.setHadir(hadir);
-        antrianService.insertAntrian(antrian);
-    
+//    public void insertAntrian(String id_antrian, String pasien_id_pasien,String dokter_id_dokter, int nomor_antrian, String jenis_antrian, String tanggal_antrian, String hadir) throws RemoteException {
+//        Antrian antrian = new Antrian();
+//        antrian.setIdAntrian(id_antrian);
+//        antrian.setPasienIdPasien(pasien_id_pasien);
+//        antrian.setDokterIdDokter(dokter_id_dokter);
+//        antrian.setNomorAntrian(nomor_antrian);
+//        antrian.setJenisAntrian(jenis_antrian);
+//        antrian.setTglAntrian(tanggal_antrian);
+//        antrian.setHadir(hadir);
+//        antrianService.insertAntrian(antrian);
+//    
+//    }
+    public DefaultTableModel getNamaPasien(Pasien ui) throws RemoteException{
+        
+        List<Pasien> list = new ArrayList<Pasien>();
+        list = pasienService.getPasien();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Nama Pasien");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getNamaPasien()});
+            System.out.println("lewat");
+        }
+        //ui.tableNamaAntrian.setModel(model);
+        return model;
     }
+    
     public String getIdPasien(){
         Pasien pasien = new Pasien();
         String idPasien = pasien.getIdPasien();
@@ -53,5 +68,7 @@ public class AntrianController {
         String idDokter = dokter.getIdDokter();
         return idDokter;
     }
+
+    
 
 }

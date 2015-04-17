@@ -1,11 +1,15 @@
 package carismaresepsionis.boundaries;
 
+import carismainterface.server.PasienService;
+import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.DaftarRawatInapController;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,14 +19,20 @@ public class Menursepsionis extends javax.swing.JFrame {
 
     private ClientSocket client;
     private String userName;
+    private PasienService ps;
+    
+    private DefaultTableModel tableAntri = new DefaultTableModel();
    
     public Menursepsionis(ClientSocket client, String userName) throws RemoteException{
         this.client = client;
         this.userName = userName;
+        AntrianController control = new AntrianController(this.client);
+        ps = client.getPasienService();
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
-
+              
+    
         //   tanggalkustom();
     }
     @SuppressWarnings("unchecked")
@@ -30,7 +40,7 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableDaftarAntrian = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
         List_Antrian = new javax.swing.JComboBox();
         RegisPasienReg = new javax.swing.JButton();
@@ -50,7 +60,7 @@ public class Menursepsionis extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableDaftarAntrian.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -82,7 +92,7 @@ public class Menursepsionis extends javax.swing.JFrame {
                 "Daftar Antrian"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableDaftarAntrian);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 100, 1072, 402);
@@ -94,6 +104,11 @@ public class Menursepsionis extends javax.swing.JFrame {
         jButton5.setBounds(376, 559, 110, 50);
 
         List_Antrian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Kategori -", "Dokter Umum", "Dokter Anak", "Dokter THT", "Dokter Mata", "Dokter " }));
+        List_Antrian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                List_AntrianActionPerformed(evt);
+            }
+        });
         getContentPane().add(List_Antrian);
         List_Antrian.setBounds(20, 559, 350, 50);
 
@@ -235,6 +250,10 @@ public class Menursepsionis extends javax.swing.JFrame {
        
     }//GEN-LAST:event_LihatPasienInapActionPerformed
 
+    private void List_AntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_List_AntrianActionPerformed
+  
+    }//GEN-LAST:event_List_AntrianActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LihatPasienInap;
     private javax.swing.JComboBox List_Antrian;
@@ -251,7 +270,7 @@ public class Menursepsionis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tableDaftarAntrian;
     // End of variables declaration//GEN-END:variables
 }
