@@ -6,7 +6,11 @@ package carismaresepsionis.controller;
 
 import carismainterface.entity.*;
 import carismainterface.server.PasienService;
+import carismaresepsionis.boundaries.Rawatinap;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,11 +24,20 @@ public class RawatinapController {
       
 } 
    
-    public String getNamaPasien(){
-        Pasien pasien = new Pasien();
-        String NamaPasien = pasien.getNamaPasien();
-        return NamaPasien;
+   public DefaultTableModel getNamaPasien(Rawatinap ui) throws RemoteException{
+        
+        List<Pasien> list = new ArrayList<Pasien>();
+        list = pasienService.getPasien();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Nama Pasien");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getNamaPasien()});
+            System.out.println("lewat");
+        }
+        ui.tablepasien.setModel(model);
+        return model;
     }
+   
     public String getIdPasien(){
         Pasien pasien = new Pasien();
         String IdPasien = pasien.getIdPasien();
@@ -55,7 +68,15 @@ public class RawatinapController {
         return gantiParameterTarif;
     }
     
-    
+     public String kamarKosong (String parameterA){
+       String kamar = "";
+       if (parameterA.equals("coba")){
+        kamar = "kosong";}
+       else {
+        kamar = "ada isinya";
+       }
+       return kamar;
+   }
     
     
     

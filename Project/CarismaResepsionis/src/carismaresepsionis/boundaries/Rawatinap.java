@@ -258,23 +258,21 @@ public class Rawatinap extends javax.swing.JFrame {
         //if(model.getNamaPasien() > 0){ tablepasien.setRowSelectionInterval(0,0);}  
         tablepasien.setValueAt(model, WIDTH, WIDTH);*/ 
     private void tablepasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepasienMouseClicked
-        RawatinapController ambilData;
-        try {
-            ambilData = new RawatinapController (client);
-            Kamar model = (Kamar)tablelistkamarpasien.getModel();
-            tablelistkamarpasien.setValueAt(model, WIDTH, WIDTH);
-            int row = tablepasien.getSelectedRow();
-            String namaPasien = " ";
-            namaPasien = String.valueOf(tablepasien.getValueAt(row, 0));
-            idpasien.setText(ambilData.getIdPasien());
-            namapasien.setText(ambilData.getNamaPasien());
-            NamaPenyakitpasien.setText(ambilData.getNamaPenyakit());
-            
-            
-        } catch (RemoteException ex) {
-            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, "ada salah disini", ex);
-        }
         
+        int row = tablePasien.getRowCount();
+        try {
+            //new Rawatinap(client, String.valueOf(tablePasien.getValueAt(row, 0))).setVisible(true);
+            RawatinapController ambilData = new RawatinapController(client);
+            //idpasien.setText(ambilData.getIdPasien());
+            namapasien.setText(String.valueOf(tablePasien.getValueAt(row, 0)));
+            //NamaPenyakitpasien.setText(ambilData.getNamaPenyakit());
+
+        } catch (RemoteException ex) {
+            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                        
+            
+       
     }//GEN-LAST:event_tablepasienMouseClicked
 
     private void tablelistkamarpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistkamarpasienMouseClicked
@@ -335,7 +333,7 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JTextField namapasien;
     private javax.swing.JButton ok;
     private javax.swing.JTable tablelistkamarpasien;
-    private javax.swing.JTable tablepasien;
+    public javax.swing.JTable tablepasien;
     private javax.swing.JTextField tarif;
     // End of variables declaration//GEN-END:variables
 }

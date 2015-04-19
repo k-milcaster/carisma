@@ -330,4 +330,30 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
         }
     }
 
+    @Override
+    public String getlastIdRekamMedik() throws RemoteException {
+        ui.act.append("Client Execute getLastIdRekamMedis");
+        
+        String lastIdRekamMedis = " ";
+        PreparedStatement state = null;
+        try {
+            state = DatabaseConnection.getConnection().prepareStatement("SELECT MAX(`id_rekammedik`) FROM `rekammedik`");
+            ResultSet resultSet = state.executeQuery();
+            if (resultSet.next()) {
+                lastIdRekamMedis = resultSet.getString(1);
+            }
+            return lastIdRekamMedis;
+        } catch (SQLException exception) {
+            ui.act.append("getLastIdResep\n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (state != null) {
+                try {
+                    state.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
 }

@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author kepoterz
  */
-public class PegawaiManagement {
+public class StaffManagement {
     public void getPegawai(carismaserver.boundaries.StaffManagement ui) throws RemoteException {
         StaffEntity pegawaiService = new StaffEntity(ui.ui);
         List<Pegawai> list = new ArrayList<Pegawai>();

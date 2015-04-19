@@ -79,9 +79,4 @@ public class ResepEntity extends UnicastRemoteObject implements ResepService {
             }
         }
     }
-    public String getDateNow() throws RemoteException{
-        DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
-        String date = df.format(new java.util.Date());
-        return date;
-    }
 }
