@@ -171,7 +171,7 @@ public class IsiRekamMedisController {
     }
     
     public String getIdRekamMedis()throws RemoteException{
-        String lastIdRekamMedik = rekamMedikService.lastIdRekamMedis();
+        String lastIdRekamMedik = rekamMedikService.getlastIdRekamMedik();
         String[] splitDateNow = getDateNow().split("-");
         String dateNow = splitDateNow[0].concat(splitDateNow[1]).concat(splitDateNow[2]);
         String awalan = "REKMED-".concat(dateNow).concat("-");
@@ -227,7 +227,7 @@ public class IsiRekamMedisController {
     }
     
     public String[] getIdDokter(String userName) throws RemoteException{
-        String[] dokterInfor = dokterService.getIdDokter(userName);
+        String[] dokterInfor = dokterService.getIdNamaDokter(userName);
         return dokterInfor;
     }
     

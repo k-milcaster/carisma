@@ -68,8 +68,6 @@ public class IsiResep extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/Resep.jpg"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(383, 496));
-        jLabel1.setMinimumSize(new java.awt.Dimension(383, 496));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -108,6 +106,8 @@ public class IsiResep extends javax.swing.JFrame {
         jLabel11.setText("Keterangan");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 382, -1, -1));
 
+        fieldIdResep.setEditable(false);
+        fieldIdResep.setBackground(new java.awt.Color(255, 255, 255));
         fieldIdResep.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fieldIdResep.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
         jPanel1.add(fieldIdResep, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 30, 260, 30));
