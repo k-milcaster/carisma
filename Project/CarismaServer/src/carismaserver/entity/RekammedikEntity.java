@@ -331,7 +331,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
     }
 
     @Override
-    public String getlastIdRekamMedis() throws RemoteException {
+    public String getlastIdRekamMedik() throws RemoteException {
         ui.act.append("Client Execute getLastIdRekamMedis");
         
         String lastIdRekamMedis = " ";

@@ -29,5 +29,5 @@ public interface RekammedikService extends Remote {
 
     List<Rekammedik> getRekamMedik() throws RemoteException;
     
-    String getlastIdRekamMedis() throws RemoteException;
+    String getlastIdRekamMedik() throws RemoteException;
 }
