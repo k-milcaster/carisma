@@ -44,36 +44,41 @@ public class AntrianController {
 //        antrianService.insertAntrian(antrian);
 //    
 //    }
-    public DefaultTableModel getNamaPasien(Menursepsionis ui) throws RemoteException{
+    public DefaultTableModel getAntrian(Menursepsionis ui) throws RemoteException{
         
         List<Antrian> list = new ArrayList<Antrian>();
         list = antrianService.getAntrian();
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Nama Pasien");
+        DefaultTableModel tabelAntrian = new DefaultTableModel();
+        tabelAntrian.addColumn("Id Antrian");
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{list.get(i).getIdAntrian()});
+            tabelAntrian.addRow(new Object[]{list.get(i).getIdAntrian()});
             System.out.println("lewat");
         }
-        ui.tableDaftarAntrian.setModel(model);
-        return model;
+        ui.tableDaftarAntrian.setModel(tabelAntrian);
+        return tabelAntrian;
     }
     
-    public Antrian detailAntrian(String idAntrian) throws RemoteException{
-        Antrian antrian = antrianService.getAntrian(idAntrian);
+    public Antrian getAntrianDetail(String id) throws RemoteException{
+        Antrian antrian = antrianService.getAntrian(id);
+        //System.out.println(antrian.getPasienIdPasien());
         return antrian;
-        
     }
     
-    public String getIdPasien(){
-        Pasien pasien = new Pasien();
-        String idPasien = pasien.getIdPasien();
-        return idPasien;
+    public Pasien getDetailPasien(String idPasien) throws RemoteException{
+        Pasien pasien = pasienService.getPasien(idPasien);
+        return pasien;
     }
-    public String getIdDokter(){
-        Dokter dokter = new Dokter();
-        String idDokter = dokter.getIdDokter();
-        return idDokter;
-    }
+    
+//    public String getIdPasien(){
+//        Pasien pasien = new Pasien();
+//        String idPasien = pasien.getIdPasien();
+//        return idPasien;
+//    }
+//    public String getIdDokter(){
+//        Dokter dokter = new Dokter();
+//        String idDokter = dokter.getIdDokter();
+//        return idDokter;
+//    }
 
     
 
