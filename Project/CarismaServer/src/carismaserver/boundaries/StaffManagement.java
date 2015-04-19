@@ -25,7 +25,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class StaffManagement extends javax.swing.JFrame {
 
-    private carismaserver.controllers.PegawaiManagement control = new carismaserver.controllers.PegawaiManagement();
+    private carismaserver.controllers.StaffManagement control = new carismaserver.controllers.StaffManagement();
     private StaffEntity staffService;
     public Main ui;
     private File file;
