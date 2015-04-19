@@ -22,9 +22,8 @@ public class DaftarRawatInapController {
        
         
 } 
-   public void insertNamaPasien () throws RemoteException{
-       
-       
+   public void insertNamaPasien (String namaPasien, String idPasien, String namaPenyakit, String namaKamar, String kelasKamar, String tarif) throws RemoteException{
+      
        Pasien pasien = new Pasien ();
        pasienService.insertPasien(pasien);
    }

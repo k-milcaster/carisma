@@ -7,8 +7,11 @@ import carismaresepsionis.controller.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,6 +24,9 @@ public class Rawatinap extends javax.swing.JFrame {
     private String userName;
     private PasienService ps;
     private DefaultTableModel tablePasien = new DefaultTableModel();
+    private DaftarRawatInapController daftarRawatInapController;
+    settergetter simpanan = new settergetter();
+    String a, b, c, d, e, f;
     
     public Rawatinap(ClientSocket client, String userName) throws RemoteException {
         
@@ -31,6 +37,14 @@ public class Rawatinap extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         //control.getNamaPasien();
+        
+        a = namapasien.getText();
+        b = idpasien.getText();
+        c = NamaPenyakitpasien.getText();
+        d = namaKamar.getText();
+        e = kelasKamar.getText();
+        f = tarif.getText();
+       
     }
 
 //    void awalan
@@ -292,7 +306,47 @@ public class Rawatinap extends javax.swing.JFrame {
     }//GEN-LAST:event_carnampasKeyReleased
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
-        
+        //lek default
+        if (((a.equals(namapasien.getText())) && (b.equals(idpasien.getText())) && (c.equals(NamaPenyakitpasien.getText())) && (d.equals(namaKamar.getText()))
+                && (e.equals(kelasKamar.getText())) && (f.equals(tarif.getText())))) {
+            JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
+            System.out.println("1");
+
+        } //lek kosong
+        else  if (((a.equals(namapasien.getText())) || (b.equals(idpasien.getText())) || (c.equals(NamaPenyakitpasien.getText())) || (d.equals(namaKamar.getText()))
+                && (e.equals(kelasKamar.getText())) || (f.equals(tarif.getText())))) {
+            JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
+            System.out.println("2");
+        } //         int tinggi,bert,umur;
+       
+        else {
+
+            try {
+                //Date date = new Date(tgl_lahir.getDate().getTime());
+                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                //String lah = sdf.format(date);
+                //Date now = tgl_regpasien.getDate();
+                //String hariIni = sdf.format(now);
+
+                int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
+                if (pilihan == 0) {
+                    daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(), NamaPenyakitpasien.getText(),  namaKamar.getText(), kelasKamar.getText(), tarif.getText());
+                    System.out.println("3");
+                    //JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
+                    //ListPasien.add(Nama_Pasien.getText());
+                    namapasien.setText("");
+                    idpasien.setText("");
+                    NamaPenyakitpasien.setText("");
+                    namaKamar.setText("");
+                    kelasKamar.setText("");
+                    tarif.setText("");
+                    
+
+                }
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+        }
     }//GEN-LAST:event_okActionPerformed
 
     private void tablepasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepasienMouseClicked
