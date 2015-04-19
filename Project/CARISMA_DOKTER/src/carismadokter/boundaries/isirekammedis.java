@@ -34,12 +34,16 @@ public class isirekammedis extends javax.swing.JFrame {
         this.username = username;
         
         initComponents();
-        
         dateNow = new java.util.Date();
         dateRekamMedis.setDate(dateNow);
-        isiRekamMedisController.getNamaPenyakit(this);
+        
         this.jLabel1.setText(username);
-        fieldIdDokter.setText(isiRekamMedisController.getIdDokter(this.username));
+        String[] dokterInfor = isiRekamMedisController.getIdDokter(this.username);
+        fieldIdDokter.setText(dokterInfor[0]);
+        labelNamaDokter.setText(dokterInfor[1]);
+        isiRekamMedisController.getNamaPenyakit(this);
+        fieldIdRekamMedis.setText(isiRekamMedisController.getIdRekamMedis());
+        
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -62,7 +66,19 @@ public class isirekammedis extends javax.swing.JFrame {
         System.out.println("Get Id Resep"+idResep);
         return idResep;
     }
-
+    
+    public void clearField(){
+        fieldIdPasien.setText("");
+        textAreaKeluhan.setText("");
+        textAreaAlergiObat.setText("");
+        textAreaKesimpulan.setText("");
+        textAreaKondisiPasien.setText("");
+        textAreaPemeriksaan.setText("");
+        textAreaTerapi.setText("");
+        DefaultListModel modelPenyakit = (DefaultListModel)listPenyakit.getModel();
+        modelPenyakit.removeAllElements();
+        listPenyakit.setModel(modelPenyakit);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -244,11 +260,16 @@ public class isirekammedis extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/tombol-delete.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setViewportView(listPenyakit);
 
         buttonTambahPenyakit.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        buttonTambahPenyakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426717487_save.png"))); // NOI18N
+        buttonTambahPenyakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1429342283_519691-199_CircledPlus-12.png"))); // NOI18N
         buttonTambahPenyakit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonTambahPenyakitActionPerformed(evt);
@@ -337,8 +358,13 @@ public class isirekammedis extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426717770_circle_close_delete-24.png"))); // NOI18N
         jButton4.setText("Cancel");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         buttonTambahResep.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonTambahResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1428524407_check_book.png"))); // NOI18N
@@ -458,12 +484,21 @@ public class isirekammedis extends javax.swing.JFrame {
         jLabel5.setText("Id Rekam Medis");
 
         fieldIdPasien.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        fieldIdPasien.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldIdPasienFocusLost(evt);
+            }
+        });
 
+        fieldIdRekamMedis.setEditable(false);
+        fieldIdRekamMedis.setBackground(new java.awt.Color(255, 255, 255));
         fieldIdRekamMedis.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Id Dokter");
 
+        fieldIdDokter.setEditable(false);
+        fieldIdDokter.setBackground(new java.awt.Color(255, 255, 255));
         fieldIdDokter.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -486,17 +521,16 @@ public class isirekammedis extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(fieldIdDokter))
-                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel11Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(fieldIdRekamMedis))
-                        .addGroup(jPanel11Layout.createSequentialGroup()
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(45, 45, 45)
-                            .addComponent(fieldIdPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fieldIdRekamMedis))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(fieldIdPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jButton5)
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -546,19 +580,23 @@ public class isirekammedis extends javax.swing.JFrame {
             try {
                 IsiRekamMedisController rekamMedisController = new IsiRekamMedisController(client);
                 
-                rekamMedisController.insertRekamMedis(fieldIdRekamMedis.getText(), fieldIdDokter.getText(), fieldIdPasien.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), 
+                int pilihan = JOptionPane.showConfirmDialog(null, "Apakah Data yang Anda Isi Sudah Benar?","Rekam Medis",JOptionPane.YES_NO_OPTION);
+                if (pilihan == 0) {
+                    rekamMedisController.insertRekamMedis(fieldIdRekamMedis.getText(), fieldIdDokter.getText(), fieldIdPasien.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), 
                                                       textAreaKeluhan.getText(), textAreaPemeriksaan.getText(), textAreaTerapi.getText(), textAreaAlergiObat.getText(), 
                                                       textAreaKesimpulan.getText(), textAreaKondisiPasien.getText(), idResep);
-                for (int i = 0; i < listPenyakit.getModel().getSize(); i++) {
-                    String idPenyakit = String.valueOf( listPenyakit.getModel().getElementAt(i));
-                    String [] idPenyakitList = idPenyakit.split(" ");
-                    idPenyakit = idPenyakitList[0];
-                    System.out.println("List ID Penyakit "+idPenyakit);
-                    rekamMedisController.insertRekamMedisPenyakit(fieldIdRekamMedis.getText(), idPenyakit);
-                    
+                    for (int i = 0; i < listPenyakit.getModel().getSize(); i++) {
+                        String idPenyakit = String.valueOf( listPenyakit.getModel().getElementAt(i));
+                        String [] idPenyakitList = idPenyakit.split(" ");
+                        idPenyakit = idPenyakitList[0];
+                        rekamMedisController.insertRekamMedisPenyakit(fieldIdRekamMedis.getText(), idPenyakit);
+                    }
+                    JOptionPane.showMessageDialog(null, "Data Rekam Medis Sudah Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
+                    clearField();
+                    fieldIdRekamMedis.setText(rekamMedisController.getIdRekamMedis());
                 }
-                JOptionPane.showMessageDialog(null, "Data Rekam Medis Sudah Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception e) {
+                System.out.println(e);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -582,6 +620,31 @@ public class isirekammedis extends javax.swing.JFrame {
             Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonTambahResepActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultListModel modelPenyakit = (DefaultListModel)listPenyakit.getModel();
+        
+        int row = listPenyakit.getSelectedIndex();
+        modelPenyakit.removeElementAt(row);
+        listPenyakit.setModel(modelPenyakit);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        clearField();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void fieldIdPasienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldIdPasienFocusLost
+        try {
+            IsiRekamMedisController isiRekamMedisController = new IsiRekamMedisController(this.client);
+            boolean registered = isiRekamMedisController.cekIdPasien(fieldIdPasien.getText());
+            if (registered == false) {
+                JOptionPane.showMessageDialog(null, "Id Pasien "+fieldIdPasien.getText()+" belum pernah terdaftar\nSilakan mendaftar di bagian Resepsionis","Rekam Medis",JOptionPane.WARNING_MESSAGE);
+            }
+    
+        } catch (RemoteException ex) {
+            Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_fieldIdPasienFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonTambahPenyakit;
