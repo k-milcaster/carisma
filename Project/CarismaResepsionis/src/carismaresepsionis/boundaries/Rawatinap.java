@@ -22,7 +22,8 @@ public class Rawatinap extends javax.swing.JFrame {
     private PasienService ps;
     private DefaultTableModel tablePasien = new DefaultTableModel();
     
-    public Rawatinap(ClientSocket client, String userName) throws RemoteException {
+    public Rawatinap(ClientSocket client, String userName, String idPasien, String idPenyakit) throws RemoteException {
+        
         this.client = client;
         RawatinapController control = new RawatinapController(this.client);
         ps = client.getPasienService();
@@ -258,18 +259,20 @@ public class Rawatinap extends javax.swing.JFrame {
         //if(model.getNamaPasien() > 0){ tablepasien.setRowSelectionInterval(0,0);}  
         tablepasien.setValueAt(model, WIDTH, WIDTH);*/ 
     private void tablepasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepasienMouseClicked
-        
-        int row = tablePasien.getRowCount();
+            
+            int row = tablePasien.getRowCount();
         try {
+            
             //new Rawatinap(client, String.valueOf(tablePasien.getValueAt(row, 0))).setVisible(true);
             RawatinapController ambilData = new RawatinapController(client);
-            //idpasien.setText(ambilData.getIdPasien());
-            namapasien.setText(String.valueOf(tablePasien.getValueAt(row, 0)));
-            //NamaPenyakitpasien.setText(ambilData.getNamaPenyakit());
-
+            idpasien.setText(String.valueOf(tablePasien.getValueAt(row, 0)));
+            namapasien.setText(String.valueOf(tablePasien.getValueAt(row, 1)));
+            //NamaPenyakitpasien.String.valueOf(ambilData.getDetailPenyakit(coba).getNamaPasien());
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+
                         
             
        

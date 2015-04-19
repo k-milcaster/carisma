@@ -5,7 +5,7 @@
 package carismaresepsionis.controller;
 
 import carismainterface.entity.*;
-import carismainterface.server.PasienService;
+import carismainterface.server.*;
 import carismaresepsionis.boundaries.Rawatinap;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RawatinapController {
     private PasienService pasienService;
-    
+    private PenyakitService penyakitService;
     public RawatinapController (ClientSocket client) throws RemoteException{
         this.pasienService = client.getPasienService();
       
@@ -29,25 +29,27 @@ public class RawatinapController {
         List<Pasien> list = new ArrayList<Pasien>();
         list = pasienService.getPasien();
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Pasien");
         model.addColumn("Nama Pasien");
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{list.get(i).getNamaPasien()});
+            model.addRow(new Object[]{list.get(i).getIdPasien()});
             System.out.println("lewat");
         }
         ui.tablepasien.setModel(model);
         return model;
     }
    
-    public String getIdPasien(){
-        Pasien pasien = new Pasien();
-        String IdPasien = pasien.getIdPasien();
-        return IdPasien;
+    public Pasien getDetailPasien(String idPasien) throws RemoteException{
+        Pasien pasien = pasienService.getPasien(idPasien);
+        return pasien;
+        //Pasien pasien = new Pasien();
+        //String IdPasien = pasien.getIdPasien();
+        //return IdPasien;
     }
     
-    public String getNamaPenyakit(){
-        Penyakit penyakit = new Penyakit();
-        String NamaPenyakit = penyakit.getNamaPenyakit();
-        return NamaPenyakit;
+    public Penyakit getDetailPenyakit(String idPenyakit) throws RemoteException{
+        Penyakit penyakit = penyakitService.getPenyakit(idPenyakit);
+        return penyakit;
     }
     
     public String getNamaKamar(){
