@@ -13,17 +13,17 @@ public class lihatantrian extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
 
-    public lihatantrian(ClientSocket client, String userName, String idPasien,String idAntrian) throws RemoteException {
+    public lihatantrian(ClientSocket client, String userName, String idAntrian) throws RemoteException {
         this.client = client;
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         AntrianController control = new AntrianController(this.client);
         NomorAntrian.setText(String.valueOf(control.getAntrianDetail(idAntrian).getNomorAntrian()));
+        String idPasien = String.valueOf(control.getAntrianDetail(idAntrian).getPasienIdPasien());
         NamaPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getNamaPasien()));
         AlamatPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getAlamatPasien()));
-        //String idPasien = String.valueOf(control.getAntrianDetail(idAntrian).getPasienIdPasien());
-    }
+        }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

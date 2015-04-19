@@ -262,8 +262,11 @@ public class Menursepsionis extends javax.swing.JFrame {
 
     private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
        int row = tableDaftarAntrian.getSelectedRow();
-       new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 0))).setVisible(true);
-       
+       try {
+            new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 0))).setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_tableDaftarAntrianMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
