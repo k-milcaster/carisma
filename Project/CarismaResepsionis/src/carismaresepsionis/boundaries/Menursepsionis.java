@@ -28,7 +28,8 @@ public class Menursepsionis extends javax.swing.JFrame {
         this.userName = userName;
         AntrianController control = new AntrianController(this.client);
         ps = client.getPasienService();
-        control.getNamaPasien(this);
+        control.getAntrian(this);
+        control.getAntrianDetail("AA001"); //contoh bentar
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
@@ -261,8 +262,9 @@ public class Menursepsionis extends javax.swing.JFrame {
     }//GEN-LAST:event_List_AntrianActionPerformed
 
     private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
-        int row = tableDaftarAntrian.getSelectedRow();
-        new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 0))).setVisible(true);
+       int row = tableDaftarAntrian.getSelectedRow();
+       new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 0))).setVisible(true);
+       
     }//GEN-LAST:event_tableDaftarAntrianMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
