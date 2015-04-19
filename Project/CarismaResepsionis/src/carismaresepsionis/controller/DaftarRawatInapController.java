@@ -17,14 +17,13 @@ public class DaftarRawatInapController {
     private PasienService pasienService;
     
     
-    public DaftarRawatInapController (ClientSocket client) throws RemoteException{
+    public DaftarRawatInapController (ClientSocket client){
         this.pasienService = client.getPasienService();
        
         
 } 
-   public void insertNamaPasien () throws RemoteException{
-       
-       
+   public void insertNamaPasien (String namaPasien, String idPasien, String namaPenyakit, String namaKamar, String kelasKamar, String tarif) throws RemoteException{
+      
        Pasien pasien = new Pasien ();
        pasienService.insertPasien(pasien);
    }
@@ -34,13 +33,5 @@ public class DaftarRawatInapController {
        pasienService.getPasien();
    }
    
-   public String kamarKosong (String parameterA){
-       String kamar = "";
-       if (parameterA.equals("coba")){
-        kamar = "kosong";}
-       else {
-        kamar = "ada isinya";
-       }
-       return kamar;
-   }
+  
 }

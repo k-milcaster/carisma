@@ -7,8 +7,11 @@ import carismaresepsionis.controller.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,8 +24,12 @@ public class Rawatinap extends javax.swing.JFrame {
     private String userName;
     private PasienService ps;
     private DefaultTableModel tablePasien = new DefaultTableModel();
+    private DaftarRawatInapController daftarRawatInapController;
+    settergetter simpanan = new settergetter();
+    String a, b, c, d, e, f;
     
     public Rawatinap(ClientSocket client, String userName) throws RemoteException {
+        
         this.client = client;
         RawatinapController control = new RawatinapController(this.client);
         ps = client.getPasienService();
@@ -30,6 +37,14 @@ public class Rawatinap extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         //control.getNamaPasien();
+        
+        a = namapasien.getText();
+        b = idpasien.getText();
+        c = NamaPenyakitpasien.getText();
+        d = namaKamar.getText();
+        e = kelasKamar.getText();
+        f = tarif.getText();
+       
     }
 
 //    void awalan
@@ -41,8 +56,6 @@ public class Rawatinap extends javax.swing.JFrame {
         tablelistkamarpasien = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         carnampas = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablepasien = new javax.swing.JTable();
         idpasien = new javax.swing.JTextField();
         namapasien = new javax.swing.JTextField();
         NamaPenyakitpasien = new javax.swing.JTextField();
@@ -53,7 +66,8 @@ public class Rawatinap extends javax.swing.JFrame {
         tarif = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablepasien = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -98,7 +112,7 @@ public class Rawatinap extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablelistkamarpasien);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(426, 179, 540, 402);
+        jScrollPane1.setBounds(430, 190, 540, 402);
 
         jLabel1.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -115,11 +129,11 @@ public class Rawatinap extends javax.swing.JFrame {
             }
         });
         carnampas.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                carnampasFocusLost(evt);
-            }
             public void focusGained(java.awt.event.FocusEvent evt) {
                 carnampasFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                carnampasFocusLost(evt);
             }
         });
         carnampas.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -129,48 +143,6 @@ public class Rawatinap extends javax.swing.JFrame {
         });
         getContentPane().add(carnampas);
         carnampas.setBounds(10, 130, 410, 40);
-
-        tablepasien.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Nama Pasien"
-            }
-        ));
-        tablepasien.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablepasienMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tablepasien);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 179, 406, 402);
 
         idpasien.setText("ID Pasien");
         idpasien.addActionListener(new java.awt.event.ActionListener() {
@@ -231,9 +203,47 @@ public class Rawatinap extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(990, 170, 90, 14);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(0, 0, 1370, 690);
+        tablepasien.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID Pasien", "Nama Pasien"
+            }
+        ));
+        tablepasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablepasienMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tablepasien);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(10, 190, 410, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -251,34 +261,14 @@ public class Rawatinap extends javax.swing.JFrame {
     private void idpasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idpasienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idpasienActionPerformed
- /*Pasien model = (Pasien)tablepasien.getModel();  
-        String query=null;  
-        query="lower(nama) like '%"+ carnampas.getText()+"%' ";  
-        model.setNamaPasien(query);  
-        //if(model.getNamaPasien() > 0){ tablepasien.setRowSelectionInterval(0,0);}  
-        tablepasien.setValueAt(model, WIDTH, WIDTH);*/ 
-    private void tablepasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepasienMouseClicked
-        RawatinapController ambilData;
-        try {
-            ambilData = new RawatinapController (client);
-            Kamar model = (Kamar)tablelistkamarpasien.getModel();
-            tablelistkamarpasien.setValueAt(model, WIDTH, WIDTH);
-            int row = tablepasien.getSelectedRow();
-            String namaPasien = " ";
-            namaPasien = String.valueOf(tablepasien.getValueAt(row, 0));
-            idpasien.setText(ambilData.getIdPasien());
-            namapasien.setText(ambilData.getNamaPasien());
-            NamaPenyakitpasien.setText(ambilData.getNamaPenyakit());
-            
-            
-        } catch (RemoteException ex) {
-            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, "ada salah disini", ex);
-        }
-        
-    }//GEN-LAST:event_tablepasienMouseClicked
 
     private void tablelistkamarpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistkamarpasienMouseClicked
-        RawatinapController ambilData;
+         int row = tablelistkamarpasien.getSelectedRow();
+            
+            namaKamar.setText(String.valueOf(tablepasien.getValueAt(row, 0)));
+            kelasKamar.setText(String.valueOf(tablepasien.getValueAt(row, 1)));
+            tarif.setText(String.valueOf(tablepasien.getValueAt(row, 2)));
+        /*RawatinapController ambilData;
         try {
             ambilData = new RawatinapController (client);
             
@@ -292,7 +282,7 @@ public class Rawatinap extends javax.swing.JFrame {
             
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, "ada salah disini", ex);
-        }
+        }*/
     }//GEN-LAST:event_tablelistkamarpasienMouseClicked
 
     private void carnampasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_carnampasFocusGained
@@ -316,8 +306,58 @@ public class Rawatinap extends javax.swing.JFrame {
     }//GEN-LAST:event_carnampasKeyReleased
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
-        
+        //lek default
+        if (((a.equals(namapasien.getText())) && (b.equals(idpasien.getText())) && (c.equals(NamaPenyakitpasien.getText())) && (d.equals(namaKamar.getText()))
+                && (e.equals(kelasKamar.getText())) && (f.equals(tarif.getText())))) {
+            JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
+            System.out.println("1");
+
+        } //lek kosong
+        else  if (((a.equals(namapasien.getText())) || (b.equals(idpasien.getText())) || (c.equals(NamaPenyakitpasien.getText())) || (d.equals(namaKamar.getText()))
+                && (e.equals(kelasKamar.getText())) || (f.equals(tarif.getText())))) {
+            JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
+            System.out.println("2");
+        } //         int tinggi,bert,umur;
+       
+        else {
+
+            try {
+                //Date date = new Date(tgl_lahir.getDate().getTime());
+                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                //String lah = sdf.format(date);
+                //Date now = tgl_regpasien.getDate();
+                //String hariIni = sdf.format(now);
+
+                int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
+                if (pilihan == 0) {
+                    daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(), NamaPenyakitpasien.getText(),  namaKamar.getText(), kelasKamar.getText(), tarif.getText());
+                    System.out.println("3");
+                    //JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
+                    //ListPasien.add(Nama_Pasien.getText());
+                    namapasien.setText("");
+                    idpasien.setText("");
+                    NamaPenyakitpasien.setText("");
+                    namaKamar.setText("");
+                    kelasKamar.setText("");
+                    tarif.setText("");
+                    
+
+                }
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+        }
     }//GEN-LAST:event_okActionPerformed
+
+    private void tablepasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepasienMouseClicked
+         int row = tablepasien.getSelectedRow();
+            
+            idpasien.setText(String.valueOf(tablepasien.getValueAt(row, 0)));
+            namapasien.setText(String.valueOf(tablepasien.getValueAt(row, 1)));
+            
+            
+       
+    }//GEN-LAST:event_tablepasienMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField NamaPenyakitpasien;
@@ -327,15 +367,14 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField kelasKamar;
     private javax.swing.JTextField namaKamar;
     private javax.swing.JTextField namapasien;
     private javax.swing.JButton ok;
-    private javax.swing.JTable tablelistkamarpasien;
-    private javax.swing.JTable tablepasien;
+    public javax.swing.JTable tablelistkamarpasien;
+    public javax.swing.JTable tablepasien;
     private javax.swing.JTextField tarif;
     // End of variables declaration//GEN-END:variables
 }

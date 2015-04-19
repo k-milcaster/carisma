@@ -3,13 +3,14 @@ package carismaapoteker.boundaries;
 import carismaapoteker.controller.ClientSocket;
 import carismaapoteker.controller.TransaksiJualObatController;
 import java.util.Date;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author User
+ * @author Sinta Eka Lestari
  */
 public class TransaksiJualObat extends javax.swing.JFrame {
 
@@ -23,7 +24,6 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         this.Client = Client;
         this.userName = userName;
         initComponents();
-        setLocationRelativeTo(this);
         Date date = new Date();
         dateOfSales.setDate(date);
     }
@@ -43,7 +43,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         Quantity = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        comboBoxObat = new javax.swing.JComboBox();
+        IdObat = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         labelAoptekerName = new javax.swing.JLabel();
@@ -95,9 +95,9 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("ID Obat");
 
-        comboBoxObat.addActionListener(new java.awt.event.ActionListener() {
+        IdObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxObatActionPerformed(evt);
+                IdObatActionPerformed(evt);
             }
         });
 
@@ -125,7 +125,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
                 .addGap(60, 60, 60)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(comboBoxObat, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(IdObat, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -137,7 +137,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5))
-                        .addComponent(comboBoxObat, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addComponent(IdObat, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(fieldDescription))
                     .addComponent(fieldIdOfSales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -168,7 +168,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(10, 170, 1350, 158);
+        jPanel2.setBounds(10, 170, 1350, 0);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1426717487_save.png"))); // NOI18N
@@ -255,14 +255,14 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if ((fieldIdOfSales.getText().equals("")||fieldDescription.getText().equals("")||jTextField1.getText().equals(""))){
+        if ((IdObat.getSelectedItem().equals(" ") ||fieldIdOfSales.getText().equals("")||fieldDescription.getText().equals("")||jTextField1.getText().equals(""))){
             JOptionPane.showMessageDialog(null, "Field yang anda isi tidak lengkap","Peringatan",JOptionPane.WARNING_MESSAGE);
         }
         else{
             try {
                 TransaksiJualObatController transaksijual = new TransaksiJualObatController(Client);
                 transaksijual.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf (new Date(dateOfSales.getDate().getTime())), fieldDescription.getText());
-                JOptionPane.showMessageDialog(null, "Data Tersimpan");
+                JOptionPane.showMessageDialog(null, "Data Transaksi Penjualan Obat Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
                 
             } catch (Exception e) {
             }
@@ -270,17 +270,25 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void comboBoxObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxObatActionPerformed
+    private void IdObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdObatActionPerformed
+       DefaultListModel model = new DefaultListModel();
+        for (int i = 0; i < IdObat.getModel().getSize(); i++) {
+            Object item = IdObat.getModel().getElementAt(i);
+            model.addElement(item.toString());
+        }
+       // int obat = IdObat.getSelectedItem();
+       // model.addElement(obat);
         
-    }//GEN-LAST:event_comboBoxObatActionPerformed
+        
+    }//GEN-LAST:event_IdObatActionPerformed
 
     private void fieldIdOfSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdOfSalesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldIdOfSalesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JComboBox IdObat;
     private javax.swing.JLabel Quantity;
-    public javax.swing.JComboBox comboBoxObat;
     private com.toedter.calendar.JDateChooser dateOfSales;
     private javax.swing.JTextField fieldDescription;
     private javax.swing.JTextField fieldIdOfSales;

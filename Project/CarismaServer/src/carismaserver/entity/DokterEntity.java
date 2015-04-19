@@ -236,20 +236,20 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
     }
 
     @Override
-    public String getIdDokter(String username) throws RemoteException {
+    public String[] getIdNamaDokter(String username) throws RemoteException {
         ui.act.append("Client Execute getIdDokter(" + username + ") \n");
-        String idDokter = " ";
+        String[] dokterInfo = new String[2];
         Statement state = null;
         ResultSet resultSet = null;
         
         try {
             state = DatabaseConnection.getConnection().createStatement();
-            resultSet = state.executeQuery("SELECT D.id_dokter FROM `dokter` AS D, user AS "
-                    + "WHERE D.user_id_user = 2 AND U.username = '"+username+"'");
+            resultSet = state.executeQuery("SELECT D.id_dokter, D.nama_dokter FROM `dokter` AS D, user AS U WHERE D.user_id_user = 2 AND U.username = '"+username+"'");
             while (resultSet.next()) {
-                idDokter = resultSet.getString(1);
+                dokterInfo[0] = resultSet.getString(1);
+                dokterInfo[1] = resultSet.getString(2);
             }
-            return idDokter;
+            return dokterInfo;
         } catch (SQLException e) {
             ui.act.append("getIdDokter Error\n");
             ui.act.append(e.toString());
@@ -263,5 +263,6 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             }
         }
     }
+
 
 }

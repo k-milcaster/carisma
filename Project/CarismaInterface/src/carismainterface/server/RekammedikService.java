@@ -28,4 +28,6 @@ public interface RekammedikService extends Remote {
     List<Rekammedik> getRekamMedikByTahun(String bulan, String tahun, String pasien) throws RemoteException;    
 
     List<Rekammedik> getRekamMedik() throws RemoteException;
+    
+    String getlastIdRekamMedik() throws RemoteException;
 }

@@ -9,6 +9,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,4 +131,31 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
             }
         }
     }
+
+    @Override
+    public String getLastIdDetailResep() throws RemoteException {
+        ui.act.append("Client Execute getLastIdDetailResep");
+        String idDetailResep = " ";
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement("SELECT MAX(`id_detailresep`) FROM `detailresep`");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                idDetailResep = resultSet.getString(1);
+            }         
+            return idDetailResep;
+        } catch (SQLException exception) {
+            ui.act.append("getLastIdDetailResep Error\n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+ 
 }

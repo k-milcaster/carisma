@@ -1,13 +1,16 @@
 package carismaserver.entity;
 
-import carismainterface.server.ResepService;
 import carismainterface.entity.Resep;
+import carismainterface.server.ResepService;
 import carismaserver.boundaries.Main;
 import carismaserver.controllers.DatabaseConnection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -51,4 +54,29 @@ public class ResepEntity extends UnicastRemoteObject implements ResepService {
         }
     }
 
+    @Override
+    public String getLastIdResep() throws RemoteException {
+         ui.act.append("Client Execute getLastIdResep");
+        String idResep = " ";
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement("SELECT MAX(`id_detailresep`) FROM `detailresep`");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                idResep = resultSet.getString(1);
+            }
+            return idResep;
+        } catch (SQLException exception) {
+            ui.act.append("getLastIdResep Error\n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
 }

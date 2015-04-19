@@ -5,8 +5,12 @@
 package carismaresepsionis.controller;
 
 import carismainterface.entity.*;
-import carismainterface.server.PasienService;
+import carismainterface.server.*;
+import carismaresepsionis.boundaries.Rawatinap;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,27 +18,49 @@ import java.rmi.RemoteException;
  */
 public class RawatinapController {
     private PasienService pasienService;
-    
+    private PenyakitService penyakitService;
+    private KamarService kamarService;
     public RawatinapController (ClientSocket client) throws RemoteException{
         this.pasienService = client.getPasienService();
       
 } 
    
-    public String getNamaPasien(){
-        Pasien pasien = new Pasien();
-        String NamaPasien = pasien.getNamaPasien();
-        return NamaPasien;
+   public DefaultTableModel getNamaPasien(Rawatinap ui) throws RemoteException{
+        
+        List<Pasien> list = new ArrayList<Pasien>();
+        list = pasienService.getPasien();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Pasien");
+        model.addColumn("Nama Pasien");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdPasien()});
+            System.out.println("lewat");
+        }
+        ui.tablepasien.setModel(model);
+        return model;
     }
-    public String getIdPasien(){
-        Pasien pasien = new Pasien();
-        String IdPasien = pasien.getIdPasien();
-        return IdPasien;
+   
+    
+    
+    public Penyakit getDetailPenyakit (String idPenyakit) throws RemoteException{
+        Penyakit penyakit = penyakitService.getPenyakit(idPenyakit);
+        return penyakit;
     }
     
-    public String getNamaPenyakit(){
-        Penyakit penyakit = new Penyakit();
-        String NamaPenyakit = penyakit.getNamaPenyakit();
-        return NamaPenyakit;
+    public DefaultTableModel getNamaKamar(Rawatinap ui) throws RemoteException{
+        
+        List<Kamar> list = new ArrayList<Kamar>();
+        list = kamarService.getKamar();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Nama Kamar");
+        model.addColumn("Kelas Kamar");
+        model.addColumn("Tarif Kamar");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdKamar()});
+            System.out.println("lewat");
+        }
+        ui.tablelistkamarpasien.setModel(model);
+        return model;
     }
     
     public String getNamaKamar(){
@@ -55,7 +81,15 @@ public class RawatinapController {
         return gantiParameterTarif;
     }
     
-    
+     public String kamarKosong (String parameterA){
+       String kamar = "";
+       if (parameterA.equals("coba")){
+        kamar = "kosong";}
+       else {
+        kamar = "ada isinya";
+       }
+       return kamar;
+   }
     
     
     

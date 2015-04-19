@@ -50,7 +50,7 @@ public class TransaksiJualObatController {
         List <Obat> list = new ArrayList<Obat>();
         list = obatService.getObat();
         for (int i = 0; i < list.size(); i++){
-            b.comboBoxObat.addItem(list.get(i).getNamaObat());
+            //b.comboBoxObat.addItem(list.get(i).getNamaObat());
         }
         
     }

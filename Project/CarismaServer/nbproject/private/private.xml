@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/Project/CarismaServer/src/carismaserver/entity/ObatEntity.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/Project/CarismaServer/src/carismaserver/controllers/ServerSocket.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/Project/CarismaServer/src/carismaserver/entity/ResepEntity.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/Project/CarismaServer/src/carismaserver/entity/PegawaiEntity.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/Project/CarismaServer/src/carismaserver/controllers/DokterManagement.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/Project/CarismaServer/src/carismaserver/boundaries/StaffManagement.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/Project/CarismaServer/src/carismaserver/entity/RekammedikEntity.java</file>
+            <file>file:/C:/Users/kepoterz/Documents/NetBeansProjects/carisma/Project/CarismaServer/src/carismaserver/boundaries/DoctorManagement.java</file>
         </group>
     </open-files>
 </project-private>

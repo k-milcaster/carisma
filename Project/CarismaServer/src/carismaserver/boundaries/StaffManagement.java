@@ -2,7 +2,7 @@ package carismaserver.boundaries;
 
 import carismainterface.entity.Pegawai;
 import carismaserver.controllers.DatabaseConnection;
-import carismaserver.entity.StaffEntity;
+import carismaserver.entity.PegawaiEntity;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.io.File;
@@ -25,8 +25,8 @@ import javax.swing.event.ListSelectionListener;
  */
 public class StaffManagement extends javax.swing.JFrame {
 
-    private carismaserver.controllers.PegawaiManagement control = new carismaserver.controllers.PegawaiManagement();
-    private StaffEntity staffService;
+    private carismaserver.controllers.StaffManagement control = new carismaserver.controllers.StaffManagement();
+    private PegawaiEntity staffService;
     public Main ui;
     private File file;
     private DatabaseConnection databaseConnection;
@@ -43,7 +43,7 @@ public class StaffManagement extends javax.swing.JFrame {
                 int row = tablePegawai.getSelectedRow();
                 if (row != -1) {
                     try {
-                        staffService = new StaffEntity(ui);
+                        staffService = new PegawaiEntity(ui);
                         Pegawai selected = new Pegawai(staffService.getPegawai(tablePegawai.getValueAt(row, 1).toString()));
                         fieldId.setText(selected.getIdPegawai());
                         fieldNama.setText(selected.getNamaPegawai());

@@ -49,14 +49,15 @@ public class ServerSocket {
             RekammedikEntity rekammedik = new RekammedikEntity(ui);
             RekammedikpenyakitEntity rekammedikpenyakit = new RekammedikpenyakitEntity(ui);
             ResepEntity resep = new ResepEntity(ui);
-            StaffEntity staff = new StaffEntity(ui);
+            PegawaiEntity staff = new PegawaiEntity(ui);
             TransaksibeliobatEntity transaksibeliobat = new TransaksibeliobatEntity(ui);
             TransaksijualobatEntity transaksijualobat = new TransaksijualobatEntity(ui);
             UserEntity user = new UserEntity(ui);
             PenyakitEntity penyakit = new PenyakitEntity(ui);
             KotaEntity kota = new KotaEntity(ui);
             ProvinsiEntity provinsi = new ProvinsiEntity(ui);
-            
+            PoliEntity poli = new PoliEntity(ui);
+
             server.rebind("userRequest", user);
             server.rebind("antrianRequest", antrian);
             server.rebind("detailobatRequest", detailobat);
@@ -82,7 +83,8 @@ public class ServerSocket {
             server.rebind("penyakitRequest", penyakit);
             server.rebind("kotaRequest", kota);
             server.rebind("provinsiRequest", provinsi);
-            
+            server.rebind("poliRequest", poli);
+                    
             ui.act.append("Server Started \n");
         } catch (RemoteException ex) {
             Logger.getLogger(ServerSocket.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,16 +92,33 @@ public class ServerSocket {
     }
 
     public void Close() throws RemoteException, NotBoundException {
-//        server.unbind("customerServer");
-//        server.unbind("employeeServer");
-//        server.unbind("officeServer");
-//        server.unbind("orderDetailsPKServer");
-//        server.unbind("orderDetailServer");
-//        server.unbind("ordersServer");
-//        server.unbind("paymentsPKServer");
-//        server.unbind("paymentServer");
-//        server.unbind("productServer");
-//        server.unbind("productLinesServer");
+        server.unbind("userRequest");
+        server.unbind("antrianRequest");
+        server.unbind("detailobatRequest");
+        server.unbind("detailresepRequest");
+        server.unbind("detailtransaksijualobatRequest");
+        server.unbind("detailtransaksibeliobatRequest");
+        server.unbind("dokterRequest");
+        server.unbind("jadwalRequest");
+        server.unbind("jadwaldokterRequest");
+        server.unbind("jadwalpegawaiRequest");
+        server.unbind("kamarRequest");
+        server.unbind("kunjunganRequest");
+        server.unbind("obatRequest");
+        server.unbind("pasienRequest");
+        server.unbind("pasienkamarRequest");
+        server.unbind("rakobatRequest");
+        server.unbind("rekammedikRequest");
+        server.unbind("rekammedikpenyakitRequest");
+        server.unbind("resepRequest");
+        server.unbind("staffRequest");
+        server.unbind("transaksibeliobatRequest");
+        server.unbind("transaksijualobatRequest");
+        server.unbind("penyakitRequest");
+        server.unbind("kotaRequest");
+        server.unbind("provinsiRequest");
+        server.unbind("poliRequest");
+        
         ui.act.append("Server Stopped \n");
     }
 }

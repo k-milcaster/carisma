@@ -101,7 +101,7 @@
                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="comboBoxObat" min="-2" pref="141" max="-2" attributes="0"/>
+                      <Component id="IdObat" min="-2" pref="141" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -116,7 +116,7 @@
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="comboBoxObat" alignment="0" pref="38" max="32767" attributes="0"/>
+                              <Component id="IdObat" alignment="0" pref="38" max="32767" attributes="0"/>
                               <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                               <Component id="fieldDescription" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -235,14 +235,14 @@
                 <Property name="text" type="java.lang.String" value="ID Obat"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="comboBoxObat">
+            <Component class="javax.swing.JComboBox" name="IdObat">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxObatActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IdObatActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

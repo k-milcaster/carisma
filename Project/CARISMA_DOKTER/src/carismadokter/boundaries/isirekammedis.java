@@ -12,9 +12,10 @@ import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
-import java.sql.Date;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class isirekammedis extends javax.swing.JFrame {
@@ -22,24 +23,29 @@ public class isirekammedis extends javax.swing.JFrame {
     private ClientSocket client;
     private UserService login;
     private String username;
-    private String idRekamMedis = "REK001";
-    private String idDokter = "DOK001";
-    private String idPasien = "PAS002";
-    private String idResep = "RES001";
-    private String idDetailResep = "DR0001";
-
+    public String idResep;
+    java.util.Date dateNow = new java.util.Date();
+    java.sql.Date sqlDate;
+        
     public isirekammedis(ClientSocket client, final String username) throws RemoteException {
         this.client = client;
         IsiRekamMedisController isiRekamMedisController = new IsiRekamMedisController(this.client);
         this.login = this.client.getUserService();
         this.username = username;
+        
         initComponents();
-        isiRekamMedisController.getNamaObat(this);
-        isiRekamMedisController.getNamaPenyakit(this);
+        dateNow = new java.util.Date();
+        dateRekamMedis.setDate(dateNow);
+        
         this.jLabel1.setText(username);
-        fieldIdDokter.setText(this.username);
+        String[] dokterInfor = isiRekamMedisController.getIdDokter(this.username);
+        fieldIdDokter.setText(dokterInfor[0]);
+        labelNamaDokter.setText(dokterInfor[1]);
+        isiRekamMedisController.getNamaPenyakit(this);
+        fieldIdRekamMedis.setText(isiRekamMedisController.getIdRekamMedis());
+        
         this.setExtendedState(this.MAXIMIZED_BOTH);
-                this.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 LoginController log = new LoginController(login, username);
                 try {
@@ -55,29 +61,23 @@ public class isirekammedis extends javax.swing.JFrame {
         });
     }
     
-    public String getIdRekamMedis() throws RemoteException{
-        IsiRekamMedisController rekamMedisController = new IsiRekamMedisController(client);
-        return idRekamMedis = rekamMedisController.getIdRekamMedis();
+    public String getIdResep(IsiResep ui){
+        String idResep = ui.fieldIdResep.getText();
+        System.out.println("Get Id Resep"+idResep);
+        return idResep;
     }
     
-//    public String getIdDokter()throws RemoteException{
-//        IsiRekamMedisController rekamMedisController = new IsiRekamMedisController(client);
-//        return idDokter = rekamMedisController.getIdDokter();
-//    }
-    
-    public String getIdPasien() throws RemoteException{
-        IsiRekamMedisController rekamMedisController = new IsiRekamMedisController(client);
-        return idPasien = rekamMedisController.getIdPasien();
-    }
-    
-    public String getIdResep() throws RemoteException{
-        ResepController resepController = new ResepController(client);
-        return idResep = resepController.getIdResep();
-    }
-    
-    public String getIdDetailResep() throws RemoteException{
-        DetailResepController detailResepController = new DetailResepController(client);
-        return idDetailResep = detailResepController.getIdDetailResep();
+    public void clearField(){
+        fieldIdPasien.setText("");
+        textAreaKeluhan.setText("");
+        textAreaAlergiObat.setText("");
+        textAreaKesimpulan.setText("");
+        textAreaKondisiPasien.setText("");
+        textAreaPemeriksaan.setText("");
+        textAreaTerapi.setText("");
+        DefaultListModel modelPenyakit = (DefaultListModel)listPenyakit.getModel();
+        modelPenyakit.removeAllElements();
+        listPenyakit.setModel(modelPenyakit);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -97,17 +97,6 @@ public class isirekammedis extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         textAreaPemeriksaan = new javax.swing.JTextArea();
-        jPanel7 = new javax.swing.JPanel();
-        comboBoxObat = new javax.swing.JComboBox();
-        buttonSimpanResep = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        fieldQuantity = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textAreaKeterangan = new javax.swing.JTextArea();
-        jLabel9 = new javax.swing.JLabel();
-        fieldAturanPakai = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         textAreaTerapi = new javax.swing.JTextArea();
@@ -116,12 +105,7 @@ public class isirekammedis extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listPenyakit = new javax.swing.JList();
-        jPanel17 = new javax.swing.JPanel();
-        fieldInputPenyakit = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        listPenyakit1 = new javax.swing.JList();
-        jButton6 = new javax.swing.JButton();
+        buttonTambahPenyakit = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         textAreaKesimpulan = new javax.swing.JTextArea();
@@ -130,13 +114,11 @@ public class isirekammedis extends javax.swing.JFrame {
         textAreaKondisiPasien = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        buttonTambahResep = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         dateRekamMedis = new com.toedter.calendar.JDateChooser();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         fieldIdPasien = new javax.swing.JTextField();
@@ -254,95 +236,6 @@ public class isirekammedis extends javax.swing.JFrame {
             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resep", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
-
-        buttonSimpanResep.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        buttonSimpanResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426717487_save.png"))); // NOI18N
-        buttonSimpanResep.setEnabled(false);
-        buttonSimpanResep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSimpanResepActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Nama Obat");
-
-        fieldQuantity.setEditable(false);
-        fieldQuantity.setBackground(new java.awt.Color(255, 255, 255));
-        fieldQuantity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        textAreaKeterangan.setEditable(false);
-        textAreaKeterangan.setColumns(20);
-        textAreaKeterangan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        textAreaKeterangan.setLineWrap(true);
-        textAreaKeterangan.setRows(5);
-        jScrollPane3.setViewportView(textAreaKeterangan);
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel9.setText("Quantity");
-
-        fieldAturanPakai.setEditable(false);
-        fieldAturanPakai.setBackground(new java.awt.Color(255, 255, 255));
-        fieldAturanPakai.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel10.setText("Aturan Pakai");
-
-        jLabel11.setText("Ket.");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(fieldAturanPakai))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel9))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(fieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxObat, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(buttonSimpanResep, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboBoxObat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(fieldAturanPakai, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10))
-                    .addComponent(buttonSimpanResep, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Terapi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
 
         textAreaTerapi.setColumns(20);
@@ -367,70 +260,49 @@ public class isirekammedis extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/tombol-delete.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setViewportView(listPenyakit);
 
-        jPanel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel12.setFont(new java.awt.Font("Agency FB", 0, 14)); // NOI18N
-        jLabel12.setText("Input Penyakit");
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(fieldInputPenyakit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(fieldInputPenyakit, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addComponent(jLabel12))
-        );
-
-        jScrollPane7.setViewportView(listPenyakit1);
-
-        jButton6.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426717487_save.png"))); // NOI18N
+        buttonTambahPenyakit.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
+        buttonTambahPenyakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1429342283_519691-199_CircledPlus-12.png"))); // NOI18N
+        buttonTambahPenyakit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTambahPenyakitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(comboBoxPenyakit, 0, 190, Short.MAX_VALUE))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboBoxPenyakit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(buttonTambahPenyakit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboBoxPenyakit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxPenyakit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonTambahPenyakit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46))
         );
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Kesimpulan Pemeriksaan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
@@ -460,11 +332,6 @@ public class isirekammedis extends javax.swing.JFrame {
         textAreaKondisiPasien.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         textAreaKondisiPasien.setLineWrap(true);
         textAreaKondisiPasien.setRows(5);
-        textAreaKondisiPasien.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                textAreaKondisiPasienMouseMoved(evt);
-            }
-        });
         jScrollPane10.setViewportView(textAreaKondisiPasien);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
@@ -474,7 +341,7 @@ public class isirekammedis extends javax.swing.JFrame {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,8 +358,22 @@ public class isirekammedis extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426717770_circle_close_delete-24.png"))); // NOI18N
         jButton4.setText("Cancel");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        buttonTambahResep.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        buttonTambahResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1428524407_check_book.png"))); // NOI18N
+        buttonTambahResep.setText("Tambah Resep");
+        buttonTambahResep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTambahResepActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -508,16 +389,21 @@ public class isirekammedis extends javax.swing.JFrame {
                     .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 2, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 7, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(buttonTambahResep)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -536,17 +422,21 @@ public class isirekammedis extends javax.swing.JFrame {
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(buttonTambahResep)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(267, 267, 267)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 206, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 206, 1030, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tanggal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
 
@@ -585,41 +475,7 @@ public class isirekammedis extends javax.swing.JFrame {
 
         getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 0, -1));
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
-
-        jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jTextField6.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField6.setText("cari pasien dengan ID");
-        jTextField6.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField6FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField6FocusLost(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
-        jLabel3.setText("Cari");
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addComponent(jLabel3))
-        );
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Field Utama", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Id Pasien");
@@ -628,15 +484,24 @@ public class isirekammedis extends javax.swing.JFrame {
         jLabel5.setText("Id Rekam Medis");
 
         fieldIdPasien.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        fieldIdPasien.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldIdPasienFocusLost(evt);
+            }
+        });
 
+        fieldIdRekamMedis.setEditable(false);
+        fieldIdRekamMedis.setBackground(new java.awt.Color(255, 255, 255));
         fieldIdRekamMedis.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Id Dokter");
 
+        fieldIdDokter.setEditable(false);
+        fieldIdDokter.setBackground(new java.awt.Color(255, 255, 255));
         fieldIdDokter.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1428524407_check_book.png"))); // NOI18N
         jButton5.setText("Lihat Rekam Medis");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -650,58 +515,45 @@ public class isirekammedis extends javax.swing.JFrame {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(130, 130, 130)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(fieldIdDokter))
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(fieldIdRekamMedis, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(110, 110, 110))
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(fieldIdPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
-                        .addComponent(fieldIdDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(221, 221, 221))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fieldIdRekamMedis))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(fieldIdPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton5))
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fieldIdPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fieldIdRekamMedis, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldIdPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(fieldIdDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6))))))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldIdRekamMedis, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldIdDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 600, 140));
+        getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 500, 140));
 
         jLabel8.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -714,52 +566,9 @@ public class isirekammedis extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField6FocusGained
-        if (jTextField6.getText().equals("cari pasien dengan ID")) {
-            jTextField6.setText("");
-        }
-    }//GEN-LAST:event_jTextField6FocusGained
-
-    private void jTextField6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField6FocusLost
-        if (jTextField6.getText().equals("")) {
-            jTextField6.setText("cari pasien dengan ID");
-            jTextField6.setForeground(Color.gray.brighter());
-            jTextField6.setFont(new Font("Tahoma", 2, 11));
-        }
-    }//GEN-LAST:event_jTextField6FocusLost
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         new dokterlihatrekammedis(this.client, this.username).show();
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void buttonSimpanResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimpanResepActionPerformed
-        if (String.valueOf(comboBoxObat.getSelectedItem()).equals("") || fieldQuantity.getText().equals("") || fieldAturanPakai.getText().equals("") || textAreaKeterangan.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Data yang Anda Masukkan Kurang Lengkap","Peringatan", JOptionPane.WARNING_MESSAGE);
-        }
-        else {
-            try {
-                ResepController resepController = new ResepController(client);
-                DetailResepController detailResepController = new DetailResepController(client);
-
-                resepController.insertResep(idResep, textAreaKeterangan.getText());
-                detailResepController.insertDetailResep(idDetailResep, idResep, String.valueOf(comboBoxObat.getSelectedItem()), Integer.parseInt(fieldQuantity.getText()), fieldAturanPakai.getText());
-            } catch (Exception e) {
-            }
-        }
-    }//GEN-LAST:event_buttonSimpanResepActionPerformed
-
-    private void textAreaKondisiPasienMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textAreaKondisiPasienMouseMoved
-        if (!textAreaKondisiPasien.getText().equals("")) {
-            int pilihan = JOptionPane.showConfirmDialog(null, "Apakah Pasien Akan Membeli Resep Obat?", "Resep Obat", JOptionPane.YES_NO_OPTION);
-            
-            if (pilihan == 0) {
-                comboBoxObat.setEnabled(true);
-                fieldQuantity.setEditable(true);
-                fieldAturanPakai.setEditable(true);
-                textAreaKeterangan.setEditable(true);
-            }
-        }
-    }//GEN-LAST:event_textAreaKondisiPasienMouseMoved
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (fieldIdPasien.getText().equals("") || textAreaKeluhan.getText().equals("") || textAreaPemeriksaan.getText().equals("") || 
@@ -771,77 +580,115 @@ public class isirekammedis extends javax.swing.JFrame {
             try {
                 IsiRekamMedisController rekamMedisController = new IsiRekamMedisController(client);
                 
-                rekamMedisController.insertRekamMedis(idRekamMedis, idDokter, idPasien, String.valueOf(new Date(dateRekamMedis.getDate().getTime())), 
+                int pilihan = JOptionPane.showConfirmDialog(null, "Apakah Data yang Anda Isi Sudah Benar?","Rekam Medis",JOptionPane.YES_NO_OPTION);
+                if (pilihan == 0) {
+                    rekamMedisController.insertRekamMedis(fieldIdRekamMedis.getText(), fieldIdDokter.getText(), fieldIdPasien.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), 
                                                       textAreaKeluhan.getText(), textAreaPemeriksaan.getText(), textAreaTerapi.getText(), textAreaAlergiObat.getText(), 
                                                       textAreaKesimpulan.getText(), textAreaKondisiPasien.getText(), idResep);
-                rekamMedisController.insertRekamMedisPenyakit(idRekamMedis, "A001");
-                JOptionPane.showMessageDialog(null, "Data Rekam Medis Sudah Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
+                    for (int i = 0; i < listPenyakit.getModel().getSize(); i++) {
+                        String idPenyakit = String.valueOf( listPenyakit.getModel().getElementAt(i));
+                        String [] idPenyakitList = idPenyakit.split(" ");
+                        idPenyakit = idPenyakitList[0];
+                        rekamMedisController.insertRekamMedisPenyakit(fieldIdRekamMedis.getText(), idPenyakit);
+                    }
+                    JOptionPane.showMessageDialog(null, "Data Rekam Medis Sudah Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
+                    clearField();
+                    fieldIdRekamMedis.setText(rekamMedisController.getIdRekamMedis());
+                }
             } catch (Exception e) {
+                System.out.println(e);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void buttonTambahPenyakitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahPenyakitActionPerformed
+        DefaultListModel model = new DefaultListModel();
+        for (int i = 0; i < listPenyakit.getModel().getSize(); i++) {
+            Object item = listPenyakit.getModel().getElementAt(i);
+            model.addElement(item.toString());
+        }
+        String penyakit = comboBoxPenyakit.getSelectedItem().toString();
+        model.addElement(penyakit);
+        listPenyakit.setModel(model);
+        
+    }//GEN-LAST:event_buttonTambahPenyakitActionPerformed
+
+    private void buttonTambahResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahResepActionPerformed
+        try {
+            new IsiResep(client, this).setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buttonTambahResepActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultListModel modelPenyakit = (DefaultListModel)listPenyakit.getModel();
+        
+        int row = listPenyakit.getSelectedIndex();
+        modelPenyakit.removeElementAt(row);
+        listPenyakit.setModel(modelPenyakit);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        clearField();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void fieldIdPasienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldIdPasienFocusLost
+        try {
+            IsiRekamMedisController isiRekamMedisController = new IsiRekamMedisController(this.client);
+            boolean registered = isiRekamMedisController.cekIdPasien(fieldIdPasien.getText());
+            if (registered == false) {
+                JOptionPane.showMessageDialog(null, "Id Pasien "+fieldIdPasien.getText()+" belum pernah terdaftar\nSilakan mendaftar di bagian Resepsionis","Rekam Medis",JOptionPane.WARNING_MESSAGE);
+            }
+    
+        } catch (RemoteException ex) {
+            Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_fieldIdPasienFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonSimpanResep;
-    public javax.swing.JComboBox comboBoxObat;
+    private javax.swing.JButton buttonTambahPenyakit;
+    private javax.swing.JButton buttonTambahResep;
     public javax.swing.JComboBox comboBoxPenyakit;
     private com.toedter.calendar.JDateChooser dateRekamMedis;
-    private javax.swing.JTextField fieldAturanPakai;
     public javax.swing.JTextField fieldIdDokter;
     private javax.swing.JTextField fieldIdPasien;
     private javax.swing.JTextField fieldIdRekamMedis;
-    private javax.swing.JTextField fieldInputPenyakit;
-    private javax.swing.JTextField fieldQuantity;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel labelNamaDokter;
     private javax.swing.JList listPenyakit;
-    private javax.swing.JList listPenyakit1;
     private javax.swing.JTextArea textAreaAlergiObat;
     private javax.swing.JTextArea textAreaKeluhan;
     private javax.swing.JTextArea textAreaKesimpulan;
-    private javax.swing.JTextArea textAreaKeterangan;
     private javax.swing.JTextArea textAreaKondisiPasien;
     private javax.swing.JTextArea textAreaPemeriksaan;
     private javax.swing.JTextArea textAreaTerapi;

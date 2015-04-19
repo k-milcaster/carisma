@@ -5,17 +5,25 @@
                 <!---- contact-grids ---->
                 <div class="contact-grids">
                     <div class="col-md-7 contact-grid-right">
-                        <h4>Log In</h4>
-                        <form>
-                            <input type="text" value="Username:" onfocus="this.value = '';" onblur="if (this.value == '') {
-                                                                                    this.value = 'Name:';
-                                                                                }">
-                            <input type="text" value="Password:" onfocus="this.value = '';" onblur="if (this.value == '') {
-                                                                                    this.value = 'Email:';
-                                                                                }">
-                            <input type="submit" value="Log In" />
+                        <h3>Log In</h3> <?php
+                    if (isset($this->ini)) {
+                       // echo'<div class="col-md-5 contact-grid-left>';
+                        echo '<h4>' . $this->ini . '</h4>';
+                        //echo '</div>';
+                    }
+                    ?>
+                        <form method="post" action="<?php echo URL ?>serah/dologin">
+                            <input type="text" name="username" value="Username:" onfocus="this.value = '';" onblur="if (this.value == '') {
+                                        this.value = 'Username:';
+                                    }">
+                            <input type="text" name="pass" value="Password:" onfocus="this.value = '';" onblur="if (this.value == '') {
+                                        this.value = 'Password:';
+                                    }">
+                            <input type="submit" name="input" value="Log In" />
                         </form>
+                        <div class="clearfix"> </div>
                     </div>
+                   
                 </div>
                 <!---- contact-grids ---->
             </div>

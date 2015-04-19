@@ -2,7 +2,7 @@ package carismaserver.controllers;
 
 import carismainterface.entity.Pegawai;
 import carismainterface.entity.User;
-import carismaserver.entity.StaffEntity;
+import carismaserver.entity.PegawaiEntity;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +14,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author kepoterz
  */
-public class PegawaiManagement {
+public class StaffManagement {
     public void getPegawai(carismaserver.boundaries.StaffManagement ui) throws RemoteException {
-        StaffEntity pegawaiService = new StaffEntity(ui.ui);
+        PegawaiEntity pegawaiService = new PegawaiEntity(ui.ui);
         List<Pegawai> list = new ArrayList<Pegawai>();
         list = pegawaiService.getPegawai();
         DefaultTableModel model = new DefaultTableModel();      
@@ -46,7 +46,7 @@ public class PegawaiManagement {
     }
     
     public void insertPegawai(carismaserver.boundaries.StaffManagement ui, String username, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String jabatan, String bank, String norek, int gfix, int glembur, byte[] foto) throws RemoteException {
-        StaffEntity pegawaiService = new StaffEntity(ui.ui);        
+        PegawaiEntity pegawaiService = new PegawaiEntity(ui.ui);        
         try {
             User user = new User();
             Pegawai pegawai = new Pegawai();

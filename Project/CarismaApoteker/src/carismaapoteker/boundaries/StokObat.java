@@ -22,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
 public class StokObat extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
-    private ObatService os;
+    public ObatService os;
+
   
     
     private DefaultTableModel tableObat = new DefaultTableModel();
@@ -54,9 +55,10 @@ public class StokObat extends javax.swing.JFrame {
                         fieldMedicineType.setText(selected.getJenisObat());
                         fieldDescribtion.setText(selected.getKeterangan());
                         fieldPrice.setText(selected.getHargajualObat().toString());
-                        if (selected.getStokkritisObat() != null) {
-                            fieldStokKritis.setText(selected.getStokkritisObat()+"");
-                        }                        
+                        //if (selected.getStokkritisObat() != null) {
+                          //  System.out.println("masuk if "+selected.getStokkritisObat());
+                            fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));
+                        //}                        
                     } catch (RemoteException ex) {
                         Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -191,6 +193,8 @@ public class StokObat extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        fieldQuantity.setEditable(false);
+        fieldQuantity.setBackground(new java.awt.Color(255, 255, 255));
         fieldQuantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldQuantity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
@@ -203,9 +207,13 @@ public class StokObat extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Jenis");
 
+        fieldMedicineName.setEditable(false);
+        fieldMedicineName.setBackground(new java.awt.Color(255, 255, 255));
         fieldMedicineName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldMedicineName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
+        fieldPrice.setEditable(false);
+        fieldPrice.setBackground(new java.awt.Color(255, 255, 255));
         fieldPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
@@ -217,6 +225,8 @@ public class StokObat extends javax.swing.JFrame {
         fieldIdMedicine.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldIdMedicine.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
+        fieldMedicineType.setEditable(false);
+        fieldMedicineType.setBackground(new java.awt.Color(255, 255, 255));
         fieldMedicineType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldMedicineType.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
@@ -226,6 +236,8 @@ public class StokObat extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Nama Obat");
 
+        fieldDescribtion.setEditable(false);
+        fieldDescribtion.setBackground(new java.awt.Color(255, 255, 255));
         fieldDescribtion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldDescribtion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
@@ -236,6 +248,11 @@ public class StokObat extends javax.swing.JFrame {
         fieldStokKritis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
         jButton1.setText("Update Stok Kritis");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -399,6 +416,39 @@ public class StokObat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_fieldSearchActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//       try {
+//           int id = Integer.parseInt(fieldIdMedicine.getText());
+//           int stok = Integer.parseInt(fieldStokKritis.getText());
+//           
+//       }
+        try {
+            StokObatController controller = new StokObatController(client);
+            int row = tableMedicine.getSelectedRow();
+            if(row == -1){
+                return;
+            }
+            int id = Integer.parseInt(fieldIdMedicine.getText());
+            String nama = fieldMedicineName.getText();
+            int qty = Integer.parseInt(fieldQuantity.getText());
+            String jenis = fieldMedicineType.getText();
+            String keterangan = fieldDescribtion.getText();
+            int hargaJual = Integer.parseInt(fieldPrice.getText());
+            int stokKritis = Integer.parseInt(fieldStokKritis.getText());
+            controller.updateStokObat(id, nama, qty, jenis, keterangan, hargaJual, stokKritis);
+            controller.getObats(this);
+//            fieldMedicineName.setText("");
+//            fieldQuantity.setText("");
+//            fieldMedicineType.setText("");
+//            fieldDescribtion.setText("");
+//            fieldPrice.setText("");
+            fieldStokKritis.setText("");
+        } catch (Exception e) {
+        }
+         
+         
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField fieldDescribtion;
     private javax.swing.JTextField fieldIdMedicine;
