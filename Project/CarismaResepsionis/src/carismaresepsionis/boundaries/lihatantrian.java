@@ -23,6 +23,12 @@ public class lihatantrian extends javax.swing.JFrame {
         String idPasien = String.valueOf(control.getAntrianDetail(idAntrian).getPasienIdPasien());
         NamaPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getNamaPasien()));
         AlamatPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getAlamatPasien()));
+        Goldar.setText(String.valueOf(control.getDetailPasien(idPasien).getDarahPasien()));
+        Umur.setText(String.valueOf(control.getDetailPasien(idPasien).getTgllahirPasien()));
+        Tinggi.setText(String.valueOf(control.getDetailPasien(idPasien).getTinggiPasien()));
+        Berat.setText(String.valueOf(control.getDetailPasien(idPasien).getBeratPasien()));
+        String idKunjungan = String.valueOf(control.getDetailKunjungan(idAntrian).getIdKunjungan());
+        TerakhirPeriksa.setText(String.valueOf(control.getDetailKunjungan(idKunjungan).getTanggaljamKunjungan()));
         }
 
     @SuppressWarnings("unchecked")

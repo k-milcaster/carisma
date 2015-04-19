@@ -6,10 +6,12 @@ package carismaresepsionis.controller;
 
 import carismainterface.entity.Antrian;
 import carismainterface.entity.Dokter;
+import carismainterface.entity.Kunjungan;
 import carismainterface.entity.Pasien;
 import carismainterface.server.AntrianService;
 import carismainterface.server.DokterService;
 import carismainterface.server.PasienService;
+import carismainterface.server.KunjunganService;
 import carismaresepsionis.boundaries.Menursepsionis;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -24,11 +26,13 @@ public class AntrianController {
     private AntrianService antrianService;
     private PasienService pasienService;
     private DokterService dokterService;
+    private KunjunganService kunjunganService;
    
     public AntrianController(ClientSocket client) throws RemoteException{
         this.antrianService = client.getAntrianService();
         this.dokterService = client.getDokterService();
         this.pasienService = client.getPasienService();
+        this.kunjunganService = client.getKunjunganService();
         
                                 
     }
@@ -69,6 +73,10 @@ public class AntrianController {
         return pasien;
     }
     
+    public Kunjungan getDetailKunjungan(String idKunjungan) throws RemoteException{
+        Kunjungan kunjungan = kunjunganService.getKunjungan(idKunjungan);
+        return kunjungan;
+    }
 //    public String getIdPasien(){
 //        Pasien pasien = new Pasien();
 //        String idPasien = pasien.getIdPasien();
