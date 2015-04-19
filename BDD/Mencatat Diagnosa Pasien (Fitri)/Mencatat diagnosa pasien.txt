@@ -2,13 +2,19 @@ Feature : Mencatat rekam medis pasien yang sedang diperiksa
 Skenario : Mencatat diagnosa pasien
 
 Given Saya masuk pada antarmuka Rekam Medis Pasien
-When Saya memasukkan ID Pasien
-Then Data Identitas pasien ditampilkan 
-When Data Identitas pasien sudah ditampilkan
-Then Field input keluhan pasien, diagnosa pasien, terapi, kesimpulan pemeriksaan, resep obat, dan nama penyakit "enable"
-And Saya mengisi keluhan pasien, diagnosa pasien, terapi, dan kesimpulan pemeriksaan
-And Saya menginputkan obat dan nama penyakit dari JCombo Box (untuk obat/nama penyakit yang sering diinputkan) atau
-    menggunakan field "pencarian" jika obat yang akan diinputkan belum pernah diinputkan sebelumnya
-Then Obat dan nama penyakit yang telah diinputkan akan ditampilkan pada tabel
-When Saya mengklik tombol "Save"
+When Nama Dokter, Id Dokter, Id Rekam Medis, dan Tanggal hari ini sudah ditampilkan
+Then Saya menginputkan Id Pasien, Keluhan Pasien, Pemeriksaan, Terapi, Alergi Obat,
+     Kesimpulan Pemeriksaan, Kondisi Pasien Keluar
+Then Saya mengklik tombol "Tambah Resep" untuk menambahkan resep obat untuk pasien
+Then Saya memasukkan resep obat untuk pasien
+When Saya mengklik tombol "save" saya mendapat pertanyaan "apakah data yang anda masukkan sudah benar?"
+Then Saya memilih jawaban "Yes"
+When Saya memilih jawaban "Yes"
+Then Data Resep Obat tersimpan
+And saya mendapatkan pesan informasi "data resep obat sudah tersimpan"
+Then Saya memasukkan penyakit yang diderita pasien dari jComboBox
+When Saya mengklik tombol "Save" saya mendapatkan pertanyaan "apakah data yang anda isi sudah benar?"
+Then Saya memilih jawaban "Yes"
+When Saya memilih jawaban "Yes"
 Then Data diagnosa pasien tersimpan pada sistem
+And Saya mendapatkan pesan informasi "data rekam medis sudah tersimpan"

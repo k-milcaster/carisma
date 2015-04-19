@@ -1,7 +1,9 @@
 Skenario : Mencatat diagnosa pasien yang belum terdaftar
 
 Given Saya masuk pada antarmuka Rekam Medis Pasien
-When Saya memasukkan ID Pasien yang salah (belum pernah terdaftar)
-Then Data identitas pasien tidak diemukan/ditampilkan
+When Nama Dokter, Id Dokter, Id Rekam Medis, dan Tanggal hari ini sudah ditampilkan
+Then Saya memasukkan ID Pasien
+when ID pasien yang saya masukkan ysalah (belum pernah terdaftar)
+Then Saya melihat pesan peringatan "Id Pasien xxxxx belum pernah terdaftar. Silakan mendaftar di bagian Resepsionis"
 When Data identitas pasien tidak ditemukan
-Then Saya tidak bisa memasukkan data keluhan pasien, diagnosa pasien, terapi, kesimpulan pemeriksaan, obat, dan nama penyakit
+Then Saya tidak bisa mencatat diagnosa pasien
