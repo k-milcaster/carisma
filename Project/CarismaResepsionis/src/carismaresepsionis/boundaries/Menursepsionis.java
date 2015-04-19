@@ -3,7 +3,7 @@ package carismaresepsionis.boundaries;
 import carismainterface.server.PasienService;
 import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
-import carismaresepsionis.controller.DaftarRawatInapController;
+import carismaresepsionis.controller.RawatinapController;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -226,23 +226,15 @@ public class Menursepsionis extends javax.swing.JFrame {
     }//GEN-LAST:event_RegisPasienRegActionPerformed
 
     private void RegisPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienInapActionPerformed
+        RawatinapController control;
         try {
-            new Rawatinap(this.client, this.userName).show();
-        } catch (RemoteException ex) {
-            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_RegisPasienInapActionPerformed
-
-    private void LihatPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatPasienInapActionPerformed
-        DaftarRawatInapController control;
-        try {
-            control = new DaftarRawatInapController (this.client);
+            control = new RawatinapController (this.client);
             String a = "coba";
             //control.kamarKosong(a);
-            if (control.kamarKosong(a).equals("ada isinya")) {
+            if (control.kamarKosong(a).equals("kosong")) {
                 
                 //if (tampilUser().equals("benar") && tampilPass() == true) {
-                    new DaftarRawatInap(this.client, this.userName).show();
+                    new Rawatinap(this.client, this.userName).show();
                     this.dispose();
                 //} else {
                // JOptionPane.showMessageDialog(null, "TERJADI ERROR \n Username atau Password Salah", "ERROR!", JOptionPane.ERROR_MESSAGE);
@@ -255,6 +247,13 @@ public class Menursepsionis extends javax.swing.JFrame {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
         }
        
+        
+    }//GEN-LAST:event_RegisPasienInapActionPerformed
+
+    private void LihatPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatPasienInapActionPerformed
+
+            new DaftarRawatInap(this.client, this.userName).show();
+      
     }//GEN-LAST:event_LihatPasienInapActionPerformed
 
     private void List_AntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_List_AntrianActionPerformed

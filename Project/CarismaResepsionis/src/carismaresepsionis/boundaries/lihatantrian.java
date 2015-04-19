@@ -1,6 +1,8 @@
 package carismaresepsionis.boundaries;
 
+import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -11,11 +13,16 @@ public class lihatantrian extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
 
-    public lihatantrian(ClientSocket client, String userName, String idPasien) {
+    public lihatantrian(ClientSocket client, String userName, String idPasien,String idAntrian) throws RemoteException {
         this.client = client;
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        AntrianController control = new AntrianController(this.client);
+        NomorAntrian.setText(String.valueOf(control.getAntrianDetail(idAntrian).getNomorAntrian()));
+        NamaPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getNamaPasien()));
+        AlamatPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getAlamatPasien()));
+        //String idPasien = String.valueOf(control.getAntrianDetail(idAntrian).getPasienIdPasien());
     }
 
     @SuppressWarnings("unchecked")
@@ -26,7 +33,7 @@ public class lihatantrian extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        NomorAntrian = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
@@ -81,8 +88,8 @@ public class lihatantrian extends javax.swing.JFrame {
         jLabel2.setText("Nomor Antrian");
         jPanel3.add(jLabel2);
         jLabel2.setBounds(90, 0, 120, 40);
-        jPanel3.add(jTextField1);
-        jTextField1.setBounds(20, 40, 250, 90);
+        jPanel3.add(NomorAntrian);
+        NomorAntrian.setBounds(20, 40, 250, 90);
 
         getContentPane().add(jPanel3);
         jPanel3.setBounds(60, 150, 290, 150);
@@ -267,6 +274,7 @@ public class lihatantrian extends javax.swing.JFrame {
     private javax.swing.JTextField Berat;
     private javax.swing.JTextField Goldar;
     private javax.swing.JTextField NamaPasien;
+    private javax.swing.JTextField NomorAntrian;
     private javax.swing.JTextField TerakhirPeriksa;
     private javax.swing.JTextField Tinggi;
     private javax.swing.JTextField Umur;
@@ -295,7 +303,6 @@ public class lihatantrian extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
