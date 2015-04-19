@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class RawatinapController {
     private PasienService pasienService;
     private PenyakitService penyakitService;
+    private KamarService kamarService;
     public RawatinapController (ClientSocket client) throws RemoteException{
         this.pasienService = client.getPasienService();
       
@@ -39,17 +40,27 @@ public class RawatinapController {
         return model;
     }
    
-    public Pasien getDetailPasien(String idPasien) throws RemoteException{
-        Pasien pasien = pasienService.getPasien(idPasien);
-        return pasien;
-        //Pasien pasien = new Pasien();
-        //String IdPasien = pasien.getIdPasien();
-        //return IdPasien;
-    }
     
-    public Penyakit getDetailPenyakit(String idPenyakit) throws RemoteException{
+    
+    public Penyakit getDetailPenyakit (String idPenyakit) throws RemoteException{
         Penyakit penyakit = penyakitService.getPenyakit(idPenyakit);
         return penyakit;
+    }
+    
+    public DefaultTableModel getNamaKamar(Rawatinap ui) throws RemoteException{
+        
+        List<Kamar> list = new ArrayList<Kamar>();
+        list = kamarService.getKamar();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Nama Kamar");
+        model.addColumn("Kelas Kamar");
+        model.addColumn("Tarif Kamar");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdKamar()});
+            System.out.println("lewat");
+        }
+        ui.tablelistkamarpasien.setModel(model);
+        return model;
     }
     
     public String getNamaKamar(){
