@@ -20,4 +20,6 @@ public interface PegawaiService extends Remote {
     Pegawai getPegawai(String pegawai) throws RemoteException;
 
     List<Pegawai> getPegawai() throws RemoteException;
+    
+    String[] getIdNamaPegawai (String username) throws RemoteException;
 }

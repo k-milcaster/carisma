@@ -23,14 +23,14 @@ import java.util.List;
  *
  * @author kepoterz
  */
-public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
+public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService{
 
      public Main ui;
 
-    public StaffEntity() throws RemoteException {
+    public PegawaiEntity() throws RemoteException {
     }
 
-    public StaffEntity(Main ui) throws RemoteException {
+    public PegawaiEntity(Main ui) throws RemoteException {
         this.ui = ui;
     }
      
@@ -242,6 +242,11 @@ public class StaffEntity extends UnicastRemoteObject implements PegawaiService{
                 }
             }
         }
+    }
+
+    @Override
+    public String[] getIdNamaPegawai(String username) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

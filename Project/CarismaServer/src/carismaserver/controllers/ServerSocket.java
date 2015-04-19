@@ -49,7 +49,7 @@ public class ServerSocket {
             RekammedikEntity rekammedik = new RekammedikEntity(ui);
             RekammedikpenyakitEntity rekammedikpenyakit = new RekammedikpenyakitEntity(ui);
             ResepEntity resep = new ResepEntity(ui);
-            StaffEntity staff = new StaffEntity(ui);
+            PegawaiEntity staff = new PegawaiEntity(ui);
             TransaksibeliobatEntity transaksibeliobat = new TransaksibeliobatEntity(ui);
             TransaksijualobatEntity transaksijualobat = new TransaksijualobatEntity(ui);
             UserEntity user = new UserEntity(ui);
