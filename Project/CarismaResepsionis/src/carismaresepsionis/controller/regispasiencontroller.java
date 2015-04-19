@@ -2,8 +2,10 @@ package carismaresepsionis.controller;
 
 import carismainterface.entity.Kota;
 import carismainterface.entity.Pasien;
+import carismainterface.entity.User;
 import carismainterface.server.KotaService;
 import carismainterface.server.PasienService;
+import carismainterface.server.UserService;
 import carismaresepsionis.boundaries.regispasienform;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -16,10 +18,12 @@ public class regispasiencontroller {
 
     private PasienService pasienService;
     private KotaService kotaService;
+    private UserService userService;
 
     public regispasiencontroller(ClientSocket client) throws RemoteException {
         this.pasienService = client.getPasienService();
         this.kotaService = client.getKotaService();
+        this.userService = client.getUserService();
     }
 
     public void InsertNamaPasien(String id_pasien, String kota_id_kota, String user_id_user, String nama_pasien, String alamat_pasien, String kartuid_pasien, String nokartuid_pasien, String telp_pasien, String hp_pasien, String tempatlahirpasien, String tgllahir_pasien, String kelamin_pasien, String darah_pasien, int berat_pasien, int tinggi_Pasien, String regdate_pasien) throws RemoteException {
@@ -44,8 +48,28 @@ public class regispasiencontroller {
 //        pasienService.insertPasien(pasien);
     }
 
+    public void InsertUser (  String username , String Password, String role) throws RemoteException {
+        User user = new User ();
+        user.setUsername(username);
+        user.setPassword(Password);
+        user.setRole(role);
+        userService.insertUser(user);
+    }
+    
+    
     public String generateUserName(String nama, String tgl) {
+        String[] firstName = nama.split(" ");
+        char[] tglLahir = tgl.toCharArray();
+        char[] dateOnly = new char[2];
+        //2015-01-01
+        for (int i = 0; i < 2; i++) {
+            dateOnly[i] = tglLahir[i+8];
+        }
+        String userName = firstName[0].concat(String.valueOf(dateOnly));
+        System.out.println("hasil generate username = "+userName);
+       //String NamaUser = Character.toString(nama.split(tgl)
         return null;
+        
     }
 
     public String generatePasienId(String Nama, String tgl, String end) {
