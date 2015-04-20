@@ -2,6 +2,7 @@ package carismaapoteker.boundaries;
 
 import carismaapoteker.controller.ClientSocket;
 import carismaapoteker.controller.TransaksiJualObatController;
+import java.rmi.RemoteException;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -19,11 +20,13 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     private DefaultTableModel tableOfSales;
     private int total = 0;
     public int row = 0;
-
-    public TransaksiJualObat(ClientSocket Client, String userName) {
+    private TransaksiJualObatController controller;
+    public TransaksiJualObat(ClientSocket Client, String userName) throws RemoteException {
         this.Client = Client;
         this.userName = userName;
+        controller = new TransaksiJualObatController(this.Client);
         initComponents();
+        controller.getIdObat(this);
         Date date = new Date();
         dateOfSales.setDate(date);
     }
@@ -46,12 +49,12 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         IdObat = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        labelAoptekerName = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableOfSales = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jSpinField1 = new com.toedter.components.JSpinField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Carisma Project");
@@ -168,7 +171,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(10, 170, 1350, 0);
+        jPanel2.setBounds(10, 170, 1350, 158);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1426717487_save.png"))); // NOI18N
@@ -184,11 +187,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Apoteker :");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(10, 130, 94, 22);
-
-        labelAoptekerName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        getContentPane().add(labelAoptekerName);
-        labelAoptekerName.setBounds(110, 111, 176, 26);
+        jLabel7.setBounds(20, 130, 94, 30);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1426717770_circle_close_delete-24.png"))); // NOI18N
@@ -239,6 +238,8 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(4, 4, 1370, 740);
+        getContentPane().add(jSpinField1);
+        jSpinField1.setBounds(10, 130, 120, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -304,8 +305,8 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JTable jTableOfSales;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel labelAoptekerName;
     // End of variables declaration//GEN-END:variables
 }
