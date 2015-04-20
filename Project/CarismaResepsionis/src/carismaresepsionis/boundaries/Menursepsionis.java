@@ -1,6 +1,5 @@
 package carismaresepsionis.boundaries;
 
-import carismainterface.server.DokterService;
 import carismainterface.server.PasienService;
 import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
@@ -21,8 +20,6 @@ public class Menursepsionis extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
     private PasienService ps;
- 
-    
     private DefaultTableModel tableAntri = new DefaultTableModel();
 
     public Menursepsionis(ClientSocket client, String userName) throws RemoteException {
@@ -34,10 +31,7 @@ public class Menursepsionis extends javax.swing.JFrame {
         control.getAntrian(this);       
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
-        Namanya.setText(String.valueOf(this.userName));
-        
 
-        
 
         //   tanggalkustom();
     }
@@ -55,7 +49,7 @@ public class Menursepsionis extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         LihatPasienInap = new javax.swing.JButton();
-        NamaDokter = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -165,14 +159,8 @@ public class Menursepsionis extends javax.swing.JFrame {
         });
         getContentPane().add(LihatPasienInap);
         LihatPasienInap.setBounds(1120, 220, 225, 50);
-
-        NamaDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NamaDokterActionPerformed(evt);
-            }
-        });
-        getContentPane().add(NamaDokter);
-        NamaDokter.setBounds(174, 517, 334, 36);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(174, 517, 334, 36);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Nama Dokter");
@@ -197,11 +185,6 @@ public class Menursepsionis extends javax.swing.JFrame {
         jButton9.setBounds(970, 510, 120, 40);
 
         Namanya.setText("Salma Indridinnanti");
-        Namanya.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NamanyaActionPerformed(evt);
-            }
-        });
         getContentPane().add(Namanya);
         Namanya.setBounds(80, 60, 296, 34);
 
@@ -282,19 +265,9 @@ public class Menursepsionis extends javax.swing.JFrame {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tableDaftarAntrianMouseClicked
-
-    private void NamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaDokterActionPerformed
-        
-    }//GEN-LAST:event_NamaDokterActionPerformed
-
-    private void NamanyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamanyaActionPerformed
-        
-    }//GEN-LAST:event_NamanyaActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LihatPasienInap;
     private javax.swing.JComboBox List_Antrian;
-    private javax.swing.JTextField NamaDokter;
     private javax.swing.JTextField Namanya;
     private javax.swing.JButton RegisPasienInap;
     private javax.swing.JButton RegisPasienReg;
@@ -308,6 +281,7 @@ public class Menursepsionis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     public javax.swing.JTable tableDaftarAntrian;
     // End of variables declaration//GEN-END:variables
 }
