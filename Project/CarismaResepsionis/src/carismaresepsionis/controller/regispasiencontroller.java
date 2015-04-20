@@ -38,7 +38,7 @@ public class regispasiencontroller {
 //        pasien.setNokartuidPasien(nokartuid_pasien);
 //        pasien.setTelpPasien(telp_pasien);
 //        pasien.setHpPasien(hp_pasien);
-//        pasien.setTempatlahirPasien(tempatlahirpasien);
+//        pasien.setTempatlahirPasien(tempatlahirpasien);  
 //        pasien.setTgllahirPasien(tgllahir_pasien);
 //        pasien.setKelaminPasien(kelamin_pasien);
 //        pasien.setDarahPasien(darah_pasien);
