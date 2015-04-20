@@ -18,7 +18,7 @@ public class regispasienform extends javax.swing.JFrame {
     private regispasiencontroller registrasicontrol;
     String a, b, c, d, e, f, g, h, i;
     settergetter simpanan = new settergetter();
-
+  
 //    String hitungumur() {
 //        int umur;
 //        umur = Integer.parseInt((String) TahunLahir.getSelectedItem());
