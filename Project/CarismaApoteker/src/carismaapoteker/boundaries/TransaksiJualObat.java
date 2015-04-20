@@ -4,6 +4,8 @@ import carismaapoteker.controller.ClientSocket;
 import carismaapoteker.controller.TransaksiJualObatController;
 import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -21,12 +23,14 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     private int total = 0;
     public int row = 0;
     private TransaksiJualObatController controller;
+    java.util.Date dateNow = new java.util.Date();
+    
     public TransaksiJualObat(ClientSocket Client, String userName) throws RemoteException {
         this.Client = Client;
         this.userName = userName;
         controller = new TransaksiJualObatController(this.Client);
         initComponents();
-        controller.getIdObat(this);
+      //  controller.getIdObat(this);
         Date date = new Date();
         dateOfSales.setDate(date);
     }
@@ -187,7 +191,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Apoteker :");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(20, 130, 94, 30);
+        jLabel7.setBounds(20, 110, 94, 30);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1426717770_circle_close_delete-24.png"))); // NOI18N
@@ -208,28 +212,33 @@ public class TransaksiJualObat extends javax.swing.JFrame {
 
         jTableOfSales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID Obat", "Nama Obat", "Harga", "Jumlah"
+                "ID Obat", "Nama Obat", "Quantity"
             }
         ));
         jTableOfSales.setDragEnabled(true);
+        jTableOfSales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableOfSalesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableOfSales);
 
         getContentPane().add(jScrollPane2);
@@ -256,13 +265,22 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if ((IdObat.getSelectedItem().equals(" ") ||fieldIdOfSales.getText().equals("")||fieldDescription.getText().equals("")||jTextField1.getText().equals(""))){
+        if ((fieldIdOfSales.getText().equals("")||fieldDescription.getText().equals(""))){
             JOptionPane.showMessageDialog(null, "Field yang anda isi tidak lengkap","Peringatan",JOptionPane.WARNING_MESSAGE);
         }
         else{
             try {
                 TransaksiJualObatController transaksijual = new TransaksiJualObatController(Client);
-                transaksijual.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf (new Date(dateOfSales.getDate().getTime())), fieldDescription.getText());
+                transaksijual.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf (new java.sql.Date(dateNow.getTime())), fieldDescription.getText());
+               //int row = jTableOfSales.getSelectedRow();
+                System.out.println("jumlah baris keisi "+jTableOfSales.getSelectedColumnCount());
+                
+                for (int i = 0; i < jTableOfSales.getSelectedRowCount(); i++) {
+                    String idObat = String.valueOf(jTableOfSales.getValueAt(i, 0));
+                    String quantity = String.valueOf(jTableOfSales.getValueAt(i, 2));
+                    transaksijual.insertDetailtransaksijualobat(fieldIdOfSales.getText(), Integer.parseInt(idObat), Integer.parseInt(quantity));
+                }
+                
                 JOptionPane.showMessageDialog(null, "Data Transaksi Penjualan Obat Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
                 
             } catch (Exception e) {
@@ -287,6 +305,17 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldIdOfSalesActionPerformed
 
+    private void jTableOfSalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableOfSalesMouseClicked
+        int column = jTableOfSales.getSelectedColumn();
+        if (column == 0) {
+            try {
+                new TabelObat(this, Client).setVisible(true);
+            } catch (RemoteException ex) {
+                Logger.getLogger(TransaksiJualObat.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jTableOfSalesMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox IdObat;
     private javax.swing.JLabel Quantity;
@@ -306,7 +335,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.components.JSpinField jSpinField1;
-    private javax.swing.JTable jTableOfSales;
+    public javax.swing.JTable jTableOfSales;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

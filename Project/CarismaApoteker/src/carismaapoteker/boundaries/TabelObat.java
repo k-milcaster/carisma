@@ -1,20 +1,28 @@
 package carismaapoteker.boundaries;
 
+import carismaapoteker.controller.ClientSocket;
+import carismaapoteker.controller.StokObatController;
+import carismaapoteker.controller.TransaksiJualObatController;
 import java.awt.Color;
 import java.awt.Font;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class TabelObat extends javax.swing.JFrame {
 
     private TransaksiJualObat ui;
-    private ArrayList<String> idObat = new ArrayList<>();
-    private ArrayList<String> namaObat = new ArrayList<>();
-    private ArrayList<String> hargaObat = new ArrayList<>();
-    
-    public TabelObat(TransaksiJualObat ui) {
+//    private ArrayList<String> idObat = new ArrayList<>();
+//    private ArrayList<String> namaObat = new ArrayList<>();
+//    private ArrayList<String> hargaObat = new ArrayList<>();
+    private ClientSocket client;
+    public TabelObat(TransaksiJualObat ui, ClientSocket client) throws RemoteException {
         initComponents();
         this.ui = ui;
+        this.client = client;
+        TransaksiJualObatController control = new TransaksiJualObatController(this.client);
         setLocationRelativeTo(ui);
+        
+        control.getTableObat(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -46,8 +54,6 @@ public class TabelObat extends javax.swing.JFrame {
 
         jTableObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"OB08980", "Aspirin", "7000"},
-                {"OB08978", "Paracetamol", "8000"},
                 {null, null, null},
                 {null, null, null}
             },
@@ -120,11 +126,17 @@ public class TabelObat extends javax.swing.JFrame {
         int row = jTableObat.getSelectedRow();
         String id = String.valueOf(jTableObat.getValueAt(row, 0));
         String nama = String.valueOf(jTableObat.getValueAt(row, 1));
-        String harga = String.valueOf(jTableObat.getValueAt(row, 2));
+       // String harga = String.valueOf(jTableObat.getValueAt(row, 5));
         
-        idObat.add(id);
-        namaObat.add(nama);
-        hargaObat.add(harga);
+        
+            ui.jTableOfSales.setValueAt(id, ui.row, 0);
+            ui.jTableOfSales.setValueAt(nama, ui.row, 1);
+          //  ui.jTableOfSales.setValueAt(harga, ui.row, 3);
+            ui.row ++;
+        
+        
+        
+        this.dispose();
     }//GEN-LAST:event_jTableObatMouseClicked
 
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
@@ -146,16 +158,7 @@ public class TabelObat extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int count = idObat.size();
-        for (int i = 0; i < count; i++) {
-//            ui.jTableOfSales.setValueAt(idObat.get(i), ui.row, 0);
-//            ui.jTableOfSales.setValueAt(namaObat.get(i), ui.row, 1);
-//            ui.jTableOfSales.setValueAt(hargaObat.get(i), ui.row, 3);
-//            ui.row ++;
-        }
         
-        
-        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
@@ -164,7 +167,7 @@ public class TabelObat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTableObat;
+    public javax.swing.JTable jTableObat;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
