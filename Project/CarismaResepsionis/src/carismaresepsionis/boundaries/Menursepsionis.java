@@ -2,6 +2,7 @@ package carismaresepsionis.boundaries;
 
 import carismainterface.server.DokterService;
 import carismainterface.server.PasienService;
+import carismainterface.entity.Dokter;
 import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.RawatinapController;
@@ -35,6 +36,7 @@ public class Menursepsionis extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
         Namanya.setText(String.valueOf(this.userName));
+        
         
 
         
@@ -277,10 +279,11 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
         int row = tableDaftarAntrian.getSelectedRow();
         try {
-            new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 0))).setVisible(true);
+            new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 1))).setVisible(true);
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_tableDaftarAntrianMouseClicked
 
     private void NamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaDokterActionPerformed
