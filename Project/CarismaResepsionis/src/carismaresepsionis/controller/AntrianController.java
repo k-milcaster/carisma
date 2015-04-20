@@ -48,18 +48,18 @@ public class AntrianController {
 //        antrianService.insertAntrian(antrian);
 //    
 //    }
-    public DefaultTableModel getAntrian(Menursepsionis ui) throws RemoteException{
+    public void getAntrian(Menursepsionis ui) throws RemoteException{
         
         List<Antrian> list = new ArrayList<Antrian>();
         list = antrianService.getAntrian();
         DefaultTableModel tabelAntrian = new DefaultTableModel();
-        tabelAntrian.addColumn("Id Antrian");
+        tabelAntrian.addColumn("No Antrian");
+        tabelAntrian.addColumn("Id");
+        tabelAntrian.addColumn("Nama Pasien");
         for (int i = 0; i < list.size(); i++) {
-            tabelAntrian.addRow(new Object[]{list.get(i).getIdAntrian()});
-            System.out.println("lewat");
+            tabelAntrian.addRow(new Object[]{list.get(i).getNomorAntrian(), list.get(i).getIdAntrian(), pasienService.getPasien(list.get(i).getPasienIdPasien()).getNamaPasien()});            
         }
         ui.tableDaftarAntrian.setModel(tabelAntrian);
-        return tabelAntrian;
     }
     
     public Antrian getAntrianDetail(String id) throws RemoteException{
