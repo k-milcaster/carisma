@@ -47,13 +47,8 @@ public class StokObatController {
     }
     
     public DefaultTableModel getDetailObat(StokObat ui, int id) throws RemoteException{
-        Detailobat det = detailobatService.getDetailobatbyIdObat(id);
-        int idDetailObat = det.getIdDetail();
-        int idObat = det.getObatIdObat();
-        String tglKadaluarsa = det.getTglkadaluarsaDetail();
         List<Detailobat> list = new ArrayList<Detailobat>();
-        //det = detailobatService.getDetailobat(id);
-        //list.add(det);
+        
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id Obat");
         model.addColumn("Id Detail");
@@ -78,11 +73,25 @@ public class StokObatController {
             obatService.updateObat(obat);
     
     }
-//    public DefaultTableModel getObatbyName (String nama) throws RemoteException{
-//        List<Obat> list = new ArrayList<Obat>();
-//        list = obatService.getObatbyName(nama);
-//        
-//    } 
+    public DefaultTableModel getObatbyName (String nama) throws RemoteException{
+        System.out.println("lalalala");
+        List<Obat> list = new ArrayList<Obat>();
+        list = obatService.getObatbyName(nama);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id Obat");
+        model.addColumn("Nama Obat");
+        model.addColumn("Quantity");
+        model.addColumn("Jenis");
+        model.addColumn("Keterangan");
+        model.addColumn("Harga Jual");
+        model.addColumn("Stok Kritis");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(),list.get(i).getStokkritisObat()});
+            System.out.println(model);
+        }
+        return model;
+        
+    } 
 
        
     }
