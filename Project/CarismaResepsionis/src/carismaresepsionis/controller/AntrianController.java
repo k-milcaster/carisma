@@ -36,18 +36,6 @@ public class AntrianController {
         
                                 
     }
-//    public void insertAntrian(String id_antrian, String pasien_id_pasien,String dokter_id_dokter, int nomor_antrian, String jenis_antrian, String tanggal_antrian, String hadir) throws RemoteException {
-//        Antrian antrian = new Antrian();
-//        antrian.setIdAntrian(id_antrian);
-//        antrian.setPasienIdPasien(pasien_id_pasien);
-//        antrian.setDokterIdDokter(dokter_id_dokter);
-//        antrian.setNomorAntrian(nomor_antrian);
-//        antrian.setJenisAntrian(jenis_antrian);
-//        antrian.setTglAntrian(tanggal_antrian);
-//        antrian.setHadir(hadir);
-//        antrianService.insertAntrian(antrian);
-//    
-//    }
     public void getAntrian(Menursepsionis ui) throws RemoteException{
         
         List<Antrian> list = new ArrayList<Antrian>();
@@ -64,7 +52,6 @@ public class AntrianController {
     
     public Antrian getAntrianDetail(String id) throws RemoteException{
         Antrian antrian = antrianService.getAntrian(id);
-        //System.out.println(antrian.getPasienIdPasien());
         return antrian;
     }
     
@@ -77,17 +64,6 @@ public class AntrianController {
         Kunjungan kunjungan = kunjunganService.getKunjungan(idKunjungan);
         return kunjungan;
     }
-//    public String getIdPasien(){
-//        Pasien pasien = new Pasien();
-//        String idPasien = pasien.getIdPasien();
-//        return idPasien;
-//    }
-//    public String getIdDokter(){
-//        Dokter dokter = new Dokter();
-//        String idDokter = dokter.getIdDokter();
-//        return idDokter;
-//    }
-
     
 
 }
