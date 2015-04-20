@@ -46,8 +46,8 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             statement.setString(7, rekamMedik.getTerapiRekammedik());
             statement.setString(8, rekamMedik.getAlergiobatRekammedik());
             statement.setString(9, rekamMedik.getKesimpulanRekammedis());
-            statement.setString(10, rekamMedik.getKesimpulanRekammedis());
-            statement.setString(11, rekamMedik.getKondisipasienkeluarRekammedis());
+            statement.setString(10, rekamMedik.getKondisipasienkeluarRekammedis());
+            statement.setString(11, rekamMedik.getResepIdResep());
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertRekammedik Error \n");
@@ -332,7 +332,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
 
     @Override
     public String getlastIdRekamMedik() throws RemoteException {
-        ui.act.append("Client Execute getLastIdRekamMedis");
+        ui.act.append("Client Execute getLastIdRekamMedik");
         
         String lastIdRekamMedis = " ";
         PreparedStatement state = null;
@@ -344,7 +344,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             }
             return lastIdRekamMedis;
         } catch (SQLException exception) {
-            ui.act.append("getLastIdResep\n");
+            ui.act.append("getLastIdRekamMedik\n");
             ui.act.append(exception.toString());
             return null;
         } finally {
