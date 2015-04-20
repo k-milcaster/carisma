@@ -194,7 +194,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel3" max="32767" attributes="0"/>
-                      <Component id="jTextField5" min="-2" pref="270" max="-2" attributes="0"/>
+                      <Component id="fieldTotal" min="-2" pref="270" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
@@ -236,7 +236,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                          <Component id="jTextField5" alignment="3" min="-2" pref="101" max="-2" attributes="0"/>
+                                          <Component id="fieldTotal" alignment="3" min="-2" pref="101" max="-2" attributes="0"/>
                                           <Component id="jTextField6" alignment="3" min="-2" pref="101" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jLabel9" alignment="1" min="-2" pref="101" max="-2" attributes="0"/>
@@ -362,7 +362,7 @@
             <Property name="text" type="java.lang.String" value="KEMBALI"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="fieldTotal">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -380,6 +380,9 @@
               </Border>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

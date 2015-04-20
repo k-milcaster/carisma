@@ -100,12 +100,13 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
 
     @Override
     public Kunjungan getKunjungan(String idKunjungan) throws RemoteException {
-        ui.act.append("Client Execute getKunjungan + " + idKunjungan + " \n");
+        ui.act.append("Client Execute getKunjungan " + idKunjungan + " \n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM kunjungan WHERE id_kunjungan = " + idKunjungan);
+                    "SELECT * FROM kunjungan WHERE id_kunjungan = ?");
+            statement.setString(1, idKunjungan);
             ResultSet result = statement.executeQuery();
             Kunjungan kunjungan = null;
             if (result.next()) {
