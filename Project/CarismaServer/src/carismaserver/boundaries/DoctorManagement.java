@@ -184,7 +184,7 @@ public class DoctorManagement extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tableDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,16 +207,15 @@ public class DoctorManagement extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableDokter);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 500, 1120, 180);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 1120, 180));
 
         jLabel3.setFont(new java.awt.Font("Agency FB", 1, 45)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("DOKTER MANAGEMENT");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(60, 40, 340, 70);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 340, 70));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setOpaque(false);
 
         jLabel7.setText("Tanggal Lahir :");
 
@@ -301,6 +300,7 @@ public class DoctorManagement extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(comboUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -355,10 +355,10 @@ public class DoctorManagement extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(90, 140, 278, 345);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, 350));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setOpaque(false);
 
         jLabel21.setText("Gaji Konsul :");
 
@@ -417,20 +417,17 @@ public class DoctorManagement extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(460, 140, 257, 153);
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
 
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/boundaries/Untitled.jpg"))); // NOI18N
         foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         foto.setMaximumSize(new java.awt.Dimension(72, 96));
         foto.setMinimumSize(new java.awt.Dimension(72, 96));
         foto.setPreferredSize(new java.awt.Dimension(72, 96));
-        getContentPane().add(foto);
-        foto.setBounds(460, 340, 90, 130);
+        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 340, 90, 130));
 
         jLabel17.setText("Foto:");
-        getContentPane().add(jLabel17);
-        jLabel17.setBounds(460, 310, 26, 14);
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, -1, -1));
 
         buttonAttach.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonAttach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428315110_icon-archive-32.png"))); // NOI18N
@@ -440,8 +437,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                 buttonAttachActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAttach);
-        buttonAttach.setBounds(570, 410, 120, 40);
+        getContentPane().add(buttonAttach, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 410, 120, 40));
 
         buttonInsert.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222513_icon-ios7-plus-outline-32.png"))); // NOI18N
@@ -451,8 +447,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                 buttonInsertActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonInsert);
-        buttonInsert.setBounds(1160, 500, 120, 40);
+        getContentPane().add(buttonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 500, 120, 40));
 
         buttonUpdate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222456_icon-compose-32.png"))); // NOI18N
@@ -462,8 +457,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                 buttonUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonUpdate);
-        buttonUpdate.setBounds(1160, 550, 120, 40);
+        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 550, 120, 40));
 
         buttonDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1426717770_circle_close_delete-24.png"))); // NOI18N
@@ -473,28 +467,26 @@ public class DoctorManagement extends javax.swing.JFrame {
                 buttonDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonDelete);
-        buttonDelete.setBounds(1160, 600, 120, 40);
+        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 600, 120, 40));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setOpaque(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGap(0, 106, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
+            .addGap(0, 146, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel3);
-        jPanel3.setBounds(450, 330, 110, 150);
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 110, 150));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(0, 0, 1360, 700);
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
