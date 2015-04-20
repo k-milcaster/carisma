@@ -21,18 +21,15 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 public class StokObat extends javax.swing.JFrame {
+
     private ClientSocket client;
     private String userName;
     public ObatService os;
 
-  
-    
     private DefaultTableModel tableObat = new DefaultTableModel();
-    
-  
-    
+
     public StokObat(ClientSocket Client, String userName) throws RemoteException {
-    //    
+        //    
         this.client = Client;
         StokObatController control = new StokObatController(this.client);
         os = client.getObatService();
@@ -41,16 +38,16 @@ public class StokObat extends javax.swing.JFrame {
         labelApotekerName.setText(this.userName);
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        
+
         control.getObats(this);
-       
-       tableMedicine.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+        tableMedicine.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
                 int row = tableMedicine.getSelectedRow();
-                 if(row != -1){
+                if (row != -1) {
                     try {
-                       
+
                         Obat selected = new Obat(os.getObat(tableMedicine.getValueAt(row, 0).toString()));
                         fieldIdMedicine.setText(selected.getIdObat().toString());
                         fieldMedicineName.setText(selected.getNamaObat());
@@ -59,19 +56,18 @@ public class StokObat extends javax.swing.JFrame {
                         fieldDescribtion.setText(selected.getKeterangan());
                         fieldPrice.setText(selected.getHargajualObat().toString());
                         //if (selected.getStokkritisObat() != null) {
-                          //  System.out.println("masuk if "+selected.getStokkritisObat());
-                         fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));
-                        
-                       
+                        //  System.out.println("masuk if "+selected.getStokkritisObat());
+                        fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));
+
                         //}                        
                     } catch (RemoteException ex) {
                         Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                  fieldIdMedicine.getText();
-                  
-                 }
+                    fieldIdMedicine.getText();
+
+                }
             }
-       });
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -100,6 +96,7 @@ public class StokObat extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         fieldStokKritis = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         labelApotekerName = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -264,6 +261,13 @@ public class StokObat extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -293,12 +297,13 @@ public class StokObat extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(fieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
+                        .addComponent(jButton2)
+                        .addGap(206, 206, 206)
                         .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(fieldStokKritis, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -321,7 +326,8 @@ public class StokObat extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel9)
                     .addComponent(fieldDescribtion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -412,17 +418,26 @@ public class StokObat extends javax.swing.JFrame {
             fieldSearch.setForeground(Color.gray);
             fieldSearch.setFont(new Font("Tahoma", 2, 12));
         }
-        
+
     }//GEN-LAST:event_fieldSearchFocusLost
 
     private void fieldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldSearchKeyReleased
         fieldSearch.setForeground(Color.black);
         fieldSearch.setFont(new Font("Tahoma", 0, 12));
+        DefaultTableModel model = new DefaultTableModel();
+        try {
+            StokObatController control = new StokObatController(client);
+            model = control.getObatbyName(fieldSearch.getText());
+            System.out.println(model);
+            tableMedicine.setModel(model);
+        } catch (RemoteException ex) {
+            Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_fieldSearchKeyReleased
 
     private void fieldSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldSearchActionPerformed
         if (evt.getSource() instanceof JTextField) {
-            
+
         }
     }//GEN-LAST:event_fieldSearchActionPerformed
 
@@ -435,7 +450,7 @@ public class StokObat extends javax.swing.JFrame {
         try {
             StokObatController controller = new StokObatController(client);
             int row = tableMedicine.getSelectedRow();
-            if(row == -1){
+            if (row == -1) {
                 return;
             }
             int id = Integer.parseInt(fieldIdMedicine.getText());
@@ -455,8 +470,8 @@ public class StokObat extends javax.swing.JFrame {
             fieldStokKritis.setText("");
         } catch (Exception e) {
         }
-         
-         
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tableMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMedicineMouseClicked
@@ -467,7 +482,11 @@ public class StokObat extends javax.swing.JFrame {
         }
 //          TODO add your handling code here:
     }//GEN-LAST:event_tableMedicineMouseClicked
-    
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField fieldDescribtion;
     private javax.swing.JTextField fieldIdMedicine;
@@ -478,6 +497,7 @@ public class StokObat extends javax.swing.JFrame {
     private javax.swing.JTextField fieldSearch;
     private javax.swing.JTextField fieldStokKritis;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
