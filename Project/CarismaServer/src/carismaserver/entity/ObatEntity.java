@@ -198,8 +198,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM obat WHERE nama_obat LIKE ('% ? %')");
-            statement.setString(1, namaobat);
+                    "SELECT * FROM obat WHERE nama_obat LIKE '%"+namaobat+"%'");
             ResultSet result = statement.executeQuery();
             List<Obat> list = new ArrayList<Obat>();
             while (result.next()) {

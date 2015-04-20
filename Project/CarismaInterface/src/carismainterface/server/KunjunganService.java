@@ -16,4 +16,6 @@ public interface KunjunganService extends Remote {
     Kunjungan getKunjungan(String kunjungan) throws RemoteException;
 
     List<Kunjungan> getKunjungan() throws RemoteException;
+    
+    String getLastIdKunjungan() throws RemoteException;
 }
