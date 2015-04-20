@@ -41,7 +41,7 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO transaksijualobat (id_transaksijual, date_transaksijual, keterangan, hargajual_obat) values (?,?,?,?)"
+                    "INSERT INTO transaksijualobat (id_transaksijual, date_transaksijual, keterangan) values (?,?,?)"
             );
             statement.setString(1, transaksijualobat.getIdTransaksijual());
             statement.setString(2, transaksijualobat.getDateTransaksijual());
