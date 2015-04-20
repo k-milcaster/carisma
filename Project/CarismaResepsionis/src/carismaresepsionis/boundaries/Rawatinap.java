@@ -24,9 +24,10 @@ public class Rawatinap extends javax.swing.JFrame {
     private String userName;
     private PasienService ps;
     private DefaultTableModel tablePasien = new DefaultTableModel();
+    private DefaultTableModel tabelKamarPasien = new DefaultTableModel();
     private DaftarRawatInapController daftarRawatInapController;
     settergetter simpanan = new settergetter();
-    String a, b, c, d, e, f;
+    String a, b, d, e, f;
     
     public Rawatinap(ClientSocket client, String userName) throws RemoteException {
         
@@ -40,11 +41,12 @@ public class Rawatinap extends javax.swing.JFrame {
         
         a = namapasien.getText();
         b = idpasien.getText();
-        c = NamaPenyakitpasien.getText();
+        //c = NamaPenyakitpasien.getText();
         d = namaKamar.getText();
         e = kelasKamar.getText();
         f = tarif.getText();
-       
+       tablePasien = control.getNamaPasien(this);
+       tabelKamarPasien = control.getNamaKamar(this);
     }
 
 //    void awalan
@@ -53,12 +55,11 @@ public class Rawatinap extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablelistkamarpasien = new javax.swing.JTable();
+        tabelKamar = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         carnampas = new javax.swing.JTextField();
         idpasien = new javax.swing.JTextField();
         namapasien = new javax.swing.JTextField();
-        NamaPenyakitpasien = new javax.swing.JTextField();
         kelasKamar = new javax.swing.JTextField();
         namaKamar = new javax.swing.JTextField();
         ok = new javax.swing.JButton();
@@ -72,7 +73,7 @@ public class Rawatinap extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        tablelistkamarpasien.setModel(new javax.swing.table.DefaultTableModel(
+        tabelKamar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -104,12 +105,12 @@ public class Rawatinap extends javax.swing.JFrame {
                 "Nama Kamar", "Kelas Kamar", "Tarif", "Fasilitas"
             }
         ));
-        tablelistkamarpasien.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelKamar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablelistkamarpasienMouseClicked(evt);
+                tabelKamarMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tablelistkamarpasien);
+        jScrollPane1.setViewportView(tabelKamar);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(430, 190, 540, 402);
@@ -156,10 +157,6 @@ public class Rawatinap extends javax.swing.JFrame {
         namapasien.setText("Nama Pasien");
         getContentPane().add(namapasien);
         namapasien.setBounds(990, 230, 360, 32);
-
-        NamaPenyakitpasien.setText("Nama Penyakit");
-        getContentPane().add(NamaPenyakitpasien);
-        NamaPenyakitpasien.setBounds(990, 270, 360, 31);
 
         kelasKamar.setText("Kelas Kamar");
         getContentPane().add(kelasKamar);
@@ -262,12 +259,12 @@ public class Rawatinap extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idpasienActionPerformed
 
-    private void tablelistkamarpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistkamarpasienMouseClicked
-         int row = tablelistkamarpasien.getSelectedRow();
+    private void tabelKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelKamarMouseClicked
+         int row = tabelKamar.getSelectedRow();
             
-            namaKamar.setText(String.valueOf(tablepasien.getValueAt(row, 0)));
-            kelasKamar.setText(String.valueOf(tablepasien.getValueAt(row, 1)));
-            tarif.setText(String.valueOf(tablepasien.getValueAt(row, 2)));
+            namaKamar.setText(String.valueOf(tabelKamarPasien.getValueAt(row, 0)));
+            kelasKamar.setText(String.valueOf(tabelKamarPasien.getValueAt(row, 1)));
+            tarif.setText(String.valueOf(tabelKamarPasien.getValueAt(row, 2)));
         /*RawatinapController ambilData;
         try {
             ambilData = new RawatinapController (client);
@@ -283,7 +280,7 @@ public class Rawatinap extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, "ada salah disini", ex);
         }*/
-    }//GEN-LAST:event_tablelistkamarpasienMouseClicked
+    }//GEN-LAST:event_tabelKamarMouseClicked
 
     private void carnampasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_carnampasFocusGained
         if (carnampas.getText().equals("Cari Nama Pasien")) {
@@ -307,13 +304,13 @@ public class Rawatinap extends javax.swing.JFrame {
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
         //lek default
-        if (((a.equals(namapasien.getText())) && (b.equals(idpasien.getText())) && (c.equals(NamaPenyakitpasien.getText())) && (d.equals(namaKamar.getText()))
+        if (((a.equals(namapasien.getText())) && (b.equals(idpasien.getText())) &&  (d.equals(namaKamar.getText()))
                 && (e.equals(kelasKamar.getText())) && (f.equals(tarif.getText())))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
             System.out.println("1");
 
         } //lek kosong
-        else  if (((a.equals(namapasien.getText())) || (b.equals(idpasien.getText())) || (c.equals(NamaPenyakitpasien.getText())) || (d.equals(namaKamar.getText()))
+        else  if (((a.equals(namapasien.getText())) || (b.equals(idpasien.getText()))  || (d.equals(namaKamar.getText()))
                 && (e.equals(kelasKamar.getText())) || (f.equals(tarif.getText())))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
             System.out.println("2");
@@ -330,13 +327,11 @@ public class Rawatinap extends javax.swing.JFrame {
 
                 int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
-                    daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(), NamaPenyakitpasien.getText(),  namaKamar.getText(), kelasKamar.getText(), tarif.getText());
+                    daftarRawatInapController.insertPasienKamar(namapasien.getText(), idpasien.getText(),  namaKamar.getText(), kelasKamar.getText(), tarif.getText());
                     System.out.println("3");
-                    //JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
-                    //ListPasien.add(Nama_Pasien.getText());
+                    
                     namapasien.setText("");
                     idpasien.setText("");
-                    NamaPenyakitpasien.setText("");
                     namaKamar.setText("");
                     kelasKamar.setText("");
                     tarif.setText("");
@@ -360,7 +355,6 @@ public class Rawatinap extends javax.swing.JFrame {
     }//GEN-LAST:event_tablepasienMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField NamaPenyakitpasien;
     private javax.swing.JTextField carnampas;
     private javax.swing.JTextField idpasien;
     private javax.swing.JLabel jLabel1;
@@ -373,7 +367,7 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JTextField namaKamar;
     private javax.swing.JTextField namapasien;
     private javax.swing.JButton ok;
-    public javax.swing.JTable tablelistkamarpasien;
+    public javax.swing.JTable tabelKamar;
     public javax.swing.JTable tablepasien;
     private javax.swing.JTextField tarif;
     // End of variables declaration//GEN-END:variables

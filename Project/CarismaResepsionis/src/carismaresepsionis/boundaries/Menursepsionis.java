@@ -20,23 +20,23 @@ public class Menursepsionis extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
     private PasienService ps;
-    
+
     private DefaultTableModel tableAntri = new DefaultTableModel();
-   
-    public Menursepsionis(ClientSocket client, String userName) throws RemoteException{
+
+    public Menursepsionis(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
         this.userName = userName;
         AntrianController control = new AntrianController(this.client);
         ps = client.getPasienService();
+        initComponents();
         control.getAntrian(this);
         control.getAntrianDetail("AA001"); //contoh bentar
-        initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
-              
-    
+
         //   tanggalkustom();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -228,41 +228,40 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void RegisPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienInapActionPerformed
         RawatinapController control;
         try {
-            control = new RawatinapController (this.client);
+            control = new RawatinapController(this.client);
             String a = "coba";
             //control.kamarKosong(a);
             if (control.kamarKosong(a).equals("kosong")) {
-                
+
                 //if (tampilUser().equals("benar") && tampilPass() == true) {
-                    new Rawatinap(this.client, this.userName).show();
-                    this.dispose();
+                new Rawatinap(this.client, this.userName).show();
+                this.dispose();
                 //} else {
-               // JOptionPane.showMessageDialog(null, "TERJADI ERROR \n Username atau Password Salah", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "TERJADI ERROR \n Username atau Password Salah", "ERROR!", JOptionPane.ERROR_MESSAGE);
                 //}
-            }
-            else {
-            JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "ERROR!", JOptionPane.ERROR_MESSAGE);
             }
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        
+
+
     }//GEN-LAST:event_RegisPasienInapActionPerformed
 
     private void LihatPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatPasienInapActionPerformed
 
-            new DaftarRawatInap(this.client, this.userName).show();
-      
+        new DaftarRawatInap(this.client, this.userName).show();
+
     }//GEN-LAST:event_LihatPasienInapActionPerformed
 
     private void List_AntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_List_AntrianActionPerformed
-  
+
     }//GEN-LAST:event_List_AntrianActionPerformed
 
     private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
-       int row = tableDaftarAntrian.getSelectedRow();
-       try {
+        int row = tableDaftarAntrian.getSelectedRow();
+        try {
             new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 0))).setVisible(true);
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
