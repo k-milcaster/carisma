@@ -2,6 +2,7 @@ package carismaapoteker.boundaries;
 
 import carismaapoteker.controller.ClientSocket;
 import carismaapoteker.controller.StokObatController;
+import carismainterface.entity.Detailobat;
 import carismainterface.entity.Obat;
 import carismainterface.entity.User;
 import carismainterface.server.ObatService;
@@ -27,6 +28,7 @@ public class StokObat extends javax.swing.JFrame {
   
     
     private DefaultTableModel tableObat = new DefaultTableModel();
+    
   
     
     public StokObat(ClientSocket Client, String userName) throws RemoteException {
@@ -48,6 +50,7 @@ public class StokObat extends javax.swing.JFrame {
                 int row = tableMedicine.getSelectedRow();
                  if(row != -1){
                     try {
+                       
                         Obat selected = new Obat(os.getObat(tableMedicine.getValueAt(row, 0).toString()));
                         fieldIdMedicine.setText(selected.getIdObat().toString());
                         fieldMedicineName.setText(selected.getNamaObat());
@@ -57,7 +60,9 @@ public class StokObat extends javax.swing.JFrame {
                         fieldPrice.setText(selected.getHargajualObat().toString());
                         //if (selected.getStokkritisObat() != null) {
                           //  System.out.println("masuk if "+selected.getStokkritisObat());
-                            fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));
+                         fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));
+                        
+                       
                         //}                        
                     } catch (RemoteException ex) {
                         Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,7 +104,7 @@ public class StokObat extends javax.swing.JFrame {
         labelApotekerName = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelDetailObat = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -136,6 +141,11 @@ public class StokObat extends javax.swing.JFrame {
                 "Id Obat", "Nama Obat", "Quantity", "Jenis", "Keterangan", "Harga Jual", "Stok Kritis"
             }
         ));
+        tableMedicine.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMedicineMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableMedicine);
 
         getContentPane().add(jScrollPane1);
@@ -358,7 +368,7 @@ public class StokObat extends javax.swing.JFrame {
         getContentPane().add(jLabel12);
         jLabel12.setBounds(-530, 50, 1346, 47);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelDetailObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -378,7 +388,7 @@ public class StokObat extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tabelDetailObat);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(1050, 470, 320, 210);
@@ -448,6 +458,15 @@ public class StokObat extends javax.swing.JFrame {
          
          
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tableMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMedicineMouseClicked
+        try {
+            StokObatController control = new StokObatController(client);
+            control.getDetailObat(this, Integer.parseInt(fieldIdMedicine.getText()));
+        } catch (Exception e) {
+        }
+//          TODO add your handling code here:
+    }//GEN-LAST:event_tableMedicineMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField fieldDescribtion;
@@ -475,8 +494,8 @@ public class StokObat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelApotekerName;
+    public javax.swing.JTable tabelDetailObat;
     public javax.swing.JTable tableMedicine;
     // End of variables declaration//GEN-END:variables
 }
