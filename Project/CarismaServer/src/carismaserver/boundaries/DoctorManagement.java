@@ -240,6 +240,15 @@ public class DoctorManagement extends javax.swing.JFrame {
         jLabel10.setText("Username :");
 
         comboUsername.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
+        comboUsername.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                comboUsernamePopupMenuWillBecomeVisible(evt);
+            }
+        });
 
         comboKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "L", "P" }));
 
@@ -558,6 +567,10 @@ public class DoctorManagement extends javax.swing.JFrame {
             foto.setIcon(new ImageIcon(dimg));
         }
     }//GEN-LAST:event_buttonAttachActionPerformed
+
+    private void comboUsernamePopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboUsernamePopupMenuWillBecomeVisible
+        comboUsername.removeAllItems();
+    }//GEN-LAST:event_comboUsernamePopupMenuWillBecomeVisible
     private byte[] extractBytes(String ImageName) throws IOException {
         File fi = new File(ImageName);
         byte[] fileContent = Files.readAllBytes(fi.toPath());

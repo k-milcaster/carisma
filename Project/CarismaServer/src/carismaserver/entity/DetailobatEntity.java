@@ -182,7 +182,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
     }
 
     @Override
-    public Detailobat getDetailobatbyIdObat(int idobat) throws RemoteException {
+    public List<Detailobat> getDetailobatbyIdObat(int idobat) throws RemoteException {
         ui.act.append("Client Execute getDetailobatbyIdObat (" + idobat + ") \n");
 
         PreparedStatement statement = null;
@@ -191,14 +191,15 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
                     "SELECT * FROM detailobat WHERE obat_id_obat = ?");
             statement.setInt(1, idobat);
             ResultSet result = statement.executeQuery();
-            Detailobat detailobat = null;
-            if (result.next()) {
-                detailobat = new Detailobat();
+            List<Detailobat> list = new ArrayList<Detailobat>();
+            while (result.next()) {
+                Detailobat detailobat = new Detailobat();
                 detailobat.setIdDetail(result.getInt("id_detail"));
                 detailobat.setObatIdObat(result.getInt("obat_id_obat"));
                 detailobat.setTglkadaluarsaDetail(result.getString("tglkadaluarsa_detail"));
+                list.add(detailobat);
             }
-            return detailobat;
+            return list;
         } catch (SQLException exception) {
             ui.act.append("getDetailobat Error \n");
             ui.act.append(exception.toString());
