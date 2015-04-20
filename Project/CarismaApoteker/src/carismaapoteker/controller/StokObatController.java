@@ -7,7 +7,9 @@
 package carismaapoteker.controller;
 
 import carismaapoteker.boundaries.StokObat;
+import carismainterface.entity.Detailobat;
 import carismainterface.entity.Obat;
+import carismainterface.server.DetailobatService;
 import carismainterface.server.ObatService;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class StokObatController {
     private ObatService obatService;
+    private DetailobatService detailobatService;
     
     public StokObatController (ClientSocket client) throws RemoteException{
         //Obat obat = new Obat();
@@ -41,6 +44,27 @@ public class StokObatController {
         }
         ui.tableMedicine.setModel(model);
         return model;
+    }
+    
+    public DefaultTableModel getDetailObat(StokObat ui, int id) throws RemoteException{
+        Detailobat det = detailobatService.getDetailobatbyIdObat(id);
+        int idDetailObat = det.getIdDetail();
+        int idObat = det.getObatIdObat();
+        String tglKadaluarsa = det.getTglkadaluarsaDetail();
+        List<Detailobat> list = new ArrayList<Detailobat>();
+        //det = detailobatService.getDetailobat(id);
+        //list.add(det);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id Obat");
+        model.addColumn("Id Detail");
+        model.addColumn("Tanggal Kadaluarsa");
+        for(int i = 0;i<list.size();i++){
+            model.addRow(new Object []{list.get(i).getObatIdObat(),list.get(i).getIdDetail(),list.get(i).getTglkadaluarsaDetail()});
+            System.out.println("lewat");
+        }
+        ui.tabelDetailObat.setModel(model);
+        return model;
+        
     }
     public void updateStokObat (int idObat, String namaObat, int qtyObat, String jenisObat, String keterangan, int hargaJualObat, int stokKritis) throws RemoteException{   
             Obat obat = new Obat();
