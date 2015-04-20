@@ -4,6 +4,7 @@
  */
 package carismaapoteker.controller;
 
+import carismaapoteker.boundaries.TabelObat;
 import carismaapoteker.boundaries.TransaksiJualObat;
 import carismainterface.entity.Detailtransaksijualobat;
 import carismainterface.entity.Obat;
@@ -47,25 +48,30 @@ public class TransaksiJualObatController {
         detailtransaksi.setObat(idObat);
         detailtransaksi.setQty(qty);
         detailtransaksijual.insertDetailtransaksijualobat(detailtransaksi);
+        System.out.println("masuk insert detail");
 
     }
 
-    public DefaultTableModel getIdObat(TransaksiJualObat b) throws RemoteException {
+    public DefaultTableModel getTableObat(TabelObat b) throws RemoteException {
         List<Obat> list = new ArrayList<Obat>();
         list = obatService.getObat();
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("Id Obat");
-            model.addColumn("Nama Obat");
-            model.addColumn("Harga");
-            model.addColumn("Jumlah");
-            for (int i = 0; i < list.size(); i++) {
-            b.IdObat.addItem(list.get(i).getIdObat() + " " + list.get(i).getNamaObat());
-            System.out.println(model);
-                
-            }
-            return model;
-            
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id Obat");
+        model.addColumn("Nama Obat");
+        model.addColumn("Quantity");
+        model.addColumn("Jenis");
+        model.addColumn("Keterangan");
+        model.addColumn("Harga Jual");
+        model.addColumn("Stok Kritis");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(),list.get(i).getStokkritisObat()});
+            System.out.println("lewat");
         }
+        b.jTableObat.setModel(model);
+        return model;
+        }
+    
+    
 
     }
 
