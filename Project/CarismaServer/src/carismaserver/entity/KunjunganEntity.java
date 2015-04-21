@@ -44,7 +44,7 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             statement.setString(4, kunjungan.getTransaksijualobatIdTransaksijual());
             statement.setString(5, kunjungan.getPasienKamarIdPeminjaman());
             statement.setString(6, kunjungan.getTanggaljamKunjungan());
-            statement.setInt(6, kunjungan.getBiayaKunjungan());
+            statement.setInt(7, kunjungan.getBiayaKunjungan());
 
             statement.executeUpdate();
         } catch (SQLException exception) {
