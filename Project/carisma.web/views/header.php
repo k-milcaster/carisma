@@ -54,6 +54,13 @@
                 <div class="container">
                     <div class="logo">
                         <a href="#"><img src="<?php echo URL; ?>public/images/logo.png" title="doctor" /></a>
+                        <?php
+                        if(Session::get('id')!=NULL){
+                        
+                            echo '<a href= "'.URL.'dashboard"><font size = "5">Selamat Datang '.Session::get('id').'</a></font>';
+                            
+                        }
+                        ?>
                     </div>
                     <!----start-top-nav---->
                     <nav class="top-nav">
@@ -63,7 +70,24 @@
                             <li><a href="<?php echo URL; ?>index#services" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Services</a></li>
                             <li <?php if ($this->title == "Doctors") echo 'class="active"' ?>><a href="<?php echo URL; ?>index#team" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Doctors</a></li>
                             <li><a href="<?php echo URL; ?>index#contact" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Contact</a></li>
+                        <?php
+                        if(Session::get('id')!=NULL){
+                            ?>   <li <?php if ($this->title == "Login") echo 'class="active"' ?>><a href="<?php echo URL; ?>verifikasi/dologout">Log Out</a></li>
+                        <?php
+                        }
+                        
+                        else{
+                          
+                        ?>
                             <li <?php if ($this->title == "Login") echo 'class="active"' ?>><a href="<?php echo URL; ?>login">Log In</a></li>
+                        <?php   
+                        }    
+                         ?>
+                            
+                            
+                            
+                            
+                            
                         </ul>
                         <a href="#" id="pull"><img src="<?php echo URL; ?>public/images/menu-icon.png" title="menu" /></a>
                     </nav>
@@ -71,4 +95,5 @@
                 </div>
             </div>
         </div>
+        
         <!----- //End-header---->
