@@ -38,7 +38,8 @@ class Doctor extends Controller{
 
             if ($i == 2) {
                 $masukindums = $masukindums . '<div class="team-member-grid">
-                <div class="team-member-info bottom-t-info bottom-t-info-b">
+                <a href="'.URL .'singleDoctor/id/'.$value[0].'"><img src="http://localhost/carisma.web/public/images/t1.jpg" />
+                <div class="team-member-info bottom-t-info">
                     <span> </span>
                     <h3><a href="' . URL . 'singleDoctor/id/' . $value[0] . '">' . $value[3] . '</a></h3>
                     <p>Specialist : ' . $value[19] . ' <br>
@@ -47,12 +48,10 @@ class Doctor extends Controller{
                         Sex : ' . $value[11] . '<br>
                         Blood : ' . $value[12] . '<br>
                         <br>
-                        <br>
-                        <br>
+                        <br>                                                         
                     </p>
                 </div>
-                <a href="'.URL .'singleDoctor/id/'.$value[0].'"><img src="http://localhost/carisma.web/public/images/t2.jpg"/>
-            </div>';
+                </div>';
             }
             if ($i == 3) {
                 $masukindums = $masukindums . '<div class="team-member-grid">
