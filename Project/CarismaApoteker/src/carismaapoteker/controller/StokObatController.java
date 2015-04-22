@@ -25,6 +25,7 @@ public class StokObatController {
     
     public StokObatController (ClientSocket client) throws RemoteException{
         //Obat obat = new Obat();
+        this.detailobatService = client.getDetailonatSerivice();
         this.obatService = client.getObatService();
     }
     public DefaultTableModel getObats(StokObat ui) throws RemoteException{
@@ -45,7 +46,7 @@ public class StokObatController {
         return model;
     }
     
-    public DefaultTableModel getDetailObat(StokObat ui, int id) throws RemoteException{
+    public DefaultTableModel getDetailObat(int id) throws RemoteException{
         List<Detailobat> list = new ArrayList<Detailobat>();
         list = detailobatService.getDetailobatbyIdObat(id);
         DefaultTableModel model = new DefaultTableModel();
@@ -56,7 +57,6 @@ public class StokObatController {
             model.addRow(new Object []{list.get(i).getObatIdObat(),list.get(i).getIdDetail(),list.get(i).getTglkadaluarsaDetail()});
             System.out.println("get detail obat");
         }
-        ui.tabelDetailObat.setModel(model);
         return model;
         
     }

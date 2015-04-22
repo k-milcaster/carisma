@@ -31,7 +31,7 @@ public class StokObat extends javax.swing.JFrame {
     public StokObat(ClientSocket Client, String userName) throws RemoteException {
         //    
         this.client = Client;
-        StokObatController control = new StokObatController(this.client);
+        final StokObatController control = new StokObatController(this.client);
         os = client.getObatService();
         this.userName = userName;
         initComponents();
@@ -57,8 +57,8 @@ public class StokObat extends javax.swing.JFrame {
                         fieldPrice.setText(selected.getHargajualObat().toString());
                         //if (selected.getStokkritisObat() != null) {
                         //  System.out.println("masuk if "+selected.getStokkritisObat());
-                        fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));
-
+                        fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));                        
+                        tabelDetailObat.setModel(control.getDetailObat(Integer.parseInt(tableMedicine.getValueAt(row, 0).toString())));
                         //}                        
                     } catch (RemoteException ex) {
                         Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
@@ -469,7 +469,7 @@ public class StokObat extends javax.swing.JFrame {
         try {
             StokObatController control = new StokObatController(client);
             
-            control.getDetailObat(this, Integer.parseInt(String.valueOf(tableMedicine.getValueAt(row, 0))));
+           // control.getDetailObat(this, Integer.parseInt(String.valueOf(tableMedicine.getValueAt(row, 0))));
         } catch (Exception e) {
         }
 //          TODO add your handling code here:
