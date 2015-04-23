@@ -34,7 +34,13 @@ public class DataDokterController {
         String NamaDokter = dokter.getNamaDokter();
         return NamaDokter;
     }
-  
+ 
+ public String getIdDokter(){
+        Dokter dokter = new Dokter();
+        String IdDokter = dokter.getIdDokter();
+        return IdDokter;
+    }
+ 
  public String getNamaPoli(){
         Poli poli = new Poli();
         String NamaPoli = poli.getNamaPoli();
@@ -100,7 +106,7 @@ public class DataDokterController {
             model.addRow(new Object[]{list.get(i).getPoliIdPoli()});
             System.out.println("lewat");
         }
-        ui.tabeldokter.setModel(model);
+        ui.TabelDokter.setModel(model);
         return model;
     }
 }
