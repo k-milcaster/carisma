@@ -88,7 +88,6 @@ public class regispasienform extends javax.swing.JFrame {
         ListPasien = new java.awt.List();
         tgl_lahir = new com.toedter.calendar.JDateChooser();
         tgl_regpasien = new com.toedter.calendar.JDateChooser();
-        kartu_iduser = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -314,10 +313,6 @@ public class regispasienform extends javax.swing.JFrame {
         tgl_lahir.setBounds(810, 170, 130, 30);
         getContentPane().add(tgl_regpasien);
         tgl_regpasien.setBounds(700, 490, 140, 30);
-
-        kartu_iduser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-ID User-", "1", "2", "3", "4", "5", "6" }));
-        getContentPane().add(kartu_iduser);
-        kartu_iduser.setBounds(870, 490, 100, 30);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(870, 60, 110, 100);
 
@@ -505,8 +500,15 @@ public class regispasienform extends javax.swing.JFrame {
 
                 int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
+<<<<<<< HEAD
                     registrasicontrol.InsertNamaPasien(Tempat_ID.getText(), String.valueOf(Kota.getSelectedItem()), String.valueOf(kartu_iduser.getSelectedItem()), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), lah, String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), hariIni);
                     System.out.println("3");
+=======
+                     String userNameandPassword = registrasicontrol.generateUserName(Nama_Pasien.getText(), String.valueOf(tgl_lahir.getDate()));
+                    // insert ke table user (id, userbaneadnpasword, usernameandpassword
+                    registrasicontrol.InsertUser(userNameandPassword, userNameandPassword, "pasien");
+                    registrasicontrol.InsertNamaPasien(Tempat_ID.getText(), String.valueOf(Kota.getSelectedItem()), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), lah, String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), hariIni, userNameandPassword);
+>>>>>>> origin/develop
                     JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
                     ListPasien.add(Nama_Pasien.getText());
                     Tempat_ID.setText("");
@@ -591,7 +593,6 @@ public class regispasienform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox kartu_iduser;
     private com.toedter.calendar.JDateChooser tgl_lahir;
     private com.toedter.calendar.JDateChooser tgl_regpasien;
     // End of variables declaration//GEN-END:variables
