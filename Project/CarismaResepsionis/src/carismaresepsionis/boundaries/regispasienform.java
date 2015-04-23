@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Fiqhi Darmawan
@@ -17,7 +18,7 @@ public class regispasienform extends javax.swing.JFrame {
     private regispasiencontroller registrasicontrol;
     String a, b, c, d, e, f, g, h, i;
     settergetter simpanan = new settergetter();
-
+  
 //    String hitungumur() {
 //        int umur;
 //        umur = Integer.parseInt((String) TahunLahir.getSelectedItem());
@@ -495,20 +496,16 @@ public class regispasienform extends javax.swing.JFrame {
                 Date date = new Date(tgl_lahir.getDate().getTime());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String lah = sdf.format(date);
+                
                 Date now = tgl_regpasien.getDate();
                 String hariIni = sdf.format(now);
 
                 int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
-<<<<<<< HEAD
-                    registrasicontrol.InsertNamaPasien(Tempat_ID.getText(), String.valueOf(Kota.getSelectedItem()), String.valueOf(kartu_iduser.getSelectedItem()), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), lah, String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), hariIni);
-                    System.out.println("3");
-=======
                      String userNameandPassword = registrasicontrol.generateUserName(Nama_Pasien.getText(), String.valueOf(tgl_lahir.getDate()));
                     // insert ke table user (id, userbaneadnpasword, usernameandpassword
                     registrasicontrol.InsertUser(userNameandPassword, userNameandPassword, "pasien");
                     registrasicontrol.InsertNamaPasien(Tempat_ID.getText(), String.valueOf(Kota.getSelectedItem()), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), lah, String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), hariIni, userNameandPassword);
->>>>>>> origin/develop
                     JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
                     ListPasien.add(Nama_Pasien.getText());
                     Tempat_ID.setText("");
