@@ -393,7 +393,7 @@ public class dokterform extends javax.swing.JFrame {
     private javax.swing.JTextField Hp1Dokter;
     private javax.swing.JTextField Hp2Dokter;
     private javax.swing.JTextField IdDokter;
-    private javax.swing.JComboBox KelaminDokter;
+    public javax.swing.JComboBox KelaminDokter;
     private javax.swing.JButton LihatJadwalDokter;
     private javax.swing.JTextField NamaDokter;
     private javax.swing.JTextField NamaPoli;

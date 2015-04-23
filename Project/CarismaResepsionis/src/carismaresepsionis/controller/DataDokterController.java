@@ -104,7 +104,7 @@ public class DataDokterController {
         model.addColumn("Nama Dokter");
         for (int i = 0; i < list.size(); i++) {
             model.addRow(new Object[]{list.get(i).getPoliIdPoli()});
-            System.out.println("lewat");
+            System.out.println("");
         }
         ui.TabelDokter.setModel(model);
         return model;
