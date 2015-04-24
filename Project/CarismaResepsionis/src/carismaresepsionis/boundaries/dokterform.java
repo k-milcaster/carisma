@@ -383,11 +383,7 @@ public class dokterform extends javax.swing.JFrame {
     }//GEN-LAST:event_TabelDokterMouseClicked
 
     private void LihatJadwalDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatJadwalDokterActionPerformed
-        try {
-            new jadwaldokter(this.client, this.userName).show();
-        } catch (RemoteException ex) {
-            Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new jadwaldokter(this.client, this.userName).show();
     }//GEN-LAST:event_LihatJadwalDokterActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
