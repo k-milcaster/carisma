@@ -7,7 +7,5 @@
     require 'libs/Database.php';
     require 'libs/Session.php';
     require 'libs/Redirect.php';
-    
     require 'config/paths.php';
-    
     $app = new Bootstrap();
