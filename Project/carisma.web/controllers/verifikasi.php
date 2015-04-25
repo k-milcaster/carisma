@@ -24,6 +24,7 @@ class verifikasi extends Controller {
             if ($ambil == TRUE) {
 //                echo 'Username Anda : ' . $us . ' || Password Anda : ' . $usa;
                 Session::set('id', $us);
+                Session::set('pas', $usa);
                 Redirect::go(URL);
             } else {
                 $masukindums = 'Salah Password';

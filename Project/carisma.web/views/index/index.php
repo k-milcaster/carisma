@@ -64,7 +64,7 @@
     <div class="container">
         <div class="header team-head text-center">
             <h2>doctors</h2>
-            <p>Para dokter yang sudah terlatih dalam carisma</p>
+            <p>Para dokter yang sudah terlatih di carisma</p>
         </div>
         <!--- teammember-grids ---->
                 <?php
