@@ -58,6 +58,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             statement.setInt(18, dokter.getGajilemburDokter());
             statement.setDouble(19, dokter.getGajikonsulDokter());
             statement.executeUpdate();
+            System.out.println(statement.toString());
         } catch (SQLException exception) {
             ui.act.append("InsertDokter Error \n");
             ui.act.append(exception.toString());

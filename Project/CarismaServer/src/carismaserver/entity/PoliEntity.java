@@ -117,7 +117,7 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM poli WHERE id_poli = ?");
+                    "SELECT * FROM `poli` WHERE id_poli = ?");
             statement.setString(1, idpoli);
             ResultSet result = statement.executeQuery();
             Poli poli = null;
@@ -150,7 +150,7 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
         try {
             statement = DatabaseConnection.getConnection().createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT * FROM poli");
+            ResultSet result = statement.executeQuery("SELECT * FROM `poli`");
 
             List<Poli> list = new ArrayList<Poli>();
 

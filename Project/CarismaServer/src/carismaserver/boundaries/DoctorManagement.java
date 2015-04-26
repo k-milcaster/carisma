@@ -1,9 +1,11 @@
 package carismaserver.boundaries;
 
 import carismainterface.entity.Dokter;
+import carismainterface.entity.Poli;
 import carismainterface.entity.User;
 import carismaserver.controllers.DatabaseConnection;
 import carismaserver.entity.DokterEntity;
+import carismaserver.entity.PoliEntity;
 import carismaserver.entity.UserEntity;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
@@ -32,17 +34,20 @@ public class DoctorManagement extends javax.swing.JFrame {
     private carismaserver.controllers.DokterManagement control = new carismaserver.controllers.DokterManagement();
     private DokterEntity dokterService;
     private UserEntity userService ;
+    private PoliEntity poliService ;
     public Main ui;
     private File file;
     private DatabaseConnection databaseConnection;
-    public List<User> list = new ArrayList<User>();
+    public List<User> users = new ArrayList<User>();
+    public List<Poli> polis = new ArrayList<Poli>();
     
     public DoctorManagement(final Main ui) throws RemoteException, SQLException {
         this.ui = ui;
         initComponents();
         userService = new UserEntity(ui);
         control.getDokter(this);        
-        list = userService.getUser();
+        users = userService.getUser();
+        //polis = poliService.getPoli();
         //setComboBox();
         tableDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -54,7 +59,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                         Dokter selected = new Dokter(dokterService.getDokter(tableDokter.getValueAt(row, 1).toString()));
                         fieldId.setText(selected.getIdDokter());
                         fieldNama.setText(selected.getNamaDokter());
-                        fieldAlamat.setText(selected.getAlamatDokter());
+                        areaAlamat.setText(selected.getAlamatDokter());
                         fieldNokartuid.setText(selected.getNokartuidDokter());
                         fieldTelepon.setText(selected.getTelpDokter());
                         fieldHP1.setText(selected.getHp1Dokter());
@@ -143,15 +148,12 @@ public class DoctorManagement extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         fieldNokartuid = new javax.swing.JTextField();
-        fieldAlamat = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         fieldNama = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         fieldId = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        fieldTempat = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         comboUsername = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
@@ -161,7 +163,8 @@ public class DoctorManagement extends javax.swing.JFrame {
         fieldHP1 = new javax.swing.JTextField();
         fieldHP2 = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        fieldPoli = new javax.swing.JTextField();
+        comboPoli = new javax.swing.JComboBox();
+        areaAlamat = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         fieldGajiFix = new javax.swing.JTextField();
@@ -179,6 +182,8 @@ public class DoctorManagement extends javax.swing.JFrame {
         comboKelamin = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         comboDarah = new javax.swing.JComboBox();
+        fieldTempat = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         foto = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         buttonAttach = new javax.swing.JButton();
@@ -187,6 +192,7 @@ public class DoctorManagement extends javax.swing.JFrame {
         buttonDelete = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        fieldPoli = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1360, 698));
@@ -231,8 +237,6 @@ public class DoctorManagement extends javax.swing.JFrame {
 
         jLabel1.setText("id Dokter :");
 
-        jLabel6.setText("Tempat Lahir :");
-
         jLabel5.setText("No Kartu ID :");
 
         jLabel10.setText("Username :");
@@ -256,6 +260,23 @@ public class DoctorManagement extends javax.swing.JFrame {
 
         jLabel22.setText("id Poli :");
 
+        comboPoli.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
+        comboPoli.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                comboPoliPopupMenuWillBecomeVisible(evt);
+            }
+        });
+
+        areaAlamat.setColumns(20);
+        areaAlamat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        areaAlamat.setLineWrap(true);
+        areaAlamat.setRows(5);
+        areaAlamat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -267,7 +288,6 @@ public class DoctorManagement extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14)
                     .addComponent(jLabel15)
@@ -276,15 +296,14 @@ public class DoctorManagement extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(fieldNama)
-                    .addComponent(fieldAlamat)
                     .addComponent(fieldNokartuid)
-                    .addComponent(fieldTempat)
-                    .addComponent(comboUsername, 0, 168, Short.MAX_VALUE)
+                    .addComponent(comboUsername, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fieldTelepon)
                     .addComponent(fieldHP1)
                     .addComponent(fieldHP2)
                     .addComponent(fieldId)
-                    .addComponent(fieldPoli))
+                    .addComponent(comboPoli, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(areaAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -297,7 +316,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(fieldPoli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboPoli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -307,9 +326,11 @@ public class DoctorManagement extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(fieldAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 42, Short.MAX_VALUE))
+                    .addComponent(areaAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -324,16 +345,12 @@ public class DoctorManagement extends javax.swing.JFrame {
                     .addComponent(fieldHP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(fieldHP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(fieldTempat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldHP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, 280));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, 290));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setOpaque(false);
@@ -362,35 +379,42 @@ public class DoctorManagement extends javax.swing.JFrame {
 
         comboDarah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "AB", "O" }));
 
+        jLabel6.setText("Tempat Lahir :");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(41, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldNorek, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fieldGajiFix, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fieldGajiLembur, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fieldBank, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldTempat, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(comboKelamin, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboDarah, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(fieldTanggal))))
@@ -400,6 +424,10 @@ public class DoctorManagement extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldTempat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -431,12 +459,12 @@ public class DoctorManagement extends javax.swing.JFrame {
                         .addComponent(jLabel20)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 290, 230));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 290, 250));
 
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/boundaries/Untitled.jpg"))); // NOI18N
         foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -506,18 +534,18 @@ public class DoctorManagement extends javax.swing.JFrame {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 700));
+        getContentPane().add(fieldPoli, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 168, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
         try {
-            //String userid = comboUsername.getSelectedItem().toString().substring(0, comboUsername.getSelectedItem().toString().indexOf(" "));
-            String userid = Integer.toString(list.get(comboUsername.getSelectedIndex()).getIdUser());
-            System.out.println(userid);
+            int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();
+            String poliid = polis.get(comboPoli.getSelectedIndex()).getIdPoli();
             String id = fieldId.getText();
             String nama = fieldNama.getText();
-            String alamat = fieldAlamat.getText();
+            String alamat = areaAlamat.getText();
             String nokartu = fieldNokartuid.getText();
             String telp = fieldTelepon.getText();
             String hp1 = fieldHP1.getText();
@@ -535,7 +563,7 @@ public class DoctorManagement extends javax.swing.JFrame {
             int gfix = Integer.parseInt(fieldGajiFix.getText());
             int glembur = Integer.parseInt(fieldGajiLembur.getText());
             double gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
-            control.insertDokter(this, userid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
+            control.insertDokter(this, userid, poliid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
             control.getDokter(this);
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -586,14 +614,26 @@ public class DoctorManagement extends javax.swing.JFrame {
     private void comboUsernamePopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboUsernamePopupMenuWillBecomeVisible
         comboUsername.removeAllItems();
         try {
-            list = userService.getUser();
+            users = userService.getUser();
         } catch (RemoteException ex) {
             Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(int i=0;i<list.size();i++){
-            comboUsername.addItem(list.get(i).getUsername());
+        for(int i=0;i<users.size();i++){
+            comboUsername.addItem(users.get(i).getUsername());
         }
     }//GEN-LAST:event_comboUsernamePopupMenuWillBecomeVisible
+
+    private void comboPoliPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboPoliPopupMenuWillBecomeVisible
+        comboPoli.removeAllItems();
+        try {
+            polis = poliService.getPoli();
+        } catch (RemoteException ex) {
+            Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int i=0;i<polis.size();i++){
+            comboPoli.addItem(polis.get(i).getNamaPoli());
+        }
+    }//GEN-LAST:event_comboPoliPopupMenuWillBecomeVisible
     private byte[] extractBytes(String ImageName) throws IOException {
         File fi = new File(ImageName);
         byte[] fileContent = Files.readAllBytes(fi.toPath());
@@ -602,14 +642,15 @@ public class DoctorManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaAlamat;
     private javax.swing.JButton buttonAttach;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonInsert;
     private javax.swing.JButton buttonUpdate;
     private javax.swing.JComboBox comboDarah;
     private javax.swing.JComboBox comboKelamin;
+    private javax.swing.JComboBox comboPoli;
     private javax.swing.JComboBox comboUsername;
-    private javax.swing.JTextField fieldAlamat;
     private javax.swing.JTextField fieldBank;
     private javax.swing.JTextField fieldGajiFix;
     private javax.swing.JTextField fieldGajiKonsul;

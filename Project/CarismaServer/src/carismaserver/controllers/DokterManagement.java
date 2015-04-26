@@ -54,13 +54,12 @@ public class DokterManagement {
         ui.tableDokter.setModel(model);
     }
 
-    public void insertDokter(carismaserver.boundaries.DoctorManagement ui, String username, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
+    public void insertDokter(carismaserver.boundaries.DoctorManagement ui, int userid, String poliid, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
         DokterEntity dokterService = new DokterEntity(ui.ui);
         try {
-            User user = new User();
             Dokter dokter = new Dokter();
-            user.setIdUser(Integer.parseInt(username));
-
+            dokter.setUserIdUser(userid);
+            dokter.setPoliIdPoli(poliid);
             dokter.setIdDokter(id);
             dokter.setNamaDokter(nama);
             dokter.setAlamatDokter(alamat);
