@@ -69,6 +69,10 @@ public class Rawatinap extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablelistpasien = new javax.swing.JTable();
+<<<<<<< HEAD
+=======
+        idkamar = new javax.swing.JTextField();
+>>>>>>> cfb4c7ed7040e9404bb59b630ee8bcfa2ae7741c
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -194,7 +198,7 @@ public class Rawatinap extends javax.swing.JFrame {
 
         jLabel3.setText("Data Kamar");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(990, 310, 90, 14);
+        jLabel3.setBounds(990, 270, 90, 14);
 
         jLabel4.setText("Data Pasien");
         getContentPane().add(jLabel4);
@@ -241,6 +245,15 @@ public class Rawatinap extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane3);
         jScrollPane3.setBounds(10, 190, 410, 400);
+
+        idkamar.setText("Id Kamar");
+        idkamar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idkamarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(idkamar);
+        idkamar.setBounds(990, 290, 170, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -339,12 +352,21 @@ public class Rawatinap extends javax.swing.JFrame {
 
                 int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
+<<<<<<< HEAD
                     daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(),   namaKamar.getText(), kelasKamar.getText(), tarif.getText());
+=======
+                    daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(), Integer.valueOf(idkamar.getText()),   namaKamar.getText(), kelasKamar.getText(), tarif.getText());
+>>>>>>> cfb4c7ed7040e9404bb59b630ee8bcfa2ae7741c
                     System.out.println("3");
                     //JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
                     //ListPasien.add(Nama_Pasien.getText());
+                    
                     namapasien.setText("");
                     idpasien.setText("");
+<<<<<<< HEAD
+=======
+                    idkamar.setText("");
+>>>>>>> cfb4c7ed7040e9404bb59b630ee8bcfa2ae7741c
                     namaKamar.setText("");
                     kelasKamar.setText("");
                     tarif.setText("");
@@ -366,9 +388,17 @@ public class Rawatinap extends javax.swing.JFrame {
             
        
     }//GEN-LAST:event_tablelistpasienMouseClicked
+<<<<<<< HEAD
+=======
+
+    private void idkamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idkamarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idkamarActionPerformed
+>>>>>>> cfb4c7ed7040e9404bb59b630ee8bcfa2ae7741c
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField carnampas;
+    private javax.swing.JTextField idkamar;
     private javax.swing.JTextField idpasien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
