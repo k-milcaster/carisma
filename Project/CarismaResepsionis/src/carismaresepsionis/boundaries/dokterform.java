@@ -1,30 +1,65 @@
 package carismaresepsionis.boundaries;
 
 import carismaresepsionis.controller.ClientSocket;
-
+import carismainterface.entity.Dokter;
+import carismainterface.entity.Poli;
+import carismainterface.server.*;
+import carismaresepsionis.controller.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 /**
  *
- * @author Fiqhi Darmawan
+ * @author Fiqhi Darmawan, Anes Dirsi
  */
 public class dokterform extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
-    public dokterform(ClientSocket client, String userName) {
+    private DokterService ds;
+    private DefaultTableModel tabeldokter = new DefaultTableModel();
+    private DataDokterController DataDokterController;
+    settergetter simpanan = new settergetter();
+    String a, b, c, d, e, f, g, h, i;
+    
+    public dokterform(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
+        DataDokterController control = new DataDokterController(this.client);
+        ds = client.getDokterService();
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        control.getNamaDokter();
+        
+        a = NamaDokter.getText();
+        b = NamaPoli.getText();
+        c = TempatlahirDokter.getText();
+        d = AlamatDokter.getText();
+        e = TelpDokter.getText();
+        f = Hp1Dokter.getText();
+        g = Hp2Dokter.getText();
+        h = IdDokter.getText();
+        i = FotoDokter.getText();
+        
+        Date tanggal = new Date();
+        TgllahirDokter.setDate(tanggal);
+       
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        CariNamaDokter = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TabelDokter = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -37,42 +72,51 @@ public class dokterform extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
+        NamaDokter = new javax.swing.JTextField();
+        NamaPoli = new javax.swing.JTextField();
+        TempatlahirDokter = new javax.swing.JTextField();
+        AlamatDokter = new javax.swing.JTextField();
+        Hp1Dokter = new javax.swing.JTextField();
+        TelpDokter = new javax.swing.JTextField();
+        Hp2Dokter = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        FotoDokter = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        LihatJadwalDokter = new javax.swing.JButton();
+        TgllahirDokter = new com.toedter.calendar.JDateChooser();
+        KelaminDokter = new javax.swing.JComboBox();
+        jLabel15 = new javax.swing.JLabel();
+        IdDokter = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        CariNamaDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                CariNamaDokterActionPerformed(evt);
+            }
+        });
+        CariNamaDokter.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CariNamaDokterFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CariNamaDokterFocusLost(evt);
+            }
+        });
+        CariNamaDokter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                CariNamaDokterKeyReleased(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Agency FB", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("Cari");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -82,187 +126,151 @@ public class dokterform extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(CariNamaDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(CariNamaDokter, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addComponent(jLabel3))
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(50, 130, 225, 40);
+        jPanel2.setBounds(50, 130, 227, 40);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "ID Dokter", "Nama Dokter"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        TabelDokter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelDokterMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TabelDokter);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(50, 180, 490, 460);
 
-        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Trajan Pro", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Data Dokter");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 70, 260, 58);
+        jLabel1.setBounds(50, 40, 440, 49);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(null);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         jLabel5.setText("Informasi Dokter");
         jPanel4.add(jLabel5);
-        jLabel5.setBounds(11, 1, 102, 17);
+        jLabel5.setBounds(20, 10, 190, 27);
 
         jLabel6.setText("Nama Dokter");
         jPanel4.add(jLabel6);
-        jLabel6.setBounds(20, 40, 190, 14);
+        jLabel6.setBounds(20, 100, 190, 16);
 
-        jLabel7.setText("Tempat Lahir");
+        jLabel7.setText("Poli");
         jPanel4.add(jLabel7);
-        jLabel7.setBounds(20, 80, 190, 14);
+        jLabel7.setBounds(20, 140, 190, 16);
 
-        jLabel8.setText("Tanggal Lahir");
+        jLabel8.setText("Tempat Lahir");
         jPanel4.add(jLabel8);
-        jLabel8.setBounds(20, 120, 200, 14);
+        jLabel8.setBounds(20, 180, 200, 16);
 
-        jLabel9.setText("Kelamin");
+        jLabel9.setText("Tanggal Lahir");
         jPanel4.add(jLabel9);
-        jLabel9.setBounds(20, 160, 160, 14);
+        jLabel9.setBounds(20, 220, 160, 16);
 
-        jLabel10.setText("Golongan Darah ");
+        jLabel10.setText("Jenis Kelamin");
         jPanel4.add(jLabel10);
-        jLabel10.setBounds(20, 200, 220, 14);
+        jLabel10.setBounds(20, 260, 80, 16);
 
-        jLabel11.setText("Telefon ");
+        jLabel11.setText("Alamat");
         jPanel4.add(jLabel11);
-        jLabel11.setBounds(20, 240, 200, 14);
+        jLabel11.setBounds(20, 310, 200, 16);
 
-        jLabel12.setText("Handphone 1");
+        jLabel12.setText("No. Telp");
         jPanel4.add(jLabel12);
-        jLabel12.setBounds(20, 280, 280, 14);
+        jLabel12.setBounds(20, 350, 80, 16);
 
-        jLabel13.setText("Handphone 2");
+        jLabel13.setText("No. HP 1");
         jPanel4.add(jLabel13);
-        jLabel13.setBounds(20, 320, 260, 14);
+        jLabel13.setBounds(20, 390, 260, 16);
 
-        jLabel14.setText("Alamat Email");
+        jLabel14.setText("No. HP 2");
         jPanel4.add(jLabel14);
-        jLabel14.setBounds(20, 360, 290, 14);
+        jLabel14.setBounds(20, 430, 290, 16);
 
-        jLabel15.setText("Hari Praktek");
-        jPanel4.add(jLabel15);
-        jLabel15.setBounds(20, 400, 90, 14);
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        NamaDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                NamaDokterActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField2);
-        jTextField2.setBounds(110, 24, 271, 30);
-        jPanel4.add(jTextField3);
-        jTextField3.setBounds(110, 60, 271, 30);
+        jPanel4.add(NamaDokter);
+        NamaDokter.setBounds(110, 90, 271, 30);
+        jPanel4.add(NamaPoli);
+        NamaPoli.setBounds(110, 130, 271, 30);
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        TempatlahirDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                TempatlahirDokterActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField4);
-        jTextField4.setBounds(110, 100, 271, 30);
-        jPanel4.add(jTextField5);
-        jTextField5.setBounds(110, 140, 271, 30);
-        jPanel4.add(jTextField6);
-        jTextField6.setBounds(110, 180, 272, 30);
-        jPanel4.add(jTextField7);
-        jTextField7.setBounds(110, 220, 272, 30);
-        jPanel4.add(jTextField8);
-        jTextField8.setBounds(110, 300, 272, 30);
-        jPanel4.add(jTextField9);
-        jTextField9.setBounds(109, 258, 272, 30);
-        jPanel4.add(jTextField10);
-        jTextField10.setBounds(110, 340, 272, 30);
-
-        jCheckBox1.setText("Senin");
-        jPanel4.add(jCheckBox1);
-        jCheckBox1.setBounds(120, 390, 60, 23);
-
-        jCheckBox2.setText("Selasa");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jCheckBox2);
-        jCheckBox2.setBounds(180, 390, 60, 23);
-
-        jCheckBox3.setText("Rabu");
-        jPanel4.add(jCheckBox3);
-        jCheckBox3.setBounds(240, 390, 51, 23);
-
-        jCheckBox4.setText("Kamis");
-        jPanel4.add(jCheckBox4);
-        jCheckBox4.setBounds(290, 390, 60, 23);
-
-        jCheckBox5.setText("Jum'at");
-        jPanel4.add(jCheckBox5);
-        jCheckBox5.setBounds(120, 420, 60, 23);
-
-        jCheckBox6.setText("Sabtu");
-        jPanel4.add(jCheckBox6);
-        jCheckBox6.setBounds(180, 420, 60, 23);
-
-        jCheckBox7.setText("Minggu");
-        jPanel4.add(jCheckBox7);
-        jCheckBox7.setBounds(240, 420, 80, 23);
+        jPanel4.add(TempatlahirDokter);
+        TempatlahirDokter.setBounds(110, 170, 271, 30);
+        jPanel4.add(AlamatDokter);
+        AlamatDokter.setBounds(110, 300, 272, 30);
+        jPanel4.add(Hp1Dokter);
+        Hp1Dokter.setBounds(110, 380, 272, 30);
+        jPanel4.add(TelpDokter);
+        TelpDokter.setBounds(110, 340, 272, 30);
+        jPanel4.add(Hp2Dokter);
+        Hp2Dokter.setBounds(110, 420, 272, 30);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel16.setText("Foto Dokter");
 
-        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        FotoDokter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -272,7 +280,7 @@ public class dokterform extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FotoDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -280,18 +288,39 @@ public class dokterform extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addComponent(FotoDokter, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel4.add(jPanel6);
-        jPanel6.setBounds(400, 20, 159, 197);
+        jPanel6.setBounds(400, 70, 163, 202);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton2.setText("Back");
         jPanel4.add(jButton2);
-        jButton2.setBounds(435, 410, 90, 40);
+        jButton2.setBounds(400, 390, 90, 40);
+
+        LihatJadwalDokter.setText("Lihat Jadwal Prakter");
+        LihatJadwalDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LihatJadwalDokterActionPerformed(evt);
+            }
+        });
+        jPanel4.add(LihatJadwalDokter);
+        LihatJadwalDokter.setBounds(400, 360, 150, 25);
+        jPanel4.add(TgllahirDokter);
+        TgllahirDokter.setBounds(110, 220, 100, 22);
+
+        KelaminDokter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pria", "Wanita" }));
+        jPanel4.add(KelaminDokter);
+        KelaminDokter.setBounds(110, 260, 64, 22);
+
+        jLabel15.setText("Id Dokter");
+        jPanel4.add(jLabel15);
+        jLabel15.setBounds(20, 60, 70, 16);
+        jPanel4.add(IdDokter);
+        IdDokter.setBounds(110, 52, 270, 30);
 
         getContentPane().add(jPanel4);
         jPanel4.setBounds(570, 180, 580, 460);
@@ -305,33 +334,75 @@ public class dokterform extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(0, 0, 1360, 700);
 
+        jButton1.setText("jButton1");
+        getContentPane().add(jButton1);
+        jButton1.setBounds(1140, 400, 79, 25);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    private void CariNamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariNamaDokterActionPerformed
+         if (evt.getSource() instanceof JTextField) {
+            
+        }
+    }//GEN-LAST:event_CariNamaDokterActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void TempatlahirDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TempatlahirDokterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_TempatlahirDokterActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void NamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaDokterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_NamaDokterActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void CariNamaDokterFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CariNamaDokterFocusGained
+        if (CariNamaDokter.getText().equals("Cari Nama Dokter")) {
+            CariNamaDokter.setText("");
+        }
+    }//GEN-LAST:event_CariNamaDokterFocusGained
+
+    private void CariNamaDokterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CariNamaDokterFocusLost
+        if (CariNamaDokter.getText().equals("")) {
+            CariNamaDokter.setText("Cari Nama Dokter");
+            CariNamaDokter.setForeground(Color.gray);
+            CariNamaDokter.setFont(new Font("Tahoma", 2, 12));
+        }
+    }//GEN-LAST:event_CariNamaDokterFocusLost
+
+    private void CariNamaDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CariNamaDokterKeyReleased
+        CariNamaDokter.setForeground(Color.black);
+        CariNamaDokter.setFont(new Font("Tahoma", 0, 12));
+    }//GEN-LAST:event_CariNamaDokterKeyReleased
+
+    private void TabelDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelDokterMouseClicked
+            int row = TabelDokter.getSelectedRow();
+            
+            IdDokter.setText(String.valueOf(TabelDokter.getValueAt(row, 0)));
+            NamaDokter.setText(String.valueOf(TabelDokter.getValueAt(row, 1)));
+            
+    }//GEN-LAST:event_TabelDokterMouseClicked
+
+    private void LihatJadwalDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatJadwalDokterActionPerformed
+        new jadwaldokter(this.client, this.userName).show();
+    }//GEN-LAST:event_LihatJadwalDokterActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AlamatDokter;
+    private javax.swing.JTextField CariNamaDokter;
+    private javax.swing.JLabel FotoDokter;
+    private javax.swing.JTextField Hp1Dokter;
+    private javax.swing.JTextField Hp2Dokter;
+    private javax.swing.JTextField IdDokter;
+    public javax.swing.JComboBox KelaminDokter;
+    private javax.swing.JButton LihatJadwalDokter;
+    private javax.swing.JTextField NamaDokter;
+    private javax.swing.JTextField NamaPoli;
+    public javax.swing.JTable TabelDokter;
+    private javax.swing.JTextField TelpDokter;
+    private javax.swing.JTextField TempatlahirDokter;
+    private com.toedter.calendar.JDateChooser TgllahirDokter;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -340,7 +411,6 @@ public class dokterform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -353,16 +423,5 @@ public class dokterform extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }

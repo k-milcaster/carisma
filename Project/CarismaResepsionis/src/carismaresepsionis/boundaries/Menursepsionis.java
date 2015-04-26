@@ -55,9 +55,9 @@ public class Menursepsionis extends javax.swing.JFrame {
         RegisPasienReg = new javax.swing.JButton();
         RegisPasienInap = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        DataDokter = new javax.swing.JButton();
         LihatPasienInap = new javax.swing.JButton();
-        NamaDokter = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -150,14 +150,14 @@ public class Menursepsionis extends javax.swing.JFrame {
         getContentPane().add(jButton3);
         jButton3.setBounds(1220, 340, 120, 50);
 
-        jButton4.setText("Data Dokter");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        DataDokter.setText("Data Dokter");
+        DataDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                DataDokterActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(1120, 280, 225, 50);
+        getContentPane().add(DataDokter);
+        DataDokter.setBounds(1120, 280, 225, 50);
 
         LihatPasienInap.setText("Lihat Pasien Rawat Inap");
         LihatPasienInap.addActionListener(new java.awt.event.ActionListener() {
@@ -167,14 +167,8 @@ public class Menursepsionis extends javax.swing.JFrame {
         });
         getContentPane().add(LihatPasienInap);
         LihatPasienInap.setBounds(1120, 220, 225, 50);
-
-        NamaDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NamaDokterActionPerformed(evt);
-            }
-        });
-        getContentPane().add(NamaDokter);
-        NamaDokter.setBounds(174, 517, 334, 36);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(174, 517, 334, 36);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Nama Dokter");
@@ -199,11 +193,6 @@ public class Menursepsionis extends javax.swing.JFrame {
         jButton9.setBounds(970, 510, 120, 40);
 
         Namanya.setText("Salma Indridinnanti");
-        Namanya.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NamanyaActionPerformed(evt);
-            }
-        });
         getContentPane().add(Namanya);
         Namanya.setBounds(80, 60, 296, 34);
 
@@ -226,9 +215,13 @@ public class Menursepsionis extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new dokterform(this.client, this.userName).show();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void DataDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataDokterActionPerformed
+        try {
+            new dokterform(this.client, this.userName).show();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DataDokterActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         String a = JOptionPane.showInputDialog("Masukkan Nama Pasien", "");
@@ -295,14 +288,13 @@ public class Menursepsionis extends javax.swing.JFrame {
     }//GEN-LAST:event_NamanyaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DataDokter;
     private javax.swing.JButton LihatPasienInap;
     private javax.swing.JComboBox List_Antrian;
-    private javax.swing.JTextField NamaDokter;
     private javax.swing.JTextField Namanya;
     private javax.swing.JButton RegisPasienInap;
     private javax.swing.JButton RegisPasienReg;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
@@ -311,6 +303,7 @@ public class Menursepsionis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     public javax.swing.JTable tableDaftarAntrian;
     // End of variables declaration//GEN-END:variables
 }

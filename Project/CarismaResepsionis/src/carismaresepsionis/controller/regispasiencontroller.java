@@ -11,6 +11,9 @@ import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -101,11 +104,26 @@ public class regispasiencontroller {
     }
 
     public void setComboBoxKota(regispasienform ui) {
-        ArrayList<Kota> list = new ArrayList();
+        List<Kota> list = new ArrayList();
+        try {
+            list = kotaService.getKota();
+        } catch (RemoteException ex) {
+            Logger.getLogger(regispasiencontroller.class.getName()).log(Level.SEVERE, null, ex);
+        }
         for (int i = 0; i < list.size(); i++) {
             ui.Kota.addItem(list.get(i).getNamaKota());
-        }        
+        } 
     }
     
+    public int ambilidkota (int urutan){
+       List<Kota> list = new ArrayList();
+        try {
+            list = kotaService.getKota();
+        } catch (RemoteException ex) {
+            Logger.getLogger(regispasiencontroller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Integer.parseInt(list.get(urutan-1).getId_kota());
+    }
+            
    
 }

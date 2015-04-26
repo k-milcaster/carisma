@@ -277,7 +277,7 @@ public class regispasienform extends javax.swing.JFrame {
         getContentPane().add(Find);
         Find.setBounds(480, 60, 95, 32);
 
-        Kota.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- KOTA -", "10020" }));
+        Kota.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- KOTA -" }));
         getContentPane().add(Kota);
         Kota.setBounds(940, 390, 325, 32);
 
@@ -505,7 +505,7 @@ public class regispasienform extends javax.swing.JFrame {
                      String userNameandPassword = registrasicontrol.generateUserName(Nama_Pasien.getText(), String.valueOf(tgl_lahir.getDate()));
                     // insert ke table user (id, userbaneadnpasword, usernameandpassword
                     registrasicontrol.InsertUser(userNameandPassword, userNameandPassword, "pasien");
-                    registrasicontrol.InsertNamaPasien(Tempat_ID.getText(), String.valueOf(Kota.getSelectedItem()), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), lah, String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), hariIni, userNameandPassword);
+                    registrasicontrol.InsertNamaPasien(Tempat_ID.getText(), String.valueOf(registrasicontrol.ambilidkota(Kota.getSelectedIndex())), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), lah, String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), hariIni, userNameandPassword);
                     JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
                     ListPasien.add(Nama_Pasien.getText());
                     Tempat_ID.setText("");
