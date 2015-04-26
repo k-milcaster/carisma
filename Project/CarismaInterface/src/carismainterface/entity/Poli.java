@@ -52,9 +52,10 @@ public class Poli implements Serializable {
         this.idPoli = idPoli;
     }
 
-    public Poli(String idPoli, String namaPoli) {
+    public Poli(String idPoli, String namaPoli, String keterangan) {
         this.idPoli = idPoli;
         this.namaPoli = namaPoli;
+        this.keterangan = keterangan;
     }
 
     public String getIdPoli() {

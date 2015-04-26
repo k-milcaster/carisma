@@ -18,10 +18,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RawatinapController {
     private PasienService pasienService;
-    private PenyakitService penyakitService;
+    //private PenyakitService penyakitService;
     private KamarService kamarService;
+    
     public RawatinapController (ClientSocket client) throws RemoteException{
         this.pasienService = client.getPasienService();
+        this.kamarService = client.getKamarService();
       
 } 
    
@@ -33,35 +35,53 @@ public class RawatinapController {
         model.addColumn("ID Pasien");
         model.addColumn("Nama Pasien");
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{list.get(i).getIdPasien()});
-            System.out.println("lewat");
+            model.addRow(new Object[]{list.get(i).getIdPasien(), list.get(i).getNamaPasien()});
+            //System.out.println("lewat");
         }
-        ui.tablepasien.setModel(model);
+        ui.tablelistpasien.setModel(model);
         return model;
     }
+  
    
     
-    
-    public Penyakit getDetailPenyakit (String idPenyakit) throws RemoteException{
-        Penyakit penyakit = penyakitService.getPenyakit(idPenyakit);
-        return penyakit;
-    }
     
     public DefaultTableModel getNamaKamar(Rawatinap ui) throws RemoteException{
         
         List<Kamar> list = new ArrayList<Kamar>();
         list = kamarService.getKamar();
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id Kamar");
         model.addColumn("Nama Kamar");
         model.addColumn("Kelas Kamar");
         model.addColumn("Tarif Kamar");
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{list.get(i).getIdKamar()});
-            System.out.println("lewat");
+<<<<<<< HEAD
+            model.addRow(new Object[]{list.get(i).getNamaKamar(), list.get(i).getKelas(), list.get(i).getTarif()});
+=======
+            model.addRow(new Object[]{list.get(i).getIdKamar(), list.get(i).getNamaKamar(), list.get(i).getKelas(), list.get(i).getTarif()});
+>>>>>>> cfb4c7ed7040e9404bb59b630ee8bcfa2ae7741c
+            //System.out.println("lewat");
         }
         ui.tablelistkamarpasien.setModel(model);
         return model;
     }
+    
+     public DefaultTableModel getPasienbyName (String nama) throws RemoteException{
+        //System.out.println("lalalala");
+        List<Pasien> list = new ArrayList<Pasien>();
+        list = pasienService.getPasienByName(nama);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id Pasien");
+        model.addColumn("Nama Pasien");
+        
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdPasien(), list.get(i).getNamaPasien()});
+            //System.out.println(model);
+        }
+        return model;
+        
+    } 
+
     
     public String getNamaKamar(){
         Kamar kamar = new Kamar();

@@ -186,7 +186,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             ResultSet result = statement.executeQuery();
             List<Pasien> list = new ArrayList<Pasien>();
             Pasien pasi = null;
-            if (result.next()) {
+            while (result.next()) {
                 pasi = new Pasien();
                 pasi.setIdPasien(result.getString("id_pasien"));
                 pasi.setKotaIdKota(result.getString("kota_id_kota"));

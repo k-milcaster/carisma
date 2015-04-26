@@ -1,10 +1,12 @@
 package carismainterface.entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author K-MiL Caster
  */
-public class Rekammedikpenyakit {
+public class Rekammedikpenyakit implements Serializable {
 
     private String rekammedikIdRekammedik;
     private String penyakitIdPenyakit;

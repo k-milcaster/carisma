@@ -58,40 +58,33 @@
 </div>
 <div class="clearfix"> </div>
 <!----- //End-slider---->
-<!---- about ---->
-<div id="about" class="about">
+<!--- team --->
+<div>
+<div id="team" class="team">
     <div class="container">
-        <div class="header about-header text-center">
-            <h2>about us</h2>
-            <p>subtitle about us</p>
+        <div class="header team-head text-center">
+            <h2>doctors</h2>
+            <p>Para dokter yang sudah terlatih di carisma</p>
         </div>
-        <!---- About-grids ---->
-        <div class="about-grids">
-            <div class="col-md-4">
-                <div class="about-grid n-about-grid n-about-grid1">
-                    <img src="<?php echo URL; ?>public/images/img1.jpg" title="name" />
-                    <span class="t-icon1"> </span>
-                    <div class="about-grid-info text-center">
-                        <h3><a href="https://www.facebook.com/indra.kharisma.r">Indra Kharisma Raharjana</a></h3>
-                        <p>Profil singkat pak Indra.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <p>Penjelasan tentang Carisma</p>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-        <!---- About-grids ---->
+        <!--- teammember-grids ---->
+                <?php
+ echo $this->ini
+         ?>
+        <a class="slide-btn" href="<?php echo URL; ?>doctor/">more . . .</a>
+        <!---//teammember-grids ---->
     </div>
+<div class="clearfix"> </div>
 </div>
-<!---- about ---->
+    <div class="clearfix"> </div>
+</div>
+<!--- team --->
+
 <!--- services --->
 <div id="services" class="services">
     <div class="container">
         <div class="header services-header text-center">
-            <h2>services</h2>
-            <p>subtitle services</p>
+            <h2>Jenis Penyakit</h2>
+            <p>Ensiklopedia Penyakit yang ada di Indonesia menurut kategorinya</p>
         </div>
         <!---- service-grids--->
         <div class="service-grids">
@@ -125,100 +118,55 @@
     </div>
 
 </div>
+
 <!--- services --->
-<!--- team --->
-<div id="team" class="team">
+<!---- about ---->
+<div id="about" class="about">
     <div class="container">
-        <div class="header team-head text-center">
-            <h2>doctors</h2>
-            <p>subtitle doctors</p>
+        <div class="header about-header text-center">
+            <h2>about us</h2>
+            <p>The Man That You know Who</p>
         </div>
-        <!--- teammember-grids ---->
-                <div class="team-member-grids">
-            <div class="team-member-grid">
-                <img src="<?php echo URL; ?>public/images/t1.jpg" title="name" />
-                <div class="team-member-info bottom-t-info">
-                    <span> </span>
-                    <h3><a href="#">Dr. Keith M. Weiner, M.D.</a></h3>
-                    <p>Specialist : <br>
-                        Origin : <br>
-                        Phone : <br>
-                        Sex : <br>
-                        Blood : <br>
-                        <br>
-                        <br>                                                
-                    </p>
+        <!---- About-grids ---->
+        <div class="about-grids">
+            <div class="col-md-4">
+                <div class="about-grid n-about-grid n-about-grid1">
+                    <img src="<?php echo URL; ?>public/images/img1.jpg" title="name" />
+                    <span class="t-icon1"> </span>
+                    <div class="about-grid-info text-center">
+                        <h3><a href="https://www.facebook.com/indra.kharisma.r">Indra Kharisma Raharjana</a></h3>
+                        <p>Lecturer at Universitas Airlangga.</p>
+                    </div>
                 </div>
             </div>
-            <div class="team-member-grid">
-                <div class="team-member-info bottom-t-info bottom-t-info-b">
-                    <span> </span>
-                    <h3><a href="#">Dr. Danielle, M.D.</a></h3>
-                    <p>Specialist : <br>
-                        Origin : <br>
-                        Phone : <br>
-                        Sex : <br>
-                        Blood : <br>
-                        <br>
-                        <br>                        
-                        <br>
-                    </p>
-                </div>
-                <img src="<?php echo URL; ?>public/images/t2.jpg" title="name" />
+            <div class="col-md-8">
+                <p>Penjelasan tentang Carisma</p>
+                <br>
+                <p>CARISMA (Clinical Information System Multi Functional). Yaitu sistem 
+                    informasi terintegrasi yang berfungsi untuk memudahkan proses utama 
+                    poliklinik sebagai health caring service serta dapat memanajemen karyawan 
+                    dan tenaga medis (multi functional)</p>
+                <br>
+<!--                <p>Carisma Menawarkan Fitur Sistem Informasi Klinik meliputi</p>
+                <br>
+                <p>     1. Sistem Login Tiap Karyawan             || 6. Sistem Pencatatan Diagnosis Pasien</p>
+                <p>     2. Sistem Absensi Pegawai                 || 7. Sistem Apoteker</p>
+                <p>     3. Sistem Penggajian Karyawan dan Dokter  || 8. Sistem Antrian Pasien</p>
+                <p>     4. Sistem Pendaftaran Pasien              || 9. Aplikasi Apoteker</p>
+                <p>     5. Aplikasi Dokter                        || 10. Sistem Rekam medis Pasien</p>-->
+               
+
+
+                
             </div>
-            <div class="team-member-grid">
-                <img src="<?php echo URL; ?>public/images/t3.jpg" title="name" />
-                <div class="team-member-info bottom-t-info">
-                    <span> </span>
-                    <h3><a href="#">Dr. Joseph, M.D.</a></h3>
-                    <p>Specialist : <br>
-                        Origin : <br>
-                        Phone : <br>
-                        Sex : <br>
-                        Blood : <br>
-                        <br>
-                        <br>                                                
-                    </p>
-                </div>
-            </div>
-            <div class="team-member-grid">
-                <div class="team-member-info bottom-t-info bottom-t-info-b">
-                    <span> </span>
-                    <h3><a href="#">Dr. Caitlin, M.D.</a></h3>
-                    <p>Specialist : <br>
-                        Origin : <br>
-                        Phone : <br>
-                        Sex : <br>
-                        Blood : <br>
-                        <br>
-                        <br>                        
-                        <br>
-                    </p>
-                </div>
-                <img src="<?php echo URL; ?>public/images/t4.jpg" title="name" />
-            </div>
-            <div class="team-member-grid">
-                <img src="<?php echo URL; ?>public/images/t5.jpg" title="name" />
-                <div class="team-member-info bottom-t-info">
-                    <span> </span>
-                    <h3><a href="#">Dr. Michael, M.D.</a></h3>
-                    <p>Specialist : <br>
-                        Origin : <br>
-                        Phone : <br>
-                        Sex : <br>
-                        Blood : <br>
-                        <br>
-                        <br>                                                
-                    </p>
-                </div>
-            </div>
+            
             <div class="clearfix"> </div>
         </div>
-        <a class="slide-btn" href="<?php echo URL; ?>doctor/">more . . .</a>
-        <!---//teammember-grids ---->
+        <!---- About-grids ---->
     </div>
 </div>
-<!--- team --->
+<!---- about ---->
+
 <!---- contact ---->
 <div id="contact" class="contact">
     <div class="map">

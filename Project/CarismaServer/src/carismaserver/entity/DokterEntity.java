@@ -58,6 +58,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             statement.setInt(18, dokter.getGajilemburDokter());
             statement.setDouble(19, dokter.getGajikonsulDokter());
             statement.executeUpdate();
+            System.out.println(statement.toString());
         } catch (SQLException exception) {
             ui.act.append("InsertDokter Error \n");
             ui.act.append(exception.toString());
@@ -237,7 +238,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 
     @Override
     public String[] getIdNamaDokter(String username) throws RemoteException {
-        ui.act.append("Client Execute getIdDokter(" + username + ") \n");
+        ui.act.append("Client Execute getIdNamaDokter(" + username + ") \n");
         String[] dokterInfo = new String[2];
         Statement state = null;
         ResultSet resultSet = null;
@@ -251,7 +252,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             }
             return dokterInfo;
         } catch (SQLException e) {
-            ui.act.append("getIdDokter Error\n");
+            ui.act.append("getIdNamaDokter Error\n");
             ui.act.append(e.toString());
             return null;
         }finally{

@@ -1,6 +1,8 @@
 package carismaresepsionis.boundaries;
 
+import carismainterface.server.DokterService;
 import carismainterface.server.PasienService;
+import carismainterface.entity.Dokter;
 import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.RawatinapController;
@@ -20,23 +22,28 @@ public class Menursepsionis extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
     private PasienService ps;
+ 
     
     private DefaultTableModel tableAntri = new DefaultTableModel();
-   
-    public Menursepsionis(ClientSocket client, String userName) throws RemoteException{
+
+    public Menursepsionis(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
         this.userName = userName;
         AntrianController control = new AntrianController(this.client);
         ps = client.getPasienService();
-        control.getAntrian(this);
-        control.getAntrianDetail("AA001"); //contoh bentar
         initComponents();
+        control.getAntrian(this);       
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
-              
-    
+        Namanya.setText(String.valueOf(this.userName));
+        
+        
+
+        
+
         //   tanggalkustom();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -48,7 +55,7 @@ public class Menursepsionis extends javax.swing.JFrame {
         RegisPasienReg = new javax.swing.JButton();
         RegisPasienInap = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        DataDokter = new javax.swing.JButton();
         LihatPasienInap = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -143,14 +150,14 @@ public class Menursepsionis extends javax.swing.JFrame {
         getContentPane().add(jButton3);
         jButton3.setBounds(1220, 340, 120, 50);
 
-        jButton4.setText("Data Dokter");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        DataDokter.setText("Data Dokter");
+        DataDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                DataDokterActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(1120, 280, 225, 50);
+        getContentPane().add(DataDokter);
+        DataDokter.setBounds(1120, 280, 225, 50);
 
         LihatPasienInap.setText("Lihat Pasien Rawat Inap");
         LihatPasienInap.addActionListener(new java.awt.event.ActionListener() {
@@ -208,9 +215,13 @@ public class Menursepsionis extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new dokterform(this.client, this.userName).show();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void DataDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataDokterActionPerformed
+        try {
+            new dokterform(this.client, this.userName).show();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DataDokterActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         String a = JOptionPane.showInputDialog("Masukkan Nama Pasien", "");
@@ -228,55 +239,62 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void RegisPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienInapActionPerformed
         RawatinapController control;
         try {
-            control = new RawatinapController (this.client);
+            control = new RawatinapController(this.client);
             String a = "coba";
             //control.kamarKosong(a);
             if (control.kamarKosong(a).equals("kosong")) {
-                
+
                 //if (tampilUser().equals("benar") && tampilPass() == true) {
-                    new Rawatinap(this.client, this.userName).show();
-                    this.dispose();
+                new Rawatinap(this.client, this.userName).show();
+                this.dispose();
                 //} else {
-               // JOptionPane.showMessageDialog(null, "TERJADI ERROR \n Username atau Password Salah", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "TERJADI ERROR \n Username atau Password Salah", "ERROR!", JOptionPane.ERROR_MESSAGE);
                 //}
-            }
-            else {
-            JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "ERROR!", JOptionPane.ERROR_MESSAGE);
             }
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        
+
+
     }//GEN-LAST:event_RegisPasienInapActionPerformed
 
     private void LihatPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatPasienInapActionPerformed
 
-            new DaftarRawatInap(this.client, this.userName).show();
-      
+        new DaftarRawatInap(this.client, this.userName).show();
+
     }//GEN-LAST:event_LihatPasienInapActionPerformed
 
     private void List_AntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_List_AntrianActionPerformed
-  
     }//GEN-LAST:event_List_AntrianActionPerformed
 
     private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
-       int row = tableDaftarAntrian.getSelectedRow();
-       try {
-            new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 0))).setVisible(true);
+        int row = tableDaftarAntrian.getSelectedRow();
+        try {
+            new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 1))).setVisible(true);
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_tableDaftarAntrianMouseClicked
 
+    private void NamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaDokterActionPerformed
+        
+    }//GEN-LAST:event_NamaDokterActionPerformed
+
+    private void NamanyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamanyaActionPerformed
+        
+    }//GEN-LAST:event_NamanyaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DataDokter;
     private javax.swing.JButton LihatPasienInap;
     private javax.swing.JComboBox List_Antrian;
     private javax.swing.JTextField Namanya;
     private javax.swing.JButton RegisPasienInap;
     private javax.swing.JButton RegisPasienReg;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;

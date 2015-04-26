@@ -19,16 +19,17 @@ public class lihatantrian extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         AntrianController control = new AntrianController(this.client);
-        NomorAntrian.setText(String.valueOf(control.getAntrianDetail(idAntrian).getNomorAntrian()));
+
         String idPasien = String.valueOf(control.getAntrianDetail(idAntrian).getPasienIdPasien());
+        NomorAntrian.setText(String.valueOf(control.getAntrianDetail(idAntrian).getNomorAntrian()));
         NamaPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getNamaPasien()));
         AlamatPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getAlamatPasien()));
         Goldar.setText(String.valueOf(control.getDetailPasien(idPasien).getDarahPasien()));
         Umur.setText(String.valueOf(control.getDetailPasien(idPasien).getTgllahirPasien()));
         Tinggi.setText(String.valueOf(control.getDetailPasien(idPasien).getTinggiPasien()));
         Berat.setText(String.valueOf(control.getDetailPasien(idPasien).getBeratPasien()));
-        String idKunjungan = String.valueOf(control.getDetailKunjungan(idAntrian).getIdKunjungan());
-        TerakhirPeriksa.setText(String.valueOf(control.getDetailKunjungan(idKunjungan).getTanggaljamKunjungan()));
+//        String idKunjungan = String.valueOf(control.getDetailKunjungan(idAntrian).getIdKunjungan());
+ //       TerakhirPeriksa.setText(String.valueOf(control.getDetailKunjungan(idKunjungan).getTanggaljamKunjungan()));
         }
 
     @SuppressWarnings("unchecked")

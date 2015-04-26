@@ -1,9 +1,12 @@
 package carismaserver.boundaries;
 
 import carismainterface.entity.Dokter;
+import carismainterface.entity.Poli;
 import carismainterface.entity.User;
 import carismaserver.controllers.DatabaseConnection;
 import carismaserver.entity.DokterEntity;
+import carismaserver.entity.PoliEntity;
+import carismaserver.entity.UserEntity;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.io.File;
@@ -13,6 +16,8 @@ import java.rmi.RemoteException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,16 +33,22 @@ public class DoctorManagement extends javax.swing.JFrame {
 
     private carismaserver.controllers.DokterManagement control = new carismaserver.controllers.DokterManagement();
     private DokterEntity dokterService;
+    private UserEntity userService ;
+    private PoliEntity poliService ;
     public Main ui;
     private File file;
     private DatabaseConnection databaseConnection;
-
+    public List<User> users = new ArrayList<User>();
+    public List<Poli> polis = new ArrayList<Poli>();
+    
     public DoctorManagement(final Main ui) throws RemoteException, SQLException {
         this.ui = ui;
         initComponents();
-        this.setExtendedState(this.MAXIMIZED_BOTH);
-        control.getDokter(this);
-        setComboBox();
+        userService = new UserEntity(ui);
+        control.getDokter(this);        
+        users = userService.getUser();
+        //polis = poliService.getPoli();
+        //setComboBox();
         tableDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
@@ -48,7 +59,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                         Dokter selected = new Dokter(dokterService.getDokter(tableDokter.getValueAt(row, 1).toString()));
                         fieldId.setText(selected.getIdDokter());
                         fieldNama.setText(selected.getNamaDokter());
-                        fieldAlamat.setText(selected.getAlamatDokter());
+                        areaAlamat.setText(selected.getAlamatDokter());
                         fieldNokartuid.setText(selected.getNokartuidDokter());
                         fieldTelepon.setText(selected.getTelpDokter());
                         fieldHP1.setText(selected.getHp1Dokter());
@@ -62,10 +73,9 @@ public class DoctorManagement extends javax.swing.JFrame {
                         fieldGajiFix.setText((String) selected.getGajifixDokter().toString());
                         fieldGajiLembur.setText((String) selected.getGajilemburDokter().toString());
                         fieldGajiKonsul.setText((String) selected.getGajikonsulDokter().toString());
-                        setComboBox(selected.getUserIdUser());
+                        comboUsername.setSelectedItem(selected.getUserIdUser());
+                        //setComboBox(selected.getUserIdUser());
                     } catch (RemoteException ex) {
-                        Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
                         Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
@@ -137,24 +147,15 @@ public class DoctorManagement extends javax.swing.JFrame {
         tableDokter = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         fieldNokartuid = new javax.swing.JTextField();
-        fieldAlamat = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        fieldTanggal = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         fieldNama = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         fieldId = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        fieldTempat = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         comboUsername = new javax.swing.JComboBox();
-        comboKelamin = new javax.swing.JComboBox();
-        comboDarah = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -162,8 +163,10 @@ public class DoctorManagement extends javax.swing.JFrame {
         fieldHP1 = new javax.swing.JTextField();
         fieldHP2 = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        fieldPoli = new javax.swing.JTextField();
+        comboPoli = new javax.swing.JComboBox();
+        areaAlamat = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         fieldGajiFix = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -174,6 +177,13 @@ public class DoctorManagement extends javax.swing.JFrame {
         fieldNorek = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         fieldBank = new javax.swing.JTextField();
+        fieldTanggal = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        comboKelamin = new javax.swing.JComboBox();
+        jLabel9 = new javax.swing.JLabel();
+        comboDarah = new javax.swing.JComboBox();
+        fieldTempat = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         foto = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         buttonAttach = new javax.swing.JButton();
@@ -182,9 +192,13 @@ public class DoctorManagement extends javax.swing.JFrame {
         buttonDelete = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        fieldPoli = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        setMaximumSize(new java.awt.Dimension(1360, 698));
+        setMinimumSize(new java.awt.Dimension(1360, 698));
+        setPreferredSize(new java.awt.Dimension(1360, 698));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tableDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,44 +221,36 @@ public class DoctorManagement extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableDokter);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 500, 1120, 180);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 1120, 160));
 
         jLabel3.setFont(new java.awt.Font("Agency FB", 1, 45)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("DOKTER MANAGEMENT");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(60, 40, 340, 70);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 340, 70));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel7.setText("Tanggal Lahir :");
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setOpaque(false);
 
         jLabel2.setText("Nama Dokter :");
-
-        fieldTanggal.setText("yyyy-mm-dd");
-        fieldTanggal.setToolTipText("yyyy-mm-dd");
-        fieldTanggal.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jLabel4.setText("Alamat Dokter :");
 
         jLabel1.setText("id Dokter :");
-
-        jLabel6.setText("Tempat Lahir :");
-
-        jLabel8.setText("Jenis Kelamin :");
-
-        jLabel9.setText("Golongan Darah :");
 
         jLabel5.setText("No Kartu ID :");
 
         jLabel10.setText("Username :");
 
         comboUsername.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
-
-        comboKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "L", "P" }));
-
-        comboDarah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "AB", "O" }));
+        comboUsername.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                comboUsernamePopupMenuWillBecomeVisible(evt);
+            }
+        });
 
         jLabel13.setText("Telepon :");
 
@@ -254,60 +260,63 @@ public class DoctorManagement extends javax.swing.JFrame {
 
         jLabel22.setText("id Poli :");
 
+        comboPoli.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
+        comboPoli.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                comboPoliPopupMenuWillBecomeVisible(evt);
+            }
+        });
+
+        areaAlamat.setColumns(20);
+        areaAlamat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        areaAlamat.setLineWrap(true);
+        areaAlamat.setRows(5);
+        areaAlamat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboDarah, 0, 168, Short.MAX_VALUE)
-                            .addComponent(comboKelamin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fieldTanggal)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel22))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fieldNama)
-                            .addComponent(fieldAlamat)
-                            .addComponent(fieldNokartuid)
-                            .addComponent(fieldTempat)
-                            .addComponent(comboUsername, 0, 168, Short.MAX_VALUE)
-                            .addComponent(fieldTelepon)
-                            .addComponent(fieldHP1)
-                            .addComponent(fieldHP2)
-                            .addComponent(fieldId)
-                            .addComponent(fieldPoli))))
+                    .addComponent(fieldNama)
+                    .addComponent(fieldNokartuid)
+                    .addComponent(comboUsername, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fieldTelepon)
+                    .addComponent(fieldHP1)
+                    .addComponent(fieldHP2)
+                    .addComponent(fieldId)
+                    .addComponent(comboPoli, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(areaAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(comboUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(fieldPoli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboPoli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -317,9 +326,11 @@ public class DoctorManagement extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(fieldAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 42, Short.MAX_VALUE))
+                    .addComponent(areaAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -334,31 +345,17 @@ public class DoctorManagement extends javax.swing.JFrame {
                     .addComponent(fieldHP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(fieldHP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(fieldTempat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(fieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(comboKelamin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(comboDarah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(fieldHP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(90, 140, 278, 345);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, 290));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setOpaque(false);
+
+        jLabel7.setText("Tanggal Lahir :");
 
         jLabel21.setText("Gaji Konsul :");
 
@@ -370,25 +367,57 @@ public class DoctorManagement extends javax.swing.JFrame {
 
         jLabel16.setText("Bank :");
 
+        fieldTanggal.setText("yyyy-mm-dd");
+        fieldTanggal.setToolTipText("yyyy-mm-dd");
+        fieldTanggal.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        jLabel8.setText("Jenis Kelamin :");
+
+        comboKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "L", "P" }));
+
+        jLabel9.setText("Golongan Darah :");
+
+        comboDarah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "AB", "O" }));
+
+        jLabel6.setText("Tempat Lahir :");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(fieldBank)
-                    .addComponent(fieldNorek)
-                    .addComponent(fieldGajiFix)
-                    .addComponent(fieldGajiLembur)
-                    .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldNorek, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldGajiFix, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldGajiLembur, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldBank, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldTempat, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(comboKelamin, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboDarah, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fieldTanggal))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -396,41 +425,56 @@ public class DoctorManagement extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(fieldBank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldTempat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(fieldNorek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(fieldGajiFix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(fieldGajiLembur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboKelamin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(comboDarah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(fieldBank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(fieldNorek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(fieldGajiFix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(fieldGajiLembur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel20)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(460, 140, 257, 153);
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 290, 250));
 
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/boundaries/Untitled.jpg"))); // NOI18N
         foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         foto.setMaximumSize(new java.awt.Dimension(72, 96));
         foto.setMinimumSize(new java.awt.Dimension(72, 96));
         foto.setPreferredSize(new java.awt.Dimension(72, 96));
-        getContentPane().add(foto);
-        foto.setBounds(460, 340, 90, 130);
+        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 160, 90, 130));
 
         jLabel17.setText("Foto:");
-        getContentPane().add(jLabel17);
-        jLabel17.setBounds(460, 310, 26, 14);
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, -1, -1));
 
         buttonAttach.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonAttach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428315110_icon-archive-32.png"))); // NOI18N
@@ -440,8 +484,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                 buttonAttachActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAttach);
-        buttonAttach.setBounds(570, 410, 120, 40);
+        getContentPane().add(buttonAttach, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 320, 120, 40));
 
         buttonInsert.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222513_icon-ios7-plus-outline-32.png"))); // NOI18N
@@ -451,8 +494,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                 buttonInsertActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonInsert);
-        buttonInsert.setBounds(1160, 500, 120, 40);
+        getContentPane().add(buttonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 500, 120, 40));
 
         buttonUpdate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222456_icon-compose-32.png"))); // NOI18N
@@ -462,8 +504,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                 buttonUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonUpdate);
-        buttonUpdate.setBounds(1160, 550, 120, 40);
+        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 550, 120, 40));
 
         buttonDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1426717770_circle_close_delete-24.png"))); // NOI18N
@@ -473,38 +514,38 @@ public class DoctorManagement extends javax.swing.JFrame {
                 buttonDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonDelete);
-        buttonDelete.setBounds(1160, 600, 120, 40);
+        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 600, 120, 40));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setOpaque(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGap(0, 106, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
+            .addGap(0, 146, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel3);
-        jPanel3.setBounds(450, 330, 110, 150);
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 110, 150));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(0, 0, 1360, 700);
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 700));
+        getContentPane().add(fieldPoli, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 168, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
         try {
-            String userid = comboUsername.getSelectedItem().toString().substring(0, comboUsername.getSelectedItem().toString().indexOf(" "));
+            int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();
+            String poliid = polis.get(comboPoli.getSelectedIndex()).getIdPoli();
             String id = fieldId.getText();
             String nama = fieldNama.getText();
-            String alamat = fieldAlamat.getText();
+            String alamat = areaAlamat.getText();
             String nokartu = fieldNokartuid.getText();
             String telp = fieldTelepon.getText();
             String hp1 = fieldHP1.getText();
@@ -515,11 +556,14 @@ public class DoctorManagement extends javax.swing.JFrame {
             String darah = comboDarah.getSelectedItem().toString();
             String bank = fieldBank.getText();
             String norek = fieldNorek.getText();
-            byte[] img = extractBytes(file.toPath().toString());
+            byte[] img = null;
+            if(file != null){
+                img = extractBytes(file.toPath().toString());
+            }
             int gfix = Integer.parseInt(fieldGajiFix.getText());
             int glembur = Integer.parseInt(fieldGajiLembur.getText());
             double gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
-            control.insertDokter(this, userid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
+            control.insertDokter(this, userid, poliid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
             control.getDokter(this);
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -566,6 +610,30 @@ public class DoctorManagement extends javax.swing.JFrame {
             foto.setIcon(new ImageIcon(dimg));
         }
     }//GEN-LAST:event_buttonAttachActionPerformed
+
+    private void comboUsernamePopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboUsernamePopupMenuWillBecomeVisible
+        comboUsername.removeAllItems();
+        try {
+            users = userService.getUser();
+        } catch (RemoteException ex) {
+            Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int i=0;i<users.size();i++){
+            comboUsername.addItem(users.get(i).getUsername());
+        }
+    }//GEN-LAST:event_comboUsernamePopupMenuWillBecomeVisible
+
+    private void comboPoliPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboPoliPopupMenuWillBecomeVisible
+        comboPoli.removeAllItems();
+        try {
+            polis = poliService.getPoli();
+        } catch (RemoteException ex) {
+            Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int i=0;i<polis.size();i++){
+            comboPoli.addItem(polis.get(i).getNamaPoli());
+        }
+    }//GEN-LAST:event_comboPoliPopupMenuWillBecomeVisible
     private byte[] extractBytes(String ImageName) throws IOException {
         File fi = new File(ImageName);
         byte[] fileContent = Files.readAllBytes(fi.toPath());
@@ -574,14 +642,15 @@ public class DoctorManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaAlamat;
     private javax.swing.JButton buttonAttach;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonInsert;
     private javax.swing.JButton buttonUpdate;
     private javax.swing.JComboBox comboDarah;
     private javax.swing.JComboBox comboKelamin;
+    private javax.swing.JComboBox comboPoli;
     private javax.swing.JComboBox comboUsername;
-    private javax.swing.JTextField fieldAlamat;
     private javax.swing.JTextField fieldBank;
     private javax.swing.JTextField fieldGajiFix;
     private javax.swing.JTextField fieldGajiKonsul;

@@ -37,7 +37,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
     
     @Override
     public void insertKamar(Kamar kamar) throws RemoteException {
-         ui.act.append("Client Execute insertKamar " + kamar.getIdKamar()+ "\n");
+        ui.act.append("Client Execute insertKamar " + kamar.getIdKamar()+ "\n");
 
         PreparedStatement statement = null;
         try {

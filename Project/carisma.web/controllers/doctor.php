@@ -29,32 +29,13 @@ class Doctor extends Controller{
                         Phone : ' . $value[6] . '<br>
                         Sex : ' . $value[11] . '<br>
                         Blood : ' . $value[12] . '<br>
-                        <br>
-                        <br>                                                        
-                    </p>
+                      </p>
+                      <br>
                 </div>
                 </div>';
             }
 
             if ($i == 2) {
-                $masukindums = $masukindums . '<div class="team-member-grid">
-                <div class="team-member-info bottom-t-info bottom-t-info-b">
-                    <span> </span>
-                    <h3><a href="' . URL . 'singleDoctor/id/' . $value[0] . '">' . $value[3] . '</a></h3>
-                    <p>Specialist : ' . $value[19] . ' <br>
-                        Address : ' . $value[4] . ' <br>
-                        Phone : ' . $value[6] . '<br>
-                        Sex : ' . $value[11] . '<br>
-                        Blood : ' . $value[12] . '<br>
-                        <br>
-                        <br>
-                        <br>
-                    </p>
-                </div>
-                <a href="'.URL .'singleDoctor/id/'.$value[0].'"><img src="http://localhost/carisma.web/public/images/t2.jpg"/>
-            </div>';
-            }
-            if ($i == 3) {
                 $masukindums = $masukindums . '<div class="team-member-grid">
                 <a href="'.URL .'singleDoctor/id/'.$value[0].'"><img src="http://localhost/carisma.web/public/images/t1.jpg" />
                 <div class="team-member-info bottom-t-info">
@@ -65,30 +46,42 @@ class Doctor extends Controller{
                         Phone : ' . $value[6] . '<br>
                         Sex : ' . $value[11] . '<br>
                         Blood : ' . $value[12] . '<br>
-                        <br>
-                        <br>                                                         
-                    </p>
+                      </p>
+                      <br>
                 </div>
                 </div>';
             }
-            if ($i == 4) {
-                $masukindums = $masukindums .
-                        '<div class="team-member-grid">
-                <div class="team-member-info bottom-t-info bottom-t-info-b">
+            if ($i == 3) {
+                 $masukindums = $masukindums . '<div class="team-member-grid">
+                <a href="'.URL .'singleDoctor/id/'.$value[0].'"><img src="http://localhost/carisma.web/public/images/t1.jpg" />
+                <div class="team-member-info bottom-t-info">
                     <span> </span>
-                   <h3><a href="' . URL . 'singleDoctor/id/' . $value[0] . '">' . $value[3] . '</a></h3>
+                    <h3><a href="' . URL . 'singleDoctor/id/' . $value[0] . '">' . $value[3] . '</a></h3>
                     <p>Specialist : ' . $value[19] . ' <br>
                         Address : ' . $value[4] . ' <br>
                         Phone : ' . $value[6] . '<br>
                         Sex : ' . $value[11] . '<br>
                         Blood : ' . $value[12] . '<br>
-                        <br>
-                        <br>                            
-                        <br>
-                        </p>
+                      </p>
+                      <br>
                 </div>
-                <a href="'.URL .'singleDoctor/id/'.$value[0].'"><img src="' . URL . 'public/images/t2.jpg" title="name" />
-            </div>';
+                </div>';
+            }
+            if ($i == 4) {
+                 $masukindums = $masukindums . '<div class="team-member-grid">
+                <a href="'.URL .'singleDoctor/id/'.$value[0].'"><img src="http://localhost/carisma.web/public/images/t1.jpg" />
+                <div class="team-member-info bottom-t-info">
+                    <span> </span>
+                    <h3><a href="' . URL . 'singleDoctor/id/' . $value[0] . '">' . $value[3] . '</a></h3>
+                    <p>Specialist : ' . $value[19] . ' <br>
+                        Address : ' . $value[4] . ' <br>
+                        Phone : ' . $value[6] . '<br>
+                        Sex : ' . $value[11] . '<br>
+                        Blood : ' . $value[12] . '<br>                                                    
+                    </p>
+                    <br>
+                </div>
+                </div>';
             }
             if ($i == 5) {
                 $masukindums = $masukindums . '<div class="team-member-grid">
@@ -101,18 +94,15 @@ class Doctor extends Controller{
                         Phone : ' . $value[6] . '<br>
                         Sex : ' . $value[11] . '<br>
                         Blood : ' . $value[12] . '<br>
-                        <br>
-                        <br>                                                
                     </p>
-                </div>
-                <div class="clearfix"> </div>
+                    <br>
                 </div>
                 <div class="clearfix"> </div>
                 </div>';
                 
                 $masukindums=$masukindums.'<div class="clearfix"> </div>';
                 $i = 0;
-                $masukindums=$masukindums.'<div class="clearfix"> </div>';
+//                $masukindums=$masukindums.'<div class="clearfix"> </div>';
             }
             $i++;
         }

@@ -12,7 +12,7 @@
                         //echo '</div>';
                     }
                     ?>
-                        <form method="post" action="<?php echo URL ?>serah/dologin">
+                        <form method="post" action="<?php echo URL ?>verifikasi/dologin">
                             <input type="text" name="username" value="Username:" onfocus="this.value = '';" onblur="if (this.value == '') {
                                         this.value = 'Username:';
                                     }">

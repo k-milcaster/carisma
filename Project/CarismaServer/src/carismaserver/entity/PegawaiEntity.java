@@ -246,7 +246,31 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
 
     @Override
     public String[] getIdNamaPegawai(String username) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ui.act.append("Client Execute getIdNamaPegawai(" + username + ") \n");
+        String[] pegawaiInfo = new String[2];
+        Statement state = null;
+        ResultSet resultSet = null;
+        
+        try {
+            state = DatabaseConnection.getConnection().createStatement();
+            resultSet = state.executeQuery("SELECT P.nama_pegawai FROM pegawai AS P, user AS U WHERE P.user_id_user = 5 AND U.username = '"+username+"'");
+            while (resultSet.next()) {
+                pegawaiInfo[0] = resultSet.getString(1);
+                //pegawaiInfo[1] = resultSet.getString(2);
+            }
+            return pegawaiInfo;
+        } catch (SQLException e) {
+            ui.act.append("getIdNamaPegawai Error\n");
+            ui.act.append(e.toString());
+            return null;
+        }finally{
+            if (state != null) {
+                try {
+                    state.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
     }
     
 }

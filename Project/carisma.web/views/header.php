@@ -1,7 +1,7 @@
 <html>
-    
+
     <head>
-        
+
         <title>Carisma Project | <?php echo $this->title; ?></title>
         <link href="<?php echo URL; ?>public/css/bootstrap.css" rel='stylesheet' type='text/css' />
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -15,8 +15,8 @@
         <script type="text/javascript" src="<?php echo URL; ?>public/js/move-top.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>public/js/easing.js"></script>
         <script type="text/javascript">
-            jQuery(document).ready(function ($) {
-                $(".scroll").click(function (event) {
+            jQuery(document).ready(function($) {
+                $(".scroll").click(function(event) {
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
@@ -29,15 +29,15 @@
         <!---//webfonts--->
         <!----start-top-nav-script---->
         <script>
-            $(function () {
+            $(function() {
                 var pull = $('#pull');
                 menu = $('nav ul');
                 menuHeight = menu.height();
-                $(pull).on('click', function (e) {
+                $(pull).on('click', function(e) {
                     e.preventDefault();
                     menu.slideToggle();
                 });
-                $(window).resize(function () {
+                $(window).resize(function() {
                     var w = $(window).width();
                     if (w > 320 && menu.is(':hidden')) {
                         menu.removeAttr('style');
@@ -54,16 +54,39 @@
                 <div class="container">
                     <div class="logo">
                         <a href="#"><img src="<?php echo URL; ?>public/images/logo.png" title="doctor" /></a>
+                        <?php
+                        if (Session::get('id') != NULL) {
+
+                            echo '<a href= "' . URL . 'dashboard"><font size = "5">Selamat Datang ' . Session::get('id') . '</a></font>';
+                        }
+                        ?>
                     </div>
                     <!----start-top-nav---->
                     <nav class="top-nav">
                         <ul class="top-nav">
                             <li <?php if ($this->title == "Home") echo 'class="active"' ?>><a href="<?php echo URL; ?>">Home </a></li>
-                            <li><a href="<?php echo URL; ?>index#about" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>About us</a></li>
-                            <li><a href="<?php echo URL; ?>index#services" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Services</a></li>
                             <li <?php if ($this->title == "Doctors") echo 'class="active"' ?>><a href="<?php echo URL; ?>index#team" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Doctors</a></li>
+                            <li><a href="<?php echo URL; ?>index#services" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Services</a></li>
+                            <li><a href="<?php echo URL; ?>index#about" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>About us</a></li>
                             <li><a href="<?php echo URL; ?>index#contact" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Contact</a></li>
-                            <li <?php if ($this->title == "Login") echo 'class="active"' ?>><a href="<?php echo URL; ?>login">Log In</a></li>
+                            
+                            <?php
+                            if (Session::get('id') != NULL) {
+                                ?>   <li <?php if ($this->title == "Login") echo 'class="active"' ?>><a href="<?php echo URL; ?>verifikasi/dologout">Log Out</a></li>
+                                <?php
+                            }
+
+                            else {
+                                ?>
+                                <li <?php if ($this->title == "Login") echo 'class="active"' ?>><a href="<?php echo URL; ?>login">Log In</a></li>
+                                <?php
+                            }
+                            ?>
+
+
+
+
+
                         </ul>
                         <a href="#" id="pull"><img src="<?php echo URL; ?>public/images/menu-icon.png" title="menu" /></a>
                     </nav>
@@ -71,4 +94,5 @@
                 </div>
             </div>
         </div>
+
         <!----- //End-header---->

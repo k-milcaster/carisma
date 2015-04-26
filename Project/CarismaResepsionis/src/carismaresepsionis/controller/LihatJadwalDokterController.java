@@ -41,40 +41,22 @@ private DokterService namadokter;
      public DokterService getDokter(){
          return this.namadokter;
      }
-     
+
      public String getNamaDokter(){
         Dokter dokter = new Dokter();
         String NamaDokter = dokter.getNamaDokter();
         return NamaDokter;
     }
      
+     public String getIdDokter(){
+         Dokter dokter = new Dokter();
+         String IdDokter = dokter.getIdDokter();
+         return IdDokter;
+     }    
+    
      public String getNamaPoli(){
          Poli poli = new Poli();
          String NamaPoli = poli.getNamaPoli();
          return NamaPoli;
-     }
-     
-     public String getAlamatDokter(){
-        Dokter dokter = new Dokter();
-        String AlamatDokter = dokter.getAlamatDokter();
-        return AlamatDokter;
-    }
-    
-    public void getNamaPoli(jadwaldokter ui)throws RemoteException{
-        List<Poli> list = new ArrayList<Poli>();
-        list = namapoli.getPoli();
-        for (int i = 0; i < list.size(); i++) {            
-           ui.comboBoxNamaPoli.addItem(list.get(i).getNamaPoli());
-        }               
-    }
-     
-    public void getNamaDokter(jadwaldokter ui)throws RemoteException{
-        List<Dokter> list = new ArrayList<Dokter>();
-        list = namadokter.getDokter();
-        for (int i = 0; i < list.size(); i++) {            
-            ui.comboBoxNamaDokter.addItem(list.get(i).getNamaDokter());
-        }               
-    }
-     
+     }     
 }
-

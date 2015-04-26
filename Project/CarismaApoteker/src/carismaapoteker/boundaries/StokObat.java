@@ -2,6 +2,7 @@ package carismaapoteker.boundaries;
 
 import carismaapoteker.controller.ClientSocket;
 import carismaapoteker.controller.StokObatController;
+import carismainterface.entity.Detailobat;
 import carismainterface.entity.Obat;
 import carismainterface.entity.User;
 import carismainterface.server.ObatService;
@@ -20,34 +21,33 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 public class StokObat extends javax.swing.JFrame {
+
     private ClientSocket client;
     private String userName;
     public ObatService os;
 
-  
-    
     private DefaultTableModel tableObat = new DefaultTableModel();
-  
-    
+
     public StokObat(ClientSocket Client, String userName) throws RemoteException {
-    //    
+        //    
         this.client = Client;
-        StokObatController control = new StokObatController(this.client);
+        final StokObatController control = new StokObatController(this.client);
         os = client.getObatService();
         this.userName = userName;
         initComponents();
         labelApotekerName.setText(this.userName);
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        
+
         control.getObats(this);
-       
-       tableMedicine.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+        tableMedicine.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
                 int row = tableMedicine.getSelectedRow();
-                 if(row != -1){
+                if (row != -1) {
                     try {
+
                         Obat selected = new Obat(os.getObat(tableMedicine.getValueAt(row, 0).toString()));
                         fieldIdMedicine.setText(selected.getIdObat().toString());
                         fieldMedicineName.setText(selected.getNamaObat());
@@ -56,17 +56,18 @@ public class StokObat extends javax.swing.JFrame {
                         fieldDescribtion.setText(selected.getKeterangan());
                         fieldPrice.setText(selected.getHargajualObat().toString());
                         //if (selected.getStokkritisObat() != null) {
-                          //  System.out.println("masuk if "+selected.getStokkritisObat());
-                            fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));
+                        //  System.out.println("masuk if "+selected.getStokkritisObat());
+                        fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));                        
+                        tabelDetailObat.setModel(control.getDetailObat(Integer.parseInt(tableMedicine.getValueAt(row, 0).toString())));
                         //}                        
                     } catch (RemoteException ex) {
                         Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                  fieldIdMedicine.getText();
-                  
-                 }
+                    fieldIdMedicine.getText();
+
+                }
             }
-       });
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -99,7 +100,7 @@ public class StokObat extends javax.swing.JFrame {
         labelApotekerName = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelDetailObat = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -136,6 +137,11 @@ public class StokObat extends javax.swing.JFrame {
                 "Id Obat", "Nama Obat", "Quantity", "Jenis", "Keterangan", "Harga Jual", "Stok Kritis"
             }
         ));
+        tableMedicine.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMedicineMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableMedicine);
 
         getContentPane().add(jScrollPane1);
@@ -283,12 +289,12 @@ public class StokObat extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(fieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
+                        .addGap(279, 279, 279)
                         .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(fieldStokKritis, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -358,7 +364,7 @@ public class StokObat extends javax.swing.JFrame {
         getContentPane().add(jLabel12);
         jLabel12.setBounds(-530, 50, 1346, 47);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelDetailObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -378,7 +384,7 @@ public class StokObat extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tabelDetailObat);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(1050, 470, 320, 210);
@@ -402,17 +408,26 @@ public class StokObat extends javax.swing.JFrame {
             fieldSearch.setForeground(Color.gray);
             fieldSearch.setFont(new Font("Tahoma", 2, 12));
         }
-        
+
     }//GEN-LAST:event_fieldSearchFocusLost
 
     private void fieldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldSearchKeyReleased
         fieldSearch.setForeground(Color.black);
         fieldSearch.setFont(new Font("Tahoma", 0, 12));
+        DefaultTableModel model = new DefaultTableModel();
+        try {
+            StokObatController control = new StokObatController(client);
+            model = control.getObatbyName(fieldSearch.getText());
+            System.out.println(model);
+            tableMedicine.setModel(model);
+        } catch (RemoteException ex) {
+            Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_fieldSearchKeyReleased
 
     private void fieldSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldSearchActionPerformed
         if (evt.getSource() instanceof JTextField) {
-            
+
         }
     }//GEN-LAST:event_fieldSearchActionPerformed
 
@@ -425,7 +440,7 @@ public class StokObat extends javax.swing.JFrame {
         try {
             StokObatController controller = new StokObatController(client);
             int row = tableMedicine.getSelectedRow();
-            if(row == -1){
+            if (row == -1) {
                 return;
             }
             int id = Integer.parseInt(fieldIdMedicine.getText());
@@ -445,10 +460,21 @@ public class StokObat extends javax.swing.JFrame {
             fieldStokKritis.setText("");
         } catch (Exception e) {
         }
-         
-         
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
+    private void tableMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMedicineMouseClicked
+        int row = tableMedicine.getSelectedRow();
+        try {
+            StokObatController control = new StokObatController(client);
+            
+           // control.getDetailObat(this, Integer.parseInt(String.valueOf(tableMedicine.getValueAt(row, 0))));
+        } catch (Exception e) {
+        }
+//          TODO add your handling code here:
+    }//GEN-LAST:event_tableMedicineMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField fieldDescribtion;
     private javax.swing.JTextField fieldIdMedicine;
@@ -475,8 +501,8 @@ public class StokObat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelApotekerName;
+    public javax.swing.JTable tabelDetailObat;
     public javax.swing.JTable tableMedicine;
     // End of variables declaration//GEN-END:variables
 }

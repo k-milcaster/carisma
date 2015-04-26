@@ -191,6 +191,7 @@ public class IsiResep extends javax.swing.JFrame {
                     ui.idResep = fieldIdResep.getText();
                     System.out.println(ui.idResep);
                     clearField();
+                    this.dispose();
                 }
             } catch (Exception e) {
                 System.out.println(e);

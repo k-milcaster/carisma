@@ -71,7 +71,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
                     "UPDATE obat SET nama_obat = ?, qty_obat = ?, jenis_obat = ?, keterangan = ?, hargajual_obat = ?, stokkritis_obat= ? "
                     + "WHERE id_obat = ?"
             );
-            statement.setInt(6, obat.getIdObat());
+            statement.setInt(7, obat.getIdObat());
             statement.setString(1, obat.getNamaObat());
             statement.setInt(2, obat.getQtyObat());
             statement.setString(3, obat.getJenisObat());
@@ -192,18 +192,17 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
     }
 
     @Override
-    public Obat getObatbyName(String namaobat) throws RemoteException {
+    public List<Obat> getObatbyName(String namaobat) throws RemoteException {
         ui.act.append("Client Execute getObatbyName (" + namaobat + ") \n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM obat WHERE nama_obat LIKE ('% ? %')");
-            statement.setString(1, namaobat);
+                    "SELECT * FROM obat WHERE nama_obat LIKE '%"+namaobat+"%'");
             ResultSet result = statement.executeQuery();
-            Obat obat = null;
-            if (result.next()) {
-                obat = new Obat();
+            List<Obat> list = new ArrayList<Obat>();
+            while (result.next()) {
+                Obat obat = new Obat();
                 obat.setIdObat(result.getInt("id_obat"));
                 obat.setNamaObat(result.getString("nama_obat"));
                 obat.setQtyObat(result.getInt("qty_obat"));
@@ -211,8 +210,9 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
                 obat.setKeterangan(result.getString("keterangan"));
                 obat.setHargajualObat(result.getInt("hargajual_obat"));
                 obat.setStokkritisObat(result.getInt("stokkritis_obat"));
+                list.add(obat);
             }
-            return obat;
+            return list;
         } catch (SQLException exception) {
             ui.act.append("getObatbyName Error \n");
             ui.act.append(exception.toString());
