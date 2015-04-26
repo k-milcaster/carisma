@@ -5,7 +5,7 @@
 package carismaresepsionis.controller;
 
 import carismainterface.entity.*;
-import carismainterface.server.PasienService;
+import carismainterface.server.*;
 import java.rmi.RemoteException;
 
 /**
@@ -15,17 +15,17 @@ import java.rmi.RemoteException;
 public class DaftarRawatInapController {
    
     private PasienService pasienService;
-    
+    private PasienKamarService pasienkamarService;
     
     public DaftarRawatInapController (ClientSocket client){
         this.pasienService = client.getPasienService();
-       
+        this.pasienkamarService = client.getPasienKamarService();
         
 } 
-   public void insertNamaPasien (String namaPasien, String idPasien, String namaPenyakit, String namaKamar, String kelasKamar, String tarif) throws RemoteException{
+   public void insertNamaPasien (String namaPasien, String idPasien, String namaKamar, String kelasKamar, String tarif) throws RemoteException{
       
-       Pasien pasien = new Pasien ();
-       pasienService.insertPasien(pasien);
+       PasienKamar pasienkamar = new PasienKamar ();
+       pasienkamarService.insertPasienKamar(pasienkamar);
    }
    
    public void getNamaPasien () throws RemoteException{

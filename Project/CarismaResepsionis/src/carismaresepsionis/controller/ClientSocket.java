@@ -85,5 +85,10 @@ public class ClientSocket {
     public PoliService getPoliService(){
         return this.poliService;
     }
-    
+    public KamarService getKamarService(){
+        return this.kamarService;
+    }
+    public PasienKamarService getPasienKamarService(){
+        return this.pasienkamarService;
+    }
 }
