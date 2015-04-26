@@ -1,3 +1,4 @@
-<?php
+<?php 
 
-echo 'hayooo mau ngapain';
+echo $this->ini
+?>
