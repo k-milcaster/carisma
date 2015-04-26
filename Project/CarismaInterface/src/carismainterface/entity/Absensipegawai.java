@@ -59,12 +59,12 @@ public class Absensipegawai implements Serializable {
         this.kehadiranlemburPegawai = kehadiranlemburPegawai;
     }
 
-    public String getDateabsensiPegawai() {
+    public String getDateAbsensipegawai() {
         return dateAbsensipegawai;
     }
 
-    public void setDateabsensiPegawai(String dateabsensiPegawai) {
-        this.dateAbsensipegawai = dateabsensiPegawai;
+    public void setDateAbsensipegawai(String dateAbsensipegawai) {
+        this.dateAbsensipegawai = dateAbsensipegawai;
     }
     
 }

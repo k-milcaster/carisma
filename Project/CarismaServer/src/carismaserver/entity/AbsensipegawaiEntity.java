@@ -46,7 +46,7 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
             statement.setString(1, absensipegawai.getPegawaiIdPegawai());
             statement.setString(2, absensipegawai.getKehadiranregulerPegawai());
             statement.setString(3, absensipegawai.getKehadiranlemburPegawai());
-            statement.setString(4, absensipegawai.getDateabsensiPegawai());
+            statement.setString(4, absensipegawai.getDateAbsensipegawai());
             statement.executeUpdate();
         } catch (SQLException exception) {
             ui.act.append("InsertAbsensipegawai Error \n");
@@ -75,7 +75,7 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
             statement.setString(4, absensipegawai.getPegawaiIdPegawai());
             statement.setString(1, absensipegawai.getKehadiranregulerPegawai());
             statement.setString(2, absensipegawai.getKehadiranlemburPegawai());
-            statement.setString(3, absensipegawai.getDateabsensiPegawai());
+            statement.setString(3, absensipegawai.getDateAbsensipegawai());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -129,7 +129,7 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
                 absensipegawai.setPegawaiIdPegawai(result.getString("pegawai_id_pegawai"));
                 absensipegawai.setKehadiranregulerPegawai(result.getString("kehadiranreguler_pegawai"));
                 absensipegawai.setKehadiranlemburPegawai(result.getString("kehadiranlembur_pegawai"));
-                absensipegawai.setDateabsensiPegawai(result.getString("date_absensipegawai"));
+                absensipegawai.setDateAbsensipegawai(result.getString("date_absensipegawai"));
             }
             return absensipegawai;
         } catch (SQLException exception) {
@@ -163,7 +163,7 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
                 absensipegawai.setPegawaiIdPegawai(result.getString("pegawai_id_pegawai"));
                 absensipegawai.setKehadiranregulerPegawai(result.getString("kehadiranreguler_pegawai"));
                 absensipegawai.setKehadiranlemburPegawai(result.getString("kehadiranlembur_pegawai"));
-                absensipegawai.setDateabsensiPegawai(result.getString("date_absensipegawai"));
+                absensipegawai.setDateAbsensipegawai(result.getString("date_absensipegawai"));
                 list.add(absensipegawai);
             }
             result.close();
