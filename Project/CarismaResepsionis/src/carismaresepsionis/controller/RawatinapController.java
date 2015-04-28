@@ -55,11 +55,11 @@ public class RawatinapController {
         model.addColumn("Kelas Kamar");
         model.addColumn("Tarif Kamar");
         for (int i = 0; i < list.size(); i++) {
-<<<<<<< HEAD
+
             model.addRow(new Object[]{list.get(i).getNamaKamar(), list.get(i).getKelas(), list.get(i).getTarif()});
-=======
+
             model.addRow(new Object[]{list.get(i).getIdKamar(), list.get(i).getNamaKamar(), list.get(i).getKelas(), list.get(i).getTarif()});
->>>>>>> cfb4c7ed7040e9404bb59b630ee8bcfa2ae7741c
+
             //System.out.println("lewat");
         }
         ui.tablelistkamarpasien.setModel(model);
