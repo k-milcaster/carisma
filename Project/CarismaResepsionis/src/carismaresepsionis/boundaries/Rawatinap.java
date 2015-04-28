@@ -69,10 +69,7 @@ public class Rawatinap extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablelistpasien = new javax.swing.JTable();
-<<<<<<< HEAD
-=======
         idkamar = new javax.swing.JTextField();
->>>>>>> cfb4c7ed7040e9404bb59b630ee8bcfa2ae7741c
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
