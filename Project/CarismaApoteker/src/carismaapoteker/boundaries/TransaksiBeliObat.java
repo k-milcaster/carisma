@@ -1,18 +1,34 @@
 package carismaapoteker.boundaries;
 
 import carismaapoteker.controller.ClientSocket;
+import carismaapoteker.controller.TransaksiBeliObatController;
+import carismainterface.server.TransaksibeliobatService;
+import java.rmi.RemoteException;
 import javax.swing.UIManager;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 public class TransaksiBeliObat extends javax.swing.JFrame {
 
     private ClientSocket Client;
     private String userName;
+    public TransaksibeliobatService tbos;
+    private DefaultTableModel tableTransaksiBeliObat = new DefaultTableModel();
 
-    public TransaksiBeliObat(ClientSocket Client, String userName) {
+    public TransaksiBeliObat(ClientSocket Client, String userName) throws RemoteException {
         this.Client = Client;
+        final TransaksiBeliObatController control = new TransaksiBeliObatController(this.Client);
+        tbos = Client.getTransaksibeliobatService();
         this.userName = userName;
         initComponents();
+        jLabel8.setText(this.userName);
         setLocationRelativeTo(this);
+        control.getTransaksiBeliObat(this);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        
+        jTableOfBuys.getSelectionModel().addListSelectionListener(jTableOfBuys);
+        
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -231,7 +247,6 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
         jLabel7.setBounds(20, 170, 94, 22);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("XXX");
         jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         getContentPane().add(jLabel8);
         jLabel8.setBounds(120, 170, 140, 30);
