@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,14 +19,9 @@ public class regispasienform extends javax.swing.JFrame {
     private regispasiencontroller registrasicontrol;
     String a, b, c, d, e, f, g, h, i;
     settergetter simpanan = new settergetter();
-  
-//    String hitungumur() {
-//        int umur;
-//        umur = Integer.parseInt((String) TahunLahir.getSelectedItem());
-//        int umurini = 2015 - umur;
-//   // System.out.println(umurini);
-//        return String.valueOf(umurini);
-//    }
+    
+    
+    
     /**
      * Creates new form regispasienform
      */
@@ -36,6 +32,7 @@ public class regispasienform extends javax.swing.JFrame {
         //control.getIdUser(this);
         this.userName = userName;
         initComponents();
+        registrasicontrol.getTabelPasien(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Find.requestFocus();
         Tempat_ID.setEditable(false);
@@ -86,11 +83,11 @@ public class regispasienform extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        ListPasien = new java.awt.List();
         tgl_lahir = new com.toedter.calendar.JDateChooser();
         tgl_regpasien = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelpasien = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -306,8 +303,6 @@ public class regispasienform extends javax.swing.JFrame {
         jLabel3.setText("Tgl Registrasi Pasien");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(580, 500, 100, 14);
-        getContentPane().add(ListPasien);
-        ListPasien.setBounds(20, 100, 550, 420);
 
         tgl_lahir.setDateFormatString("yyyy-MM-dd");
         getContentPane().add(tgl_lahir);
@@ -317,9 +312,58 @@ public class regispasienform extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(870, 60, 110, 100);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 1360, 690);
+        tabelpasien.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane2.setViewportView(tabelpasien);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(30, 120, 452, 402);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -425,73 +469,9 @@ public class regispasienform extends javax.swing.JFrame {
                 || ("".equals(No_Hp.getText())) && ("".equals(No_tele.getText())) || ("".equals(Kartu_id.getText())) && ("".equals(No_Kartu.getText()))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
             System.out.println("2");
-        } //         int tinggi,bert,umur;
-        //   String id,nama,tempat,bulanlahir,tanggal,tahun,hp,telp,kk,klain,aamat,provinsi,kota,jeniskelamin,goldar;
+        } 
         else {
-//            simpanan.setNama(Nama_Pasien.getText());
-//            simpanan.setTempat(Tempat_Lahir.getText());
-////          simpanan.setBulanlahir((String) BulanLahir.getSelectedItem());
-////          simpanan.setTanggal((String) TanggalLahir.getSelectedItem());
-////          simpanan.setBulanlahir((String) BulanLahir.getSelectedItem());
-////          simpanan.setTahun((String) TahunLahir.getSelectedItem());
-//            simpanan.setProvinsi((String) Provinsi.getSelectedItem());
-//            simpanan.setKota((String) Kota.getSelectedItem());
-//            simpanan.setJeniskelamin((String) Jenis_Kelamin.getSelectedItem());
-//            simpanan.setGoldar((String) goldar.getSelectedItem());
-//            simpanan.setAamat((String) Alamat.getText());
-//            simpanan.setTinggi(Integer.parseInt(TinggiPasien.getText()));
-//            simpanan.setUmur(Integer.parseInt(UmurPasien.getText()));
-//            simpanan.setBert(Integer.parseInt(BeratPasien.getText()));
-//            if (h.equals(Jenis_Kartu.getText())) {
-//                simpanan.setKlain(No_Kartu.getText());
-//                if (d.equals(No_Hp.getText())) {
-//                    simpanan.setTelp(No_tele.getText());
-//                } else {
-//                    simpanan.setHp(No_Hp.getText());
-//                }
-//            } else if (i.equals(No_Kartu.getText())) {
-//                simpanan.setKk(Jenis_Kartu.getText());
-//                if (d.equals(No_Hp.getText())) {
-//                    simpanan.setTelp(No_tele.getText());
-//                } else {
-//                    simpanan.setHp(No_Hp.getText());
-//                }
-//            } else {
-//                simpanan.setKlain(No_Kartu.getText());
-//                simpanan.setKk(Jenis_Kartu.getText());
-//                simpanan.setTelp(No_tele.getText());
-//                simpanan.setHp(No_Hp.getText());
-//            }
-//            
-//            int dialogButton = JOptionPane.YES_NO_OPTION;
-//            int dialogResult = JOptionPane.showConfirmDialog(null, "\nNama : " + simpanan.getNama() + "\nTempat dan Tanggal Lahir : "
-//                    + simpanan.getTempat() + " " + simpanan.getTanggal() + " " + simpanan.getBulanlahir() + " " + simpanan.getTahun() + "\nNo HP/Telp : " + simpanan.getHp() + " dan " + simpanan.getTelp()
-//                    + "\n No Kartu kk / Pengenal lain : " + simpanan.getKk() + " " + simpanan.getKlain() + "\n Alamat : " + simpanan.getAamat() + " " + simpanan.getKota() + " " + simpanan.getProvinsi()
-//                    + "\n Gender : " + simpanan.getJeniskelamin() + "\n Gol. darah : " + simpanan.getGoldar()
-//                    + "\n tinggi : " + simpanan.getTinggi() + " Berat : " + simpanan.getBert() + "\n Umur : " + simpanan.getUmur() + "\nApakah Data Tersebut benar?", "Warning", dialogButton);
-//            if (dialogResult == JOptionPane.YES_OPTION) {
-//
-//                TinggiPasien.setText(f);
-//                BeratPasien.setText(g);
-//                UmurPasien.setText("Umur");
-//                Tempat_ID.setText("dxdiag-0897-6TUX");
-//                Nama_Pasien.setText(a);
-//                Alamat.setText(c);
-//                Tempat_Lahir.setText(b);
-//
-//                BulanLahir.setSelectedIndex(0);
-//                TanggalLahir.setSelectedIndex(0);
-//                TahunLahir.setSelectedIndex(0);
-//                Provinsi.setSelectedIndex(0);
-//                Kota.setSelectedIndex(0);
-//                Jenis_Kelamin.setSelectedIndex(0);
-//                goldar.setSelectedIndex(0);
-//                No_Hp.setText(d);
-//                No_tele.setText(e);
-//                Jenis_Kartu.setText(h);
-//                No_Kartu.setText(i);
-//
-//            }
+          
             try {
                 Date date = new Date(tgl_lahir.getDate().getTime());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -507,7 +487,7 @@ public class regispasienform extends javax.swing.JFrame {
                     registrasicontrol.InsertUser(userNameandPassword, userNameandPassword, "pasien");
                     registrasicontrol.InsertNamaPasien(Tempat_ID.getText(), String.valueOf(registrasicontrol.ambilidkota(Kota.getSelectedIndex())), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), lah, String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), hariIni, userNameandPassword);
                     JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
-                    ListPasien.add(Nama_Pasien.getText());
+                    registrasicontrol.getTabelPasien(this);
                     Tempat_ID.setText("");
                     Kota.setSelectedItem(0);
                     Nama_Pasien.setText("");
@@ -572,7 +552,6 @@ public class regispasienform extends javax.swing.JFrame {
     private javax.swing.JComboBox Jenis_Kelamin;
     private javax.swing.JTextField Kartu_id;
     public javax.swing.JComboBox Kota;
-    private java.awt.List ListPasien;
     private javax.swing.JTextField Nama_Pasien;
     private javax.swing.JTextField No_Hp;
     private javax.swing.JTextField No_Kartu;
@@ -588,8 +567,9 @@ public class regispasienform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JTable tabelpasien;
     private com.toedter.calendar.JDateChooser tgl_lahir;
     private com.toedter.calendar.JDateChooser tgl_regpasien;
     // End of variables declaration//GEN-END:variables
