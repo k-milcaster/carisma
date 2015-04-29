@@ -179,5 +179,5 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
             }
         }
     }
-    
+
 }

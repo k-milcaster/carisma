@@ -179,6 +179,43 @@ public class JadwalEntity extends UnicastRemoteObject implements JadwalService{
             }
         }
     }
+
+    @Override
+    public List<Jadwal> getJadwalDokterbyIdDokter(String iddokter) throws RemoteException {
+        ui.act.append("Client Execute getJadwalDokterListbyIdDokter \n");
+
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT hari_jadwalpegawai, shift_jadwalpegawai "
+                    + "FROM `jadwal` AS D, `jadwaldokter` AS JD, `dokter` AS D "
+                    + "WHERE J.`id`=JD.`jadwal_id` AND JD.`dokter_id_dokter`=D.`id_dokter` AND D.`id_dokter`="+iddokter);
+
+            List<Jadwal> list = new ArrayList<Jadwal>();
+
+            while (result.next()) {
+                Jadwal jadwal = new Jadwal();
+                jadwal.setHariJadwalpegawai(result.getString("hari_jadwalpegawai"));
+                jadwal.setShiftJadwalpegawai(result.getString("shift_jadwalpegawai"));
+                list.add(jadwal);
+            }
+            result.close();
+            return list;
+
+        } catch (SQLException exception) {
+            ui.act.append("getJadwalDokterListbyIdDokter Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
     
     
 }

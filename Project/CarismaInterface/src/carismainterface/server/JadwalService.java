@@ -25,4 +25,6 @@ public interface JadwalService extends Remote {
     Jadwal getJadwal(String idjadwal) throws RemoteException;
 
     List<Jadwal> getJadwal() throws RemoteException;
+    
+    List<Jadwal> getJadwalDokterbyIdDokter(String iddokter) throws RemoteException;
 }
