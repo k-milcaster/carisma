@@ -22,9 +22,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author kepoterz
  */
-public class DokterManagement {
+public class DokterController {
 
-    public void getDokter(carismaserver.boundaries.DoctorManagement ui) throws RemoteException {
+    public void getDokter(carismaserver.boundaries.DokterManagement ui) throws RemoteException {
         DokterEntity dokterService = new DokterEntity(ui.ui);
         List<Dokter> list = new ArrayList<Dokter>();
         list = dokterService.getDokter();
@@ -54,7 +54,7 @@ public class DokterManagement {
         ui.tableDokter.setModel(model);
     }
 
-    public void insertDokter(carismaserver.boundaries.DoctorManagement ui, int userid, String poliid, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
+    public void insertDokter(carismaserver.boundaries.DokterManagement ui, int userid, String poliid, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
         DokterEntity dokterService = new DokterEntity(ui.ui);
         try {
             Dokter dokter = new Dokter();
@@ -79,11 +79,11 @@ public class DokterManagement {
             dokter.setFotoDokter(foto);
             dokterService.insertDokter(dokter);
         } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void deleteDokter(carismaserver.boundaries.DoctorManagement ui, String id) throws RemoteException {
+    public void deleteDokter(carismaserver.boundaries.DokterManagement ui, String id) throws RemoteException {
         DokterEntity dokterService = new DokterEntity(ui.ui);
         dokterService.deleteDokter(id);
     }

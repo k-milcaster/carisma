@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author K-MiL Caster
  */
-public class UserManagement {
+public class UserController {
 
     public void insertUser(carismaserver.boundaries.UserManagement ui,String username,String password,String now, String role) throws RemoteException {
         UserEntity userService = new UserEntity(ui.ui);
@@ -32,7 +32,7 @@ public class UserManagement {
             user.setRole(role);
             userService.insertUser(user);
         } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -46,7 +46,7 @@ public class UserManagement {
             user.setRole(role);
             userService.updateUser(user);
         } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -56,7 +56,7 @@ public class UserManagement {
             User user = new User(id);
             userService.deleteUser(user);
         } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -196,7 +196,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
-            new DoctorManagement(this).show();
+            new DokterManagement(this).show();
         } catch (RemoteException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -206,7 +206,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
-            new StaffManagement(this).show();
+            new PegawaiManagement(this).show();
         } catch (RemoteException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

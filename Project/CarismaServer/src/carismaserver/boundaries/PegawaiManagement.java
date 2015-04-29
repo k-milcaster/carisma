@@ -23,15 +23,15 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author K-MiL Caster
  */
-public class StaffManagement extends javax.swing.JFrame {
+public class PegawaiManagement extends javax.swing.JFrame {
 
-    private carismaserver.controllers.StaffManagement control = new carismaserver.controllers.StaffManagement();
+    private carismaserver.controllers.PegawaiController control = new carismaserver.controllers.PegawaiController();
     private PegawaiEntity staffService;
     public Main ui;
     private File file;
     private DatabaseConnection databaseConnection;
 
-    public StaffManagement(final Main ui) throws RemoteException, SQLException {
+    public PegawaiManagement(final Main ui) throws RemoteException, SQLException {
         this.ui = ui;
         initComponents();
         control.getPegawai(this);
@@ -62,9 +62,9 @@ public class StaffManagement extends javax.swing.JFrame {
                         fieldGajiLembur.setText((String) selected.getGajilemburPegawai().toString());
                         setComboBox(selected.getUserIdUser());
                     } catch (RemoteException ex) {
-                        Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (SQLException ex) {
-                        Logger.getLogger(StaffManagement.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(PegawaiManagement.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 }
@@ -282,7 +282,7 @@ public class StaffManagement extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(500, 100, 255, 151);
+        jPanel2.setBounds(500, 100, 0, 0);
 
         buttonUpdate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222456_icon-compose-32.png"))); // NOI18N
@@ -559,7 +559,7 @@ public class StaffManagement extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonInsertActionPerformed
 

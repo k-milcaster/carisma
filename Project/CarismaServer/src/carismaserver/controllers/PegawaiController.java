@@ -14,8 +14,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author kepoterz
  */
-public class StaffManagement {
-    public void getPegawai(carismaserver.boundaries.StaffManagement ui) throws RemoteException {
+public class PegawaiController {
+    public void getPegawai(carismaserver.boundaries.PegawaiManagement ui) throws RemoteException {
         PegawaiEntity pegawaiService = new PegawaiEntity(ui.ui);
         List<Pegawai> list = new ArrayList<Pegawai>();
         list = pegawaiService.getPegawai();
@@ -45,7 +45,7 @@ public class StaffManagement {
         ui.tablePegawai.setModel(model);
     }
     
-    public void insertPegawai(carismaserver.boundaries.StaffManagement ui, String username, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String jabatan, String bank, String norek, int gfix, int glembur, byte[] foto) throws RemoteException {
+    public void insertPegawai(carismaserver.boundaries.PegawaiManagement ui, String username, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String jabatan, String bank, String norek, int gfix, int glembur, byte[] foto) throws RemoteException {
         PegawaiEntity pegawaiService = new PegawaiEntity(ui.ui);        
         try {
             User user = new User();
@@ -70,7 +70,7 @@ public class StaffManagement {
             pegawai.setFotoPegawai(foto);
             pegawaiService.insertPegawai(pegawai);
         } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

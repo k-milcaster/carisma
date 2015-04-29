@@ -29,9 +29,9 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author K-MiL Caster
  */
-public class DoctorManagement extends javax.swing.JFrame {
+public class DokterManagement extends javax.swing.JFrame {
 
-    private carismaserver.controllers.DokterManagement control = new carismaserver.controllers.DokterManagement();
+    private carismaserver.controllers.DokterController control = new carismaserver.controllers.DokterController();
     private DokterEntity dokterService;
     private UserEntity userService ;
     private PoliEntity poliService ;
@@ -41,7 +41,7 @@ public class DoctorManagement extends javax.swing.JFrame {
     public List<User> users = new ArrayList<User>();
     public List<Poli> polis = new ArrayList<Poli>();
     
-    public DoctorManagement(final Main ui) throws RemoteException, SQLException {
+    public DokterManagement(final Main ui) throws RemoteException, SQLException {
         this.ui = ui;
         initComponents();
         userService = new UserEntity(ui);
@@ -76,7 +76,7 @@ public class DoctorManagement extends javax.swing.JFrame {
                         comboUsername.setSelectedItem(selected.getUserIdUser());
                         //setComboBox(selected.getUserIdUser());
                     } catch (RemoteException ex) {
-                        Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 }
@@ -195,9 +195,7 @@ public class DoctorManagement extends javax.swing.JFrame {
         fieldPoli = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1360, 698));
         setMinimumSize(new java.awt.Dimension(1360, 698));
-        setPreferredSize(new java.awt.Dimension(1360, 698));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tableDokter.setModel(new javax.swing.table.DefaultTableModel(
@@ -568,7 +566,7 @@ public class DoctorManagement extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_buttonInsertActionPerformed
@@ -616,7 +614,7 @@ public class DoctorManagement extends javax.swing.JFrame {
         try {
             users = userService.getUser();
         } catch (RemoteException ex) {
-            Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
         for(int i=0;i<users.size();i++){
             comboUsername.addItem(users.get(i).getUsername());
@@ -628,7 +626,7 @@ public class DoctorManagement extends javax.swing.JFrame {
         try {
             polis = poliService.getPoli();
         } catch (RemoteException ex) {
-            Logger.getLogger(DoctorManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
         for(int i=0;i<polis.size();i++){
             comboPoli.addItem(polis.get(i).getNamaPoli());

@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class UserManagement extends javax.swing.JFrame {
 
-    private carismaserver.controllers.UserManagement control = new carismaserver.controllers.UserManagement();
+    private carismaserver.controllers.UserController control = new carismaserver.controllers.UserController();
     private UserEntity userService;
     public Main ui;
 
