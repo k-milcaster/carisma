@@ -1,7 +1,11 @@
 package carismaresepsionis.boundaries;
 
+import carismainterface.server.DokterService;
+import carismainterface.server.JadwaldokterService;
 import carismaresepsionis.controller.ClientSocket;
 import javax.swing.DefaultListModel;
+import carismaresepsionis.controller.LihatJadwalDokterController;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -10,26 +14,26 @@ import javax.swing.DefaultListModel;
 public class jadwaldokter extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
-    public jadwaldokter(ClientSocket client, String userName) {
+    private JadwaldokterService jd;
+    private LihatJadwalDokterController LihatJadwalDokterController;
+    settergetter simpanan = new settergetter();
+
+    public jadwaldokter(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
+        LihatJadwalDokterController control = new LihatJadwalDokterController(this.client);
+        jd = client.getJadwaldokterService();
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        control.getJadwaldokter();
+  
+      // String IdDokter = String.valueOf(control.getJadwalDokterDetail(JadwalId).getDokterIdDokter());
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        comboBoxNamaPoli = new javax.swing.JComboBox();
-        comboBoxNamaDokter = new javax.swing.JComboBox();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jTextField5 = new javax.swing.JTextField();
@@ -41,7 +45,6 @@ public class jadwaldokter extends javax.swing.JFrame {
         jTextField19 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jTextField11 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jTextField9 = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
@@ -51,90 +54,6 @@ public class jadwaldokter extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Dokter", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
-
-        jLabel2.setText("Poli");
-
-        jLabel3.setText("Alamat");
-
-        jLabel4.setText("Nama");
-
-        comboBoxNamaPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxNamaPoliActionPerformed(evt);
-            }
-        });
-
-        comboBoxNamaDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxNamaDokterActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
-                .addGap(53, 53, 53)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(comboBoxNamaPoli, javax.swing.GroupLayout.Alignment.LEADING, 0, 97, Short.MAX_VALUE)
-                        .addComponent(comboBoxNamaDokter, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(comboBoxNamaPoli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboBoxNamaDokter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(76, 144, 510, 200);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Foto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
-
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(610, 140, 183, 207);
 
         jLabel7.setFont(new java.awt.Font("Trajan Pro", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -158,7 +77,7 @@ public class jadwaldokter extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +87,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel5);
-        jPanel5.setBounds(290, 430, 150, 82);
+        jPanel5.setBounds(300, 180, 150, 80);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
@@ -186,7 +105,7 @@ public class jadwaldokter extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +115,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel7);
-        jPanel7.setBounds(80, 430, 160, 82);
+        jPanel7.setBounds(80, 180, 160, 80);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rabu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
@@ -214,7 +133,7 @@ public class jadwaldokter extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +143,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel9);
-        jPanel9.setBounds(500, 430, 150, 82);
+        jPanel9.setBounds(530, 180, 150, 80);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Jum'at", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
@@ -235,7 +154,7 @@ public class jadwaldokter extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +162,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel14);
-        jPanel14.setBounds(80, 530, 160, 70);
+        jPanel14.setBounds(80, 310, 160, 70);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Kamis", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
@@ -252,7 +171,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -264,12 +183,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(690, 430, 140, 78);
-
-        jLabel8.setFont(new java.awt.Font("Trajan Pro", 1, 36)); // NOI18N
-        jLabel8.setText("praktek");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(80, 380, 220, 37);
+        jPanel3.setBounds(750, 180, 140, 76);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sabtu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
@@ -280,7 +194,7 @@ public class jadwaldokter extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,7 +202,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel4);
-        jPanel4.setBounds(290, 530, 150, 70);
+        jPanel4.setBounds(300, 310, 150, 70);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Minggu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 3, 14))); // NOI18N
 
@@ -299,7 +213,7 @@ public class jadwaldokter extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,7 +221,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel6);
-        jPanel6.setBounds(500, 530, 150, 71);
+        jPanel6.setBounds(530, 310, 150, 71);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton1.setText("Back");
@@ -317,7 +231,7 @@ public class jadwaldokter extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(830, 310, 90, 40);
+        jButton1.setBounds(760, 340, 90, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -338,45 +252,15 @@ public class jadwaldokter extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField13ActionPerformed
 
-    private void comboBoxNamaPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxNamaPoliActionPerformed
-        DefaultListModel model = new DefaultListModel();
-        for (int i = 0; i < comboBoxNamaPoli.getModel().getSize(); i++) {
-            Object item = comboBoxNamaPoli.getModel().getElementAt(i);
-            model.addElement(item.toString());
-        }
-        //int poli = comboBoxNamaPoli.getSelectedItem();
-        //model.addElement(poli);
-        
-    }//GEN-LAST:event_comboBoxNamaPoliActionPerformed
-
-    private void comboBoxNamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxNamaDokterActionPerformed
-       DefaultListModel model = new DefaultListModel();
-        for (int i = 0; i < comboBoxNamaDokter.getModel().getSize(); i++) {
-            Object item = comboBoxNamaDokter.getModel().getElementAt(i);
-            model.addElement(item.toString());
-        }
-        //int poli = comboBoxNamaDokter.getSelectedItem();
-        //model.addElement(poli);
-    }//GEN-LAST:event_comboBoxNamaDokterActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JComboBox comboBoxNamaDokter;
-    public javax.swing.JComboBox comboBoxNamaPoli;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -387,7 +271,6 @@ public class jadwaldokter extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField9;
