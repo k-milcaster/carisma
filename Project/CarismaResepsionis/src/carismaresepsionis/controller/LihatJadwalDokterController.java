@@ -4,11 +4,8 @@
  */
 package carismaresepsionis.controller;
 import carismainterface.entity.Dokter;
-import carismainterface.entity.Poli;
 import carismainterface.entity.Jadwaldokter;
 import carismainterface.server.JadwaldokterService;
-import carismainterface.server.PoliService;
-import carismainterface.server.DokterService;
 import carismaresepsionis.boundaries.jadwaldokter;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -19,44 +16,32 @@ import java.util.List;
  */
 public class LihatJadwalDokterController {
     
-private JadwaldokterService lihatjadwaldokter;
-private PoliService namapoli;
-private DokterService namadokter;
+private JadwaldokterService jadwaldokterService;
     
      public LihatJadwalDokterController(ClientSocket client) throws RemoteException{
         Jadwaldokter lihatjadwaldokter = new Jadwaldokter();
-        this.lihatjadwaldokter = client.getJadwaldokterService();
-        this.namapoli = client.getPoliService();
-        this.namadokter = client.getDokterService();
+        this.jadwaldokterService = client.getJadwaldokterService();
     }
-     
+         
      public JadwaldokterService getJadwaldokter(){
-         return this.lihatjadwaldokter;
-     }
-     
-     public PoliService getPoli(){
-         return this.namapoli;
-     }
-     
-     public DokterService getDokter(){
-         return this.namadokter;
-     }
-
-     public String getNamaDokter(){
-        Dokter dokter = new Dokter();
-        String NamaDokter = dokter.getNamaDokter();
-        return NamaDokter;
+     return this.jadwaldokterService;
     }
-     
-     public String getIdDokter(){
-         Dokter dokter = new Dokter();
-         String IdDokter = dokter.getIdDokter();
-         return IdDokter;
-     }    
     
-     public String getNamaPoli(){
-         Poli poli = new Poli();
-         String NamaPoli = poli.getNamaPoli();
-         return NamaPoli;
-     }     
+    public String getIdDokter(){
+        Dokter dokter = new Dokter();
+        String IdDokter = dokter.getIdDokter();
+        return IdDokter;
+    }
+    
+    public Integer getIdJadwalDokter(){
+        Jadwaldokter jadwaldokter = new Jadwaldokter();
+        Integer JadwalId = jadwaldokter.getJadwalId();
+        return JadwalId;
+    }
+    
+     public Jadwaldokter getJadwalDokterDetail(String id) throws RemoteException{
+        Jadwaldokter jadwaldokter = jadwaldokterService.getJadwaldokter(id);
+        return jadwaldokter;
+    }
+    
 }
