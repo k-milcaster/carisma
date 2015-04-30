@@ -46,7 +46,7 @@ public class TransaksiJualObatController {
         detailtransaksi.setObat(idObat);
         detailtransaksi.setQty(qty);
         detailtransaksijual.insertDetailtransaksijualobat(detailtransaksi);
-        System.out.println("masuk insert detail");
+        System.out.println("Masuk Insert Detail");
         
     }
     public DefaultTableModel getTableObat(TabelObat b) throws RemoteException {
@@ -63,8 +63,8 @@ public class TransaksiJualObatController {
          model.addColumn("Harga Jual");
          model.addColumn("Stok Kritis");
          for (int i = 0; i < list.size(); i++) {
-             model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(),list.get(i).getStokkritisObat()});
-             System.out.println("lewat");
+         model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(),list.get(i).getStokkritisObat()});
+             System.out.println("Lewat");
          }
          b.jTableObat.setModel(model);
          return model;
