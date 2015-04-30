@@ -23,8 +23,8 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
         initComponents();
         jLabel8.setText(this.userName);
         setLocationRelativeTo(this);
-        control.getTransaksiBeliObat(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        control.getTransaksiBeliObat(this);
         
         jTableOfBuys.getSelectionModel().addListSelectionListener(jTableOfBuys);
         
