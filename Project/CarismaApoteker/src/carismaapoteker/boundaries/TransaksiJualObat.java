@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,6 +34,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -50,6 +52,8 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableOfSales = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Carisma Project");
@@ -156,7 +160,15 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(10, 130, 94, 22);
 
+        labelAoptekerName.setBackground(new java.awt.Color(153, 0, 0));
         labelAoptekerName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelAoptekerName.setForeground(new java.awt.Color(153, 0, 0));
+        labelAoptekerName.setText("Apoteker Name");
+        labelAoptekerName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, labelAoptekerName, org.jdesktop.beansbinding.ObjectProperty.create(), labelAoptekerName, org.jdesktop.beansbinding.BeanProperty.create("labelFor"));
+        bindingGroup.addBinding(binding);
+
         getContentPane().add(labelAoptekerName);
         labelAoptekerName.setBounds(110, 130, 176, 26);
 
@@ -214,6 +226,12 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 1360, 700);
+        getContentPane().add(jTabbedPane1);
+        jTabbedPane1.setBounds(580, 110, 100, 100);
+        getContentPane().add(jProgressBar1);
+        jProgressBar1.setBounds(110, 134, 146, 20);
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -228,7 +246,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
 
         //fieldTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          if (fieldIdOfSales.getText().equals("")||fieldDescription.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Field yang anda isi tidak lengkap","Peringatan",JOptionPane.WARNING_MESSAGE);
@@ -249,9 +267,10 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void fieldIdOfSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdOfSalesActionPerformed
-        // TODO add your handling code here:
+     if (evt.getSource() instanceof JTextField) {
     }//GEN-LAST:event_fieldIdOfSalesActionPerformed
-
+    }
+    
     private void jTableOfSalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableOfSalesMouseClicked
         int colom = jTableOfSales.getSelectedColumn();
         if (colom == 0) {
@@ -279,8 +298,11 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     public javax.swing.JTable jTableOfSales;
     private javax.swing.JLabel labelAoptekerName;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
