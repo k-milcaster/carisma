@@ -65,6 +65,17 @@ public class TransaksiBeliObatController {
     }
     return model;
     }
+    
+    public void insertBeliObatLama(String idTransaksiBeliObat, String tglTransaksiBeliObat, String keterangan, int hargaBeliObat) throws RemoteException{
+    Transaksibeliobat trans = new Transaksibeliobat();
+    trans.setIdTransaksibeliobat(idTransaksiBeliObat);
+    trans.setDateTransaksibeli(tglTransaksiBeliObat);
+    trans.setKeterangan(keterangan);
+    trans.setHargabeliObat(hargaBeliObat);
+    transaksibeliobat.insertTransaksibelibat(trans);
+    
+    
+    }
 //    
 //    public void insertTransaksiBeliObat(carismaapoteker.boundaries.TransaksiBeliObat ui){
 //        
