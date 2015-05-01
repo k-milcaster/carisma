@@ -4,6 +4,7 @@ import carismaapoteker.controller.ClientSocket;
 import carismaapoteker.controller.TransaksiBeliObatController;
 import carismainterface.server.TransaksibeliobatService;
 import java.rmi.RemoteException;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -24,9 +25,9 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
         jLabel8.setText(this.userName);
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        control.getTransaksiBeliObat(this);
+       // control.getTransaksiBeliObat(this);
         
-        jTableOfBuys.getSelectionModel().addListSelectionListener(jTableOfBuys);
+       // jTableOfBuys.getSelectionModel().addListSelectionListener(jTableOfBuys);
         
         
     }
@@ -278,6 +279,11 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1426717487_save.png"))); // NOI18N
         jButton1.setText("SAVE");
         jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(1261, 650, 100, 35);
 
@@ -287,6 +293,15 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(fieldIdTransaksiBeli.getText().equals("")||fieldNamaObat.getText().equals("")||fieldJenisObat.getText().equals("")||fieldHargaBeli.getText().equals("")||fieldKeterangan.getText().equals(""))
+        {JOptionPane.showConfirmDialog(null, "Isi Data Transaksi Pembelian Obat dengan Lengkap", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox boxNamaObat;
