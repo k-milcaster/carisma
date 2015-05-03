@@ -35,7 +35,7 @@ public class TransaksiJualObatController {
         transaksijual.setIdTransaksijual(idTransaksijual);
         transaksijual.setDateTransaksijual(dateTransaksijual);
         transaksijual.setKeterangan(keterangan);
-        transaksijualobat.insertTransaksijualbat(transaksijual);
+        transaksijualobat.insertTransaksijualobat(transaksijual);
    
     }
     public void insertDetailtransaksijualobat(String idTransaksi, int idObat, int qty) throws RemoteException {

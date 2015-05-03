@@ -4,7 +4,6 @@ import carismaapoteker.controller.ClientSocket;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.UIManager;
 
 /**
  *
@@ -110,7 +109,11 @@ public class MenuApoteker extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new TransaksiBeliObat(this.client, this.userName).setVisible(true);
+        try {
+            new TransaksiBeliObat(this.client, this.userName).setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuApoteker.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose(); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
