@@ -112,6 +112,17 @@
                     <h3><a href="#">human bones problem</a></h3>
                 </div>
             </div>
+            
+            <div class="col-md-1 contact-grid-left">
+                        
+                    </div>
+           <div class="col-md-1 contact-grid-right">
+               <br>
+               <a href="<?php echo URL; ?>penyakit/">   <input type="submit" value="CARI DETAIL PENYAKIT ANDA" /></a>
+                        </div>
+            
+            
+            
             <div class="clearfix"> </div>
         </div>
         <!----//service-grids--->

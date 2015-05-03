@@ -1,6 +1,6 @@
 <?php
 
-class dashboard extends Controller {
+class detilPenyakit extends Controller {
 
     function __construct() {
         parent::__construct();
@@ -36,7 +36,7 @@ class dashboard extends Controller {
         }
         $this->view->ini=$masukindums;
         $this->view->title = "Dashboard";
-        $this->view->render('dashboard/index', 1, 0);
+        $this->view->render('penyakit/detail', 1, 0);
     }
 
 }

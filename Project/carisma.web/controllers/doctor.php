@@ -18,7 +18,7 @@ class Doctor extends Controller{
         foreach ($rak as $key => $value) {
 
             if ($i == 1) {
-                $masukindums = $masukindums . '<div class="team-member-grids">';
+                //$masukindums = $masukindums . '<div class="team-member-grids">';
                 $masukindums = $masukindums . '<div class="team-member-grid">
                 <a href="'.URL .'singleDoctor/id/'.$value[0].'"><img src="' . URL . 'public/images/t1.jpg"/></a>
                 <div class="team-member-info bottom-t-info">
@@ -102,7 +102,7 @@ class Doctor extends Controller{
                 
                 $masukindums=$masukindums.'<div class="clearfix"> </div>';
                 $i = 0;
-//                $masukindums=$masukindums.'<div class="clearfix"> </div>';
+                $masukindums=$masukindums.'<div class="clearfix"> </div>';
             }
             $i++;
         }
