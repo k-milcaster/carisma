@@ -111,10 +111,16 @@ public class MenuApoteker extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             new TransaksiBeliObat(this.client, this.userName).setVisible(true);
+<<<<<<< HEAD
         } catch (RemoteException ex) {
             Logger.getLogger(MenuApoteker.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose(); 
+=======
+            this.dispose(); 
+        }
+        catch (RemoteException ex){};
+>>>>>>> origin/develop
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

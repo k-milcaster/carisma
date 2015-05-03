@@ -69,7 +69,7 @@ public class StokObatController {
             obat.setKeterangan(keterangan);
             obat.setHargajualObat(hargaJualObat);
             obat.setStokkritisObat(stokKritis);
-            obatService.updateObat(obat);
+        obatService.updateObat(obat);
     
     }
     public DefaultTableModel getObatbyName (String nama) throws RemoteException{
