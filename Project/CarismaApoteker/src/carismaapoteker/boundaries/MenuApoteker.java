@@ -10,15 +10,17 @@ import java.util.logging.Logger;
  * @author User
  */
 public class MenuApoteker extends javax.swing.JFrame {
-    
+
     private ClientSocket client;
     private String userName;
-    public MenuApoteker(ClientSocket Client, String username) {        
+
+    public MenuApoteker(ClientSocket Client, String username) {
         this.client = Client;
         this.userName = username;
         initComponents();
         setLocationRelativeTo(this);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,8 +101,8 @@ public class MenuApoteker extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             new StokObat(this.client, this.userName).setVisible(true);
-        } 
-        catch (RemoteException ex){};
+        } catch (RemoteException ex) {
+        };
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -111,16 +113,13 @@ public class MenuApoteker extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             new TransaksiBeliObat(this.client, this.userName).setVisible(true);
-<<<<<<< HEAD
+
         } catch (RemoteException ex) {
             Logger.getLogger(MenuApoteker.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.dispose(); 
-=======
-            this.dispose(); 
-        }
-        catch (RemoteException ex){};
->>>>>>> origin/develop
+        this.dispose();
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -130,4 +129,5 @@ public class MenuApoteker extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
 }
