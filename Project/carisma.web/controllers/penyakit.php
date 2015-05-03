@@ -1,6 +1,6 @@
 <?php
 
-class error extends Controller {
+class penyakit extends Controller {
     
     function __construct() {
         parent::__construct();
@@ -12,10 +12,12 @@ class error extends Controller {
         <div class="contact-info">
             <div class="container">
                 <div class="contact-grids">
+                
                     <div class="col-md-7 contact-grid-right">
-                        <h3>404 Not Found</h3> 
-                        <h4> The requested URL 404 was not found on site.</h4>
-                        <div class="clearfix"> </div>
+                    <h3>Cari Penyakit</h3>
+<br>                
+                    <input type="text" name="cari">
+                        <input type="submit" value="CARI PENYAKIT" />
                     </div>
                 </div>
             </div>
@@ -24,7 +26,7 @@ class error extends Controller {
 </div>';
         $this->view->ini = $masukindums;
         $this->view->title = "Home";
-        $this->view->render('error/index', 1, 0);  
+        $this->view->render('penyakit/index', 1, 0);  
     
         
     } 

@@ -66,7 +66,7 @@
                         <ul class="top-nav">
                             <li <?php if ($this->title == "Home") echo 'class="active"' ?>><a href="<?php echo URL; ?>">Home </a></li>
                             <li <?php if ($this->title == "Doctors") echo 'class="active"' ?>><a href="<?php echo URL; ?>index#team" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Doctors</a></li>
-                            <li><a href="<?php echo URL; ?>index#services" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Services</a></li>
+                            <li <?php if ($this->title == "Service") echo 'class="active"' ?>><a href="<?php echo URL; ?>index#services" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Services</a></li>
                             <li><a href="<?php echo URL; ?>index#about" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>About us</a></li>
                             <li><a href="<?php echo URL; ?>index#contact" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Contact</a></li>
                             
