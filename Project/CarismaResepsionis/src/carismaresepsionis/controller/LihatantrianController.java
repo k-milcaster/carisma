@@ -38,8 +38,11 @@ public class LihatantrianController {
         String GolDarah = pasien.getDarahPasien();
         return GolDarah;
     }
-    //public int getUmur(){
-    //masi bingung
+//    public String getUmur(){
+//        Pasien pasien = new Pasien();
+//        String Umur = pasien.getTgllahirPasien();
+//        return Umur;
+//    }
     
     public int getTinggi(){
         Pasien pasien = new Pasien();

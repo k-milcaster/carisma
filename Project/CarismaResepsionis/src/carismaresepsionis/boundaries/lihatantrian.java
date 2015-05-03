@@ -3,6 +3,8 @@ package carismaresepsionis.boundaries;
 import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +31,7 @@ public class lihatantrian extends javax.swing.JFrame {
         Tinggi.setText(String.valueOf(control.getDetailPasien(idPasien).getTinggiPasien()));
         Berat.setText(String.valueOf(control.getDetailPasien(idPasien).getBeratPasien()));
 //        String idKunjungan = String.valueOf(control.getDetailKunjungan(idAntrian).getIdKunjungan());
- //       TerakhirPeriksa.setText(String.valueOf(control.getDetailKunjungan(idKunjungan).getTanggaljamKunjungan()));
+//        TerakhirPeriksa.setText(String.valueOf(control.getDetailKunjungan(idKunjungan).getTanggaljamKunjungan()));
         }
 
     @SuppressWarnings("unchecked")
@@ -250,6 +252,11 @@ public class lihatantrian extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(940, 330, 90, 40);
 
@@ -275,6 +282,16 @@ public class lihatantrian extends javax.swing.JFrame {
     private void BeratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeratActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BeratActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.dispose();
+       try {
+           Menursepsionis menu = new Menursepsionis(client, userName);
+           menu.setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(lihatantrian.class.getName()).log(Level.SEVERE, null, ex);
+        }                
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AlamatPasien;
