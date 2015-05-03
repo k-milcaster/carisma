@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import carismakasir.controller.KasirController;
+import java.io.FileNotFoundException;
 
 /**
  *
@@ -21,7 +22,6 @@ public class Kasir extends javax.swing.JFrame {
     private KasirController control;
 
     public Kasir(ClientSocket client, final String username) {
-
         this.client = client;
         this.login = client.getUserService();
         initComponents();
@@ -156,6 +156,11 @@ public class Kasir extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismakasir/image/1428220464_icon-ios7-checkmark-outline-64.png"))); // NOI18N
         jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         jLabel11.setText("Rp");
@@ -251,9 +256,8 @@ public class Kasir extends javax.swing.JFrame {
 
     private void buttonShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowActionPerformed
         if (fieldKunjungan.getText().equalsIgnoreCase("")) {
-            
-        }
-        else {
+
+        } else {
             try {
                 control.showBiaya(fieldKunjungan.getText());
             } catch (RemoteException ex) {
@@ -261,6 +265,14 @@ public class Kasir extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_buttonShowActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            control.cetak();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Kasir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonShow;

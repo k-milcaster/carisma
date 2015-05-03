@@ -7,6 +7,14 @@ import carismakasir.boundary.Kasir;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.io.FileOutputStream;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +25,8 @@ public class KasirController {
     private PembayaranService pembayaranService;
     private KunjunganService kunjunganService;
     private Kasir ui;
+    private String printTo = "D:\\";
+    private String fileName = ".pdf";
 
     public KasirController(ClientSocket Client, Kasir ui) {
         this.pembayaranService = Client.getPembayaranService();
@@ -47,17 +57,50 @@ public class KasirController {
         if (target.getTransaksijualobatIdTransaksijual() != "kosong") {
             ArrayList<ArrayList> biayaObat = pembayaranService.getBiayaObat(target.getTransaksijualobatIdTransaksijual());
             for (int i = 0; i < biayaObat.size(); i++) {
-                model.addRow(new Object[]{no, "Pembelian Obat "+biayaObat.get(i).get(0), biayaObat.get(i).get(1), biayaObat.get(i).get(2), biayaObat.get(i).get(3)});
+                model.addRow(new Object[]{no, "Pembelian Obat " + biayaObat.get(i).get(0), biayaObat.get(i).get(1), biayaObat.get(i).get(2), biayaObat.get(i).get(3)});
                 no++;
                 total = total + Integer.parseInt(biayaObat.get(i).get(3).toString());
             }
         }
         ui.jTable1.setModel(model);
-        ui.fieldTotal.setText(total+"");
+        ui.fieldTotal.setText(total + "");
     }
 
-    public void cetak() {
+    public void cetak() throws FileNotFoundException {
+        String FILE = this.printTo + "test" + this.fileName;
 
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(FILE));
+            document.open();
+            Image header = Image.getInstance("header.png");
+            document.add(header);
+            Paragraph space = new Paragraph(" ");
+            Paragraph title = new Paragraph("Invoice");
+            title.setAlignment(Element.ALIGN_CENTER);
+            PdfPTable table = new PdfPTable(ui.jTable1.getColumnCount());
+            for (int i = 0; i < ui.jTable1.getColumnCount(); i++) {
+                table.addCell(ui.jTable1.getColumnName(i));
+            }
+            for (int i = 0; i < ui.jTable1.getRowCount(); i++) {
+                for (int j = 0; j < ui.jTable1.getColumnCount(); j++) {
+                    table.addCell(ui.jTable1.getValueAt(i, j).toString());
+                }
+            }
+            Paragraph total = new Paragraph("Total = " + ui.fieldTotal.getText());
+            total.setAlignment(Element.ALIGN_RIGHT);
+            document.add(space);
+            document.add(title);
+            document.add(space);
+            document.add(table);
+            document.add(total);
+            document.close();
+            JOptionPane.showMessageDialog(null, "Saved");
+        } catch (DocumentException ex) {
+            Logger.getLogger(KasirController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(KasirController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
