@@ -5,6 +5,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import carismakasir.controller.ClientSocket;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import static org.junit.Assert.*;
 
 /**
@@ -12,22 +15,26 @@ import static org.junit.Assert.*;
  * @author K-MiL Caster
  */
 public class KasirControllerTest {
-    
+
+    ClientSocket client;
+
     public KasirControllerTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp() {
+    public void setUp() throws RemoteException, NotBoundException {
+        client = new ClientSocket();
+        
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -38,11 +45,11 @@ public class KasirControllerTest {
     @Test
     public void testShowBiaya() throws Exception {
         System.out.println("showBiaya");
-        String idKunjungan = "";
-        KasirController instance = null;
+        client = new ClientSocket();
+        String idKunjungan = "kun1";
+        KasirController instance = new KasirController(client, null);
         instance.showBiaya(idKunjungan);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -54,7 +61,7 @@ public class KasirControllerTest {
         KasirController instance = null;
         instance.cetak();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
-    
+
 }
