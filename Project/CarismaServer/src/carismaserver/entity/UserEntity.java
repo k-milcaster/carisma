@@ -180,7 +180,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
 
     @Override
     public User getUser(String user) throws RemoteException {
-        ui.act.append("Client Execute getUser (" + user + ") \n");
+        //ui.act.append("Client Execute getUser (" + user + ") \n");
 
         PreparedStatement statement = null;
         try {
@@ -243,7 +243,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
 
     @Override
     public List<User> getUser() throws RemoteException {
-        ui.act.append("Client Execute getUsersList \n");
+        //ui.act.append("Client Execute getUsersList \n");
 
         Statement statement = null;
         try {

@@ -5,6 +5,7 @@ import carismadokter.controller.IsiRekamMedisController;
 import java.awt.Color;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -14,7 +15,7 @@ public class IsiResep extends javax.swing.JFrame {
     private isirekammedis ui;
     private ArrayList<Integer> listQuantity = new ArrayList<>();
     private ArrayList<String> listAturanPakai = new ArrayList<>();
-    
+    private DefaultComboBoxModel listNamaObat = new DefaultComboBoxModel();
     public IsiResep(ClientSocket client, isirekammedis ui) throws RemoteException{
         this.client = client;
         IsiRekamMedisController rekamMedisControl = new IsiRekamMedisController(this.client);
@@ -22,15 +23,16 @@ public class IsiResep extends javax.swing.JFrame {
         initComponents();
         this.ui = ui;
         fieldIdResep.setText(rekamMedisControl.getIdResep());
-        rekamMedisControl.getNamaObat(this);
+        listNamaObat = rekamMedisControl.getNamaObat();
+        comboBoxObat.setModel(listNamaObat);
         setLocationRelativeTo(this);
     }
 
-    public String getIdDetailResep()throws RemoteException{
-        IsiRekamMedisController rekamMedisControl = new IsiRekamMedisController(this.client);
-        String idDetailResep = rekamMedisControl.getIdDetailResep();
-        return idDetailResep;
-    }
+//    public String getIdDetailResep()throws RemoteException{
+//        IsiRekamMedisController rekamMedisControl = new IsiRekamMedisController(this.client);
+//        String idDetailResep = rekamMedisControl.getIdDetailResep();
+//        return idDetailResep;
+//    }
     
     public void clearField(){
         fieldIdResep.setText("");
@@ -185,7 +187,8 @@ public class IsiResep extends javax.swing.JFrame {
                 if (pilihan == 0) {
                     rekamMedisControl.insertResep(fieldIdResep.getText(), textAreaKeterangan.getText());
                     for (int i = 0; i < listNamaObat1.getModel().getSize(); i++) {
-                        rekamMedisControl.insertDetailResep(getIdDetailResep(), fieldIdResep.getText(), String.valueOf(listNamaObat1.getModel().getElementAt(i)), listQuantity.get(i), listAturanPakai.get(i));
+                        String idDetailResep = rekamMedisControl.getIdDetailResep();
+                        rekamMedisControl.insertDetailResep(idDetailResep, fieldIdResep.getText(), String.valueOf(listNamaObat1.getModel().getElementAt(i)), listQuantity.get(i), listAturanPakai.get(i));
                     }
                     JOptionPane.showMessageDialog(null, "Data Resep Obat Sudah Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
                     ui.idResep = fieldIdResep.getText();

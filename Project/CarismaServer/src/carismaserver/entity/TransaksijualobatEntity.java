@@ -35,13 +35,13 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
     }
 
     @Override
-    public void insertTransaksijualbat(Transaksijualobat transaksijualobat) throws RemoteException {
+    public void insertTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException {
         ui.act.append("Client Execute insertTransaksijualobat " + transaksijualobat.getIdTransaksijual()+ "\n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO transaksijualobat (id_transaksijual, date_transaksijual, keterangan, hargajual_obat) values (?,?,?,?)"
+                    "INSERT INTO transaksijualobat (id_transaksijual, date_transaksijual, keterangan) values (?,?,?)"
             );
             statement.setString(1, transaksijualobat.getIdTransaksijual());
             statement.setString(2, transaksijualobat.getDateTransaksijual());

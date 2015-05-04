@@ -253,7 +253,8 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
         
         try {
             state = DatabaseConnection.getConnection().createStatement();
-            resultSet = state.executeQuery("SELECT P.nama_pegawai FROM pegawai AS P, user AS U WHERE P.user_id_user = 5 AND U.username = '"+username+"'");
+            resultSet = state.executeQuery("SELECT P.nama_pegawai FROM pegawai AS P, user AS U "
+                    + "WHERE U.username = '" + username + "' AND P.user_id_user = (SELECT id_user FROM user WHERE username = '" + username + "')");
             while (resultSet.next()) {
                 pegawaiInfo[0] = resultSet.getString(1);
                 //pegawaiInfo[1] = resultSet.getString(2);

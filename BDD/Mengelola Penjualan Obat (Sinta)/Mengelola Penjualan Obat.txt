@@ -6,7 +6,6 @@ Given	Saya masuk pada menu utama apoteker
 
 When	Saya memilih menu transaksi penjualan obat
 Then	Saya masuk pada menu transaksi penjualan obat
-And	Saya memasukkan id transaksi jual obat, tanggal jual obat, keterangan dan quantity
-
+And	Saya memasukkan id transaksi jual obat, tanggal jual obat, keterangan, ID obt, nama obat, dan quantity
 When	Ketika saya menekan tombol simpan, maka transaksi jual obat dan detail transaksi jual obat tersimpan
 Then	Data transaksi jual obat dan detail transaksi jual obat ditampilkan

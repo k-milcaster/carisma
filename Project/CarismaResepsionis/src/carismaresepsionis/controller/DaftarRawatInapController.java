@@ -22,11 +22,9 @@ public class DaftarRawatInapController {
         this.pasienkamarService = client.getPasienKamarService();
         
 } 
-<<<<<<< HEAD
-   public void insertNamaPasien (String namaPasien, String idPasien, String namaKamar, String kelasKamar, String tarif) throws RemoteException{
-      
-       PasienKamar pasienkamar = new PasienKamar ();
-=======
+
+    
+
    public void insertNamaPasien (String namaPasien, String idPasien, int idKamar, String namaKamar, String kelasKamar, String tarif) throws RemoteException{
       
        PasienKamar pasienkamar = new PasienKamar ();
@@ -34,7 +32,7 @@ public class DaftarRawatInapController {
        pasienkamar.setKamarIdKamar(idKamar);
        //pasienkamar.setDateinPasienKamar();
        //pasienkamar.setDateoutPasienKamar();
->>>>>>> cfb4c7ed7040e9404bb59b630ee8bcfa2ae7741c
+
        pasienkamarService.insertPasienKamar(pasienkamar);
    }
     

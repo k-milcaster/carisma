@@ -4,33 +4,16 @@
  */
 package carismadokter.controller;
 
-import carismadokter.boundaries.IsiResep;
-import carismadokter.boundaries.isirekammedis;
-import carismainterface.entity.Detailresep;
-import carismainterface.entity.Dokter;
-import carismainterface.entity.Kunjungan;
-import carismainterface.entity.Obat;
-import carismainterface.entity.Pasien;
-import carismainterface.entity.Penyakit;
-import carismainterface.entity.Rekammedik;
-import carismainterface.entity.Rekammedikpenyakit;
-import carismainterface.entity.Resep;
-import carismainterface.entity.User;
-import carismainterface.server.DetailresepService;
-import carismainterface.server.DokterService;
-import carismainterface.server.KunjunganService;
-import carismainterface.server.ObatService;
-import carismainterface.server.PasienService;
-import carismainterface.server.PenyakitService;
-import carismainterface.server.RekammedikService;
-import carismainterface.server.RekammedikpenyakitService;
-import carismainterface.server.ResepService;
-import carismainterface.server.UserService;
+import carismadokter.boundaries.*;
+import carismainterface.entity.*;
+import carismainterface.server.*;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -255,23 +238,27 @@ public class IsiRekamMedisController {
         return idKunjunganFix;
     }
 
-    public void getNamaObat(IsiResep ui) throws RemoteException {
+    public DefaultComboBoxModel getNamaObat() throws RemoteException {
+        DefaultComboBoxModel listNamaObat = new DefaultComboBoxModel();
         List<Obat> list = new ArrayList<Obat>();
         list = obatService.getObat();
         for (int i = 0; i < list.size(); i++) {
-            ui.comboBoxObat.addItem(list.get(i).getNamaObat());
+            listNamaObat.addElement(list.get(i).getNamaObat());
         }
+        return listNamaObat;
     }
 
-    public void getNamaPenyakit(isirekammedis ui) throws RemoteException {
+    public DefaultComboBoxModel getNamaPenyakit() throws RemoteException {
+        DefaultComboBoxModel listNamaPenyakit = new DefaultComboBoxModel();
         List<Penyakit> list = new ArrayList<Penyakit>();
         list = penyakitService.getPenyakit();
         for (int i = 0; i < list.size(); i++) {
-            ui.comboBoxPenyakit.addItem(list.get(i).getIdPenyakit() + " " + list.get(i).getNamaPenyakit());
+            listNamaPenyakit.addElement(list.get(i).getIdPenyakit() + " " + list.get(i).getNamaPenyakit());
         }
+        return listNamaPenyakit;
     }
 
-    public String[] getIdDokter(String userName) throws RemoteException {
+    public String[] getIdNamaDokter(String userName) throws RemoteException {
         String[] dokterInfor = dokterService.getIdNamaDokter(userName);
         return dokterInfor;
     }

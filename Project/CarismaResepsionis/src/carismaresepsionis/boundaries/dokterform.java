@@ -3,6 +3,7 @@ package carismaresepsionis.boundaries;
 import carismaresepsionis.controller.ClientSocket;
 import carismainterface.entity.Dokter;
 import carismainterface.entity.Poli;
+import carismainterface.entity.Jadwaldokter;
 import carismainterface.server.*;
 import carismaresepsionis.controller.*;
 import java.awt.Color;
@@ -14,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -34,8 +37,25 @@ public class dokterform extends javax.swing.JFrame {
         ds = client.getDokterService();
         this.userName = userName;
         initComponents();
+        setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         control.getNamaDokter();
+        
+        TabelDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+            public void valueChanged(ListSelectionEvent e) {
+                int row = TabelDokter.getSelectedRow();
+                if (row != -1) {
+                    try {
+                        Dokter selected = new Dokter(ds.getDokter(TabelDokter.getValueAt(row, 0).toString()));
+                        IdDokter.setText(selected.getIdDokter().toString());
+                        NamaDokter.setText(selected.getNamaDokter());                       
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
         
         a = NamaDokter.getText();
         b = NamaPoli.getText();
@@ -383,7 +403,11 @@ public class dokterform extends javax.swing.JFrame {
     }//GEN-LAST:event_TabelDokterMouseClicked
 
     private void LihatJadwalDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatJadwalDokterActionPerformed
-        new jadwaldokter(this.client, this.userName).show();
+        try {
+            new jadwaldokter(this.client, this.userName).show();
+        } catch (RemoteException ex) {
+            Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_LihatJadwalDokterActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

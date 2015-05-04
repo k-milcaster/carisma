@@ -6,6 +6,7 @@ import carismainterface.entity.User;
 import carismainterface.server.KotaService;
 import carismainterface.server.PasienService;
 import carismainterface.server.UserService;
+import carismaresepsionis.boundaries.Rawatinap;
 import carismaresepsionis.boundaries.regispasienform;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -125,5 +127,19 @@ public class regispasiencontroller {
         return Integer.parseInt(list.get(urutan-1).getId_kota());
     }
             
-   
+   public void getTabelPasien(regispasienform ui) throws RemoteException{
+        
+        List<Pasien> list = new ArrayList<Pasien>();
+        list = pasienService.getPasien();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Pasien");
+        model.addColumn("Nama Pasien");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdPasien(), list.get(i).getNamaPasien()});
+          }
+        ui.tabelpasien.setModel(model);
+        
+    }
+  
+  
 }

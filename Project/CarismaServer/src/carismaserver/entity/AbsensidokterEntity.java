@@ -154,7 +154,8 @@ public class AbsensidokterEntity extends UnicastRemoteObject implements Absensid
         try {
             statement = DatabaseConnection.getConnection().createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT * FROM absensidokter");
+            ResultSet result = statement.executeQuery("SELECT `dokter_id_dokter`, `kehadiranreguler_dokter`, `kehadiranlembur_dokter`"
+                    + "FROM `absensidokter`WHERE `date_absensidokter` = CURDATE()");
 
             List<Absensidokter> list = new ArrayList<Absensidokter>();
 
@@ -163,7 +164,7 @@ public class AbsensidokterEntity extends UnicastRemoteObject implements Absensid
                 absensidokter.setDokterIdDokter(result.getString("dokter_id_dokter"));
                 absensidokter.setKehadiranregulerDokter(result.getString("kehadiranreguler_dokter"));
                 absensidokter.setKehadiranlemburDokter(result.getString("kehadiranlembur_dokter"));
-                absensidokter.setDateAbsensidokter(result.getString("date_absensidokter"));
+                //absensidokter.setDateAbsensidokter(result.getString("date_absensidokter"));
                 list.add(absensidokter);
             }
             result.close();

@@ -10,8 +10,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -21,8 +23,6 @@ public class isirekammedis extends javax.swing.JFrame {
     private UserService login;
     private String username;
     public String idResep;
-    java.util.Date dateNow = new java.util.Date();
-    java.sql.Date sqlDate;
         
     public isirekammedis(ClientSocket client, final String username) throws RemoteException {
         this.client = client;
@@ -31,15 +31,17 @@ public class isirekammedis extends javax.swing.JFrame {
         this.username = username;
         
         initComponents();
-        dateNow = new java.util.Date();
-        dateRekamMedis.setDate(dateNow);
+        Date date = new Date();
+        dateRekamMedis.setDate(date);
         
         this.jLabel1.setText(username);
-        String[] dokterInfor = isiRekamMedisController.getIdDokter(this.username);
+        String[] dokterInfor = isiRekamMedisController.getIdNamaDokter(this.username);
         fieldIdDokter.setText(dokterInfor[0]);
         labelNamaDokter.setText(dokterInfor[1]);
-        isiRekamMedisController.getNamaPenyakit(this);
         fieldIdRekamMedis.setText(isiRekamMedisController.getIdRekamMedis());
+        DefaultComboBoxModel listNamaPenyakit = new DefaultComboBoxModel();
+        listNamaPenyakit = isiRekamMedisController.getNamaPenyakit();
+        comboBoxPenyakit.setModel(listNamaPenyakit);
         
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.addWindowListener(new WindowAdapter() {
@@ -610,7 +612,7 @@ public class isirekammedis extends javax.swing.JFrame {
                 
                 int pilihan = JOptionPane.showConfirmDialog(null, "Apakah Data yang Anda Isi Sudah Benar?","Rekam Medis",JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
-                    rekamMedisController.insertRekamMedis(fieldIdRekamMedis.getText(), fieldIdDokter.getText(), fieldIdPasien.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), 
+                    rekamMedisController.insertRekamMedis(fieldIdRekamMedis.getText(), fieldIdDokter.getText(), fieldIdPasien.getText(), String.valueOf(new java.sql.Date(dateRekamMedis.getDate().getTime())), 
                                                       textAreaKeluhan.getText(), textAreaPemeriksaan.getText(), textAreaTerapi.getText(), textAreaAlergiObat.getText(), 
                                                       textAreaKesimpulan.getText(), textAreaKondisiPasien.getText(), idResep);
                     for (int i = 0; i < listPenyakit.getModel().getSize(); i++) {
@@ -619,7 +621,8 @@ public class isirekammedis extends javax.swing.JFrame {
                         idPenyakit = idPenyakitList[0];
                         rekamMedisController.insertRekamMedisPenyakit(fieldIdRekamMedis.getText(), idPenyakit);
                     }
-                    rekamMedisController.insertKunjungan(rekamMedisController.getIdKunjungan(), fieldIdPasien.getText(), fieldIdRekamMedis.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), Integer.parseInt(fieldBiaya.getText()));
+					String idKunjungan = rekamMedisController.getIdKunjungan();
+                    rekamMedisController.insertKunjungan(idKunjungan, fieldIdPasien.getText(), fieldIdRekamMedis.getText(), String.valueOf(new java.sql.Date(dateRekamMedis.getDate().getTime())), Integer.parseInt(fieldBiaya.getText()));
                     JOptionPane.showMessageDialog(null, "Data Rekam Medis Sudah Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
                     clearField();
                     fieldIdRekamMedis.setText(rekamMedisController.getIdRekamMedis());

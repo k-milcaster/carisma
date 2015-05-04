@@ -16,7 +16,7 @@ import java.util.List;
  * @author kepoterz
  */
 public interface TransaksijualobatService extends Remote {
-    void insertTransaksijualbat(Transaksijualobat transaksijualobat) throws RemoteException;
+    void insertTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException;
 
     void updateTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException;
 

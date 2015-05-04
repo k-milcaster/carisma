@@ -14,6 +14,8 @@ import carismainterface.server.TransaksijualobatService;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import carismaapoteker.boundaries.TabelObat;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,7 +37,7 @@ public class TransaksiJualObatController {
         transaksijual.setIdTransaksijual(idTransaksijual);
         transaksijual.setDateTransaksijual(dateTransaksijual);
         transaksijual.setKeterangan(keterangan);
-        transaksijualobat.insertTransaksijualbat(transaksijual);
+        transaksijualobat.insertTransaksijualobat(transaksijual);
    
     }
     public void insertDetailtransaksijualobat(String idTransaksi, int idObat, int qty) throws RemoteException {
@@ -44,17 +46,33 @@ public class TransaksiJualObatController {
         detailtransaksi.setObat(idObat);
         detailtransaksi.setQty(qty);
         detailtransaksijual.insertDetailtransaksijualobat(detailtransaksi);
+        System.out.println("Masuk Insert Detail");
         
     }
-    public void getIdObat (TransaksiJualObat b) throws RemoteException{
+    public DefaultTableModel getTableObat(TabelObat b) throws RemoteException {
         List <Obat> list = new ArrayList<Obat>();
         list = obatService.getObat();
-        for (int i = 0; i < list.size(); i++){
+        //for (int i = 0; i < list.size(); i++){
             //b.comboBoxObat.addItem(list.get(i).getNamaObat());
+         DefaultTableModel model = new DefaultTableModel();
+         model.addColumn("Id Obat");
+         model.addColumn("Nama Obat");
+         model.addColumn("Quantity");
+         model.addColumn("Jenis");
+         model.addColumn("Keterangan");
+         model.addColumn("Harga Jual");
+         model.addColumn("Stok Kritis");
+         for (int i = 0; i < list.size(); i++) {
+         model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(),list.get(i).getStokkritisObat()});
+             System.out.println("Lewat");
+         }
+         b.jTableObat.setModel(model);
+         return model;
+        }
         }
         
-    }
     
-    }
+    
+    
     
 
