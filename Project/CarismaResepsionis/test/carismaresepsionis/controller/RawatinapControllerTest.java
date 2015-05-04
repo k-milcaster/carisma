@@ -4,7 +4,12 @@
  */
 package carismaresepsionis.controller;
 
+import carismainterface.entity.Pasien;
+import carismainterface.server.KamarService;
+import carismainterface.server.PasienService;
 import carismaresepsionis.boundaries.Rawatinap;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import javax.swing.table.DefaultTableModel;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,8 +23,11 @@ import static org.junit.Assert.*;
  * @author Vaio Sony
  */
 public class RawatinapControllerTest {
+    private PasienService pasienService;
+    private KamarService kamarService;
     
     public RawatinapControllerTest() {
+        
     }
     
     @BeforeClass
@@ -44,13 +52,15 @@ public class RawatinapControllerTest {
     @Test
     public void testGetNamaPasien() throws Exception {
         System.out.println("getNamaPasien");
+        ClientSocket client = new ClientSocket ();
+        this.pasienService = client.getPasienService();
         Rawatinap ui = null;
         RawatinapController instance = null;
         DefaultTableModel expResult = null;
         DefaultTableModel result = instance.getNamaPasien(ui);
-        assertEquals(expResult, result);
+        assertEquals(ui.tablelistpasien, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -59,13 +69,15 @@ public class RawatinapControllerTest {
     @Test
     public void testGetNamaKamar_Rawatinap() throws Exception {
         System.out.println("getNamaKamar");
+        ClientSocket client= new ClientSocket ();
+        this.kamarService = client.getKamarService();
         Rawatinap ui = null;
         RawatinapController instance = null;
         DefaultTableModel expResult = null;
         DefaultTableModel result = instance.getNamaKamar(ui);
-        assertEquals(expResult, result);
+        assertEquals(ui.tablelistkamarpasien, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -75,56 +87,16 @@ public class RawatinapControllerTest {
     public void testGetPasienbyName() throws Exception {
         System.out.println("getPasienbyName");
         String nama = "";
+        Rawatinap ui = null;
         RawatinapController instance = null;
         DefaultTableModel expResult = null;
         DefaultTableModel result = instance.getPasienbyName(nama);
-        assertEquals(expResult, result);
+        assertEquals(ui.tablelistpasien, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getNamaKamar method, of class RawatinapController.
-     */
-    @Test
-    public void testGetNamaKamar_0args() {
-        System.out.println("getNamaKamar");
-        RawatinapController instance = null;
-        String expResult = "";
-        String result = instance.getNamaKamar();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getKelasKamar method, of class RawatinapController.
-     */
-    @Test
-    public void testGetKelasKamar() {
-        System.out.println("getKelasKamar");
-        RawatinapController instance = null;
-        String expResult = "";
-        String result = instance.getKelasKamar();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getTarifKamar method, of class RawatinapController.
-     */
-    @Test
-    public void testGetTarifKamar() {
-        System.out.println("getTarifKamar");
-        RawatinapController instance = null;
-        String expResult = "";
-        String result = instance.getTarifKamar();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+   
     /**
      * Test of kamarKosong method, of class RawatinapController.
      */
@@ -133,10 +105,13 @@ public class RawatinapControllerTest {
         System.out.println("kamarKosong");
         String parameterA = "";
         RawatinapController instance = null;
-        String expResult = "";
+        String expResult = "kosong";
         String result = instance.kamarKosong(parameterA);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
+    
+   
+    
 }

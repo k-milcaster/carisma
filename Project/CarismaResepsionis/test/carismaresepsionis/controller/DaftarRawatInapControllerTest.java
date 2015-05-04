@@ -51,7 +51,7 @@ public class DaftarRawatInapControllerTest {
         DaftarRawatInapController instance = null;
         instance.insertNamaPasien(namaPasien, idPasien, idKamar, namaKamar, kelasKamar, tarif);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -67,6 +67,6 @@ public class DaftarRawatInapControllerTest {
         String result = instance.generatePeminjamanId(idPasien, namaKamar);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 }
