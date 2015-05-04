@@ -154,7 +154,8 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
         try {
             statement = DatabaseConnection.getConnection().createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT * FROM absensipegawai");
+            ResultSet result = statement.executeQuery("SELECT `pegawai_id_pegawai`, `kehadiranreguler_pegawai`, `kehadiranlembur_pegawai`"
+                    + "FROM `absensipegawai` WHERE `date_absensipegawai` = CURDATE()");
 
             List<Absensipegawai> list = new ArrayList<Absensipegawai>();
 
@@ -163,7 +164,7 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
                 absensipegawai.setPegawaiIdPegawai(result.getString("pegawai_id_pegawai"));
                 absensipegawai.setKehadiranregulerPegawai(result.getString("kehadiranreguler_pegawai"));
                 absensipegawai.setKehadiranlemburPegawai(result.getString("kehadiranlembur_pegawai"));
-                absensipegawai.setDateAbsensipegawai(result.getString("date_absensipegawai"));
+                //absensipegawai.setDateAbsensipegawai(result.getString("date_absensipegawai"));
                 list.add(absensipegawai);
             }
             result.close();

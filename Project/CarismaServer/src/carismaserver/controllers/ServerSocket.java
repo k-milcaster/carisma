@@ -31,6 +31,8 @@ public class ServerSocket {
         try {
             server = LocateRegistry.createRegistry(port);
 
+            AbsensidokterEntity absensiDokter = new AbsensidokterEntity(ui);
+            AbsensipegawaiEntity absensiPegawai = new AbsensipegawaiEntity(ui);
             AntrianEntity antrian = new AntrianEntity(ui);
             DetailobatEntity detailobat = new DetailobatEntity(ui);
             DetailresepEntity detailresep = new DetailresepEntity(ui);
@@ -59,6 +61,8 @@ public class ServerSocket {
             PoliEntity poli = new PoliEntity(ui);
             PembayaranEntity pembayaran = new PembayaranEntity(ui);
             server.rebind("userRequest", user);
+            server.rebind("absensiDokterRequest", absensiDokter);
+            server.rebind("absensiPegawaiRequest", absensiPegawai);
             server.rebind("antrianRequest", antrian);
             server.rebind("detailobatRequest", detailobat);
             server.rebind("detailresepRequest", detailresep);
@@ -73,6 +77,7 @@ public class ServerSocket {
             server.rebind("obatRequest", obat);
             server.rebind("pasienRequest", pasien);
             server.rebind("pasienkamarRequest", pasienkamar);
+            server.rebind("pegawaiRequest", staff);
             server.rebind("rakobatRequest", rakobat);
             server.rebind("rekammedikRequest", rekammedik);
             server.rebind("rekammedikpenyakitRequest", rekammedikpenyakit);
@@ -94,6 +99,8 @@ public class ServerSocket {
 
     public void Close() throws RemoteException, NotBoundException {
         server.unbind("userRequest");
+        server.unbind("absensiDokterRequest");
+        server.unbind("absensiPegawaiRequest");
         server.unbind("antrianRequest");
         server.unbind("detailobatRequest");
         server.unbind("detailresepRequest");
@@ -108,6 +115,7 @@ public class ServerSocket {
         server.unbind("obatRequest");
         server.unbind("pasienRequest");
         server.unbind("pasienkamarRequest");
+        server.unbind("pegawaiRequest");
         server.unbind("rakobatRequest");
         server.unbind("rekammedikRequest");
         server.unbind("rekammedikpenyakitRequest");
