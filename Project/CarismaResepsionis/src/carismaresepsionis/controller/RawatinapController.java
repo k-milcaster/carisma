@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RawatinapController {
     private PasienService pasienService;
-    //private PenyakitService penyakitService;
     private KamarService kamarService;
     
     public RawatinapController (ClientSocket client) throws RemoteException{
@@ -58,7 +57,8 @@ public class RawatinapController {
 
             model.addRow(new Object[]{list.get(i).getNamaKamar(), list.get(i).getKelas(), list.get(i).getTarif()});
 
-            model.addRow(new Object[]{list.get(i).getIdKamar(), list.get(i).getNamaKamar(), list.get(i).getKelas(), list.get(i).getTarif()});
+            model.addRow(new Object[]{list.get(i).getIdKamar(), list.get(i).getNamaKamar(), list.get(i).getKelas(), 
+                list.get(i).getTarif()});
 
             //System.out.println("lewat");
         }
@@ -82,25 +82,6 @@ public class RawatinapController {
         
     } 
 
-    
-    public String getNamaKamar(){
-        Kamar kamar = new Kamar();
-        String NamaKamar = kamar.getNamaKamar();
-        return NamaKamar;
-    }
-    
-    public String getKelasKamar(){
-        Kamar kamar = new Kamar();
-        String KelasKamar = kamar.getKelas();
-        return KelasKamar;
-    }
-    public String getTarifKamar(){
-        Kamar kamar = new Kamar();
-        int TarifKamar = kamar.getTarif();
-        String gantiParameterTarif = String.valueOf(TarifKamar);
-        return gantiParameterTarif;
-    }
-    
      public String kamarKosong (String parameterA){
        String kamar = "";
        if (parameterA.equals("coba")){
@@ -110,7 +91,6 @@ public class RawatinapController {
        }
        return kamar;
    }
-    
     
     
 }
