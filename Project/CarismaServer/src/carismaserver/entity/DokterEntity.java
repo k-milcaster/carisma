@@ -245,7 +245,8 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         
         try {
             state = DatabaseConnection.getConnection().createStatement();
-            resultSet = state.executeQuery("SELECT D.id_dokter, D.nama_dokter FROM `dokter` AS D, user AS U WHERE D.user_id_user = 2 AND U.username = '"+username+"'");
+            resultSet = state.executeQuery("SELECT D.id_dokter, D.nama_dokter FROM `dokter` AS D, user AS U "
+                    + "WHERE U.username = '"+username+"' AND D.user_id_user = (SELECT id_user FROM user WHERE username = '"+username+"')");
             while (resultSet.next()) {
                 dokterInfo[0] = resultSet.getString(1);
                 dokterInfo[1] = resultSet.getString(2);

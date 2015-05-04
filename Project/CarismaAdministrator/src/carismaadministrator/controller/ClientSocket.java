@@ -17,6 +17,10 @@ public class ClientSocket {
     private int port = 2015;
     public Login login;
     private UserService userService;
+    private AbsensidokterService absensiDokterService;
+    private AbsensipegawaiService absensiPegawaiService;
+    private DokterService dokterService;
+    private PegawaiService pegawaiService;
     
     public ClientSocket() throws RemoteException, NotBoundException{
         this.Connect();
@@ -30,6 +34,10 @@ public class ClientSocket {
                 Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
             }            
             userService = (UserService) registry.lookup("userRequest");
+            absensiDokterService = (AbsensidokterService) registry.lookup("absensiDokterRequest");
+            absensiPegawaiService = (AbsensipegawaiService) registry.lookup("absensiPegawaiRequest");
+            dokterService = (DokterService) registry.lookup("dokterRequest");
+            pegawaiService = (PegawaiService) registry.lookup("pegawaiRequest");
                        
         } catch (RemoteException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
@@ -40,5 +48,21 @@ public class ClientSocket {
     
     public UserService getUserService(){
         return this.userService;
+    }
+    
+    public AbsensidokterService getAbsensiDokterService(){
+        return absensiDokterService;
+    }
+    
+    public AbsensipegawaiService getAbsensiPegawaiService(){
+        return absensiPegawaiService;
+    }
+    
+    public DokterService getDokterService(){
+        return dokterService;
+    }
+    
+    public PegawaiService getPegawaiService(){
+        return pegawaiService;
     }
 }
