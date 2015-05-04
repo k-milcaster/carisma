@@ -103,7 +103,7 @@ public class DataDokterController {
         model.addColumn("ID Dokter");
         model.addColumn("Nama Dokter");
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{list.get(i).getPoliIdPoli()});
+            model.addRow(new Object[]{list.get(i).getNamaDokter()});
             System.out.println("");
         }
         ui.TabelDokter.setModel(model);
