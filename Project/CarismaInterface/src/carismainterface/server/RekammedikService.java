@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface RekammedikService extends Remote {
 
-    void insertRekamMedik(Rekammedik rekamMedik) throws RemoteException;
+    boolean insertRekamMedik(Rekammedik rekamMedik) throws RemoteException;
 
-    void updateRekamMedik(Rekammedik rekamMedik) throws RemoteException;
+    boolean updateRekamMedik(Rekammedik rekamMedik) throws RemoteException;
 
-    void deleteRekamMedik(String rekamMedik) throws RemoteException;
+    boolean deleteRekamMedik(String rekamMedik) throws RemoteException;
 
     Rekammedik getRekamMedik(String rekamMedik) throws RemoteException;
     

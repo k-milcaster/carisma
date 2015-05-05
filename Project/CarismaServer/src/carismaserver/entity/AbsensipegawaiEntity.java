@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaserver.entity;
 
 import carismainterface.entity.Absensipegawai;
@@ -35,7 +29,7 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
     }
 
     @Override
-    public void insertAbsensipegawai(Absensipegawai absensipegawai) throws RemoteException {
+    public boolean insertAbsensipegawai(Absensipegawai absensipegawai) throws RemoteException {
         ui.act.append("Client Execute insertAbsensipegawai " + absensipegawai.getPegawaiIdPegawai()+ "\n");
 
         PreparedStatement statement = null;
@@ -48,9 +42,11 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
             statement.setString(3, absensipegawai.getKehadiranlemburPegawai());
             statement.setString(4, absensipegawai.getDateAbsensipegawai());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertAbsensipegawai Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -63,7 +59,7 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
     }
 
     @Override
-    public void updateAbsensipegawai(Absensipegawai absensipegawai) throws RemoteException {
+    public boolean updateAbsensipegawai(Absensipegawai absensipegawai) throws RemoteException {
         ui.act.append("Client Execute updateAbsensipegawai(" + absensipegawai.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -77,10 +73,11 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
             statement.setString(2, absensipegawai.getKehadiranlemburPegawai());
             statement.setString(3, absensipegawai.getDateAbsensipegawai());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateAbsensipegawai Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -92,7 +89,7 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
     }
 
     @Override
-    public void deleteAbsensipegawai(String idabsensipegawai) throws RemoteException {
+    public boolean deleteAbsensipegawai(String idabsensipegawai) throws RemoteException {
         ui.act.append("Client Execute deleteAbsensipegawai (" + idabsensipegawai + ") \n");
         PreparedStatement statement = null;
         try {
@@ -100,9 +97,11 @@ public class AbsensipegawaiEntity extends UnicastRemoteObject implements Absensi
                     "DELETE FROM absensipegawai WHERE pegawai_id_pegawai = ?");
             statement.setString(1, idabsensipegawai);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteAbsensipegawai Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

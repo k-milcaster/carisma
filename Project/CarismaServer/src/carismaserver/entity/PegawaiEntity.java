@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaserver.entity;
 
 import carismainterface.entity.Pegawai;
@@ -36,7 +30,7 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
      
     
     @Override
-    public void insertPegawai(Pegawai pegawai) throws RemoteException {
+    public boolean insertPegawai(Pegawai pegawai) throws RemoteException {
         ui.act.append("Client Execute insertPegawai " + pegawai.getIdPegawai() + "\n");
 
         PreparedStatement statement = null;
@@ -64,9 +58,11 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
             statement.setInt(17, pegawai.getGajifixPegawai());
             statement.setInt(18, pegawai.getGajilemburPegawai());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertUser Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -79,7 +75,7 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
     }
 
     @Override
-    public void updatePegawai(Pegawai pegawai) throws RemoteException {
+    public boolean updatePegawai(Pegawai pegawai) throws RemoteException {
         ui.act.append("Client Execute updateCustomers(" + pegawai.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -108,12 +104,12 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
             statement.setBytes(15, pegawai.getFotoPegawai());
             statement.setInt(16, pegawai.getGajifixPegawai());
             statement.setInt(17, pegawai.getGajilemburPegawai());
-            //System.out.println(statement);
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdatePegawai Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -125,7 +121,7 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
     }
 
     @Override
-    public void deletePegawai(String pegawai) throws RemoteException {
+    public boolean deletePegawai(String pegawai) throws RemoteException {
         ui.act.append("Client Execute deleteUser (" + pegawai+ ") \n");
         PreparedStatement statement = null;
         try {
@@ -133,9 +129,11 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
                     "DELETE FROM pegawai WHERE id_pegawai = ?");
             statement.setString(1, pegawai);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deletePegawai Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

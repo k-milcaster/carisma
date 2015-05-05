@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaserver.entity;
 
 import carismainterface.entity.Transaksijualobat;
@@ -35,7 +29,7 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
     }
 
     @Override
-    public void insertTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException {
+    public boolean insertTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException {
         ui.act.append("Client Execute insertTransaksijualobat " + transaksijualobat.getIdTransaksijual()+ "\n");
 
         PreparedStatement statement = null;
@@ -47,9 +41,11 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
             statement.setString(2, transaksijualobat.getDateTransaksijual());
             statement.setString(3, transaksijualobat.getKeterangan());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertTransaksijualobat Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -62,7 +58,7 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
     }
 
     @Override
-    public void updateTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException {
+    public boolean updateTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException {
         ui.act.append("Client Execute updateTransaksijualbat(" + transaksijualobat.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -75,10 +71,11 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
             statement.setString(1, transaksijualobat.getDateTransaksijual());
             statement.setString(2, transaksijualobat.getKeterangan());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateTransaksijualbat Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -90,7 +87,7 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
     }
 
     @Override
-    public void deleteTransaksijualobat(String idtransaksijualobat) throws RemoteException {
+    public boolean deleteTransaksijualobat(String idtransaksijualobat) throws RemoteException {
         ui.act.append("Client Execute deleteTransaksijualobat (" + idtransaksijualobat + ") \n");
         PreparedStatement statement = null;
         try {
@@ -98,9 +95,11 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
                     "DELETE FROM transaksijualobat WHERE id_transaksijual = ?");
             statement.setString(1, idtransaksijualobat);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteTansaksijualobat Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

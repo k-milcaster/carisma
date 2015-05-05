@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismainterface.server;
 
 import carismainterface.entity.Rakobat;
@@ -16,11 +10,11 @@ import java.util.List;
  * @author kepoterz
  */
 public interface RakobatService extends Remote {
-    void insertRakobat(Rakobat rakobat) throws RemoteException;
+    boolean insertRakobat(Rakobat rakobat) throws RemoteException;
 
-    void updateRakobat(Rakobat rakobat) throws RemoteException;
+    boolean updateRakobat(Rakobat rakobat) throws RemoteException;
 
-    void deleteRakobat(int idrakobat) throws RemoteException;
+    boolean deleteRakobat(int idrakobat) throws RemoteException;
 
     Rakobat getRakobat(int idrakobat) throws RemoteException;
 

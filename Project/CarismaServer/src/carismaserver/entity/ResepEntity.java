@@ -9,8 +9,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 /**
  *
@@ -29,7 +27,7 @@ public class ResepEntity extends UnicastRemoteObject implements ResepService {
     }
 
     @Override
-    public void insertResep(Resep resep) throws RemoteException {
+    public boolean insertResep(Resep resep) throws RemoteException {
         ui.act.append("Client Execute insertResep " + resep.getIdResep() + "\n");
 
         PreparedStatement statement = null;
@@ -40,9 +38,11 @@ public class ResepEntity extends UnicastRemoteObject implements ResepService {
             statement.setString(1, resep.getIdResep());
             statement.setString(2, resep.getKeterangan());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertResep Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

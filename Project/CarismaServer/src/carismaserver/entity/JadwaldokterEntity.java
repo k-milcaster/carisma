@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaserver.entity;
 
-import carismainterface.entity.Jadwaldokter;
 import carismainterface.entity.Jadwaldokter;
 import carismainterface.server.JadwaldokterService;
 import carismaserver.boundaries.Main;
@@ -36,7 +29,7 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
     }
     
     @Override
-    public void insertJadwaldokter(Jadwaldokter jadwaldokter) throws RemoteException {
+    public boolean insertJadwaldokter(Jadwaldokter jadwaldokter) throws RemoteException {
         ui.act.append("Client Execute insertJadwaldokter " + jadwaldokter.getId()+ "\n");
 
         PreparedStatement statement = null;
@@ -48,9 +41,11 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
             statement.setString(2, jadwaldokter.getDokterIdDokter());
             statement.setInt(3, jadwaldokter.getJadwalId());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertJadwaldokter Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -63,7 +58,7 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
     }
 
     @Override
-    public void updateJadwaldokter(Jadwaldokter jadwaldokter) throws RemoteException {
+    public boolean updateJadwaldokter(Jadwaldokter jadwaldokter) throws RemoteException {
         ui.act.append("Client Execute updateJadwaldokter(" + jadwaldokter.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -76,10 +71,11 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
             statement.setString(1, jadwaldokter.getDokterIdDokter());
             statement.setInt(2, jadwaldokter.getJadwalId());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateJadwaldokter Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -91,7 +87,7 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
     }
 
     @Override
-    public void deleteJadwaldokter(String idjadwaldokter) throws RemoteException {
+    public boolean deleteJadwaldokter(String idjadwaldokter) throws RemoteException {
         ui.act.append("Client Execute deleteJadwaldokter (" + idjadwaldokter + ") \n");
         PreparedStatement statement = null;
         try {
@@ -99,9 +95,11 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
                     "DELETE FROM jadwaldokter WHERE id = ?");
             statement.setString(1, idjadwaldokter);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteJadwaldokter Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

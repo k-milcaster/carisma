@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 
 /**
  *
@@ -83,19 +82,26 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
     }
 
     @Override
-    public void userLogOut(String userName, String role) {
+    public boolean userLogOut(String userName, String role) {
         ui.act.append("Client Execute UserLogOut " + userName + "\n");
-        DefaultListModel model = new DefaultListModel();
-        for (int i = 0; i < ui.loggedInList.getModel().getSize(); i++) {
-            Object item = ui.loggedInList.getModel().getElementAt(i);
-            model.addElement(item.toString());
+        try {
+            DefaultListModel model = new DefaultListModel();
+            for (int i = 0; i < ui.loggedInList.getModel().getSize(); i++) {
+                Object item = ui.loggedInList.getModel().getElementAt(i);
+                model.addElement(item.toString());
+            }
+            model.removeElement(userName + " as " + role);
+            ui.loggedInList.setModel(model);
+            return true;
+        } catch (Throwable e) {
+            return false;
+
         }
-        model.removeElement(userName + " as " + role);
-        ui.loggedInList.setModel(model);        
+
     }
 
     @Override
-    public void insertUser(User user) throws RemoteException {
+    public boolean insertUser(User user) throws RemoteException {
         ui.act.append("Client Execute insertUser " + user.toString() + "\n");
 
         PreparedStatement statement = null;
@@ -109,11 +115,12 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             statement.setString(4, user.getRegistered().toString());
             statement.setString(5, user.getRegistered().toString());
             statement.setString(6, user.getRole());
-            //nyoba branch
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertUser Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -126,7 +133,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
     }
 
     @Override
-    public void updateUser(User user) throws RemoteException {
+    public boolean updateUser(User user) throws RemoteException {
         ui.act.append("Client Execute updateCustomers(" + user.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -140,12 +147,12 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getRole());
             statement.setInt(4, user.getIdUser());
-            //System.out.println(statement);
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateUser Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -157,7 +164,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
     }
 
     @Override
-    public void deleteUser(User user) throws RemoteException {
+    public boolean deleteUser(User user) throws RemoteException {
         ui.act.append("Client Execute deleteUser (" + user.toString() + ") \n");
         PreparedStatement statement = null;
         try {
@@ -165,9 +172,11 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
                     "DELETE FROM user WHERE id_user = ?");
             statement.setInt(1, user.getIdUser());
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteUser Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -180,7 +189,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
 
     @Override
     public User getUser(String user) throws RemoteException {
-        //ui.act.append("Client Execute getUser (" + user + ") \n");
+        ui.act.append("Client Execute getUser (" + user + ") \n");
 
         PreparedStatement statement = null;
         try {
@@ -215,7 +224,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
     }
 
     @Override
-    public void updateLastLogIn(String userName) throws RemoteException {
+    public boolean updateLastLogIn(String userName) throws RemoteException {
         PreparedStatement statement = null;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
@@ -223,13 +232,14 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "UPDATE user SET lastlogin = ? WHERE username = ?");
-
             statement.setString(1, now);
             statement.setString(2, userName);
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("updateLastLogIn Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

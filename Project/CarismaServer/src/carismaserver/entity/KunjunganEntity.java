@@ -1,6 +1,5 @@
 package carismaserver.entity;
 
-import carismainterface.entity.Detailresep;
 import carismainterface.entity.Kunjungan;
 import carismainterface.server.KunjunganService;
 import carismaserver.boundaries.Main;
@@ -30,7 +29,7 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
     }
 
     @Override
-    public void insertKunjungan(Kunjungan kunjungan) throws RemoteException {
+    public boolean insertKunjungan(Kunjungan kunjungan) throws RemoteException {
         ui.act.append("Client Execute insertKunjungan " + kunjungan.getIdKunjungan() + "\n");
 
         PreparedStatement statement = null;
@@ -45,11 +44,12 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             statement.setString(5, kunjungan.getPasienKamarIdPeminjaman());
             statement.setString(6, kunjungan.getTanggaljamKunjungan());
             statement.setInt(7, kunjungan.getBiayaKunjungan());
-
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertKunjungan Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

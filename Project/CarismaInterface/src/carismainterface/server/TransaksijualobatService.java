@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismainterface.server;
 
 import carismainterface.entity.Transaksijualobat;
@@ -16,11 +10,11 @@ import java.util.List;
  * @author kepoterz
  */
 public interface TransaksijualobatService extends Remote {
-    void insertTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException;
+    boolean insertTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException;
 
-    void updateTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException;
+    boolean updateTransaksijualobat(Transaksijualobat transaksijualobat) throws RemoteException;
 
-    void deleteTransaksijualobat(String idtransaksijualobat) throws RemoteException;
+    boolean deleteTransaksijualobat(String idtransaksijualobat) throws RemoteException;
 
     Transaksijualobat getTransaksijualobat(String idtransaksijualobat) throws RemoteException;
 

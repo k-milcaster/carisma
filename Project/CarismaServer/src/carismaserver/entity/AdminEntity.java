@@ -52,7 +52,7 @@ public class AdminEntity {
         }
     }
 
-    public void updateLastLogIn(String userName) throws RemoteException {
+    public boolean updateLastLogIn(String userName) throws RemoteException {
         PreparedStatement statement = null;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
@@ -64,8 +64,9 @@ public class AdminEntity {
             statement.setString(1, now);
             statement.setString(2, userName);
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
-            System.out.println(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
