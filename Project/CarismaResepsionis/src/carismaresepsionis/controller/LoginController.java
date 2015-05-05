@@ -22,7 +22,7 @@ public class LoginController {
     public boolean logIn() throws RemoteException {
         boolean success = user.userLogIn(userName, password, "resepsionis");
         if (success) {
-            user.updateLastLogIn(userName);
+            success = user.updateLastLogIn(userName);
         }
         return success;
     }
