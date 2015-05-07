@@ -266,5 +266,50 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         }
     }
 
+    @Override
+    public List<Dokter> getDokterbyName(String namadokter) throws RemoteException {
+        ui.act.append("Client Execute getDokterbyName (" + namadokter + ") \n");
+
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT * FROM dokter WHERE nama_dokter LIKE '%"+namadokter+"%'");
+            ResultSet result = statement.executeQuery();
+            List<Dokter> list = new ArrayList<Dokter>();
+            while (result.next()) {
+                Dokter dokter = new Dokter();
+                dokter.setIdDokter(result.getString("id_dokter"));
+                dokter.setNamaDokter(result.getString("nama_dokter"));
+                dokter.setAlamatDokter(result.getString("alamat_dokter"));
+                dokter.setNokartuidDokter(result.getString("nokartuid_dokter"));
+                dokter.setTelpDokter(result.getString("telp_dokter"));
+                dokter.setHp1Dokter(result.getString("hp1_dokter"));
+                dokter.setHp2Dokter(result.getString("hp2_dokter"));
+                dokter.setTempatlahirDokter(result.getString("tempatlahir_dokter"));
+                dokter.setTgllahirDokter(result.getString("tgllahir_dokter"));
+                dokter.setKelaminDokter(result.getString("kelamin_dokter"));
+                dokter.setDarahDokter(result.getString("darah_dokter"));
+                dokter.setBankDokter(result.getString("bank_dokter"));
+                dokter.setNorekDokter(result.getString("norek_dokter"));
+                dokter.setGajifixDokter(result.getInt("gajifix_dokter"));
+                dokter.setGajilemburDokter(result.getInt("gajilembur_dokter"));
+                dokter.setGajikonsulDokter(result.getDouble("gajikonsul_dokter"));
+                list.add(dokter);
+            }
+            return list;
+        } catch (SQLException exception) {
+            ui.act.append("getDokterbyName Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
 
 }
