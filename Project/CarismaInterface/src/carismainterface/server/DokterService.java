@@ -23,5 +23,7 @@ public interface DokterService extends Remote {
     
     String[] getIdNamaDokter (String username) throws RemoteException;
     
-    List<Dokter> getDokterbyName(String namadokter) throws RemoteException;
+    public List<Dokter> getDokterByName(String nama) throws RemoteException;
+    
+    String[] getDokterById(String idDokter) throws RemoteException;
 }
