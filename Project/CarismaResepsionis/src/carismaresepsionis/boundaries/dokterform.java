@@ -30,8 +30,9 @@ public class dokterform extends javax.swing.JFrame {
     private DataDokterController DataDokterController;
     settergetter simpanan = new settergetter();
     String a, b, c, d, e, f, g, h, i;
-    
+
     public dokterform(ClientSocket client, String userName) throws RemoteException {
+        
         this.client = client;
         DataDokterController control = new DataDokterController(this.client);
         ds = client.getDokterService();
@@ -39,38 +40,39 @@ public class dokterform extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        control.getNamaDokter();
         
-        TabelDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        control.getDokter2(this);
 
-            public void valueChanged(ListSelectionEvent e) {
-                int row = TabelDokter.getSelectedRow();
-                if (row != -1) {
-                    try {
-                        Dokter selected = new Dokter(ds.getDokter(TabelDokter.getValueAt(row, 0).toString()));
-                        IdDokter.setText(selected.getIdDokter().toString());
-                        NamaDokter.setText(selected.getNamaDokter());                       
-                    } catch (RemoteException ex) {
-                        Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        });
-        
-        a = NamaDokter.getText();
-        b = NamaPoli.getText();
-        c = TempatlahirDokter.getText();
-        d = AlamatDokter.getText();
-        e = TelpDokter.getText();
-        f = Hp1Dokter.getText();
-        g = Hp2Dokter.getText();
-        h = IdDokter.getText();
-        i = FotoDokter.getText();
-        
-        Date tanggal = new Date();
-        TgllahirDokter.setDate(tanggal);
-       
+//        TabelDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//            public void valueChanged(ListSelectionEvent e) {
+//                int row = TabelDokter.getSelectedRow();
+//                if (row != -1) {
+//                    try {
+//                        Dokter selected = new Dokter(ds.getDokter(TabelDokter.getValueAt(row, 0).toString()));
+//                        IdDokter.setText(selected.getIdDokter().toString());
+//                        NamaDokter.setText(selected.getNamaDokter());
+//                    } catch (RemoteException ex) {
+//                        Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//            }
+//        });
+//
+//        a = NamaDokter.getText();
+//        b = NamaPoli.getText();
+//        c = TempatlahirDokter.getText();
+//        d = AlamatDokter.getText();
+//        e = TelpDokter.getText();
+//        f = Hp1Dokter.getText();
+//        g = Hp2Dokter.getText();
+//        h = IdDokter.getText();
+//        i = FotoDokter.getText();
+//
+////        Date tanggal = new Date();
+////        TgllahirDokter.setDate(tanggal);
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,7 +96,7 @@ public class dokterform extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         NamaDokter = new javax.swing.JTextField();
         NamaPoli = new javax.swing.JTextField();
-        TempatlahirDokter = new javax.swing.JTextField();
+        TempatLahirDokter = new javax.swing.JTextField();
         AlamatDokter = new javax.swing.JTextField();
         Hp1Dokter = new javax.swing.JTextField();
         TelpDokter = new javax.swing.JTextField();
@@ -104,10 +106,10 @@ public class dokterform extends javax.swing.JFrame {
         FotoDokter = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         LihatJadwalDokter = new javax.swing.JButton();
-        TgllahirDokter = new com.toedter.calendar.JDateChooser();
-        KelaminDokter = new javax.swing.JComboBox();
         jLabel15 = new javax.swing.JLabel();
         IdDokter = new javax.swing.JTextField();
+        TglLahirDokter = new javax.swing.JTextField();
+        JenisKelaminDokter = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -157,7 +159,7 @@ public class dokterform extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(50, 130, 227, 40);
+        jPanel2.setBounds(50, 130, 225, 40);
 
         TabelDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -226,39 +228,39 @@ public class dokterform extends javax.swing.JFrame {
 
         jLabel6.setText("Nama Dokter");
         jPanel4.add(jLabel6);
-        jLabel6.setBounds(20, 100, 190, 16);
+        jLabel6.setBounds(20, 100, 190, 14);
 
         jLabel7.setText("Poli");
         jPanel4.add(jLabel7);
-        jLabel7.setBounds(20, 140, 190, 16);
+        jLabel7.setBounds(20, 140, 190, 14);
 
         jLabel8.setText("Tempat Lahir");
         jPanel4.add(jLabel8);
-        jLabel8.setBounds(20, 180, 200, 16);
+        jLabel8.setBounds(20, 180, 80, 14);
 
         jLabel9.setText("Tanggal Lahir");
         jPanel4.add(jLabel9);
-        jLabel9.setBounds(20, 220, 160, 16);
+        jLabel9.setBounds(20, 220, 80, 14);
 
         jLabel10.setText("Jenis Kelamin");
         jPanel4.add(jLabel10);
-        jLabel10.setBounds(20, 260, 80, 16);
+        jLabel10.setBounds(20, 260, 80, 14);
 
         jLabel11.setText("Alamat");
         jPanel4.add(jLabel11);
-        jLabel11.setBounds(20, 310, 200, 16);
+        jLabel11.setBounds(20, 310, 200, 14);
 
         jLabel12.setText("No. Telp");
         jPanel4.add(jLabel12);
-        jLabel12.setBounds(20, 350, 80, 16);
+        jLabel12.setBounds(20, 350, 80, 14);
 
         jLabel13.setText("No. HP 1");
         jPanel4.add(jLabel13);
-        jLabel13.setBounds(20, 390, 260, 16);
+        jLabel13.setBounds(20, 390, 260, 14);
 
         jLabel14.setText("No. HP 2");
         jPanel4.add(jLabel14);
-        jLabel14.setBounds(20, 430, 290, 16);
+        jLabel14.setBounds(20, 430, 290, 14);
 
         NamaDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,13 +272,13 @@ public class dokterform extends javax.swing.JFrame {
         jPanel4.add(NamaPoli);
         NamaPoli.setBounds(110, 130, 271, 30);
 
-        TempatlahirDokter.addActionListener(new java.awt.event.ActionListener() {
+        TempatLahirDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TempatlahirDokterActionPerformed(evt);
+                TempatLahirDokterActionPerformed(evt);
             }
         });
-        jPanel4.add(TempatlahirDokter);
-        TempatlahirDokter.setBounds(110, 170, 271, 30);
+        jPanel4.add(TempatLahirDokter);
+        TempatLahirDokter.setBounds(110, 170, 271, 30);
         jPanel4.add(AlamatDokter);
         AlamatDokter.setBounds(110, 300, 272, 30);
         jPanel4.add(Hp1Dokter);
@@ -313,7 +315,7 @@ public class dokterform extends javax.swing.JFrame {
         );
 
         jPanel4.add(jPanel6);
-        jPanel6.setBounds(400, 70, 163, 202);
+        jPanel6.setBounds(400, 70, 159, 197);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
@@ -328,19 +330,17 @@ public class dokterform extends javax.swing.JFrame {
             }
         });
         jPanel4.add(LihatJadwalDokter);
-        LihatJadwalDokter.setBounds(400, 360, 150, 25);
-        jPanel4.add(TgllahirDokter);
-        TgllahirDokter.setBounds(110, 220, 100, 22);
-
-        KelaminDokter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pria", "Wanita" }));
-        jPanel4.add(KelaminDokter);
-        KelaminDokter.setBounds(110, 260, 64, 22);
+        LihatJadwalDokter.setBounds(400, 360, 150, 23);
 
         jLabel15.setText("Id Dokter");
         jPanel4.add(jLabel15);
-        jLabel15.setBounds(20, 60, 70, 16);
+        jLabel15.setBounds(20, 60, 70, 14);
         jPanel4.add(IdDokter);
         IdDokter.setBounds(110, 52, 270, 30);
+        jPanel4.add(TglLahirDokter);
+        TglLahirDokter.setBounds(110, 210, 110, 30);
+        jPanel4.add(JenisKelaminDokter);
+        JenisKelaminDokter.setBounds(110, 250, 50, 30);
 
         getContentPane().add(jPanel4);
         jPanel4.setBounds(570, 180, 580, 460);
@@ -356,7 +356,7 @@ public class dokterform extends javax.swing.JFrame {
 
         jButton1.setText("jButton1");
         getContentPane().add(jButton1);
-        jButton1.setBounds(1140, 400, 79, 25);
+        jButton1.setBounds(1140, 400, 73, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -367,9 +367,9 @@ public class dokterform extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CariNamaDokterActionPerformed
 
-    private void TempatlahirDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TempatlahirDokterActionPerformed
+    private void TempatLahirDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TempatLahirDokterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TempatlahirDokterActionPerformed
+    }//GEN-LAST:event_TempatLahirDokterActionPerformed
 
     private void NamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaDokterActionPerformed
         // TODO add your handling code here:
@@ -392,14 +392,42 @@ public class dokterform extends javax.swing.JFrame {
     private void CariNamaDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CariNamaDokterKeyReleased
         CariNamaDokter.setForeground(Color.black);
         CariNamaDokter.setFont(new Font("Tahoma", 0, 12));
+
+        DefaultTableModel model = new DefaultTableModel();
+        try {
+            DataDokterController control = new DataDokterController(client);
+            model = control.getDokterbyName(CariNamaDokter.getText());
+            System.out.println(model);
+            TabelDokter.setModel(model);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CariNamaDokterKeyReleased
 
     private void TabelDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelDokterMouseClicked
             int row = TabelDokter.getSelectedRow();
-            
-            IdDokter.setText(String.valueOf(TabelDokter.getValueAt(row, 0)));
-            NamaDokter.setText(String.valueOf(TabelDokter.getValueAt(row, 1)));
-            
+        try {
+            DataDokterController control = new DataDokterController(client);
+            String[] infoDokter = control.getDokterByIdDokter(String.valueOf(TabelDokter.getValueAt(row, 0)));
+            IdDokter.setText(infoDokter[0]);
+            NamaDokter.setText(infoDokter[1]);
+            NamaPoli.setText(infoDokter[2]);
+            TempatLahirDokter.setText(infoDokter[3]);
+            TglLahirDokter.setText(infoDokter[4]);
+            JenisKelaminDokter.setText(infoDokter[5]);
+            AlamatDokter.setText(infoDokter[6]);
+            TelpDokter.setText(infoDokter[7]);
+            Hp1Dokter.setText(infoDokter[8]);
+            Hp2Dokter.setText(infoDokter[9]);
+
+        } catch (RemoteException ex) {
+            Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+
+//            IdDokter.setText(String.valueOf(TabelDokter.getValueAt(row, 0)));
+//            NamaDokter.setText(String.valueOf(TabelDokter.getValueAt(row, 1)));
+
     }//GEN-LAST:event_TabelDokterMouseClicked
 
     private void LihatJadwalDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatJadwalDokterActionPerformed
@@ -417,14 +445,14 @@ public class dokterform extends javax.swing.JFrame {
     private javax.swing.JTextField Hp1Dokter;
     private javax.swing.JTextField Hp2Dokter;
     private javax.swing.JTextField IdDokter;
-    public javax.swing.JComboBox KelaminDokter;
+    private javax.swing.JTextField JenisKelaminDokter;
     private javax.swing.JButton LihatJadwalDokter;
     private javax.swing.JTextField NamaDokter;
     private javax.swing.JTextField NamaPoli;
     public javax.swing.JTable TabelDokter;
     private javax.swing.JTextField TelpDokter;
-    private javax.swing.JTextField TempatlahirDokter;
-    private com.toedter.calendar.JDateChooser TgllahirDokter;
+    private javax.swing.JTextField TempatLahirDokter;
+    private javax.swing.JTextField TglLahirDokter;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
