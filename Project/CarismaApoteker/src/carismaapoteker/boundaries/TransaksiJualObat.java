@@ -20,15 +20,20 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     private ClientSocket Client;
     private String userName;
     private DefaultTableModel tableOfSales;
+    private TransaksiJualObatController transaksijualobatController;
+    String[] namaPegawai; 
     private int total = 0;
     public int row = 0;
     java.util.Date dateNow = new java.util.Date();
 
-    public TransaksiJualObat(ClientSocket Client, String userName) {
+    public TransaksiJualObat(ClientSocket Client, String userName) throws RemoteException {
         this.Client = Client;
         this.userName = userName;
         initComponents();
         dateOfSales.setDate(dateNow);
+        transaksijualobatController = new TransaksiJualObatController (Client);
+        namaPegawai = transaksijualobatController.namaPegawai(this.userName);
+        labelAoptekerName.setText(namaPegawai [0]);
     }
 
     @SuppressWarnings("unchecked")
@@ -160,10 +165,9 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(10, 130, 94, 22);
 
-        labelAoptekerName.setBackground(new java.awt.Color(153, 0, 0));
+        labelAoptekerName.setBackground(new java.awt.Color(0, 0, 0));
         labelAoptekerName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        labelAoptekerName.setForeground(new java.awt.Color(153, 0, 0));
-        labelAoptekerName.setText("Apoteker Name");
+        labelAoptekerName.setText("\n");
         labelAoptekerName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, labelAoptekerName, org.jdesktop.beansbinding.ObjectProperty.create(), labelAoptekerName, org.jdesktop.beansbinding.BeanProperty.create("labelFor"));
@@ -217,6 +221,9 @@ public class TransaksiJualObat extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableOfSalesMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTableOfSalesMouseReleased(evt);
+            }
         });
         jScrollPane2.setViewportView(jTableOfSales);
 
@@ -227,7 +234,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 1360, 700);
         getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(580, 110, 100, 100);
+        jTabbedPane1.setBounds(580, 110, 5, 5);
         getContentPane().add(jProgressBar1);
         jProgressBar1.setBounds(110, 134, 146, 20);
 
@@ -246,44 +253,59 @@ public class TransaksiJualObat extends javax.swing.JFrame {
 
         //fieldTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         if (fieldIdOfSales.getText().equals("")||fieldDescription.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Field yang anda isi tidak lengkap","Peringatan",JOptionPane.WARNING_MESSAGE);
-        }
-        else{
+        if (fieldIdOfSales.getText().equals("") || fieldDescription.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Field yang anda isi tidak lengkap", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
             try {
                 TransaksiJualObatController transaksijual = new TransaksiJualObatController(Client);
-                transaksijual.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf (new java.sql.Date(dateNow.getTime())), fieldDescription.getText());
-                JOptionPane.showMessageDialog(null, "Data Transaksi Penjualan Obat Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
+                transaksijual.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), fieldDescription.getText());
+                JOptionPane.showMessageDialog(null, "Data Transaksi Penjualan Obat Tersimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
                 int row = jTableOfSales.getRowCount();
                 for (int i = 0; i < row; i++) {
-                    transaksijual.insertDetailtransaksijualobat(fieldIdOfSales.getText(),Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 1))) , Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
+                    transaksijual.insertDetailtransaksijualobat(fieldIdOfSales.getText(), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 1))), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
                 }
             } catch (Exception e) {
             }
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void fieldIdOfSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdOfSalesActionPerformed
-     if (evt.getSource() instanceof JTextField) {
+        if (evt.getSource() instanceof JTextField) {
     }//GEN-LAST:event_fieldIdOfSalesActionPerformed
     }
-    
+
     private void jTableOfSalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableOfSalesMouseClicked
         int colom = jTableOfSales.getSelectedColumn();
         if (colom == 0) {
             try {
-            new TabelObat (this, Client).setVisible(true);
-        } catch (RemoteException ex) {
-            Logger.getLogger(TransaksiJualObat.class.getName()).log(Level.SEVERE, null, ex);
+                new TabelObat(this, Client).setVisible(true);
+            } catch (RemoteException ex) {
+                Logger.getLogger(TransaksiJualObat.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
-            
-        }
-        
+
     }//GEN-LAST:event_jTableOfSalesMouseClicked
 
+    private void jTableOfSalesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableOfSalesMouseReleased
+        try {
+            int coloumn = jTableOfSales.getSelectedColumn();
+            int row = jTableOfSales.getSelectedRow();
+            if (coloumn == 2) {
+                int qty = Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(row, coloumn)));
+                TransaksiJualObatController control = new TransaksiJualObatController(Client);
+                int stock = control.cekStok(Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(row, 0))));
+                if (stock < qty) {
+                    JOptionPane.showMessageDialog(null, "Stok Obat Tidak Mencukupi");
+                }
+            }
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jTableOfSalesMouseReleased
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser dateOfSales;
     private javax.swing.JTextField fieldDescription;
