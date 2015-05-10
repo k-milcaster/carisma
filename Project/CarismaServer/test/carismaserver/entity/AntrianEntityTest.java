@@ -71,13 +71,18 @@ public class AntrianEntityTest {
      */
     @Test
     public void testGetAntrian_String() throws Exception {
-        String idantrian = "AN001";
-        
+        System.out.println("getAntrian");
+        String antri = "AN001";        
         AntrianEntity instance = new AntrianEntity(ui);
         Antrian expResult = new Antrian();
         expResult.setIdAntrian("AN001");
-        
-        Antrian result = instance.getAntrian(idantrian);
+        expResult.setPasienIdPasien("PS001");
+        expResult.setDokterIdDokter("DR001");
+        expResult.setNomorAntrian(1);
+        expResult.setJenisAntrian("Periksa");
+        expResult.setTglAntrian("2015-05-10");
+        expResult.setHadir("H");
+        Antrian result = instance.getAntrian(antri);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
@@ -100,13 +105,16 @@ public class AntrianEntityTest {
 //    /**
 //     * Test of antrianHadir method, of class AntrianEntity.
 //     */
-//    @Test
-//    public void testAntrianHadir() throws Exception {
-//        System.out.println("antrianHadir");
-//        String antrian = "";
-//        AntrianEntity instance = new AntrianEntity();
-//        instance.antrianHadir(antrian);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+        @Test
+        public void testAntrianHadir() throws Exception {
+            System.out.println("antrianHadir");
+            String antrian = "AN001";
+            AntrianEntity instance = new AntrianEntity(ui);
+            Antrian expResult = new Antrian();
+            expResult.setHadir("H");             
+            boolean result = instance.antrianHadir(antrian);
+            assertEquals(expResult, result);
+            // TODO review the generated test code and remove the default call to fail.
+            //fail("The test case is a prototype.");
+        }
 }
