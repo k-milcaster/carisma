@@ -16,11 +16,11 @@ import java.util.List;
  * @author kepoterz
  */
 public interface PasienKamarService extends Remote {
-    void insertPasienKamar(PasienKamar pasienKamar) throws RemoteException;
+    boolean insertPasienKamar(PasienKamar pasienKamar) throws RemoteException;
 
-    void updatePasienKamar(PasienKamar pasienKamar) throws RemoteException;
+    boolean updatePasienKamar(PasienKamar pasienKamar) throws RemoteException;
 
-    void deletePasienKamar(String idpeminjaman) throws RemoteException;
+    boolean deletePasienKamar(String idpeminjaman) throws RemoteException;
 
     PasienKamar getPasienKamar(String idpeminjaman) throws RemoteException;
 

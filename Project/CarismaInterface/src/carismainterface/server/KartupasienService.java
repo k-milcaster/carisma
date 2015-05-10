@@ -11,9 +11,9 @@ import java.util.List;
  */
 public interface KartupasienService extends Remote {
 
-    void insertKartuPasien(Kartupasien kp) throws RemoteException;
+    boolean insertKartuPasien(Kartupasien kp) throws RemoteException;
 
-    void deleteKartuPasien(String kp) throws RemoteException;
+    boolean deleteKartuPasien(String kp) throws RemoteException;
 
     Kartupasien getKartuPasien(String kp) throws RemoteException;
 

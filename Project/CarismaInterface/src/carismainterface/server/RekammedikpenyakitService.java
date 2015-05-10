@@ -11,9 +11,9 @@ import java.util.List;
  */
 public interface RekammedikpenyakitService extends Remote {
 
-    void insertRekamMedikPenyakit(Rekammedikpenyakit rp) throws RemoteException;
+    boolean insertRekamMedikPenyakit(Rekammedikpenyakit rp) throws RemoteException;
 
     List<Rekammedikpenyakit> getRekamMedikPenyakit(String idRm) throws RemoteException;
     
-    void deleteRekammedikPenyakit(String idRm) throws RemoteException;
+    boolean deleteRekammedikPenyakit(String idRm) throws RemoteException;
 }

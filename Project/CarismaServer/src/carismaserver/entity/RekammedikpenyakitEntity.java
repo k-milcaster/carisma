@@ -30,7 +30,7 @@ public class RekammedikpenyakitEntity extends UnicastRemoteObject implements Rek
     }
 
     @Override
-    public void insertRekamMedikPenyakit(Rekammedikpenyakit rp) throws RemoteException {
+    public boolean insertRekamMedikPenyakit(Rekammedikpenyakit rp) throws RemoteException {
         ui.act.append("Client Execute insertRekammedikPenyakit " + rp.getRekammedikIdRekammedik() + " \n");
 
         PreparedStatement statement = null;
@@ -41,9 +41,11 @@ public class RekammedikpenyakitEntity extends UnicastRemoteObject implements Rek
             statement.setString(1, rp.getRekammedikIdRekammedik());
             statement.setString(2, rp.getPenyakitIdPenyakit());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertRekammedikPenyakit Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -88,7 +90,7 @@ public class RekammedikpenyakitEntity extends UnicastRemoteObject implements Rek
     }
 
     @Override
-    public void deleteRekammedikPenyakit(String idRm) throws RemoteException {
+    public boolean deleteRekammedikPenyakit(String idRm) throws RemoteException {
         ui.act.append("Client Execute deleteRekamMedikPenyakit (" + idRm + " \n");
         PreparedStatement statement = null;
         try {
@@ -96,9 +98,11 @@ public class RekammedikpenyakitEntity extends UnicastRemoteObject implements Rek
                     "DELETE FROM rekammedis_penyakit WHERE rekammedik_id_rekammedik = ?");
             statement.setString(1, idRm);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteRekamMedikPenyakit Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

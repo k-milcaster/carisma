@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface DetailresepService extends Remote {
 
-    void insertDetailresep(Detailresep detailResep) throws RemoteException;
+    boolean insertDetailresep(Detailresep detailResep) throws RemoteException;
 
     List<Detailresep> getDetailresep(String idResep) throws RemoteException;
 
