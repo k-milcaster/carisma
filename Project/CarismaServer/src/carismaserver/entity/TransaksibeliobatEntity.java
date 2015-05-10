@@ -30,7 +30,7 @@ public class TransaksibeliobatEntity extends UnicastRemoteObject implements Tran
     
     
     @Override
-    public boolean insertTransaksibelibat(Transaksibeliobat transaksibeliobat) throws RemoteException {
+    public boolean insertTransaksibeliobat(Transaksibeliobat transaksibeliobat) throws RemoteException {
         ui.act.append("Client Execute insertTransaksibeliobat " + transaksibeliobat.getIdTransaksibeliobat()+ "\n");
 
         PreparedStatement statement = null;
