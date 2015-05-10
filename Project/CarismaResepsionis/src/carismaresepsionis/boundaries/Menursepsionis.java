@@ -101,9 +101,9 @@ public class Menursepsionis extends javax.swing.JFrame {
                 "Daftar Antrian"
             }
         ));
-        tableDaftarAntrian.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableDaftarAntrianMouseClicked(evt);
+        tableDaftarAntrian.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                tableDaftarAntrianMouseDragged(evt);
             }
         });
         jScrollPane1.setViewportView(tableDaftarAntrian);
@@ -269,16 +269,6 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void List_AntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_List_AntrianActionPerformed
     }//GEN-LAST:event_List_AntrianActionPerformed
 
-    private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
-        int row = tableDaftarAntrian.getSelectedRow();
-        try {
-            new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 1))).setVisible(true);
-        } catch (RemoteException ex) {
-            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_tableDaftarAntrianMouseClicked
-
     private void NamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaDokterActionPerformed
         
     }//GEN-LAST:event_NamaDokterActionPerformed
@@ -286,6 +276,16 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void NamanyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamanyaActionPerformed
         
     }//GEN-LAST:event_NamanyaActionPerformed
+
+    private void tableDaftarAntrianMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseDragged
+        int row = tableDaftarAntrian.getSelectedRow();
+        
+        try {
+            new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 1))).setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_tableDaftarAntrianMouseDragged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DataDokter;
