@@ -271,39 +271,77 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         }
     }
 
-    @Override
-    public List<Dokter> getDokterbyName(String namadokter) throws RemoteException {
-        ui.act.append("Client Execute getDokterbyName (" + namadokter + ") \n");
+    public List<Dokter> getDokter2() throws RemoteException {
+        ui.act.append("Client Execute getDokterList \n");
 
-        PreparedStatement statement = null;
+        Statement statement = null;
         try {
-            statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM dokter WHERE nama_dokter LIKE '%"+namadokter+"%'");
-            ResultSet result = statement.executeQuery();
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT * FROM dokter");
+
             List<Dokter> list = new ArrayList<Dokter>();
+
             while (result.next()) {
                 Dokter dokter = new Dokter();
                 dokter.setIdDokter(result.getString("id_dokter"));
                 dokter.setNamaDokter(result.getString("nama_dokter"));
-                dokter.setAlamatDokter(result.getString("alamat_dokter"));
-                dokter.setNokartuidDokter(result.getString("nokartuid_dokter"));
-                dokter.setTelpDokter(result.getString("telp_dokter"));
-                dokter.setHp1Dokter(result.getString("hp1_dokter"));
-                dokter.setHp2Dokter(result.getString("hp2_dokter"));
-                dokter.setTempatlahirDokter(result.getString("tempatlahir_dokter"));
-                dokter.setTgllahirDokter(result.getString("tgllahir_dokter"));
-                dokter.setKelaminDokter(result.getString("kelamin_dokter"));
-                dokter.setDarahDokter(result.getString("darah_dokter"));
-                dokter.setBankDokter(result.getString("bank_dokter"));
-                dokter.setNorekDokter(result.getString("norek_dokter"));
-                dokter.setGajifixDokter(result.getInt("gajifix_dokter"));
-                dokter.setGajilemburDokter(result.getInt("gajilembur_dokter"));
-                dokter.setGajikonsulDokter(result.getDouble("gajikonsul_dokter"));
+ 
                 list.add(dokter);
+                
+                System.out.println("ini nama dok :"+list.get(0).getNamaDokter());
+            }
+            result.close();
+            return list;
+
+        } catch (SQLException exception) {
+            ui.act.append("getDokterList Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+   
+    @Override
+    public List<Dokter> getDokterByName(String dokter) throws RemoteException {
+        ui.act.append("Client Execute getPasienListByName  \n");
+
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT * FROM dokter WHERE nama_dokter LIKE('%" + dokter + "%')");
+            ResultSet result = statement.executeQuery();
+            List<Dokter> list = new ArrayList<Dokter>();
+            Dokter dok = null;
+            if (result.next()) {
+                dok = new Dokter();
+                dok.setIdDokter(result.getString("id_dokter"));
+                dok.setNamaDokter(result.getString("nama_dokter"));
+                dok.setAlamatDokter(result.getString("alamat_dokter"));
+                dok.setNokartuidDokter(result.getString("nokartuid_dokter"));
+                dok.setTelpDokter(result.getString("telp_dokter"));
+                dok.setHp1Dokter(result.getString("hp1_dokter"));
+                dok.setHp2Dokter(result.getString("hp2_dokter"));
+                dok.setTempatlahirDokter(result.getString("tempatlahir_dokter"));
+                dok.setTgllahirDokter(result.getString("tgllahir_dokter"));
+                dok.setKelaminDokter(result.getString("kelamin_dokter"));
+                dok.setDarahDokter(result.getString("darah_dokter"));
+                dok.setBankDokter(result.getString("bank_dokter"));
+                dok.setNorekDokter(result.getString("norek_dokter"));
+                dok.setGajifixDokter(result.getInt("gajifix_dokter"));
+                dok.setGajilemburDokter(result.getInt("gajilembur_dokter"));
+                dok.setGajikonsulDokter(result.getDouble("gajikonsul_dokter"));
+                list.add(dok);                
             }
             return list;
         } catch (SQLException exception) {
-            ui.act.append("getDokterbyName Error \n");
+            ui.act.append("getDokterListByName Error \n");
             ui.act.append(exception.toString());
             return null;
         } finally {
@@ -316,5 +354,39 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         }
     }
 
-
+    @Override
+    public String[] getDokterById(String idDokter) throws RemoteException {
+        ui.act.append("Client Execute getDokterById  \n");
+        String[] informasiDokter = new String[10];
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT d.`id_dokter`, d.`nama_dokter`, p.`nama_poli`, d.`tempatlahir_dokter`, d.`tgllahir_dokter`, d.`kelamin_dokter`, d.`alamat_dokter`, d.`telp_dokter`, d.`hp1_dokter`, d.`hp2_dokter` FROM `dokter` AS d, poli AS p WHERE d.`id_dokter` = '"+idDokter+"' AND p.id_poli = d.`poli_id_poli`");
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                informasiDokter[0] = result.getString(1);
+                informasiDokter[1] = result.getString(2);
+                informasiDokter[2] = result.getString(3);
+                informasiDokter[3] = result.getString(4);
+                informasiDokter[4] = result.getString(5);
+                informasiDokter[5] = result.getString(6);
+                informasiDokter[6] = result.getString(7);
+                informasiDokter[7] = result.getString(8);
+                informasiDokter[8] = result.getString(9);
+                informasiDokter[9] = result.getString(10);
+            }
+            return informasiDokter;
+        } catch (SQLException exception) {
+            ui.act.append("getDokterById Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
 }
