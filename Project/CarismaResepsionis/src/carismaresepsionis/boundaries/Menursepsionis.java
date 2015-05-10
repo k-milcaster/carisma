@@ -101,9 +101,9 @@ public class Menursepsionis extends javax.swing.JFrame {
                 "Daftar Antrian"
             }
         ));
-        tableDaftarAntrian.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                tableDaftarAntrianMouseDragged(evt);
+        tableDaftarAntrian.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDaftarAntrianMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tableDaftarAntrian);
@@ -277,7 +277,7 @@ public class Menursepsionis extends javax.swing.JFrame {
         
     }//GEN-LAST:event_NamanyaActionPerformed
 
-    private void tableDaftarAntrianMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseDragged
+    private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
         int row = tableDaftarAntrian.getSelectedRow();
         
         try {
@@ -285,7 +285,7 @@ public class Menursepsionis extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
         }// TODO add your handling code here:
-    }//GEN-LAST:event_tableDaftarAntrianMouseDragged
+    }//GEN-LAST:event_tableDaftarAntrianMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DataDokter;
