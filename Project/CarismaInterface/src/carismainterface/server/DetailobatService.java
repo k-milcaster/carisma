@@ -10,15 +10,17 @@ import java.util.List;
  * @author K-MiL Caster
  */
 public interface DetailobatService extends Remote {
-    void insertDetailobat(Detailobat detailobat) throws RemoteException;
+    boolean insertDetailobat(Detailobat detailobat) throws RemoteException;
 
-    void updateDetailobat(Detailobat detailobat) throws RemoteException;
+    boolean updateDetailobat(Detailobat detailobat) throws RemoteException;
 
-    void deleteDetailobat(int iddetailobat) throws RemoteException;
+    boolean deleteDetailobat(int iddetailobat) throws RemoteException;
 
     Detailobat getDetailobat(int iddetailobat) throws RemoteException;
     
     List<Detailobat> getDetailobatbyIdObat(int idobat) throws RemoteException;
 
     List<Detailobat> getDetailobat() throws RemoteException;
+    
+    int getLastIdDetailObat() throws RemoteException;
 }

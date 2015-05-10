@@ -10,11 +10,11 @@ import java.util.List;
  * @author kepoterz
  */
 public interface ObatService extends Remote {
-    void insertObat(Obat obat) throws RemoteException;
+    boolean insertObat(Obat obat) throws RemoteException;
 
-    void updateObat(Obat obat) throws RemoteException;
+    boolean updateObat(Obat obat) throws RemoteException;
 
-    void deleteObat(String idobat) throws RemoteException;
+    boolean deleteObat(String idobat) throws RemoteException;
 
     Obat getObat(String idobat) throws RemoteException;
     
@@ -22,5 +22,7 @@ public interface ObatService extends Remote {
 
     List<Obat> getObat() throws RemoteException;
     
-    int cekStokObat(int idObat)throws RemoteException;
+    int getLastIdObat() throws RemoteException;
+    
+    boolean updateQtyObat(int id, int qty) throws RemoteException;
 }
