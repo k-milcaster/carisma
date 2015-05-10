@@ -226,5 +226,33 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             }
         }
     }
+    @Override
+    public int cekStokObat(int idObat) throws RemoteException {
+        ui.act.append("Client Execute getLastIdRekamMedik");
+        
+        int qty = 0;
+        PreparedStatement state = null;
+        try {
+            state = DatabaseConnection.getConnection().prepareStatement("SELECT qty_obat FROM obat WHERE id_obat = 1 ");
+            ResultSet resultSet = state.executeQuery();
+            if (resultSet.next()) {
+                qty = resultSet.getInt(1);
+            }
+            return qty;
+        } catch (SQLException exception) {
+            ui.act.append("getLastIdRekamMedik\n");
+            ui.act.append(exception.toString());
+            return qty;
+        } finally {
+            if (state != null) {
+                try {
+                    state.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+        
+                
+    }
     
 }
