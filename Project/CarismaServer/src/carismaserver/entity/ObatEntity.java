@@ -31,7 +31,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
     
 
     @Override
-    public void insertObat(Obat obat) throws RemoteException {
+    public boolean insertObat(Obat obat) throws RemoteException {
         ui.act.append("Client Execute insertObat " + obat.getIdObat()+ "\n");
 
         PreparedStatement statement = null;
@@ -47,9 +47,11 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             statement.setInt(6, obat.getHargajualObat());
             statement.setInt(7, obat.getStokkritisObat());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertObat Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -62,7 +64,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
     }
 
     @Override
-    public void updateObat(Obat obat) throws RemoteException {
+    public boolean updateObat(Obat obat) throws RemoteException {
         ui.act.append("Client Execute updateObat(" + obat.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -79,10 +81,11 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             statement.setInt(5, obat.getHargajualObat());
             statement.setInt(6, obat.getStokkritisObat());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateObat Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -94,7 +97,7 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
     }
 
     @Override
-    public void deleteObat(String idobat) throws RemoteException {
+    public boolean deleteObat(String idobat) throws RemoteException {
         ui.act.append("Client Execute deleteObat (" + idobat + ") \n");
         PreparedStatement statement = null;
         try {
@@ -102,9 +105,11 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
                     "DELETE FROM obat WHERE id_obat = ?");
             statement.setString(1, idobat);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteObat Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -226,23 +231,23 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
             }
         }
     }
-    @Override
-    public int cekStokObat(int idObat) throws RemoteException {
-        ui.act.append("Client Execute getLastIdRekamMedik");
+    
+    public int getLastIdObat() throws RemoteException {
+        ui.act.append("Client Execute getLastIdDetailObat");
         
-        int qty = 0;
+        int lastIdObat = 0;
         PreparedStatement state = null;
         try {
-            state = DatabaseConnection.getConnection().prepareStatement("SELECT qty_obat FROM obat WHERE id_obat = 1 ");
+            state = DatabaseConnection.getConnection().prepareStatement("SELECT MAX(`id_obat`) FROM obat");
             ResultSet resultSet = state.executeQuery();
             if (resultSet.next()) {
-                qty = resultSet.getInt(1);
+                lastIdObat = resultSet.getInt(1);
             }
-            return qty;
+            return lastIdObat;
         } catch (SQLException exception) {
-            ui.act.append("getLastIdRekamMedik\n");
+            ui.act.append("getLastIdObat\n");
             ui.act.append(exception.toString());
-            return qty;
+            return lastIdObat;
         } finally {
             if (state != null) {
                 try {
@@ -251,8 +256,36 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
                 }
             }
         }
-        
-                
+    }
+
+    @Override
+    public boolean updateQtyObat(int id, int qty) throws RemoteException {
+         ui.act.append("Client Execute updateQtyObat()\n");
+
+//        PreparedStatement statement = null;
+         Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+            String sql = "UPDATE obat SET `qty_obat` = `qty_obat`+ "+qty+" WHERE `id_obat` = "+id+"";
+            statement.executeUpdate(sql);
+//            statement = DatabaseConnection.getConnection().prepareStatement(
+//                    "UPDATE obat SET `qty_obat` = `qty_obat`+ "+qty+" WHERE `id_obat` = "+id+"");
+//            statement.setInt(1, qty);
+//            statement.setInt(2, id);
+//            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            ui.act.append("UpdateQtyObat Error \n");
+            ui.act.append(e.toString());
+            return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
     }
     
 }
