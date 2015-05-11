@@ -19,95 +19,83 @@ import carismaresepsionis.boundaries.settergetter;
  * @author Anes Dirsi
  */
 public class DataDokterController {
-    
     private DokterService dokterService;
 
-    public DataDokterController(ClientSocket client) throws RemoteException {
+ public DataDokterController(ClientSocket client) throws RemoteException {
         this.dokterService = client.getDokterService();
     }
-
-    public DokterService getDokter() {
-        return this.dokterService;
-    }
-
-    public String getNamaDokter() {
+   
+ public DokterService getDokter(){
+         return this.dokterService;
+     }
+ 
+ public String getNamaDokter(){
         Dokter dokter = new Dokter();
         String NamaDokter = dokter.getNamaDokter();
         return NamaDokter;
     }
-
-    public String getIdDokter() {
+ 
+ public String getIdDokter(){
         Dokter dokter = new Dokter();
         String IdDokter = dokter.getIdDokter();
         return IdDokter;
     }
-
-    public String getNamaPoli() {
+ 
+ public String getNamaPoli(){
         Poli poli = new Poli();
         String NamaPoli = poli.getNamaPoli();
         return NamaPoli;
     }
-
-    public String getTempatlahirDokter() {
+ 
+ public String getTempatlahirDokter(){
         Dokter dokter = new Dokter();
         String TempatlahirDokter = dokter.getTempatlahirDokter();
         return TempatlahirDokter;
     }
-
-    public String getTgllahirDokter() {
+  
+ public String getTgllahirDokter(){
         Dokter dokter = new Dokter();
         String TgllahirDokter = dokter.getTgllahirDokter();
         return TgllahirDokter;
     }
-
-    public String getKelaminDokter() {
+  
+ public String getKelaminDokter(){
         Dokter dokter = new Dokter();
         String KelaminDokter = dokter.getKelaminDokter();
         return KelaminDokter;
     }
-
-    public String getAlamatDokter() {
+  
+ public String getAlamatDokter(){
         Dokter dokter = new Dokter();
         String AlamatDokter = dokter.getAlamatDokter();
         return AlamatDokter;
     }
-
-    public String getTelpDokter() {
+   
+ public String getTelpDokter(){
         Dokter dokter = new Dokter();
         String TelpDokter = dokter.getTelpDokter();
         return TelpDokter;
     }
-
-    public String getHp1Dokter() {
+    
+ public String getHp1Dokter(){
         Dokter dokter = new Dokter();
         String getHp1Dokter = dokter.getHp1Dokter();
         return getHp1Dokter;
     }
-
-    public String getHp2Dokter() {
+ 
+ public String getHp2Dokter(){
         Dokter dokter = new Dokter();
         String getHp2Dokter = dokter.getHp2Dokter();
         return getHp2Dokter;
     }
-
-    public byte[] getFotoDokter() {
+ 
+ public byte[] getFotoDokter(){
         Dokter dokter = new Dokter();
         byte[] getFotoDokter = dokter.getFotoDokter();
         return getFotoDokter;
     }
-<<<<<<< HEAD
-
-    public DefaultTableModel getDokter2(dokterform ui) throws RemoteException {
-=======
    
- public DefaultTableModel getDokter2(dokterform ui) throws RemoteException {
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/develop
-=======
->>>>>>> origin/develop
-=======
->>>>>>> origin/develop
+    public DefaultTableModel getDokter(dokterform ui) throws RemoteException {
         List<Dokter> list = new ArrayList<Dokter>();
         list = dokterService.getDokter();
         DefaultTableModel model = new DefaultTableModel();
@@ -119,19 +107,8 @@ public class DataDokterController {
         ui.TabelDokter.setModel(model);
         return model;
     }
-<<<<<<< HEAD
 
-    public DefaultTableModel getDokterbyName(String nama) throws RemoteException {
-=======
-   
-   public DefaultTableModel getDokterbyName(String nama) throws RemoteException {
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/develop
-=======
->>>>>>> origin/develop
-=======
->>>>>>> origin/develop
+    public DefaultTableModel getDokterByName(String nama) throws RemoteException {
         List<Dokter> list = new ArrayList<Dokter>();
         list = dokterService.getDokterByName(nama);
         DefaultTableModel model = new DefaultTableModel();
@@ -148,22 +125,6 @@ public class DataDokterController {
         String[] informasiDokter = dokterService.getDokterById(idDokter);
         return informasiDokter;
     }
-}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    
+}    
 
  
->>>>>>> origin/develop
-=======
-    
-
- 
->>>>>>> origin/develop
-=======
-    
-
- 
->>>>>>> origin/develop

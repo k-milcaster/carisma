@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class UserController {
 
-    public void insertUser(carismaserver.boundaries.UserManagement ui,String username,String password,String now, String role) throws RemoteException {
+    public boolean insertUser(carismaserver.boundaries.UserManagement ui,String username,String password,String now, String role) throws RemoteException {
         UserEntity userService = new UserEntity(ui.ui);
         try {
             User user = new User();
@@ -31,12 +31,14 @@ public class UserController {
             user.setRegistered(now);
             user.setRole(role);
             userService.insertUser(user);
+            return true;
         } catch (RemoteException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
-    public void updateUser(carismaserver.boundaries.UserManagement ui,int id, String username, String password, String role) throws RemoteException{
+    public boolean updateUser(carismaserver.boundaries.UserManagement ui,int id, String username, String password, String role) throws RemoteException{
         UserEntity userService = new UserEntity(ui.ui);
         try{
             User user = new User();
@@ -45,22 +47,26 @@ public class UserController {
             user.setPassword(password);
             user.setRole(role);
             userService.updateUser(user);
+            return true;
         } catch (RemoteException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
-    public void deleteUser(carismaserver.boundaries.UserManagement ui,int id) throws RemoteException{
+    public boolean deleteUser(carismaserver.boundaries.UserManagement ui,int id) throws RemoteException{
         UserEntity userService = new UserEntity(ui.ui);
         try{
             User user = new User(id);
             userService.deleteUser(user);
+            return true;
         } catch (RemoteException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
-    public void getUsers(carismaserver.boundaries.UserManagement ui) throws RemoteException {
+    public DefaultTableModel getUsers(carismaserver.boundaries.UserManagement ui) throws RemoteException {
         UserEntity userService = new UserEntity(ui.ui);
         List<User> list = new ArrayList<User>();
         list = userService.getUser();
@@ -73,8 +79,9 @@ public class UserController {
         model.addColumn("Role"); 
         for (int i = 0; i < list.size(); i++) {
             model.addRow(new Object[]{i, list.get(i).getUsername(), list.get(i).getPassword(), list.get(i).getRegistered(), list.get(i).getLastlogin(), list.get(i).getRole()});
-            System.out.println("lewat");
+            //System.out.println("lewat");
         }
-        ui.tableUser.setModel(model);
+        //ui.tableUser.setModel(model);
+        return model;
     }
 }

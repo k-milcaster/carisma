@@ -6,8 +6,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import carismakasir.controller.ClientSocket;
+import carismakasir.boundary.Kasir;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import static org.junit.Assert.*;
 
 /**
@@ -17,7 +20,7 @@ import static org.junit.Assert.*;
 public class KasirControllerTest {
 
     ClientSocket client;
-
+    Kasir ui;
     public KasirControllerTest() {
     }
 
@@ -32,7 +35,7 @@ public class KasirControllerTest {
     @Before
     public void setUp() throws RemoteException, NotBoundException {
         client = new ClientSocket();
-        
+
     }
 
     @After
@@ -44,24 +47,58 @@ public class KasirControllerTest {
      */
     @Test
     public void testShowBiaya() throws Exception {
-        System.out.println("showBiaya");
+        System.out.println("showBiayaBerhasil");
         client = new ClientSocket();
         String idKunjungan = "kun1";
         KasirController instance = new KasirController(client, null);
-        instance.showBiaya(idKunjungan);
-        // TODO review the generated test code and remove the default call to fail.
+        DefaultTableModel result = instance.showBiaya(idKunjungan);
+        boolean resultCondition = false;
+        if (result.getRowCount() >= 1) {
+            resultCondition = true;
+        }
+        assertTrue(resultCondition); //ketika ketemu
+
+        System.out.println("showBiayaGagal");
+        client = new ClientSocket();
+        idKunjungan = "0";        
+        result = instance.showBiaya(idKunjungan);
+        resultCondition = false;
+        if (result.getRowCount() >= 1) {
+            resultCondition = true;
+        }
+        assertFalse(resultCondition); //ketika tidak ketemu        
+    }
+    /**
+     * Test of sumTotal method, of class KasirController.
+     */
+    @Test
+    public void testSumTotal() throws RemoteException {
+        System.out.println("sumTotal");
+        KasirController instance = new KasirController(client, null);
+        TableModel model = instance.showBiaya("kun1");
+        int expResult = 1260000;
+        int result = instance.sumTotal(model);
+        assertEquals(expResult, result);
+
     }
 
     /**
-     * Test of cetak method, of class KasirController.
+     * Test of doBayar method, of class KasirController.
      */
     @Test
-    public void testCetak() throws Exception {
-        System.out.println("cetak");
-        KasirController instance = null;
-        instance.cetak();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+    public void testDoBayar() throws Exception {
+        System.out.println("doBayarBenar");
+        int pembayaran = 1000;
+        int biaya = 500;
+        KasirController instance = new KasirController(client, null);
+        boolean result = instance.doBayar(pembayaran, biaya);
+        assertTrue(result);
+        
+        pembayaran = 100;
+        biaya = 500;       
+        result = instance.doBayar(pembayaran, biaya);
+        assertFalse(result);        
+        
     }
 
 }

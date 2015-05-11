@@ -85,7 +85,7 @@ public class TransaksiBeliObatController {
         trans.setDateTransaksibeli(tglTransaksiBeliObat);
         trans.setKeterangan(keterangan);
         trans.setHargabeliObat(hargaBeliObat);
-        transaksibeliobat.insertTransaksibelibat(trans);
+        transaksibeliobat.insertTransaksibeliobat(trans);
 
     }
 

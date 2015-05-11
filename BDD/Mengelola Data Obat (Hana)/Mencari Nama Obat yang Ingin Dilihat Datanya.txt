@@ -2,17 +2,20 @@ Fitur: Mengelola data obat
 
 Skenario: Mencari  nama obat yang ingin dilihat datanya
 
-Given apoteker telah login ke sistem
-And apoteker masuk ke menu utama apoteker
+getNamaPegawai(username): String[] namaApoteker
+getObats(): DefaultTableModel tableObat
+getObatbyName(nama): DefaultTableModel tableObatbyName
+
+Given apoteker masuk ke menu utama apoteker
 When apoteker memilih inventory obat
 Then apoteker berada pada menu data obat
 And nama apoteker muncul dilayar
 When apoteker memasukan nama obat yang ingin dilihat datanya
-Then id obat muncul dilayar
-And nama obat muncul dilayar
-And quantity obat muncul dilayar
-And jenis obat muncul dilayar
-And keterangan obat muncul dilayar
-And harga jual obat muncul dilayar
-And stok kritis muncul dilayar
+Then id obat muncul ditabel
+And nama obat muncul ditabel
+And quantity obat muncul ditabel
+And jenis obat muncul ditabel
+And keterangan obat muncul ditabel
+And harga jual obat muncul ditabel
+And stok kritis muncul ditabel
 And id detail obat dan tanggal kadaluarsa obat yang dipilih muncul ditabel

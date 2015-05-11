@@ -2,11 +2,16 @@ Fitur: Mengelola data obat
 
 Skenario: Melihat Obat pada Tabel Lalu Dilihat Detail dan Kadaluarsanya
 
-Given apoteker telah login ke sistem
-And apoteker masuk ke menu utama apoteker
+getNamaPegawai(username): String[] namaApoteker		| assertEquals(expectedNamaApoteker, resultNamaApoteker)
+getObats(): DefaultTableModel tableObat			| assertEquals(expectedTableObat, resultTableObat)
+getDetailObat(id): DefaultTableModel tableDetailObat	| assertEqualls(expectedTableDetailObat, resultTableDetailObat)
+
+
+Given apoteker masuk ke menu utama apoteker
 When apoteker memilih inventory obat
 Then apoteker berada pada menu data obat
 And nama apoteker muncul dilayar
+And daftar obat muncul ditabel
 When apoteker memilih obat pada tabel
 Then id obat muncul dilayar
 And nama obat muncul dilayar

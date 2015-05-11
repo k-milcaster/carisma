@@ -197,4 +197,39 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
         }
     }
     
+    //buundo kalo menurutku harusnya per pasien di klik baru query jalan, kalo salah bilang ya
+    @Override
+    public String[] getNamaKelasKamarbyIdpasien(String idpasien) {
+        ui.act.append("Client Execute getNamaKelasKamarList \n");
+
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT KA.nama_kamar , KA.kelas FROM `kamar` AS KA, `pasien_kamar` AS PK, `kunjungan` AS K "
+                    + "WHERE KA.id_kamar = PK.kamar_id_kamar AND K.pasien_kamar_id_peminjaman = PK.id_peminjaman AND K.pasien_id_pasien = '"+idpasien+"'");
+
+            String[] kamarInfo = new String[2];
+
+            while (result.next()) {
+                kamarInfo[0] = result.getString(1);
+                kamarInfo[1] = result.getString(2);
+            }
+            result.close();
+            return kamarInfo;
+
+        } catch (SQLException exception) {
+            ui.act.append("getNamaKelasKamarList Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+    
 }

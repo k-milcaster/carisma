@@ -30,7 +30,7 @@ public class UserManagement extends javax.swing.JFrame {
         this.ui = ui;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        control.getUsers(this);
+        tableUser.setModel(control.getUsers(this));
         tableUser.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
@@ -220,7 +220,8 @@ public class UserManagement extends javax.swing.JFrame {
             System.out.println(now);
             String role = (String) comboRole.getItemAt(comboRole.getSelectedIndex());
             control.insertUser(this, user, pass, now, role);
-            control.getUsers(this);
+            //control.getUsers(this);
+            tableUser.setModel(control.getUsers(this));
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -234,7 +235,8 @@ public class UserManagement extends javax.swing.JFrame {
             String pass = fieldPassword.getText();
             String role = (String) comboRole.getItemAt(comboRole.getSelectedIndex());
             control.updateUser(this, id, user, pass, role);
-            control.getUsers(this);
+            //control.getUsers(this);
+            tableUser.setModel(control.getUsers(this));
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -244,7 +246,8 @@ public class UserManagement extends javax.swing.JFrame {
         try {
             int id = Integer.parseInt(fieldId.getText());;
             control.deleteUser(this, id);
-            control.getUsers(this);
+            //control.getUsers(this);
+            tableUser.setModel(control.getUsers(this));
         } catch (RemoteException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
