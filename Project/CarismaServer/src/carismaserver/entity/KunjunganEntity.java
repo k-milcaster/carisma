@@ -198,6 +198,30 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             }
         }
     }
-
-    
+	
+	@Override
+    public String getLastIdKunjungan() throws RemoteException {
+        ui.act.append("Client Execute getLastKunjungan");
+        String idKunjungan = " ";
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement("SELECT MAX(`id_kunjungan`) FROM `kunjungan`");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                idKunjungan = resultSet.getString(1);
+            }         
+            return idKunjungan;
+        } catch (SQLException exception) {
+            ui.act.append("getLastIdKunjungan Error\n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
 }

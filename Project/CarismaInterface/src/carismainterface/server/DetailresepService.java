@@ -13,6 +13,8 @@ public interface DetailresepService extends Remote {
 
     boolean insertDetailresep(Detailresep detailResep) throws RemoteException;
 
+    boolean deleteDetailResep(String idDetailResep) throws RemoteException;
+    
     List<Detailresep> getDetailresep(String idResep) throws RemoteException;
 
     List<Detailresep> getDetailresepByPasien(String idPasien) throws RemoteException;

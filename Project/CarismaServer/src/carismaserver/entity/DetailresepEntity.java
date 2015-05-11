@@ -158,5 +158,28 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
             }
         }
     }
- 
+	
+	@Override
+    public boolean deleteDetailResep(String idDetailResep) throws RemoteException {
+        ui.act.append("Client Execute deleteDetailResep (" + idDetailResep + " \n");
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "DELETE FROM detailresep WHERE id_detailresep = ?");
+            statement.setString(1, idDetailResep);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            ui.act.append("deleteDetailResep Error \n");
+            ui.act.append(e.toString());
+            return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
 }
