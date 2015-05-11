@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -34,9 +35,12 @@ public class KasirController {
         this.ui = ui;
     }
 
-    public void showBiaya(String idKunjungan) throws RemoteException {
+    public DefaultTableModel showBiaya(String idKunjungan) throws RemoteException {
         Kunjungan target = kunjunganService.getKunjungan(idKunjungan);
         DefaultTableModel model = new DefaultTableModel();
+        if (target == null) {
+            return model;
+        }        
         model.addColumn("No.");
         model.addColumn("Nama");
         model.addColumn("Harga satuan");
@@ -64,9 +68,17 @@ public class KasirController {
         }
         ui.jTable1.setModel(model);
         ui.fieldTotal.setText(total + "");
+        return model;
     }
 
-    public void cetak() throws FileNotFoundException {
+    public int sumTotal(TableModel model){
+        int sum = 0;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            sum = sum + Integer.parseInt(model.getValueAt(i, 3).toString());
+        }
+        return sum;
+    }
+    public boolean cetak() throws FileNotFoundException {
         String FILE = this.printTo + "test" + this.fileName;
 
         Document document = new Document();
@@ -94,12 +106,14 @@ public class KasirController {
             document.add(space);
             document.add(table);
             document.add(total);
-            document.close();
-            JOptionPane.showMessageDialog(null, "Saved");
+            document.close();            
+            return true;            
         } catch (DocumentException ex) {
             Logger.getLogger(KasirController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } catch (IOException ex) {
             Logger.getLogger(KasirController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 

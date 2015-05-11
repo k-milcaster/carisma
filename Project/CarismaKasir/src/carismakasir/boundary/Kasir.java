@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import carismakasir.controller.KasirController;
 import java.io.FileNotFoundException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -259,16 +260,28 @@ public class Kasir extends javax.swing.JFrame {
 
         } else {
             try {
-                control.showBiaya(fieldKunjungan.getText());
+                jTable1.setModel(control.showBiaya(fieldKunjungan.getText()));
+                if (jTable1.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "Id Tidak ditemukan");
+                }
+                else {
+                    fieldTotal.setText(control.sumTotal(jTable1.getModel())+"");
+                }
             } catch (RemoteException ex) {
                 Logger.getLogger(Kasir.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Id Tidak ditemukan");
             }
         }
     }//GEN-LAST:event_buttonShowActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            control.cetak();
+            boolean cetakDone = control.cetak();
+            if (cetakDone) {
+                JOptionPane.showMessageDialog(null, "Cetak berhasil");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nominal pembayaran salah");
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Kasir.class.getName()).log(Level.SEVERE, null, ex);
         }
