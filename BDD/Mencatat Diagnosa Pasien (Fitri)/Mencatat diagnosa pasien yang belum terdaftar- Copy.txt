@@ -1,5 +1,5 @@
-Feature : Mencatat rekam medis pasien yang belum terdaftar
-Skenario : Mencatat diagnosa pasien
+Story Card : Mencatat diagnosa pasien
+Skenario : Mencatat diagnosa pasien yang belum terdaftar
 
 Given Saya masuk pada antarmuka Rekam Medis Pasien
 When Saya melihat Id Saya, Nama Saya, dan Id Rekam Medis ditampilkan di form Rekam Medis

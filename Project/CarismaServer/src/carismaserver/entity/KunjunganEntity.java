@@ -22,7 +22,6 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
     public Main ui;
 
     public KunjunganEntity() throws RemoteException {
-
     }
 
     public KunjunganEntity(Main ui) throws RemoteException {
@@ -36,8 +35,7 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO kunjungan (id_kunjungan, pasien_id_pasien, rekammedik_id_rekammedik, transaksijualobat_id_transaksijual, pasien_kamar_id_peminjaman, tanggaljam_kunjungan, biaya_kunjungan) values (?,?,?,?,?,?,?)"
-            );
+                    "INSERT INTO kunjungan (id_kunjungan, pasien_id_pasien, rekammedik_id_rekammedik, transaksijualobat_id_transaksijual, pasien_kamar_id_peminjaman, tanggaljam_kunjungan, biaya_kunjungan) values (?,?,?,?,?,?,?)");
             statement.setString(1, kunjungan.getIdKunjungan());
             statement.setString(2, kunjungan.getPasienIdPasien());
             statement.setString(3, kunjungan.getRekammedikIdRekammedik());
@@ -57,7 +55,30 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
                 try {
                     statement.close();
                 } catch (SQLException exception) {
+                }
+            }
+        }
+    }
 
+    @Override
+    public boolean deleteKunjungan(String idKunjungan) throws RemoteException {
+        ui.act.append("Client Execute deleteKunjungan (" + idKunjungan + " \n");
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "DELETE FROM kunjungan WHERE id_kunjungan = ?");
+            statement.setString(1, idKunjungan);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            ui.act.append("deleteKunjungan Error \n");
+            ui.act.append(e.toString());
+            return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
                 }
             }
         }
@@ -183,7 +204,7 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 idKunjungan = resultSet.getString(1);
-            }         
+            }
             return idKunjungan;
         } catch (SQLException exception) {
             ui.act.append("getLastIdKunjungan Error\n");
@@ -198,6 +219,7 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             }
         }
     }
+<<<<<<< HEAD
 	
 	@Override
     public String getLastIdKunjungan() throws RemoteException {
@@ -224,4 +246,6 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             }
         }
     }
+=======
+>>>>>>> 8e33532999d5110f8aad2328849d582acb7cd2fd
 }

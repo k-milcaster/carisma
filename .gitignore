@@ -1,2 +1,3 @@
 *.class
 Project/CarismaInterface/build/classes/carismainterface/server/DokterService.class
+Project/CarismaServer/src/carismaserver/entity/KunjunganEntity.java

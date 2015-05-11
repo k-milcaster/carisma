@@ -1,5 +1,5 @@
-Feature : Mencatat rekam medis pasien yang sedang diperiksa
-Skenario : Mencatat diagnosa pasien
+Story Card : Mencatat Diagnosa pasien
+Skenario : Mencatat Diagnosa Pasien yang sudah terdaftar
 
 Given Saya masuk pada antarmuka Rekam Medis Pasien
 When Saya memasukkan ID Pasien
