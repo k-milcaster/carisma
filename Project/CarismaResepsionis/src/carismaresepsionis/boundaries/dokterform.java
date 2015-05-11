@@ -108,7 +108,6 @@ public class dokterform extends javax.swing.JFrame {
         TglLahirDokter = new javax.swing.JTextField();
         JenisKelaminDokter = new javax.swing.JTextField();
         TempatLahirDokter = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -343,10 +342,6 @@ public class dokterform extends javax.swing.JFrame {
         getContentPane().add(jPanel4);
         jPanel4.setBounds(570, 180, 580, 460);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismajadwaldokter/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 0, 0);
-
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         jLabel4.setText("jLabel4");
         getContentPane().add(jLabel4);
@@ -463,7 +458,6 @@ public class dokterform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
