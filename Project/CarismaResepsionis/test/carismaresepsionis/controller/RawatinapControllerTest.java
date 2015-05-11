@@ -55,7 +55,7 @@ public class RawatinapControllerTest {
     @Test
     public void testGetNamaPasien() throws Exception {
         System.out.println("getNamaPasien");
-        String namaPasien = "Raisa";
+        String namaPasien = "Raisa Andriana";
         String idPasien = "PAS000001";
         ClientSocket client = new ClientSocket ();
         //List<Pasien> list = new ArrayList<Pasien>();
@@ -124,7 +124,7 @@ public class RawatinapControllerTest {
     @Test
     public void testKamarKosong() {
         System.out.println("kamarKosong");
-        String parameterA = "";
+        String parameterA = "kosong";
         RawatinapController instance = null;
         String expResult = "kosong";
         String result = instance.kamarKosong(parameterA);
