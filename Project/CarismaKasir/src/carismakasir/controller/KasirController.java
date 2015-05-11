@@ -40,7 +40,7 @@ public class KasirController {
         DefaultTableModel model = new DefaultTableModel();
         if (target == null) {
             return model;
-        }        
+        }
         model.addColumn("No.");
         model.addColumn("Nama");
         model.addColumn("Harga satuan");
@@ -66,18 +66,26 @@ public class KasirController {
                 total = total + Integer.parseInt(biayaObat.get(i).get(3).toString());
             }
         }
-        ui.jTable1.setModel(model);
-        ui.fieldTotal.setText(total + "");
         return model;
     }
 
-    public int sumTotal(TableModel model){
+    public int sumTotal(TableModel model) {
         int sum = 0;
         for (int i = 0; i < model.getRowCount(); i++) {
-            sum = sum + Integer.parseInt(model.getValueAt(i, 3).toString());
+            sum = sum + Integer.parseInt(model.getValueAt(i, 4).toString());
         }
         return sum;
     }
+
+    public boolean doBayar(int pembayaran, int biaya) throws FileNotFoundException {
+        if (pembayaran >= biaya) {            
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     public boolean cetak() throws FileNotFoundException {
         String FILE = this.printTo + "test" + this.fileName;
 
@@ -106,8 +114,8 @@ public class KasirController {
             document.add(space);
             document.add(table);
             document.add(total);
-            document.close();            
-            return true;            
+            document.close();
+            return true;
         } catch (DocumentException ex) {
             Logger.getLogger(KasirController.class.getName()).log(Level.SEVERE, null, ex);
             return false;
