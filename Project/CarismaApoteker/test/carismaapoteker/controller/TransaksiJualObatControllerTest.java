@@ -4,7 +4,6 @@
  */
 package carismaapoteker.controller;
 
-import carismaapoteker.boundaries.TabelObat;
 import javax.swing.table.DefaultTableModel;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,6 +17,7 @@ import static org.junit.Assert.*;
  * @author ASUS
  */
 public class TransaksiJualObatControllerTest {
+    ClientSocket client;
     
     public TransaksiJualObatControllerTest() {
     }
@@ -43,14 +43,15 @@ public class TransaksiJualObatControllerTest {
      */
     @Test
     public void testInsertTransaksijualobat() throws Exception {
+        client = new ClientSocket();
         System.out.println("insertTransaksijualobat");
-        String idTransaksijual = "";
-        String dateTransaksijual = "";
-        String keterangan = "";
-        TransaksiJualObatController instance = null;
-        instance.insertTransaksijualobat(idTransaksijual, dateTransaksijual, keterangan);
+        String idTransaksijual = "oooooo";
+        String dateTransaksijual = "2015-05-11";
+        String keterangan = "lalalala";
+        TransaksiJualObatController instance = new TransaksiJualObatController(client);
+        boolean result = instance.insertTransaksijualobat(idTransaksijual, dateTransaksijual, keterangan);
+        assertTrue(result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -58,14 +59,16 @@ public class TransaksiJualObatControllerTest {
      */
     @Test
     public void testInsertDetailtransaksijualobat() throws Exception {
+        client = new ClientSocket();
         System.out.println("insertDetailtransaksijualobat");
-        String idTransaksi = "";
-        int idObat = 0;
-        int qty = 0;
-        TransaksiJualObatController instance = null;
-        instance.insertDetailtransaksijualobat(idTransaksi, idObat, qty);
+        String idTransaksi = "trans01";
+        int idObat = 1;
+        int qty = 50;
+        TransaksiJualObatController instance = new TransaksiJualObatController(client) ;
+        boolean result = instance.insertDetailtransaksijualobat(idTransaksi, idObat, qty);
+        assertTrue(result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+   
     }
 
     /**
@@ -73,13 +76,68 @@ public class TransaksiJualObatControllerTest {
      */
     @Test
     public void testGetTableObat() throws Exception {
+        client = new ClientSocket();
         System.out.println("getTableObat");
-        TabelObat b = null;
-        TransaksiJualObatController instance = null;
-        DefaultTableModel expResult = null;
-        DefaultTableModel result = instance.getTableObat(b);
-        assertEquals(expResult, result);
+        TransaksiJualObatController instance = new TransaksiJualObatController(client);
+        DefaultTableModel result = instance.getTableObat();
+        boolean resultCondition = false;
+        System.out.println(result.getRowCount());
+        if (result.getRowCount() >= 1){
+            resultCondition = true;
+        }
+        assertTrue(resultCondition);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+    }
+
+    /**
+     * Test of cekStok method, of class TransaksiJualObatController.
+     */
+    @Test
+    public void testCekStok() throws Exception {
+        client = new ClientSocket();
+        System.out.println("cekStok");
+        int idObat = 15;
+        TransaksiJualObatController instance = new TransaksiJualObatController(client);
+        int expResult = 50;
+        int result = instance.cekStok(idObat);
+        assertEquals(expResult, result);
+        
+    }
+
+    /**
+     * Test of namaPegawai method, of class TransaksiJualObatController.
+     */
+    @Test
+    public void testNamaPegawai() throws Exception {
+        client = new ClientSocket();
+        System.out.println("namaPegawai");
+        String username = "apotek1";
+        TransaksiJualObatController instance = new TransaksiJualObatController(client);
+        String[] expResult = new String [2];
+        expResult[0] = "Sinta";
+        expResult[1] = null;
+        String[] result = instance.namaPegawai(username);
+        assertArrayEquals(expResult, result);
+       
+    }
+
+    /**
+     * Test of getObatbyName method, of class TransaksiJualObatController.
+     */
+    @Test
+    public void testGetObatbyName() throws Exception {
+        client = new ClientSocket();
+        System.out.println("getObatbyName");
+        String nama = "Ibuprofen";
+        TransaksiJualObatController instance = new TransaksiJualObatController(client);
+        DefaultTableModel result = instance.getObatbyName(nama);
+        boolean resultCondition = false;
+        System.out.println(result.getRowCount());
+        if (result.getRowCount()>=1){
+            resultCondition = true;
+        }
+        assertTrue(resultCondition);
+        
     }
 }

@@ -1,0 +1,20 @@
+Story Card : Mengelola Penjualan Obat
+Skenario : Mengelola Penjualan Obat jika Field yang Diisi Lengkap
+
+
+namaPegawai(username) : String [] namaApoteker							| assertEquals(expectedNamaApoteker, resultNamaApoteker)
+getIdNamaPegawai(username) : String [] pegawaiInfo						| assertEquals(expectedIdNamaPegawai, resultIdNamaPegawai)
+insertTransaksijualobat(idTransaksijual, dateTransaksijual, keterangan) : boolean insert	| assertTrue(resultCondition)	
+insertDetailtransaksijualobat(idTransaksi, idObat, qty) : boolean insertDetail			| assertTrue(resultCondition)
+getTableObat() : DefaultTableModel tabel obat							| aseertEquals(expectedTableObat, resultTableObat)
+getObat() : obat										| assertEquals(expectedObat, resultObat)
+cekStok(idObat) : stok										| assertEquals(expectedStok, result Stok)
+cekStokObat(idObat) : qty									| assertEquals(expectedStokObat, result StokObat)
+getObatbyName(nama) : DefaultTableModel tabel obat						| assertEquals(expectedObatbyName, result ObatbyName)
+getObatbyName(namaobat) : List <obat>	nama obat						| assertEquals(expectedObatbyName, result ObatbyName)
+JOptionPane("Data Transaksi Penjualan Tersimpan")						| -
+
+
+
+
+

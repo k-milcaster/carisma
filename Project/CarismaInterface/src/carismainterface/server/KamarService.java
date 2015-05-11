@@ -25,4 +25,6 @@ public interface KamarService extends Remote {
     Kamar getKamar(String idkamar) throws RemoteException;
 
     List<Kamar> getKamar() throws RemoteException;
+    
+    String[] getNamaKelasKamarbyIdpasien(String idpasien) throws RemoteException;
 }
