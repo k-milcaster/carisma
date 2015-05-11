@@ -94,7 +94,6 @@ public class dokterform extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         NamaDokter = new javax.swing.JTextField();
         NamaPoli = new javax.swing.JTextField();
-        TempatLahirDokter = new javax.swing.JTextField();
         AlamatDokter = new javax.swing.JTextField();
         Hp1Dokter = new javax.swing.JTextField();
         TelpDokter = new javax.swing.JTextField();
@@ -108,6 +107,7 @@ public class dokterform extends javax.swing.JFrame {
         IdDokter = new javax.swing.JTextField();
         TglLahirDokter = new javax.swing.JTextField();
         JenisKelaminDokter = new javax.swing.JTextField();
+        TempatLahirDokter = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -269,14 +269,6 @@ public class dokterform extends javax.swing.JFrame {
         NamaDokter.setBounds(110, 90, 271, 30);
         jPanel4.add(NamaPoli);
         NamaPoli.setBounds(110, 130, 271, 30);
-
-        TempatLahirDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TempatLahirDokterActionPerformed(evt);
-            }
-        });
-        jPanel4.add(TempatLahirDokter);
-        TempatLahirDokter.setBounds(110, 170, 271, 30);
         jPanel4.add(AlamatDokter);
         AlamatDokter.setBounds(110, 300, 272, 30);
         jPanel4.add(Hp1Dokter);
@@ -335,10 +327,18 @@ public class dokterform extends javax.swing.JFrame {
         jLabel15.setBounds(20, 60, 70, 14);
         jPanel4.add(IdDokter);
         IdDokter.setBounds(110, 52, 270, 30);
+
+        TglLahirDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TglLahirDokterActionPerformed(evt);
+            }
+        });
         jPanel4.add(TglLahirDokter);
         TglLahirDokter.setBounds(110, 210, 110, 30);
         jPanel4.add(JenisKelaminDokter);
         JenisKelaminDokter.setBounds(110, 250, 50, 30);
+        jPanel4.add(TempatLahirDokter);
+        TempatLahirDokter.setBounds(110, 170, 270, 30);
 
         getContentPane().add(jPanel4);
         jPanel4.setBounds(570, 180, 580, 460);
@@ -433,6 +433,10 @@ public class dokterform extends javax.swing.JFrame {
             Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_LihatJadwalDokterActionPerformed
+
+    private void TglLahirDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TglLahirDokterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TglLahirDokterActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AlamatDokter;
