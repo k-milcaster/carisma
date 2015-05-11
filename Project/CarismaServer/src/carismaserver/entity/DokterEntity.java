@@ -264,7 +264,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                 }
             }
         }
-    }
+    }}
 
 
-}
+
