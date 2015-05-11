@@ -87,8 +87,9 @@ public class UserEntityTest {
         user.setLastlogin(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         user.setRole("administrator");
         UserEntity instance = new UserEntity();
-        boolean expectedCondition = instance.insertUser(user);
-        assertTrue(expectedCondition);
+        boolean expectedCondition = true;
+        boolean resultCondition = instance.insertUser(user);
+        assertEquals(expectedCondition, resultCondition);
     }
 
     /**
@@ -103,8 +104,9 @@ public class UserEntityTest {
         user.setPassword("server");
         user.setRole("administrator");
         UserEntity instance = new UserEntity();
-        boolean expectedCondition = instance.updateUser(user);
-        assertTrue(expectedCondition);
+        boolean expectedCondition = true;
+        boolean resultCondition = instance.updateUser(user);
+        assertEquals(expectedCondition, resultCondition);
     }
 
     /**
@@ -115,8 +117,9 @@ public class UserEntityTest {
         System.out.println("deleteUser");
         User user = new User(7);
         UserEntity instance = new UserEntity();
-        boolean expectedCondition = instance.deleteUser(user);
-        assertTrue(expectedCondition);
+        boolean expectedCondition = true;
+        boolean resultCondition = instance.deleteUser(user);
+        assertEquals(expectedCondition, resultCondition);
     }
 
     /**
