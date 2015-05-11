@@ -110,12 +110,6 @@ public class DataDokterController {
         return model;
     }
    
-    public void getKelaminDokter(dokterform ui)throws RemoteException{
-        List<Dokter> list = new ArrayList<Dokter>();
-        list = dokterService.getDokter();
-        for (int i = 0; i < list.size(); i++) {            
-            ui.KelaminDokter.addItem(list.get(i).getKelaminDokter());
-        }               
-    }
+    
 }
  
