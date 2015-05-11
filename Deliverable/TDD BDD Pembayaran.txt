@@ -8,7 +8,7 @@ getBiayaObat(idTransaksiJualObat):ArrayList<ArrayList> biayaObat	| assertEquals(
 setTableModel(Model)							| -
 setTotalBiaya()								| -
 doBayar(pembayaran,biaya):boolean					| assertTrue(resultCondition);
-cetak():boolean								| assertTrue(resultCondition);
+cetak():boolean								| -
 ____________________________________________________________________________________________________________________________________
 Story Card : Pembayaran pasien
 Scenario : Pembayaran pasien jika id kunjungan tidak ditemukan

@@ -206,32 +206,4 @@ public class DataDokterControllerTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of getNamaDokter method, of class DataDokterController.
-     */
-    @Test
-    public void testGetNamaDokter_dokterform() throws Exception {
-        System.out.println("getNamaDokter");
-        dokterform ui = null;
-        DataDokterController instance = null;
-        DefaultTableModel expResult = null;
-        DefaultTableModel result = instance.getNamaDokter(ui);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getKelaminDokter method, of class DataDokterController.
-     */
-    @Test
-    public void testGetKelaminDokter_dokterform() throws Exception {
-        System.out.println("getKelaminDokter");
-        dokterform ui = null;
-        DataDokterController instance = null;
-        instance.getKelaminDokter(ui);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 }
