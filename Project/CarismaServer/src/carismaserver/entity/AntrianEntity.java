@@ -29,7 +29,7 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
     }
 
     @Override
-    public void insertAntrian(Antrian antrian) throws RemoteException {
+    public boolean insertAntrian(Antrian antrian) throws RemoteException {
         ui.act.append("Client Execute insertAntrian " + antrian.getIdAntrian() + "\n");
 
         PreparedStatement statement = null;
@@ -46,10 +46,12 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
             statement.setString(7, antrian.getHadir());
             System.out.println(statement);
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertUser Error \n");
             ui.act.append(exception.toString());
             exception.printStackTrace();
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -62,7 +64,7 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
     }
 
     @Override
-    public void deleteAntrian(String antrian) throws RemoteException {
+    public boolean deleteAntrian(String antrian) throws RemoteException {
         ui.act.append("Client Execute deleteAntrian (" + antrian + ") \n");
         PreparedStatement statement = null;
         try {
@@ -70,9 +72,11 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
                     "DELETE FROM antrian WHERE id_antrian = ?");
             statement.setString(1, antrian);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteAntrian Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -158,7 +162,7 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
     }
 
     @Override
-    public void antrianHadir(String antrian) throws RemoteException {
+    public boolean antrianHadir(String antrian) throws RemoteException {
         ui.act.append("Client Execute antrianHadir(" + antrian + ") \n");
 
         PreparedStatement statement = null;
@@ -169,9 +173,11 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
             statement.setInt(1, 1);
             statement.setString(1, antrian);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("antrianHadir Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

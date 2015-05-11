@@ -29,7 +29,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
     }
 
     @Override
-    public void insertPasien(Pasien pasien) throws RemoteException {
+    public boolean insertPasien(Pasien pasien) throws RemoteException {
         ui.act.append("Client Execute insertPasien " + pasien + "\n");
 
         PreparedStatement statement = null;
@@ -54,9 +54,11 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             statement.setInt(15, pasien.getTinggiPasien());
             statement.setString(16, pasien.getRegdatePasien());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertPasien Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -69,7 +71,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
     }
 
     @Override
-    public void updatePasien(Pasien pasien) throws RemoteException {
+    public boolean updatePasien(Pasien pasien) throws RemoteException {
         ui.act.append("Client Execute updatePasien " + pasien + "\n");
 
         PreparedStatement statement = null;
@@ -94,9 +96,11 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             statement.setString(15, pasien.getRegdatePasien());
             statement.setString(16, pasien.getIdPasien());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("UpdatePasien Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -109,7 +113,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
     }
 
     @Override
-    public void deletePasien(String pasien) throws RemoteException {
+    public boolean deletePasien(String pasien) throws RemoteException {
         ui.act.append("Client Execute deletePasien (" + pasien + ") \n");
         PreparedStatement statement = null;
         try {
@@ -117,9 +121,11 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
                     "DELETE FROM pasien WHERE id_pasien = ?");
             statement.setString(1, pasien);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deletePasien Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -255,6 +261,53 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             return list;
         } catch (SQLException exception) {
             ui.act.append("getPasienListByName Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<Pasien> getPasienRawatinap() throws RemoteException {
+        ui.act.append("Client Execute getPasienRawatinapList  \n");
+
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT P.* FROM `pasien` AS P , `kunjungan` AS K , `pasien_kamar` AS PK "
+                            + "WHERE P.id_pasien = K.pasien_id_pasien AND K.pasien_kamar_id_peminjaman = PK.id_peminjaman");
+            ResultSet result = statement.executeQuery();
+            List<Pasien> list = new ArrayList<Pasien>();
+            Pasien pasi = null;
+            while (result.next()) {
+                pasi = new Pasien();
+                pasi.setIdPasien(result.getString("id_pasien"));
+                pasi.setKotaIdKota(result.getString("kota_id_kota"));
+                pasi.setUserIdUser(result.getString("user_id_user"));
+                pasi.setNamaPasien((result.getString("nama_pasien")));
+                pasi.setAlamatPasien(result.getString("alamat_pasien"));
+                pasi.setKartuidPasien(result.getString("kartuid_pasien"));
+                pasi.setNokartuidPasien(result.getString("nokartuid_pasien"));
+                pasi.setTelpPasien(result.getString("telp_pasien"));
+                pasi.setHpPasien(result.getString("hp_pasien"));
+                pasi.setTempatlahirPasien(result.getString("tempatlahir_pasien"));
+                pasi.setTgllahirPasien(result.getString("tgllahir_pasien"));
+                pasi.setKelaminPasien(result.getString("kelamin_pasien"));
+                pasi.setDarahPasien(result.getString("darah_pasien"));
+                pasi.setBeratPasien(result.getInt("berat_pasien"));
+                pasi.setTinggiPasien(result.getInt("tinggi_pasien"));
+                pasi.setRegdatePasien(result.getString("regdate_pasien"));
+                list.add(pasi);
+            }
+            return list;
+        } catch (SQLException exception) {
+            ui.act.append("getPasienList Error \n");
             ui.act.append(exception.toString());
             return null;
         } finally {

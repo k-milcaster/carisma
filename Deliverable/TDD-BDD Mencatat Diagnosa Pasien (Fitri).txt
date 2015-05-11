@@ -1,0 +1,40 @@
+Story Card : Mencatat Diagnosa Pasien
+Skenario   : Mencatat diagnosa pasien yang sudah terdaftar (berhasil)
+
+Controller -> getIdNamaDokter(username) : String[] dokterInfor							| assertArrayEquals(expectedDokterInfor, resultDokterInfor)
+Entity	   -> getIdNamaDokter(username) : String[] dokterInfor							| assertArrayEquals(expectedDokterInfor, resultDokterInfor)
+Controller -> getIdRekamMedis() : String idRekamMedisFix							| assertEquals(expectedIdRekamMedis, resultIdRekamMedis)
+Entity	   -> getLastIdRekamMedis() : String lastIdRekamMedis							| assertEquals(expectedLastIdRekamMedis, resultLastIdRekamMedis)
+Controller -> cekIdPasien(idPasien) : boolean registered							| assertTrue(resultCheck)
+Entity     -> getIdPasien(idPasien) : String idPasien								| assertEquals(expectedIdPasien, resultIdPasien)
+Controller -> getIdResep() : String idResepFix									| assertEquals(expectedIdResep, resultIdResep)
+Entity     -> getLastIdResep() : String lastIdResep								| assertEquals(expectedLastIdResep, resultLastIdResep)
+Controller -> insertResep(idResep, keterangan) : boolean inserted						| assertTrue(resultInserted)
+Entity     -> insertResep(idResep, keterangan) : boolean inserted						| assertTrue(resultInserted)
+Controller -> getIdDetailResep() : String idDetailResep								| assertEquals(expectedIdDetailResep, resultIdDetailResep)
+Entity     -> getLastIdDetailResep() : String lastIdDetailResep							| assertEquals(expectedLastIdDetailResep, resultLastIdDetailResep)
+Controller -> insertDetailResep(idDetailResep, idResup, namaObat, quantity, aturanPakai) : boolean inserted	| assertTrue(resultInserted)
+Entity     -> insertDetailResep(DetailResep) : boolean inserted							| assertTrue(resultInserted)
+showMessageDialog("Data Resep Telah Tersimpan")									| -
+Controller -> insertRekamMedisPenyakit(idRekamMedis, idPenyakit) : boolean inserted				| assertTrue(resultInserted)
+Entity     -> insertRekamMedisPenyakit(RekamMedikPenyakit) : boolean inserted					| assertTrue(resultInserted)
+Controller -> insertRekamMedis(idRekamMedis, idDokter, idPasien, tglRekamMedis, keluhan, 
+		pemeriksaan, terapi, alergiObat, kesimpulan, kondisiPasien, idResep) : boolean inserted		| assertTrue(resultInserted)
+Entity     -> insertRekamMedis(rekamMedis) : boolean inserted							| assertTrue(resultInserted)
+Controller -> getIdKunjungan() : String idKunjunganFix								| assertEquals(expectedIdKunjungan, resultIdKunjungan)
+Entity     -> getLastIdKunjungan() : String lastidKunjungan							| assertEquals(expectedLastIdKunjungan, resultLastIdKunjungan)
+Controller -> insertKunjungan(idKunjungan, idPasien, idRekamMedik, tglKunjungan, biaya) : boolean inserted	| assertTrue(resultInserted)
+Entity     -> insertKunjungan(kunjungan) : boolean inserted							| assertTrue(resultInserted)
+JoptionPane("Data Rekam Medis Telah Tersimpan")									| - 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Story Card : Mencatat Diagnosa Pasien
+Skenario   : Mencatat diagnosa pasien yang belum terdaftar
+
+Controller -> getIdNamaDokter(username) : String[] dokterInfor							| assertArrayEquals(expectedDokterInfor, resultDokterInfor)
+Entity	   -> getIdNamaDokter(username) : String[] dokterInfor							| assertArrayEquals(expectedDokterInfor, resultDokterInfor)
+Controller -> getIdRekamMedis() : String idRekamMedisFix							| assertEquals(expectedIdRekamMedis, resultIdRekamMedis)
+Entity	   -> getLastIdRekamMedis() : String lastIdRekamMedis							| assertEquals(expectedLastIdRekamMedis, resultLastIdRekamMedis)
+Controller -> cekIdPasien(idPasien) : boolean registered							| assertFalse(resultCheck)
+Entity     -> getIdPasien(idPasien) : boolean registered							| assertFalse(resultCheck)
+showMessageDialog("Id Pasien "xxxxxx" tidak ditemukan/ belum terdaftar")						| -

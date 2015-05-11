@@ -167,18 +167,18 @@ public class regispasiencontrollerTest {
     /**
      * Test of ambilidkota method, of class regispasiencontroller.
      */
-    @Test
-    public void testAmbilidkota() throws RemoteException, NotBoundException {
-        System.out.println("ambilidkota");
-        int urutan = 5;
-        ClientSocket client = new ClientSocket();
-        regispasiencontroller instance = new regispasiencontroller(client);
-        int expResult = 4;
-        int result = instance.ambilidkota(urutan);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testAmbilidkota() throws RemoteException, NotBoundException {
+//        System.out.println("ambilidkota");
+//        int urutan = 5;
+//        ClientSocket client = new ClientSocket();
+//        regispasiencontroller instance = new regispasiencontroller(client);
+//        int expResult = 4;
+//        int result = instance.ambilidkota(urutan);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//       // fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of getTabelPasien method, of class regispasiencontroller.

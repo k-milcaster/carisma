@@ -36,7 +36,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
     }
     
     @Override
-    public void insertKamar(Kamar kamar) throws RemoteException {
+    public boolean insertKamar(Kamar kamar) throws RemoteException {
         ui.act.append("Client Execute insertKamar " + kamar.getIdKamar()+ "\n");
 
         PreparedStatement statement = null;
@@ -51,9 +51,11 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
             statement.setString(5, kamar.getFasilitasKamar());
             statement.setInt(6, kamar.getTarif());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertKamar Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -66,7 +68,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
     }
 
     @Override
-    public void updateKamar(Kamar kamar) throws RemoteException {
+    public boolean updateKamar(Kamar kamar) throws RemoteException {
         ui.act.append("Client Execute updateKamar(" + kamar.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -82,10 +84,11 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
             statement.setString(4, kamar.getFasilitasKamar());
             statement.setInt(5, kamar.getTarif());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateKamar Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -97,7 +100,7 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
     }
 
     @Override
-    public void deleteKamar(String idkamar) throws RemoteException {
+    public boolean deleteKamar(String idkamar) throws RemoteException {
         ui.act.append("Client Execute deleteKamar (" + idkamar + ") \n");
         PreparedStatement statement = null;
         try {
@@ -105,9 +108,11 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
                     "DELETE FROM kamar WHERE id_kamar = ?");
             statement.setString(1, idkamar);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteKamar Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -180,6 +185,41 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
 
         } catch (SQLException exception) {
             ui.act.append("getKamarList Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+    
+    //buundo kalo menurutku harusnya per pasien di klik baru query jalan, kalo salah bilang ya
+    @Override
+    public String[] getNamaKelasKamarbyIdpasien(String idpasien) {
+        ui.act.append("Client Execute getNamaKelasKamarList \n");
+
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT KA.nama_kamar , KA.kelas FROM `kamar` AS KA, `pasien_kamar` AS PK, `kunjungan` AS K "
+                    + "WHERE KA.id_kamar = PK.kamar_id_kamar AND K.pasien_kamar_id_peminjaman = PK.id_peminjaman AND K.pasien_id_pasien = '"+idpasien+"'");
+
+            String[] kamarInfo = new String[2];
+
+            while (result.next()) {
+                kamarInfo[0] = result.getString(1);
+                kamarInfo[1] = result.getString(2);
+            }
+            result.close();
+            return kamarInfo;
+
+        } catch (SQLException exception) {
+            ui.act.append("getNamaKelasKamarList Error \n");
             ui.act.append(exception.toString());
             return null;
         } finally {

@@ -14,5 +14,12 @@ class Penyaki_Model extends Model {
         $statement->execute(array("penyakit" => $namapenyakit));
         return $statement->fetchAll();
     }
+    
+    function getgrouppedpenyakit($groupped) {
+        $statement = $this->db->prepare("SELECT nama_penyakit , deskripsi_penyakit FROM penyakit "
+                . "WHERE nama_penyakit = :penyakit");
+        $statement->execute(array("penyakit" => $groupped));
+        return $statement->fetchAll();
+    }
 
 }

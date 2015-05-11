@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface JadwalpegawaiService extends Remote {
 
-    void insertJadwalpegawai(Jadwalpegawai jadwalpegawai) throws RemoteException;
+    boolean insertJadwalpegawai(Jadwalpegawai jadwalpegawai) throws RemoteException;
 
-    void updateJadwalpegawai(Jadwalpegawai jadwalpegawai) throws RemoteException;
+    boolean updateJadwalpegawai(Jadwalpegawai jadwalpegawai) throws RemoteException;
 
-    void deleteJadwalpegawai(String idjadwalpegawai) throws RemoteException;
+    boolean deleteJadwalpegawai(String idjadwalpegawai) throws RemoteException;
 
     Jadwalpegawai getJadwalpegawai(String idjadwalpegawai) throws RemoteException;
 

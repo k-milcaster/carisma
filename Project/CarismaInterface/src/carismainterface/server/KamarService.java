@@ -16,13 +16,15 @@ import java.util.List;
  * @author kepoterz
  */
 public interface KamarService extends Remote {
-    void insertKamar(Kamar kamar) throws RemoteException;
+    boolean insertKamar(Kamar kamar) throws RemoteException;
 
-    void updateKamar(Kamar kamar) throws RemoteException;
+    boolean updateKamar(Kamar kamar) throws RemoteException;
 
-    void deleteKamar(String idkamar) throws RemoteException;
+    boolean deleteKamar(String idkamar) throws RemoteException;
 
     Kamar getKamar(String idkamar) throws RemoteException;
 
     List<Kamar> getKamar() throws RemoteException;
+    
+    String[] getNamaKelasKamarbyIdpasien(String idpasien) throws RemoteException;
 }

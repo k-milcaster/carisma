@@ -55,7 +55,7 @@ public class RawatinapController {
         model.addColumn("Tarif Kamar");
         for (int i = 0; i < list.size(); i++) {
 
-            model.addRow(new Object[]{list.get(i).getNamaKamar(), list.get(i).getKelas(), list.get(i).getTarif()});
+            
 
             model.addRow(new Object[]{list.get(i).getIdKamar(), list.get(i).getNamaKamar(), list.get(i).getKelas(), 
                 list.get(i).getTarif()});

@@ -15,6 +15,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import carismaapoteker.boundaries.TabelObat;
+import carismainterface.server.PegawaiService;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,57 +23,95 @@ import javax.swing.table.DefaultTableModel;
  * @author Sinta Eka Lestari
  */
 public class TransaksiJualObatController {
+
     private TransaksijualobatService transaksijualobat;
     private DetailtransaksijualobatService detailtransaksijual;
     private ObatService obatService;
-    
-    
-    public TransaksiJualObatController (ClientSocket client) throws RemoteException{
-        Transaksijualobat trans = new Transaksijualobat();
+    private PegawaiService pegawaiService;
+
+    public TransaksiJualObatController(ClientSocket client) throws RemoteException {
+       // Transaksijualobat trans = new Transaksijualobat();
         this.transaksijualobat = client.getTransaksijualobatService();
         obatService = client.getObatService();
-    }  
-    public void insertTransaksijualobat (String idTransaksijual , String dateTransaksijual, String keterangan) throws RemoteException{
+        pegawaiService = client.getPegawaiService();
+    }
+
+    public boolean insertTransaksijualobat(String idTransaksijual, String dateTransaksijual, String keterangan) throws RemoteException {
+        boolean insert = false;
         Transaksijualobat transaksijual = new Transaksijualobat();
         transaksijual.setIdTransaksijual(idTransaksijual);
         transaksijual.setDateTransaksijual(dateTransaksijual);
         transaksijual.setKeterangan(keterangan);
-        transaksijualobat.insertTransaksijualobat(transaksijual);
-   
+        insert = transaksijualobat.insertTransaksijualobat(transaksijual);
+        return insert;
+
     }
-    public void insertDetailtransaksijualobat(String idTransaksi, int idObat, int qty) throws RemoteException {
+
+    public boolean insertDetailtransaksijualobat(String idTransaksi, int idObat, int qty) throws RemoteException {
+        boolean insertDetail = false;
         Detailtransaksijualobat detailtransaksi = new Detailtransaksijualobat();
         detailtransaksi.setTransaksijualobat(idTransaksi);
         detailtransaksi.setObat(idObat);
         detailtransaksi.setQty(qty);
-        detailtransaksijual.insertDetailtransaksijualobat(detailtransaksi);
+        insertDetail = detailtransaksijual.insertDetailtransaksijualobat(detailtransaksi);
         System.out.println("Masuk Insert Detail");
-        
+        return insertDetail;
+
     }
-    public DefaultTableModel getTableObat(TabelObat b) throws RemoteException {
-        List <Obat> list = new ArrayList<Obat>();
+
+    public DefaultTableModel getTableObat() throws RemoteException {
+        List<Obat> list = new ArrayList<Obat>();
         list = obatService.getObat();
         //for (int i = 0; i < list.size(); i++){
-            //b.comboBoxObat.addItem(list.get(i).getNamaObat());
-         DefaultTableModel model = new DefaultTableModel();
-         model.addColumn("Id Obat");
-         model.addColumn("Nama Obat");
-         model.addColumn("Quantity");
-         model.addColumn("Jenis");
-         model.addColumn("Keterangan");
-         model.addColumn("Harga Jual");
-         model.addColumn("Stok Kritis");
-         for (int i = 0; i < list.size(); i++) {
-         model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(),list.get(i).getStokkritisObat()});
-             System.out.println("Lewat");
-         }
-         b.jTableObat.setModel(model);
-         return model;
+        //b.comboBoxObat.addItem(list.get(i).getNamaObat());
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id Obat");
+        model.addColumn("Nama Obat");
+        model.addColumn("Quantity");
+        model.addColumn("Jenis");
+        model.addColumn("Keterangan");
+        model.addColumn("Harga Jual");
+        model.addColumn("Stok Kritis");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(), list.get(i).getStokkritisObat()});
+            System.out.println("Lewat");
         }
+        //b.tableMedicine.setModel(model);
+        return model;
+    }
+    
+    public int cekStok (int idObat) throws RemoteException{
+        int stok = obatService.cekStokObat(idObat);
+        return stok;
+    }
+    public String[] namaPegawai (String username) throws RemoteException{
+        String[] namaApoteker = pegawaiService.getIdNamaPegawai(username);
+        return namaApoteker;
+    }
+     public DefaultTableModel getObatbyName (String nama) throws RemoteException{
+        System.out.println("abcde");
+        List<Obat> list = new ArrayList<Obat>();
+        list = obatService.getObatbyName(nama);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id Obat");
+        model.addColumn("Nama Obat");
+        model.addColumn("Quantity");
+        model.addColumn("Jenis");
+        model.addColumn("Keterangan");
+        model.addColumn("Harga Jual");
+        model.addColumn("Stok Kritis");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(),list.get(i).getStokkritisObat()});
+            System.out.println(model);
         }
+        return model;
         
-    
-    
-    
-    
+    } 
+
+       
+    }
+   
+
+
+
 

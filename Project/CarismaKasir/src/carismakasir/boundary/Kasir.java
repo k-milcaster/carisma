@@ -10,17 +10,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import carismakasir.controller.KasirController;
 import java.io.FileNotFoundException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author User
  */
 public class Kasir extends javax.swing.JFrame {
-
+    
     private ClientSocket client;
     private UserService login;
     private KasirController control;
-
+    
     public Kasir(ClientSocket client, final String username) {
         this.client = client;
         this.login = client.getUserService();
@@ -40,7 +41,7 @@ public class Kasir extends javax.swing.JFrame {
             }
         });
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -143,7 +144,6 @@ public class Kasir extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         jLabel10.setText("Rp");
 
-        jTextField6.setEditable(false);
         jTextField6.setBackground(new java.awt.Color(255, 255, 255));
         jTextField6.setFont(new java.awt.Font("Agency FB", 1, 60)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -256,19 +256,31 @@ public class Kasir extends javax.swing.JFrame {
 
     private void buttonShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowActionPerformed
         if (fieldKunjungan.getText().equalsIgnoreCase("")) {
-
+            
         } else {
             try {
-                control.showBiaya(fieldKunjungan.getText());
+                jTable1.setModel(control.showBiaya(fieldKunjungan.getText()));
+                if (jTable1.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "Id Tidak ditemukan");
+                } else {
+                    fieldTotal.setText(control.sumTotal(jTable1.getModel()) + "");
+                }
             } catch (RemoteException ex) {
                 Logger.getLogger(Kasir.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Id Tidak ditemukan");
             }
         }
     }//GEN-LAST:event_buttonShowActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            control.cetak();
+        try {            
+            boolean pembayaranDone = control.doBayar(Integer.parseInt(jTextField6.getText()), Integer.parseInt(fieldTotal.getText()));
+            if (pembayaranDone) {
+                jTextField7.setText(Integer.parseInt(jTextField6.getText()) - Integer.parseInt(fieldTotal.getText()) + "");
+                control.cetak();                
+            } else {
+                JOptionPane.showMessageDialog(null, "Nominal pembayaran salah");
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Kasir.class.getName()).log(Level.SEVERE, null, ex);
         }

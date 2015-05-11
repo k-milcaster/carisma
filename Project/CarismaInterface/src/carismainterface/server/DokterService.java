@@ -11,15 +11,19 @@ import java.util.List;
  */
 public interface DokterService extends Remote {
 
-    void insertDokter(Dokter dokter) throws RemoteException;
+    boolean insertDokter(Dokter dokter) throws RemoteException;
 
-    void updateDokter(Dokter dokter) throws RemoteException;
+    boolean updateDokter(Dokter dokter) throws RemoteException;
 
-    void deleteDokter(String dokter) throws RemoteException;
+    boolean deleteDokter(String dokter) throws RemoteException;
 
     Dokter getDokter(String dokter) throws RemoteException;
 
     List<Dokter> getDokter() throws RemoteException;
-    
+   
     String[] getIdNamaDokter (String username) throws RemoteException;
+    
+    public List<Dokter> getDokterByName(String nama) throws RemoteException;
+    
+    String[] getDokterById(String idDokter) throws RemoteException;
 }

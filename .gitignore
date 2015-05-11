@@ -1,1 +1,11 @@
 *.class
+<<<<<<< HEAD
+Project/CarismaInterface/build/classes/carismainterface/server/DokterService.class
+Project/CarismaServer/src/carismaserver/entity/KunjunganEntity.java
+=======
+Project/CarismaInterface/build/classes/carismainterface/server/DokterService.class
+>>>>>>> 01d21a6da2e3c2e4ce44b8098973990323c46589
+Project/CarismaResepsionis/nbproject/private/private.properties
+Project/CarismaServer/build/classes/carismaserver/boundaries/PegawaiManagement$1.class
+Project/CarismaServer/build/classes/carismaserver/boundaries/PegawaiManagement.class
+Project/CarismaServer/build/classes/carismaserver/boundaries/PegawaiManagement$1.class

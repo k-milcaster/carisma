@@ -10,7 +10,9 @@ import java.rmi.RemoteException;
  */
 public interface ResepService extends Remote {
 
-    void insertResep(Resep resep) throws RemoteException;
+    boolean insertResep(Resep resep) throws RemoteException;
+    
+    boolean deletedResep(String idResep) throws RemoteException;
     
     String getLastIdResep() throws RemoteException;
 }

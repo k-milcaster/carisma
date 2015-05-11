@@ -1,0 +1,41 @@
+Fitur: Mengelola data obat
+Skenario: Melihat Obat pada Tabel Lalu Dilihat Detail dan Kadaluarsanya
+
+getNamaPegawai(username): String[] namaApoteker									| assertArrayEquals(expectedNamaApoteker, resultNamaApoteker)
+getIdNamaPegawai)(username): String[] pegawaiInfo								| assertArrayEquals(expectedNamaApoteker, resultNamaApoteker)
+getObats(): TableModel tableObat										| assertTrue(resultRowCount)
+getObat(): TableModel daftarObat										| assertTrue(resultRowCount)
+getDetailObat(id): TableModel tableDetailObat									| assertTrue(resultRowCount)
+getSetailObatbyIdObat(idobat): TableModel detailObat								| assertTrue(resultRowCount)
+
+Fitur: Mengelola data obat
+Skenario: Mencari  nama obat yang ingin dilihat datanya
+
+getNamaPegawai(username): String[] namaApoteker									| assertArrayEquals(expectedNamaApoteker, resultNamaApoteker)
+getIdNamaPegawai)(username): String[] pegawaiInfo								| assertArrayEquals(expectedNamaApoteker, resultNamaApoteker)
+getObats(): TableModel tableObat										| assertTrue(resultRowCount)
+getObat(): TableModel daftarObat										| assertTrue(resultRowCount)
+getObatbyName(nama): TableModel tableObatbyName									| assertTrue(resultRowCount)
+getObatbyName(namaObat): TableModel daftarObatbyName 								| assertTrue(resultRowCount)
+
+Fitur: Mengelola data obat
+Skenario: Mengupdate Stok Kritis Berhasil
+
+getNamaPegawai(username): String[] namaApoteker									| assertArrayEquals(expectedNamaApoteker, resultNamaApoteker)
+getIdNamaPegawai)(username): String[] pegawaiInfo								| assertArrayEquals(expectedNamaApoteker, resultNamaApoteker)
+getObats(): TableModel tableObat										| assertTrue(resultRowCount)
+getObat(): TableModel daftarObat										| assertTrue(resultRowCount)
+updateStokObat(idObat, namaObat, qtyObat, jenisObat, keterangan, hargaJualObat, stokKritis):boolean updated  	| assertTrue(resultUpdated)
+updateObat(): boolean updated											| assertTrue(resultUpdated)
+JOptionPane("Stok Obat Kritis Berhasil Terupdate")								| -
+
+Fitur: Mengelola data obat
+Skenario: Mengupdate Stok Kritis Gagal
+
+getNamaPegawai(username): String[] namaApoteker									| assertArrayEquals(expectedNamaApoteker, resultNamaApoteker)
+getIdNamaPegawai)(username): String[] pegawaiInfo								| assertArrayEquals(expectedNamaApoteker, resultNamaApoteker)
+getObats(): TableModel tableObat										| assertTrue(resultRowCount)
+getObat(): TableModel daftarObat										| assertTrue(resultRowCount)
+updateStokObat(idObat, namaObat, qtyObat, jenisObat, keterangan, hargaJualObat, stokKritis):boolean updated  	| assertFalse(resultUpdated)
+updateObat(): boolean updated											| assertFalse(resultUpdated)
+JOptionPane("Stok Obat Kritis Tidak Terupdate")									| -

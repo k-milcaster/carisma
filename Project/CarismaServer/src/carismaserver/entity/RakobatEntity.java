@@ -36,7 +36,7 @@ public class RakobatEntity extends UnicastRemoteObject implements RakobatService
     
     
     @Override
-    public void insertRakobat(Rakobat rakobat) throws RemoteException {
+    public boolean insertRakobat(Rakobat rakobat) throws RemoteException {
         ui.act.append("Client Execute insertRakobat " + rakobat.getIdRak()+ "\n");
 
         PreparedStatement statement = null;
@@ -48,9 +48,11 @@ public class RakobatEntity extends UnicastRemoteObject implements RakobatService
             statement.setInt(2, rakobat.getObatIdObat());
             statement.setString(3, rakobat.getNamaRak());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertRakobat Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -63,7 +65,7 @@ public class RakobatEntity extends UnicastRemoteObject implements RakobatService
     }
 
     @Override
-    public void updateRakobat(Rakobat rakobat) throws RemoteException {
+    public boolean updateRakobat(Rakobat rakobat) throws RemoteException {
         ui.act.append("Client Execute updateRakobat(" + rakobat.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -76,9 +78,11 @@ public class RakobatEntity extends UnicastRemoteObject implements RakobatService
             statement.setInt(1, rakobat.getObatIdObat());
             statement.setString(2, rakobat.getNamaRak());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateRakobat Error \n");
+            ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -90,7 +94,7 @@ public class RakobatEntity extends UnicastRemoteObject implements RakobatService
     }
 
     @Override
-    public void deleteRakobat(int idrakobat) throws RemoteException {
+    public boolean deleteRakobat(int idrakobat) throws RemoteException {
         ui.act.append("Client Execute deleteRakobat (" + idrakobat + ") \n");
         PreparedStatement statement = null;
         try {
@@ -98,9 +102,11 @@ public class RakobatEntity extends UnicastRemoteObject implements RakobatService
                     "DELETE FROM rakobat WHERE id_rak = ?");
             statement.setInt(1, idrakobat);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteRakobat Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

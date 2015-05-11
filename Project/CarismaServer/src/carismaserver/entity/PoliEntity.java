@@ -34,7 +34,7 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
     }
 
     @Override
-    public void insertPoli(Poli poli) throws RemoteException {
+    public boolean insertPoli(Poli poli) throws RemoteException {
         ui.act.append("Client Execute insertPoli " + poli.getIdPoli()+ "\n");
 
         PreparedStatement statement = null;
@@ -46,9 +46,11 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
             statement.setString(2, poli.getNamaPoli());
             statement.setString(3, poli.getKeterangan());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertPoli Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -61,7 +63,7 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
     }
 
     @Override
-    public void updatePoli(Poli poli) throws RemoteException {
+    public boolean updatePoli(Poli poli) throws RemoteException {
         ui.act.append("Client Execute updatePoli(" + poli.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -74,10 +76,11 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
             statement.setString(1, poli.getNamaPoli());
             statement.setString(2, poli.getKeterangan());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdatePoli Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -89,7 +92,7 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
     }
 
     @Override
-    public void deletePoli(String idpoli) throws RemoteException {
+    public boolean deletePoli(String idpoli) throws RemoteException {
         ui.act.append("Client Execute deletePoli (" + idpoli + ") \n");
         PreparedStatement statement = null;
         try {
@@ -97,9 +100,11 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
                     "DELETE FROM poli WHERE id_poli = ?");
             statement.setString(1, idpoli);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deletePoli Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

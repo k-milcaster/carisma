@@ -1,0 +1,27 @@
+Fitur: Mengelola data obat
+
+Skenario: Mengupdate Stok Kritis Berhasil
+
+getNamaPegawai(username): String[] namaApoteker
+getObats(): DefaultTableModel tableObat
+updateStokObat(idObat, namaObat, qtyObat, jenisObat, keterangan, hargaJualObat, stokKritis):boolean updated  
+JOptionPane("Stok Obat Kritis Berhasil Terupdate")
+
+Given apoteker masuk ke menu utama apoteker
+When apoteker memilih inventory obat
+Then apoteker berada pada menu data obat
+And nama apoteker muncul dilayar
+When apoteker memilih obat pada tabel or apoteker memasukan nama obat yang ingin dilihat datanya
+Then id obat muncul dilayar
+And nama obat muncul dilayar
+And quantity obat muncul dilayar
+And jenis obat muncul dilayar
+And keterangan obat muncul dilayar
+And harga jual obat muncul dilayar
+And stok kritis muncul dilayar
+And id detail obat dan tanggal kadaluarsa obat yang dipilih muncul ditabel
+When apoteker mengedit stok kritis pada layar
+And mengklik button update
+Then muncul message dialog "Stok Kritis Obat Berhasil Terupdate"
+When apoteker klik ok pada message dialog
+Then stok kritis pada tabel berubah

@@ -36,7 +36,7 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
     }
     
     @Override
-    public void insertDetailtransaksijualobat(Detailtransaksijualobat detailtransaksijualobat) throws RemoteException {
+    public boolean insertDetailtransaksijualobat(Detailtransaksijualobat detailtransaksijualobat) throws RemoteException {
         ui.act.append("Client Execute insertDetailtransaksijualobat " + detailtransaksijualobat.getTransaksijualobat()+" "+ detailtransaksijualobat.getObat()+ "\n");
 
         PreparedStatement statement = null;
@@ -48,10 +48,12 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
             statement.setInt(2, detailtransaksijualobat.getObat());
             statement.setInt(3, detailtransaksijualobat.getQty());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertDetailtransaksijualobat Error \n");
             ui.act.append(exception.toString());
             exception.printStackTrace();
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -64,7 +66,7 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
     }
 
     @Override
-    public void updateDetailtransaksijualobat(Detailtransaksijualobat detailtransaksijualobat) throws RemoteException {
+    public boolean updateDetailtransaksijualobat(Detailtransaksijualobat detailtransaksijualobat) throws RemoteException {
         ui.act.append("Client Execute updateDetailtransaksijualobat(" + detailtransaksijualobat.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -77,10 +79,11 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
             statement.setInt(3, detailtransaksijualobat.getObat());
             statement.setInt(1, detailtransaksijualobat.getQty());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateDetailtransaksijualobat Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -92,7 +95,7 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
     }
 
     @Override
-    public void deleteDetailtransaksijualobat(String idtransaksijualobat, int idobat) throws RemoteException {
+    public boolean deleteDetailtransaksijualobat(String idtransaksijualobat, int idobat) throws RemoteException {
         ui.act.append("Client Execute deleteDetailtransaksijualobat (" + idtransaksijualobat + " " + idobat + ") \n");
         PreparedStatement statement = null;
         try {
@@ -101,9 +104,11 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
             statement.setString(1, idtransaksijualobat);
             statement.setInt(2, idobat);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteDetailtransaksijualobat Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

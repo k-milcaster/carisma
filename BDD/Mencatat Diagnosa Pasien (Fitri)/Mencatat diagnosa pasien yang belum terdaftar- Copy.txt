@@ -1,0 +1,26 @@
+Story Card : Mencatat diagnosa pasien
+Skenario : Mencatat diagnosa pasien yang belum terdaftar
+
+Given Saya masuk pada antarmuka Rekam Medis Pasien
+When Saya melihat Id Saya, Nama Saya, dan Id Rekam Medis ditampilkan di form Rekam Medis
+Then Saya mengisi Id Pasien yang salah/belum terdaftar
+Then Saya mendapat peringatan "Id Pasien salah/pasien belum terdaftar"
+Then Saya memasukkan Id pasien lagi yang sesuai
+When Saya tidak mendapat peringatan "Id Pasien salah/pasien belum terdaftar"
+Then Saya Saya Keluhan, pemeriksaan, terapi, alergi obat, kesimpulan, 
+     kondisi pasien keluar, resep, penyakit, dan biaya.
+Then Saya mengklik tobol "Tambah Resep"
+When Saya melihat Id Resep
+Then Saya mengisi nama obat, quantity, aturan pakai, dan keterangan
+When Saya mengklik tombol "save"
+Then Saya mendapat pesan pertanyaan "Apakah data yang anda masukkan sudah benar?"
+When Saya memilih tombol "yes"
+Then Data resep tersimpan dalam sistem
+And Saya mendapatkan konfirmasi "Data resep telah tersimpan"
+Then Saya kembali pada antarmuka Rekam Medis Pasien
+Then Saya memasukkan nama penyakit
+When Saya mengklik tombol "save"
+Then Saya mendapat pesan pertanyaan "Apakah data yang anda masukkan sudah benar?"
+When Saya memilih "Yes"
+Then Data diagnosa pasien tersimpan pada sistem
+And Saya mendapatkan konfirmasi "Data rekam medis telah tersimpan"

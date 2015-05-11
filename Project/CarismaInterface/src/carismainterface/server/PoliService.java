@@ -16,11 +16,11 @@ import java.util.List;
  * @author kepoterz
  */
 public interface PoliService extends Remote{
-    void insertPoli(Poli poli) throws RemoteException;
+    boolean insertPoli(Poli poli) throws RemoteException;
 
-    void updatePoli(Poli poli) throws RemoteException;
+    boolean updatePoli(Poli poli) throws RemoteException;
     
-    void deletePoli(String idpoli) throws RemoteException;
+    boolean deletePoli(String idpoli) throws RemoteException;
 
     Poli getPoli(String idpoli) throws RemoteException;
 

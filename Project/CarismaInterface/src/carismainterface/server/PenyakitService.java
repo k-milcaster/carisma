@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface PenyakitService extends Remote {
     
-    void insertPenyakit(Penyakit penyakit) throws RemoteException;
+    boolean insertPenyakit(Penyakit penyakit) throws RemoteException;
 
-    void updatePenyakit(Penyakit penyakit) throws RemoteException;
+    boolean updatePenyakit(Penyakit penyakit) throws RemoteException;
     
-    void deletePenyakit(String idpenyakit) throws RemoteException;
+    boolean deletePenyakit(String idpenyakit) throws RemoteException;
 
     Penyakit getPenyakit(String idpenyakit) throws RemoteException;
 

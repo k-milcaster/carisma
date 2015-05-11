@@ -1,0 +1,8 @@
+Fitur	: Resepsionis melihat antrian pasien di menu resepsionis
+Skenario : Melihat antrian pasien 
+
+
+showAntrian(idAntrian) : TabelAntrian			| assertTrue(resultRowCount);
+getAntrianDetail(id): Antrian antrian			| assertEquals(expectedAntrian, resultAntrian);
+getDetailPasien(idPasien): Pasien pasien		| assertEquals(expectedPasien, resultPasien);
+getDetailKunjungan(idKunjungan): Kunjungan kunjungan	| assertEquals(expectedKunjungan, resultKunjungan);

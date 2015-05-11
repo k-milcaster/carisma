@@ -6,11 +6,13 @@ import carismainterface.entity.Detailobat;
 import carismainterface.entity.Obat;
 import carismainterface.entity.User;
 import carismainterface.server.ObatService;
+import carismainterface.server.PegawaiService;
 import java.awt.Color;
 import java.awt.Font;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -24,22 +26,28 @@ public class StokObat extends javax.swing.JFrame {
 
     private ClientSocket client;
     private String userName;
+    private StokObatController control;
     public ObatService os;
+     private PegawaiService pegawaiService;
+    private  String[] namaPegawai; 
+    private int total = 0;
+    public int row = 0;
 
     private DefaultTableModel tableObat = new DefaultTableModel();
 
     public StokObat(ClientSocket Client, String userName) throws RemoteException {
         //    
         this.client = Client;
-        final StokObatController control = new StokObatController(this.client);
+        control = new StokObatController(this.client);
         os = client.getObatService();
         this.userName = userName;
         initComponents();
-        labelApotekerName.setText(this.userName);
+        namaPegawai = control.getNamaPegawai(this.userName);
+        labelApotekerName.setText(namaPegawai[0]);
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
 
-        control.getObats(this);
+        tableMedicine.setModel(control.getObats());
 
         tableMedicine.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -55,11 +63,8 @@ public class StokObat extends javax.swing.JFrame {
                         fieldMedicineType.setText(selected.getJenisObat());
                         fieldDescribtion.setText(selected.getKeterangan());
                         fieldPrice.setText(selected.getHargajualObat().toString());
-                        //if (selected.getStokkritisObat() != null) {
-                        //  System.out.println("masuk if "+selected.getStokkritisObat());
                         fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));                        
-                        tabelDetailObat.setModel(control.getDetailObat(Integer.parseInt(tableMedicine.getValueAt(row, 0).toString())));
-                        //}                        
+                        tabelDetailObat.setModel(control.getDetailObat(Integer.parseInt(tableMedicine.getValueAt(row, 0).toString())));                        
                     } catch (RemoteException ex) {
                         Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -418,7 +423,7 @@ public class StokObat extends javax.swing.JFrame {
         try {
             StokObatController control = new StokObatController(client);
             model = control.getObatbyName(fieldSearch.getText());
-            System.out.println(model);
+           // System.out.println(model);
             tableMedicine.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
@@ -432,11 +437,6 @@ public class StokObat extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldSearchActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//       try {
-//           int id = Integer.parseInt(fieldIdMedicine.getText());
-//           int stok = Integer.parseInt(fieldStokKritis.getText());
-//           
-//       }
         try {
             StokObatController controller = new StokObatController(client);
             int row = tableMedicine.getSelectedRow();
@@ -450,16 +450,18 @@ public class StokObat extends javax.swing.JFrame {
             String keterangan = fieldDescribtion.getText();
             int hargaJual = Integer.parseInt(fieldPrice.getText());
             int stokKritis = Integer.parseInt(fieldStokKritis.getText());
-            controller.updateStokObat(id, nama, qty, jenis, keterangan, hargaJual, stokKritis);
-            controller.getObats(this);
-//            fieldMedicineName.setText("");
-//            fieldQuantity.setText("");
-//            fieldMedicineType.setText("");
-//            fieldDescribtion.setText("");
-//            fieldPrice.setText("");
+            boolean updated = controller.updateStokObat(id, nama, qty, jenis, keterangan, hargaJual, stokKritis);
+            if (updated == true) {
+                JOptionPane.showMessageDialog(null, "Stok Kritis Obat Berhasil Terupdate");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Stok Kritis Obat Tidak Terupdate");
+                 }
+            tableMedicine.setModel(controller.getObats());
             fieldStokKritis.setText("");
-        } catch (Exception e) {
-        }
+            } 
+        catch (Exception e) { 
+            }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -468,11 +470,9 @@ public class StokObat extends javax.swing.JFrame {
         int row = tableMedicine.getSelectedRow();
         try {
             StokObatController control = new StokObatController(client);
-            
-           // control.getDetailObat(this, Integer.parseInt(String.valueOf(tableMedicine.getValueAt(row, 0))));
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
         }
-//          TODO add your handling code here:
     }//GEN-LAST:event_tableMedicineMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

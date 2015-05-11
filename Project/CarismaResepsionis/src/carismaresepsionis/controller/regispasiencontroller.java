@@ -141,5 +141,12 @@ public class regispasiencontroller {
         
     }
   
-  
+  public Pasien getDataPasien (String id ){
+        try {
+            return pasienService.getPasien(id);
+        } catch (RemoteException ex) {
+            Logger.getLogger(regispasiencontroller.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+  }
 }

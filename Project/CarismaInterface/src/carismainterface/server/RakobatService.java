@@ -16,11 +16,11 @@ import java.util.List;
  * @author kepoterz
  */
 public interface RakobatService extends Remote {
-    void insertRakobat(Rakobat rakobat) throws RemoteException;
+    boolean insertRakobat(Rakobat rakobat) throws RemoteException;
 
-    void updateRakobat(Rakobat rakobat) throws RemoteException;
+    boolean updateRakobat(Rakobat rakobat) throws RemoteException;
 
-    void deleteRakobat(int idrakobat) throws RemoteException;
+    boolean deleteRakobat(int idrakobat) throws RemoteException;
 
     Rakobat getRakobat(int idrakobat) throws RemoteException;
 

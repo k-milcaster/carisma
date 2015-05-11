@@ -34,7 +34,7 @@ public class PenyakitEntity extends UnicastRemoteObject implements PenyakitServi
     }
 
     @Override
-    public void insertPenyakit(Penyakit penyakit) throws RemoteException {
+    public boolean insertPenyakit(Penyakit penyakit) throws RemoteException {
         ui.act.append("Client Execute insertPenyakit " + penyakit.getIdPenyakit()+ "\n");
 
         PreparedStatement statement = null;
@@ -46,9 +46,11 @@ public class PenyakitEntity extends UnicastRemoteObject implements PenyakitServi
             statement.setString(2, penyakit.getNamaPenyakit());
             statement.setString(3, penyakit.getDeskripsiPenyakit());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertPenyakit Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -61,7 +63,7 @@ public class PenyakitEntity extends UnicastRemoteObject implements PenyakitServi
     }
     
     @Override
-    public void updatePenyakit(Penyakit penyakit) throws RemoteException {
+    public boolean updatePenyakit(Penyakit penyakit) throws RemoteException {
         ui.act.append("Client Execute updatePenyakit(" + penyakit.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -74,10 +76,11 @@ public class PenyakitEntity extends UnicastRemoteObject implements PenyakitServi
             statement.setString(1, penyakit.getNamaPenyakit());
             statement.setString(2, penyakit.getDeskripsiPenyakit());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdatePenyakit Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -89,7 +92,7 @@ public class PenyakitEntity extends UnicastRemoteObject implements PenyakitServi
     }
     
     @Override
-    public void deletePenyakit(String idpenyakit) throws RemoteException {
+    public boolean deletePenyakit(String idpenyakit) throws RemoteException {
         ui.act.append("Client Execute deletePenyakit (" + idpenyakit + ") \n");
         PreparedStatement statement = null;
         try {
@@ -97,9 +100,11 @@ public class PenyakitEntity extends UnicastRemoteObject implements PenyakitServi
                     "DELETE FROM penyakit WHERE id_penyakit = ?");
             statement.setString(1, idpenyakit);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deletePenyakit Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

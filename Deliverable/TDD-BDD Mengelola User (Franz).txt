@@ -1,0 +1,75 @@
+Story Card : Mengelola User
+Scenario : Insert User berhasil
+
+getUsers(ui):TableModel user					|assertTrue(resultCondition);
+getUser():ArrayList<User> user					|assertTrue(resultCondition);
+setTableModel(Model)						|-
+insertUser(ui, username,pass, date, role):boolean 		|assertEquals(expectedCondition, resultCondiditon);
+insertUser(user):boolean					|assertEquals(expectedCondition, resultConndition);
+getUser(ui):TableModel user					|assertTrue(resultCondition);
+getUser():ArrayList<User> user					|assertTrue(resultCondition);
+setTableModel(Model)						|-
+JOptionPane("Insert user berhasil")				|-
+
+____________________________________________________________________________________________________________________
+Story Card : Mengelola User
+Scenario : Insert User gagal
+
+getUsers(ui):TableModel user					|assertTrue(resultCondition);
+getUser():User user						|assertTrue(resultCondition);
+setTableModel(Model)						|-
+insertUser(ui, username,pass, date, role):boolean 		|assertEquals(expectedCondition, resultCondiditon);
+insertUser(user):boolean					|assertEquals(expectedCondition, resultConndition);
+JOptionPane("Insert user gagal")				|-
+
+____________________________________________________________________________________________________________________
+Story Card : Mengelola User
+Scenario : Update User berhasil
+
+getUsers(ui):TableModel user					|assertTrue(resultCondition);
+getUser():ArrayList<User> user					|assertTrue(resultCondition);
+setTableModel(Model)						|-
+updateUser(ui, username,pass, date, role):boolean 		|assertEquals(expectedCondition, resultCondiditon);
+updateUser(user):boolean					|assertEquals(expectedCondition, resultConndition);
+getUser(ui):TableModel user					|assertTrue(resultRowCount);
+getUser():ArrayList<User> user					|assertTrue(resultCondition);
+setTableModel(Model)						|-
+JOptionPane("Update user berhasil")				|-
+
+____________________________________________________________________________________________________________________
+Story Card : Mengelola User
+Scenario : Update User gagal
+
+getUsers(ui):TableModel user					|assertTrue(resultCondition);
+getUser():ArrayList<User> user					|assertTrue(resultCondition);
+setTableModel(Model)						|-
+updateUser(ui, username,pass, date, role):boolean 		|assertEquals(expectedCondition, resultCondiditon);
+updateUser(user):boolean					|assertEquals(expectedCondition, resultConndition);
+JOptionPane("Update user gagal")				|-
+
+____________________________________________________________________________________________________________________
+Story Card : Mengelola User
+Scenario : Delete User berhasil
+
+getUsers(ui):TableModel user					|assertTrue(resultCondition);
+getUser():ArrayList<User> user					|assertTrue(resultCondition);
+setTableModel(Model)						|-
+deleteUser(ui, username):boolean		 		|assertEquals(expectedCondition, resultCondiditon);
+deleteUser(user):boolean					|assertEquals(expectedCondition, resultConndition);
+getUser(ui):TableModel user					|assertTrue(resultCondition);
+getUser():ArrayList<User> user					|assertTrue(resultCondition);
+setTableModel(Model)						|-
+JOptionPane("Delete user berhasil")				|-
+
+____________________________________________________________________________________________________________________
+Story Card : Mengelola User
+Scenario : Insert User gagal
+
+getUsers(ui):TableModel user					|assertTrue(resultCondition);
+getUser():ArrayList<User> user					|assertTrue(resultCondition);
+setTableModel(Model)						|-
+deleteUser(ui, username):boolean 				|assertEquals(expectedCondition, resultCondiditon);
+deleteUser(user):boolean					|assertEquals(expectedCondition, resultConndition);
+JOptionPane("Delete user gagal")				|-
+
+____________________________________________________________________________________________________________________

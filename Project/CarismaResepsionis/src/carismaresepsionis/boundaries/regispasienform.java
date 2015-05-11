@@ -1,12 +1,16 @@
 package carismaresepsionis.boundaries;
 
+import carismainterface.entity.Pasien;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.regispasiencontroller;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -32,11 +36,11 @@ public class regispasienform extends javax.swing.JFrame {
         //control.getIdUser(this);
         this.userName = userName;
         initComponents();
+      
         registrasicontrol.getTabelPasien(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Find.requestFocus();
         Tempat_ID.setEditable(false);
-
         a = Nama_Pasien.getText();
         b = Tempat_Lahir.getText();
         c = Alamat.getText();
@@ -88,6 +92,7 @@ public class regispasienform extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelpasien = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -129,8 +134,6 @@ public class regispasienform extends javax.swing.JFrame {
         ID.setText("ID PASIEN");
         getContentPane().add(ID);
         ID.setBounds(1080, 90, 79, 32);
-
-        Tempat_ID.setText("SDA-1234-C");
         getContentPane().add(Tempat_ID);
         Tempat_ID.setBounds(1170, 90, 99, 32);
 
@@ -302,7 +305,7 @@ public class regispasienform extends javax.swing.JFrame {
 
         jLabel3.setText("Tgl Registrasi Pasien");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(580, 500, 100, 14);
+        jLabel3.setBounds(580, 500, 120, 14);
 
         tgl_lahir.setDateFormatString("yyyy-MM-dd");
         getContentPane().add(tgl_lahir);
@@ -360,10 +363,19 @@ public class regispasienform extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
+        tabelpasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelpasienMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabelpasien);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(30, 120, 452, 402);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(1, 0, 1359, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -542,6 +554,28 @@ public class regispasienform extends javax.swing.JFrame {
     private void BeratPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeratPasienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BeratPasienActionPerformed
+
+    private void tabelpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelpasienMouseClicked
+        
+        int row = tabelpasien.getSelectedRow();
+        Pasien pasien = new Pasien ();
+        Date date = new Date();
+        pasien = registrasicontrol.getDataPasien(String.valueOf(tabelpasien.getValueAt(row, 0)));
+        Nama_Pasien.setText(pasien.getNamaPasien());
+        Tempat_ID.setText(pasien.getIdPasien());
+        Tempat_Lahir.setText(pasien.getTempatlahirPasien());
+        tgl_lahir.setDate(java.sql.Date.valueOf(pasien.getTgllahirPasien()));
+        No_Hp.setText(pasien.getHpPasien());
+        No_tele.setText(pasien.getTelpPasien());
+        Kartu_id.setText(pasien.getNokartuidPasien());
+        No_Kartu.setText(pasien.getKartuidPasien());
+        Alamat.setText(pasien.getAlamatPasien());
+        TinggiPasien.setText(Integer.toString(pasien.getTinggiPasien()));
+        BeratPasien.setText(Integer.toString(pasien.getBeratPasien()));
+        tgl_regpasien.setDate(java.sql.Date.valueOf(pasien.getRegdatePasien()));
+        
+    }//GEN-LAST:event_tabelpasienMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alamat;
     private javax.swing.JTextField BeratPasien;
@@ -567,6 +601,7 @@ public class regispasienform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JTable tabelpasien;
