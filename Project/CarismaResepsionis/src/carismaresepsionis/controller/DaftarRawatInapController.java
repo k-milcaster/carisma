@@ -25,7 +25,7 @@ public class DaftarRawatInapController {
 
     
 
-   public void insertNamaPasien (String namaPasien, String idPasien, int idKamar, String namaKamar, String kelasKamar, String tarif) throws RemoteException{
+   public boolean insertNamaPasien (String namaPasien, String idPasien, int idKamar, String namaKamar, String kelasKamar, String tarif) throws RemoteException{
       
        PasienKamar pasienkamar = new PasienKamar ();
        pasienkamar.setIdPeminjaman(generatePeminjamanId(idPasien, namaKamar));
@@ -34,6 +34,7 @@ public class DaftarRawatInapController {
        //pasienkamar.setDateoutPasienKamar();
 
        pasienkamarService.insertPasienKamar(pasienkamar);
+       return true;
    }
     
    public String generatePeminjamanId(String idPasien, String namaKamar) {

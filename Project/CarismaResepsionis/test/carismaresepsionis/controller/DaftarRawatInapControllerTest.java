@@ -4,6 +4,8 @@
  */
 package carismaresepsionis.controller;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,14 +44,17 @@ public class DaftarRawatInapControllerTest {
     @Test
     public void testInsertNamaPasien() throws Exception {
         System.out.println("insertNamaPasien");
-        String namaPasien = "";
-        String idPasien = "";
-        int idKamar = 0;
-        String namaKamar = "";
-        String kelasKamar = "";
-        String tarif = "";
-        DaftarRawatInapController instance = null;
-        instance.insertNamaPasien(namaPasien, idPasien, idKamar, namaKamar, kelasKamar, tarif);
+        String namaPasien = "Pevita";
+        String idPasien = "PAS004";
+        int idKamar = 202;
+        String namaKamar = "EDELWEIS";
+        String kelasKamar = "UTAMA";
+        String tarif = "245000";
+        ClientSocket client = new ClientSocket();
+        DaftarRawatInapController instance = new DaftarRawatInapController(client);
+        boolean expResult = true;
+        boolean result = instance.insertNamaPasien(namaPasien, idPasien, idKamar, namaKamar, kelasKamar, tarif);
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -58,12 +63,13 @@ public class DaftarRawatInapControllerTest {
      * Test of generatePeminjamanId method, of class DaftarRawatInapController.
      */
     @Test
-    public void testGeneratePeminjamanId() {
+    public void testGeneratePeminjamanId() throws RemoteException, NotBoundException {
         System.out.println("generatePeminjamanId");
-        String idPasien = "";
-        String namaKamar = "";
-        DaftarRawatInapController instance = null;
-        String expResult = "";
+        String idPasien = "PAS004";
+        String namaKamar = "EDELWEIS";
+        ClientSocket client = new ClientSocket();
+        DaftarRawatInapController instance = new DaftarRawatInapController(client);
+        String expResult = "PAS004";
         String result = instance.generatePeminjamanId(idPasien, namaKamar);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
