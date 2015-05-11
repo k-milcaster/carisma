@@ -115,12 +115,15 @@ public class KasirController {
             document.add(table);
             document.add(total);
             document.close();
+            JOptionPane.showMessageDialog(null, "Pembayaran Berhasil");
             return true;
         } catch (DocumentException ex) {
             Logger.getLogger(KasirController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Cetak Gagal");
             return false;
         } catch (IOException ex) {
             Logger.getLogger(KasirController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Cetak Gagal");
             return false;
         }
     }

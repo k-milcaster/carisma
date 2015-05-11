@@ -277,8 +277,7 @@ public class Kasir extends javax.swing.JFrame {
             boolean pembayaranDone = control.doBayar(Integer.parseInt(jTextField6.getText()), Integer.parseInt(fieldTotal.getText()));
             if (pembayaranDone) {
                 jTextField7.setText(Integer.parseInt(jTextField6.getText()) - Integer.parseInt(fieldTotal.getText()) + "");
-                control.cetak();
-                JOptionPane.showMessageDialog(null, "Pembayaran Berhasil");
+                control.cetak();                
             } else {
                 JOptionPane.showMessageDialog(null, "Nominal pembayaran salah");
             }
