@@ -1,0 +1,8 @@
+Story Card : Melihat Data Dokter
+Scenario : Resepsionis melihat data dokter
+
+showDokter(idDokter, namaDokter): TabelDokter		| assertTrue(resultRowCount);
+getDokter(idDokter, namaDokter): ArrayList Dokter		| assertEquals(expectedDokter, resultDokter);
+getDokterByName(namaDokter): ArrayList Dokter		| assertEquals(expectedDokterByName, resultDokterByName);
+getDokterByIdDokter(idDokter):String[] idDokter		| assertEquals(expectedDokterByIdDokter, resultDokterByIdDokter);
+setInvalidDokter					| -
