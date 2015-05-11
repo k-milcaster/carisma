@@ -122,10 +122,11 @@ public class RawatinapControllerTest {
      * Test of kamarKosong method, of class RawatinapController.
      */
     @Test
-    public void testKamarKosong() {
+    public void testKamarKosong() throws RemoteException, NotBoundException {
         System.out.println("kamarKosong");
-        String parameterA = "kosong";
-        RawatinapController instance = null;
+        String parameterA = "coba";
+        ClientSocket client= new ClientSocket ();
+        RawatinapController instance = new RawatinapController (client);
         String expResult = "kosong";
         String result = instance.kamarKosong(parameterA);
         assertEquals(expResult, result);
