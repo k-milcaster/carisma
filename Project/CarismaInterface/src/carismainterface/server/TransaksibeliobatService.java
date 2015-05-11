@@ -16,11 +16,11 @@ import java.util.List;
  * @author kepoterz
  */
 public interface TransaksibeliobatService extends Remote {
-    void insertTransaksibelibat(Transaksibeliobat transaksibeliobat) throws RemoteException;
+    boolean insertTransaksibeliobat(Transaksibeliobat transaksibeliobat) throws RemoteException;
 
-    void updateTransaksibeliobat(Transaksibeliobat transaksibeliobat) throws RemoteException;
+    boolean updateTransaksibeliobat(Transaksibeliobat transaksibeliobat) throws RemoteException;
 
-    void deleteTransaksibeliobat(String idtransaksibeliobat) throws RemoteException;
+    boolean deleteTransaksibeliobat(String idtransaksibeliobat) throws RemoteException;
 
     Transaksibeliobat getTransaksibeliobat(String idtransaksibeliobat) throws RemoteException;
 

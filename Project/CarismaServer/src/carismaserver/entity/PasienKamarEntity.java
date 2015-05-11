@@ -36,7 +36,7 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
     }
     
     @Override
-    public void insertPasienKamar(PasienKamar pasienKamar) throws RemoteException {
+    public boolean insertPasienKamar(PasienKamar pasienKamar) throws RemoteException {
         ui.act.append("Client Execute insertPasienKamar " + pasienKamar.getIdPeminjaman()+ "\n");
 
         PreparedStatement statement = null;
@@ -50,9 +50,11 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
             statement.setString(4, pasienKamar.getDateoutPasienKamar());
             statement.setString(5, pasienKamar.getKeterangan());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertPasienKamar Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -65,7 +67,7 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
     }
 
     @Override
-    public void updatePasienKamar(PasienKamar pasienKamar) throws RemoteException {
+    public boolean updatePasienKamar(PasienKamar pasienKamar) throws RemoteException {
         ui.act.append("Client Execute updatePasienKamar(" + pasienKamar.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -80,10 +82,11 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
             statement.setString(3, pasienKamar.getDateoutPasienKamar());
             statement.setString(4, pasienKamar.getKeterangan());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdatePasienKamar Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -95,7 +98,7 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
     }
 
     @Override
-    public void deletePasienKamar(String idpeminjaman) throws RemoteException {
+    public boolean deletePasienKamar(String idpeminjaman) throws RemoteException {
         ui.act.append("Client Execute deletePasienKamar (" + idpeminjaman+ ") \n");
         PreparedStatement statement = null;
         try {
@@ -103,9 +106,11 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
                     "DELETE FROM pasien_kamar WHERE id_peminjaman = ?");
             statement.setString(1, idpeminjaman);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deletePasienKamar Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

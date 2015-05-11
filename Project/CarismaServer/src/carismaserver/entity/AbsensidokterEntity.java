@@ -35,7 +35,7 @@ public class AbsensidokterEntity extends UnicastRemoteObject implements Absensid
     }
 
     @Override
-    public void insertAbsensidokter(Absensidokter absensidokter) throws RemoteException {
+    public boolean insertAbsensidokter(Absensidokter absensidokter) throws RemoteException {
         ui.act.append("Client Execute insertAbsensidokter " + absensidokter.getDokterIdDokter()+ "\n");
 
         PreparedStatement statement = null;
@@ -48,9 +48,11 @@ public class AbsensidokterEntity extends UnicastRemoteObject implements Absensid
             statement.setString(3, absensidokter.getKehadiranlemburDokter());
             statement.setString(4, absensidokter.getDateAbsensidokter());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertAbsensidokter Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -63,7 +65,7 @@ public class AbsensidokterEntity extends UnicastRemoteObject implements Absensid
     }
 
     @Override
-    public void updateAbsensidokter(Absensidokter absensidokter) throws RemoteException {
+    public boolean updateAbsensidokter(Absensidokter absensidokter) throws RemoteException {
         ui.act.append("Client Execute updateAbsensidokter(" + absensidokter.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -77,10 +79,11 @@ public class AbsensidokterEntity extends UnicastRemoteObject implements Absensid
             statement.setString(2, absensidokter.getKehadiranlemburDokter());
             statement.setString(3, absensidokter.getDateAbsensidokter());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateAbsensidokter Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -92,7 +95,7 @@ public class AbsensidokterEntity extends UnicastRemoteObject implements Absensid
     }
 
     @Override
-    public void deleteAbsensidokter(String idabsensidokter) throws RemoteException {
+    public boolean deleteAbsensidokter(String idabsensidokter) throws RemoteException {
         ui.act.append("Client Execute deleteAbsensidokter (" + idabsensidokter + ") \n");
         PreparedStatement statement = null;
         try {
@@ -100,9 +103,11 @@ public class AbsensidokterEntity extends UnicastRemoteObject implements Absensid
                     "DELETE FROM absensidokter WHERE dokter_id_dokter = ?");
             statement.setString(1, idabsensidokter);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteAbsensidokter Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaserver.entity;
 
 import carismainterface.entity.Detailobat;
@@ -35,22 +29,23 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
     }
 
     @Override
-    public void insertDetailobat(Detailobat detailobat) throws RemoteException {
+    public boolean insertDetailobat(Detailobat detailobat) throws RemoteException {
         ui.act.append("Client Execute insertDetailobat " + detailobat.getIdDetail()+ "\n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO obat (id_detail, obat_id_obat, tglkadaluarsa_detail) values (?,?,?)"
+                    "INSERT INTO detailobat (id_detail, obat_id_obat, tglkadaluarsa_detail) values (?,?,?)"
             );
             statement.setInt(1, detailobat.getIdDetail());
             statement.setInt(2, detailobat.getObatIdObat());
             statement.setString(3, detailobat.getTglkadaluarsaDetail());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertDetailobat Error \n");
             ui.act.append(exception.toString());
-            exception.printStackTrace();
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -63,7 +58,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
     }
 
     @Override
-    public void updateDetailobat(Detailobat detailobat) throws RemoteException {
+    public boolean updateDetailobat(Detailobat detailobat) throws RemoteException {
         ui.act.append("Client Execute updateDetailobat(" + detailobat.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -75,12 +70,12 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
             statement.setInt(6, detailobat.getIdDetail());
             statement.setInt(1, detailobat.getObatIdObat());
             statement.setString(2, detailobat.getTglkadaluarsaDetail());
-
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateDetailobat Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -92,7 +87,7 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
     }
 
     @Override
-    public void deleteDetailobat(int iddetailobat) throws RemoteException {
+    public boolean deleteDetailobat(int iddetailobat) throws RemoteException {
         ui.act.append("Client Execute deleteDetailobat (" + iddetailobat + ") \n");
         PreparedStatement statement = null;
         try {
@@ -100,9 +95,11 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
                     "DELETE FROM detailobat WHERE id_detail = ?");
             statement.setInt(1, iddetailobat);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteDetailobat Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -208,6 +205,33 @@ public class DetailobatEntity extends UnicastRemoteObject implements DetailobatS
             if (statement != null) {
                 try {
                     statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public int getLastIdDetailObat() throws RemoteException {
+        ui.act.append("Client Execute getLastIdDetailObat");
+        
+        int lastIdDetailObat = 0;
+        PreparedStatement state = null;
+        try {
+            state = DatabaseConnection.getConnection().prepareStatement("SELECT MAX(`id_detail`) FROM detailobat");
+            ResultSet resultSet = state.executeQuery();
+            if (resultSet.next()) {
+                lastIdDetailObat = resultSet.getInt(1);
+            }
+            return lastIdDetailObat;
+        } catch (SQLException exception) {
+            ui.act.append("getLastIdDetailObat\n");
+            ui.act.append(exception.toString());
+            return lastIdDetailObat;
+        } finally {
+            if (state != null) {
+                try {
+                    state.close();
                 } catch (SQLException exception) {
                 }
             }

@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface AntrianService extends Remote {
 
-    void insertAntrian(Antrian antrian) throws RemoteException;
+    boolean insertAntrian(Antrian antrian) throws RemoteException;
 
-    void deleteAntrian(String antrian) throws RemoteException;
+    boolean deleteAntrian(String antrian) throws RemoteException;
     
-    void antrianHadir(String antrian) throws RemoteException;
+    boolean antrianHadir(String antrian) throws RemoteException;
 
     Antrian getAntrian(String antrian) throws RemoteException;
 

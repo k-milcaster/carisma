@@ -57,7 +57,7 @@ public class Menursepsionis extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         DataDokter = new javax.swing.JButton();
         LihatPasienInap = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        NamaDokter = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -167,8 +167,8 @@ public class Menursepsionis extends javax.swing.JFrame {
         });
         getContentPane().add(LihatPasienInap);
         LihatPasienInap.setBounds(1120, 220, 225, 50);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(174, 517, 334, 36);
+        getContentPane().add(NamaDokter);
+        NamaDokter.setBounds(174, 517, 334, 36);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Nama Dokter");
@@ -269,16 +269,6 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void List_AntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_List_AntrianActionPerformed
     }//GEN-LAST:event_List_AntrianActionPerformed
 
-    private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
-        int row = tableDaftarAntrian.getSelectedRow();
-        try {
-            new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 1))).setVisible(true);
-        } catch (RemoteException ex) {
-            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_tableDaftarAntrianMouseClicked
-
     private void NamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaDokterActionPerformed
         
     }//GEN-LAST:event_NamaDokterActionPerformed
@@ -287,10 +277,21 @@ public class Menursepsionis extends javax.swing.JFrame {
         
     }//GEN-LAST:event_NamanyaActionPerformed
 
+    private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
+        int row = tableDaftarAntrian.getSelectedRow();
+        
+        try {
+            new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 1))).setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_tableDaftarAntrianMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DataDokter;
     private javax.swing.JButton LihatPasienInap;
     private javax.swing.JComboBox List_Antrian;
+    private javax.swing.JTextField NamaDokter;
     private javax.swing.JTextField Namanya;
     private javax.swing.JButton RegisPasienInap;
     private javax.swing.JButton RegisPasienReg;
@@ -303,7 +304,6 @@ public class Menursepsionis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     public javax.swing.JTable tableDaftarAntrian;
     // End of variables declaration//GEN-END:variables
 }

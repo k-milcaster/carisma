@@ -31,7 +31,7 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
     }
 
     @Override
-    public void insertDetailresep(Detailresep detailResep) throws RemoteException {
+    public boolean insertDetailresep(Detailresep detailResep) throws RemoteException {
         ui.act.append("Client Execute insertDetailresep " + detailResep.getIdDetailresep() + "\n");
 
         PreparedStatement statement = null;
@@ -44,11 +44,12 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
             statement.setString(3, detailResep.getNamaobatResep());
             statement.setInt(4, detailResep.getQtyResep());
             statement.setString(5, detailResep.getAturanpakaiResep());
-
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertDetailresep Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

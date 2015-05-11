@@ -95,8 +95,19 @@ public class DataDokterController {
         byte[] getFotoDokter = dokter.getFotoDokter();
         return getFotoDokter;
     }
+<<<<<<< HEAD
 
     public DefaultTableModel getDokter2(dokterform ui) throws RemoteException {
+=======
+   
+ public DefaultTableModel getDokter2(dokterform ui) throws RemoteException {
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/develop
+=======
+>>>>>>> origin/develop
+=======
+>>>>>>> origin/develop
         List<Dokter> list = new ArrayList<Dokter>();
         list = dokterService.getDokter();
         DefaultTableModel model = new DefaultTableModel();
@@ -108,8 +119,19 @@ public class DataDokterController {
         ui.TabelDokter.setModel(model);
         return model;
     }
+<<<<<<< HEAD
 
     public DefaultTableModel getDokterbyName(String nama) throws RemoteException {
+=======
+   
+   public DefaultTableModel getDokterbyName(String nama) throws RemoteException {
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/develop
+=======
+>>>>>>> origin/develop
+=======
+>>>>>>> origin/develop
         List<Dokter> list = new ArrayList<Dokter>();
         list = dokterService.getDokterByName(nama);
         DefaultTableModel model = new DefaultTableModel();
@@ -127,3 +149,21 @@ public class DataDokterController {
         return informasiDokter;
     }
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    
+
+ 
+>>>>>>> origin/develop
+=======
+    
+
+ 
+>>>>>>> origin/develop
+=======
+    
+
+ 
+>>>>>>> origin/develop

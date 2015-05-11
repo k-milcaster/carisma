@@ -95,7 +95,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
     }
 
     @Override
-    public void insertUser(User user) throws RemoteException {
+    public boolean insertUser(User user) throws RemoteException {
         ui.act.append("Client Execute insertUser " + user.toString() + "\n");
 
         PreparedStatement statement = null;
@@ -109,11 +109,12 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             statement.setString(4, user.getRegistered().toString());
             statement.setString(5, user.getRegistered().toString());
             statement.setString(6, user.getRole());
-            //nyoba branch
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertUser Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -126,7 +127,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
     }
 
     @Override
-    public void updateUser(User user) throws RemoteException {
+    public boolean updateUser(User user) throws RemoteException {
         ui.act.append("Client Execute updateCustomers(" + user.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -142,10 +143,11 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             statement.setInt(4, user.getIdUser());
             //System.out.println(statement);
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateUser Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -157,7 +159,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
     }
 
     @Override
-    public void deleteUser(User user) throws RemoteException {
+    public boolean deleteUser(User user) throws RemoteException {
         ui.act.append("Client Execute deleteUser (" + user.toString() + ") \n");
         PreparedStatement statement = null;
         try {
@@ -165,9 +167,11 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
                     "DELETE FROM user WHERE id_user = ?");
             statement.setInt(1, user.getIdUser());
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteUser Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {

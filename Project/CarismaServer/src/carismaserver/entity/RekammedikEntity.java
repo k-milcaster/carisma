@@ -29,7 +29,7 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
     }
 
     @Override
-    public void insertRekamMedik(Rekammedik rekamMedik) throws RemoteException {
+    public boolean insertRekamMedik(Rekammedik rekamMedik) throws RemoteException {
         ui.act.append("Client Execute insertRekammedik " + rekamMedik.getIdRekammedik() + " \n");
 
         PreparedStatement statement = null;
@@ -49,9 +49,11 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             statement.setString(10, rekamMedik.getKondisipasienkeluarRekammedis());
             statement.setString(11, rekamMedik.getResepIdResep());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertRekammedik Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -64,12 +66,13 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
     }
 
     @Override
-    public void updateRekamMedik(Rekammedik rekamMedik) throws RemoteException {
+    public boolean updateRekamMedik(Rekammedik rekamMedik) throws RemoteException {
         //masak rekammedik di update??
+        return false;
     }
 
     @Override
-    public void deleteRekamMedik(String rekamMedik) throws RemoteException {
+    public boolean deleteRekamMedik(String rekamMedik) throws RemoteException {
         ui.act.append("Client Execute deleteRekamMedik (" + rekamMedik + " \n");
         PreparedStatement statement = null;
         try {
@@ -77,9 +80,11 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
                     "DELETE FROM rekammedik WHERE id_rekammedik = ?");
             statement.setString(1, rekamMedik);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteRekamMedik Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
