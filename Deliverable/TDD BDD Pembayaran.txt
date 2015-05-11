@@ -8,14 +8,15 @@ getBiayaObat(idTransaksiJualObat):ArrayList<ArrayList> biayaObat	| assertEquals(
 setTableModel(Model)							| -
 setTotalBiaya()								| -
 doBayar(pembayaran,biaya):boolean					| assertTrue(resultCondition);
-cetak():boolean								| -
+cetak()									| -
+showMessageDialog("pembayaran berhasil")					| -
 ____________________________________________________________________________________________________________________________________
 Story Card : Pembayaran pasien
 Scenario : Pembayaran pasien jika id kunjungan tidak ditemukan
 
 showBiaya(idKunjungan):TableModel biaya					| assertFalse(resultRowCount);
 getKunjungan(idKunjungan):Kunjungan kunjungan				| assertEquals(expectedKunjungan, resultKunjungan);
-JOptionPane("id kunjungan tidak ditemukan")				| -
+showMessageDialog("id kunjungan tidak ditemukan")			| -
 ____________________________________________________________________________________________________________________________________
 Story Card : Pembayaran pasien
 Scenario : Pembayaran pasien jika nominal pembayaran tidak sesuai
@@ -27,4 +28,4 @@ getBiayaObat(idTransaksiJualObat):ArrayList<ArrayList> biayaObat	| assertEquals(
 setTableModel(Model)							| -
 setTotalBiaya()								| -
 doBayar(pembayaran,biaya):boolean					| assertFalse(resultCondition);
-JOptionPane("pembayaran gagal")						| -
+showMessageDialog("pembayaran gagal")					| -
