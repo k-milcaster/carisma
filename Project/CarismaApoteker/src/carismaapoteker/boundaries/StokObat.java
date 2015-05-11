@@ -6,6 +6,7 @@ import carismainterface.entity.Detailobat;
 import carismainterface.entity.Obat;
 import carismainterface.entity.User;
 import carismainterface.server.ObatService;
+import carismainterface.server.PegawaiService;
 import java.awt.Color;
 import java.awt.Font;
 import java.rmi.RemoteException;
@@ -25,22 +26,28 @@ public class StokObat extends javax.swing.JFrame {
 
     private ClientSocket client;
     private String userName;
+    private StokObatController control;
     public ObatService os;
+     private PegawaiService pegawaiService;
+    private  String[] namaPegawai; 
+    private int total = 0;
+    public int row = 0;
 
     private DefaultTableModel tableObat = new DefaultTableModel();
 
     public StokObat(ClientSocket Client, String userName) throws RemoteException {
         //    
         this.client = Client;
-        final StokObatController control = new StokObatController(this.client);
+        control = new StokObatController(this.client);
         os = client.getObatService();
         this.userName = userName;
         initComponents();
-        labelApotekerName.setText(this.userName);
+        namaPegawai = control.getNamaPegawai(this.userName);
+        labelApotekerName.setText(namaPegawai[0]);
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
 
-        control.getObats(this);
+        tableMedicine.setModel(control.getObats());
 
         tableMedicine.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -416,7 +423,7 @@ public class StokObat extends javax.swing.JFrame {
         try {
             StokObatController control = new StokObatController(client);
             model = control.getObatbyName(fieldSearch.getText());
-            System.out.println(model);
+           // System.out.println(model);
             tableMedicine.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
@@ -450,7 +457,7 @@ public class StokObat extends javax.swing.JFrame {
             else {
                 JOptionPane.showMessageDialog(null, "Stok Kritis Obat Tidak Terupdate");
                  }
-            controller.getObats(this);
+            tableMedicine.setModel(controller.getObats());
             fieldStokKritis.setText("");
             } 
         catch (Exception e) { 
