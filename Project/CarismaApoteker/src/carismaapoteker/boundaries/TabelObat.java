@@ -23,7 +23,9 @@ public class TabelObat extends javax.swing.JFrame {
         this.client = client;
         TransaksiJualObatController control = new TransaksiJualObatController(this.client);
         setLocationRelativeTo(ui);
-        control.getTableObat(this);
+        DefaultTableModel tabelObat = new DefaultTableModel();
+        tabelObat = control.getTableObat();
+        tableMedicine.setModel(tabelObat);
     }
 
     @SuppressWarnings("unchecked")
