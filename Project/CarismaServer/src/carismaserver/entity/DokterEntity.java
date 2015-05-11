@@ -30,7 +30,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
     }
 
     @Override
-    public void insertDokter(Dokter dokter) throws RemoteException {
+    public boolean insertDokter(Dokter dokter) throws RemoteException {
         ui.act.append("Client Execute insertDokter " + dokter.getIdDokter() + "\n");
 
         PreparedStatement statement = null;
@@ -59,9 +59,11 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             statement.setDouble(19, dokter.getGajikonsulDokter());
             statement.executeUpdate();
             System.out.println(statement.toString());
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertDokter Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -74,7 +76,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
     }
 
     @Override
-    public void updateDokter(Dokter dokter) throws RemoteException {
+    public boolean updateDokter(Dokter dokter) throws RemoteException {
         ui.act.append("Client Execute updateDokter(" + dokter.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -105,10 +107,11 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             statement.setInt(17, dokter.getGajilemburDokter());
             statement.setDouble(18, dokter.getGajikonsulDokter());
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdateDokter Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -120,7 +123,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
     }
 
     @Override
-    public void deleteDokter(String dokter) throws RemoteException {
+    public boolean deleteDokter(String dokter) throws RemoteException {
         ui.act.append("Client Execute deleteDokter (" + dokter + ") \n");
         PreparedStatement statement = null;
         try {
@@ -128,9 +131,11 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                     "DELETE FROM dokter WHERE id_dokter = ?");
             statement.setString(1, dokter);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deleteDokter Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -264,7 +269,18 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                 }
             }
         }
-    }}
+    }
+
+    @Override
+    public List<Dokter> getDokterByName(String nama) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String[] getDokterById(String idDokter) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+}
 
 
 
