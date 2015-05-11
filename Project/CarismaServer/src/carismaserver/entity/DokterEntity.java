@@ -318,6 +318,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     @Override
     public List<Dokter> getDokterByName(String dokter) throws RemoteException {
         ui.act.append("Client Execute getPasienListByName  \n");
@@ -395,6 +396,18 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 
             List<Dokter> list = new ArrayList<Dokter>();
 >>>>>>> origin/develop
+=======
+    public List<Dokter> getDokter2() throws RemoteException {
+        ui.act.append("Client Execute getDokterList \n");
+
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT * FROM dokter");
+
+            List<Dokter> list = new ArrayList<Dokter>();
+>>>>>>> origin/develop
 
             while (result.next()) {
                 Dokter dokter = new Dokter();
@@ -407,6 +420,9 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/develop
+=======
 >>>>>>> origin/develop
 =======
 >>>>>>> origin/develop
@@ -418,6 +434,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             result.close();
             return list;
 
+<<<<<<< HEAD
         } catch (SQLException exception) {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -475,6 +492,10 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 =======
             ui.act.append("getDokterList Error \n");
 >>>>>>> origin/develop
+=======
+        } catch (SQLException exception) {
+            ui.act.append("getDokterList Error \n");
+>>>>>>> origin/develop
             ui.act.append(exception.toString());
             return null;
         } finally {
@@ -487,7 +508,10 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/develop
 =======
 >>>>>>> origin/develop
 =======
@@ -579,6 +603,9 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/develop
+=======
 >>>>>>> origin/develop
 =======
 >>>>>>> origin/develop
