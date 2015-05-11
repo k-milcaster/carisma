@@ -48,10 +48,25 @@ public class AntrianControllerTest {
     @Test
     public void testGetAntrian() throws Exception {
         System.out.println("getAntrian");
+<<<<<<< HEAD
         ClientSocket client = new ClientSocket();
         Menursepsionis ui = new Menursepsionis(client, "resp1");
         AntrianController instance = new AntrianController(client);
         instance.getAntrian(ui);
+=======
+        Menursepsionis ui = new Menursepsionis(client, "resp1");       
+        AntrianController instance = new AntrianController(client);
+        DefaultTableModel expResult = instance.getAntrian(ui);
+        DefaultTableModel result = instance.getAntrian(ui);
+        boolean resultCondition = false;
+        System.out.println(result.getRowCount());
+        if (result.getRowCount()>=1){
+            resultCondition = true;
+        }
+        assertTrue(resultCondition);
+        
+               
+>>>>>>> 01d21a6da2e3c2e4ce44b8098973990323c46589
     }
 
     /**
@@ -78,6 +93,10 @@ public class AntrianControllerTest {
         ClientSocket client = new ClientSocket();
         AntrianController instance = new AntrianController(client);
         instance.getDetailPasien(idPasien);
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 01d21a6da2e3c2e4ce44b8098973990323c46589
         // TODO review the generated test code and remove the default call to fail.
         
     }
