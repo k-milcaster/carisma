@@ -14,7 +14,6 @@ class Login extends Controller {
     function index() {
         Index::__construct();
     }
-    
 }
 
 ?>
