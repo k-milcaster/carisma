@@ -96,7 +96,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
 
     @Override
     public boolean insertUser(User user) throws RemoteException {
-        ui.act.append("Client Execute insertUser " + user.toString() + "\n");
+        //ui.act.append("Client Execute insertUser " + user.toString() + "\n");
 
         PreparedStatement statement = null;
         try {
@@ -128,7 +128,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
 
     @Override
     public boolean updateUser(User user) throws RemoteException {
-        ui.act.append("Client Execute updateCustomers(" + user.toString() + ") \n");
+        //ui.act.append("Client Execute updateCustomers(" + user.toString() + ") \n");
 
         PreparedStatement statement = null;
         try {
@@ -160,7 +160,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
 
     @Override
     public boolean deleteUser(User user) throws RemoteException {
-        ui.act.append("Client Execute deleteUser (" + user.toString() + ") \n");
+        //ui.act.append("Client Execute deleteUser (" + user.toString() + ") \n");
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
