@@ -10,7 +10,9 @@ import java.util.List;
 public interface KunjunganService extends Remote {
     
     boolean insertKunjungan(Kunjungan kunjungan) throws RemoteException;
-
+    
+    boolean deleteKunjungan(String idKunjungan) throws RemoteException;
+    
     List<Kunjungan> getKunjunganByPasien(String idPasien) throws RemoteException;
     
     Kunjungan getKunjungan(String kunjungan) throws RemoteException;
