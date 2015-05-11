@@ -1,0 +1,28 @@
+Story Card : Pendaftaran Pasien Rawat Inap
+Scenario : Pendaftaran Berhasil
+
+showPasien(idPasien):TableModel tablepasien				| assertTrue(resultRowCount);
+showKamar(idKamar):TableModel tablekamar				| assertTrue(resultRowCount);
+getNamaPasien(Rawatinap ui)						| assserTrue(model)
+getNamaKamar(Rawatinap ui)						| assserTrue(model)
+getPasienByName(nama)							| assertEquals(expectedNama, resultNama);
+getSelectedRow():TableModel tablepasien					| assertTrue(resultSelectedRow);
+getSelectedRow():TableModel tablekamar					| assertTrue(resultSelectedRow);
+ok()									| -							
+insertNamaPasien(namapasien,idpasien,idkamar,namaKamar,kelas,tarif)	| assertEquals(expected namapasien,idpasien,idkamar,namaKamar,kelas,tarif; result namapasien,idpasien,idkamar,namaKamar,kelas,tarif );
+showMessageDialog("yakin menyimpan?")					| -
+showMessageDialog("data berhasil tersimpan?")				| -
+____________________________________________________________________________________________________________________________________
+Story Card :  Pendaftaran Pasien Rawat Inap
+Scenario : Data Tidak Lengkap
+
+showPasien(idPasien):TableModel tablepasien				| assertTrue(resultRowCount);
+showKamar(idKamar):TableModel tablekamar				| assertTrue(resultRowCount);
+getNamaPasien(Rawatinap ui)						| assserTrue(model)
+getNamaKamar(Rawatinap ui)						| assserTrue(model)
+getPasienByName(nama)							| assertEquals(expectedNama, resultNama);
+getSelectedRow():TableModel tablekamar					| assertTrue(resultSelectedRow);
+ok()									| -							
+showMessageDialog("ada data yang belum terisi")				| -
+____________________________________________________________________________________________________________________________________
+				| -
