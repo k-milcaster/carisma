@@ -312,7 +312,8 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                 }
             }
         }
-    }
+    }}
+
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -416,6 +417,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             List<Dokter> list = new ArrayList<Dokter>();
 >>>>>>> origin/develop
 
+<<<<<<< HEAD
 =======
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "SELECT * FROM dokter WHERE nama_dokter LIKE '%"+namadokter+"%'");
@@ -612,3 +614,5 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
 =======
 >>>>>>> parent of bc761f9... do: Membuat query getDokter2, getDokterByName dan getDokterById
 }
+=======
+>>>>>>> origin/develop

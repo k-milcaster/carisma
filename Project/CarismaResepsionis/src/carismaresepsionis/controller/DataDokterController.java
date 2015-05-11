@@ -124,6 +124,7 @@ public class DataDokterController {
     public DefaultTableModel getDokterbyName(String nama) throws RemoteException {
 =======
    
+<<<<<<< HEAD
    public DefaultTableModel getDokterbyName(String nama) throws RemoteException {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -148,6 +149,9 @@ public class DataDokterController {
         String[] informasiDokter = dokterService.getDokterById(idDokter);
         return informasiDokter;
     }
+=======
+    
+>>>>>>> origin/develop
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
