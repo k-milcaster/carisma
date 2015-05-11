@@ -1,0 +1,31 @@
+Story Card : Log In Web
+Scenario : Log In Berhasil
+
+showBiaya(idKunjungan):TableModel biaya					| assertTrue(resultRowCount);
+getKunjungan(idKunjungan):Kunjungan kunjungan				| assertEquals(expectedKunjungan, resultKunjungan);
+getBiayaKamar(idPeminjaman):ArrayList biayaKamar			| assertEquals(expectedBiayaKamar, resultBiayaKamar);
+getBiayaObat(idTransaksiJualObat):ArrayList<ArrayList> biayaObat	| assertEquals(expectedBiayaObat, resultBiayaObat);
+setTableModel(Model)							| -
+setTotalBiaya()								| -
+doBayar(pembayaran,biaya):boolean					| assertTrue(resultCondition);
+cetak()									| -
+showMessageDialog("pembayaran berhasil")					| -
+____________________________________________________________________________________________________________________________________
+Story Card : Pembayaran pasien
+Scenario : Pembayaran pasien jika id kunjungan tidak ditemukan
+
+showBiaya(idKunjungan):TableModel biaya					| assertFalse(resultRowCount);
+getKunjungan(idKunjungan):Kunjungan kunjungan				| assertEquals(expectedKunjungan, resultKunjungan);
+showMessageDialog("id kunjungan tidak ditemukan")			| -
+____________________________________________________________________________________________________________________________________
+Story Card : Pembayaran pasien
+Scenario : Pembayaran pasien jika nominal pembayaran tidak sesuai
+
+showBiaya(idKunjungan):TableModel biaya					| assertTrue(resultRowCount);
+getKunjungan(idKunjungan):Kunjungan kunjungan				| assertEquals(expectedKunjungan, resultKunjungan);
+getBiayaKamar(idPeminjaman):ArrayList biayaKamar			| assertEquals(expectedBiayaKamar, resultBiayaKamar);
+getBiayaObat(idTransaksiJualObat):ArrayList<ArrayList> biayaObat	| assertEquals(expectedBiayaObat, resultBiayaObat);
+setTableModel(Model)							| -
+setTotalBiaya()								| -
+doBayar(pembayaran,biaya):boolean					| assertFalse(resultCondition);
+showMessageDialog("pembayaran gagal")					| -
