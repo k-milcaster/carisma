@@ -25,4 +25,19 @@ getSelectedRow():TableModel tablekamar					| assertTrue(resultSelectedRow);
 ok()									| -							
 showMessageDialog("ada data yang belum terisi")				| -
 ____________________________________________________________________________________________________________________________________
-				| -
+Story Card :  Pendaftaran Pasien Rawat Inap
+Scenario : Pasien telah check out
+
+
+____________________________________________________________________________________________________________________________________
+Story Card :  Pendaftaran Pasien Rawat Inap
+Scenario : Melihat data daftar pasien yang dirawat inap
+
+
+____________________________________________________________________________________________________________________________________
+Story Card :  Pendaftaran Pasien Rawat Inap
+Scenario : Tidak ada kamar kosong
+
+showPasien(idPasien):TableModel tablepasien				| assertFalse(showMessageDialog("tidak ada kamar kosong"));
+showKamar(idKamar):TableModel tablekamar				| assertFalse(showMessageDialog("tidak ada kamar kosong"));
+			
