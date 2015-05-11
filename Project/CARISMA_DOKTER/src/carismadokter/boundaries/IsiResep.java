@@ -16,10 +16,11 @@ public class IsiResep extends javax.swing.JFrame {
     private ArrayList<Integer> listQuantity = new ArrayList<>();
     private ArrayList<String> listAturanPakai = new ArrayList<>();
     private DefaultComboBoxModel listNamaObat = new DefaultComboBoxModel();
-    public IsiResep(ClientSocket client, isirekammedis ui) throws RemoteException{
+
+    public IsiResep(ClientSocket client, isirekammedis ui) throws RemoteException {
         this.client = client;
         IsiRekamMedisController rekamMedisControl = new IsiRekamMedisController(this.client);
-        
+
         initComponents();
         this.ui = ui;
         fieldIdResep.setText(rekamMedisControl.getIdResep());
@@ -33,16 +34,16 @@ public class IsiResep extends javax.swing.JFrame {
 //        String idDetailResep = rekamMedisControl.getIdDetailResep();
 //        return idDetailResep;
 //    }
-    
-    public void clearField(){
+    public void clearField() {
         fieldIdResep.setText("");
         fieldQuantity.setText("");
         fieldAturanPakai.setText("");
         textAreaKeterangan.setText("");
-        DefaultListModel model = (DefaultListModel)listNamaObat1.getModel();
+        DefaultListModel model = (DefaultListModel) listNamaObat1.getModel();
         model.removeAllElements();
         listNamaObat1.setModel(model);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -177,24 +178,31 @@ public class IsiResep extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSimpanResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimpanResepActionPerformed
-        if (String.valueOf(comboBoxObat.getSelectedItem()).equals("") || fieldIdResep.getText().equals("") ) {
+        if (String.valueOf(comboBoxObat.getSelectedItem()).equals("") || fieldIdResep.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Data yang Anda Masukkan Kurang Lengkap", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
                 IsiRekamMedisController rekamMedisControl = new IsiRekamMedisController(client);
 
-                int pilihan = JOptionPane.showConfirmDialog(null, "Apakah Data yang Anda Masukkan Sudah Benar?","Resep Obat", JOptionPane.YES_NO_OPTION);
+                int pilihan = JOptionPane.showConfirmDialog(null, "Apakah Data yang Anda Masukkan Sudah Benar?", "Resep Obat", JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
-                    rekamMedisControl.insertResep(fieldIdResep.getText(), textAreaKeterangan.getText());
+                    boolean insertResep = false;
+                    boolean insertDetailResep = false;
+
+                    insertResep = rekamMedisControl.insertResep(fieldIdResep.getText(), textAreaKeterangan.getText());
                     for (int i = 0; i < listNamaObat1.getModel().getSize(); i++) {
                         String idDetailResep = rekamMedisControl.getIdDetailResep();
-                        rekamMedisControl.insertDetailResep(idDetailResep, fieldIdResep.getText(), String.valueOf(listNamaObat1.getModel().getElementAt(i)), listQuantity.get(i), listAturanPakai.get(i));
+                        insertDetailResep = rekamMedisControl.insertDetailResep(idDetailResep, fieldIdResep.getText(), String.valueOf(listNamaObat1.getModel().getElementAt(i)), listQuantity.get(i), listAturanPakai.get(i));
                     }
-                    JOptionPane.showMessageDialog(null, "Data Resep Obat Sudah Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
-                    ui.idResep = fieldIdResep.getText();
-                    System.out.println(ui.idResep);
-                    clearField();
-                    this.dispose();
+                    if (insertDetailResep == true && insertResep == true) {
+                        JOptionPane.showMessageDialog(null, "Data Resep Obat Sudah Tersimpan", "Resep", JOptionPane.INFORMATION_MESSAGE);
+                        ui.idResep = fieldIdResep.getText();
+                        System.out.println(ui.idResep);
+                        clearField();
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Data Resep Obat Tidak Dapat Disimpan", "Resep", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             } catch (Exception e) {
                 System.out.println(e);
@@ -211,8 +219,8 @@ public class IsiResep extends javax.swing.JFrame {
         String obat = comboBoxObat.getSelectedItem().toString();
         model.addElement(obat);
         listNamaObat1.setModel(model);
-        String quantity = JOptionPane.showInputDialog(null, "Masukkan Quantity Obat","Quantity Obat",JOptionPane.QUESTION_MESSAGE);
-        String aturanPakai = JOptionPane.showInputDialog(null, "Masukkan Aturan Pakai Obat","Aturan Pakai Obat",JOptionPane.QUESTION_MESSAGE);
+        String quantity = JOptionPane.showInputDialog(null, "Masukkan Quantity Obat", "Quantity Obat", JOptionPane.QUESTION_MESSAGE);
+        String aturanPakai = JOptionPane.showInputDialog(null, "Masukkan Aturan Pakai Obat", "Aturan Pakai Obat", JOptionPane.QUESTION_MESSAGE);
         listQuantity.add(Integer.parseInt(quantity));
         listAturanPakai.add(aturanPakai);
         fieldQuantity.setText(quantity);
@@ -226,7 +234,7 @@ public class IsiResep extends javax.swing.JFrame {
     }//GEN-LAST:event_listNamaObat1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        DefaultListModel model = (DefaultListModel)listNamaObat1.getModel();
+        DefaultListModel model = (DefaultListModel) listNamaObat1.getModel();
         int row = listNamaObat1.getSelectedIndex();
         model.removeElementAt(row);
         listNamaObat1.setModel(model);
@@ -239,9 +247,8 @@ public class IsiResep extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         listQuantity.set(listNamaObat1.getSelectedIndex(), Integer.parseInt(fieldQuantity.getText()));
         listAturanPakai.set(listNamaObat1.getSelectedIndex(), fieldAturanPakai.getText());
-        JOptionPane.showMessageDialog(null, "Quantity Obat atau Auturan Pakai\nBerhasil Diubah","Quantity dan Aturan Pakai",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Quantity Obat atau Auturan Pakai\nBerhasil Diubah", "Quantity dan Aturan Pakai", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton5ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonSimpanResep;
     public javax.swing.JComboBox comboBoxObat;

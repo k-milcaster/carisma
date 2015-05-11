@@ -23,17 +23,17 @@ public class isirekammedis extends javax.swing.JFrame {
     private UserService login;
     private String username;
     public String idResep;
-        
+
     public isirekammedis(ClientSocket client, final String username) throws RemoteException {
         this.client = client;
         IsiRekamMedisController isiRekamMedisController = new IsiRekamMedisController(this.client);
         this.login = this.client.getUserService();
         this.username = username;
-        
+
         initComponents();
         Date date = new Date();
         dateRekamMedis.setDate(date);
-        
+
         this.jLabel1.setText(username);
         String[] dokterInfor = isiRekamMedisController.getIdNamaDokter(this.username);
         fieldIdDokter.setText(dokterInfor[0]);
@@ -42,7 +42,7 @@ public class isirekammedis extends javax.swing.JFrame {
         DefaultComboBoxModel listNamaPenyakit = new DefaultComboBoxModel();
         listNamaPenyakit = isiRekamMedisController.getNamaPenyakit();
         comboBoxPenyakit.setModel(listNamaPenyakit);
-        
+
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -59,14 +59,8 @@ public class isirekammedis extends javax.swing.JFrame {
             }
         });
     }
-    
-    public String getIdResep(IsiResep ui){
-        String idResep = ui.fieldIdResep.getText();
-        System.out.println("Get Id Resep"+idResep);
-        return idResep;
-    }
-    
-    public void clearField(){
+
+    public void clearField() {
         fieldIdPasien.setText("");
         textAreaKeluhan.setText("");
         textAreaAlergiObat.setText("");
@@ -74,10 +68,12 @@ public class isirekammedis extends javax.swing.JFrame {
         textAreaKondisiPasien.setText("");
         textAreaPemeriksaan.setText("");
         textAreaTerapi.setText("");
-        DefaultListModel modelPenyakit = (DefaultListModel)listPenyakit.getModel();
+        DefaultListModel modelPenyakit = (DefaultListModel) listPenyakit.getModel();
         modelPenyakit.removeAllElements();
         listPenyakit.setModel(modelPenyakit);
+        fieldBiaya.setText("");
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -601,34 +597,41 @@ public class isirekammedis extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (fieldIdPasien.getText().equals("") || textAreaKeluhan.getText().equals("") || textAreaPemeriksaan.getText().equals("") || 
-            textAreaTerapi.getText().equals("") || textAreaAlergiObat.getText().equals("") || textAreaKesimpulan.getText().equals("") ||
-            textAreaKondisiPasien.getText().equals("")) {
+        if (fieldIdPasien.getText().equals("") || textAreaKeluhan.getText().equals("") || textAreaPemeriksaan.getText().equals("")
+                || textAreaTerapi.getText().equals("") || textAreaAlergiObat.getText().equals("") || textAreaKesimpulan.getText().equals("")
+                || textAreaKondisiPasien.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Isi Data Rekam Medis dengan Lengkap", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-        else {
+        } else {
             try {
                 IsiRekamMedisController rekamMedisController = new IsiRekamMedisController(client);
-                
-                int pilihan = JOptionPane.showConfirmDialog(null, "Apakah Data yang Anda Isi Sudah Benar?","Rekam Medis",JOptionPane.YES_NO_OPTION);
+
+                int pilihan = JOptionPane.showConfirmDialog(null, "Apakah Data yang Anda Isi Sudah Benar?", "Rekam Medis", JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
-                    rekamMedisController.insertRekamMedis(fieldIdRekamMedis.getText(), fieldIdDokter.getText(), fieldIdPasien.getText(), String.valueOf(new java.sql.Date(dateRekamMedis.getDate().getTime())), 
-                                                      textAreaKeluhan.getText(), textAreaPemeriksaan.getText(), textAreaTerapi.getText(), textAreaAlergiObat.getText(), 
-                                                      textAreaKesimpulan.getText(), textAreaKondisiPasien.getText(), idResep);
+                    boolean insertRekamMedis = false;
+                    boolean insertRekamMedisPenyakit = false;
+                    boolean insertKunjungan = false;
+
+                    insertRekamMedis = rekamMedisController.insertRekamMedis(fieldIdRekamMedis.getText(), fieldIdDokter.getText(), fieldIdPasien.getText(), String.valueOf(new java.sql.Date(dateRekamMedis.getDate().getTime())),
+                            textAreaKeluhan.getText(), textAreaPemeriksaan.getText(), textAreaTerapi.getText(), textAreaAlergiObat.getText(),
+                            textAreaKesimpulan.getText(), textAreaKondisiPasien.getText(), idResep);
                     for (int i = 0; i < listPenyakit.getModel().getSize(); i++) {
-                        String idPenyakit = String.valueOf( listPenyakit.getModel().getElementAt(i));
-                        String [] idPenyakitList = idPenyakit.split(" ");
+                        String idPenyakit = String.valueOf(listPenyakit.getModel().getElementAt(i));
+                        String[] idPenyakitList = idPenyakit.split(" ");
                         idPenyakit = idPenyakitList[0];
-                        rekamMedisController.insertRekamMedisPenyakit(fieldIdRekamMedis.getText(), idPenyakit);
+                        insertRekamMedisPenyakit = rekamMedisController.insertRekamMedisPenyakit(fieldIdRekamMedis.getText(), idPenyakit);
                     }
-					String idKunjungan = rekamMedisController.getIdKunjungan();
-                    rekamMedisController.insertKunjungan(idKunjungan, fieldIdPasien.getText(), fieldIdRekamMedis.getText(), String.valueOf(new java.sql.Date(dateRekamMedis.getDate().getTime())), Integer.parseInt(fieldBiaya.getText()));
-                    JOptionPane.showMessageDialog(null, "Data Rekam Medis Sudah Tersimpan","Pemberitahuan",JOptionPane.INFORMATION_MESSAGE);
-                    clearField();
-                    fieldIdRekamMedis.setText(rekamMedisController.getIdRekamMedis());
+                    String idKunjungan = rekamMedisController.getIdKunjungan();
+                    insertKunjungan = rekamMedisController.insertKunjungan(idKunjungan, fieldIdPasien.getText(), fieldIdRekamMedis.getText(), String.valueOf(new java.sql.Date(dateRekamMedis.getDate().getTime())), Integer.parseInt(fieldBiaya.getText()));
+                    if (insertKunjungan == true && insertRekamMedis == true && insertRekamMedisPenyakit == true) {
+                        JOptionPane.showMessageDialog(null, "Data Rekam Medis Sudah Tersimpan", "Rekam Medik", JOptionPane.INFORMATION_MESSAGE);
+                        clearField();
+                        fieldIdRekamMedis.setText(rekamMedisController.getIdRekamMedis());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Data Rekam Medik Tidak Dapat Disimpan", "Rekam Medik", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             } catch (Exception e) {
-                System.out.println("there is an error when inserting data at class isirekammedis -> "+e);
+                System.out.println("there is an error when inserting data at class isirekammedis -> " + e);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -642,7 +645,7 @@ public class isirekammedis extends javax.swing.JFrame {
         String penyakit = comboBoxPenyakit.getSelectedItem().toString();
         model.addElement(penyakit);
         listPenyakit.setModel(model);
-        
+
     }//GEN-LAST:event_buttonTambahPenyakitActionPerformed
 
     private void buttonTambahResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahResepActionPerformed
@@ -654,8 +657,8 @@ public class isirekammedis extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonTambahResepActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DefaultListModel modelPenyakit = (DefaultListModel)listPenyakit.getModel();
-        
+        DefaultListModel modelPenyakit = (DefaultListModel) listPenyakit.getModel();
+
         int row = listPenyakit.getSelectedIndex();
         modelPenyakit.removeElementAt(row);
         listPenyakit.setModel(modelPenyakit);
@@ -670,14 +673,13 @@ public class isirekammedis extends javax.swing.JFrame {
             IsiRekamMedisController isiRekamMedisController = new IsiRekamMedisController(this.client);
             boolean registered = isiRekamMedisController.cekIdPasien(fieldIdPasien.getText());
             if (registered == false) {
-                JOptionPane.showMessageDialog(null, "Id Pasien "+fieldIdPasien.getText()+" belum pernah terdaftar\nSilakan mendaftar di bagian Resepsionis","Rekam Medis",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Id Pasien " + fieldIdPasien.getText() + " belum pernah terdaftar\nSilakan mendaftar di bagian Resepsionis", "Rekam Medis", JOptionPane.WARNING_MESSAGE);
             }
-    
+
         } catch (RemoteException ex) {
             Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_fieldIdPasienFocusLost
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonTambahPenyakit;
     private javax.swing.JButton buttonTambahResep;
