@@ -81,4 +81,28 @@ public class ResepEntity extends UnicastRemoteObject implements ResepService {
             }
         }
     }
+	
+	@Override
+    public boolean deletedResep(String idResep) throws RemoteException {
+        ui.act.append("Client Execute deleteResep (" + idResep + " \n");
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "DELETE FROM resep WHERE id_resep = ?");
+            statement.setString(1, idResep);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            ui.act.append("deleteResep Error \n");
+            ui.act.append(e.toString());
+            return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
 }

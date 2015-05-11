@@ -43,7 +43,7 @@ public class IsiRekamMedisController {
         kunjunganService = client.getKunjunganService();
     }
 
-    public void insertRekamMedis(String idRekammedik, String idDokter, String idPasien, String tglRekamMedis, String keluhan, String pemeriksaan, String terapi, String alergiObat, String kesimpulanPemeriksaan, String kondisiPasien, String idResep) throws RemoteException {
+    public boolean insertRekamMedis(String idRekammedik, String idDokter, String idPasien, String tglRekamMedis, String keluhan, String pemeriksaan, String terapi, String alergiObat, String kesimpulanPemeriksaan, String kondisiPasien, String idResep) throws RemoteException {
         Rekammedik rekamMedik = new Rekammedik();
         rekamMedik.setIdRekammedik(idRekammedik);
         rekamMedik.setDokterIdDokter(idDokter);
@@ -56,32 +56,55 @@ public class IsiRekamMedisController {
         rekamMedik.setKesimpulanRekammedis(kesimpulanPemeriksaan);
         rekamMedik.setKondisipasienkeluarRekammedis(kondisiPasien);
         rekamMedik.setResepIdResep(idResep);
-        rekamMedikService.insertRekamMedik(rekamMedik);
+        return rekamMedikService.insertRekamMedik(rekamMedik);
     }
 
-    public void insertRekamMedisPenyakit(String idRekamMedis, String idPenyakit) throws RemoteException {
+    public boolean deleteRekamMedik(String id) throws RemoteException {
+        return rekamMedikService.deleteRekamMedik(id);
+    }
+
+    public boolean insertRekamMedisPenyakit(String idRekamMedis, String idPenyakit) throws RemoteException {
+        boolean inserted = false;
         Rekammedikpenyakit rekamMedisPenyakit = new Rekammedikpenyakit(idRekamMedis, idPenyakit);
-        rekamMedisPenyakitService.insertRekamMedikPenyakit(rekamMedisPenyakit);
+        inserted = rekamMedisPenyakitService.insertRekamMedikPenyakit(rekamMedisPenyakit);
+        return inserted;
     }
 
-    public void insertResep(String idResep, String keterangan) throws RemoteException {
+    public boolean deleteRekamMedikPenyakit(String idRekamMedik) throws RemoteException {
+        return rekamMedisPenyakitService.deleteRekammedikPenyakit(idRekamMedik);
+    }
+
+    public boolean insertResep(String idResep, String keterangan) throws RemoteException {
+        boolean inserted = false;
         Resep resep = new Resep();
         resep.setIdResep(idResep);
         resep.setKeterangan(keterangan);
-        resepService.insertResep(resep);
+        inserted = resepService.insertResep(resep);
+        return inserted;
+    }
+    
+    public boolean deleteResep(String idResep) throws RemoteException{
+        return resepService.deletedResep(idResep);
     }
 
-    public void insertDetailResep(String idDetailResep, String idResep, String namaObat, int quantity, String aturanPakai) throws RemoteException {
+    public boolean insertDetailResep(String idDetailResep, String idResep, String namaObat, int quantity, String aturanPakai) throws RemoteException {
+        boolean inserted = false;
         Detailresep detailResep = new Detailresep();
         detailResep.setIdDetailresep(idDetailResep);
         detailResep.setResepIdResep(idResep);
         detailResep.setNamaobatResep(namaObat);
         detailResep.setQtyResep(quantity);
         detailResep.setAturanpakaiResep(aturanPakai);
-        detailResepService.insertDetailresep(detailResep);
+        inserted = detailResepService.insertDetailresep(detailResep);
+        return inserted;
     }
     
-    public void insertKunjungan(String idKunjungan, String idPasien, String idRekamMedik, String tglKunjungan, int biaya) throws RemoteException{
+    public boolean deleteDetailResep(String idDetailResep) throws RemoteException{
+        return detailResepService.deleteDetailResep(idDetailResep);
+    }
+
+    public boolean insertKunjungan(String idKunjungan, String idPasien, String idRekamMedik, String tglKunjungan, int biaya) throws RemoteException {
+        boolean inserted = false;
         Kunjungan kunjungan = new Kunjungan();
         kunjungan.setIdKunjungan(idKunjungan);
         kunjungan.setPasienIdPasien(idPasien);
@@ -90,7 +113,12 @@ public class IsiRekamMedisController {
         kunjungan.setPasienKamarIdPeminjaman("kosong");
         kunjungan.setTanggaljamKunjungan(tglKunjungan);
         kunjungan.setBiayaKunjungan(biaya);
-        kunjunganService.insertKunjungan(kunjungan);
+        inserted = kunjunganService.insertKunjungan(kunjungan);
+        return inserted;
+    }
+    
+    public boolean deleteKunjungan(String idKunjungan) throws RemoteException{
+        return kunjunganService.deleteKunjungan(idKunjungan);
     }
 
     public String getIdDetailResep() throws RemoteException {
@@ -145,8 +173,7 @@ public class IsiRekamMedisController {
         }
         if (lastIdResep == null || (!getDateNow().equals(getDateOnly))) {
             idResepFix = awalan.concat("001");
-        } 
-        else {
+        } else {
             char[] lastDigit = lastIdResep.toCharArray();
             char[] newLastDigit = new char[3];
             for (int i = 0; i < 3; i++) {
@@ -182,8 +209,7 @@ public class IsiRekamMedisController {
         }
         if (lastIdRekamMedik == null || (!dateNow.equals(getDateOnly))) {
             idRekamMedisFix = awalan.concat("001");
-        } 
-        else {
+        } else {
             char[] lastDigit = lastIdRekamMedik.toCharArray();
             char[] newLastDigit = new char[3];
             for (int i = 0; i < 3; i++) {
@@ -200,8 +226,8 @@ public class IsiRekamMedisController {
         }
         return idRekamMedisFix;
     }
-    
-    public String getIdKunjungan() throws RemoteException{
+
+    public String getIdKunjungan() throws RemoteException {
         String lastIdKunjungan = kunjunganService.getLastIdKunjungan();
         String[] splitDateNow = getDateNow().split("-");
         String dateNow = splitDateNow[0].concat(splitDateNow[1]).concat(splitDateNow[2]);
@@ -219,8 +245,7 @@ public class IsiRekamMedisController {
         }
         if (lastIdKunjungan == null || !dateNow.equals(getDateOnly)) {
             idKunjunganFix = awalan.concat("001");
-        }
-        else {
+        } else {
             char[] lastDigit = lastIdKunjungan.toCharArray();
             char[] newLastDigit = new char[3];
             for (int i = 0; i < 3; i++) {
