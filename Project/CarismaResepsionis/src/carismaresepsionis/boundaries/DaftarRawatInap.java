@@ -3,6 +3,15 @@ package carismaresepsionis.boundaries;
 import carismainterface.server.UserService;
 import carismaresepsionis.boundaries.*;
 import carismaresepsionis.controller.ClientSocket;
+import carismaresepsionis.controller.DaftarRawatInapController;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,6 +20,7 @@ import carismaresepsionis.controller.ClientSocket;
 public class DaftarRawatInap extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
+    private DefaultTableModel tablePasienRawat = new DefaultTableModel();
     String a, b, c, d, e, f, g, h, i, j, k;
     settergetter simpanan = new settergetter();
 
@@ -21,12 +31,14 @@ public class DaftarRawatInap extends javax.swing.JFrame {
    // System.out.println(umurini);
         return String.valueOf(umurini);
     }
-    public DaftarRawatInap(ClientSocket client, String userName) {
+    public DaftarRawatInap(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
+        DaftarRawatInapController control = new DaftarRawatInapController(this.client);
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        Find.requestFocus();
+        tablePasienRawat = control.getNamaPasienRawatInap(this);
+ 
         Tempat_ID.setEditable(false);
         UmurPasien.setEditable(false);
         a = Nama_Pasien.getText();
@@ -67,7 +79,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         CariPasien = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelPasien = new javax.swing.JTable();
-        Find = new javax.swing.JButton();
         Provinsi = new javax.swing.JComboBox();
         Kota = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
@@ -254,55 +265,71 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(TambahAntri);
         TambahAntri.setBounds(158, 605, 167, 40);
 
-        CariPasien.setText("- Cari Nama Pasien -");
+        CariPasien.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        CariPasien.setForeground(new java.awt.Color(204, 204, 204));
+        CariPasien.setText("Cari Nama Pasien");
+        CariPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CariPasienActionPerformed(evt);
+            }
+        });
+        CariPasien.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CariPasienFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CariPasienFocusLost(evt);
+            }
+        });
+        CariPasien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                CariPasienKeyReleased(evt);
+            }
+        });
         getContentPane().add(CariPasien);
-        CariPasien.setBounds(45, 105, 457, 32);
+        CariPasien.setBounds(45, 105, 560, 32);
 
         TabelPasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Nama Pasien"
+                "Id Pasien", "Nama Pasien"
             }
         ));
+        TabelPasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelPasienMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TabelPasien);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(45, 155, 558, 444);
-
-        Find.setText("CARI");
-        Find.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FindActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Find);
-        Find.setBounds(508, 105, 95, 32);
 
         Provinsi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Provinsi -", "jatim", "jateng", "jabar", "kaltim", "kalteng", "kalbar" }));
         getContentPane().add(Provinsi);
@@ -570,16 +597,73 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_No_KartuFocusGained
 
-    private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FindActionPerformed
+    private void CariPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariPasienActionPerformed
+         if (evt.getSource() instanceof JTextField) {
+            
+        }
+    }//GEN-LAST:event_CariPasienActionPerformed
+
+    private void CariPasienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CariPasienFocusGained
+        if (CariPasien.getText().equals("Cari Nama Pasien")) {
+            CariPasien.setText("");
+        }
+    }//GEN-LAST:event_CariPasienFocusGained
+
+    private void CariPasienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CariPasienFocusLost
+        if (CariPasien.getText().equals("")) {
+            CariPasien.setText("Cari Nama Pasien");
+            CariPasien.setForeground(Color.gray);
+            CariPasien.setFont(new Font("Tahoma", 2, 12));
+        }
+        
+    }//GEN-LAST:event_CariPasienFocusLost
+
+    private void CariPasienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CariPasienKeyReleased
+        CariPasien.setForeground(Color.black);
+        CariPasien.setFont(new Font("Tahoma", 0, 12));
+        
+        DefaultTableModel model = new DefaultTableModel();
+        try {
+            DaftarRawatInapController control = new DaftarRawatInapController(client);
+            model = control.getNamaPasienRawatInapbyName(CariPasien.getText());
+            System.out.println(model);
+            TabelPasien.setModel(model);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_CariPasienKeyReleased
+
+    private void TabelPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelPasienMouseClicked
+        
+        int row = TabelPasien.getSelectedRow();
+        DaftarRawatInapController kamar = new DaftarRawatInapController (client);
+        try {
+            String [] infokamar = {};
+            infokamar = kamar.getNamaKelasKamarbyIdpasien(String.valueOf(TabelPasien.getValueAt(row, 0)));
+            
+            Tempat_ID.setText(String.valueOf(tablePasienRawat.getValueAt(row, 0)));
+            Nama_Pasien.setText(String.valueOf(tablePasienRawat.getValueAt(row, 1)));
+            Kamar.setText(infokamar[0]);
+            KelasKamar.setText(infokamar[1]);
+        
+        } catch (RemoteException ex) {
+            Logger.getLogger(DaftarRawatInap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Tempat_Lahir.setText(String.valueOf(tablePasienRawat.getValueAt(row, 2)));
+        //No_tele.setText(String.valueOf(tablePasienRawat.getValueAt(row, 2)));
+        //No_Hp.setText(String.valueOf(tablePasienRawat.getValueAt(row, 2)));
+        //No_Hp.setText(String.valueOf(tablePasienRawat.getValueAt(row, 2)));
+        //No_Hp.setText(String.valueOf(tablePasienRawat.getValueAt(row, 2)));
+        
+    }//GEN-LAST:event_TabelPasienMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alamat;
     private javax.swing.JTextField BeratPasien;
     private javax.swing.JComboBox BulanLahir;
     private javax.swing.JTextField CariPasien;
-    private javax.swing.JButton Find;
     private javax.swing.JLabel ID;
     private javax.swing.JTextField Jenis_Kartu;
     private javax.swing.JComboBox Jenis_Kelamin;
@@ -591,7 +675,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private javax.swing.JTextField No_Kartu;
     private javax.swing.JTextField No_tele;
     private javax.swing.JComboBox Provinsi;
-    private javax.swing.JTable TabelPasien;
+    public javax.swing.JTable TabelPasien;
     private javax.swing.JComboBox TahunLahir;
     private javax.swing.JButton TambahAntri;
     private javax.swing.JComboBox TanggalLahir;
