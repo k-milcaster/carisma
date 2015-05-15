@@ -39,7 +39,8 @@ public class dokterform extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        control.getNamaDokter();
+        TabelDokter.setModel(control.getDokterList());
+        //control.getNamaDokter();
         
 //        TabelDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 //
@@ -390,7 +391,7 @@ public class dokterform extends javax.swing.JFrame {
         try {
             DataDokterController control = new DataDokterController(client);
             model = control.getDokterByName(CariNamaDokter.getText());
-            System.out.println(model);
+            //System.out.println(model);
             TabelDokter.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
@@ -423,7 +424,7 @@ public class dokterform extends javax.swing.JFrame {
 
     private void LihatJadwalDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatJadwalDokterActionPerformed
         try {
-            new jadwaldokter(this.client, this.userName).show();
+            new jadwaldokter(this.client, this.userName, this.IdDokter.getText()).show();
         } catch (RemoteException ex) {
             Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
         }

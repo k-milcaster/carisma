@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismaresepsionis.controller;
 
-import carismainterface.server.DokterService;
 import carismaresepsionis.boundaries.dokterform;
 import javax.swing.table.DefaultTableModel;
 import org.junit.After;
@@ -212,12 +207,12 @@ public class DataDokterControllerTest {
      * Test of getDokter method, of class DataDokterController.
      */
     @Test
-    public void testGetDokter_dokterform() throws Exception {
+    public void testGetDokterList() throws Exception {
         System.out.println("getDokter");
         dokterform ui = new dokterform(client, "resp1");
         DataDokterController instance = new DataDokterController(client);
-        DefaultTableModel expResult = instance.getDokter(ui);
-        DefaultTableModel result = instance.getDokter(ui);
+        DefaultTableModel expResult = instance.getDokterList();
+        DefaultTableModel result = instance.getDokterList();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
