@@ -32,7 +32,8 @@ public class Menursepsionis extends javax.swing.JFrame {
         AntrianController control = new AntrianController(this.client);
         ps = client.getPasienService();
         initComponents();
-        control.getAntrian(this);       
+        tableAntri = control.getAntrian();
+        tableDaftarAntrian.setModel(tableAntri);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
         Namanya.setText(String.valueOf(this.userName));
