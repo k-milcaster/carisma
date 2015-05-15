@@ -9,6 +9,7 @@ import carismainterface.server.*;
 import carismaresepsionis.boundaries.Rawatinap;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,7 +25,22 @@ public class RawatinapController {
         this.pasienService = client.getPasienService();
         this.kamarService = client.getKamarService();
       
-} 
+    } 
+    
+   public String generatetanggal ( ){
+        String tanggal;
+        String bulan;
+        Date date = new Date ();
+        if (date.getMonth() > 8) {
+            bulan = Integer.toString((date.getMonth()+1));
+        }
+        else {
+            bulan = "0"+ Integer.toString((date.getMonth()+1));
+        }
+        tanggal = Integer.toString((date.getYear()+1900))+"-"+bulan+"-"+Integer.toString(date.getDate())+" "+Integer.toString(date.getHours())+":"+Integer.toString(date.getMinutes())+";"+Integer.toString(date.getSeconds());
+        return tanggal;
+    }
+   
    
    public DefaultTableModel getNamaPasien(Rawatinap ui) throws RemoteException{
         
