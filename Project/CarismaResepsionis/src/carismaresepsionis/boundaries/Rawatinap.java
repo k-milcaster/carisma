@@ -73,6 +73,7 @@ public class Rawatinap extends javax.swing.JFrame {
         idkamar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         tgl_regpasien = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -134,11 +135,11 @@ public class Rawatinap extends javax.swing.JFrame {
             }
         });
         carnampas.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                carnampasFocusLost(evt);
-            }
             public void focusGained(java.awt.event.FocusEvent evt) {
                 carnampasFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                carnampasFocusLost(evt);
             }
         });
         carnampas.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -260,6 +261,10 @@ public class Rawatinap extends javax.swing.JFrame {
         jLabel5.setBounds(990, 140, 120, 20);
         getContentPane().add(tgl_regpasien);
         tgl_regpasien.setBounds(1110, 130, 140, 30);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(4, 4, 1360, 690);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -406,6 +411,7 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField kelasKamar;

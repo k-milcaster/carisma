@@ -81,7 +81,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         TabelPasien = new javax.swing.JTable();
         Provinsi = new javax.swing.JComboBox();
         Kota = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        kembali = new javax.swing.JButton();
         Kamar = new javax.swing.JTextField();
         KelasKamar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -101,6 +101,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         No_Kartu = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -339,11 +340,16 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(Kota);
         Kota.setBounds(991, 479, 325, 32);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
-        jButton1.setText("Back");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(45, 605, 95, 40);
+        kembali.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
+        kembali.setText("Back");
+        kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kembaliActionPerformed(evt);
+            }
+        });
+        getContentPane().add(kembali);
+        kembali.setBounds(45, 605, 95, 40);
 
         Kamar.setText("Kamar");
         Kamar.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -452,6 +458,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         jLabel16.setText("Nomor Kartu");
         getContentPane().add(jLabel16);
         jLabel16.setBounds(980, 380, 60, 14);
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(4, 4, 1360, 690);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -659,6 +669,16 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         
     }//GEN-LAST:event_TabelPasienMouseClicked
 
+    private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
+        try {
+            new Menursepsionis (this.client, this.userName).show();
+        
+        } catch (RemoteException ex) {
+            Logger.getLogger(DaftarRawatInap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }//GEN-LAST:event_kembaliActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alamat;
     private javax.swing.JTextField BeratPasien;
@@ -684,12 +704,12 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private javax.swing.JTextField TinggiPasien;
     private javax.swing.JTextField UmurPasien;
     private javax.swing.JComboBox goldar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
@@ -702,5 +722,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton kembali;
     // End of variables declaration//GEN-END:variables
 }
