@@ -25,10 +25,6 @@ public class DataDokterController {
         this.dokterService = client.getDokterService();
     }
 
-    public DokterService getDokter() {
-        return this.dokterService;
-    }
-
     public DefaultTableModel getDokterList() throws RemoteException {
         List<Dokter> list = new ArrayList<Dokter>();
         list = dokterService.getDokter();
