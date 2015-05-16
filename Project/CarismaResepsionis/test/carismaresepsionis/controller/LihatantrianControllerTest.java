@@ -109,14 +109,14 @@ public class LihatantrianControllerTest {
     /**
      * Test of getTerakhirPeriksa method, of class LihatantrianController.
      */
-    @Test
-    public void testGetTerakhirPeriksa() {
-        System.out.println("getTerakhirPeriksa");
-        LihatantrianController instance = null;
-        String expResult = "";
-        String result = instance.getTerakhirPeriksa();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testGetTerakhirPeriksa() {
+//        System.out.println("getTerakhirPeriksa");
+//        LihatantrianController instance = null;
+//        String expResult = "";
+//        String result = instance.getTerakhirPeriksa();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 }

@@ -54,10 +54,10 @@ public class LihatantrianController {
         Integer Berat = pasien.getBeratPasien();
         return Berat;
     }
-    public String getTerakhirPeriksa(){
-        Kunjungan kunjungan = new Kunjungan();
-        String TerakhirPeriksa = kunjungan.getTanggaljamKunjungan();
-        return TerakhirPeriksa;        
-    }
+//    public String getTerakhirPeriksa(){
+//        Kunjungan kunjungan = new Kunjungan();
+//        String TerakhirPeriksa = kunjungan.getTanggaljamKunjungan();
+//        return TerakhirPeriksa;        
+//    }
     //public foto
 }

@@ -97,6 +97,12 @@ public class lihatantrian extends javax.swing.JFrame {
         jLabel2.setText("Nomor Antrian");
         jPanel3.add(jLabel2);
         jLabel2.setBounds(90, 0, 120, 40);
+
+        NomorAntrian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NomorAntrianActionPerformed(evt);
+            }
+        });
         jPanel3.add(NomorAntrian);
         NomorAntrian.setBounds(20, 40, 250, 90);
 
@@ -178,7 +184,7 @@ public class lihatantrian extends javax.swing.JFrame {
         jLabel5.setBounds(10, 0, 34, 14);
 
         jPanel10.add(jPanel11);
-        jPanel11.setBounds(410, 40, 110, 150);
+        jPanel11.setBounds(640, 40, 110, 150);
 
         jLabel6.setText("Nama");
         jPanel10.add(jLabel6);
@@ -186,23 +192,23 @@ public class lihatantrian extends javax.swing.JFrame {
 
         jLabel7.setText("Alamat");
         jPanel10.add(jLabel7);
-        jLabel7.setBounds(40, 90, 100, 14);
+        jLabel7.setBounds(40, 120, 100, 14);
 
         jLabel8.setText("Golongan Darah");
         jPanel10.add(jLabel8);
-        jLabel8.setBounds(40, 120, 130, 14);
+        jLabel8.setBounds(40, 210, 130, 14);
 
         jLabel9.setText("Umur");
         jPanel10.add(jLabel9);
-        jLabel9.setBounds(40, 150, 80, 14);
+        jLabel9.setBounds(280, 210, 80, 10);
 
         jLabel10.setText("Tinggi Badan");
         jPanel10.add(jLabel10);
-        jLabel10.setBounds(40, 180, 100, 14);
+        jLabel10.setBounds(40, 250, 100, 14);
 
         jLabel11.setText("Berat");
         jPanel10.add(jLabel11);
-        jLabel11.setBounds(40, 210, 70, 14);
+        jLabel11.setBounds(280, 250, 70, 14);
 
         NamaPasien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,9 +216,15 @@ public class lihatantrian extends javax.swing.JFrame {
             }
         });
         jPanel10.add(NamaPasien);
-        NamaPasien.setBounds(160, 50, 210, 20);
+        NamaPasien.setBounds(160, 50, 390, 50);
+
+        AlamatPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlamatPasienActionPerformed(evt);
+            }
+        });
         jPanel10.add(AlamatPasien);
-        AlamatPasien.setBounds(160, 80, 210, 20);
+        AlamatPasien.setBounds(160, 110, 390, 70);
 
         Goldar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,7 +232,7 @@ public class lihatantrian extends javax.swing.JFrame {
             }
         });
         jPanel10.add(Goldar);
-        Goldar.setBounds(160, 110, 60, 20);
+        Goldar.setBounds(160, 200, 60, 30);
 
         Umur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,9 +240,9 @@ public class lihatantrian extends javax.swing.JFrame {
             }
         });
         jPanel10.add(Umur);
-        Umur.setBounds(160, 140, 60, 20);
+        Umur.setBounds(350, 200, 60, 30);
         jPanel10.add(Tinggi);
-        Tinggi.setBounds(160, 170, 60, 20);
+        Tinggi.setBounds(160, 240, 60, 30);
 
         Berat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,16 +250,22 @@ public class lihatantrian extends javax.swing.JFrame {
             }
         });
         jPanel10.add(Berat);
-        Berat.setBounds(160, 200, 60, 20);
+        Berat.setBounds(350, 240, 60, 30);
 
         jLabel12.setText("Terakhir Periksa");
         jPanel10.add(jLabel12);
-        jLabel12.setBounds(40, 240, 100, 14);
+        jLabel12.setBounds(40, 290, 100, 14);
+
+        TerakhirPeriksa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TerakhirPeriksaActionPerformed(evt);
+            }
+        });
         jPanel10.add(TerakhirPeriksa);
-        TerakhirPeriksa.setBounds(160, 230, 210, 20);
+        TerakhirPeriksa.setBounds(160, 280, 210, 30);
 
         getContentPane().add(jPanel10);
-        jPanel10.setBounds(380, 70, 540, 300);
+        jPanel10.setBounds(380, 70, 810, 330);
 
         jButton1.setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
@@ -258,7 +276,7 @@ public class lihatantrian extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(940, 330, 90, 40);
+        jButton1.setBounds(1200, 340, 90, 40);
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel13);
@@ -292,6 +310,18 @@ public class lihatantrian extends javax.swing.JFrame {
             Logger.getLogger(lihatantrian.class.getName()).log(Level.SEVERE, null, ex);
         }                
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TerakhirPeriksaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerakhirPeriksaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TerakhirPeriksaActionPerformed
+
+    private void AlamatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlamatPasienActionPerformed
+       
+    }//GEN-LAST:event_AlamatPasienActionPerformed
+
+    private void NomorAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomorAntrianActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NomorAntrianActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AlamatPasien;
