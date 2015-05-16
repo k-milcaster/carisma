@@ -42,25 +42,24 @@ public class AntrianControllerTest {
     public void tearDown() {
     }
 
-//    /**
-//     * Test of getAntrian method, of class AntrianController.
-//     */
-//    @Test
-//    public void testGetAntrian() throws Exception {
-//        System.out.println("getAntrian");
-//        ClientSocket client = new ClientSocket();
-//        Menursepsionis ui = new Menursepsionis(client, "resp1");
-//        AntrianController instance = new AntrianController(client);
-//        instance.getAntrian(ui);
-//        DefaultTableModel expResult = instance.getAntrian(ui);
-//        DefaultTableModel result = instance.getAntrian(ui);
-//        boolean resultCondition = false;
-//        System.out.println(result.getRowCount());
-//        if (result.getRowCount()>=1){
-//            resultCondition = true;
-//        }
-//        assertTrue(resultCondition);                      
-//    }
+    /**
+     * Test of getAntrian method, of class AntrianController.
+     */
+    @Test
+    public void testGetAntrian() throws Exception {
+        System.out.println("getAntrian");
+        ClientSocket client = new ClientSocket();
+        Menursepsionis ui = new Menursepsionis(client, "resp1");
+        AntrianController instance = new AntrianController(client);
+        DefaultTableModel expResult = instance.getAntrian();
+        DefaultTableModel result = instance.getAntrian();
+        boolean resultCondition = false;
+        System.out.println(result.getRowCount());
+        if (result.getRowCount()>=1){
+            resultCondition = true;
+        }
+        assertTrue(resultCondition);                      
+    }
 
     /**
      * Test of getAntrianDetail method, of class AntrianController.
@@ -71,7 +70,12 @@ public class AntrianControllerTest {
         String id = "AN001";
         ClientSocket client = new ClientSocket();
         AntrianController instance = new AntrianController(client);
-        instance.getAntrianDetail(id);
+            
+        Antrian expResult = instance.getAntrianDetail(id);
+        Antrian result = instance.getAntrianDetail(id);
+        assertEquals(expResult, result);
+        
+        
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -85,7 +89,11 @@ public class AntrianControllerTest {
         String idPasien = "PS001";
         ClientSocket client = new ClientSocket();
         AntrianController instance = new AntrianController(client);
-        instance.getDetailPasien(idPasien);
+        
+        Pasien expResult = instance.getDetailPasien(idPasien);
+        Pasien result = instance.getDetailPasien(idPasien);
+        assertEquals(expResult, result);
+        
         // TODO review the generated test code and remove the default call to fail.
         
     }
