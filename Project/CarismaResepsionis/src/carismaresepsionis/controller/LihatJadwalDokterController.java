@@ -33,9 +33,12 @@ public class LihatJadwalDokterController {
         ArrayList<Jadwal> jadwal = new ArrayList();
         for (int i = 0; i < list.size(); i++) {
             jadwal.add(jadwalService.getJadwal(list.get(i).getJadwalId().toString()));
-            System.out.println(jadwal.get(i).getHariJadwalpegawai());
+            System.out.println(jadwal.get(i).getHariJadwalpegawai()+ " " +jadwal.get(i).getShiftJadwalpegawai());
         }
         return jadwal;
     }
+    
+    
+    
     
 }

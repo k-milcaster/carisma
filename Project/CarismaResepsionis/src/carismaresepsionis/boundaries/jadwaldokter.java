@@ -28,22 +28,25 @@ public class jadwaldokter extends javax.swing.JFrame {
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        ArrayList<Jadwal> jadwal = control.lihatJadwal(idDokter);
+        ArrayList<Jadwal> jadwal = new ArrayList();
+        jadwal = control.lihatJadwal(idDokter);
+        System.out.println(jadwal.get(0).getHariJadwalpegawai());
         for (int i = 0; i < jadwal.size(); i++) {
             String hari = jadwal.get(i).getHariJadwalpegawai();
-            if (hari.equals("SENIN")) {
+            if (hari.equals("Senin")) {
                 senin.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("SELASA")) {
+                System.out.println(jadwal.get(i).getShiftJadwalpegawai()+" yang di GUI");
+            } else if (hari.equals("Selasa")) {
                 selasa.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("RABU")) {
+            } else if (hari.equals("Rabu")) {
                 rabu.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("KAMIS")) {
+            } else if (hari.equals("Kamis")) {
                 kamis.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("JUMAT")) {
+            } else if (hari.equals("Jumat")) {
                 jumat.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("SABTU")) {
+            } else if (hari.equals("Sabtu")) {
                 sabtu.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("MINGGU")) {
+            } else if (hari.equals("Minggu")) {
                 minggu.setText(jadwal.get(i).getShiftJadwalpegawai());
             }
 
@@ -74,7 +77,7 @@ public class jadwaldokter extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Trajan Pro", 1, 36)); // NOI18N
