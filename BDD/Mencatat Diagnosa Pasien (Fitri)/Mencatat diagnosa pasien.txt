@@ -2,13 +2,21 @@ Story Card : Mencatat Diagnosa pasien
 Skenario : Mencatat Diagnosa Pasien yang sudah terdaftar
 
 Given Saya masuk pada antarmuka Rekam Medis Pasien
-When Saya memasukkan ID Pasien
-Then Data Identitas pasien ditampilkan 
-When Data Identitas pasien sudah ditampilkan
-Then Field input keluhan pasien, diagnosa pasien, terapi, kesimpulan pemeriksaan, resep obat, dan nama penyakit "enable"
-And Saya mengisi keluhan pasien, diagnosa pasien, terapi, dan kesimpulan pemeriksaan
-And Saya menginputkan obat dan nama penyakit dari JCombo Box (untuk obat/nama penyakit yang sering diinputkan) atau
-    menggunakan field "pencarian" jika obat yang akan diinputkan belum pernah diinputkan sebelumnya
-Then Obat dan nama penyakit yang telah diinputkan akan ditampilkan pada tabel
-When Saya mengklik tombol "Save"
+When Saya melihat Id Saya, Nama Saya, dan Id Rekam Medis ditampilkan di form Rekam Medis
+Then Saya mengisi Id Pasien, Keluhan, pemeriksaan, terapi, alergi obat, kesimpulan, 
+     kondisi pasien keluar, resep, penyakit, dan biaya.
+Then Saya mengklik tobol "Tambah Resep"
+When Saya melihat Id Resep
+Then Saya mengisi nama obat, quantity, aturan pakai, dan keterangan
+When Saya mengklik tombol "save"
+Then Saya mendapat pesan pertanyaan "Apakah data yang anda masukkan sudah benar?"
+When Saya memilih tombol "yes"
+Then Data resep tersimpan dalam sistem
+And Saya mendapatkan konfirmasi "Data resep telah tersimpan"
+Then Saya kembali pada antarmuka Rekam Medis Pasien
+Then Saya memasukkan nama penyakit
+When Saya mengklik tombol "save"
+Then Saya mendapat pesan pertanyaan "Apakah data yang anda masukkan sudah benar?"
+When Saya memilih "Yes"
 Then Data diagnosa pasien tersimpan pada sistem
+And Saya mendapatkan konfirmasi "Data rekam medis telah tersimpan"
