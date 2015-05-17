@@ -206,14 +206,15 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
         try {
             statement = DatabaseConnection.getConnection().createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT KA.nama_kamar , KA.kelas FROM `kamar` AS KA, `pasien_kamar` AS PK, `kunjungan` AS K "
+            ResultSet result = statement.executeQuery("SELECT PK.id_peminjaman , KA.nama_kamar , KA.kelas FROM `kamar` AS KA, `pasien_kamar` AS PK, `kunjungan` AS K "
                     + "WHERE KA.id_kamar = PK.kamar_id_kamar AND K.pasien_kamar_id_peminjaman = PK.id_peminjaman AND K.pasien_id_pasien = '"+idpasien+"'");
 
-            String[] kamarInfo = new String[2];
+            String[] kamarInfo = new String[3];
 
             while (result.next()) {
                 kamarInfo[0] = result.getString(1);
                 kamarInfo[1] = result.getString(2);
+                kamarInfo[2] = result.getString(3);
             }
             result.close();
             return kamarInfo;

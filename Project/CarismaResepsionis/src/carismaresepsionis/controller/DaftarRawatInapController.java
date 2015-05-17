@@ -51,12 +51,15 @@ public class DaftarRawatInapController {
    public DefaultTableModel getNamaPasienRawatInap(DaftarRawatInap ui) throws RemoteException{
         
         List<Pasien> list = new ArrayList<Pasien>();
+      
         list = pasienService.getPasienRawatinap();
+   
         DefaultTableModel model = new DefaultTableModel();
-        //model.addColumn("ID Pasien");
+  
+        model.addColumn("ID Pasien");
         model.addColumn("Nama Pasien");
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{list.get(i).getNamaPasien()});
+            model.addRow(new Object[]{list.get(i).getIdPasien(),list.get(i).getNamaPasien()});
             //System.out.println("lewat");
         }
         ui.TabelPasien.setModel(model);

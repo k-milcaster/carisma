@@ -666,7 +666,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         int select = TabelPasien.getSelectedRow();
         DaftarRawatInapController kamar = new DaftarRawatInapController (client);
         try {
-            kamar.deletePasienKamar(String.valueOf(select));
+            String [] infokamar = {};
+            kamar.getNamaKelasKamarbyIdpasien(String.valueOf(tablePasienRawat.getValueAt(select, 0)));
+            System.out.println(infokamar[3]);
+            kamar.deletePasienKamar(infokamar[3]);
         } catch (RemoteException ex) {
             Logger.getLogger(DaftarRawatInap.class.getName()).log(Level.SEVERE, null, ex);
         }
