@@ -320,4 +320,34 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
         }
     }
 
+    @Override
+    public boolean isUsedNokartuPasien(String nokartuidpasien) throws RemoteException {
+        ui.act.append("Client Execute isUsedNokartuPasien (" + nokartuidpasien + ") \n");
+
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT * FROM pasien WHERE nokartuid_pasien = ?");
+            statement.setString(1, nokartuidpasien);
+            ResultSet result = statement.executeQuery();
+            boolean used = false;
+            if (result.next()) {
+                used = true;
+            }
+            return used;
+        } catch (SQLException exception) {
+            ui.act.append("isUsedNokartuPasien Error \n");
+            ui.act.append(exception.toString());
+            return true;//iki tak gae true soale gak isok null bingung nek method e rusak hasile opo, jadi nek misal e true berarti kan gak isok input pasien
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+        
+    }
+
 }
