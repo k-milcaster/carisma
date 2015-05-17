@@ -36,7 +36,7 @@ public class DaftarRawatInapController {
        PasienKamar pasienkamar = new PasienKamar ();
        pasienkamar.setIdPeminjaman(generatePeminjamanId(idPasien, namaKamar));
        pasienkamar.setKamarIdKamar(idKamar);
-       //pasienkamar.setDateinPasienKamar();
+       pasienkamar.setDateinPasienKamar(date);
        //pasienkamar.setDateoutPasienKamar();
 
        pasienkamarService.insertPasienKamar(pasienkamar);
@@ -91,5 +91,10 @@ public class DaftarRawatInapController {
         
         return kamarInfo;
     }
-  
+  public boolean deletePasienKamar (String unPinjam) throws RemoteException{
+      //PasienKamar pasienkamar = new PasienKamar ();
+      
+      pasienkamarService.deletePasienKamar(unPinjam);
+      return true;
+  }
 }
