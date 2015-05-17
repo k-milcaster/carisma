@@ -231,5 +231,39 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
             }
         }
     }
+
+    @Override
+    public List<String> getKamarAvailable() throws RemoteException {
+        ui.act.append("Client Execute getKamarAvailableList \n");
+
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT K.id_kamar FROM kamar AS K LEFT JOIN pasien_kamar AS PK on K.id_kamar = PK.kamar_id_kamar "
+                    + "WHERE PK .kamar_id_kamar IS null");
+
+            List<String> list = new ArrayList<String>();
+
+            while (result.next()) {
+                String kamar = result.getString(1);
+                list.add(kamar);
+            }
+            result.close();
+            return list;
+
+        } catch (SQLException exception) {
+            ui.act.append("getKamarAvailableList Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
     
 }
