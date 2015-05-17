@@ -22,26 +22,30 @@ public class AbsensiController {
         pegawaiService = client.getPegawaiService();
     }
 
-    public void insertAbsensiDokter(String idDokter, String kehadiranReguler, String kehadiranLembur, String tanggalKehadiran) throws RemoteException {
+    public boolean insertAbsensiDokter(String idDokter, String kehadiranReguler, String kehadiranLembur, String tanggalKehadiran) throws RemoteException {
         Absensidokter absensiDokter = new Absensidokter();
         absensiDokter.setDokterIdDokter(idDokter);
         absensiDokter.setKehadiranregulerDokter(kehadiranReguler);
         absensiDokter.setKehadiranlemburDokter(kehadiranLembur);
         absensiDokter.setDateAbsensidokter(tanggalKehadiran);
-        absensiDokterService.insertAbsensidokter(absensiDokter);
+        return absensiDokterService.insertAbsensidokter(absensiDokter);
     }
 
-    public void deleteAbsensiDokter(String idDokter) throws RemoteException{
-        absensiDokterService.deleteAbsensidokter(idDokter);
+    public boolean deleteAbsensiDokter(String idDokter) throws RemoteException{
+        return absensiDokterService.deleteAbsensidokter(idDokter);
     }
 
-    public void insertAbsensiPegawai(String idPegawai, String kehadiranReguler, String kehadiranLembur, String tanggalKehadiran) throws RemoteException {
+    public boolean insertAbsensiPegawai(String idPegawai, String kehadiranReguler, String kehadiranLembur, String tanggalKehadiran) throws RemoteException {
         Absensipegawai absensiPegawai = new Absensipegawai();
         absensiPegawai.setPegawaiIdPegawai(idPegawai);
         absensiPegawai.setKehadiranregulerPegawai(kehadiranReguler);
         absensiPegawai.setKehadiranlemburPegawai(kehadiranLembur);
         absensiPegawai.setDateAbsensipegawai(tanggalKehadiran);
-        absensiPegawaiService.insertAbsensipegawai(absensiPegawai);
+        return absensiPegawaiService.insertAbsensipegawai(absensiPegawai);
+    }
+    
+    public boolean deleteAbsensiPegawai(String idPegawai) throws RemoteException{
+        return absensiPegawaiService.deleteAbsensipegawai(idPegawai);
     }
     
     public DefaultComboBoxModel getIdDokter() throws RemoteException {
