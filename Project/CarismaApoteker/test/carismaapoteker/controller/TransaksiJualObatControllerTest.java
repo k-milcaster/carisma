@@ -45,13 +45,13 @@ public class TransaksiJualObatControllerTest {
     public void testInsertTransaksijualobat() throws Exception {
         client = new ClientSocket();
         System.out.println("insertTransaksijualobat");
-        String idTransaksijual = "oooooo";
+        String idTransaksijual = "ooo";
         String dateTransaksijual = "2015-05-11";
-        String keterangan = "lalalala";
+        String keterangan = "ccc";
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
         boolean result = instance.insertTransaksijualobat(idTransaksijual, dateTransaksijual, keterangan);
         assertTrue(result);
-        // TODO review the generated test code and remove the default call to fail.
+        
     }
 
     /**
@@ -61,13 +61,13 @@ public class TransaksiJualObatControllerTest {
     public void testInsertDetailtransaksijualobat() throws Exception {
         client = new ClientSocket();
         System.out.println("insertDetailtransaksijualobat");
-        String idTransaksi = "trans01";
+        String idTransaksi = "kkk";
         int idObat = 1;
         int qty = 50;
         TransaksiJualObatController instance = new TransaksiJualObatController(client) ;
         boolean result = instance.insertDetailtransaksijualobat(idTransaksi, idObat, qty);
         assertTrue(result);
-        // TODO review the generated test code and remove the default call to fail.
+        
    
     }
 
@@ -86,8 +86,7 @@ public class TransaksiJualObatControllerTest {
             resultCondition = true;
         }
         assertTrue(resultCondition);
-        // TODO review the generated test code and remove the default call to fail.
-        
+       
     }
 
     /**
@@ -97,7 +96,7 @@ public class TransaksiJualObatControllerTest {
     public void testCekStok() throws Exception {
         client = new ClientSocket();
         System.out.println("cekStok");
-        int idObat = 15;
+        int idObat = 4;
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
         int expResult = 50;
         int result = instance.cekStok(idObat);
