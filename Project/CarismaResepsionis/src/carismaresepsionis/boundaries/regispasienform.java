@@ -1,5 +1,6 @@
 package carismaresepsionis.boundaries;
 
+import carismainterface.entity.Kota;
 import carismainterface.entity.Pasien;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.regispasiencontroller;
@@ -559,6 +560,7 @@ public class regispasienform extends javax.swing.JFrame {
         
         int row = tabelpasien.getSelectedRow();
         Pasien pasien = new Pasien ();
+                        
         Date date = new Date();
         pasien = registrasicontrol.getDataPasien(String.valueOf(tabelpasien.getValueAt(row, 0)));
         Nama_Pasien.setText(pasien.getNamaPasien());
@@ -573,6 +575,9 @@ public class regispasienform extends javax.swing.JFrame {
         TinggiPasien.setText(Integer.toString(pasien.getTinggiPasien()));
         BeratPasien.setText(Integer.toString(pasien.getBeratPasien()));
         tgl_regpasien.setDate(java.sql.Date.valueOf(pasien.getRegdatePasien()));
+        Jenis_Kelamin.setSelectedItem(pasien.getKelaminPasien());
+        goldar.setSelectedItem(pasien.getDarahPasien());
+        Kota.setSelectedItem(pasien.getKotaIdKota());
         
     }//GEN-LAST:event_tabelpasienMouseClicked
 
