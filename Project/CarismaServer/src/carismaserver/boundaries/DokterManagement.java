@@ -45,6 +45,7 @@ public class DokterManagement extends javax.swing.JFrame {
         this.ui = ui;
         initComponents();
         userService = new UserEntity(ui);
+        poliService = new PoliEntity(ui);
         control.getDokter(this);        
         users = userService.getUser();
         //polis = poliService.getPoli();
