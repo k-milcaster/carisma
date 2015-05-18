@@ -45,9 +45,10 @@ public class DokterManagement extends javax.swing.JFrame {
         this.ui = ui;
         initComponents();
         userService = new UserEntity(ui);
+        poliService = new PoliEntity(ui);
         control.getDokter(this);        
         users = userService.getUser();
-        //polis = poliService.getPoli();
+        polis = poliService.getPoli();
         //setComboBox();
         tableDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -74,6 +75,7 @@ public class DokterManagement extends javax.swing.JFrame {
                         fieldGajiLembur.setText((String) selected.getGajilemburDokter().toString());
                         fieldGajiKonsul.setText((String) selected.getGajikonsulDokter().toString());
                         comboUsername.setSelectedItem(selected.getUserIdUser());
+                        comboPoli.setSelectedItem(selected.getPoliIdPoli());
                         //setComboBox(selected.getUserIdUser());
                     } catch (RemoteException ex) {
                         Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,10 +202,7 @@ public class DokterManagement extends javax.swing.JFrame {
 
         tableDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "No.", "Nama", "Alamat", "No Kartu ID", "Telepon", "HP1", "HP2", "Tempat Lahir", "Tanggal Lahir", "Jenis Kelamin", "Golongan Darah", "Bank", "No Rek", "Gaji Fix", "Gaji Lembur", "Gaji Konsul"
