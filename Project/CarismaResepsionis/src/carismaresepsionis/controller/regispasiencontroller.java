@@ -140,6 +140,20 @@ public class regispasiencontroller {
         ui.tabelpasien.setModel(model);
         
     }
+   public void getTabelPasienSearch(regispasienform ui, String id) throws RemoteException{
+        
+        Pasien list = new Pasien();
+        list = pasienService.getPasien(id);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Pasien");
+        model.addColumn("Nama Pasien");
+//        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.getIdPasien(), list.getNamaPasien()});
+//          }
+        ui.tabelpasien.setModel(model);
+        
+    }
+    
   
   public Pasien getDataPasien (String id ){
         try {
