@@ -36,7 +36,7 @@ public class AntrianController {
         
                                 
     }
-    public DefaultTableModel getAntrian(Menursepsionis ui) throws RemoteException{
+    public DefaultTableModel getAntrian() throws RemoteException{
         List<Antrian> list = new ArrayList<Antrian>();
         list = antrianService.getAntrian();
         DefaultTableModel tabelAntrian = new DefaultTableModel();
@@ -47,7 +47,7 @@ public class AntrianController {
             tabelAntrian.addRow(new Object[]{list.get(i).getNomorAntrian(), list.get(i).getIdAntrian(), pasienService.getPasien(list.get(i).getPasienIdPasien()).getNamaPasien()});            
             System.out.println("get antrian pasien");
         }
-        ui.tableDaftarAntrian.setModel(tabelAntrian);
+       // ui.tableDaftarAntrian.setModel(tabelAntrian);
         return tabelAntrian;
     }
     

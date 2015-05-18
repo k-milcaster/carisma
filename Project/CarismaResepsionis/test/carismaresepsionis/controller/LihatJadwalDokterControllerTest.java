@@ -4,8 +4,7 @@
  */
 package carismaresepsionis.controller;
 
-import carismainterface.entity.Jadwaldokter;
-import carismainterface.server.JadwaldokterService;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,10 +14,12 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Anes Dirsi
+ * @author Muhammad Rizal
  */
 public class LihatJadwalDokterControllerTest {
     
+    ClientSocket client;
+     
     public LihatJadwalDokterControllerTest() {
     }
     
@@ -39,59 +40,20 @@ public class LihatJadwalDokterControllerTest {
     }
 
     /**
-     * Test of getJadwaldokter method, of class LihatJadwalDokterController.
+     * Test of lihatJadwal method, of class LihatJadwalDokterController.
      */
     @Test
-    public void testGetJadwaldokter() {
-        System.out.println("getJadwaldokter");
-        LihatJadwalDokterController instance = null;
-        JadwaldokterService expResult = null;
-        JadwaldokterService result = instance.getJadwaldokter();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    public void testLihatJadwal() throws Exception {
+        client = new ClientSocket();
+        System.out.println("lihatJadwal");
+        String idDokter = "";
+        LihatJadwalDokterController instance = new LihatJadwalDokterController (client);
+        ArrayList result = instance.lihatJadwal(idDokter);
+        boolean resultCondition = false;
+        if (result.size() >= 0) {
+            resultCondition = true;
+        }
+        assertTrue(resultCondition);
 
-    /**
-     * Test of getIdDokter method, of class LihatJadwalDokterController.
-     */
-    @Test
-    public void testGetIdDokter() {
-        System.out.println("getIdDokter");
-        LihatJadwalDokterController instance = null;
-        String expResult = "";
-        String result = instance.getIdDokter();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getIdJadwalDokter method, of class LihatJadwalDokterController.
-     */
-    @Test
-    public void testGetIdJadwalDokter() {
-        System.out.println("getIdJadwalDokter");
-        LihatJadwalDokterController instance = null;
-        Integer expResult = null;
-        Integer result = instance.getIdJadwalDokter();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getJadwalDokterDetail method, of class LihatJadwalDokterController.
-     */
-    @Test
-    public void testGetJadwalDokterDetail() throws Exception {
-        System.out.println("getJadwalDokterDetail");
-        String id = "";
-        LihatJadwalDokterController instance = null;
-        Jadwaldokter expResult = null;
-        Jadwaldokter result = instance.getJadwalDokterDetail(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    }    
 }

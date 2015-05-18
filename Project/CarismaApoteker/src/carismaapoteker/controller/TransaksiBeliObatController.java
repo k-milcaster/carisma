@@ -13,6 +13,7 @@ import carismainterface.entity.Transaksibeliobat;
 import carismainterface.server.DetailobatService;
 import carismainterface.server.DetailtransaksibeliobatService;
 import carismainterface.server.ObatService;
+import carismainterface.server.PegawaiService;
 import carismainterface.server.TransaksibeliobatService;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -30,16 +31,14 @@ public class TransaksiBeliObatController {
     private DetailtransaksibeliobatService detailtransaksibeliobat;
     private ObatService obatService;
     private DetailobatService detailobatService;
+    private PegawaiService pegawaiService;
 
     public TransaksiBeliObatController(ClientSocket client) throws RemoteException {
-//        Transaksibeliobat trans = new Transaksibeliobat();
-//        Detailtransaksibeliobat trans1 = new Detailtransaksibeliobat();
-//        Obat obat = new Obat();
-//        Detailobat detailobat = new Detailobat();
         this.transaksibeliobat = client.getTransaksibeliobatService();
         this.detailtransaksibeliobat = client.getDetailtransaksibeliobatService();
         obatService = client.getObatService();
         detailobatService = client.getDetailonatSerivice();
+        this.pegawaiService = client.getPegawaiService();
     }
 
     public DefaultComboBoxModel getIdObat() throws RemoteException {
@@ -136,8 +135,13 @@ public class TransaksiBeliObatController {
         return lastIdObat;
         
     }
-//    
-//    public void insertTransaksiBeliObat(carismaapoteker.boundaries.TransaksiBeliObat ui){
-//        
-//    }
+    
+  
+     
+    
+    public String[] getNamaPegawai (String username) throws RemoteException{
+        String[] namaApoteker = pegawaiService.getIdNamaPegawai(username);
+        return namaApoteker;
+    }
+
 }

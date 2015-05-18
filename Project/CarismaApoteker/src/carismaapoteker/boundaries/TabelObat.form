@@ -52,7 +52,7 @@
                   <Component id="jScrollPane2" pref="450" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="fieldSearch" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="fieldCariobat" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -63,7 +63,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="fieldSearch" min="-2" max="-2" attributes="0"/>
+              <Component id="fieldCariobat" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" pref="388" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
@@ -135,7 +135,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="fieldSearch">
+    <Component class="javax.swing.JTextField" name="fieldCariobat">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="2"/>
@@ -146,10 +146,10 @@
         <Property name="text" type="java.lang.String" value="cari obat"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fieldSearchActionPerformed"/>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fieldSearchFocusGained"/>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fieldSearchFocusLost"/>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="fieldSearchKeyReleased"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fieldCariobatActionPerformed"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fieldCariobatFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fieldCariobatFocusLost"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="fieldCariobatKeyReleased"/>
       </Events>
     </Component>
   </SubComponents>

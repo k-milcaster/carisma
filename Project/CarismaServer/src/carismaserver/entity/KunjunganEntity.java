@@ -205,7 +205,6 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             if (resultSet.next()) {
                 idKunjungan = resultSet.getString(1);
             }
-<<<<<<< HEAD
             return idKunjungan;
         } catch (SQLException exception) {
             ui.act.append("getLastIdKunjungan Error\n");
@@ -220,38 +219,4 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
             }
         }
     }
-<<<<<<< HEAD
-	
-	@Override
-    public String getLastIdKunjungan() throws RemoteException {
-        ui.act.append("Client Execute getLastKunjungan");
-        String idKunjungan = " ";
-        PreparedStatement statement = null;
-        try {
-            statement = DatabaseConnection.getConnection().prepareStatement("SELECT MAX(`id_kunjungan`) FROM `kunjungan`");
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                idKunjungan = resultSet.getString(1);
-            }         
-=======
->>>>>>> 01d21a6da2e3c2e4ce44b8098973990323c46589
-            return idKunjungan;
-        } catch (SQLException exception) {
-            ui.act.append("getLastIdKunjungan Error\n");
-            ui.act.append(exception.toString());
-            return null;
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException exception) {
-                }
-            }
-        }
-    }
-<<<<<<< HEAD
-=======
->>>>>>> 8e33532999d5110f8aad2328849d582acb7cd2fd
-=======
->>>>>>> 01d21a6da2e3c2e4ce44b8098973990323c46589
 }

@@ -3,6 +3,7 @@ package carismaapoteker.boundaries;
 import carismaapoteker.controller.ClientSocket;
 import carismaapoteker.controller.TransaksiBeliObatController;
 import carismainterface.server.DetailobatService;
+import carismainterface.server.PegawaiService;
 import carismainterface.server.TransaksibeliobatService;
 import java.rmi.RemoteException;
 import java.util.Date;
@@ -21,6 +22,10 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
     public TransaksibeliobatService tbos;
     private DefaultTableModel tableTransaksiBeliObat = new DefaultTableModel();
     private DefaultComboBoxModel combo = new DefaultComboBoxModel();
+    private PegawaiService pegawaiService;
+    private  String[] namaPegawai; 
+    private int total = 0;
+    public int row = 0;
 
     public TransaksiBeliObat(ClientSocket Client, String userName) throws RemoteException {
         this.Client = Client;
@@ -28,16 +33,14 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
         tbos = Client.getTransaksibeliobatService();
         this.userName = userName;
         initComponents();
+        namaPegawai = control.getNamaPegawai(this.userName);
+        jLabel8.setText(namaPegawai[0]);
         combo = control.getIdObat();
         boxNamaObat.setModel(combo);
         Date dateNow = new Date();
         jDateChooser1.setDate(dateNow);
-        jLabel8.setText(this.userName);
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-       // control.getTransaksiBeliObat(this);
-
-       // jTableOfBuys.getSelectionModel().addListSelectionListener(jTableOfBuys);
     }
 
     @SuppressWarnings("unchecked")
@@ -202,12 +205,13 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fieldIdTransaksiBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel9)
-                                    .addComponent(fieldHargaBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fieldHargaBeli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(fieldIdTransaksiBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel9)
+                                        .addComponent(jLabel11)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(28, 28, 28)
@@ -319,7 +323,8 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
                 System.out.println(e);
             }
         }
-
+       
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void reset(){
@@ -330,12 +335,12 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        
         tableTransaksiBeliObat = (DefaultTableModel) jTableOfBuys.getModel();
         String[] idObat = String.valueOf(boxNamaObat.getSelectedItem()).split(" ");
         tableTransaksiBeliObat.addRow(new Object[]{fieldIdTransaksiBeli.getText(), String.valueOf(new java.sql.Date(jDateChooser1.getDate().getTime())), Integer.parseInt(String.valueOf(idObat[0])), Integer.parseInt(fieldHargaBeli.getText()), Integer.parseInt(fieldQuantity.getText()), String.valueOf(new java.sql.Date(jDateChooser2.getDate().getTime())), fieldKeterangan.getText()});
         jTableOfBuys.setModel(tableTransaksiBeliObat);
-        reset();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

@@ -36,7 +36,7 @@ public class TabelObat extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableMedicine = new javax.swing.JTable();
-        fieldSearch = new javax.swing.JTextField();
+        fieldCariobat = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,25 +72,25 @@ public class TabelObat extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableMedicine);
 
-        fieldSearch.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        fieldSearch.setForeground(new java.awt.Color(204, 204, 204));
-        fieldSearch.setText("cari obat");
-        fieldSearch.addActionListener(new java.awt.event.ActionListener() {
+        fieldCariobat.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        fieldCariobat.setForeground(new java.awt.Color(204, 204, 204));
+        fieldCariobat.setText("cari obat");
+        fieldCariobat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldSearchActionPerformed(evt);
+                fieldCariobatActionPerformed(evt);
             }
         });
-        fieldSearch.addFocusListener(new java.awt.event.FocusAdapter() {
+        fieldCariobat.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldSearchFocusGained(evt);
+                fieldCariobatFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldSearchFocusLost(evt);
+                fieldCariobatFocusLost(evt);
             }
         });
-        fieldSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+        fieldCariobat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                fieldSearchKeyReleased(evt);
+                fieldCariobatKeyReleased(evt);
             }
         });
 
@@ -104,14 +104,14 @@ public class TabelObat extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(fieldCariobat, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldCariobat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                 .addGap(45, 45, 45))
@@ -134,40 +134,40 @@ public class TabelObat extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_tableMedicineMouseClicked
 
-    private void fieldSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldSearchFocusGained
-        if (fieldSearch.getText().equals("cari obat")) {
-            fieldSearch.setText("");
+    private void fieldCariobatFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariobatFocusGained
+        if (fieldCariobat.getText().equals("cari obat")) {
+            fieldCariobat.setText("");
         }
-    }//GEN-LAST:event_fieldSearchFocusGained
+    }//GEN-LAST:event_fieldCariobatFocusGained
 
-    private void fieldSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldSearchFocusLost
-        if (fieldSearch.getText().equals("")) {
-            fieldSearch.setText("cari obat");
-            fieldSearch.setFont(new Font("Tahoma", 0, 11));
-            fieldSearch.setForeground(Color.gray);
+    private void fieldCariobatFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariobatFocusLost
+        if (fieldCariobat.getText().equals("")) {
+            fieldCariobat.setText("cari obat");
+            fieldCariobat.setFont(new Font("Tahoma", 0, 11));
+            fieldCariobat.setForeground(Color.gray);
         }
-    }//GEN-LAST:event_fieldSearchFocusLost
+    }//GEN-LAST:event_fieldCariobatFocusLost
 
-    private void fieldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldSearchKeyReleased
-        fieldSearch.setForeground(Color.black);
-        fieldSearch.setFont(new Font("Tahoma", 0, 12));
+    private void fieldCariobatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCariobatKeyReleased
+        fieldCariobat.setForeground(Color.black);
+        fieldCariobat.setFont(new Font("Tahoma", 0, 12));
         DefaultTableModel model = new DefaultTableModel();
         try {
             StokObatController control = new StokObatController(client);
-            model = control.getObatbyName(fieldSearch.getText());
+            model = control.getObatbyName(fieldCariobat.getText());
             System.out.println(model);
             tableMedicine.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_fieldSearchKeyReleased
+    }//GEN-LAST:event_fieldCariobatKeyReleased
 
-    private void fieldSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldSearchActionPerformed
+    private void fieldCariobatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldCariobatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldSearchActionPerformed
+    }//GEN-LAST:event_fieldCariobatActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField fieldSearch;
+    private javax.swing.JTextField fieldCariobat;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

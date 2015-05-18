@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaserver.entity;
 
-import carismainterface.entity.Jadwaldokter;
 import carismainterface.entity.Jadwaldokter;
 import carismainterface.server.JadwaldokterService;
 import carismaserver.boundaries.Main;
@@ -118,23 +111,25 @@ public class JadwaldokterEntity extends UnicastRemoteObject implements Jadwaldok
     }
 
     @Override
-    public Jadwaldokter getJadwaldokter(String idjadwaldokter) throws RemoteException {
+    public List<Jadwaldokter> getJadwaldokter(String idjadwaldokter) throws RemoteException {
         ui.act.append("Client Execute getJadwaldokter (" + idjadwaldokter + ") \n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM jadwaldokter WHERE id = ?");
+                    "SELECT * FROM jadwaldokter WHERE dokter_id_dokter = ?");
             statement.setString(1, idjadwaldokter);
             ResultSet result = statement.executeQuery();
+            List<Jadwaldokter> list = new ArrayList<Jadwaldokter>();
             Jadwaldokter jadwaldokter = null;
-            if (result.next()) {
+            while (result.next()) {
                 jadwaldokter = new Jadwaldokter();
                 jadwaldokter.setId(result.getInt("id"));
                 jadwaldokter.setDokterIdDokter(result.getString("dokter_id_dokter"));
                 jadwaldokter.setJadwalId(result.getInt("jadwal_id"));
+                list.add(jadwaldokter);
             }
-            return jadwaldokter;
+            return list;
         } catch (SQLException exception) {
             ui.act.append("getJadwaldokter Error \n");
             ui.act.append(exception.toString());

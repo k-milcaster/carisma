@@ -39,7 +39,6 @@ public class AbsensiPegawai extends javax.swing.JFrame {
         Date date = new Date();
         jDateChooser1.setDate(date);
         setLocationRelativeTo(this);
-        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -247,9 +246,16 @@ public class AbsensiPegawai extends javax.swing.JFrame {
 
             try {
                 String[] idPegawai = String.valueOf(comboBoxIdPegawai.getSelectedItem()).split(" ");
-                absensiController.insertAbsensiPegawai(String.valueOf(idPegawai[0]), hadirReguler, hadirLembur, String.valueOf(new java.sql.Date(jDateChooser1.getDate().getTime())));
-                tabelModelAbsensi = absensiController.getTabelAbsensiPegawai();
-                tableAbsensi.setModel(tabelModelAbsensi);
+                String namaPegwai = "";
+                for (int i = 1; i < idPegawai.length; i++) {
+                    namaPegwai = namaPegwai.concat(" ").concat(idPegawai[i]);
+                }
+                boolean inserted = absensiController.insertAbsensiPegawai(String.valueOf(idPegawai[0]), hadirReguler, hadirLembur, String.valueOf(new java.sql.Date(jDateChooser1.getDate().getTime())));
+                if (inserted == true) {
+                    JOptionPane.showMessageDialog(null, "Karyawan " + namaPegwai + " Telah Melakukan Absensi", "Absensi Pegawai", JOptionPane.INFORMATION_MESSAGE);
+                    tabelModelAbsensi = absensiController.getTabelAbsensiPegawai();
+                    tableAbsensi.setModel(tabelModelAbsensi);
+                }
             } catch (RemoteException ex) {
                 Logger.getLogger(AbsensiDokter.class.getName()).log(Level.SEVERE, null, ex);
             }

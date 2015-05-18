@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author ASUS
+ * @author Sinta Eka Lestari
  */
 public class TransaksiJualObatControllerTest {
     ClientSocket client;
@@ -45,13 +45,14 @@ public class TransaksiJualObatControllerTest {
     public void testInsertTransaksijualobat() throws Exception {
         client = new ClientSocket();
         System.out.println("insertTransaksijualobat");
-        String idTransaksijual = "oooooo";
+        String idTransaksijual = "jjj";
         String dateTransaksijual = "2015-05-11";
-        String keterangan = "lalalala";
+        String keterangan = "rrr";
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
+        boolean expResult = true;
         boolean result = instance.insertTransaksijualobat(idTransaksijual, dateTransaksijual, keterangan);
-        assertTrue(result);
-        // TODO review the generated test code and remove the default call to fail.
+        assertEquals(expResult, result);
+        
     }
 
     /**
@@ -61,13 +62,14 @@ public class TransaksiJualObatControllerTest {
     public void testInsertDetailtransaksijualobat() throws Exception {
         client = new ClientSocket();
         System.out.println("insertDetailtransaksijualobat");
-        String idTransaksi = "trans01";
-        int idObat = 1;
+        String idTransaksi = "aaa";
+        int idObat = 7;
         int qty = 50;
         TransaksiJualObatController instance = new TransaksiJualObatController(client) ;
+        boolean expResult = true;
         boolean result = instance.insertDetailtransaksijualobat(idTransaksi, idObat, qty);
-        assertTrue(result);
-        // TODO review the generated test code and remove the default call to fail.
+         assertEquals(expResult, result);
+        
    
     }
 
@@ -86,8 +88,7 @@ public class TransaksiJualObatControllerTest {
             resultCondition = true;
         }
         assertTrue(resultCondition);
-        // TODO review the generated test code and remove the default call to fail.
-        
+       
     }
 
     /**
@@ -97,7 +98,7 @@ public class TransaksiJualObatControllerTest {
     public void testCekStok() throws Exception {
         client = new ClientSocket();
         System.out.println("cekStok");
-        int idObat = 15;
+        int idObat = 2;
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
         int expResult = 50;
         int result = instance.cekStok(idObat);

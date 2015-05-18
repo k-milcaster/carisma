@@ -23,4 +23,4 @@ When Saya mengklik tombol "save"
 Then Saya mendapat pesan pertanyaan "Apakah data yang anda masukkan sudah benar?"
 When Saya memilih "Yes"
 Then Data diagnosa pasien tersimpan pada sistem
-And Saya mendapatkan konfirmasi "Data rekam medis telah tersimpan"
+And Saya mendapatkan konfirmasi "Data Rekam Medis Telah Tersimpan"

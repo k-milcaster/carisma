@@ -32,7 +32,8 @@ public class Menursepsionis extends javax.swing.JFrame {
         AntrianController control = new AntrianController(this.client);
         ps = client.getPasienService();
         initComponents();
-        control.getAntrian(this);       
+        tableAntri = control.getAntrian();
+        tableDaftarAntrian.setModel(tableAntri);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
         Namanya.setText(String.valueOf(this.userName));
@@ -261,8 +262,11 @@ public class Menursepsionis extends javax.swing.JFrame {
     }//GEN-LAST:event_RegisPasienInapActionPerformed
 
     private void LihatPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LihatPasienInapActionPerformed
-
-        new DaftarRawatInap(this.client, this.userName).show();
+        try {
+            new DaftarRawatInap(this.client, this.userName).show();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_LihatPasienInapActionPerformed
 

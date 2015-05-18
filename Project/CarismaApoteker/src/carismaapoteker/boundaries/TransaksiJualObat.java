@@ -256,7 +256,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (fieldIdOfSales.getText().equals("") || fieldDescription.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Field yang anda isi tidak lengkap", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Field yang Anda Isi Kurang Lengkap", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
                 TransaksiJualObatController transaksijual = new TransaksiJualObatController(Client);
@@ -299,7 +299,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
                 TransaksiJualObatController control = new TransaksiJualObatController(Client);
                 int stock = control.cekStok(Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(row, 0))));
                 if (stock < qty) {
-                    JOptionPane.showMessageDialog(null, "Stok Obat Tidak Mencukupi");
+                    JOptionPane.showMessageDialog(null, "Stok Obat Tidak Cukup!!!");
                 }
             }
         } catch (Exception e) {

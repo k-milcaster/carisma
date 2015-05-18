@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaserver.entity;
 
 import carismainterface.entity.Jadwal;
@@ -125,7 +119,7 @@ public class JadwalEntity extends UnicastRemoteObject implements JadwalService{
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "SELECT * FROM jadwal WHERE id = ?");
-            statement.setString(1, idjadwal);
+            statement.setInt(1, Integer.parseInt(idjadwal));
             ResultSet result = statement.executeQuery();
             Jadwal jadwal = null;
             if (result.next()) {

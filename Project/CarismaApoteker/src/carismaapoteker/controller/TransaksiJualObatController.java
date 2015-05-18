@@ -30,7 +30,7 @@ public class TransaksiJualObatController {
     private PegawaiService pegawaiService;
 
     public TransaksiJualObatController(ClientSocket client) throws RemoteException {
-       // Transaksijualobat trans = new Transaksijualobat();
+       
         this.transaksijualobat = client.getTransaksijualobatService();
         obatService = client.getObatService();
         pegawaiService = client.getPegawaiService();
@@ -74,9 +74,8 @@ public class TransaksiJualObatController {
         model.addColumn("Stok Kritis");
         for (int i = 0; i < list.size(); i++) {
             model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(), list.get(i).getStokkritisObat()});
-            System.out.println("Lewat");
+            System.out.println("Lewati");
         }
-        //b.tableMedicine.setModel(model);
         return model;
     }
     
@@ -89,7 +88,7 @@ public class TransaksiJualObatController {
         return namaApoteker;
     }
      public DefaultTableModel getObatbyName (String nama) throws RemoteException{
-        System.out.println("abcde");
+        System.out.println("xyxyxyx");
         List<Obat> list = new ArrayList<Obat>();
         list = obatService.getObatbyName(nama);
         DefaultTableModel model = new DefaultTableModel();

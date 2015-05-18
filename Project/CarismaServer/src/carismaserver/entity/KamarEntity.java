@@ -206,20 +206,55 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
         try {
             statement = DatabaseConnection.getConnection().createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT KA.nama_kamar , KA.kelas FROM `kamar` AS KA, `pasien_kamar` AS PK, `kunjungan` AS K "
+            ResultSet result = statement.executeQuery("SELECT PK.id_peminjaman , KA.nama_kamar , KA.kelas FROM `kamar` AS KA, `pasien_kamar` AS PK, `kunjungan` AS K "
                     + "WHERE KA.id_kamar = PK.kamar_id_kamar AND K.pasien_kamar_id_peminjaman = PK.id_peminjaman AND K.pasien_id_pasien = '"+idpasien+"'");
 
-            String[] kamarInfo = new String[2];
+            String[] kamarInfo = new String[3];
 
             while (result.next()) {
                 kamarInfo[0] = result.getString(1);
                 kamarInfo[1] = result.getString(2);
+                kamarInfo[2] = result.getString(3);
             }
             result.close();
             return kamarInfo;
 
         } catch (SQLException exception) {
             ui.act.append("getNamaKelasKamarList Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<String> getKamarAvailable() throws RemoteException {
+        ui.act.append("Client Execute getKamarAvailableList \n");
+
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT K.id_kamar FROM kamar AS K LEFT JOIN pasien_kamar AS PK on K.id_kamar = PK.kamar_id_kamar "
+                    + "WHERE PK .kamar_id_kamar IS null");
+
+            List<String> list = new ArrayList<String>();
+
+            while (result.next()) {
+                String kamar = result.getString(1);
+                list.add(kamar);
+            }
+            result.close();
+            return list;
+
+        } catch (SQLException exception) {
+            ui.act.append("getKamarAvailableList Error \n");
             ui.act.append(exception.toString());
             return null;
         } finally {

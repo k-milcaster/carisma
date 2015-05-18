@@ -50,10 +50,11 @@ public class DaftarRawatInapControllerTest {
         String namaKamar = "EDELWEIS";
         String kelasKamar = "UTAMA";
         String tarif = "245000";
+        String tanggal = "2015-05-04";
         ClientSocket client = new ClientSocket();
         DaftarRawatInapController instance = new DaftarRawatInapController(client);
         boolean expResult = true;
-        boolean result = instance.insertNamaPasien(namaPasien, idPasien, idKamar, namaKamar, kelasKamar, tarif);
+        boolean result = instance.insertNamaPasien(namaPasien, idPasien, idKamar, namaKamar, kelasKamar, tarif, tanggal);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

@@ -1,0 +1,43 @@
+Story Card : Pendaftaran Pasien Rawat Inap
+Scenario : Pendaftaran Berhasil
+
+showPasien(idPasien):TableModel tablepasien				| assertTrue(resultRowCount);
+showKamar(idKamar):TableModel tablekamar				| assertTrue(resultRowCount);
+getNamaPasien(Rawatinap ui)						| assserTrue(model)
+getNamaKamar(Rawatinap ui)						| assserTrue(model)
+getPasienByName(nama)							| assertEquals(expectedNama, resultNama);
+getSelectedRow():TableModel tablepasien					| assertTrue(resultSelectedRow);
+getSelectedRow():TableModel tablekamar					| assertTrue(resultSelectedRow);
+ok()									| -							
+insertNamaPasien(namapasien,idpasien,idkamar,namaKamar,kelas,tarif)	| assertEquals(expected namapasien,idpasien,idkamar,namaKamar,kelas,tarif; result namapasien,idpasien,idkamar,namaKamar,kelas,tarif );
+showMessageDialog("yakin menyimpan?")					| -
+showMessageDialog("data berhasil tersimpan?")				| -
+____________________________________________________________________________________________________________________________________
+Story Card :  Pendaftaran Pasien Rawat Inap
+Scenario : Data Tidak Lengkap
+
+showPasien(idPasien):TableModel tablepasien				| assertTrue(resultRowCount);
+showKamar(idKamar):TableModel tablekamar				| assertTrue(resultRowCount);
+getNamaPasien(Rawatinap ui)						| assserTrue(model)
+getNamaKamar(Rawatinap ui)						| assserTrue(model)
+getPasienByName(nama)							| assertEquals(expectedNama, resultNama);
+getSelectedRow():TableModel tablekamar					| assertTrue(resultSelectedRow);
+ok()									| -							
+showMessageDialog("ada data yang belum terisi")				| -
+____________________________________________________________________________________________________________________________________
+Story Card :  Pendaftaran Pasien Rawat Inap
+Scenario : Pasien telah check out
+
+
+____________________________________________________________________________________________________________________________________
+Story Card :  Pendaftaran Pasien Rawat Inap
+Scenario : Melihat data daftar pasien yang dirawat inap
+
+
+____________________________________________________________________________________________________________________________________
+Story Card :  Pendaftaran Pasien Rawat Inap
+Scenario : Tidak ada kamar kosong
+
+showPasien(idPasien):TableModel tablepasien				| assertFalse(showMessageDialog("tidak ada kamar kosong"));
+showKamar(idKamar):TableModel tablekamar				| assertFalse(showMessageDialog("tidak ada kamar kosong"));
+			

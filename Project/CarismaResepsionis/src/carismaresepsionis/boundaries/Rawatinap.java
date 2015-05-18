@@ -42,10 +42,11 @@ public class Rawatinap extends javax.swing.JFrame {
         
         a = namapasien.getText();
         b = idpasien.getText();
-        //c = NamaPenyakitpasien.getText();
         d = namaKamar.getText();
         e = kelasKamar.getText();
         f = tarif.getText();
+        Date tanggal = new Date();
+        tgl_regpasien.setDate(tanggal);
        
     }
 
@@ -70,6 +71,9 @@ public class Rawatinap extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablelistpasien = new javax.swing.JTable();
         idkamar = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        tgl_regpasien = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -131,11 +135,11 @@ public class Rawatinap extends javax.swing.JFrame {
             }
         });
         carnampas.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                carnampasFocusLost(evt);
-            }
             public void focusGained(java.awt.event.FocusEvent evt) {
                 carnampasFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                carnampasFocusLost(evt);
             }
         });
         carnampas.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -252,6 +256,16 @@ public class Rawatinap extends javax.swing.JFrame {
         getContentPane().add(idkamar);
         idkamar.setBounds(990, 290, 170, 30);
 
+        jLabel5.setText("Tgl Registrasi Pasien");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(990, 140, 120, 20);
+        getContentPane().add(tgl_regpasien);
+        tgl_regpasien.setBounds(1110, 130, 140, 30);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(4, 4, 1360, 690);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -350,7 +364,7 @@ public class Rawatinap extends javax.swing.JFrame {
                 int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
                     //daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(),   namaKamar.getText(), kelasKamar.getText(), tarif.getText());
-                    daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(), Integer.valueOf(idkamar.getText()),   namaKamar.getText(), kelasKamar.getText(), tarif.getText());
+                    daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(), Integer.valueOf(idkamar.getText()),   namaKamar.getText(), kelasKamar.getText(), tarif.getText(), String.valueOf(new java.sql.Date(tgl_regpasien.getDate().getTime())));
 
                     System.out.println("3");
                     //JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
@@ -358,9 +372,8 @@ public class Rawatinap extends javax.swing.JFrame {
                     
                     namapasien.setText("");
                     idpasien.setText("");
-
                     idkamar.setText("");
-
+                    tgl_regpasien.setDate(null);
                     namaKamar.setText("");
                     kelasKamar.setText("");
                     tarif.setText("");
@@ -397,6 +410,8 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField kelasKamar;
@@ -406,5 +421,6 @@ public class Rawatinap extends javax.swing.JFrame {
     public javax.swing.JTable tablelistkamarpasien;
     public javax.swing.JTable tablelistpasien;
     private javax.swing.JTextField tarif;
+    private com.toedter.calendar.JDateChooser tgl_regpasien;
     // End of variables declaration//GEN-END:variables
 }

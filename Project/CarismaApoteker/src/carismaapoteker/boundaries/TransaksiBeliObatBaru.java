@@ -181,7 +181,6 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
         tabel = (DefaultTableModel) jTable1.getModel();
         tabel.addRow(new Object[]{jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField6.getText(), jTextField7.getText()});
         jTable1.setModel(tabel);
-        reset();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

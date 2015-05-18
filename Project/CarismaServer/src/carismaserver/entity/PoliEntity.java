@@ -155,8 +155,8 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
         try {
             statement = DatabaseConnection.getConnection().createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT * FROM `poli`");
-
+            ResultSet result = statement.executeQuery("SELECT * FROM poli");
+            
             List<Poli> list = new ArrayList<Poli>();
 
             while (result.next()) {

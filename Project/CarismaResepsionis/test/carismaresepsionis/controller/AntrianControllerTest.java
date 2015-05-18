@@ -48,25 +48,17 @@ public class AntrianControllerTest {
     @Test
     public void testGetAntrian() throws Exception {
         System.out.println("getAntrian");
-<<<<<<< HEAD
         ClientSocket client = new ClientSocket();
         Menursepsionis ui = new Menursepsionis(client, "resp1");
         AntrianController instance = new AntrianController(client);
-        instance.getAntrian(ui);
-=======
-        Menursepsionis ui = new Menursepsionis(client, "resp1");       
-        AntrianController instance = new AntrianController(client);
-        DefaultTableModel expResult = instance.getAntrian(ui);
-        DefaultTableModel result = instance.getAntrian(ui);
+        DefaultTableModel expResult = instance.getAntrian();
+        DefaultTableModel result = instance.getAntrian();
         boolean resultCondition = false;
         System.out.println(result.getRowCount());
         if (result.getRowCount()>=1){
             resultCondition = true;
         }
-        assertTrue(resultCondition);
-        
-               
->>>>>>> 01d21a6da2e3c2e4ce44b8098973990323c46589
+        assertTrue(resultCondition);                      
     }
 
     /**
@@ -78,7 +70,12 @@ public class AntrianControllerTest {
         String id = "AN001";
         ClientSocket client = new ClientSocket();
         AntrianController instance = new AntrianController(client);
-        instance.getAntrianDetail(id);
+            
+        Antrian expResult = instance.getAntrianDetail(id);
+        Antrian result = instance.getAntrianDetail(id);
+        assertEquals(expResult, result);
+        
+        
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -92,11 +89,11 @@ public class AntrianControllerTest {
         String idPasien = "PS001";
         ClientSocket client = new ClientSocket();
         AntrianController instance = new AntrianController(client);
-        instance.getDetailPasien(idPasien);
-<<<<<<< HEAD
-=======
         
->>>>>>> 01d21a6da2e3c2e4ce44b8098973990323c46589
+        Pasien expResult = instance.getDetailPasien(idPasien);
+        Pasien result = instance.getDetailPasien(idPasien);
+        assertEquals(expResult, result);
+        
         // TODO review the generated test code and remove the default call to fail.
         
     }
