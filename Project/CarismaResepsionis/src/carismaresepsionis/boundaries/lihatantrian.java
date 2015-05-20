@@ -43,20 +43,6 @@ public class lihatantrian extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         NomorAntrian = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jTextField3 = new javax.swing.JTextField();
-        jPanel8 = new javax.swing.JPanel();
-        jTextField5 = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
-        jTextField4 = new javax.swing.JTextField();
-        jPanel9 = new javax.swing.JPanel();
-        jTextField6 = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -108,65 +94,6 @@ public class lihatantrian extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3);
         jPanel3.setBounds(60, 150, 290, 150);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.setLayout(null);
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Antrian 1", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 12))); // NOI18N
-        jPanel5.setLayout(null);
-        jPanel5.add(jTextField2);
-        jTextField2.setBounds(10, 30, 180, 70);
-
-        jPanel2.add(jPanel5);
-        jPanel5.setBounds(20, 40, 200, 110);
-
-        jLabel3.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        jLabel3.setText("Antrian Pasien");
-        jPanel2.add(jLabel3);
-        jLabel3.setBounds(20, 10, 140, 29);
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Antrian 2", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 12))); // NOI18N
-        jPanel6.setLayout(null);
-        jPanel6.add(jTextField3);
-        jTextField3.setBounds(10, 30, 180, 70);
-
-        jPanel2.add(jPanel6);
-        jPanel6.setBounds(250, 40, 200, 110);
-
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Antrian 4", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 12))); // NOI18N
-        jPanel8.setLayout(null);
-        jPanel8.add(jTextField5);
-        jTextField5.setBounds(10, 30, 190, 70);
-
-        jPanel2.add(jPanel8);
-        jPanel8.setBounds(730, 40, 210, 110);
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Antrian 3", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 12))); // NOI18N
-        jPanel7.setLayout(null);
-        jPanel7.add(jTextField4);
-        jTextField4.setBounds(10, 30, 180, 70);
-
-        jPanel2.add(jPanel7);
-        jPanel7.setBounds(490, 40, 200, 110);
-
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Antrian 5", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 12))); // NOI18N
-        jPanel9.setLayout(null);
-        jPanel9.add(jTextField6);
-        jTextField6.setBounds(10, 30, 190, 70);
-
-        jPanel2.add(jPanel9);
-        jPanel9.setBounds(990, 40, 210, 110);
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Total Antrian", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 10))); // NOI18N
-        jPanel4.setLayout(null);
-        jPanel4.add(jTextField7);
-        jTextField7.setBounds(20, 20, 70, 30);
-
-        jPanel2.add(jPanel4);
-        jPanel4.setBounds(540, 160, 110, 60);
-
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(60, 430, 1230, 240);
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informasi Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), java.awt.Color.black)); // NOI18N
         jPanel10.setLayout(null);
@@ -339,7 +266,6 @@ public class lihatantrian extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -349,19 +275,6 @@ public class lihatantrian extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }
