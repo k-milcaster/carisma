@@ -36,6 +36,11 @@ public class AntrianController {
         
                                 
     }
+    
+    public boolean deleteAntrian(String idAntrian) throws RemoteException{
+        return antrianService.deleteAntrian(idAntrian);
+    }
+    
     public DefaultTableModel getAntrian() throws RemoteException{
         List<Antrian> list = new ArrayList<Antrian>();
         list = antrianService.getAntrian();

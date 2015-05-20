@@ -1,14 +1,11 @@
 package carismaresepsionis.boundaries;
 
-import carismainterface.entity.Kota;
 import carismainterface.entity.Pasien;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.regispasiencontroller;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -235,6 +232,11 @@ public class regispasienform extends javax.swing.JFrame {
         TambahAntri.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         TambahAntri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428222513_icon-ios7-plus-outline-32.png"))); // NOI18N
         TambahAntri.setText("Tambah Antrian");
+        TambahAntri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TambahAntriActionPerformed(evt);
+            }
+        });
         getContentPane().add(TambahAntri);
         TambahAntri.setBounds(380, 550, 170, 40);
 
@@ -267,11 +269,6 @@ public class regispasienform extends javax.swing.JFrame {
         No_Kartu.setBounds(930, 250, 335, 32);
 
         CariPasien.setText("- Cari Nama Pasien -");
-        CariPasien.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                CariPasienKeyReleased(evt);
-            }
-        });
         getContentPane().add(CariPasien);
         CariPasien.setBounds(20, 60, 457, 32);
 
@@ -567,7 +564,6 @@ public class regispasienform extends javax.swing.JFrame {
         
         int row = tabelpasien.getSelectedRow();
         Pasien pasien = new Pasien ();
-                        
         Date date = new Date();
         pasien = registrasicontrol.getDataPasien(String.valueOf(tabelpasien.getValueAt(row, 0)));
         Nama_Pasien.setText(pasien.getNamaPasien());
@@ -582,25 +578,12 @@ public class regispasienform extends javax.swing.JFrame {
         TinggiPasien.setText(Integer.toString(pasien.getTinggiPasien()));
         BeratPasien.setText(Integer.toString(pasien.getBeratPasien()));
         tgl_regpasien.setDate(java.sql.Date.valueOf(pasien.getRegdatePasien()));
-        Jenis_Kelamin.setSelectedItem(pasien.getKelaminPasien());
-        goldar.setSelectedItem(pasien.getDarahPasien());
-        Kota.setSelectedItem(pasien.getKotaIdKota());
         
     }//GEN-LAST:event_tabelpasienMouseClicked
 
-    private void CariPasienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CariPasienKeyReleased
-        try {
-            if(!CariPasien.getText().isEmpty()){
-                registrasicontrol.getTabelPasienSearch(this, CariPasien.getText().toString());
-            }
-            else{
-                registrasicontrol.getTabelPasien(this);
-            }
-            
-        } catch (RemoteException ex) {
-            Logger.getLogger(regispasienform.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_CariPasienKeyReleased
+    private void TambahAntriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahAntriActionPerformed
+        
+    }//GEN-LAST:event_TambahAntriActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alamat;
