@@ -47,24 +47,25 @@ public class AbsensiControllerTest {
         String idDokter = "DOK0404994";
         String kehadiranReguler = "1";
         String kehadiranLembur = "0";
-        String tanggalKehadiran = "2015-05-17";
+        String tanggalKehadiran = "2015-05-15";
         AbsensiController instance = new AbsensiController(client);
         boolean result = instance.insertAbsensiDokter(idDokter, kehadiranReguler, kehadiranLembur, tanggalKehadiran);
         assertTrue(result);
+        //instance.deleteAbsensiDokter(idDokter);
     }
 
     /**
      * Test of deleteAbsensiDokter method, of class AbsensiController.
      */
-//    @Test
-//    public void testDeleteAbsensiDokter() throws Exception {
-//        client = new ClientSocket();
-//        System.out.println("deleteAbsensiDokter");
-//        String idDokter = "DOK0404994";
-//        AbsensiController instance = new AbsensiController(client);
-//        boolean result = instance.deleteAbsensiDokter(idDokter);
-//        assertTrue(result);
-//    }
+    @Test
+    public void testDeleteAbsensiDokter() throws Exception {
+        client = new ClientSocket();
+        System.out.println("deleteAbsensiDokter");
+        String idDokter = "DOK0404994";
+        AbsensiController instance = new AbsensiController(client);
+        boolean result = instance.deleteAbsensiDokter(idDokter);
+        assertTrue(result);
+    }
 
     /**
      * Test of insertAbsensiPegawai method, of class AbsensiController.
@@ -76,7 +77,7 @@ public class AbsensiControllerTest {
         String idPegawai = "EMP19880319001";
         String kehadiranReguler = "1";
         String kehadiranLembur = "0";
-        String tanggalKehadiran = "2015-05-17";
+        String tanggalKehadiran = "2015-05-15";
         AbsensiController instance = new AbsensiController(client);
         boolean result = instance.insertAbsensiPegawai(idPegawai, kehadiranReguler, kehadiranLembur, tanggalKehadiran);
         assertTrue(result);
@@ -85,15 +86,15 @@ public class AbsensiControllerTest {
     /**
      * Test of deleteAbsensiPegawai method, of class AbsensiController.
      */
-//    @Test
-//    public void testDeleteAbsensiPegawai() throws Exception {
-//        client = new ClientSocket();
-//        System.out.println("deleteAbsensiPegawai");
-//        String idPegawai = "EMP19880319001";
-//        AbsensiController instance = new AbsensiController(client);
-//        boolean result = instance.deleteAbsensiPegawai(idPegawai);
-//        assertTrue(result);
-//    }
+    @Test
+    public void testDeleteAbsensiPegawai() throws Exception {
+        client = new ClientSocket();
+        System.out.println("deleteAbsensiPegawai");
+        String idPegawai = "EMP19880319001";
+        AbsensiController instance = new AbsensiController(client);
+        boolean result = instance.deleteAbsensiPegawai(idPegawai);
+        assertTrue(result);
+    }
 
     /**
      * Test of getIdDokter method, of class AbsensiController.
@@ -153,7 +154,6 @@ public class AbsensiControllerTest {
         AbsensiController instance = new AbsensiController(client);
         DefaultTableModel result = instance.getTabelAbsensiPegawai();
         boolean resultCondition = false;
-        System.out.println("Row = "+result.getRowCount());
         if (result.getRowCount() >= 1) {
             resultCondition = true;
         }
