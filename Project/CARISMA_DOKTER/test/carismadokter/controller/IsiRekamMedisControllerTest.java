@@ -64,7 +64,7 @@ public class IsiRekamMedisControllerTest {
         client = new ClientSocket();
         System.out.println("getIdRekamMedis");
         IsiRekamMedisController instance = new IsiRekamMedisController(client);
-        String expResult = "REKMED-20150511-001";
+        String expResult = "REKMED-20150517-001";
         String result = instance.getIdRekamMedis();
         assertEquals(expResult, result);
     }
@@ -77,7 +77,7 @@ public class IsiRekamMedisControllerTest {
         client = new ClientSocket();
         System.out.println("getIdResep");
         IsiRekamMedisController instance = new IsiRekamMedisController(client);
-        String expResult = "RES-2015-05-11-001";
+        String expResult = "RES-2015-05-17-001";
         String result = instance.getIdResep();
         assertEquals(expResult, result);
     }
@@ -89,7 +89,7 @@ public class IsiRekamMedisControllerTest {
     public void testInsertResep() throws Exception {
         client = new ClientSocket();
         System.out.println("insertResep");
-        String idResep = "RES-2015-05-11-001";
+        String idResep = "RES-2015-05-17-001";
         String keterangan = "ada deh";
         IsiRekamMedisController instance = new IsiRekamMedisController(client);
         boolean result = instance.insertResep(idResep, keterangan);
@@ -104,7 +104,7 @@ public class IsiRekamMedisControllerTest {
         client = new ClientSocket();
         System.out.println("getIdDetailResep");
         IsiRekamMedisController instance = new IsiRekamMedisController(client);
-        String expResult = "DETRES-2015-05-11-001";
+        String expResult = "DETRES-2015-05-17-001";
         String result = instance.getIdDetailResep();
         assertEquals(expResult, result);
     }
@@ -116,16 +116,16 @@ public class IsiRekamMedisControllerTest {
     public void testInsertDetailResep() throws Exception {
         client = new ClientSocket();
         System.out.println("insertDetailResep");
-        String idDetailResep = "DETRES-2015-05-11-001";
-        String idResep = "RES-2015-05-11-001";
+        String idDetailResep = "DETRES-2015-05-17-001";
+        String idResep = "RES-2015-05-17-001";
         String namaObat = "Aspirin";
         int quantity = 10;
         String aturanPakai = "rahasia dong";
         IsiRekamMedisController instance = new IsiRekamMedisController(client);
         boolean result = instance.insertDetailResep(idDetailResep, idResep, namaObat, quantity, aturanPakai);
         assertTrue(result);
-        instance.deleteDetailResep("DETRES-2015-05-11-001");
-        instance.deleteResep("RES-2015-05-11-001");
+        instance.deleteDetailResep("DETRES-2015-05-17-001");
+        instance.deleteResep("RES-2015-05-17-001");
     }
 
     /**
@@ -135,10 +135,10 @@ public class IsiRekamMedisControllerTest {
     public void testInsertRekamMedis() throws Exception {
         client = new ClientSocket();
         System.out.println("insertRekamMedis");
-        String idRekammedik = "REKMED-20150511-001";
+        String idRekammedik = "REKMED-20150517-001";
         String idDokter = "DOK0304980";
         String idPasien = "0011445423";
-        String tglRekamMedis = "2015-05-11";
+        String tglRekamMedis = "2015-05-17";
         String keluhan = "jkdk";
         String pemeriksaan = "dsfs";
         String terapi = "gendeng";
@@ -159,12 +159,12 @@ public class IsiRekamMedisControllerTest {
     public void testInsertRekamMedisPenyakit() throws Exception {
         client = new ClientSocket();
         System.out.println("insertRekamMedisPenyakit");
-        String idRekamMedis = "REKMED-20150511-001";
+        String idRekamMedis = "REKMED-20150517-001";
         String idPenyakit = "A001";
         IsiRekamMedisController instance = new IsiRekamMedisController(client);
         boolean result = instance.insertRekamMedisPenyakit(idRekamMedis, idPenyakit);
         assertTrue(result);
-        instance.deleteRekamMedikPenyakit("REKMED-20150511-001");
+        instance.deleteRekamMedikPenyakit("REKMED-20150517-001");
     }
 
     /**
@@ -175,7 +175,7 @@ public class IsiRekamMedisControllerTest {
         client = new ClientSocket();
         System.out.println("getIdKunjungan");
         IsiRekamMedisController instance = new IsiRekamMedisController(client);
-        String expResult = "VIS-20150511-001";
+        String expResult = "VIS-20150517-001";
         String result = instance.getIdKunjungan();
         assertEquals(expResult, result);
     }
@@ -187,16 +187,16 @@ public class IsiRekamMedisControllerTest {
     public void testInsertKunjungan() throws Exception {
         client = new ClientSocket();
         System.out.println("insertKunjungan");
-        String idKunjungan = "VIS-20150511-001";
+        String idKunjungan = "VIS-20150517-001";
         String idPasien = "0011445423";
-        String idRekamMedik = "REKMED-20150511-001";
-        String tglKunjungan = "2015-05-11";
+        String idRekamMedik = "REKMED-20150517-001";
+        String tglKunjungan = "2015-05-17";
         int biaya = 25000;
         IsiRekamMedisController instance = new IsiRekamMedisController(client);
         boolean result = instance.insertKunjungan(idKunjungan, idPasien, idRekamMedik, tglKunjungan, biaya);
         assertTrue(result);
-        instance.deleteKunjungan("VIS-20150511-001");
-        instance.deleteRekamMedik("REKMED-20150511-001");
+        instance.deleteKunjungan("VIS-20150517-001");
+        instance.deleteRekamMedik("REKMED-20150517-001");
     }
 
     /**
@@ -252,7 +252,7 @@ public class IsiRekamMedisControllerTest {
         client = new ClientSocket();
         System.out.println("getDateNow");
         IsiRekamMedisController instance = new IsiRekamMedisController(client);
-        String expResult = "2015-05-11";
+        String expResult = "2015-05-17";
         String result = instance.getDateNow();
         assertEquals(expResult, result);
     }
