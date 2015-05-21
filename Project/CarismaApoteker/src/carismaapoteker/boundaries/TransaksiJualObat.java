@@ -31,9 +31,9 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         this.userName = userName;
         initComponents();
         dateOfSales.setDate(dateNow);
-        transaksijualobatController = new TransaksiJualObatController (Client);
-        namaPegawai = transaksijualobatController.namaPegawai(this.userName);
-        labelAoptekerName.setText(namaPegawai [0]);
+        transaksijualobatController = new TransaksiJualObatController(Client);
+        labelAoptekerName.setText(this.userName);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
     @SuppressWarnings("unchecked")
@@ -60,7 +60,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jProgressBar1 = new javax.swing.JProgressBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Carisma Project");
         getContentPane().setLayout(null);
 
@@ -160,13 +160,13 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(1250, 650, 100, 40);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jLabel7.setText("Apoteker :");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(10, 130, 94, 22);
+        jLabel7.setBounds(10, 130, 79, 29);
 
         labelAoptekerName.setBackground(new java.awt.Color(0, 0, 0));
-        labelAoptekerName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelAoptekerName.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         labelAoptekerName.setText("\n");
         labelAoptekerName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -187,7 +187,8 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(1140, 650, 100, 40);
 
-        jLabel6.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("TRANSAKSI PENJUALAN OBAT");
         getContentPane().add(jLabel6);
@@ -279,7 +280,8 @@ public class TransaksiJualObat extends javax.swing.JFrame {
 
     private void jTableOfSalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableOfSalesMouseClicked
         int colom = jTableOfSales.getSelectedColumn();
-        if (colom == 0) {
+        row = jTableOfSales.getSelectedRow();
+		if (colom == 0) {
             try {
                 new TabelObat(this, Client).setVisible(true);
             } catch (RemoteException ex) {

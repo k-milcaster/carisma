@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 /**
@@ -46,6 +47,11 @@ public class Login extends javax.swing.JFrame {
         username.setBounds(180, 350, 240, 40);
 
         password.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordActionPerformed(evt);
+            }
+        });
         getContentPane().add(password);
         password.setBounds(180, 400, 240, 40);
 
@@ -99,6 +105,32 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        if (evt.getSource() instanceof JTextField) {
+            if (username.getText().equalsIgnoreCase("") || password.getText().equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(null, "User Name atau Password anda belum terisi!");
+            } else {
+                LoginController login = new LoginController(this.login, username.getText(), password.getText());
+                boolean success = false;
+                try {
+                    success = login.logIn();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (success) {
+                    try {
+                        new Menursepsionis(this.client, username.getText()).show();
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "User Name atau Password anda salah!");
+                }
+            }
+        }
+    }//GEN-LAST:event_passwordActionPerformed
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -117,7 +149,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
