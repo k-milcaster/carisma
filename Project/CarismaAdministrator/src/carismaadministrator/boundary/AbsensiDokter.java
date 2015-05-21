@@ -189,11 +189,6 @@ public class AbsensiDokter extends javax.swing.JFrame {
                 "Nama Dokter", "Kehadiran Reguler", "Kehadiran Lembur"
             }
         ));
-        tableAbsensi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableAbsensiMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tableAbsensi);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(502, 240, 850, 450));
@@ -218,18 +213,6 @@ public class AbsensiDokter extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tableAbsensiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAbsensiMouseClicked
-        int row = tableAbsensi.getSelectedRow();
-
-        comboBoxIdDokter.setSelectedItem(String.valueOf(tableAbsensi.getValueAt(row, 0)));
-        if (String.valueOf(tableAbsensi.getValueAt(row, 1)).equals("1")) {
-            radioButtonReguler.setSelected(true);
-        }
-        if (String.valueOf(tableAbsensi.getValueAt(row, 2)).equals("1")) {
-            radioButtonLembur.setSelected(true);
-        }
-    }//GEN-LAST:event_tableAbsensiMouseClicked
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (radioButtonReguler.isSelected() == false && radioButtonLembur.isSelected() == false) {
             JOptionPane.showMessageDialog(null, "Data yang Anda Masukkan Kurang Lengkap", "WARNING", JOptionPane.WARNING_MESSAGE);
@@ -246,9 +229,17 @@ public class AbsensiDokter extends javax.swing.JFrame {
 
             try {
                 String[] idDokter = String.valueOf(comboBoxIdDokter.getSelectedItem()).split(" ");
-                absensiController.insertAbsensiDokter(String.valueOf(idDokter[0]), hadirReguler, hadirLembur, String.valueOf(new java.sql.Date(jDateChooser1.getDate().getTime())));
-                tabelModelAbsensi = absensiController.getTabelAbsensiDokter();
-                tableAbsensi.setModel(tabelModelAbsensi);
+                String namaDokter="";
+                for (int i = 1; i < idDokter.length; i++) {
+                    namaDokter = namaDokter.concat(" ").concat(idDokter[i]);
+                }
+                System.out.println("nama :"+namaDokter);
+                boolean inserted = absensiController.insertAbsensiDokter(String.valueOf(idDokter[0]), hadirReguler, hadirLembur, String.valueOf(new java.sql.Date(jDateChooser1.getDate().getTime())));
+                if (inserted == true) {
+                    JOptionPane.showMessageDialog(null, "Dokter "+namaDokter+" Telah Melakukan Absensi", "Absensi Dokter", JOptionPane.INFORMATION_MESSAGE);
+                    tabelModelAbsensi = absensiController.getTabelAbsensiDokter();
+                    tableAbsensi.setModel(tabelModelAbsensi);
+                }
             } catch (RemoteException ex) {
                 Logger.getLogger(AbsensiDokter.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -267,7 +258,7 @@ public class AbsensiDokter extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_radioButtonLemburItemStateChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox comboBoxIdDokter;
+    public javax.swing.JComboBox comboBoxIdDokter;
     private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
