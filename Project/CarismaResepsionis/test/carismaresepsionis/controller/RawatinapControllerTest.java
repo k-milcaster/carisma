@@ -121,7 +121,7 @@ public class RawatinapControllerTest {
     /**
      * Test of kamarKosong method, of class RawatinapController.
      */
-    @Test
+  /*  @Test
     public void testKamarKosong() throws RemoteException, NotBoundException {
         System.out.println("kamarKosong");
         String parameterA = "coba";
@@ -133,7 +133,7 @@ public class RawatinapControllerTest {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-    
+    */
    
     
 }

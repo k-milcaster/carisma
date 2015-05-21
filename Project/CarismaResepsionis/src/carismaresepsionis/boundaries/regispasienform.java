@@ -269,6 +269,11 @@ public class regispasienform extends javax.swing.JFrame {
         No_Kartu.setBounds(930, 250, 335, 32);
 
         CariPasien.setText("- Cari Nama Pasien -");
+        CariPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CariPasienActionPerformed(evt);
+            }
+        });
         getContentPane().add(CariPasien);
         CariPasien.setBounds(20, 60, 457, 32);
 
@@ -584,6 +589,10 @@ public class regispasienform extends javax.swing.JFrame {
     private void TambahAntriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahAntriActionPerformed
         
     }//GEN-LAST:event_TambahAntriActionPerformed
+
+    private void CariPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariPasienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CariPasienActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alamat;

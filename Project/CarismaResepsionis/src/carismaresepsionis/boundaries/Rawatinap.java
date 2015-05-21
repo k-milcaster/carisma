@@ -285,10 +285,10 @@ public class Rawatinap extends javax.swing.JFrame {
 
     private void tablelistkamarpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistkamarpasienMouseClicked
          int row = tablelistkamarpasien.getSelectedRow();
-            
-            namaKamar.setText(String.valueOf(tableKamar.getValueAt(row, 0)));
-            kelasKamar.setText(String.valueOf(tableKamar.getValueAt(row, 1)));
-            tarif.setText(String.valueOf(tableKamar.getValueAt(row, 2)));
+            idkamar.setText(String.valueOf(tableKamar.getValueAt(row, 0)));
+            namaKamar.setText(String.valueOf(tableKamar.getValueAt(row, 1)));
+            kelasKamar.setText(String.valueOf(tableKamar.getValueAt(row, 2)));
+            tarif.setText(String.valueOf(tableKamar.getValueAt(row, 3)));
         /*RawatinapController ambilData;
         try {
             ambilData = new RawatinapController (client);

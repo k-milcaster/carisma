@@ -454,7 +454,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         tampilTanggal.setBounds(1050, 50, 130, 40);
 
         tampilJam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tampilJam.setForeground(new java.awt.Color(255, 255, 255));
         tampilJam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tampilJam.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Jam", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
         getContentPane().add(tampilJam);
@@ -732,7 +731,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         try {
             DaftarRawatInapController control = new DaftarRawatInapController(client);
             model = control.getNamaPasienRawatInapbyName(CariPasien.getText());
-            System.out.println(model);
+            //System.out.println(model);
             TabelPasien.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);

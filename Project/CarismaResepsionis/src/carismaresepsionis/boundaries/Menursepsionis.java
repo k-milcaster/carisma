@@ -1,12 +1,14 @@
 package carismaresepsionis.boundaries;
 
-import carismainterface.server.DokterService;
-import carismainterface.server.PasienService;
-import carismainterface.entity.Dokter;
+//import carismainterface.server.DokterService;
+import carismainterface.server.*;
+import carismainterface.entity.*;
 import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.RawatinapController;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,12 +25,14 @@ public class Menursepsionis extends javax.swing.JFrame {
     private String userName;
     private PasienService ps;
     private DefaultTableModel tableAntri = new DefaultTableModel();
-
+    private KamarService kamarService;
+    
     public Menursepsionis(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
         this.userName = userName;
         AntrianController control = new AntrianController(this.client);
         ps = client.getPasienService();
+        kamarService = client.getKamarService();
         initComponents();
         tableAntri = control.getAntrian();
         tableDaftarAntrian.setModel(tableAntri);
@@ -261,19 +265,22 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void RegisPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienInapActionPerformed
         RawatinapController control;
         try {
+            List<String> list = new ArrayList<String>();
             control = new RawatinapController(this.client);
-            String a = "coba";
+            list = kamarService.getKamarAvailable();
             //control.kamarKosong(a);
-            if (control.kamarKosong(a).equals("kosong")) {
+            if (list.equals(null)) {
 
+                
                 //if (tampilUser().equals("benar") && tampilPass() == true) {
-                new Rawatinap(this.client, this.userName).show();
-                this.dispose();
+                JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "WARNING!", JOptionPane.ERROR_MESSAGE);
+                
                 //} else {
                 // JOptionPane.showMessageDialog(null, "TERJADI ERROR \n Username atau Password Salah", "ERROR!", JOptionPane.ERROR_MESSAGE);
                 //}
             } else {
-                JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                new Rawatinap(this.client, this.userName).show();
+                this.dispose();
             }
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);

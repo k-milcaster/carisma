@@ -98,15 +98,15 @@ public class RawatinapController {
         
     } 
 
-     public String kamarKosong (String parameterA){
-       String kamar = "";
+    /* public String getKamarAvailable (String parameterA){
+       String kamar = parameterA;
        if (parameterA.equals("coba")){
         kamar = "kosong";}
        else {
         kamar = "ada isinya";
        }
        return kamar;
-   }
+   }*/
     
     
 }
