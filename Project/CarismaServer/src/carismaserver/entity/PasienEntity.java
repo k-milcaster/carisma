@@ -260,7 +260,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             }
             return list;
         } catch (SQLException exception) {
-            ui.act.append("getPasienListByName Error \n");
+            ui.act.append("getPasienByNameListByName Error \n");
             ui.act.append(exception.toString());
             return null;
         } finally {
@@ -307,7 +307,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
             }
             return list;
         } catch (SQLException exception) {
-            ui.act.append("getPasienList Error \n");
+            ui.act.append("getPasienRawatinapList Error \n");
             ui.act.append(exception.toString());
             return null;
         } finally {
@@ -350,4 +350,51 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
         
     }
 
+    @Override
+    public List<Pasien> getPasienRawatinapByName(String pasien) throws RemoteException {
+        ui.act.append("Client Execute getPasienRawatinapListByName  \n");
+
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT P.* FROM `pasien` AS P , `kunjungan` AS K , `pasien_kamar` AS PK "
+                            + "WHERE P.nama_pasien LIKE('%" + pasien + "%') AND P.id_pasien = K.pasien_id_pasien AND K.pasien_kamar_id_peminjaman = PK.id_peminjaman");
+            ResultSet result = statement.executeQuery();
+            List<Pasien> list = new ArrayList<Pasien>();
+            Pasien pasi = null;
+            while (result.next()) {
+                pasi = new Pasien();
+                pasi.setIdPasien(result.getString("id_pasien"));
+                pasi.setKotaIdKota(result.getString("kota_id_kota"));
+                pasi.setUserIdUser(result.getString("user_id_user"));
+                pasi.setNamaPasien((result.getString("nama_pasien")));
+                pasi.setAlamatPasien(result.getString("alamat_pasien"));
+                pasi.setKartuidPasien(result.getString("kartuid_pasien"));
+                pasi.setNokartuidPasien(result.getString("nokartuid_pasien"));
+                pasi.setTelpPasien(result.getString("telp_pasien"));
+                pasi.setHpPasien(result.getString("hp_pasien"));
+                pasi.setTempatlahirPasien(result.getString("tempatlahir_pasien"));
+                pasi.setTgllahirPasien(result.getString("tgllahir_pasien"));
+                pasi.setKelaminPasien(result.getString("kelamin_pasien"));
+                pasi.setDarahPasien(result.getString("darah_pasien"));
+                pasi.setBeratPasien(result.getInt("berat_pasien"));
+                pasi.setTinggiPasien(result.getInt("tinggi_pasien"));
+                pasi.setRegdatePasien(result.getString("regdate_pasien"));
+                list.add(pasi);
+            }
+            return list;
+        } catch (SQLException exception) {
+            ui.act.append("getPasienRawatinapListByName Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+    
 }
