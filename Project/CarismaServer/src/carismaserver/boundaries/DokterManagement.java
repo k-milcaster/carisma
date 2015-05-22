@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -46,9 +47,11 @@ public class DokterManagement extends javax.swing.JFrame {
         initComponents();
         userService = new UserEntity(ui);
         poliService = new PoliEntity(ui);
-        control.getDokter(this);        
+        tableDokter.setModel(control.getDokter(this));        
         users = userService.getUser();
         polis = poliService.getPoli();
+        comboUsernamePopupMenuWillBecomeVisible(null);
+        comboPoliPopupMenuWillBecomeVisible(null);
         //setComboBox();
         tableDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -74,8 +77,10 @@ public class DokterManagement extends javax.swing.JFrame {
                         fieldGajiFix.setText((String) selected.getGajifixDokter().toString());
                         fieldGajiLembur.setText((String) selected.getGajilemburDokter().toString());
                         fieldGajiKonsul.setText((String) selected.getGajikonsulDokter().toString());
-                        comboUsername.setSelectedItem(selected.getUserIdUser());
+                        comboUsername.setSelectedItem((String)selected.getUserIdUser().toString());
+                        //System.out.println(selected.getUserIdUser());
                         comboPoli.setSelectedItem(selected.getPoliIdPoli());
+                        //System.out.println(selected.getPoliIdPoli());
                         //setComboBox(selected.getUserIdUser());
                     } catch (RemoteException ex) {
                         Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -191,12 +196,12 @@ public class DokterManagement extends javax.swing.JFrame {
         buttonAttach = new javax.swing.JButton();
         buttonInsert = new javax.swing.JButton();
         buttonUpdate = new javax.swing.JButton();
-        buttonDelete = new javax.swing.JButton();
+        buttonDelete1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         fieldPoli = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1360, 698));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -455,7 +460,6 @@ public class DokterManagement extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(fieldGajiLembur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel20)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -504,15 +508,15 @@ public class DokterManagement extends javax.swing.JFrame {
         });
         getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 550, 120, 40));
 
-        buttonDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1426717770_circle_close_delete-24.png"))); // NOI18N
-        buttonDelete.setText("DELETE");
-        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+        buttonDelete1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        buttonDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1426717770_circle_close_delete-24.png"))); // NOI18N
+        buttonDelete1.setText("DELETE");
+        buttonDelete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonDeleteActionPerformed(evt);
+                buttonDelete1ActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 600, 120, 40));
+        getContentPane().add(buttonDelete1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 600, 120, 40));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setOpaque(false);
@@ -554,17 +558,23 @@ public class DokterManagement extends javax.swing.JFrame {
             String darah = comboDarah.getSelectedItem().toString();
             String bank = fieldBank.getText();
             String norek = fieldNorek.getText();
+            String foto = "";
             byte[] img = null;
             if(file != null){
                 img = extractBytes(file.toPath().toString());
+            }
+            else{
+                foto = "Belum memasukkan foto";
             }
             int gfix = Integer.parseInt(fieldGajiFix.getText());
             int glembur = Integer.parseInt(fieldGajiLembur.getText());
             double gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
             control.insertDokter(this, userid, poliid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
             control.getDokter(this);
+            JOptionPane.showMessageDialog(this, "Insert Dokter berhasil\n"+foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            file = null;
         } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -584,15 +594,6 @@ public class DokterManagement extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
-    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        try {
-            String id = fieldId.getText();;
-            control.deleteDokter(this, id);
-        } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_buttonDeleteActionPerformed
-
     private void buttonAttachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAttachActionPerformed
         int o = jFileChooser1.showOpenDialog(this);
         if (0 == jFileChooser1.APPROVE_OPTION) {
@@ -604,7 +605,7 @@ public class DokterManagement extends javax.swing.JFrame {
                 //e.printStackTrace();
             }
             //System.out.println(file.toPath());
-            Image dimg = img.getScaledInstance(72, 102, Image.SCALE_SMOOTH);
+            Image dimg = img.getScaledInstance(72, 96, Image.SCALE_SMOOTH);
             foto.setIcon(new ImageIcon(dimg));
         }
     }//GEN-LAST:event_buttonAttachActionPerformed
@@ -632,17 +633,20 @@ public class DokterManagement extends javax.swing.JFrame {
             comboPoli.addItem(polis.get(i).getNamaPoli());
         }
     }//GEN-LAST:event_comboPoliPopupMenuWillBecomeVisible
+
+    private void buttonDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDelete1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonDelete1ActionPerformed
     private byte[] extractBytes(String ImageName) throws IOException {
         File fi = new File(ImageName);
         byte[] fileContent = Files.readAllBytes(fi.toPath());
-
         return fileContent;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaAlamat;
     private javax.swing.JButton buttonAttach;
-    private javax.swing.JButton buttonDelete;
+    private javax.swing.JButton buttonDelete1;
     private javax.swing.JButton buttonInsert;
     private javax.swing.JButton buttonUpdate;
     private javax.swing.JComboBox comboDarah;

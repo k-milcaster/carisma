@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DokterController {
 
-    public void getDokter(carismaserver.boundaries.DokterManagement ui) throws RemoteException {
+    public DefaultTableModel getDokter(carismaserver.boundaries.DokterManagement ui) throws RemoteException {
         DokterEntity dokterService = new DokterEntity(ui.ui);
         List<Dokter> list = new ArrayList<Dokter>();
         list = dokterService.getDokter();
@@ -49,9 +49,8 @@ public class DokterController {
             model.addRow(new Object[]{i, list.get(i).getNamaDokter(), list.get(i).getAlamatDokter(), list.get(i).getNokartuidDokter(), list.get(i).getTelpDokter(), list.get(i).getHp1Dokter(),
                 list.get(i).getHp2Dokter(), list.get(i).getTempatlahirDokter(), list.get(i).getTgllahirDokter(), list.get(i).getKelaminDokter(), list.get(i).getDarahDokter(),
                 list.get(i).getBankDokter(), list.get(i).getNorekDokter(), list.get(i).getGajifixDokter(), list.get(i).getGajilemburDokter(), list.get(i).getGajikonsulDokter()});
-            System.out.println("lewat");
         }
-        ui.tableDokter.setModel(model);
+        return model;
     }
 
     public void insertDokter(carismaserver.boundaries.DokterManagement ui, int userid, String poliid, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
@@ -82,7 +81,36 @@ public class DokterController {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public void updateDokter(carismaserver.boundaries.DokterManagement ui, int userid, String poliid, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
+        DokterEntity dokterService = new DokterEntity(ui.ui);
+        try {
+            Dokter dokter = new Dokter();
+            dokter.setUserIdUser(userid);
+            dokter.setPoliIdPoli(poliid);
+            dokter.setIdDokter(id);
+            dokter.setNamaDokter(nama);
+            dokter.setAlamatDokter(alamat);
+            dokter.setNokartuidDokter(nokartu);
+            dokter.setTelpDokter(telp);
+            dokter.setHp1Dokter(hp1);
+            dokter.setHp2Dokter(hp2);
+            dokter.setTempatlahirDokter(tempat);
+            dokter.setTgllahirDokter(tanggal);
+            dokter.setKelaminDokter(kelamin);
+            dokter.setDarahDokter(darah);
+            dokter.setBankDokter(bank);
+            dokter.setNorekDokter(norek);
+            dokter.setGajifixDokter(gfix);
+            dokter.setGajilemburDokter(glembur);
+            dokter.setGajikonsulDokter(gkonsul);
+            dokter.setFotoDokter(foto);
+            dokterService.updateDokter(dokter);
+        } catch (RemoteException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void deleteDokter(carismaserver.boundaries.DokterManagement ui, String id) throws RemoteException {
         DokterEntity dokterService = new DokterEntity(ui.ui);
         dokterService.deleteDokter(id);
