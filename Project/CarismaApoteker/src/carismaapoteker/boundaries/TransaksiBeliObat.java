@@ -34,6 +34,7 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
         this.userName = userName;
         initComponents();
         jLabel8.setText(this.userName);
+        fieldIdTransaksiBeli.setText(control.getIdTransaksiBeliObat());
         combo = control.getIdObat();
         boxNamaObat.setModel(combo);
         Date dateNow = new Date();
@@ -305,47 +306,51 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                    try {
-                TransaksiBeliObatController control = new TransaksiBeliObatController(this.Client);
-                tableTransaksiBeliObat = (DefaultTableModel) jTableOfBuys.getModel();
-                int row = tableTransaksiBeliObat.getRowCount();
-                
-                System.out.println("baris = "+row);
-                for (int i = 0; i < row; i++) {
-                    System.out.println("lewat");
-                    control.insertBeliObatLama(String.valueOf(jTableOfBuys.getValueAt(i, 0)), String.valueOf(jTableOfBuys.getValueAt(i, 1)), String.valueOf(jTableOfBuys.getValueAt(i, 6)), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 3))));
-                    control.insertDetailObat(control.getidDetailObat(), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 2))), String.valueOf(jTableOfBuys.getValueAt(i, 5)));
-                    control.insertDetailTransaksiBeliObat(String.valueOf(jTableOfBuys.getValueAt(i, 0)), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 2))), Integer.parseInt(fieldQuantity.getText()));
-                    control.updateStokObat(Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 2))), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 4))));
-                }
-                JOptionPane.showMessageDialog(null, "Data Obat Sudah Tersimpan", "Obat", JOptionPane.INFORMATION_MESSAGE);
-                
-
-            } catch (Exception e) {
-                System.out.println(e);
+        try {
+            TransaksiBeliObatController control = new TransaksiBeliObatController(this.Client);
+            tableTransaksiBeliObat = (DefaultTableModel) jTableOfBuys.getModel();
+            int row = tableTransaksiBeliObat.getRowCount();
+            System.out.println("baris = "+row);
+            for (int i = 0; i < row; i++) {
+                control.insertBeliObat(String.valueOf(jTableOfBuys.getValueAt(i, 0)), String.valueOf(jTableOfBuys.getValueAt(i, 1)), String.valueOf(jTableOfBuys.getValueAt(i, 6)), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 3))));
+                control.insertDetailObat(control.getidDetailObat(), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 2))), String.valueOf(jTableOfBuys.getValueAt(i, 5)));
+                control.insertDetailTransaksiBeliObat(String.valueOf(jTableOfBuys.getValueAt(i, 0)), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 2))), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i,4))));
+                control.updateStokObat(Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 2))), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 4))));
             }
-        
-       
-        
+            JOptionPane.showMessageDialog(null, "Data Obat Sudah Tersimpan", "Obat", JOptionPane.INFORMATION_MESSAGE);
+        } 
+            
+        catch (Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void reset(){
-    fieldIdTransaksiBeli.setText("");
-    fieldHargaBeli.setText("");
-    fieldQuantity.setText("");
-    fieldKeterangan.setText("");
+        fieldHargaBeli.setText("");
+        fieldQuantity.setText("");
+        fieldKeterangan.setText("");
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (fieldIdTransaksiBeli.getText().equals("") || fieldHargaBeli.getText().equals("") || fieldQuantity.getText().equals("")) {
-            JOptionPane.showConfirmDialog(null, "Isi Data Transaksi Pembelian Obat dengan Lengkap", "Warning", JOptionPane.WARNING_MESSAGE);
-        } else {
-            tableTransaksiBeliObat = (DefaultTableModel) jTableOfBuys.getModel();
-            String[] idObat = String.valueOf(boxNamaObat.getSelectedItem()).split(" ");
-            tableTransaksiBeliObat.addRow(new Object[]{fieldIdTransaksiBeli.getText(), String.valueOf(new java.sql.Date(jDateChooser1.getDate().getTime())), Integer.parseInt(String.valueOf(idObat[0])), Integer.parseInt(fieldHargaBeli.getText()), Integer.parseInt(fieldQuantity.getText()), String.valueOf(new java.sql.Date(jDateChooser2.getDate().getTime())), fieldKeterangan.getText()});
-            jTableOfBuys.setModel(tableTransaksiBeliObat);
-            reset();
+        TransaksiBeliObatController control;
+        try {
+            control = new TransaksiBeliObatController(this.Client);
+            if (fieldIdTransaksiBeli.getText().equals("") || fieldHargaBeli.getText().equals("") || fieldQuantity.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Data Transaksi Belum Lengkap", "Warning", JOptionPane.WARNING_MESSAGE);
+            } 
+            else {
+                tableTransaksiBeliObat = (DefaultTableModel) jTableOfBuys.getModel();
+                String[] idObat = String.valueOf(boxNamaObat.getSelectedItem()).split(" ");
+                tableTransaksiBeliObat.addRow(new Object[]{fieldIdTransaksiBeli.getText(), String.valueOf(new java.sql.Date(jDateChooser1.getDate().getTime())), Integer.parseInt(String.valueOf(idObat[0])), Integer.parseInt(fieldHargaBeli.getText()), Integer.parseInt(fieldQuantity.getText()), String.valueOf(new java.sql.Date(jDateChooser2.getDate().getTime())), fieldKeterangan.getText()});
+                jTableOfBuys.setModel(tableTransaksiBeliObat);
+                reset();
+                fieldIdTransaksiBeli.setText(control.getIdTransaksiBeliObat());
+            }
+        }       
+        catch (RemoteException ex) {
+            Logger.getLogger(TransaksiBeliObat.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
