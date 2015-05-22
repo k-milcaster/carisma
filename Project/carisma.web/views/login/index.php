@@ -16,9 +16,7 @@
                             <input type="text" name="username" value="Username:" onfocus="this.value = '';" onblur="if (this.value == '') {
                                         this.value = 'Username:';
                                     }">
-                            <input type="text" name="pass" value="Password:" onfocus="this.value = '';" onblur="if (this.value == '') {
-                                        this.value = 'Password:';
-                                    }">
+                                    <input type="password" name="pass" placeholder="Password :">
                             <input type="submit" name="input" value="Log In" />
                         </form>
                         <div class="clearfix"> </div>

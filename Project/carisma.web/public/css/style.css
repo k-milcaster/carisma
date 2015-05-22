@@ -481,8 +481,9 @@ div.slide-text-info {
 .about-grid-info {
     margin:0px;padding:0px;
     width:100%;
+    padding-bottom: 10px;
     box-shadow: 10px 10px 5px #888888;
-    border:1px solid #7f0000;
+    border:0px solid #7f0000;
 
     -moz-border-radius-bottomleft:0px;
     -webkit-border-bottom-left-radius:0px;
@@ -806,6 +807,23 @@ div.slide-text-info {
     -ms-transition:border-color 0.4s;
 }
 .contact-grid-right input[type="text"]:hover,.contact-grid-right textarea:hover{
+    border-color:#084A5C;
+}
+.contact-grid-right input[type="password"],.contact-grid-right textarea{
+    width: 86%;
+    padding:0.6em;
+    border:none;
+    margin-bottom:1em;
+    color:#084A5C;
+    font-size:0.875em;
+    font-family: 'Open Sans', sans-serif;
+    transition:border-color 0.4s;
+    -webkit-transition:border-color 0.4s;
+    -moz-transition:border-color 0.4s;
+    -o-transition:border-color 0.4s;
+    -ms-transition:border-color 0.4s;
+}
+.contact-grid-right input[type="password"]:hover,.contact-grid-right textarea:hover{
     border-color:#084A5C;
 }
 .contact-grid-right textarea{
