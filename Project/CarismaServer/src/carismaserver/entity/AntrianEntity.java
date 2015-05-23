@@ -135,7 +135,7 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
             ResultSet result = statement.executeQuery();
             List<Antrian> list = new ArrayList<Antrian>();
             Antrian antri = null;
-            if (result.next()) {
+            while (result.next()) {
                 antri = new Antrian();
                 antri.setIdAntrian(result.getString("id_antrian"));
                 antri.setPasienIdPasien(result.getString("pasien_id_pasien"));

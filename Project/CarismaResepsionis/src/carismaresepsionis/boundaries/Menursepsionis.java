@@ -5,7 +5,10 @@ import carismainterface.server.*;
 import carismainterface.entity.*;
 import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
+import carismaresepsionis.controller.LoginController;
 import carismaresepsionis.controller.RawatinapController;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,24 +29,30 @@ public class Menursepsionis extends javax.swing.JFrame {
     private PasienService ps;
     private DefaultTableModel tableAntri = new DefaultTableModel();
     private KamarService kamarService;
-    
-    public Menursepsionis(ClientSocket client, String userName) throws RemoteException {
+    private AntrianController control;
+    private UserService userService;
+    public Menursepsionis(ClientSocket client, final String userName) throws RemoteException {
         this.client = client;
         this.userName = userName;
-        AntrianController control = new AntrianController(this.client);
+        control = new AntrianController(this.client, this);
         ps = client.getPasienService();
         kamarService = client.getKamarService();
+        userService = client.getUserService();
         initComponents();
-        tableAntri = control.getAntrian();
-        tableDaftarAntrian.setModel(tableAntri);
+        control.start();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
         Namanya.setText(String.valueOf(this.userName));
-        
-        
-
-        
-
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                LoginController log = new LoginController(userService, userName);
+                try {
+                    log.logOut();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         //   tanggalkustom();
     }
 
@@ -271,10 +280,9 @@ public class Menursepsionis extends javax.swing.JFrame {
             //control.kamarKosong(a);
             if (list.equals(null)) {
 
-                
                 //if (tampilUser().equals("benar") && tampilPass() == true) {
                 JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "WARNING!", JOptionPane.ERROR_MESSAGE);
-                
+
                 //} else {
                 // JOptionPane.showMessageDialog(null, "TERJADI ERROR \n Username atau Password Salah", "ERROR!", JOptionPane.ERROR_MESSAGE);
                 //}
@@ -299,19 +307,18 @@ public class Menursepsionis extends javax.swing.JFrame {
     }//GEN-LAST:event_LihatPasienInapActionPerformed
 
     private void NamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaDokterActionPerformed
-        
+
     }//GEN-LAST:event_NamaDokterActionPerformed
 
     private void NamanyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamanyaActionPerformed
-        
+
     }//GEN-LAST:event_NamanyaActionPerformed
 
     private void buttonHapusAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHapusAntrianActionPerformed
         int row = tableDaftarAntrian.getSelectedRow();
         try {
-            AntrianController controller = new AntrianController(client);
-            controller.deleteAntrian(String.valueOf(tableDaftarAntrian.getValueAt(row, 0)));
-            tableAntri = (DefaultTableModel)tableDaftarAntrian.getModel();
+            control.deleteAntrian(String.valueOf(tableDaftarAntrian.getValueAt(row, 0)));
+            tableAntri = (DefaultTableModel) tableDaftarAntrian.getModel();
             tableAntri.removeRow(row);
             tableDaftarAntrian.setModel(tableAntri);
         } catch (Exception e) {
@@ -320,7 +327,7 @@ public class Menursepsionis extends javax.swing.JFrame {
 
     private void buttonLihatAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLihatAntrianActionPerformed
         int row = tableDaftarAntrian.getSelectedRow();
-        
+
         try {
             new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 1))).setVisible(true);
         } catch (RemoteException ex) {
@@ -343,4 +350,5 @@ public class Menursepsionis extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tableDaftarAntrian;
     // End of variables declaration//GEN-END:variables
+
 }

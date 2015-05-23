@@ -64,7 +64,7 @@ public class lihatantrian extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -84,6 +84,8 @@ public class lihatantrian extends javax.swing.JFrame {
         jPanel3.add(jLabel2);
         jLabel2.setBounds(90, 0, 120, 40);
 
+        NomorAntrian.setEditable(false);
+        NomorAntrian.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         NomorAntrian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NomorAntrianActionPerformed(evt);
