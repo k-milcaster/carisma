@@ -1,10 +1,8 @@
 package carismaresepsionis.boundaries;
 
 import carismainterface.entity.Jadwal;
-import carismainterface.server.DokterService;
 import carismainterface.server.JadwaldokterService;
 import carismaresepsionis.controller.ClientSocket;
-import javax.swing.DefaultListModel;
 import carismaresepsionis.controller.LihatJadwalDokterController;
 import java.rmi.RemoteException;
 import java.util.ArrayList;

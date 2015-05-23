@@ -1,22 +1,14 @@
 package carismaresepsionis.boundaries;
 
 import carismaresepsionis.controller.ClientSocket;
-import carismainterface.entity.Dokter;
-import carismainterface.entity.Poli;
-import carismainterface.entity.Jadwaldokter;
 import carismainterface.server.*;
 import carismaresepsionis.controller.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.rmi.RemoteException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -391,7 +383,7 @@ public class dokterform extends javax.swing.JFrame {
         try {
             DataDokterController control = new DataDokterController(client);
             model = control.getDokterByName(CariNamaDokter.getText());
-            //System.out.println(model);
+
             TabelDokter.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);

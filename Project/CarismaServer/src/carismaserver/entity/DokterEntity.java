@@ -177,6 +177,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                 dokter.setGajifixDokter(result.getInt("gajifix_dokter"));
                 dokter.setGajilemburDokter(result.getInt("gajilembur_dokter"));
                 dokter.setGajikonsulDokter(result.getDouble("gajikonsul_dokter"));
+                dokter.setFotoDokter(result.getBytes("foto_dokter"));
             }
             return dokter;
         } catch (SQLException exception) {
@@ -223,6 +224,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                 dokter.setGajifixDokter(result.getInt("gajifix_dokter"));
                 dokter.setGajilemburDokter(result.getInt("gajilembur_dokter"));
                 dokter.setGajikonsulDokter(result.getDouble("gajikonsul_dokter"));
+                dokter.setFotoDokter(result.getBytes("foto_dokter"));
                 list.add(dokter);
             }
             result.close();

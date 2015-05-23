@@ -118,6 +118,7 @@ public class Dokter implements Serializable {
     }
     
     public Dokter(Dokter dokter) {
+        this.poliIdPoli = dokter.poliIdPoli;
         this.idDokter = dokter.idDokter;
         this.namaDokter = dokter.namaDokter;
         this.alamatDokter = dokter.alamatDokter;
@@ -135,6 +136,7 @@ public class Dokter implements Serializable {
         this.gajilemburDokter = dokter.gajilemburDokter;
         this.gajikonsulDokter = dokter.gajikonsulDokter;
         this.userIdUser = dokter.userIdUser;
+        this.fotoDokter = dokter.fotoDokter;
     }
     
     public Dokter(String idDokter) {

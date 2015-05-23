@@ -9,6 +9,7 @@ import carismaserver.entity.PoliEntity;
 import carismaserver.entity.UserEntity;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,20 +35,20 @@ public class DokterManagement extends javax.swing.JFrame {
 
     private carismaserver.controllers.DokterController control = new carismaserver.controllers.DokterController();
     private DokterEntity dokterService;
-    private UserEntity userService ;
-    private PoliEntity poliService ;
+    private UserEntity userService;
+    private PoliEntity poliService;
     public Main ui;
     private File file;
     private DatabaseConnection databaseConnection;
     public List<User> users = new ArrayList<User>();
     public List<Poli> polis = new ArrayList<Poli>();
-    
+
     public DokterManagement(final Main ui) throws RemoteException, SQLException {
         this.ui = ui;
         initComponents();
         userService = new UserEntity(ui);
         poliService = new PoliEntity(ui);
-        tableDokter.setModel(control.getDokter(this));        
+        tableDokter.setModel(control.getDokter(this));
         users = userService.getUser();
         polis = poliService.getPoli();
         comboUsernamePopupMenuWillBecomeVisible(null);
@@ -77,11 +78,13 @@ public class DokterManagement extends javax.swing.JFrame {
                         fieldGajiFix.setText((String) selected.getGajifixDokter().toString());
                         fieldGajiLembur.setText((String) selected.getGajilemburDokter().toString());
                         fieldGajiKonsul.setText((String) selected.getGajikonsulDokter().toString());
-                        comboUsername.setSelectedItem((String)selected.getUserIdUser().toString());
-                        //System.out.println(selected.getUserIdUser());
-                        comboPoli.setSelectedItem(selected.getPoliIdPoli());
-                        //System.out.println(selected.getPoliIdPoli());
-                        //setComboBox(selected.getUserIdUser());
+                        comboUsername.setSelectedItem(userService.getUserById(selected.getUserIdUser()).getUsername());
+                        comboPoli.setSelectedItem(poliService.getPoli(selected.getPoliIdPoli()).getNamaPoli());
+                        byte[] content = null;
+                        content = selected.getFotoDokter();
+                        Image imgs = Toolkit.getDefaultToolkit().createImage(content);
+                        ImageIcon icon = new ImageIcon(imgs);
+                        foto.setIcon(icon);
                     } catch (RemoteException ex) {
                         Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -560,10 +563,9 @@ public class DokterManagement extends javax.swing.JFrame {
             String norek = fieldNorek.getText();
             String foto = "";
             byte[] img = null;
-            if(file != null){
+            if (file != null) {
                 img = extractBytes(file.toPath().toString());
-            }
-            else{
+            } else {
                 foto = "Belum memasukkan foto";
             }
             int gfix = Integer.parseInt(fieldGajiFix.getText());
@@ -571,7 +573,7 @@ public class DokterManagement extends javax.swing.JFrame {
             double gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
             control.insertDokter(this, userid, poliid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
             control.getDokter(this);
-            JOptionPane.showMessageDialog(this, "Insert Dokter berhasil\n"+foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Insert Dokter berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
             file = null;
         } catch (RemoteException ex) {
             Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -617,7 +619,7 @@ public class DokterManagement extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(int i=0;i<users.size();i++){
+        for (int i = 0; i < users.size(); i++) {
             comboUsername.addItem(users.get(i).getUsername());
         }
     }//GEN-LAST:event_comboUsernamePopupMenuWillBecomeVisible
@@ -629,7 +631,7 @@ public class DokterManagement extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(int i=0;i<polis.size();i++){
+        for (int i = 0; i < polis.size(); i++) {
             comboPoli.addItem(polis.get(i).getNamaPoli());
         }
     }//GEN-LAST:event_comboPoliPopupMenuWillBecomeVisible
