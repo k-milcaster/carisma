@@ -46,7 +46,6 @@ public class StokObatController {
         for (int i = 0; i < list.size(); i++) {
             model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(), list.get(i).getStokkritisObat()});
         }
-       // ui.tableMedicine.setModel(model);
         return model;
     }
 
@@ -62,7 +61,6 @@ public class StokObatController {
             System.out.println("get detail obat");
         }
         return model;
-
     }
 
     public boolean updateStokObat(int idObat, String namaObat, int qtyObat, String jenisObat, String keterangan, int hargaJualObat, int stokKritis) throws RemoteException {

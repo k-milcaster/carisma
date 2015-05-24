@@ -36,11 +36,11 @@ public class TransaksiBeliObatController {
     private PegawaiService pegawaiService;
 
     public TransaksiBeliObatController(ClientSocket client) throws RemoteException {
-        this.transaksibeliobat = client.getTransaksibeliobatService();
-        this.detailtransaksibeliobat = client.getDetailtransaksibeliobatService();
+        transaksibeliobat = client.getTransaksibeliobatService();
+        detailtransaksibeliobat = client.getDetailtransaksibeliobatService();
         obatService = client.getObatService();
         detailobatService = client.getDetailonatSerivice();
-        this.pegawaiService = client.getPegawaiService();
+        pegawaiService = client.getPegawaiService();
     }
 
     public DefaultComboBoxModel getIdObat() throws RemoteException {
@@ -54,7 +54,6 @@ public class TransaksiBeliObatController {
 
     }
 
-
     public boolean insertBeliObat(String idTransaksiBeliObat, String tglTransaksiBeliObat, String keterangan, int hargaBeliObat) throws RemoteException {
         boolean inserted = false;
         Transaksibeliobat trans = new Transaksibeliobat();
@@ -66,7 +65,7 @@ public class TransaksiBeliObatController {
         return inserted;
     }
 
-    public boolean insertStokObatLama(int idObat, String namaObat, int qtyObat, String jenisObat, String keterangan, int hargaJualObat, int stokKritis) throws RemoteException {
+    public boolean insertStokObat(int idObat, String namaObat, int qtyObat, String jenisObat, String keterangan, int hargaJualObat, int stokKritis) throws RemoteException {
         boolean inserted = false;
         Obat obat = new Obat();
         obat.setIdObat(idObat);
@@ -80,10 +79,10 @@ public class TransaksiBeliObatController {
         return inserted;
     }
 
-    public boolean insertDetailTransaksiBeliObat(String idTransaski, int idObat, int qtyObat) throws RemoteException {
+    public boolean insertDetailTransaksiBeliObat(String idTransaksi, int idObat, int qtyObat) throws RemoteException {
         boolean inserted = false;
         Detailtransaksibeliobat trans1 = new Detailtransaksibeliobat();
-        trans1.setTransaksibeliobat(idTransaski);
+        trans1.setTransaksibeliobat(idTransaksi);
         trans1.setObat(idObat);
         trans1.setQty(qtyObat);
         inserted = detailtransaksibeliobat.insertDetailtransaksibeliobat(trans1);
@@ -118,11 +117,25 @@ public class TransaksiBeliObatController {
         return lastIdObat;    
     }
     
-    
-    
     public String[] getNamaPegawai (String username) throws RemoteException{
         String[] namaApoteker = pegawaiService.getIdNamaPegawai(username);
         return namaApoteker;
+    }
+    
+    public boolean deleteDetailObat(int idDetail) throws RemoteException{
+        return detailobatService.deleteDetailobat(idDetail);
+    }
+    
+    public boolean deleteDetailTransaksiBeliObat(String idTransaksi, int idObat) throws RemoteException{
+        return detailtransaksibeliobat.deleteDetailtransaksibeliobat(idTransaksi, idObat);
+    }
+    
+    public boolean deleteStokObat(int idObat) throws RemoteException{
+        return obatService.deleteObat(idObat);
+    }
+    
+    public boolean deleteBeliObat(String idTransaksi) throws RemoteException{
+        return transaksibeliobat.deleteTransaksibeliobat(idTransaksi);
     }
     
     public String getIdTransaksiBeliObat() throws RemoteException {
@@ -162,11 +175,11 @@ public class TransaksiBeliObatController {
     }
 
    
-      public String getDateNow() throws RemoteException {
+    public String getDateNow() throws RemoteException {
         DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
         String date = df.format(new java.util.Date());
         return date;
     }
-
+      
 
 }
