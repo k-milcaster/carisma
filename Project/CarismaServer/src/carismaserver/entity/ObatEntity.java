@@ -97,13 +97,13 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
     }
 
     @Override
-    public boolean deleteObat(String idobat) throws RemoteException {
+    public boolean deleteObat(int idobat) throws RemoteException {
         ui.act.append("Client Execute deleteObat (" + idobat + ") \n");
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "DELETE FROM obat WHERE id_obat = ?");
-            statement.setString(1, idobat);
+            statement.setInt(1, idobat);
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -121,14 +121,14 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
     }
 
     @Override
-    public Obat getObat(String idobat) throws RemoteException {
+    public Obat getObat(int idobat) throws RemoteException {
         ui.act.append("Client Execute getObat (" + idobat + ") \n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "SELECT * FROM obat WHERE id_obat = ?");
-            statement.setString(1, idobat);
+            statement.setInt(1, idobat);
             ResultSet result = statement.executeQuery();
             Obat obat = null;
             if (result.next()) {
@@ -261,18 +261,11 @@ public class ObatEntity extends UnicastRemoteObject implements ObatService {
     @Override
     public boolean updateQtyObat(int id, int qty) throws RemoteException {
          ui.act.append("Client Execute updateQtyObat()\n");
-
-//        PreparedStatement statement = null;
          Statement statement = null;
         try {
             statement = DatabaseConnection.getConnection().createStatement();
             String sql = "UPDATE obat SET `qty_obat` = `qty_obat`+ "+qty+" WHERE `id_obat` = "+id+"";
             statement.executeUpdate(sql);
-//            statement = DatabaseConnection.getConnection().prepareStatement(
-//                    "UPDATE obat SET `qty_obat` = `qty_obat`+ "+qty+" WHERE `id_obat` = "+id+"");
-//            statement.setInt(1, qty);
-//            statement.setInt(2, id);
-//            statement.executeUpdate();
             return true;
         } catch (SQLException e) {
             ui.act.append("UpdateQtyObat Error \n");
