@@ -2,6 +2,7 @@ package carismaapoteker.boundaries;
 
 import carismaapoteker.controller.ClientSocket;
 import carismaapoteker.controller.TransaksiBeliObatController;
+import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -97,6 +98,11 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
 
         fieldStokKritis.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fieldStokKritis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        fieldStokKritis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldStokKritisKeyTyped(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Harga Jual");
@@ -130,6 +136,11 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
 
         fieldHarga.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fieldHarga.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        fieldHarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldHargaKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -239,7 +250,7 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
             transaksiBeliController = new TransaksiBeliObatController(this.client);
             for (int i = 0; i < row; i++) {
                 ui.TambahCombo(String.valueOf(transaksiBeliController.getidObat()) + " " + jTable1.getValueAt(i, 0));
-                transaksiBeliController.insertStokObatLama(transaksiBeliController.getidObat(), String.valueOf(jTable1.getValueAt(i, 0)), Integer.parseInt(String.valueOf(jTable1.getValueAt(i, 1))), String.valueOf(jTable1.getValueAt(i, 2)), String.valueOf(jTable1.getValueAt(i, 3)), Integer.parseInt(String.valueOf(jTable1.getValueAt(i, 4))), Integer.parseInt(String.valueOf(jTable1.getValueAt(i, 5))));
+                transaksiBeliController.insertStokObat(transaksiBeliController.getidObat(), String.valueOf(jTable1.getValueAt(i, 0)), Integer.parseInt(String.valueOf(jTable1.getValueAt(i, 1))), String.valueOf(jTable1.getValueAt(i, 2)), String.valueOf(jTable1.getValueAt(i, 3)), Integer.parseInt(String.valueOf(jTable1.getValueAt(i, 4))), Integer.parseInt(String.valueOf(jTable1.getValueAt(i, 5))));
             }
             JOptionPane.showMessageDialog(null, "Data Obat Sudah Tersimpan", "Obat", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
@@ -248,6 +259,21 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void fieldHargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldHargaKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_fieldHargaKeyTyped
+
+    private void fieldStokKritisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldStokKritisKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_fieldStokKritisKeyTyped
+     public void typeOnlyNumber(KeyEvent evt){
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)||c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField fieldHarga;
     private javax.swing.JTextField fieldJenisObat;

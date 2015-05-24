@@ -9,6 +9,7 @@ import carismainterface.server.ObatService;
 import carismainterface.server.PegawaiService;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,21 +39,18 @@ public class StokObat extends javax.swing.JFrame {
         this.client = Client;
         control = new StokObatController(this.client);
         os = client.getObatService();
-        this.userName = userName;
         initComponents();
+        this.userName = userName;
         labelApotekerName.setText(this.userName);
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-
         tableMedicine.setModel(control.getObats());
-
         tableMedicine.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 int row = tableMedicine.getSelectedRow();
                 if (row != -1) {
                     try {
-
-                        Obat selected = new Obat(os.getObat(tableMedicine.getValueAt(row, 0).toString()));
+                        Obat selected = new Obat(os.getObat((int) tableMedicine.getValueAt(row, 0)));
                         fieldIdMedicine.setText(selected.getIdObat().toString());
                         fieldMedicineName.setText(selected.getNamaObat());
                         fieldQuantity.setText(selected.getQtyObat().toString());
@@ -253,6 +251,11 @@ public class StokObat extends javax.swing.JFrame {
 
         fieldStokKritis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldStokKritis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        fieldStokKritis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldStokKritisKeyTyped(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1429342362_checkround-24-12.png"))); // NOI18N
@@ -421,7 +424,6 @@ public class StokObat extends javax.swing.JFrame {
         try {
             StokObatController control = new StokObatController(client);
             model = control.getObatbyName(fieldSearch.getText());
-            // System.out.println(model);
             tableMedicine.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
@@ -472,6 +474,19 @@ public class StokObat extends javax.swing.JFrame {
             System.out.println("Through Catch");
         } 
     }//GEN-LAST:event_tableMedicineMouseClicked
+
+    private void fieldStokKritisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldStokKritisKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_fieldStokKritisKeyTyped
+    
+     public void typeOnlyNumber(KeyEvent evt){
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)||c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField fieldDescribtion;
     private javax.swing.JTextField fieldIdMedicine;
