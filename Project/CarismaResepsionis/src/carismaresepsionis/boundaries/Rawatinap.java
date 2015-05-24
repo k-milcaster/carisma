@@ -75,7 +75,7 @@ public class Rawatinap extends javax.swing.JFrame {
         tgl_regpasien = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         tablelistkamarpasien.setModel(new javax.swing.table.DefaultTableModel(
