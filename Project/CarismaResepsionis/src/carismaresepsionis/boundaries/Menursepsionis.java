@@ -283,7 +283,7 @@ public class Menursepsionis extends javax.swing.JFrame {
 
             } else {
                 new Rawatinap(this.client, this.userName).show();
-                this.dispose();
+                //this.dispose();
             }
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);

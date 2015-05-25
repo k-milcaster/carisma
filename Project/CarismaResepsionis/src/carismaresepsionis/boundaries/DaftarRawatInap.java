@@ -45,10 +45,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        tablePasienRawat = control.getNamaPasienRawatInap(this);
+        TabelPasien.setModel(control.getNamaPasienRawatInap());
  
         Tempat_ID.setEditable(false);
-        UmurPasien.setEditable(false);
+        //UmurPasien.setEditable(false);
         a = Nama_Pasien.getText();
         b = Tempat_Lahir.getText();
         bb = tglLahir.getText();
@@ -597,10 +597,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AlamatFocusGained
 
-    private void UmurPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UmurPasienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UmurPasienActionPerformed
-
     private void No_HpFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_No_HpFocusGained
         if (d.equals(No_Hp.getText())) {
             No_Hp.setText("");
@@ -851,6 +847,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
             goldar.setText("");
         }// TODO add your handling code here:
     }//GEN-LAST:event_goldarMouseClicked
+
+    private void UmurPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UmurPasienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UmurPasienActionPerformed
 public void setJam() {
     ActionListener taskPerformer = new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
