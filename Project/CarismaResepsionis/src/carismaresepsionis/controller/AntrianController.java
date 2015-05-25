@@ -94,5 +94,8 @@ public class AntrianController extends Thread {
         Kunjungan kunjungan = kunjunganService.getKunjungan(idKunjungan);
         return kunjungan;
     }
-
+    
+//    public String tglTerakhirKunjungan(String idPasien) throws RemoteException{
+//        return kunjunganService.TerakhirPeriksa(idPasien);
+//    }
 }
