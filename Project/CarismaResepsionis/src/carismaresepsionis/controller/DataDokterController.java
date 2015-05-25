@@ -50,8 +50,8 @@ public class DataDokterController {
         return model;
     }
 
-    public String[] getDokterByIdDokter(String idDokter) throws RemoteException {
-        String[] informasiDokter = dokterService.getDokterById(idDokter);
+    public ArrayList getDokterByIdDokter(String idDokter) throws RemoteException {
+        ArrayList informasiDokter = dokterService.getDokterById(idDokter);
         return informasiDokter;
     }
 }

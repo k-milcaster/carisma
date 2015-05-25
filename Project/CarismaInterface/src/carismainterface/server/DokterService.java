@@ -3,6 +3,7 @@ package carismainterface.server;
 import carismainterface.entity.Dokter;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,5 +26,5 @@ public interface DokterService extends Remote {
     
     public List<Dokter> getDokterByName(String nama) throws RemoteException;
     
-    String[] getDokterById(String idDokter) throws RemoteException;
+    ArrayList getDokterById(String idDokter) throws RemoteException;
 }

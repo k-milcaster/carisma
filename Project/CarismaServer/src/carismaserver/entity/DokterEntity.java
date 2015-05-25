@@ -250,11 +250,11 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         String[] dokterInfo = new String[2];
         Statement state = null;
         ResultSet resultSet = null;
-        
+
         try {
             state = DatabaseConnection.getConnection().createStatement();
             resultSet = state.executeQuery("SELECT D.id_dokter, D.nama_dokter FROM `dokter` AS D, user AS U "
-                    + "WHERE U.username = '"+username+"' AND D.user_id_user = (SELECT id_user FROM user WHERE username = '"+username+"')");
+                    + "WHERE U.username = '" + username + "' AND D.user_id_user = (SELECT id_user FROM user WHERE username = '" + username + "')");
             while (resultSet.next()) {
                 dokterInfo[0] = resultSet.getString(1);
                 dokterInfo[1] = resultSet.getString(2);
@@ -264,7 +264,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             ui.act.append("getIdNamaDokter Error\n");
             ui.act.append(e.toString());
             return null;
-        }finally{
+        } finally {
             if (state != null) {
                 try {
                     state.close();
@@ -303,7 +303,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                 dok.setGajifixDokter(result.getInt("gajifix_dokter"));
                 dok.setGajilemburDokter(result.getInt("gajilembur_dokter"));
                 dok.setGajikonsulDokter(result.getDouble("gajikonsul_dokter"));
-                list.add(dok);                
+                list.add(dok);
             }
             return list;
         } catch (SQLException exception) {
@@ -321,26 +321,29 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
     }
 
     @Override
-    public String[] getDokterById(String idDokter) throws RemoteException {
+    public ArrayList getDokterById(String idDokter) throws RemoteException {
         ui.act.append("Client Execute getDokterById  \n");
-        String[] informasiDokter = new String[10];
+
+        ArrayList informasiDokter = new ArrayList();
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT d.`id_dokter`, d.`nama_dokter`, p.`nama_poli`, d.`tempatlahir_dokter`, d.`tgllahir_dokter`, d.`kelamin_dokter`, d.`alamat_dokter`, d.`telp_dokter`, d.`hp1_dokter`, d.`hp2_dokter` FROM `dokter` AS d, poli AS p WHERE d.`id_dokter` = '"+idDokter+"' AND p.id_poli = d.`poli_id_poli`");
+                    "SELECT d.`id_dokter`, d.`nama_dokter`, p.`nama_poli`, d.`tempatlahir_dokter`, d.`tgllahir_dokter`, d.`kelamin_dokter`, d.`alamat_dokter`, d.`telp_dokter`, d.`hp1_dokter`, d.`hp2_dokter`, d.`foto_dokter` FROM `dokter` AS d, poli AS p WHERE d.`id_dokter` = '" + idDokter + "' AND p.id_poli = d.`poli_id_poli`");
             ResultSet result = statement.executeQuery();
             if (result.next()) {
-                informasiDokter[0] = result.getString(1);
-                informasiDokter[1] = result.getString(2);
-                informasiDokter[2] = result.getString(3);
-                informasiDokter[3] = result.getString(4);
-                informasiDokter[4] = result.getString(5);
-                informasiDokter[5] = result.getString(6);
-                informasiDokter[6] = result.getString(7);
-                informasiDokter[7] = result.getString(8);
-                informasiDokter[8] = result.getString(9);
-                informasiDokter[9] = result.getString(10);
+                informasiDokter.add(result.getString(1));
+                informasiDokter.add(result.getString(2));
+                informasiDokter.add(result.getString(3));
+                informasiDokter.add(result.getString(4));
+                informasiDokter.add(result.getString(5));
+                informasiDokter.add(result.getString(6));
+                informasiDokter.add(result.getString(7));
+                informasiDokter.add(result.getString(8));
+                informasiDokter.add(result.getString(9));
+                informasiDokter.add(result.getString(10));
+                informasiDokter.add(result.getBytes(11));
             }
+            System.out.println(informasiDokter.get(10));
             return informasiDokter;
         } catch (SQLException exception) {
             ui.act.append("getDokterById Error \n");
@@ -356,6 +359,3 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         }
     }
 }
-
-
-
