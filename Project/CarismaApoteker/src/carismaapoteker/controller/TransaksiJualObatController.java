@@ -30,10 +30,11 @@ public class TransaksiJualObatController {
     private PegawaiService pegawaiService;
 
     public TransaksiJualObatController(ClientSocket client) throws RemoteException {
-       
+
         this.transaksijualobat = client.getTransaksijualobatService();
         obatService = client.getObatService();
         pegawaiService = client.getPegawaiService();
+        detailtransaksijual = client.getDetailtransaksijualobatService();
     }
 
     public boolean insertTransaksijualobat(String idTransaksijual, String dateTransaksijual, String keterangan) throws RemoteException {
@@ -47,16 +48,25 @@ public class TransaksiJualObatController {
 
     }
 
+    public boolean deleteTransaksiJualObat(String idTransaksi) throws RemoteException {
+        return transaksijualobat.deleteTransaksijualobat(idTransaksi);
+    }
+
     public boolean insertDetailtransaksijualobat(String idTransaksi, int idObat, int qty) throws RemoteException {
         boolean insertDetail = false;
+        System.out.println("Masuk Insert Detail");
         Detailtransaksijualobat detailtransaksi = new Detailtransaksijualobat();
         detailtransaksi.setTransaksijualobat(idTransaksi);
         detailtransaksi.setObat(idObat);
         detailtransaksi.setQty(qty);
         insertDetail = detailtransaksijual.insertDetailtransaksijualobat(detailtransaksi);
-        System.out.println("Masuk Insert Detail");
         return insertDetail;
 
+
+    }
+
+    public boolean deleteDetailTransaksiJualObat(String idTransaksi, int idobat) throws RemoteException {
+        return detailtransaksijual.deleteDetailtransaksijualobat(idTransaksi, idobat);
     }
 
     public DefaultTableModel getTableObat() throws RemoteException {
@@ -74,21 +84,21 @@ public class TransaksiJualObatController {
         model.addColumn("Stok Kritis");
         for (int i = 0; i < list.size(); i++) {
             model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(), list.get(i).getStokkritisObat()});
-            System.out.println("Lewati");
         }
         return model;
     }
-    
-    public int cekStok (int idObat) throws RemoteException{
+
+    public int cekStok(int idObat) throws RemoteException {
         int stok = obatService.cekStokObat(idObat);
         return stok;
     }
-    public String[] namaPegawai (String username) throws RemoteException{
+
+    public String[] namaPegawai(String username) throws RemoteException {
         String[] namaApoteker = pegawaiService.getIdNamaPegawai(username);
         return namaApoteker;
     }
-     public DefaultTableModel getObatbyName (String nama) throws RemoteException{
-        System.out.println("xyxyxyx");
+
+    public DefaultTableModel getObatbyName(String nama) throws RemoteException {
         List<Obat> list = new ArrayList<Obat>();
         list = obatService.getObatbyName(nama);
         DefaultTableModel model = new DefaultTableModel();
@@ -100,17 +110,9 @@ public class TransaksiJualObatController {
         model.addColumn("Harga Jual");
         model.addColumn("Stok Kritis");
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(),list.get(i).getStokkritisObat()});
+            model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(), list.get(i).getStokkritisObat()});
             System.out.println(model);
         }
         return model;
-        
-    } 
-
-       
     }
-   
-
-
-
-
+}
