@@ -83,8 +83,8 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "UPDATE dokter SET poli_id_poli = ?, user_id_user = ?, nama_dokter = ?, alamat_dokter = ?, nokartuid_dokter = ?, telp_dokter = ?,"
-                    + "hp1_dokter = ?, hp2_dokter = ?, tempatlahir = ?, tgllahir_dokter = ?, kelamin_dokter = ?, darah_dokter = ?, "
-                    + "bank_dokter = ?, norek_dokter = ?, foto_dokter = ?, gajifix_dokter = ?, gajilembur_dokter = ?, gajikonsul = ? "
+                    + "hp1_dokter = ?, hp2_dokter = ?, tempatlahir_dokter = ?, tgllahir_dokter = ?, kelamin_dokter = ?, darah_dokter = ?, "
+                    + "bank_dokter = ?, norek_dokter = ?, foto_dokter = ?, gajifix_dokter = ?, gajilembur_dokter = ?, gajikonsul_dokter = ? "
                     + "WHERE id_dokter = ?"
             );
             statement.setString(1, (dokter.getPoliIdPoli()));

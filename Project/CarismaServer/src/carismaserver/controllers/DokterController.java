@@ -53,7 +53,7 @@ public class DokterController {
         return model;
     }
 
-    public void insertDokter(carismaserver.boundaries.DokterManagement ui, int userid, String poliid, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
+    public boolean insertDokter(carismaserver.boundaries.DokterManagement ui, int userid, String poliid, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
         DokterEntity dokterService = new DokterEntity(ui.ui);
         try {
             Dokter dokter = new Dokter();
@@ -76,13 +76,20 @@ public class DokterController {
             dokter.setGajilemburDokter(glembur);
             dokter.setGajikonsulDokter(gkonsul);
             dokter.setFotoDokter(foto);
-            dokterService.insertDokter(dokter);
+            boolean success = dokterService.insertDokter(dokter);
+            if(success){
+                return true;
+            }
+            else {
+                return false;
+            }
         } catch (RemoteException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
-    public void updateDokter(carismaserver.boundaries.DokterManagement ui, int userid, String poliid, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
+    public boolean updateDokter(carismaserver.boundaries.DokterManagement ui, int userid, String poliid, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, double gkonsul, byte[] foto) throws RemoteException {
         DokterEntity dokterService = new DokterEntity(ui.ui);
         try {
             Dokter dokter = new Dokter();
@@ -105,14 +112,33 @@ public class DokterController {
             dokter.setGajilemburDokter(glembur);
             dokter.setGajikonsulDokter(gkonsul);
             dokter.setFotoDokter(foto);
-            dokterService.updateDokter(dokter);
+            boolean success = dokterService.updateDokter(dokter);
+            if(success){
+                return true;
+            }
+            else {
+                return false;
+            }
         } catch (RemoteException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
-    public void deleteDokter(carismaserver.boundaries.DokterManagement ui, String id) throws RemoteException {
+    public boolean deleteDokter(carismaserver.boundaries.DokterManagement ui, String id) throws RemoteException {
         DokterEntity dokterService = new DokterEntity(ui.ui);
-        dokterService.deleteDokter(id);
+        try{
+            boolean success = dokterService.deleteDokter(id);
+            if(success){
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
     }
 }
