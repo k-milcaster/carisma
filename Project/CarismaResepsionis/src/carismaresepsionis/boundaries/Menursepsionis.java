@@ -317,7 +317,7 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void buttonHapusAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHapusAntrianActionPerformed
         int row = tableDaftarAntrian.getSelectedRow();
         try {
-            control.deleteAntrian(String.valueOf(tableDaftarAntrian.getValueAt(row, 0)));
+            control.deleteAntrian(String.valueOf(tableDaftarAntrian.getValueAt(row, 1)));
             tableAntri = (DefaultTableModel) tableDaftarAntrian.getModel();
             tableAntri.removeRow(row);
             tableDaftarAntrian.setModel(tableAntri);
