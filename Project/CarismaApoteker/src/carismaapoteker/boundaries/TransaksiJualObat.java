@@ -246,13 +246,8 @@ public class TransaksiJualObat extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int row = jTableOfSales.getSelectedRow();
-
-        //total = total - jumlah;
-        tableOfSales = (DefaultTableModel) jTableOfSales.getModel();
         tableOfSales.removeRow(row);
         jTableOfSales.setModel(tableOfSales);
-
-        //fieldTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -263,11 +258,14 @@ public class TransaksiJualObat extends javax.swing.JFrame {
                 TransaksiJualObatController transaksijual = new TransaksiJualObatController(Client);
                 transaksijual.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), fieldDescription.getText());
                 JOptionPane.showMessageDialog(null, "Data Transaksi Penjualan Obat Tersimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-                int row = jTableOfSales.getRowCount();
+                int row = jTableOfSales.getSelectedRow()+1;
+                System.out.println(row);
                 for (int i = 0; i < row; i++) {
-                    transaksijual.insertDetailtransaksijualobat(fieldIdOfSales.getText(), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 1))), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
+                    System.out.println("berapa");
+                    transaksijual.insertDetailtransaksijualobat(fieldIdOfSales.getText(), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 0))), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
                 }
             } catch (Exception e) {
+                System.out.println("through catch "+e);
             }
         }
 
