@@ -9,6 +9,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -356,6 +357,48 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
             if (state != null) {
                 try {
                     state.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<ArrayList> getRekamMedikDetail(String idpasien) throws RemoteException {
+        ui.act.append("Client Execute getRekamMedikDetail " + idpasien + " \n");
+
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT r.id_rekammedik, p.nama_pasien, p.tempatlahir_pasien, p.tgllahir_pasien, po.nama_poli, d.nama_dokter "
+                    + "FROM rekammedik AS r, pasien as p, poli as po, dokter as d "
+                    + "WHERE r.pasien_id_pasien = p.id_pasien AND r.dokter_id_dokter = d.id_dokter AND d.poli_id_poli = po.id_poli AND r.pasien_id_pasien = '"+idpasien+"'");
+
+            ArrayList<ArrayList> list = new ArrayList<ArrayList>();
+            ArrayList subList;
+
+            while (result.next()) {
+                subList = new ArrayList();
+                subList.add(result.getString(1));
+                subList.add(result.getString(2));
+                subList.add(result.getString(3));
+                subList.add(result.getString(4));
+                subList.add(result.getString(5));
+                subList.add(result.getString(6));
+                list.add(subList);
+            }
+            result.close();
+            return list;
+
+        } catch (SQLException exception) {
+            ui.act.append("getBiayaObat Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
                 } catch (SQLException exception) {
                 }
             }

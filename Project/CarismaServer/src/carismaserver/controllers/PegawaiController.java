@@ -45,12 +45,13 @@ public class PegawaiController {
         ui.tablePegawai.setModel(model);
     }
     
-    public void insertPegawai(carismaserver.boundaries.PegawaiManagement ui, String username, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String jabatan, String bank, String norek, int gfix, int glembur, byte[] foto) throws RemoteException {
+    public void insertPegawai(carismaserver.boundaries.PegawaiManagement ui, int username, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String jabatan, String bank, String norek, int gfix, int glembur, byte[] foto) throws RemoteException {
         PegawaiEntity pegawaiService = new PegawaiEntity(ui.ui);        
         try {
             User user = new User();
             Pegawai pegawai = new Pegawai();
-            user.setIdUser(Integer.parseInt(username));
+            System.out.println(username);
+            user.setIdUser(username);
             pegawai.setIdPegawai(id);
             pegawai.setNamaPegawai(nama);
             pegawai.setAlamatPegawai(alamat);

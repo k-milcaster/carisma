@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -261,11 +261,14 @@
         <Component class="javax.swing.JComboBox" name="comboRole">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="7">
                 <StringItem index="0" value="--"/>
                 <StringItem index="1" value="administrator"/>
-                <StringItem index="2" value="doctor"/>
+                <StringItem index="2" value="dokter"/>
                 <StringItem index="3" value="staff"/>
+                <StringItem index="4" value="resepsionis"/>
+                <StringItem index="5" value="pasien"/>
+                <StringItem index="6" value="apoteker"/>
               </StringArray>
             </Property>
           </Properties>

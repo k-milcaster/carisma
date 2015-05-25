@@ -87,7 +87,7 @@ public class ObatEntityTest {
     @Test
     public void testGetObat_String() throws Exception {
         System.out.println("getObat");
-        String idobat = "1";
+        int idobat = 1;
         ObatEntity instance = new ObatEntity(ui);
         Obat expResult = new Obat();
         expResult.setIdObat(1);

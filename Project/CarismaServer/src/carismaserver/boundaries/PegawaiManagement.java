@@ -3,6 +3,7 @@ package carismaserver.boundaries;
 import carismainterface.entity.Pegawai;
 import carismaserver.controllers.DatabaseConnection;
 import carismaserver.entity.PegawaiEntity;
+import carismaserver.entity.UserEntity;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.io.File;
@@ -27,6 +28,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
 
     private carismaserver.controllers.PegawaiController control = new carismaserver.controllers.PegawaiController();
     private PegawaiEntity staffService;
+    private UserEntity userService;
     public Main ui;
     private File file;
     private DatabaseConnection databaseConnection;
@@ -34,6 +36,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
     public PegawaiManagement(final Main ui) throws RemoteException, SQLException {
         this.ui = ui;
         initComponents();
+        userService = new UserEntity(ui);
         control.getPegawai(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         setComboBox();
@@ -78,9 +81,9 @@ public class PegawaiManagement extends javax.swing.JFrame {
         ResultSet resultSet = null;
         try {
             statement = (Statement) databaseConnection.getConnection().createStatement();
-            resultSet = statement.executeQuery("SELECT id_user, username FROM user");
+            resultSet = statement.executeQuery("SELECT id_user, username FROM user WHERE role != 'doctor' ORDER BY id_user");
             while (resultSet.next()) {
-                String userName = resultSet.getString("id_user") + " " + resultSet.getString("username");
+                String userName = resultSet.getString("username");
                 comboUsername.addItem(userName);
             }
         } catch (SQLException ex) {
@@ -102,11 +105,11 @@ public class PegawaiManagement extends javax.swing.JFrame {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            statement = databaseConnection.getConnection().prepareStatement("SELECT id_user, username FROM user WHERE id_user = ?");
+            statement = databaseConnection.getConnection().prepareStatement("SELECT id_user, username FROM user WHERE username = ?");
             statement.setInt(1, id_user);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                String userName = resultSet.getString("id_user") + " " + resultSet.getString("username");
+                String userName = resultSet.getString("username");
                 comboUsername.setSelectedItem(userName);
             }
         } catch (SQLException ex) {
@@ -191,7 +194,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
         foto = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(922, 569));
         getContentPane().setLayout(null);
 
@@ -228,7 +231,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonAttach);
-        buttonAttach.setBounds(630, 390, 130, 40);
+        buttonAttach.setBounds(700, 430, 130, 40);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -282,7 +285,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(500, 100, 0, 0);
+        jPanel2.setBounds(500, 100, 257, 153);
 
         buttonUpdate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222456_icon-compose-32.png"))); // NOI18N
@@ -440,7 +443,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
 
         jLabel17.setText("Foto:");
         getContentPane().add(jLabel17);
-        jLabel17.setBounds(500, 280, 26, 14);
+        jLabel17.setBounds(500, 260, 26, 14);
 
         jLabel3.setFont(new java.awt.Font("Agency FB", 1, 45)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -484,19 +487,19 @@ public class PegawaiManagement extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(foto, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(foto, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addComponent(foto, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(500, 300, 110, 130);
+        jPanel3.setBounds(500, 280, 180, 190);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel11);
@@ -516,7 +519,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
                 //e.printStackTrace();
             }
             //System.out.println(file.toPath());
-            Image dimg = img.getScaledInstance(72, 102, Image.SCALE_SMOOTH);
+            Image dimg = img.getScaledInstance(160, 160, Image.SCALE_SMOOTH);
             foto.setIcon(new ImageIcon(dimg));
         }
     }//GEN-LAST:event_buttonAttachActionPerformed
@@ -536,7 +539,8 @@ public class PegawaiManagement extends javax.swing.JFrame {
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
         try {
-            String userid = comboUsername.getSelectedItem().toString().substring(0, comboUsername.getSelectedItem().toString().indexOf(" "));
+            int userid = userService.getUser(comboUsername.getSelectedItem().toString()).getIdUser();
+            //String userid = comboUsername.getSelectedItem().toString().substring(0, comboUsername.getSelectedItem().toString().indexOf(" "));
             String id = fieldId.getText();
             String nama = fieldNama.getText();
             String alamat = fieldAlamat.getText();

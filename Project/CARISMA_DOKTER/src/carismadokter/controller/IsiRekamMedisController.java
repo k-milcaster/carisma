@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismadokter.controller;
 
-import carismadokter.boundaries.*;
 import carismainterface.entity.*;
 import carismainterface.server.*;
 import java.rmi.RemoteException;
@@ -13,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 
 /**
  *
@@ -55,7 +49,7 @@ public class IsiRekamMedisController {
         rekamMedik.setAlergiobatRekammedik(alergiObat);
         rekamMedik.setKesimpulanRekammedis(kesimpulanPemeriksaan);
         rekamMedik.setKondisipasienkeluarRekammedis(kondisiPasien);
-        rekamMedik.setResepIdResep(idResep);
+        rekamMedik.setResepIdResep(idResep);        
         return rekamMedikService.insertRekamMedik(rekamMedik);
     }
 

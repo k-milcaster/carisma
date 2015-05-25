@@ -60,7 +60,7 @@ public class RawatinapController {
    
     
     
-    public DefaultTableModel getNamaKamar(Rawatinap ui) throws RemoteException{
+    public DefaultTableModel getKamar(Rawatinap ui) throws RemoteException{
         
         List<Kamar> list = new ArrayList<Kamar>();
         list = kamarService.getKamar();
@@ -98,14 +98,12 @@ public class RawatinapController {
         
     } 
 
-     public String kamarKosong (String parameterA){
-       String kamar = "";
-       if (parameterA.equals("coba")){
-        kamar = "kosong";}
-       else {
-        kamar = "ada isinya";
-       }
-       return kamar;
+    public int kamarTersedia () throws RemoteException{
+       int jumlahKamarTerisi = kamarService.getJumlahKamarTerisi();
+       int jumlahKamarKeseluruhan = kamarService.getJumlahKamarKeseluruhan();
+       
+    
+       return jumlahKamarKeseluruhan-jumlahKamarTerisi;
    }
     
     

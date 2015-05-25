@@ -26,4 +26,6 @@ public interface PasienService extends Remote {
     List<Pasien> getPasienRawatinap() throws RemoteException;
     
     boolean isUsedNokartuPasien(String nokartuidpasien) throws RemoteException;
+    
+    List<Pasien> getPasienRawatinapByName(String pasien) throws RemoteException;
 }

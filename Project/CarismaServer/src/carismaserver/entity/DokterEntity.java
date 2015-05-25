@@ -83,11 +83,11 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "UPDATE dokter SET poli_id_poli = ?, user_id_user = ?, nama_dokter = ?, alamat_dokter = ?, nokartuid_dokter = ?, telp_dokter = ?,"
-                    + "hp1_dokter = ?, hp2_dokter = ?, tempatlahir = ?, tgllahir_dokter = ?, kelamin_dokter = ?, darah_dokter = ?, "
-                    + "bank_dokter = ?, norek_dokter = ?, foto_dokter = ?, gajifix_dokter = ?, gajilembur_dokter = ?, gajikonsul = ? "
+                    + "hp1_dokter = ?, hp2_dokter = ?, tempatlahir_dokter = ?, tgllahir_dokter = ?, kelamin_dokter = ?, darah_dokter = ?, "
+                    + "bank_dokter = ?, norek_dokter = ?, foto_dokter = ?, gajifix_dokter = ?, gajilembur_dokter = ?, gajikonsul_dokter = ? "
                     + "WHERE id_dokter = ?"
             );
-            statement.setString(1, (dokter.getPoliIdPoli()).toString());
+            statement.setString(1, (dokter.getPoliIdPoli()));
             statement.setInt(2, dokter.getUserIdUser());
             statement.setString(19, dokter.getIdDokter());
             statement.setString(3, dokter.getNamaDokter());
@@ -161,6 +161,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                 dokter = new Dokter();
                 dokter.setIdDokter(result.getString("id_dokter"));
                 dokter.setUserIdUser(result.getInt("user_id_user"));
+                dokter.setPoliIdPoli(result.getString("poli_id_poli"));
                 dokter.setNamaDokter(result.getString("nama_dokter"));
                 dokter.setAlamatDokter(result.getString("alamat_dokter"));
                 dokter.setNokartuidDokter(result.getString("nokartuid_dokter"));
@@ -176,6 +177,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                 dokter.setGajifixDokter(result.getInt("gajifix_dokter"));
                 dokter.setGajilemburDokter(result.getInt("gajilembur_dokter"));
                 dokter.setGajikonsulDokter(result.getDouble("gajikonsul_dokter"));
+                dokter.setFotoDokter(result.getBytes("foto_dokter"));
             }
             return dokter;
         } catch (SQLException exception) {
@@ -222,6 +224,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                 dokter.setGajifixDokter(result.getInt("gajifix_dokter"));
                 dokter.setGajilemburDokter(result.getInt("gajilembur_dokter"));
                 dokter.setGajikonsulDokter(result.getDouble("gajikonsul_dokter"));
+                dokter.setFotoDokter(result.getBytes("foto_dokter"));
                 list.add(dokter);
             }
             result.close();
@@ -247,11 +250,11 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         String[] dokterInfo = new String[2];
         Statement state = null;
         ResultSet resultSet = null;
-        
+
         try {
             state = DatabaseConnection.getConnection().createStatement();
             resultSet = state.executeQuery("SELECT D.id_dokter, D.nama_dokter FROM `dokter` AS D, user AS U "
-                    + "WHERE U.username = '"+username+"' AND D.user_id_user = (SELECT id_user FROM user WHERE username = '"+username+"')");
+                    + "WHERE U.username = '" + username + "' AND D.user_id_user = (SELECT id_user FROM user WHERE username = '" + username + "')");
             while (resultSet.next()) {
                 dokterInfo[0] = resultSet.getString(1);
                 dokterInfo[1] = resultSet.getString(2);
@@ -261,7 +264,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             ui.act.append("getIdNamaDokter Error\n");
             ui.act.append(e.toString());
             return null;
-        }finally{
+        } finally {
             if (state != null) {
                 try {
                     state.close();
@@ -300,7 +303,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
                 dok.setGajifixDokter(result.getInt("gajifix_dokter"));
                 dok.setGajilemburDokter(result.getInt("gajilembur_dokter"));
                 dok.setGajikonsulDokter(result.getDouble("gajikonsul_dokter"));
-                list.add(dok);                
+                list.add(dok);
             }
             return list;
         } catch (SQLException exception) {
@@ -318,26 +321,29 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
     }
 
     @Override
-    public String[] getDokterById(String idDokter) throws RemoteException {
+    public ArrayList getDokterById(String idDokter) throws RemoteException {
         ui.act.append("Client Execute getDokterById  \n");
-        String[] informasiDokter = new String[10];
+
+        ArrayList informasiDokter = new ArrayList();
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT d.`id_dokter`, d.`nama_dokter`, p.`nama_poli`, d.`tempatlahir_dokter`, d.`tgllahir_dokter`, d.`kelamin_dokter`, d.`alamat_dokter`, d.`telp_dokter`, d.`hp1_dokter`, d.`hp2_dokter` FROM `dokter` AS d, poli AS p WHERE d.`id_dokter` = '"+idDokter+"' AND p.id_poli = d.`poli_id_poli`");
+                    "SELECT d.`id_dokter`, d.`nama_dokter`, p.`nama_poli`, d.`tempatlahir_dokter`, d.`tgllahir_dokter`, d.`kelamin_dokter`, d.`alamat_dokter`, d.`telp_dokter`, d.`hp1_dokter`, d.`hp2_dokter`, d.`foto_dokter` FROM `dokter` AS d, poli AS p WHERE d.`id_dokter` = '" + idDokter + "' AND p.id_poli = d.`poli_id_poli`");
             ResultSet result = statement.executeQuery();
             if (result.next()) {
-                informasiDokter[0] = result.getString(1);
-                informasiDokter[1] = result.getString(2);
-                informasiDokter[2] = result.getString(3);
-                informasiDokter[3] = result.getString(4);
-                informasiDokter[4] = result.getString(5);
-                informasiDokter[5] = result.getString(6);
-                informasiDokter[6] = result.getString(7);
-                informasiDokter[7] = result.getString(8);
-                informasiDokter[8] = result.getString(9);
-                informasiDokter[9] = result.getString(10);
+                informasiDokter.add(result.getString(1));
+                informasiDokter.add(result.getString(2));
+                informasiDokter.add(result.getString(3));
+                informasiDokter.add(result.getString(4));
+                informasiDokter.add(result.getString(5));
+                informasiDokter.add(result.getString(6));
+                informasiDokter.add(result.getString(7));
+                informasiDokter.add(result.getString(8));
+                informasiDokter.add(result.getString(9));
+                informasiDokter.add(result.getString(10));
+                informasiDokter.add(result.getBytes(11));
             }
+            System.out.println(informasiDokter.get(10));
             return informasiDokter;
         } catch (SQLException exception) {
             ui.act.append("getDokterById Error \n");
@@ -353,6 +359,3 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         }
     }
 }
-
-
-

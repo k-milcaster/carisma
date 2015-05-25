@@ -9,6 +9,7 @@ import carismaserver.entity.PoliEntity;
 import carismaserver.entity.UserEntity;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -33,23 +35,25 @@ public class DokterManagement extends javax.swing.JFrame {
 
     private carismaserver.controllers.DokterController control = new carismaserver.controllers.DokterController();
     private DokterEntity dokterService;
-    private UserEntity userService ;
-    private PoliEntity poliService ;
+    private UserEntity userService;
+    private PoliEntity poliService;
     public Main ui;
     private File file;
+    private byte[] img = null;
     private DatabaseConnection databaseConnection;
     public List<User> users = new ArrayList<User>();
     public List<Poli> polis = new ArrayList<Poli>();
-    
+
     public DokterManagement(final Main ui) throws RemoteException, SQLException {
         this.ui = ui;
         initComponents();
         userService = new UserEntity(ui);
         poliService = new PoliEntity(ui);
-        control.getDokter(this);        
+        tableDokter.setModel(control.getDokter(this));
         users = userService.getUser();
         polis = poliService.getPoli();
-        //setComboBox();
+        comboUsernamePopupMenuWillBecomeVisible(null);
+        comboPoliPopupMenuWillBecomeVisible(null);
         tableDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
@@ -65,7 +69,7 @@ public class DokterManagement extends javax.swing.JFrame {
                         fieldTelepon.setText(selected.getTelpDokter());
                         fieldHP1.setText(selected.getHp1Dokter());
                         fieldHP2.setText(selected.getHp2Dokter());
-                        fieldTempat.setText(selected.getTelpDokter());
+                        fieldTempat.setText(selected.getTempatlahirDokter());
                         fieldTanggal.setText(selected.getTgllahirDokter());
                         comboKelamin.setSelectedItem(selected.getKelaminDokter());
                         comboDarah.setSelectedItem(selected.getDarahDokter());
@@ -74,9 +78,18 @@ public class DokterManagement extends javax.swing.JFrame {
                         fieldGajiFix.setText((String) selected.getGajifixDokter().toString());
                         fieldGajiLembur.setText((String) selected.getGajilemburDokter().toString());
                         fieldGajiKonsul.setText((String) selected.getGajikonsulDokter().toString());
-                        comboUsername.setSelectedItem(selected.getUserIdUser());
-                        comboPoli.setSelectedItem(selected.getPoliIdPoli());
-                        //setComboBox(selected.getUserIdUser());
+                        comboUsername.setSelectedItem(userService.getUserById(selected.getUserIdUser()).getUsername());
+                        comboPoli.setSelectedItem(poliService.getPoli(selected.getPoliIdPoli()).getNamaPoli());
+                        img = selected.getFotoDokter();
+                        if(img!=null){
+                            Image imgs = Toolkit.getDefaultToolkit().createImage(img);
+                            Image dimg = imgs.getScaledInstance(160, 160, Image.SCALE_SMOOTH);
+                            ImageIcon icon = new ImageIcon(dimg);
+                            foto.setIcon(icon);
+                        }
+                        else{
+                            foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/Preview.jpg")));
+                        }
                     } catch (RemoteException ex) {
                         Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -85,59 +98,29 @@ public class DokterManagement extends javax.swing.JFrame {
             }
         });
     }
-
-    public void setComboBox() throws SQLException {
-        comboUsername.removeAllItems();
-        Statement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = (Statement) databaseConnection.getConnection().createStatement();
-            resultSet = statement.executeQuery("SELECT id_user, username FROM user");
-            while (resultSet.next()) {
-                String userName = resultSet.getString("id_user") + " " + resultSet.getString("username");
-                comboUsername.addItem(userName);
-            }
-        } catch (SQLException ex) {
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-            } catch (SQLException ex) {
-            }
-            if (statement != null) {
-                statement.close();
-            }
-        }
-    }
-
-    public void setComboBox(int id_user) throws SQLException {
-        setComboBox();
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = databaseConnection.getConnection().prepareStatement("SELECT id_user, username FROM user WHERE id_user = ?");
-            statement.setInt(1, id_user);
-            resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                String userName = resultSet.getString("id_user") + " " + resultSet.getString("username");
-                comboUsername.setSelectedItem(userName);
-            }
-        } catch (SQLException ex) {
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-            } catch (SQLException ex) {
-            }
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException ex) {
-            }
-        }
+    
+    public void clear(){
+        this.file = null;
+        this.img = null;
+        comboUsername.setSelectedItem("--");
+        comboPoli.setSelectedItem("--");
+        fieldId.setText("");
+        fieldNama.setText("");
+        areaAlamat.setText("");
+        fieldNokartuid.setText("");
+        fieldTelepon.setText("");
+        fieldHP1.setText("");
+        fieldHP2.setText("");
+        fieldTempat.setText("");
+        fieldTanggal.setText("yyyy-mm-dd");
+        comboKelamin.setSelectedItem("L");
+        comboDarah.setSelectedItem("A");
+        fieldBank.setText("");
+        fieldNorek.setText("");
+        fieldGajiFix.setText("");
+        fieldGajiKonsul.setText("");
+        fieldGajiLembur.setText("");
+        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/Preview.jpg")));
     }
 
     @SuppressWarnings("unchecked")
@@ -196,7 +179,7 @@ public class DokterManagement extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         fieldPoli = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1360, 698));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -382,25 +365,25 @@ public class DokterManagement extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldTempat, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(comboKelamin, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboDarah, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fieldTanggal)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 21, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fieldTempat, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(comboKelamin, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboDarah, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(fieldTanggal)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 21, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -411,11 +394,12 @@ public class DokterManagement extends javax.swing.JFrame {
                                     .addComponent(fieldNorek, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(fieldGajiFix, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(fieldGajiLembur, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fieldBank, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(fieldBank, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -455,21 +439,21 @@ public class DokterManagement extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(fieldGajiLembur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel20)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldGajiKonsul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
                 .addContainerGap())
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 290, 250));
 
-        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/boundaries/Untitled.jpg"))); // NOI18N
+        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/Preview.jpg"))); // NOI18N
         foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        foto.setMaximumSize(new java.awt.Dimension(72, 96));
-        foto.setMinimumSize(new java.awt.Dimension(72, 96));
-        foto.setPreferredSize(new java.awt.Dimension(72, 96));
-        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 160, 90, 130));
+        foto.setMaximumSize(new java.awt.Dimension(90, 90));
+        foto.setMinimumSize(new java.awt.Dimension(90, 90));
+        foto.setPreferredSize(new java.awt.Dimension(90, 90));
+        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 160, 160, 160));
 
         jLabel17.setText("Foto:");
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, -1, -1));
@@ -482,7 +466,7 @@ public class DokterManagement extends javax.swing.JFrame {
                 buttonAttachActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAttach, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 320, 120, 40));
+        getContentPane().add(buttonAttach, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 390, 120, 40));
 
         buttonInsert.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222513_icon-ios7-plus-outline-32.png"))); // NOI18N
@@ -521,14 +505,14 @@ public class DokterManagement extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 106, Short.MAX_VALUE)
+            .addGap(0, 176, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
+            .addGap(0, 176, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 110, 150));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 180, 180));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 700));
@@ -554,17 +538,27 @@ public class DokterManagement extends javax.swing.JFrame {
             String darah = comboDarah.getSelectedItem().toString();
             String bank = fieldBank.getText();
             String norek = fieldNorek.getText();
-            byte[] img = null;
-            if(file != null){
-                img = extractBytes(file.toPath().toString());
+            String foto = "";
+            byte[] image = null;
+            if (img != null) {
+                image = img;
+            } else {
+                foto = "Belum memasukkan foto";
             }
             int gfix = Integer.parseInt(fieldGajiFix.getText());
             int glembur = Integer.parseInt(fieldGajiLembur.getText());
             double gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
-            control.insertDokter(this, userid, poliid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, img);
-            control.getDokter(this);
+            boolean success = control.insertDokter(this, userid, poliid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, image);
+            if (success){
+                JOptionPane.showMessageDialog(this, "Insert Dokter berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Insert Dokter gagal" , "Gagal", JOptionPane.ERROR_MESSAGE);
+            }
+            tableDokter.setModel(control.getDokter(this));
+            clear();
         } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -572,26 +566,47 @@ public class DokterManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonInsertActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
-//        try {
-//            int id = Integer.parseInt(fieldId.getText());
-//            String user = fieldUsername.getText();
-//            String pass = fieldPassword.getText();
-//            String role = (String)comboRole.getItemAt(comboRole.getSelectedIndex());
-//            control.updateUser(this, id, user, pass, role);
-//            control.getUsers(this);
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_buttonUpdateActionPerformed
-
-    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         try {
-            String id = fieldId.getText();;
-            control.deleteDokter(this, id);
+            int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();
+            String poliid = polis.get(comboPoli.getSelectedIndex()).getIdPoli();
+            String id = fieldId.getText();
+            String nama = fieldNama.getText();
+            String alamat = areaAlamat.getText();
+            String nokartu = fieldNokartuid.getText();
+            String telp = fieldTelepon.getText();
+            String hp1 = fieldHP1.getText();
+            String hp2 = fieldHP2.getText();
+            String tempat = fieldTempat.getText();
+            String tanggal = fieldTanggal.getText();
+            String kelamin = comboKelamin.getSelectedItem().toString();
+            String darah = comboDarah.getSelectedItem().toString();
+            String bank = fieldBank.getText();
+            String norek = fieldNorek.getText();
+            String foto = "";
+            byte[] image = null;
+            if (img != null) {
+                image = img;
+            } else {
+                foto = "Belum memasukkan foto";
+            }
+            int gfix = Integer.parseInt(fieldGajiFix.getText());
+            int glembur = Integer.parseInt(fieldGajiLembur.getText());
+            double gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
+            boolean success = control.updateDokter(this, userid, poliid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, image);
+            if (success){
+                JOptionPane.showMessageDialog(this, "Update Dokter berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Update Dokter gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+            }
+            tableDokter.setModel(control.getDokter(this));
+            clear();
         } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_buttonDeleteActionPerformed
+    }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonAttachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAttachActionPerformed
         int o = jFileChooser1.showOpenDialog(this);
@@ -599,12 +614,13 @@ public class DokterManagement extends javax.swing.JFrame {
             file = jFileChooser1.getSelectedFile();
             Image img = null;
             try {
+                this.img = extractBytes(this.file.toPath().toString());
                 img = ImageIO.read(file);
             } catch (IOException e) {
                 //e.printStackTrace();
             }
             //System.out.println(file.toPath());
-            Image dimg = img.getScaledInstance(72, 102, Image.SCALE_SMOOTH);
+            Image dimg = img.getScaledInstance(160, 160, Image.SCALE_SMOOTH);
             foto.setIcon(new ImageIcon(dimg));
         }
     }//GEN-LAST:event_buttonAttachActionPerformed
@@ -612,11 +628,11 @@ public class DokterManagement extends javax.swing.JFrame {
     private void comboUsernamePopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboUsernamePopupMenuWillBecomeVisible
         comboUsername.removeAllItems();
         try {
-            users = userService.getUser();
+            users = userService.getUserbyRole("dokter");
         } catch (RemoteException ex) {
             Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(int i=0;i<users.size();i++){
+        for (int i = 0; i < users.size(); i++) {
             comboUsername.addItem(users.get(i).getUsername());
         }
     }//GEN-LAST:event_comboUsernamePopupMenuWillBecomeVisible
@@ -628,14 +644,35 @@ public class DokterManagement extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(int i=0;i<polis.size();i++){
+        for (int i = 0; i < polis.size(); i++) {
             comboPoli.addItem(polis.get(i).getNamaPoli());
         }
     }//GEN-LAST:event_comboPoliPopupMenuWillBecomeVisible
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        if(!fieldId.getText().equalsIgnoreCase("")){
+            boolean success;
+            try {
+                success = control.deleteDokter(this, fieldId.getText());
+                if (success){
+                    JOptionPane.showMessageDialog(this, "Delete Dokter berhasil", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "Delete Dokter gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+                tableDokter.setModel(control.getDokter(this));
+                clear();
+            } catch (RemoteException ex) {
+                Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Data kurang lengkap");
+        }
+    }//GEN-LAST:event_buttonDeleteActionPerformed
     private byte[] extractBytes(String ImageName) throws IOException {
         File fi = new File(ImageName);
         byte[] fileContent = Files.readAllBytes(fi.toPath());
-
         return fileContent;
     }
 

@@ -1,12 +1,17 @@
 package carismaresepsionis.boundaries;
 
-import carismainterface.server.DokterService;
-import carismainterface.server.PasienService;
-import carismainterface.entity.Dokter;
+//import carismainterface.server.DokterService;
+import carismainterface.server.*;
+import carismainterface.entity.*;
 import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
+import carismaresepsionis.controller.LoginController;
 import carismaresepsionis.controller.RawatinapController;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,50 +27,90 @@ public class Menursepsionis extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
     private PasienService ps;
- 
-    
     private DefaultTableModel tableAntri = new DefaultTableModel();
-
-    public Menursepsionis(ClientSocket client, String userName) throws RemoteException {
+    private KamarService kamarService;
+    private AntrianController control;
+    private UserService userService;
+     
+    public Menursepsionis(ClientSocket client, final String userName) throws RemoteException {
         this.client = client;
         this.userName = userName;
-        AntrianController control = new AntrianController(this.client);
+        control = new AntrianController(this.client, this);
         ps = client.getPasienService();
+        kamarService = client.getKamarService();
+        userService = client.getUserService();
         initComponents();
-        tableAntri = control.getAntrian();
-        tableDaftarAntrian.setModel(tableAntri);
+        control.start();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
         Namanya.setText(String.valueOf(this.userName));
-        
-        
-
-        
-
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                LoginController log = new LoginController(userService, userName);
+                try {
+                    log.logOut();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         //   tanggalkustom();
     }
 
+    
+      public Menursepsionis(ClientSocket client, String username, String idPasien, String namaPasien) throws RemoteException {
+        this.client = client;
+        this.userName = username;
+        control = new AntrianController(this.client, this);
+        ps = client.getPasienService();
+        kamarService = client.getKamarService();
+        userService = client.getUserService();
+        initComponents();
+        control.start();
+        
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        Namanya.setEditable(false);
+        Namanya.setText(username);
+        Object rowData[] = new Object[3]; 
+          System.out.println("PASIEN = "+idPasien);
+          System.out.println("NAMA PASIEN = "+namaPasien);
+        rowData[0]=tableDaftarAntrian.getRowCount()+1;
+        rowData[1]=idPasien;
+        rowData[2]=namaPasien;
+        tableAntri.addRow(rowData);
+        tableDaftarAntrian.setModel(tableAntri);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                LoginController log = new LoginController(userService, userName);
+                try {
+                    log.logOut();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        //   tanggalkustom();
+    }
+        
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDaftarAntrian = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
-        List_Antrian = new javax.swing.JComboBox();
         RegisPasienReg = new javax.swing.JButton();
         RegisPasienInap = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         DataDokter = new javax.swing.JButton();
         LihatPasienInap = new javax.swing.JButton();
-        NamaDokter = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        buttonTambahAntrian = new javax.swing.JButton();
+        buttonHapusAntrian = new javax.swing.JButton();
         Namanya = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        buttonLihatAntrian = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -102,30 +147,10 @@ public class Menursepsionis extends javax.swing.JFrame {
                 "Daftar Antrian"
             }
         ));
-        tableDaftarAntrian.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableDaftarAntrianMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tableDaftarAntrian);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 100, 1072, 402);
-
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428228446_ok.png"))); // NOI18N
-        jButton5.setText("Ok");
-        getContentPane().add(jButton5);
-        jButton5.setBounds(376, 559, 110, 50);
-
-        List_Antrian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Kategori -", "Dokter Umum", "Dokter Anak", "Dokter THT", "Dokter Mata", "Dokter " }));
-        List_Antrian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                List_AntrianActionPerformed(evt);
-            }
-        });
-        getContentPane().add(List_Antrian);
-        List_Antrian.setBounds(20, 559, 350, 50);
+        jScrollPane1.setBounds(21, 100, 1072, 402);
 
         RegisPasienReg.setText("Registrasi Pasien Reguler");
         RegisPasienReg.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +159,7 @@ public class Menursepsionis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(RegisPasienReg);
-        RegisPasienReg.setBounds(1120, 100, 225, 50);
+        RegisPasienReg.setBounds(1121, 100, 225, 50);
 
         RegisPasienInap.setText("Registrasi Pasien Rawat Inap");
         RegisPasienInap.addActionListener(new java.awt.event.ActionListener() {
@@ -143,13 +168,13 @@ public class Menursepsionis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(RegisPasienInap);
-        RegisPasienInap.setBounds(1120, 160, 225, 50);
+        RegisPasienInap.setBounds(1121, 160, 225, 50);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428228543_unlock.png"))); // NOI18N
         jButton3.setText("Log Out");
         getContentPane().add(jButton3);
-        jButton3.setBounds(1220, 340, 120, 50);
+        jButton3.setBounds(1221, 340, 120, 50);
 
         DataDokter.setText("Data Dokter");
         DataDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +183,7 @@ public class Menursepsionis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DataDokter);
-        DataDokter.setBounds(1120, 280, 225, 50);
+        DataDokter.setBounds(1121, 280, 225, 50);
 
         LihatPasienInap.setText("Lihat Pasien Rawat Inap");
         LihatPasienInap.addActionListener(new java.awt.event.ActionListener() {
@@ -167,31 +192,29 @@ public class Menursepsionis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(LihatPasienInap);
-        LihatPasienInap.setBounds(1120, 220, 225, 50);
-        getContentPane().add(NamaDokter);
-        NamaDokter.setBounds(174, 517, 334, 36);
+        LihatPasienInap.setBounds(1121, 220, 225, 50);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Nama Dokter");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 520, 150, 34);
-
-        jButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428222513_icon-ios7-plus-outline-32.png"))); // NOI18N
-        jButton7.setText("Tambah");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        buttonTambahAntrian.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        buttonTambahAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428222513_icon-ios7-plus-outline-32.png"))); // NOI18N
+        buttonTambahAntrian.setText("Tambah");
+        buttonTambahAntrian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                buttonTambahAntrianActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7);
-        jButton7.setBounds(840, 510, 120, 40);
+        getContentPane().add(buttonTambahAntrian);
+        buttonTambahAntrian.setBounds(787, 510, 120, 41);
 
-        jButton9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426717770_circle_close_delete-24.png"))); // NOI18N
-        jButton9.setText("Hapus");
-        getContentPane().add(jButton9);
-        jButton9.setBounds(970, 510, 120, 40);
+        buttonHapusAntrian.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        buttonHapusAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426717770_circle_close_delete-24.png"))); // NOI18N
+        buttonHapusAntrian.setText("Hapus");
+        buttonHapusAntrian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHapusAntrianActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonHapusAntrian);
+        buttonHapusAntrian.setBounds(657, 510, 120, 41);
 
         Namanya.setText("Salma Indridinnanti");
         getContentPane().add(Namanya);
@@ -209,9 +232,20 @@ public class Menursepsionis extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(30, 0, 290, 60);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 1400, 700);
+        buttonLihatAntrian.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        buttonLihatAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1432134923_eye-32.png"))); // NOI18N
+        buttonLihatAntrian.setText("Lihat Detail Antrian");
+        buttonLihatAntrian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLihatAntrianActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonLihatAntrian);
+        buttonLihatAntrian.setBounds(916, 510, 177, 41);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 1090, 610);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -224,10 +258,13 @@ public class Menursepsionis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DataDokterActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        String a = JOptionPane.showInputDialog("Masukkan Nama Pasien", "");
-
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void buttonTambahAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahAntrianActionPerformed
+        try {
+            new regispasienform(client, userName).setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buttonTambahAntrianActionPerformed
 
     private void RegisPasienRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienRegActionPerformed
         try {
@@ -240,19 +277,16 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void RegisPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienInapActionPerformed
         RawatinapController control;
         try {
+           
             control = new RawatinapController(this.client);
-            String a = "coba";
-            //control.kamarKosong(a);
-            if (control.kamarKosong(a).equals("kosong")) {
+            int kamarTersedia = control.kamarTersedia();
+            if (kamarTersedia ==0 ) {
 
-                //if (tampilUser().equals("benar") && tampilPass() == true) {
-                new Rawatinap(this.client, this.userName).show();
-                this.dispose();
-                //} else {
-                // JOptionPane.showMessageDialog(null, "TERJADI ERROR \n Username atau Password Salah", "ERROR!", JOptionPane.ERROR_MESSAGE);
-                //}
+                JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "WARNING!", JOptionPane.ERROR_MESSAGE);
+
             } else {
-                JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                new Rawatinap(this.client, this.userName).show();
+                //this.dispose();
             }
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
@@ -270,44 +304,50 @@ public class Menursepsionis extends javax.swing.JFrame {
 
     }//GEN-LAST:event_LihatPasienInapActionPerformed
 
-    private void List_AntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_List_AntrianActionPerformed
-    }//GEN-LAST:event_List_AntrianActionPerformed
-
     private void NamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaDokterActionPerformed
-        
+
     }//GEN-LAST:event_NamaDokterActionPerformed
 
     private void NamanyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamanyaActionPerformed
-        
+
     }//GEN-LAST:event_NamanyaActionPerformed
 
-    private void tableDaftarAntrianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDaftarAntrianMouseClicked
+    private void buttonHapusAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHapusAntrianActionPerformed
         int row = tableDaftarAntrian.getSelectedRow();
-        
+        try {
+            control.deleteAntrian(String.valueOf(tableDaftarAntrian.getValueAt(row, 1)));
+            tableAntri = (DefaultTableModel) tableDaftarAntrian.getModel();
+            tableAntri.removeRow(row);
+            tableDaftarAntrian.setModel(tableAntri);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_buttonHapusAntrianActionPerformed
+
+    private void buttonLihatAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLihatAntrianActionPerformed
+        int row = tableDaftarAntrian.getSelectedRow();
+
         try {
             new lihatantrian(client, userName, String.valueOf(tableDaftarAntrian.getValueAt(row, 1))).setVisible(true);
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
-        }// TODO add your handling code here:
-    }//GEN-LAST:event_tableDaftarAntrianMouseClicked
+        }
+    }//GEN-LAST:event_buttonLihatAntrianActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DataDokter;
     private javax.swing.JButton LihatPasienInap;
-    private javax.swing.JComboBox List_Antrian;
-    private javax.swing.JTextField NamaDokter;
     private javax.swing.JTextField Namanya;
     private javax.swing.JButton RegisPasienInap;
     private javax.swing.JButton RegisPasienReg;
+    private javax.swing.JButton buttonHapusAntrian;
+    private javax.swing.JButton buttonLihatAntrian;
+    private javax.swing.JButton buttonTambahAntrian;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tableDaftarAntrian;
     // End of variables declaration//GEN-END:variables
+
 }

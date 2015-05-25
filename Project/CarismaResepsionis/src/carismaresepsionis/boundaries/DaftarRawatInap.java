@@ -45,10 +45,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        tablePasienRawat = control.getNamaPasienRawatInap(this);
+        TabelPasien.setModel(control.getNamaPasienRawatInap());
  
         Tempat_ID.setEditable(false);
-        UmurPasien.setEditable(false);
+        //UmurPasien.setEditable(false);
         a = Nama_Pasien.getText();
         b = Tempat_Lahir.getText();
         bb = tglLahir.getText();
@@ -119,7 +119,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         Nama_Pasien.setText("Nama_Pasien");
@@ -454,7 +454,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         tampilTanggal.setBounds(1050, 50, 130, 40);
 
         tampilJam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tampilJam.setForeground(new java.awt.Color(255, 255, 255));
         tampilJam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tampilJam.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Jam", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
         getContentPane().add(tampilJam);
@@ -598,10 +597,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AlamatFocusGained
 
-    private void UmurPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UmurPasienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UmurPasienActionPerformed
-
     private void No_HpFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_No_HpFocusGained
         if (d.equals(No_Hp.getText())) {
             No_Hp.setText("");
@@ -732,7 +727,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         try {
             DaftarRawatInapController control = new DaftarRawatInapController(client);
             model = control.getNamaPasienRawatInapbyName(CariPasien.getText());
-            System.out.println(model);
+            //System.out.println(model);
             TabelPasien.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
@@ -852,6 +847,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
             goldar.setText("");
         }// TODO add your handling code here:
     }//GEN-LAST:event_goldarMouseClicked
+
+    private void UmurPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UmurPasienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UmurPasienActionPerformed
 public void setJam() {
     ActionListener taskPerformer = new ActionListener() {
       public void actionPerformed(ActionEvent evt) {

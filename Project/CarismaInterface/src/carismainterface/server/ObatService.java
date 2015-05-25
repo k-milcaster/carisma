@@ -14,9 +14,9 @@ public interface ObatService extends Remote {
 
     boolean updateObat(Obat obat) throws RemoteException;
 
-    boolean deleteObat(String idobat) throws RemoteException;
+    boolean deleteObat(int idobat) throws RemoteException;
 
-    Obat getObat(String idobat) throws RemoteException;
+    Obat getObat(int idobat) throws RemoteException;
     
     List<Obat> getObatbyName(String namaobat) throws RemoteException;
 

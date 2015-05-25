@@ -14,8 +14,10 @@ public interface AntrianService extends Remote {
     boolean insertAntrian(Antrian antrian) throws RemoteException;
 
     boolean deleteAntrian(String antrian) throws RemoteException;
-    
+
     boolean antrianHadir(String antrian) throws RemoteException;
+
+    boolean antrianTidakHadir(String antrian) throws RemoteException;
 
     Antrian getAntrian(String antrian) throws RemoteException;
 

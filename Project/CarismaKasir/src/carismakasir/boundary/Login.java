@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 import carismakasir.controller.ClientSocket;
 import java.rmi.NotBoundException;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 /**
  *
@@ -38,7 +40,6 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(null);
 
         username.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -46,6 +47,11 @@ public class Login extends javax.swing.JFrame {
         username.setBounds(180, 350, 240, 40);
 
         password.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordActionPerformed(evt);
+            }
+        });
         getContentPane().add(password);
         password.setBounds(180, 400, 240, 40);
 
@@ -95,22 +101,33 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_loginButtonActionPerformed
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        if (evt.getSource() instanceof JTextField) {
+            if (username.getText().equalsIgnoreCase("") || password.getText().equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(null, "User Name atau Password anda belum terisi!");
+            } else {
+                LoginController login = new LoginController(this.login, username.getText(), password.getText());
+                boolean success = false;
+                try {
+                    success = login.logIn();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (success) {
+                    new Kasir(this.client, username.getText()).show();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "User Name atau Password anda salah!");
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_passwordActionPerformed
+    public static void main(String args[]) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            System.out.println("Look & Feel exception");
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -124,7 +141,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

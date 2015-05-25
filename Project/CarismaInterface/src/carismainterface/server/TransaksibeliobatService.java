@@ -25,4 +25,6 @@ public interface TransaksibeliobatService extends Remote {
     Transaksibeliobat getTransaksibeliobat(String idtransaksibeliobat) throws RemoteException;
 
     List<Transaksibeliobat> getTransaksibeliobat() throws RemoteException;
+    
+    String getLastIdTransaksiBeliObat() throws RemoteException;
 }

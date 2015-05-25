@@ -91,7 +91,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
             model.addElement(item.toString());
         }
         model.removeElement(userName + " as " + role);
-        ui.loggedInList.setModel(model);        
+        ui.loggedInList.setModel(model);
     }
 
     @Override
@@ -202,7 +202,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
                 users.setLastlogin(result.getString("lastlogin"));
                 users.setRole(result.getString("role"));
             }
-            System.out.println("here is");
+            System.out.println("here is " + users.getUsername());
             return users;
         } catch (SQLException exception) {
             ui.act.append("getUser Error \n");
@@ -273,6 +273,80 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
 
         } catch (SQLException exception) {
             ui.act.append("getUserList Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public User getUserById(int idUser) throws RemoteException {
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT * FROM user WHERE id_user = ?");
+            statement.setInt(1, idUser);
+            ResultSet result = statement.executeQuery();
+            User users = null;
+            if (result.next()) {
+                users = new User();
+                users.setIdUser(result.getInt("id_user"));
+                users.setUsername(result.getString("username"));
+                users.setPassword(result.getString("password"));
+                users.setRegistered(result.getString("registered"));
+                users.setLastlogin(result.getString("lastlogin"));
+                users.setRole(result.getString("role"));
+            }
+            System.out.println("here is " + users.getUsername());
+            return users;
+        } catch (SQLException exception) {
+            ui.act.append("getUser Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<User> getUserbyRole(String role) throws RemoteException {
+        //ui.act.append("Client Execute getUsersListbyRole \n");
+
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT * FROM user WHERE role = '"+role+"' ORDER BY id_user");
+
+            List<User> list = new ArrayList<User>();
+
+            while (result.next()) {
+                User users = new User();
+                users.setIdUser(result.getInt("id_user"));
+                users.setUsername(result.getString("username"));
+                users.setPassword(result.getString("password"));
+                users.setRegistered(result.getString("registered"));
+                users.setLastlogin(result.getString("lastlogin"));
+                users.setRole(result.getString("role"));
+                list.add(users);
+            }
+            result.close();
+
+            return list;
+
+        } catch (SQLException exception) {
+            ui.act.append("getUserListbyRoles Error \n");
             ui.act.append(exception.toString());
             return null;
         } finally {

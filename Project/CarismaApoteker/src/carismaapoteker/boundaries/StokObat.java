@@ -9,6 +9,7 @@ import carismainterface.server.ObatService;
 import carismainterface.server.PegawaiService;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,43 +29,36 @@ public class StokObat extends javax.swing.JFrame {
     private String userName;
     private StokObatController control;
     public ObatService os;
-     private PegawaiService pegawaiService;
-    private  String[] namaPegawai; 
+    private PegawaiService pegawaiService;
+    private String[] namaPegawai;
     private int total = 0;
     public int row = 0;
-
     private DefaultTableModel tableObat = new DefaultTableModel();
 
     public StokObat(ClientSocket Client, String userName) throws RemoteException {
-        //    
         this.client = Client;
         control = new StokObatController(this.client);
         os = client.getObatService();
-        this.userName = userName;
         initComponents();
-        namaPegawai = control.getNamaPegawai(this.userName);
-        labelApotekerName.setText(namaPegawai[0]);
+        this.userName = userName;
+        labelApotekerName.setText(this.userName);
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-
         tableMedicine.setModel(control.getObats());
-
         tableMedicine.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
             public void valueChanged(ListSelectionEvent e) {
                 int row = tableMedicine.getSelectedRow();
                 if (row != -1) {
                     try {
-
-                        Obat selected = new Obat(os.getObat(tableMedicine.getValueAt(row, 0).toString()));
+                        Obat selected = new Obat(os.getObat((int) tableMedicine.getValueAt(row, 0)));
                         fieldIdMedicine.setText(selected.getIdObat().toString());
                         fieldMedicineName.setText(selected.getNamaObat());
                         fieldQuantity.setText(selected.getQtyObat().toString());
                         fieldMedicineType.setText(selected.getJenisObat());
                         fieldDescribtion.setText(selected.getKeterangan());
                         fieldPrice.setText(selected.getHargajualObat().toString());
-                        fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));                        
-                        tabelDetailObat.setModel(control.getDetailObat(Integer.parseInt(tableMedicine.getValueAt(row, 0).toString())));                        
+                        fieldStokKritis.setText(String.valueOf(selected.getStokkritisObat()));
+                        tabelDetailObat.setModel(control.getDetailObat(Integer.parseInt(tableMedicine.getValueAt(row, 0).toString())));
                     } catch (RemoteException ex) {
                         Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -108,7 +102,7 @@ public class StokObat extends javax.swing.JFrame {
         tabelDetailObat = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Carisma Project");
         getContentPane().setLayout(null);
 
@@ -257,7 +251,14 @@ public class StokObat extends javax.swing.JFrame {
 
         fieldStokKritis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldStokKritis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        fieldStokKritis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldStokKritisKeyTyped(evt);
+            }
+        });
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1429342362_checkround-24-12.png"))); // NOI18N
         jButton1.setText("Update Stok Kritis");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,16 +295,16 @@ public class StokObat extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(fieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(54, 54, 54)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(279, 279, 279)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
                         .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                         .addComponent(fieldStokKritis, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,21 +354,21 @@ public class StokObat extends javax.swing.JFrame {
         getContentPane().add(jPanel3);
         jPanel3.setBounds(10, 255, 1346, 207);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jLabel2.setText("Apoteker :");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 175, 94, 22);
+        jLabel2.setBounds(10, 175, 79, 29);
 
-        labelApotekerName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelApotekerName.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         getContentPane().add(labelApotekerName);
         labelApotekerName.setBounds(110, 175, 199, 22);
 
         jLabel12.setFont(new java.awt.Font("Agency FB", 1, 55)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Data Obat");
+        jLabel12.setText("Inventory Obat");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(-530, 50, 1346, 47);
+        jLabel12.setBounds(50, 30, 350, 47);
 
         tabelDetailObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -394,9 +395,9 @@ public class StokObat extends javax.swing.JFrame {
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(1050, 470, 320, 210);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/background.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 1366, 700);
+        jLabel3.setBounds(0, 0, 1360, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -423,7 +424,6 @@ public class StokObat extends javax.swing.JFrame {
         try {
             StokObatController control = new StokObatController(client);
             model = control.getObatbyName(fieldSearch.getText());
-           // System.out.println(model);
             tableMedicine.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(StokObat.class.getName()).log(Level.SEVERE, null, ex);
@@ -432,7 +432,6 @@ public class StokObat extends javax.swing.JFrame {
 
     private void fieldSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldSearchActionPerformed
         if (evt.getSource() instanceof JTextField) {
-
         }
     }//GEN-LAST:event_fieldSearchActionPerformed
 
@@ -453,15 +452,13 @@ public class StokObat extends javax.swing.JFrame {
             boolean updated = controller.updateStokObat(id, nama, qty, jenis, keterangan, hargaJual, stokKritis);
             if (updated == true) {
                 JOptionPane.showMessageDialog(null, "Stok Kritis Obat Berhasil Terupdate");
-            }
-            else {
+            } else {
                 JOptionPane.showMessageDialog(null, "Stok Kritis Obat Tidak Terupdate");
-                 }
+            }
             tableMedicine.setModel(controller.getObats());
             fieldStokKritis.setText("");
-            } 
-        catch (Exception e) { 
-            }
+        } catch (Exception e) {
+        }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -470,11 +467,26 @@ public class StokObat extends javax.swing.JFrame {
         int row = tableMedicine.getSelectedRow();
         try {
             StokObatController control = new StokObatController(client);
+            DefaultTableModel detailObat = new DefaultTableModel();
+            detailObat = control.getDetailObat(Integer.parseInt(String.valueOf(tableMedicine.getValueAt(row, 0))));
+            tabelDetailObat.setModel(detailObat);
+        } catch (Exception e) {
+            System.out.println("Through Catch");
         } 
-        catch (Exception e) {
-        }
     }//GEN-LAST:event_tableMedicineMouseClicked
 
+    private void fieldStokKritisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldStokKritisKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_fieldStokKritisKeyTyped
+    
+     public void typeOnlyNumber(KeyEvent evt){
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)||c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField fieldDescribtion;
     private javax.swing.JTextField fieldIdMedicine;

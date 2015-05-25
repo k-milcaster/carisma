@@ -14,7 +14,7 @@ public interface UserService extends Remote {
     void updateLastLogIn(String userName) throws RemoteException;
 
     Boolean userLogIn(String userName, String password, String role) throws RemoteException;
-    
+
     void userLogOut(String userName, String role) throws RemoteException;
 
     boolean insertUser(User user) throws RemoteException;
@@ -25,5 +25,9 @@ public interface UserService extends Remote {
 
     User getUser(String user) throws RemoteException;
 
+    User getUserById(int idUser) throws RemoteException;
+
     List<User> getUser() throws RemoteException;
+    
+    List<User> getUserbyRole(String role) throws RemoteException;
 }

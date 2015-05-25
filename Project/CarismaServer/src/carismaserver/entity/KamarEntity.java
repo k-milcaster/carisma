@@ -166,7 +166,8 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
         try {
             statement = DatabaseConnection.getConnection().createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT * FROM kamar");
+            ResultSet result = statement.executeQuery("SELECT K.* FROM kamar AS K LEFT JOIN pasien_kamar AS PK on K.id_kamar = PK.kamar_id_kamar "
+                    + "WHERE PK .kamar_id_kamar IS null");
 
             List<Kamar> list = new ArrayList<Kamar>();
 
@@ -234,29 +235,28 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
     }
 
     @Override
-    public List<String> getKamarAvailable() throws RemoteException {
-        ui.act.append("Client Execute getKamarAvailableList \n");
-
+    public int getJumlahKamarTerisi() throws RemoteException {
+        ui.act.append("Client Execute getJumlahKamarTerisi \n");
+        int jumlahkamarterisi = 0;
         Statement statement = null;
         try {
             statement = DatabaseConnection.getConnection().createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT K.id_kamar FROM kamar AS K LEFT JOIN pasien_kamar AS PK on K.id_kamar = PK.kamar_id_kamar "
-                    + "WHERE PK .kamar_id_kamar IS null");
+            ResultSet result = statement.executeQuery("SELECT count(kamar_id_kamar) from `pasien_kamar` ");
 
-            List<String> list = new ArrayList<String>();
+            
 
             while (result.next()) {
-                String kamar = result.getString(1);
-                list.add(kamar);
+                jumlahkamarterisi = result.getInt(1);
+                //list.add(kamar);
             }
             result.close();
-            return list;
+            return jumlahkamarterisi;
 
         } catch (SQLException exception) {
-            ui.act.append("getKamarAvailableList Error \n");
+            ui.act.append("getJumlahKamarTerisi Error \n");
             ui.act.append(exception.toString());
-            return null;
+            return jumlahkamarterisi;
         } finally {
             if (statement != null) {
                 try {
@@ -266,5 +266,40 @@ public class KamarEntity extends UnicastRemoteObject implements KamarService{
             }
         }
     }
+
+    @Override
+    public int getJumlahKamarKeseluruhan() throws RemoteException {
+        ui.act.append("Client Execute getJumlahKamarKeseluruhan \n");
+        int jumlahkamarkeseluruhan = 0;
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT count(id_kamar) from `kamar` ");
+
+            
+
+            while (result.next()) {
+                jumlahkamarkeseluruhan= result.getInt(1);
+                //list.add(kamar);
+            }
+            result.close();
+            return jumlahkamarkeseluruhan;
+
+        } catch (SQLException exception) {
+            ui.act.append("getJumlahKamarKeseluruhan Error \n");
+            ui.act.append(exception.toString());
+            return jumlahkamarkeseluruhan;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+    
+    
     
 }

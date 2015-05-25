@@ -24,7 +24,7 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
 
     }
 
-    public AntrianEntity(Main ui) throws RemoteException{
+    public AntrianEntity(Main ui) throws RemoteException {
         this.ui = ui;
     }
 
@@ -131,11 +131,11 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM antrian");
+                    "SELECT * FROM antrian WHERE hadir = '-'");
             ResultSet result = statement.executeQuery();
             List<Antrian> list = new ArrayList<Antrian>();
             Antrian antri = null;
-            if (result.next()) {
+            while (result.next()) {
                 antri = new Antrian();
                 antri.setIdAntrian(result.getString("id_antrian"));
                 antri.setPasienIdPasien(result.getString("pasien_id_pasien"));
@@ -171,11 +171,38 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
                     "UPDATE antrian SET hadir = ? WHERE id_antrian = ?"
             );
             statement.setInt(1, 1);
-            statement.setString(1, antrian);
+            statement.setString(2, antrian);
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
             ui.act.append("antrianHadir Error \n");
+            ui.act.append(e.toString());
+            return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean antrianTidakHadir(String antrian) throws RemoteException {
+        ui.act.append("Client Execute antrianHadir(" + antrian + ") \n");
+
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "UPDATE antrian SET hadir = ? WHERE id_antrian = ?"
+            );
+            statement.setInt(1, 0);
+            statement.setString(2, antrian);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            ui.act.append("antrianTidakHadir Error \n");
             ui.act.append(e.toString());
             return false;
         } finally {

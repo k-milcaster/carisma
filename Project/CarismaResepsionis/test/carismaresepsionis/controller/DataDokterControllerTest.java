@@ -1,12 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismaresepsionis.controller;
 
-import carismainterface.server.DokterService;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -86,9 +80,8 @@ public class DataDokterControllerTest {
         System.out.println("getDokterByIdDokter");
         String idDokter = "DOK101";
         DataDokterController instance = new DataDokterController(client);
-        String[] expResult = instance.getDokterByIdDokter(idDokter);
-        String[] result = instance.getDokterByIdDokter(idDokter);
-        assertArrayEquals(expResult, result);
-        
+        ArrayList expResult = instance.getDokterByIdDokter(idDokter);
+        ArrayList result = instance.getDokterByIdDokter(idDokter);
+        assertEquals(expResult, result);        
     }
 }

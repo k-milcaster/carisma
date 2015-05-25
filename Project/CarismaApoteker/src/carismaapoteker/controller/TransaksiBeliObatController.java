@@ -16,6 +16,8 @@ import carismainterface.server.ObatService;
 import carismainterface.server.PegawaiService;
 import carismainterface.server.TransaksibeliobatService;
 import java.rmi.RemoteException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -34,11 +36,11 @@ public class TransaksiBeliObatController {
     private PegawaiService pegawaiService;
 
     public TransaksiBeliObatController(ClientSocket client) throws RemoteException {
-        this.transaksibeliobat = client.getTransaksibeliobatService();
-        this.detailtransaksibeliobat = client.getDetailtransaksibeliobatService();
+        transaksibeliobat = client.getTransaksibeliobatService();
+        detailtransaksibeliobat = client.getDetailtransaksibeliobatService();
         obatService = client.getObatService();
         detailobatService = client.getDetailonatSerivice();
-        this.pegawaiService = client.getPegawaiService();
+        pegawaiService = client.getPegawaiService();
     }
 
     public DefaultComboBoxModel getIdObat() throws RemoteException {
@@ -52,44 +54,19 @@ public class TransaksiBeliObatController {
 
     }
 
-//    public DefaultTableModel getTransaksiBeliObat(TransaksiBeliObat ui) throws RemoteException {
-//        List<Transaksibeliobat> list = new ArrayList<Transaksibeliobat>();
-//        list = transaksibeliobat.getTransaksibeliobat();
-//        List<Detailtransaksibeliobat> list1 = new ArrayList<Detailtransaksibeliobat>();
-//        list1 = detailtransaksibeliobat.getDetailtransaksibeliobat();
-//        List<Obat> list2 = new ArrayList<Obat>();
-//        list2 = obatService.getObat();
-//        List<Detailobat> list3 = new ArrayList<Detailobat>();
-//        list3 = detailobatService.getDetailobat();
-//        DefaultTableModel model = new DefaultTableModel();
-//        model.addColumn("Id Transaksi Beli Obat");
-//        model.addColumn("Tanggal Beli Obat");
-//        model.addColumn("Nama Obat");
-//        model.addColumn("Jenis Obat");
-//        model.addColumn("Harga Beli Obat");
-//        model.addColumn("Qty");
-//        model.addColumn("Tanggal Kadaluarsa");
-//        model.addColumn("Keterangan");
-//
-//        for (int i = 0; i < list.size(); i++) {
-//            model.addRow(new Object[]{list.get(i).getIdTransaksibeliobat(), list.get(i).getDateTransaksibeli(), list2.get(i).getNamaObat(), list2.get(i).getJenisObat(), list.get(i).getHargabeliObat(), list1.get(i).getQty(), list3.get(i).getTglkadaluarsaDetail(), list.get(i).getKeterangan()});
-//            System.out.println("get Transaksi beli obat");
-//        }
-//        return model;
-//    }
-
-    public void insertBeliObatLama(String idTransaksiBeliObat, String tglTransaksiBeliObat, String keterangan, int hargaBeliObat) throws RemoteException {
+    public boolean insertBeliObat(String idTransaksiBeliObat, String tglTransaksiBeliObat, String keterangan, int hargaBeliObat) throws RemoteException {
+        boolean inserted = false;
         Transaksibeliobat trans = new Transaksibeliobat();
         trans.setIdTransaksibeliobat(idTransaksiBeliObat);
         trans.setDateTransaksibeli(tglTransaksiBeliObat);
         trans.setKeterangan(keterangan);
         trans.setHargabeliObat(hargaBeliObat);
-        transaksibeliobat.insertTransaksibeliobat(trans);
-
+        inserted = transaksibeliobat.insertTransaksibeliobat(trans);
+        return inserted;
     }
 
-    public void insertStokObatLama(int idObat, String namaObat, int qtyObat, String jenisObat, String keterangan, int hargaJualObat, int stokKritis) throws RemoteException {
-        System.out.println("yeah");
+    public boolean insertStokObat(int idObat, String namaObat, int qtyObat, String jenisObat, String keterangan, int hargaJualObat, int stokKritis) throws RemoteException {
+        boolean inserted = false;
         Obat obat = new Obat();
         obat.setIdObat(idObat);
         obat.setNamaObat(namaObat);
@@ -98,23 +75,28 @@ public class TransaksiBeliObatController {
         obat.setKeterangan(keterangan);
         obat.setHargajualObat(hargaJualObat);
         obat.setStokkritisObat(stokKritis);
-        obatService.insertObat(obat);
+        inserted = obatService.insertObat(obat);
+        return inserted;
     }
 
-    public void insertDetailTransaksiBeliObat(String idTransaski, int idObat, int qtyObat) throws RemoteException {
+    public boolean insertDetailTransaksiBeliObat(String idTransaksi, int idObat, int qtyObat) throws RemoteException {
+        boolean inserted = false;
         Detailtransaksibeliobat trans1 = new Detailtransaksibeliobat();
-        trans1.setTransaksibeliobat(idTransaski);
+        trans1.setTransaksibeliobat(idTransaksi);
         trans1.setObat(idObat);
         trans1.setQty(qtyObat);
-        detailtransaksibeliobat.insertDetailtransaksibeliobat(trans1);
+        inserted = detailtransaksibeliobat.insertDetailtransaksibeliobat(trans1);
+        return inserted;
     }
 
-    public void insertDetailObat(int idDetail, int idObat, String TglKadaluarsa) throws RemoteException {
+    public boolean insertDetailObat(int idDetail, int idObat, String TglKadaluarsa) throws RemoteException {
+        boolean inserted = false;
         Detailobat det = new Detailobat();
         det.setIdDetail(idDetail);
         det.setObatIdObat(idObat);
         det.setTglkadaluarsaDetail(TglKadaluarsa);
-        detailobatService.insertDetailobat(det);
+        inserted = detailobatService.insertDetailobat(det);
+        return inserted;
     }
     public boolean updateStokObat(int id, int qty) throws RemoteException{
         boolean updated = false;
@@ -132,16 +114,72 @@ public class TransaksiBeliObatController {
     
     public int getidObat() throws RemoteException{
         int lastIdObat = obatService.getLastIdObat() +1;
-        return lastIdObat;
-        
+        return lastIdObat;    
     }
-    
-  
-     
     
     public String[] getNamaPegawai (String username) throws RemoteException{
         String[] namaApoteker = pegawaiService.getIdNamaPegawai(username);
         return namaApoteker;
     }
+    
+    public boolean deleteDetailObat(int idDetail) throws RemoteException{
+        return detailobatService.deleteDetailobat(idDetail);
+    }
+    
+    public boolean deleteDetailTransaksiBeliObat(String idTransaksi, int idObat) throws RemoteException{
+        return detailtransaksibeliobat.deleteDetailtransaksibeliobat(idTransaksi, idObat);
+    }
+    
+    public boolean deleteStokObat(int idObat) throws RemoteException{
+        return obatService.deleteObat(idObat);
+    }
+    
+    public boolean deleteBeliObat(String idTransaksi) throws RemoteException{
+        return transaksibeliobat.deleteTransaksibeliobat(idTransaksi);
+    }
+    
+    public String getIdTransaksiBeliObat() throws RemoteException {
+        String lastIdTransaksiBeliObat = transaksibeliobat.getLastIdTransaksiBeliObat();
+        String[] splitDateNow = getDateNow().split("-");
+        String dateNow = splitDateNow[0].concat(splitDateNow[1]).concat(splitDateNow[2]);
+        String awalan = "TRANSBUY-".concat(dateNow).concat("-");
+        String idTransaksiBeliObatFix = " ";
+        String getDateOnly = " ";
+        // TRANSBUY-20150520-001
+        if (lastIdTransaksiBeliObat != null) {
+            char[] charDate = lastIdTransaksiBeliObat.toCharArray();
+            char[] newCharDate = new char[8];
+            for (int i = 0; i < 8; i++) {
+                newCharDate[i] = charDate[i + 9];
+            }
+            getDateOnly = String.valueOf(newCharDate);
+        }
+        if (lastIdTransaksiBeliObat == null || (!dateNow.equals(getDateOnly))) {
+            idTransaksiBeliObatFix = awalan.concat("001");
+        } else {
+            char[] lastDigit = lastIdTransaksiBeliObat.toCharArray();
+            char[] newLastDigit = new char[3];
+            for (int i = 0; i < 3; i++) {
+                newLastDigit[i] = lastDigit[i + 18];
+            }
+            int lastDigitIdDetail = Integer.parseInt(String.valueOf(newLastDigit)) + 1;
+            if (lastDigitIdDetail < 10) {
+                idTransaksiBeliObatFix = awalan.concat("00").concat(String.valueOf(lastDigitIdDetail));
+            } else if (lastDigitIdDetail >= 10 && lastDigitIdDetail < 100) {
+                idTransaksiBeliObatFix = awalan.concat("0").concat(String.valueOf(lastDigitIdDetail));
+            } else if (lastDigitIdDetail >= 100) {
+                idTransaksiBeliObatFix = awalan.concat(String.valueOf(lastDigitIdDetail));
+            }
+        }
+        return idTransaksiBeliObatFix;
+    }
+
+   
+    public String getDateNow() throws RemoteException {
+        DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+        String date = df.format(new java.util.Date());
+        return date;
+    }
+      
 
 }

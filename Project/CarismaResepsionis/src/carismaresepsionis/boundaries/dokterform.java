@@ -1,28 +1,26 @@
 package carismaresepsionis.boundaries;
 
 import carismaresepsionis.controller.ClientSocket;
-import carismainterface.entity.Dokter;
-import carismainterface.entity.Poli;
-import carismainterface.entity.Jadwaldokter;
 import carismainterface.server.*;
 import carismaresepsionis.controller.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.rmi.RemoteException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Fiqhi Darmawan, Anes Dirsi
  */
 public class dokterform extends javax.swing.JFrame {
+
     private ClientSocket client;
     private String userName;
     private DokterService ds;
@@ -30,7 +28,7 @@ public class dokterform extends javax.swing.JFrame {
     private DataDokterController DataDokterController;
     settergetter simpanan = new settergetter();
 //    String a, b, c, d, e, f, g, h, i;
-    
+
     public dokterform(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
         DataDokterController control = new DataDokterController(this.client);
@@ -41,7 +39,7 @@ public class dokterform extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         TabelDokter.setModel(control.getDokterList());
         //control.getNamaDokter();
-        
+
 //        TabelDokter.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 //
 //            public void valueChanged(ListSelectionEvent e) {
@@ -72,6 +70,7 @@ public class dokterform extends javax.swing.JFrame {
 //        TgllahirDokter.setDate(tanggal);
 //       
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -112,7 +111,7 @@ public class dokterform extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -260,6 +259,7 @@ public class dokterform extends javax.swing.JFrame {
         jPanel4.add(jLabel14);
         jLabel14.setBounds(20, 430, 290, 14);
 
+        NamaDokter.setEditable(false);
         NamaDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NamaDokterActionPerformed(evt);
@@ -267,14 +267,24 @@ public class dokterform extends javax.swing.JFrame {
         });
         jPanel4.add(NamaDokter);
         NamaDokter.setBounds(110, 90, 271, 30);
+
+        NamaPoli.setEditable(false);
         jPanel4.add(NamaPoli);
         NamaPoli.setBounds(110, 130, 271, 30);
+
+        AlamatDokter.setEditable(false);
         jPanel4.add(AlamatDokter);
         AlamatDokter.setBounds(110, 300, 272, 30);
+
+        Hp1Dokter.setEditable(false);
         jPanel4.add(Hp1Dokter);
         Hp1Dokter.setBounds(110, 380, 272, 30);
+
+        TelpDokter.setEditable(false);
         jPanel4.add(TelpDokter);
         TelpDokter.setBounds(110, 340, 272, 30);
+
+        Hp2Dokter.setEditable(false);
         jPanel4.add(Hp2Dokter);
         Hp2Dokter.setBounds(110, 420, 272, 30);
 
@@ -292,26 +302,26 @@ public class dokterform extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
-                    .addComponent(FotoDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FotoDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(FotoDokter, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(FotoDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jPanel4.add(jPanel6);
-        jPanel6.setBounds(400, 70, 159, 197);
+        jPanel6.setBounds(400, 70, 184, 190);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton2.setText("Back");
         jPanel4.add(jButton2);
-        jButton2.setBounds(400, 390, 90, 40);
+        jButton2.setBounds(490, 410, 90, 40);
 
         LihatJadwalDokter.setText("Lihat Jadwal Prakter");
         LihatJadwalDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -320,14 +330,17 @@ public class dokterform extends javax.swing.JFrame {
             }
         });
         jPanel4.add(LihatJadwalDokter);
-        LihatJadwalDokter.setBounds(400, 360, 150, 23);
+        LihatJadwalDokter.setBounds(430, 380, 150, 23);
 
         jLabel15.setText("Id Dokter");
         jPanel4.add(jLabel15);
         jLabel15.setBounds(20, 60, 70, 14);
+
+        IdDokter.setEditable(false);
         jPanel4.add(IdDokter);
         IdDokter.setBounds(110, 52, 270, 30);
 
+        TglLahirDokter.setEditable(false);
         TglLahirDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TglLahirDokterActionPerformed(evt);
@@ -335,13 +348,17 @@ public class dokterform extends javax.swing.JFrame {
         });
         jPanel4.add(TglLahirDokter);
         TglLahirDokter.setBounds(110, 210, 110, 30);
+
+        JenisKelaminDokter.setEditable(false);
         jPanel4.add(JenisKelaminDokter);
         JenisKelaminDokter.setBounds(110, 250, 50, 30);
+
+        TempatLahirDokter.setEditable(false);
         jPanel4.add(TempatLahirDokter);
         TempatLahirDokter.setBounds(110, 170, 270, 30);
 
         getContentPane().add(jPanel4);
-        jPanel4.setBounds(570, 180, 580, 460);
+        jPanel4.setBounds(570, 180, 590, 460);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         jLabel4.setText("jLabel4");
@@ -356,8 +373,8 @@ public class dokterform extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CariNamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariNamaDokterActionPerformed
-         if (evt.getSource() instanceof JTextField) {
-            
+        if (evt.getSource() instanceof JTextField) {
+
         }
     }//GEN-LAST:event_CariNamaDokterActionPerformed
 
@@ -386,34 +403,39 @@ public class dokterform extends javax.swing.JFrame {
     private void CariNamaDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CariNamaDokterKeyReleased
         CariNamaDokter.setForeground(Color.black);
         CariNamaDokter.setFont(new Font("Tahoma", 0, 12));
-        
+
         DefaultTableModel model = new DefaultTableModel();
         try {
             DataDokterController control = new DataDokterController(client);
             model = control.getDokterByName(CariNamaDokter.getText());
-            //System.out.println(model);
+
             TabelDokter.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_CariNamaDokterKeyReleased
 
     private void TabelDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelDokterMouseClicked
-            int row = TabelDokter.getSelectedRow();
+        int row = TabelDokter.getSelectedRow();
         try {
             DataDokterController control = new DataDokterController(client);
-            String[] infoDokter = control.getDokterByIdDokter(String.valueOf(TabelDokter.getValueAt(row, 0)));
-            IdDokter.setText(infoDokter[0]);
-            NamaDokter.setText(infoDokter[1]);
-            NamaPoli.setText(infoDokter[2]);
-            TempatLahirDokter.setText(infoDokter[3]);
-            TglLahirDokter.setText(infoDokter[4]);
-            JenisKelaminDokter.setText(infoDokter[5]);
-            AlamatDokter.setText(infoDokter[6]);
-            TelpDokter.setText(infoDokter[7]);
-            Hp1Dokter.setText(infoDokter[8]);
-            Hp2Dokter.setText(infoDokter[9]);
+            ArrayList infoDokter = control.getDokterByIdDokter(String.valueOf(TabelDokter.getValueAt(row, 0)));
+            IdDokter.setText(infoDokter.get(0).toString());
+            NamaDokter.setText(infoDokter.get(1).toString());
+            NamaPoli.setText(infoDokter.get(2).toString());
+            TempatLahirDokter.setText(infoDokter.get(3).toString());
+            TglLahirDokter.setText(infoDokter.get(4).toString());
+            JenisKelaminDokter.setText(infoDokter.get(5).toString());
+            AlamatDokter.setText(infoDokter.get(6).toString());
+            TelpDokter.setText(infoDokter.get(7).toString());
+            Hp1Dokter.setText(infoDokter.get(8).toString());
+            Hp2Dokter.setText(infoDokter.get(9).toString());
+            byte[] content = null;
+            content = (byte[]) infoDokter.get(10);
+            Image imgs = Toolkit.getDefaultToolkit().createImage(content);
+            ImageIcon icon = new ImageIcon(imgs);
+            FotoDokter.setIcon(icon);
 
         } catch (RemoteException ex) {
             Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);

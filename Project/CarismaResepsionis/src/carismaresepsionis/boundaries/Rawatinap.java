@@ -38,7 +38,7 @@ public class Rawatinap extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         tablePasien = control.getNamaPasien(this);
-        tableKamar = control.getNamaKamar(this);
+        tableKamar = control.getKamar(this);
         
         a = namapasien.getText();
         b = idpasien.getText();
@@ -75,7 +75,7 @@ public class Rawatinap extends javax.swing.JFrame {
         tgl_regpasien = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         tablelistkamarpasien.setModel(new javax.swing.table.DefaultTableModel(
@@ -285,10 +285,10 @@ public class Rawatinap extends javax.swing.JFrame {
 
     private void tablelistkamarpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistkamarpasienMouseClicked
          int row = tablelistkamarpasien.getSelectedRow();
-            
-            namaKamar.setText(String.valueOf(tableKamar.getValueAt(row, 0)));
-            kelasKamar.setText(String.valueOf(tableKamar.getValueAt(row, 1)));
-            tarif.setText(String.valueOf(tableKamar.getValueAt(row, 2)));
+            idkamar.setText(String.valueOf(tableKamar.getValueAt(row, 0)));
+            namaKamar.setText(String.valueOf(tableKamar.getValueAt(row, 1)));
+            kelasKamar.setText(String.valueOf(tableKamar.getValueAt(row, 2)));
+            tarif.setText(String.valueOf(tableKamar.getValueAt(row, 3)));
         /*RawatinapController ambilData;
         try {
             ambilData = new RawatinapController (client);

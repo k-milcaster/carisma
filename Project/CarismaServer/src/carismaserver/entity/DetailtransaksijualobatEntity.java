@@ -42,7 +42,7 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO detailtransaksijualobat (transaksijualobat_id_transaksijualobat, obat_id_obat, qty) values (?,?,?)"
+                    "INSERT INTO detailtransaksijualobat (transaksijualobat_id_transaksijual, obat_id_obat, qty) values (?,?,?)"
             );
             statement.setString(1, detailtransaksijualobat.getTransaksijualobat());
             statement.setInt(2, detailtransaksijualobat.getObat());
@@ -73,7 +73,7 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "UPDATE detailtransaksijualobat SET qty = ? "
-                    + "WHERE transaksijualobat_id_transaksijualobat = ? AND obat_id_obat = ?"
+                    + "WHERE transaksijualobat_id_transaksijual = ? AND obat_id_obat = ?"
             );
             statement.setString(2, detailtransaksijualobat.getTransaksijualobat());
             statement.setInt(3, detailtransaksijualobat.getObat());
@@ -100,7 +100,7 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "DELETE FROM detailtransaksijualobat WHERE transaksijualobat_id_transaksijualobat = ? AND obat_id_obat =?");
+                    "DELETE FROM detailtransaksijualobat WHERE transaksijualobat_id_transaksijual = ? AND obat_id_obat =?");
             statement.setString(1, idtransaksijualobat);
             statement.setInt(2, idobat);
             statement.executeUpdate();
@@ -126,14 +126,14 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM detailtransaksijualobat WHERE transaksijualobat_id_transaksijualobat = ? AND obat_id_obat = ?");
+                    "SELECT * FROM detailtransaksijualobat WHERE transaksijualobat_id_transaksijual = ? AND obat_id_obat = ?");
             statement.setString(1, idtransaksijualobat);
             statement.setInt(2, idobat);
             ResultSet result = statement.executeQuery();
             Detailtransaksijualobat detailtransaksijualobat = null;
             if (result.next()) {
                 detailtransaksijualobat = new Detailtransaksijualobat();
-                detailtransaksijualobat.setTransaksijualobat(result.getString("transaksijualobat_transaksijualobat"));
+                detailtransaksijualobat.setTransaksijualobat(result.getString("transaksijualobat_transaksijual"));
                 detailtransaksijualobat.setObat(result.getInt("obat_id_obat"));
                 detailtransaksijualobat.setQty(result.getInt("qty"));
             }
@@ -166,7 +166,7 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
 
             while (result.next()) {
                 Detailtransaksijualobat detailtransaksijualobat = new Detailtransaksijualobat();
-                detailtransaksijualobat.setTransaksijualobat(result.getString("transaksijualobat_id_transaksijualobat"));
+                detailtransaksijualobat.setTransaksijualobat(result.getString("transaksijualobat_id_transaksijual"));
                 detailtransaksijualobat.setObat(result.getInt("obat_id_obat"));
                 detailtransaksijualobat.setQty(result.getInt("qty"));
             }

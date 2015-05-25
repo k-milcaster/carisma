@@ -1,6 +1,6 @@
 <?php
 
-class Penyaki_Model extends Model {
+class Penyakit_Model extends Model {
 
     function __construct() {
         parent::__construct();
