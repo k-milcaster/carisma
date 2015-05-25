@@ -82,7 +82,7 @@ public class DokterManagement extends javax.swing.JFrame {
                         comboPoli.setSelectedItem(poliService.getPoli(selected.getPoliIdPoli()).getNamaPoli());
                         byte[] content = null;
                         content = selected.getFotoDokter();
-                        Image imgs = Toolkit.getDefaultToolkit().createImage(content);
+                        Image imgs = Toolkit.getDefaultToolkit().createImage(content);                        
                         ImageIcon icon = new ImageIcon(imgs);
                         foto.setIcon(icon);
                     } catch (RemoteException ex) {
@@ -100,7 +100,7 @@ public class DokterManagement extends javax.swing.JFrame {
         ResultSet resultSet = null;
         try {
             statement = (Statement) databaseConnection.getConnection().createStatement();
-            resultSet = statement.executeQuery("SELECT id_user, username FROM user");
+            resultSet = statement.executeQuery("SELECT id_user, username FROM user WHERE role = 'doctor' ORDER BY id_user");
             while (resultSet.next()) {
                 String userName = resultSet.getString("id_user") + " " + resultSet.getString("username");
                 comboUsername.addItem(userName);
@@ -473,10 +473,10 @@ public class DokterManagement extends javax.swing.JFrame {
 
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/boundaries/Untitled.jpg"))); // NOI18N
         foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        foto.setMaximumSize(new java.awt.Dimension(72, 96));
-        foto.setMinimumSize(new java.awt.Dimension(72, 96));
-        foto.setPreferredSize(new java.awt.Dimension(72, 96));
-        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 160, 90, 130));
+        foto.setMaximumSize(new java.awt.Dimension(90, 90));
+        foto.setMinimumSize(new java.awt.Dimension(90, 90));
+        foto.setPreferredSize(new java.awt.Dimension(90, 90));
+        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 160, 160, 160));
 
         jLabel17.setText("Foto:");
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, -1, -1));
@@ -489,7 +489,7 @@ public class DokterManagement extends javax.swing.JFrame {
                 buttonAttachActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAttach, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 320, 120, 40));
+        getContentPane().add(buttonAttach, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 390, 120, 40));
 
         buttonInsert.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222513_icon-ios7-plus-outline-32.png"))); // NOI18N
@@ -528,14 +528,14 @@ public class DokterManagement extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 106, Short.MAX_VALUE)
+            .addGap(0, 176, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
+            .addGap(0, 176, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 110, 150));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 180, 180));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 700));
@@ -607,7 +607,7 @@ public class DokterManagement extends javax.swing.JFrame {
                 //e.printStackTrace();
             }
             //System.out.println(file.toPath());
-            Image dimg = img.getScaledInstance(72, 96, Image.SCALE_SMOOTH);
+            Image dimg = img.getScaledInstance(160, 160, Image.SCALE_SMOOTH);
             foto.setIcon(new ImageIcon(dimg));
         }
     }//GEN-LAST:event_buttonAttachActionPerformed

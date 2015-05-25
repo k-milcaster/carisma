@@ -73,7 +73,7 @@ public class UserManagement extends javax.swing.JFrame {
         fieldPassword = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Agency FB", 1, 45)); // NOI18N
@@ -150,7 +150,7 @@ public class UserManagement extends javax.swing.JFrame {
 
         jLabel5.setText("Role :");
 
-        comboRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--", "administrator", "doctor", "staff" }));
+        comboRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--", "administrator", "doctor", "staff", "resepsionis", "pasien", "apoteker" }));
 
         fieldId.setEditable(false);
 
@@ -196,7 +196,7 @@ public class UserManagement extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(160, 150, 251, 156);
+        jPanel1.setBounds(160, 150, 253, 158);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel6);
