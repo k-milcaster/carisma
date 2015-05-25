@@ -2,11 +2,14 @@ package carismaresepsionis.controller;
 
 import carismainterface.entity.Kota;
 import carismainterface.entity.Pasien;
+import carismainterface.entity.Poli;
 import carismainterface.entity.User;
 import carismainterface.server.KotaService;
 import carismainterface.server.PasienService;
+import carismainterface.server.PoliService;
 import carismainterface.server.UserService;
 import carismaresepsionis.boundaries.Rawatinap;
+import carismaresepsionis.boundaries.antrianoffline;
 import carismaresepsionis.boundaries.regispasienform;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
@@ -26,11 +29,13 @@ public class regispasiencontroller {
     private PasienService pasienService;
     private KotaService kotaService;
     private UserService userService;
+    private PoliService poliService;
 
     public regispasiencontroller(ClientSocket client) throws RemoteException {
         this.pasienService = client.getPasienService();
         this.kotaService = client.getKotaService();
         this.userService = client.getUserService();
+        this.poliService = client.getPoliService();
     }
 
     public void InsertNamaPasien(String id_pasien, String kota_id_kota,  String nama_pasien, String alamat_pasien, String kartuid_pasien, String nokartuid_pasien, String telp_pasien, String hp_pasien, String tempatlahirpasien, String tgllahir_pasien, String kelamin_pasien, String darah_pasien, int berat_pasien, int tinggi_Pasien, String regdate_pasien, String username) throws RemoteException {
@@ -114,6 +119,19 @@ public class regispasiencontroller {
         }
         for (int i = 0; i < list.size(); i++) {
             ui.Kota.addItem(list.get(i).getNamaKota());
+        } 
+    }
+    
+     public void setComboBoxPoli(antrianoffline ua) {
+        List<Poli> list = new ArrayList();
+        try {
+            list = poliService.getPoli();
+        } catch (RemoteException ex) {
+            Logger.getLogger(regispasiencontroller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < list.size(); i++) {
+            ua.polidokter.addItem(list.get(i).getNamaPoli());
+            
         } 
     }
     

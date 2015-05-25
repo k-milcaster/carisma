@@ -527,7 +527,7 @@ public class regispasienform extends javax.swing.JFrame {
                     BeratPasien.setText("");
                     TinggiPasien.setText("");
                     tgl_regpasien.setDate(null);
-
+  
                 }
             } catch (Exception e) {
                 System.out.println(e.toString());
