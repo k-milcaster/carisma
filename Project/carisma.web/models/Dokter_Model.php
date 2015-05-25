@@ -20,8 +20,9 @@ FROM DOKTER a, poli p WHERE a.id_dokter = :id AND a.poli_id_poli = p.id_poli ");
         $statement->execute(array(":id" => $id));
         return $statement->fetchAll();
     }
-      function getJadwalDokter($id){
-         $statement = $this->db->prepare("SELECT a.jadwal_id,b.hari_jadwalpegawai,b.shift_jadwalpegawai FROM jadwaldokter a , jadwal b WHERE a.dokter_id_dokter = :id AND b.id = a.jadwal_id");
+
+    function getJadwalDokter($id) {
+        $statement = $this->db->prepare("SELECT a.jadwal_id,b.hari_jadwalpegawai,b.shift_jadwalpegawai FROM jadwaldokter a , jadwal b WHERE a.dokter_id_dokter = :id AND b.id = a.jadwal_id");
         $statement->execute(array(":id" => $id));
         return $statement->fetchAll();
     }

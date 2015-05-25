@@ -21,4 +21,10 @@ class Login_Model extends Model {
         }
     }
 
+    function getIdUser($username) {
+        $statement = $this->db->prepare("SELECT id_user from user WHERE username = :username");
+        $statement->execute(array(":username" => $username));
+        return $statement->fetchAll();
+    }
+
 }
