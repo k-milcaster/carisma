@@ -73,8 +73,10 @@ public class Menursepsionis extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         buttonLihatAntrian = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         tableDaftarAntrian.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,12 +112,17 @@ public class Menursepsionis extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableDaftarAntrian);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(21, 100, 1072, 402);
+
         RegisPasienReg.setText("Registrasi Pasien Reguler");
         RegisPasienReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegisPasienRegActionPerformed(evt);
             }
         });
+        getContentPane().add(RegisPasienReg);
+        RegisPasienReg.setBounds(1121, 100, 225, 50);
 
         RegisPasienInap.setText("Registrasi Pasien Rawat Inap");
         RegisPasienInap.addActionListener(new java.awt.event.ActionListener() {
@@ -123,10 +130,14 @@ public class Menursepsionis extends javax.swing.JFrame {
                 RegisPasienInapActionPerformed(evt);
             }
         });
+        getContentPane().add(RegisPasienInap);
+        RegisPasienInap.setBounds(1121, 160, 225, 50);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428228543_unlock.png"))); // NOI18N
         jButton3.setText("Log Out");
+        getContentPane().add(jButton3);
+        jButton3.setBounds(1221, 340, 120, 50);
 
         DataDokter.setText("Data Dokter");
         DataDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +145,8 @@ public class Menursepsionis extends javax.swing.JFrame {
                 DataDokterActionPerformed(evt);
             }
         });
+        getContentPane().add(DataDokter);
+        DataDokter.setBounds(1121, 280, 225, 50);
 
         LihatPasienInap.setText("Lihat Pasien Rawat Inap");
         LihatPasienInap.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +154,8 @@ public class Menursepsionis extends javax.swing.JFrame {
                 LihatPasienInapActionPerformed(evt);
             }
         });
+        getContentPane().add(LihatPasienInap);
+        LihatPasienInap.setBounds(1121, 220, 225, 50);
 
         buttonTambahAntrian.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonTambahAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428222513_icon-ios7-plus-outline-32.png"))); // NOI18N
@@ -150,6 +165,8 @@ public class Menursepsionis extends javax.swing.JFrame {
                 buttonTambahAntrianActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonTambahAntrian);
+        buttonTambahAntrian.setBounds(787, 510, 120, 41);
 
         buttonHapusAntrian.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonHapusAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426717770_circle_close_delete-24.png"))); // NOI18N
@@ -159,16 +176,24 @@ public class Menursepsionis extends javax.swing.JFrame {
                 buttonHapusAntrianActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonHapusAntrian);
+        buttonHapusAntrian.setBounds(657, 510, 120, 41);
 
         Namanya.setText("Salma Indridinnanti");
+        getContentPane().add(Namanya);
+        Namanya.setBounds(80, 60, 296, 34);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nama ");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 70, 56, 20);
 
         jLabel3.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Menu Resepsionis");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(30, 0, 290, 60);
 
         buttonLihatAntrian.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonLihatAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1432134923_eye-32.png"))); // NOI18N
@@ -178,71 +203,12 @@ public class Menursepsionis extends javax.swing.JFrame {
                 buttonLihatAntrianActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonLihatAntrian);
+        buttonLihatAntrian.setBounds(916, 510, 177, 41);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(Namanya, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 21, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(buttonHapusAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buttonTambahAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(9, 9, 9)
-                                .addComponent(buttonLihatAntrian))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1072, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RegisPasienReg, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RegisPasienInap, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LihatPasienInap, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DataDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(100, 100, 100)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 20, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Namanya, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(RegisPasienReg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(RegisPasienInap, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(LihatPasienInap, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(DataDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonLihatAntrian)
-                    .addComponent(buttonTambahAntrian)
-                    .addComponent(buttonHapusAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 1090, 610);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -346,6 +312,7 @@ public class Menursepsionis extends javax.swing.JFrame {
     private javax.swing.JButton buttonTambahAntrian;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tableDaftarAntrian;

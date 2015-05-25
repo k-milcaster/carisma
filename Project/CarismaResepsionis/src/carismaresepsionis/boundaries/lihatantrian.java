@@ -27,11 +27,9 @@ public class lihatantrian extends javax.swing.JFrame {
         NamaPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getNamaPasien()));
         AlamatPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getAlamatPasien()));
         Goldar.setText(String.valueOf(control.getDetailPasien(idPasien).getDarahPasien()));
-        Umur.setText(String.valueOf(control.getDetailPasien(idPasien).getTgllahirPasien()));
         Tinggi.setText(String.valueOf(control.getDetailPasien(idPasien).getTinggiPasien()));
         Berat.setText(String.valueOf(control.getDetailPasien(idPasien).getBeratPasien()));
-//        String idKunjungan = String.valueOf(control.getDetailKunjungan(idAntrian).getIdKunjungan());
-//        TerakhirPeriksa.setText(String.valueOf(control.getDetailKunjungan(idKunjungan).getTanggaljamKunjungan()));
+        //TerakhirPeriksa.setText(control.tglTerakhirKunjungan(idPasien));
         }
 
     @SuppressWarnings("unchecked")
@@ -44,19 +42,14 @@ public class lihatantrian extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         NomorAntrian = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         NamaPasien = new javax.swing.JTextField();
         AlamatPasien = new javax.swing.JTextField();
         Goldar = new javax.swing.JTextField();
-        Umur = new javax.swing.JTextField();
         Tinggi = new javax.swing.JTextField();
         Berat = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -100,21 +93,6 @@ public class lihatantrian extends javax.swing.JFrame {
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informasi Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), java.awt.Color.black)); // NOI18N
         jPanel10.setLayout(null);
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel11.setFont(new java.awt.Font("Agency FB", 0, 11)); // NOI18N
-        jPanel11.setLayout(null);
-
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel11.add(jLabel4);
-        jLabel4.setBounds(10, 20, 90, 120);
-
-        jLabel5.setText("Foto");
-        jPanel11.add(jLabel5);
-        jLabel5.setBounds(10, 0, 34, 14);
-
-        jPanel10.add(jPanel11);
-        jPanel11.setBounds(640, 40, 110, 150);
-
         jLabel6.setText("Nama");
         jPanel10.add(jLabel6);
         jLabel6.setBounds(40, 60, 110, 14);
@@ -126,10 +104,6 @@ public class lihatantrian extends javax.swing.JFrame {
         jLabel8.setText("Golongan Darah");
         jPanel10.add(jLabel8);
         jLabel8.setBounds(40, 210, 130, 14);
-
-        jLabel9.setText("Umur");
-        jPanel10.add(jLabel9);
-        jLabel9.setBounds(280, 210, 80, 10);
 
         jLabel10.setText("Tinggi Badan");
         jPanel10.add(jLabel10);
@@ -162,14 +136,6 @@ public class lihatantrian extends javax.swing.JFrame {
         });
         jPanel10.add(Goldar);
         Goldar.setBounds(160, 200, 60, 30);
-
-        Umur.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UmurActionPerformed(evt);
-            }
-        });
-        jPanel10.add(Umur);
-        Umur.setBounds(350, 200, 60, 30);
         jPanel10.add(Tinggi);
         Tinggi.setBounds(160, 240, 60, 30);
 
@@ -222,10 +188,6 @@ public class lihatantrian extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_GoldarActionPerformed
 
-    private void UmurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UmurActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UmurActionPerformed
-
     private void BeratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeratActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BeratActionPerformed
@@ -260,7 +222,6 @@ public class lihatantrian extends javax.swing.JFrame {
     private javax.swing.JTextField NomorAntrian;
     private javax.swing.JTextField TerakhirPeriksa;
     private javax.swing.JTextField Tinggi;
-    private javax.swing.JTextField Umur;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -268,15 +229,11 @@ public class lihatantrian extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
