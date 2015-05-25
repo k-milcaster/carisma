@@ -95,7 +95,7 @@ public class RawatinapControllerTest {
             subList.addRow(new Object[]{list.get(i).getIdKamar(), list.get(i).getNamaKamar(), list.get(i).getKelas(), 
                 list.get(i).getTarif()});
 
-        DefaultTableModel result = instance.getNamaKamar(ui);
+        DefaultTableModel result = instance.getKamar(ui);
         assertEquals(expresult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

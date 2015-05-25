@@ -45,12 +45,13 @@ public class TransaksiJualObatControllerTest {
     public void testInsertTransaksijualobat() throws Exception {
         client = new ClientSocket();
         System.out.println("insertTransaksijualobat");
-        String idTransaksijual = "cccc";
+        String idTransaksijual = "jjj";
         String dateTransaksijual = "2015-05-11";
         String keterangan = "rrr";
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
+        boolean expResult = true;
         boolean result = instance.insertTransaksijualobat(idTransaksijual, dateTransaksijual, keterangan);
-        assertTrue(result);
+        assertEquals(expResult, result);
         
     }
 
@@ -61,14 +62,13 @@ public class TransaksiJualObatControllerTest {
     public void testInsertDetailtransaksijualobat() throws Exception {
         client = new ClientSocket();
         System.out.println("insertDetailtransaksijualobat");
-        String idTransaksi = "cccc";
+        String idTransaksi = "aaa";
         int idObat = 7;
-        int qty = 5;
+        int qty = 50;
         TransaksiJualObatController instance = new TransaksiJualObatController(client) ;
+        boolean expResult = true;
         boolean result = instance.insertDetailtransaksijualobat(idTransaksi, idObat, qty);
-        assertTrue(result);
-        instance.deleteDetailTransaksiJualObat(idTransaksi, idObat);
-        instance.deleteTransaksiJualObat(idTransaksi);
+         assertEquals(expResult, result);
         
    
     }

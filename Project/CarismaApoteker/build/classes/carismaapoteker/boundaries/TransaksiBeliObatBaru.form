@@ -278,9 +278,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="fieldStokKritisKeyTyped"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
@@ -396,9 +393,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="fieldHargaKeyTyped"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>

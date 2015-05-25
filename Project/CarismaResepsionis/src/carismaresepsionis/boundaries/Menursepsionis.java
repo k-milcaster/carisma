@@ -277,21 +277,16 @@ public class Menursepsionis extends javax.swing.JFrame {
     private void RegisPasienInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisPasienInapActionPerformed
         RawatinapController control;
         try {
-            List<String> list = new ArrayList<String>();
+           
             control = new RawatinapController(this.client);
-            list = kamarService.getKamarAvailable();
-            //control.kamarKosong(a);
-            if (list.equals(null)) {
+            int kamarTersedia = control.kamarTersedia();
+            if (kamarTersedia ==0 ) {
 
-                //if (tampilUser().equals("benar") && tampilPass() == true) {
                 JOptionPane.showMessageDialog(null, "MAAF!! \n Kamar Rawat Inap Penuh", "WARNING!", JOptionPane.ERROR_MESSAGE);
 
-                //} else {
-                // JOptionPane.showMessageDialog(null, "TERJADI ERROR \n Username atau Password Salah", "ERROR!", JOptionPane.ERROR_MESSAGE);
-                //}
             } else {
                 new Rawatinap(this.client, this.userName).show();
-                this.dispose();
+                //this.dispose();
             }
         } catch (RemoteException ex) {
             Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);

@@ -26,8 +26,6 @@ public class TabelObat extends javax.swing.JFrame {
         DefaultTableModel tabelObat = new DefaultTableModel();
         tabelObat = control.getTableObat();
         tableMedicine.setModel(tabelObat);
-        setSize(515, 535);
-        setLocationRelativeTo(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -56,7 +54,7 @@ public class TabelObat extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Daftar Obat");
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tableMedicine.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,8 +72,7 @@ public class TabelObat extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableMedicine);
 
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 91, 480, 398);
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 91, 480, 398));
 
         fieldSearch.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         fieldSearch.setForeground(new java.awt.Color(204, 204, 204));
@@ -98,12 +95,10 @@ public class TabelObat extends javax.swing.JFrame {
                 fieldSearchKeyReleased(evt);
             }
         });
-        getContentPane().add(fieldSearch);
-        fieldSearch.setBounds(290, 50, 200, 30);
+        getContentPane().add(fieldSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 200, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/Menu Absensi.jpg"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 500, 500);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

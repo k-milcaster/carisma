@@ -48,7 +48,7 @@ public class DaftarRawatInapController {
         return pasienId;
     }
    
-   public DefaultTableModel getNamaPasienRawatInap(DaftarRawatInap ui) throws RemoteException{
+   public DefaultTableModel getNamaPasienRawatInap() throws RemoteException{
         
         List<Pasien> list = new ArrayList<Pasien>();
       
@@ -87,7 +87,7 @@ public class DaftarRawatInapController {
   public DefaultTableModel getNamaPasienRawatInapbyName(String nama) throws RemoteException{
         
         List<Pasien> list = new ArrayList<Pasien>();
-        list = pasienService.getPasienRawatinap();
+        list = pasienService.getPasienRawatinapByName(nama);
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID Pasien");
         model.addColumn("Nama Pasien");
