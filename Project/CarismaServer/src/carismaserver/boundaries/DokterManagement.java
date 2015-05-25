@@ -88,7 +88,7 @@ public class DokterManagement extends javax.swing.JFrame {
                             foto.setIcon(icon);
                         }
                         else{
-                            foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/boundaries/Untitled.jpg")));
+                            foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/Preview.jpg")));
                         }
                     } catch (RemoteException ex) {
                         Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,7 +120,7 @@ public class DokterManagement extends javax.swing.JFrame {
         fieldGajiFix.setText("");
         fieldGajiKonsul.setText("");
         fieldGajiLembur.setText("");
-        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/boundaries/Untitled.jpg")));
+        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/Preview.jpg")));
     }
 
     @SuppressWarnings("unchecked")
@@ -448,7 +448,7 @@ public class DokterManagement extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 290, 250));
 
-        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/boundaries/Untitled.jpg"))); // NOI18N
+        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/Preview.jpg"))); // NOI18N
         foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         foto.setMaximumSize(new java.awt.Dimension(90, 90));
         foto.setMinimumSize(new java.awt.Dimension(90, 90));

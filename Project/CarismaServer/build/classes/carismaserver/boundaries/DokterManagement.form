@@ -512,7 +512,7 @@
     <Component class="javax.swing.JLabel" name="foto">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/carismaserver/boundaries/Untitled.jpg"/>
+          <Image iconType="3" name="/carismaserver/image/Preview.jpg"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
