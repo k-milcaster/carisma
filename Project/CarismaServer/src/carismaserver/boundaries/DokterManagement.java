@@ -615,7 +615,7 @@ public class DokterManagement extends javax.swing.JFrame {
     private void comboUsernamePopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboUsernamePopupMenuWillBecomeVisible
         comboUsername.removeAllItems();
         try {
-            users = userService.getUser();
+            users = userService.getUserbyRole("dokter");
         } catch (RemoteException ex) {
             Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
