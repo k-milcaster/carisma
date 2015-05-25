@@ -64,7 +64,7 @@ public class AntrianController extends Thread {
     }
 
     public boolean deleteAntrian(String idAntrian) throws RemoteException {
-        return antrianService.deleteAntrian(idAntrian);
+        return antrianService.antrianTidakHadir(idAntrian);
     }
 
     public DefaultTableModel getAntrian() throws RemoteException {
