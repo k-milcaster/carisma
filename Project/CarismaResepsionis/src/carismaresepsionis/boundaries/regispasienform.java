@@ -6,6 +6,8 @@ import carismaresepsionis.controller.regispasiencontroller;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -238,7 +240,7 @@ public class regispasienform extends javax.swing.JFrame {
             }
         });
         getContentPane().add(TambahAntri);
-        TambahAntri.setBounds(380, 550, 170, 40);
+        TambahAntri.setBounds(310, 540, 170, 40);
 
         Kartu_id.setText("Kartu Id Pasien");
         Kartu_id.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -281,7 +283,7 @@ public class regispasienform extends javax.swing.JFrame {
         UpdatePasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428227236_card_in_use.png"))); // NOI18N
         UpdatePasien.setText("Cetak Bukti Antrian");
         getContentPane().add(UpdatePasien);
-        UpdatePasien.setBounds(190, 550, 180, 40);
+        UpdatePasien.setBounds(130, 540, 180, 40);
 
         Find.setText("FIND");
         getContentPane().add(Find);
@@ -385,7 +387,7 @@ public class regispasienform extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(1, 0, 1359, 700);
+        jLabel4.setBounds(0, 10, 1359, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -587,7 +589,12 @@ public class regispasienform extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelpasienMouseClicked
 
     private void TambahAntriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahAntriActionPerformed
-        
+        try {
+            new antrianoffline(this.client, userName, tabelpasien.getValueAt(tabelpasien.getSelectedRow(), 0).toString(),tabelpasien.getValueAt(tabelpasien.getSelectedRow(), 1).toString()).show();
+    //        System.out.println(tabelpasien.getValueAt(tabelpasien.getSelectedRow(), 0).toString());
+        } catch (RemoteException ex) {
+            Logger.getLogger(regispasienform.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_TambahAntriActionPerformed
 
     private void CariPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariPasienActionPerformed
