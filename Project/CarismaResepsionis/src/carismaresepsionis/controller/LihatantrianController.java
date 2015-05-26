@@ -38,12 +38,6 @@ public class LihatantrianController {
         String GolDarah = pasien.getDarahPasien();
         return GolDarah;
     }
-//    public String getUmur(){
-//        Pasien pasien = new Pasien();
-//        String Umur = pasien.getTgllahirPasien();
-//        return Umur;
-//    }
-    
     public int getTinggi(){
         Pasien pasien = new Pasien();
         Integer Tinggi = pasien.getTinggiPasien();
@@ -54,10 +48,4 @@ public class LihatantrianController {
         Integer Berat = pasien.getBeratPasien();
         return Berat;
     }
-//    public String getTerakhirPeriksa(){
-//        Kunjungan kunjungan = new Kunjungan();
-//        String TerakhirPeriksa = kunjungan.getTanggaljamKunjungan();
-//        return TerakhirPeriksa;        
-//    }
-    //public foto
 }

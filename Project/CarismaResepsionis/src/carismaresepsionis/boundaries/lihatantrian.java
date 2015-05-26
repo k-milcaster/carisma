@@ -52,8 +52,6 @@ public class lihatantrian extends javax.swing.JFrame {
         Goldar = new javax.swing.JTextField();
         Tinggi = new javax.swing.JTextField();
         Berat = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        TerakhirPeriksa = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
 
@@ -111,7 +109,7 @@ public class lihatantrian extends javax.swing.JFrame {
 
         jLabel11.setText("Berat");
         jPanel10.add(jLabel11);
-        jLabel11.setBounds(280, 250, 70, 14);
+        jLabel11.setBounds(40, 290, 70, 14);
 
         NamaPasien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,19 +143,7 @@ public class lihatantrian extends javax.swing.JFrame {
             }
         });
         jPanel10.add(Berat);
-        Berat.setBounds(350, 240, 60, 30);
-
-        jLabel12.setText("Terakhir Periksa");
-        jPanel10.add(jLabel12);
-        jLabel12.setBounds(40, 290, 100, 14);
-
-        TerakhirPeriksa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TerakhirPeriksaActionPerformed(evt);
-            }
-        });
-        jPanel10.add(TerakhirPeriksa);
-        TerakhirPeriksa.setBounds(160, 280, 210, 30);
+        Berat.setBounds(160, 280, 60, 30);
 
         getContentPane().add(jPanel10);
         jPanel10.setBounds(380, 70, 810, 330);
@@ -202,10 +188,6 @@ public class lihatantrian extends javax.swing.JFrame {
         }                
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void TerakhirPeriksaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerakhirPeriksaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TerakhirPeriksaActionPerformed
-
     private void AlamatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlamatPasienActionPerformed
        
     }//GEN-LAST:event_AlamatPasienActionPerformed
@@ -220,13 +202,11 @@ public class lihatantrian extends javax.swing.JFrame {
     private javax.swing.JTextField Goldar;
     private javax.swing.JTextField NamaPasien;
     private javax.swing.JTextField NomorAntrian;
-    private javax.swing.JTextField TerakhirPeriksa;
     private javax.swing.JTextField Tinggi;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
