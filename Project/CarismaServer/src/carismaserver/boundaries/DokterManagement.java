@@ -201,7 +201,7 @@ public class DokterManagement extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableDokter);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 1120, 160));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 1110, 190));
 
         jLabel3.setFont(new java.awt.Font("Agency FB", 1, 45)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -466,7 +466,7 @@ public class DokterManagement extends javax.swing.JFrame {
                 buttonAttachActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAttach, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 390, 120, 40));
+        getContentPane().add(buttonAttach, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 350, 120, 40));
 
         buttonInsert.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222513_icon-ios7-plus-outline-32.png"))); // NOI18N
@@ -476,7 +476,7 @@ public class DokterManagement extends javax.swing.JFrame {
                 buttonInsertActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 500, 120, 40));
+        getContentPane().add(buttonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 500, 120, 40));
 
         buttonUpdate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222456_icon-compose-32.png"))); // NOI18N
@@ -486,7 +486,7 @@ public class DokterManagement extends javax.swing.JFrame {
                 buttonUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 550, 120, 40));
+        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 550, 120, 40));
 
         buttonDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1426717770_circle_close_delete-24.png"))); // NOI18N
@@ -496,7 +496,7 @@ public class DokterManagement extends javax.swing.JFrame {
                 buttonDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 600, 120, 40));
+        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 600, 120, 40));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setOpaque(false);
