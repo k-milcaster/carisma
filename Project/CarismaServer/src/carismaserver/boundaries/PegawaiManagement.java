@@ -1,6 +1,7 @@
 package carismaserver.boundaries;
 
 import carismainterface.entity.Pegawai;
+import carismainterface.entity.User;
 import carismaserver.controllers.DatabaseConnection;
 import carismaserver.entity.PegawaiEntity;
 import carismaserver.entity.UserEntity;
@@ -13,10 +14,13 @@ import java.rmi.RemoteException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -31,14 +35,16 @@ public class PegawaiManagement extends javax.swing.JFrame {
     private UserEntity userService;
     public Main ui;
     private File file;
+    private byte[] img = null;
     private DatabaseConnection databaseConnection;
+    public List<User> users = new ArrayList<User>();
 
     public PegawaiManagement(final Main ui) throws RemoteException, SQLException {
         this.ui = ui;
         initComponents();
         userService = new UserEntity(ui);
-        control.getPegawai(this);
-        setComboBox();
+        tablePegawai.setModel(control.getPegawai(this));
+        users = userService.getUser();
         tablePegawai.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
@@ -54,7 +60,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
                         fieldTelepon.setText(selected.getTelpPegawai());
                         fieldHP1.setText(selected.getHp1Pegawai());
                         fieldHP2.setText(selected.getHp2Pegawai());
-                        fieldTempat.setText(selected.getTelpPegawai());
+                        fieldTempat.setText(selected.getTempatlahirPegawai());
                         fieldTanggal.setText(selected.getTgllahirPegawai());
                         comboKelamin.setSelectedItem(selected.getKelaminPegawai());
                         comboDarah.setSelectedItem(selected.getDarahPegawai());
@@ -62,11 +68,9 @@ public class PegawaiManagement extends javax.swing.JFrame {
                         fieldNorek.setText(selected.getNorekPegawai());
                         fieldGajiFix.setText((String) selected.getGajifixPegawai().toString());
                         fieldGajiLembur.setText((String) selected.getGajilemburPegawai().toString());
-                        setComboBox(selected.getUserIdUser());
+                        comboUsername.setSelectedItem(userService.getUserById(selected.getUserIdUser()).getUsername());
                     } catch (RemoteException ex) {
                         Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(PegawaiManagement.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 }
@@ -74,60 +78,29 @@ public class PegawaiManagement extends javax.swing.JFrame {
         });
     }
 
-    public void setComboBox() throws SQLException {
-        comboUsername.removeAllItems();
-        Statement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = (Statement) databaseConnection.getConnection().createStatement();
-            resultSet = statement.executeQuery("SELECT id_user, username FROM user WHERE role != 'doctor' ORDER BY id_user");
-            while (resultSet.next()) {
-                String userName = resultSet.getString("username");
-                comboUsername.addItem(userName);
-            }
-        } catch (SQLException ex) {
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-            } catch (SQLException ex) {
-            }
-            if (statement != null) {
-                statement.close();
-            }
-        }
+    public void clear(){
+        this.file = null;
+        this.img = null;
+        comboUsername.setSelectedItem("--");
+        fieldJabatan.setText("");
+        fieldId.setText("");
+        fieldNama.setText("");
+        areaAlamat.setText("");
+        fieldNokartuid.setText("");
+        fieldTelepon.setText("");
+        fieldHP1.setText("");
+        fieldHP2.setText("");
+        fieldTempat.setText("");
+        fieldTanggal.setText("yyyy-mm-dd");
+        comboKelamin.setSelectedItem("L");
+        comboDarah.setSelectedItem("A");
+        fieldBank.setText("");
+        fieldNorek.setText("");
+        fieldGajiFix.setText("");
+        fieldGajiLembur.setText("");
+        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/Preview.jpg")));
     }
-
-    public void setComboBox(int id_user) throws SQLException {
-        setComboBox();
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = databaseConnection.getConnection().prepareStatement("SELECT id_user, username FROM user WHERE username = ?");
-            statement.setInt(1, id_user);
-            resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                String userName = resultSet.getString("username");
-                comboUsername.setSelectedItem(userName);
-            }
-        } catch (SQLException ex) {
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-            } catch (SQLException ex) {
-            }
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException ex) {
-            }
-        }
-    }
-
+    
     private byte[] extractBytes(String ImageName) throws IOException {
         File fi = new File(ImageName);
         byte[] fileContent = Files.readAllBytes(fi.toPath());
@@ -135,11 +108,6 @@ public class PegawaiManagement extends javax.swing.JFrame {
         return fileContent;
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -345,6 +313,15 @@ public class PegawaiManagement extends javax.swing.JFrame {
         jLabel10.setText("Username :");
 
         comboUsername.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
+        comboUsername.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                comboUsernamePopupMenuWillBecomeVisible(evt);
+            }
+        });
 
         jLabel13.setText("Telepon :");
 
@@ -492,10 +469,11 @@ public class PegawaiManagement extends javax.swing.JFrame {
 
     private void buttonAttachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAttachActionPerformed
         int o = jFileChooser1.showOpenDialog(this);
-        if (0 == jFileChooser1.APPROVE_OPTION) {
+        if (o == jFileChooser1.APPROVE_OPTION) {
             file = jFileChooser1.getSelectedFile();
             Image img = null;
             try {
+                this.img = extractBytes(this.file.toPath().toString());
                 img = ImageIO.read(file);
             } catch (IOException e) {
                 //e.printStackTrace();
@@ -507,25 +485,12 @@ public class PegawaiManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAttachActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
-        //        try {
-        //            int id = Integer.parseInt(fieldId.getText());
-        //            String user = fieldUsername.getText();
-        //            String pass = fieldPassword.getText();
-        //            String role = (String)comboRole.getItemAt(comboRole.getSelectedIndex());
-        //            control.updateUser(this, id, user, pass, role);
-        //            control.getUsers(this);
-        //        } catch (RemoteException ex) {
-        //            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
-        //        }
-    }//GEN-LAST:event_buttonUpdateActionPerformed
-
-    private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
         try {
-            int userid = userService.getUser(comboUsername.getSelectedItem().toString()).getIdUser();
-            //String userid = comboUsername.getSelectedItem().toString().substring(0, comboUsername.getSelectedItem().toString().indexOf(" "));
+            int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();
+            String jabatan = fieldJabatan.getText();
             String id = fieldId.getText();
             String nama = fieldNama.getText();
-            String alamat = fieldAlamat.getText();
+            String alamat = areaAlamat.getText();
             String nokartu = fieldNokartuid.getText();
             String telp = fieldTelepon.getText();
             String hp1 = fieldHP1.getText();
@@ -534,30 +499,109 @@ public class PegawaiManagement extends javax.swing.JFrame {
             String tanggal = fieldTanggal.getText();
             String kelamin = comboKelamin.getSelectedItem().toString();
             String darah = comboDarah.getSelectedItem().toString();
-            String jabatan = fieldJabatan.getText();
             String bank = fieldBank.getText();
             String norek = fieldNorek.getText();
-            byte[] img = extractBytes(file.toPath().toString());
+            String foto = "";
+            byte[] image = null;
+            if (img != null) {
+                image = img;
+            } else {
+                foto = "Belum memasukkan foto";
+            }
             int gfix = Integer.parseInt(fieldGajiFix.getText());
             int glembur = Integer.parseInt(fieldGajiLembur.getText());
-            control.insertPegawai(this, userid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, jabatan, bank, norek, gfix, glembur, img);
-            control.getPegawai(this);
+            boolean success = control.updatePegawai(this, userid, jabatan, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, image);
+            if (success){
+                JOptionPane.showMessageDialog(this, "Update Pegawai berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Update Pegawai gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+            }
+            tablePegawai.setModel(control.getPegawai(this));
+            clear();
         } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_buttonUpdateActionPerformed
+
+    private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
+        try {
+            int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();;
+            String jabatan = fieldJabatan.getText();
+            String id = fieldId.getText();
+            String nama = fieldNama.getText();
+            String alamat = areaAlamat.getText();
+            String nokartu = fieldNokartuid.getText();
+            String telp = fieldTelepon.getText();
+            String hp1 = fieldHP1.getText();
+            String hp2 = fieldHP2.getText();
+            String tempat = fieldTempat.getText();
+            String tanggal = fieldTanggal.getText();
+            String kelamin = comboKelamin.getSelectedItem().toString();
+            String darah = comboDarah.getSelectedItem().toString();
+            String bank = fieldBank.getText();
+            String norek = fieldNorek.getText();
+            String foto = "";
+            byte[] image = null;
+            if (img != null) {
+                image = img;
+            } else {
+                foto = "Belum memasukkan foto";
+            }
+            int gfix = Integer.parseInt(fieldGajiFix.getText());
+            int glembur = Integer.parseInt(fieldGajiLembur.getText());
+            boolean success = control.insertPegawai(this, userid, jabatan, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, image);
+            if (success){
+                JOptionPane.showMessageDialog(this, "Insert Pegawai berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Insert Pegawai gagal" , "Gagal", JOptionPane.ERROR_MESSAGE);
+            }
+            tablePegawai.setModel(control.getPegawai(this));
+            clear();
+        } catch (RemoteException ex) {
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_buttonInsertActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        //        try {
-        //            int id = Integer.parseInt(fieldId.getText());;
-        //            control.deleteUser(this, id);
-        //            control.getUsers(this);
-        //        } catch (RemoteException ex) {
-        //            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
-        //        }
+        if(!fieldId.getText().equalsIgnoreCase("")){
+            boolean success;
+            try {
+                success = control.deletePegawai(this, fieldId.getText());
+                if (success){
+                    JOptionPane.showMessageDialog(this, "Delete Pegawai berhasil", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "Delete Pegawai gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+                tablePegawai.setModel(control.getPegawai(this));
+                clear();
+            } catch (RemoteException ex) {
+                Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Data kurang lengkap");
+        }
     }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void comboUsernamePopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboUsernamePopupMenuWillBecomeVisible
+        comboUsername.removeAllItems();
+        try {
+            users = userService.getUserbyRole("staff");
+        } catch (RemoteException ex) {
+            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < users.size(); i++) {
+            comboUsername.addItem(users.get(i).getUsername());
+        }
+    }//GEN-LAST:event_comboUsernamePopupMenuWillBecomeVisible
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaAlamat;

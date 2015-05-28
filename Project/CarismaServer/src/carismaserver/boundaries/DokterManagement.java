@@ -79,6 +79,8 @@ public class DokterManagement extends javax.swing.JFrame {
                         fieldGajiLembur.setText((String) selected.getGajilemburDokter().toString());
                         fieldGajiKonsul.setText((String) selected.getGajikonsulDokter().toString());
                         comboUsername.setSelectedItem(userService.getUserById(selected.getUserIdUser()).getUsername());
+                        System.out.println(selected.getUserIdUser());
+                        System.out.println(userService.getUserById(selected.getUserIdUser()).getUsername());
                         comboPoli.setSelectedItem(poliService.getPoli(selected.getPoliIdPoli()).getNamaPoli());
                         img = selected.getFotoDokter();
                         if(img!=null){
@@ -610,7 +612,7 @@ public class DokterManagement extends javax.swing.JFrame {
 
     private void buttonAttachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAttachActionPerformed
         int o = jFileChooser1.showOpenDialog(this);
-        if (0 == jFileChooser1.APPROVE_OPTION) {
+        if (o == jFileChooser1.APPROVE_OPTION) {
             file = jFileChooser1.getSelectedFile();
             Image img = null;
             try {
