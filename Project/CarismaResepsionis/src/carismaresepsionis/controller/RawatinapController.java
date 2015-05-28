@@ -42,7 +42,7 @@ public class RawatinapController {
     }
    
    
-   public DefaultTableModel getNamaPasien(Rawatinap ui) throws RemoteException{
+   public DefaultTableModel getNamaPasien() throws RemoteException{
         
         List<Pasien> list = new ArrayList<Pasien>();
         list = pasienService.getPasien();
@@ -53,14 +53,14 @@ public class RawatinapController {
             model.addRow(new Object[]{list.get(i).getIdPasien(), list.get(i).getNamaPasien()});
             //System.out.println("lewat");
         }
-        ui.tablelistpasien.setModel(model);
+        
         return model;
     }
   
    
     
     
-    public DefaultTableModel getKamar(Rawatinap ui) throws RemoteException{
+    public DefaultTableModel getKamar() throws RemoteException{
         
         List<Kamar> list = new ArrayList<Kamar>();
         list = kamarService.getKamar();
@@ -78,7 +78,7 @@ public class RawatinapController {
 
             //System.out.println("lewat");
         }
-        ui.tablelistkamarpasien.setModel(model);
+        
         return model;
     }
     

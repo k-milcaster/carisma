@@ -46,8 +46,9 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         TabelPasien.setModel(control.getNamaPasienRawatInap());
- 
-        Tempat_ID.setEditable(false);
+        
+        
+        regDate.setEditable(false);
         //UmurPasien.setEditable(false);
         a = Nama_Pasien.getText();
         b = Tempat_Lahir.getText();
@@ -75,7 +76,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         Nama_Pasien = new javax.swing.JTextField();
         Tempat_Lahir = new javax.swing.JTextField();
         ID = new javax.swing.JLabel();
-        Tempat_ID = new javax.swing.JTextField();
+        regDate = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Alamat = new javax.swing.JTextArea();
         No_Hp = new javax.swing.JTextField();
@@ -117,6 +118,8 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         goldar = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        Tempat_ID1 = new javax.swing.JTextField();
+        ID1 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -150,17 +153,17 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(Tempat_Lahir);
         Tempat_Lahir.setBounds(631, 288, 180, 32);
 
-        ID.setText("ID PASIEN");
+        ID.setText("TANGGAL REGISTRASI");
         getContentPane().add(ID);
-        ID.setBounds(1140, 110, 79, 32);
+        ID.setBounds(920, 110, 130, 32);
 
-        Tempat_ID.addActionListener(new java.awt.event.ActionListener() {
+        regDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Tempat_IDActionPerformed(evt);
+                regDateActionPerformed(evt);
             }
         });
-        getContentPane().add(Tempat_ID);
-        Tempat_ID.setBounds(1220, 110, 99, 32);
+        getContentPane().add(regDate);
+        regDate.setBounds(1050, 110, 99, 32);
 
         Alamat.setColumns(20);
         Alamat.setRows(5);
@@ -552,9 +555,21 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(jLabel18);
         jLabel18.setBounds(630, 480, 80, 14);
 
+        Tempat_ID1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Tempat_ID1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Tempat_ID1);
+        Tempat_ID1.setBounds(740, 110, 99, 32);
+
+        ID1.setText("ID PASIEN");
+        getContentPane().add(ID1);
+        ID1.setBounds(630, 110, 79, 32);
+
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel19);
-        jLabel19.setBounds(4, 4, 1360, 690);
+        jLabel19.setBounds(0, 0, 1360, 690);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -738,32 +753,37 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private void TabelPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelPasienMouseClicked
         
         int row = TabelPasien.getSelectedRow();
-        DaftarRawatInapController kamar = new DaftarRawatInapController (client);
+        DaftarRawatInapController control = new DaftarRawatInapController (client);
+             // try {
+                 //String [] infokamar = {};
+                // infokamar = kamar.getNamaKelasKamarbyIdpasien(String.valueOf(TabelPasien.getValueAt(row, 0)));
+                 
+            String idPas;
         try {
-            String [] infokamar = {};
-            infokamar = kamar.getNamaKelasKamarbyIdpasien(String.valueOf(TabelPasien.getValueAt(row, 0)));
-            
-            Tempat_ID.setText(String.valueOf(tablePasienRawat.getValueAt(row, 0)));
-            Kota.setText(String.valueOf(tablePasienRawat.getValueAt(row, 1)));
-            //Tempat_Lahir.setText(String.valueOf(tablePasienRawat.getValueAt(row, 2)));
-            Nama_Pasien.setText(String.valueOf(tablePasienRawat.getValueAt(row, 3)));
-            Alamat.setText(String.valueOf(tablePasienRawat.getValueAt(row, 4)));
-            Jenis_Kartu.setText(String.valueOf(tablePasienRawat.getValueAt(row, 5)));
-            No_Kartu.setText(String.valueOf(tablePasienRawat.getValueAt(row, 6)));
-            No_tele.setText(String.valueOf(tablePasienRawat.getValueAt(row, 7)));
-            No_Hp.setText(String.valueOf(tablePasienRawat.getValueAt(row, 8)));
-            Tempat_Lahir.setText(String.valueOf(tablePasienRawat.getValueAt(row, 9)));
-            tglLahir.setText(String.valueOf(tablePasienRawat.getValueAt(row, 10)));
-            jenis_kelamin.setText(String.valueOf(tablePasienRawat.getValueAt(row, 11)));
-            goldar.setText(String.valueOf(tablePasienRawat.getValueAt(row, 12)));
-            BeratPasien.setText(String.valueOf(tablePasienRawat.getValueAt(row, 13)));
-            TinggiPasien.setText(String.valueOf(tablePasienRawat.getValueAt(row, 14)));
-            Kamar.setText(infokamar[0]);
-            KelasKamar.setText(infokamar[1]);
-            
+            idPas = String.valueOf(tablePasienRawat.getValueAt(row, 0));
+            Tempat_ID1.setText(String.valueOf(control.getIdPasien(idPas).getIdPasien()));
+            Kota.setText(String.valueOf(control.getIdPasien(idPas).getKotaIdKota()));
+            Nama_Pasien.setText(String.valueOf(control.getIdPasien(idPas).getNamaPasien()));
+            Alamat.setText(String.valueOf(control.getIdPasien(idPas).getAlamatPasien()));
+            Jenis_Kartu.setText(String.valueOf(control.getIdPasien(idPas).getKartupasien()));
+            No_Kartu.setText(String.valueOf(control.getIdPasien(idPas).getKartuidPasien()));
+            No_tele.setText(String.valueOf(control.getIdPasien(idPas).getTelpPasien()));
+            No_Hp.setText(String.valueOf(control.getIdPasien(idPas).getHpPasien()));
+            Tempat_Lahir.setText(String.valueOf(control.getIdPasien(idPas).getTempatlahirPasien()));
+            tglLahir.setText(String.valueOf(control.getIdPasien(idPas).getTgllahirPasien()));
+            jenis_kelamin.setText(String.valueOf(control.getIdPasien(idPas).getKelaminPasien()));
+            goldar.setText(String.valueOf(control.getIdPasien(idPas).getDarahPasien()));
+            BeratPasien.setText(String.valueOf(control.getIdPasien(idPas).getBeratPasien()));
+            TinggiPasien.setText(String.valueOf(control.getIdPasien(idPas).getTinggiPasien()));
+            regDate.setText(String.valueOf(control.getIdPasien(idPas).getRegdatePasien()));
         } catch (RemoteException ex) {
             Logger.getLogger(DaftarRawatInap.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+            //Kamar.setText(infokamar[0]);
+            //KelasKamar.setText(infokamar[1]);
+            
+      
        
     }//GEN-LAST:event_TabelPasienMouseClicked
 
@@ -777,9 +797,9 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_kembaliActionPerformed
 
-    private void Tempat_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tempat_IDActionPerformed
+    private void regDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Tempat_IDActionPerformed
+    }//GEN-LAST:event_regDateActionPerformed
 
     private void tglLahirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglLahirActionPerformed
         // TODO add your handling code here:
@@ -851,6 +871,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private void UmurPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UmurPasienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UmurPasienActionPerformed
+
+    private void Tempat_ID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tempat_ID1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Tempat_ID1ActionPerformed
 public void setJam() {
     ActionListener taskPerformer = new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
@@ -915,6 +939,7 @@ public void setJam() {
     private javax.swing.JTextField BeratPasien;
     private javax.swing.JTextField CariPasien;
     private javax.swing.JLabel ID;
+    private javax.swing.JLabel ID1;
     private javax.swing.JTextField Jenis_Kartu;
     private javax.swing.JTextField Kamar;
     private javax.swing.JTextField KelasKamar;
@@ -925,7 +950,7 @@ public void setJam() {
     private javax.swing.JTextField No_tele;
     private javax.swing.JTextField Provinsi;
     public javax.swing.JTable TabelPasien;
-    private javax.swing.JTextField Tempat_ID;
+    private javax.swing.JTextField Tempat_ID1;
     private javax.swing.JTextField Tempat_Lahir;
     private javax.swing.JTextField TinggiPasien;
     private javax.swing.JTextField UmurPasien;
@@ -954,6 +979,7 @@ public void setJam() {
     private javax.swing.JTextField jenis_kelamin;
     private javax.swing.JButton kembali;
     private javax.swing.JButton konfirmKeluar;
+    private javax.swing.JTextField regDate;
     private javax.swing.JLabel tampilJam;
     private javax.swing.JLabel tampilTanggal;
     private javax.swing.JTextField tglLahir;

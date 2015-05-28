@@ -37,8 +37,8 @@ public class Rawatinap extends javax.swing.JFrame {
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        tablePasien = control.getNamaPasien(this);
-        tableKamar = control.getKamar(this);
+        tablelistpasien.setModel(control.getNamaPasien());
+        tablelistkamarpasien.setModel(control.getKamar());
         
         a = namapasien.getText();
         b = idpasien.getText();

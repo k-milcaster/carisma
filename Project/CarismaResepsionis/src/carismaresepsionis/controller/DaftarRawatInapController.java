@@ -56,29 +56,13 @@ public class DaftarRawatInapController {
    
         DefaultTableModel model = new DefaultTableModel();
   
-        model.addColumn("ID Pasien");
-        model.addColumn("kota_id_kota"); 
+        model.addColumn("ID Pasien"); 
         model.addColumn("nama_pasien");
-        model.addColumn("alamat_pasien");
-        model.addColumn("kartuid_pasien");
-        model.addColumn("nokartuid_pasien");
-        model.addColumn("telp_pasien");
-        model.addColumn("hp_pasien");
-        model.addColumn("tempatlahir_pasien");
-        model.addColumn("tgllahir_pasien");
-        model.addColumn("kelamin_pasien");
-        model.addColumn("darah_pasien");
-        model.addColumn("berat_pasien");
-        model.addColumn("tinggi_pasien");
-        model.addColumn("regdate_pasien");
+  
        
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{list.get(i).getIdPasien(),list.get(i).getKotaIdKota(), list.get(i).getNamaPasien(),
-            list.get(i).getAlamatPasien(),list.get(i).getKartuidPasien(),list.get(i).getNokartuidPasien(),
-                    list.get(i).getTelpPasien(),list.get(i).getHpPasien(),list.get(i).getTempatlahirPasien(),
-                           list.get(i).getTgllahirPasien(), list.get(i).getKelaminPasien(),
-            list.get(i).getDarahPasien(), list.get(i).getBeratPasien(), list.get(i).getTinggiPasien(),list.get(i).getRegdatePasien()});
-            //System.out.println("lewat");
+            model.addRow(new Object[]{list.get(i).getIdPasien(),list.get(i).getNamaPasien()});
+            System.out.println("lewat");
         }
        
         return model;
@@ -103,19 +87,16 @@ public class DaftarRawatInapController {
         
         String[] kamarInfo = new String[2];
         kamarInfo = kamarService.getNamaKelasKamarbyIdpasien(idPasien);
-        //DefaultTableModel model = new DefaultTableModel();
-        //model.addColumn("ID Pasien");
-        //model.addColumn("Nama Pasien");
-        //for (int i = 0; i < list.size(); i++) {
-            //model.addRow(new Object[]{list.get(i).getNamaPasien()});
-            //System.out.println("lewat");
-        
+        System.out.println(kamarInfo);
         return kamarInfo;
     }
-  public boolean deletePasienKamar (String unPinjam) throws RemoteException{
-      //PasienKamar pasienkamar = new PasienKamar ();
-      
+  public boolean deletePasienKamar (String unPinjam) throws RemoteException{ 
       pasienkamarService.deletePasienKamar(unPinjam);
       return true;
   }
+  
+  public Pasien getIdPasien(String idPasien) throws RemoteException {
+        Pasien pasien = pasienService.getPasien(idPasien);
+        return pasien;
+    }
 }

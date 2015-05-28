@@ -67,7 +67,7 @@ public class RawatinapControllerTest {
         list = pasienService.getPasien();
         for (int i = 0; i < list.size(); i++) {
             subList.addRow(new Object[]{list.get(i).getIdPasien(), list.get(i).getNamaPasien()});
-        DefaultTableModel result = instance.getNamaPasien(ui);
+        DefaultTableModel result = instance.getNamaPasien();
         assertEquals(expresult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -95,7 +95,7 @@ public class RawatinapControllerTest {
             subList.addRow(new Object[]{list.get(i).getIdKamar(), list.get(i).getNamaKamar(), list.get(i).getKelas(), 
                 list.get(i).getTarif()});
 
-        DefaultTableModel result = instance.getKamar(ui);
+        DefaultTableModel result = instance.getKamar();
         assertEquals(expresult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
