@@ -245,7 +245,7 @@ public class Menursepsionis extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1090, 610);
+        jLabel2.setBounds(0, -10, 1360, 720);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
