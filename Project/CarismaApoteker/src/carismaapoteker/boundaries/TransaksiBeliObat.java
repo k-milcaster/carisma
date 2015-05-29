@@ -72,7 +72,7 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Carisma");
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Input Transaksi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
@@ -230,15 +230,18 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 223, -1, -1));
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(10, 223, 361, 407);
 
         jLabel7.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jLabel7.setText("Apoteker :");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 175, -1, 30));
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(10, 175, 117, 30);
 
         jLabel8.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 175, 200, 30));
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(110, 175, 200, 30);
 
         jTableOfBuys.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -250,13 +253,15 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableOfBuys);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(389, 223, 960, 410));
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(389, 223, 960, 410);
 
         jLabel5.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("TRANSAKSI PEMBELIAN OBAT");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 59, -1, 47));
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(76, 59, 721, 47);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1426717487_save.png"))); // NOI18N
@@ -267,10 +272,12 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 640, 100, -1));
+        getContentPane().add(jButton1);
+        jButton1.setBounds(1250, 640, 100, 35);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, -1));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 1360, 698);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
