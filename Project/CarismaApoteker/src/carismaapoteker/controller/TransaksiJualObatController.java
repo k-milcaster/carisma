@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import carismaapoteker.boundaries.TabelObat;
 import carismainterface.server.PegawaiService;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,10 +32,11 @@ public class TransaksiJualObatController {
     private PegawaiService pegawaiService;
 
     public TransaksiJualObatController(ClientSocket client) throws RemoteException {
-       
+
         this.transaksijualobat = client.getTransaksijualobatService();
         obatService = client.getObatService();
         pegawaiService = client.getPegawaiService();
+        detailtransaksijual = client.getDetailtransaksijualobatService();
     }
 
     public boolean insertTransaksijualobat(String idTransaksijual, String dateTransaksijual, String keterangan) throws RemoteException {
@@ -47,16 +50,25 @@ public class TransaksiJualObatController {
 
     }
 
+    public boolean deleteTransaksiJualObat(String idTransaksi) throws RemoteException {
+        return transaksijualobat.deleteTransaksijualobat(idTransaksi);
+    }
+
     public boolean insertDetailtransaksijualobat(String idTransaksi, int idObat, int qty) throws RemoteException {
         boolean insertDetail = false;
+        System.out.println("Masuk Insert Detail");
         Detailtransaksijualobat detailtransaksi = new Detailtransaksijualobat();
         detailtransaksi.setTransaksijualobat(idTransaksi);
         detailtransaksi.setObat(idObat);
         detailtransaksi.setQty(qty);
         insertDetail = detailtransaksijual.insertDetailtransaksijualobat(detailtransaksi);
-        System.out.println("Masuk Insert Detail");
         return insertDetail;
 
+
+    }
+
+    public boolean deleteDetailTransaksiJualObat(String idTransaksi, int idobat) throws RemoteException {
+        return detailtransaksijual.deleteDetailtransaksijualobat(idTransaksi, idobat);
     }
 
     public DefaultTableModel getTableObat() throws RemoteException {
@@ -74,21 +86,21 @@ public class TransaksiJualObatController {
         model.addColumn("Stok Kritis");
         for (int i = 0; i < list.size(); i++) {
             model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(), list.get(i).getStokkritisObat()});
-            System.out.println("Lewati");
         }
         return model;
     }
-    
-    public int cekStok (int idObat) throws RemoteException{
-        int stok = obatService.cekStokObat(idObat);
+
+    public int cekStok(int idObat) throws RemoteException {
+        int stok = obatService.getObat(idObat).getQtyObat();
         return stok;
     }
-    public String[] namaPegawai (String username) throws RemoteException{
+
+    public String[] namaPegawai(String username) throws RemoteException {
         String[] namaApoteker = pegawaiService.getIdNamaPegawai(username);
         return namaApoteker;
     }
-     public DefaultTableModel getObatbyName (String nama) throws RemoteException{
-        System.out.println("xyxyxyx");
+
+    public DefaultTableModel getObatbyName(String nama) throws RemoteException {
         List<Obat> list = new ArrayList<Obat>();
         list = obatService.getObatbyName(nama);
         DefaultTableModel model = new DefaultTableModel();
@@ -100,17 +112,50 @@ public class TransaksiJualObatController {
         model.addColumn("Harga Jual");
         model.addColumn("Stok Kritis");
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(),list.get(i).getStokkritisObat()});
+            model.addRow(new Object[]{list.get(i).getIdObat(), list.get(i).getNamaObat(), list.get(i).getQtyObat(), list.get(i).getJenisObat(), list.get(i).getKeterangan(), list.get(i).getHargajualObat(), list.get(i).getStokkritisObat()});
             System.out.println(model);
         }
         return model;
-        
-    } 
-
-       
     }
-   
+    public String getIdTransaksiJualObat() throws RemoteException {
+        String lastIdTransaksiJualObat = transaksijualobat.getLastIdTransaksiJualObat();
+        String[] splitDateNow = getDateNow().split("-");
+        String dateNow = splitDateNow[0].concat(splitDateNow[1]).concat(splitDateNow[2]);
+        String awalan = "TRANSSELL-".concat(dateNow).concat("-");
+        String idTransaksiJualObatFix = " ";
+        String getDateOnly = " ";
+        //TRANSSELL-20150528-001
+        if (lastIdTransaksiJualObat != null) {
+            char[] charDate = lastIdTransaksiJualObat.toCharArray();
+            char[] newCharDate = new char[8];
+            for (int i = 0; i < 8; i++) {
+                newCharDate[i] = charDate[i + 10];
+            }
+            getDateOnly = String.valueOf(newCharDate);
+        }
+        if (lastIdTransaksiJualObat == null || (!dateNow.equals(getDateOnly))) {
+            idTransaksiJualObatFix = awalan.concat("001");
+        } else {
+            char[] lastDigit = lastIdTransaksiJualObat.toCharArray();
+            char[] newLastDigit = new char[3];
+            for (int i = 0; i < 3; i++) {
+                newLastDigit[i] = lastDigit[i + 19];
+            }
+            int lastDigitIdDetail = Integer.parseInt(String.valueOf(newLastDigit)) + 1;
+            if (lastDigitIdDetail < 10) {
+                idTransaksiJualObatFix = awalan.concat("00").concat(String.valueOf(lastDigitIdDetail));
+            } else if (lastDigitIdDetail >= 10 && lastDigitIdDetail < 100) {
+                idTransaksiJualObatFix = awalan.concat("0").concat(String.valueOf(lastDigitIdDetail));
+            } else if (lastDigitIdDetail >= 100) {
+                idTransaksiJualObatFix = awalan.concat(String.valueOf(lastDigitIdDetail));
+            }
+        }
+        return idTransaksiJualObatFix;
+    }
+    public String getDateNow() throws RemoteException {
+        DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+        String date = df.format(new java.util.Date());
+        return date;
+    }
 
-
-
-
+}
