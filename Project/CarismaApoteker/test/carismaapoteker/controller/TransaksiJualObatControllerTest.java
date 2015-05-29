@@ -45,13 +45,12 @@ public class TransaksiJualObatControllerTest {
     public void testInsertTransaksijualobat() throws Exception {
         client = new ClientSocket();
         System.out.println("insertTransaksijualobat");
-        String idTransaksijual = "jjj";
+        String idTransaksijual = "cccc";
         String dateTransaksijual = "2015-05-11";
         String keterangan = "rrr";
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
-        boolean expResult = true;
         boolean result = instance.insertTransaksijualobat(idTransaksijual, dateTransaksijual, keterangan);
-        assertEquals(expResult, result);
+        assertTrue(result);
         
     }
 
@@ -62,13 +61,14 @@ public class TransaksiJualObatControllerTest {
     public void testInsertDetailtransaksijualobat() throws Exception {
         client = new ClientSocket();
         System.out.println("insertDetailtransaksijualobat");
-        String idTransaksi = "aaa";
+        String idTransaksi = "cccc";
         int idObat = 7;
-        int qty = 50;
+        int qty = 5;
         TransaksiJualObatController instance = new TransaksiJualObatController(client) ;
-        boolean expResult = true;
         boolean result = instance.insertDetailtransaksijualobat(idTransaksi, idObat, qty);
-         assertEquals(expResult, result);
+        assertTrue(result);
+        instance.deleteDetailTransaksiJualObat(idTransaksi, idObat);
+        instance.deleteTransaksiJualObat(idTransaksi);
         
    
     }
@@ -140,5 +140,30 @@ public class TransaksiJualObatControllerTest {
         }
         assertTrue(resultCondition);
         
+    }
+    /**
+     * Test of getIdTransaksiJualObat method, of class TransaksiJualObatController.
+     */
+    @Test
+    public void testGetIdTransaksiJualObat() throws Exception {
+        client = new ClientSocket();
+        System.out.println("getIdTransaksiJualObat");
+        TransaksiJualObatController instance = new TransaksiJualObatController(client);
+        String expResult = "TRANSSELL-20150529-002";
+        String result = instance.getIdTransaksiJualObat();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getDateNow method, of class TransaksiJualObatController.
+     */
+    @Test
+    public void testGetDateNow() throws Exception {
+        client = new ClientSocket();
+        System.out.println("getDateNow");
+        TransaksiJualObatController instance = new TransaksiJualObatController(client);
+        String expResult = "2015-05-29";
+        String result = instance.getDateNow();
+        assertEquals(expResult, result);
     }
 }
