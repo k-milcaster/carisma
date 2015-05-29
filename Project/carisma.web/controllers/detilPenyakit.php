@@ -9,29 +9,34 @@ class detilPenyakit extends Controller {
     }
 
     function index() {
-        Index::__construct();
-    }
-    
-    function carisatu() {
-        $us = $_POST['masukan'];
+        $this->loadModel("Kunjungan");
+        $username = Session::get('Etok');
+        $password = Session::get('Wuryanto');
         
-        $this->loadModel("Penyakit");
-        $ambil = $this->model->getpenyakit($us);
-        $masukindums = '';
-        $masukan;
-        foreach ($ambil as $key => $value) {
-           $masukindums = $masukindums . '
+        $rak = $this->model->getkunjunganpasien($username,$password);
+
+        $masukindums = "";
+        $i = 1;
+
+
+        $masukindums = "";
+        foreach ($rak as $key => $value) {
+            $masukindums = $masukindums . '
                             <tr>
                                 <td >
-                                    '.$value[1] .'
+                                    '.$value[0] .'
                                 </td>
-                              
+                                <td>
+                                    '.$value[1].'
+                                </td>
+                                <td>
+                                    '.$value[2].'
+                                </td>
                             </tr>';
-           $masukan = $value[0];
         }
-        $this->view->judul=$masukan;
-        $this->view->isi=$masukindums;
-        $this->view->title = "Service";
+        $this->view->ini=$masukindums;
+        $this->view->title = "Dashboard";
         $this->view->render('penyakit/detail', 1, 0);
     }
+
 }

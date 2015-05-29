@@ -7,6 +7,7 @@ class singleDoctor extends Controller {
         Session::init();
 //        $this->single();
     }
+
     function id($param) {
         $masukindums = "";
 
@@ -27,7 +28,7 @@ class singleDoctor extends Controller {
                     <img src="' . URL . 'public/images/img2.jpg" title="name" />
                     <span class="t-icon2"> </span>
                     <div class="about-grid-info text-center">
-                        <h3><a href="https://www.facebook.com/indra.kharisma.r">' . $value[3] . '</a></h3>
+                        <h3><a href="#">' . $value[3] . '</a></h3>
                     </div>
                 </div>
             </div>
@@ -39,10 +40,10 @@ class singleDoctor extends Controller {
                         Blood : ' . $value[12] . ' <br>
                         <br>';
             $masukindums = $masukindums . 'Schedule  =  ';
-            foreach ($rakdua as $key => $value) {
-                $masukindums = $masukindums . ' ' . $value[1] . ' || ' . $value[2] . ';';
+            foreach ($rakdua as $key => $values) {
+                $masukindums = $masukindums . ' ' . $values[1] . ' || ' . $values[2] . ';';
             }
-            $masukindums = $masukindums . '</p> <a href="#">BOOK NOW!!</a>               
+            $masukindums = $masukindums . '</p> <a href="' . URL . 'book/form/' . $value[0] . '">BOOK NOW!!</a>               
             </div>
             <div class="clearfix"> </div>
         </div>
