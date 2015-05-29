@@ -9,34 +9,45 @@ class detilPenyakit extends Controller {
     }
 
     function index() {
-        $this->loadModel("Kunjungan");
-        $username = Session::get('Etok');
-        $password = Session::get('Wuryanto');
+        Index::__construct();
+    }
+    
+    function carisatu() {
+        $us = $_POST['masukan'];
         
-        $rak = $this->model->getkunjunganpasien($username,$password);
-
-        $masukindums = "";
-        $i = 1;
-
-
-        $masukindums = "";
-        foreach ($rak as $key => $value) {
-            $masukindums = $masukindums . '
+        $this->loadModel("Penyakit");
+        $ambil = $this->model->getgrouppedpenyakit($us);
+        $masukindums = '';
+        $masukan;
+        foreach ($ambil as $key => $value) {
+           $masukindums = $masukindums . '
+                            
+                    <table >
+                            <tr>
+                                <td>
+                               Hasil Untuk Penyakit dengan Inisial ' . $us . '
+                                </td>
+                                
+                            </tr>
                             <tr>
                                 <td >
                                     '.$value[0] .'
                                 </td>
-                                <td>
-                                    '.$value[1].'
+                                <td >
+                                    '.$value[1] .'
                                 </td>
-                                <td>
-                                    '.$value[2].'
-                                </td>
-                            </tr>';
+                              
+                            </tr>
+
+                    </table>';
+           $masukan = $value[0];
         }
-        $this->view->ini=$masukindums;
-        $this->view->title = "Dashboard";
+//        $this->view->judul=$masukan;
+        $this->view->isi=$masukindums;
+        $this->view->title = "Service";
         $this->view->render('penyakit/detail', 1, 0);
     }
-
 }
+
+
+//

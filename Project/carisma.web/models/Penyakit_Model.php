@@ -1,6 +1,6 @@
 <?php
 
-class Penyaki_Model extends Model {
+class Penyakit_Model extends Model {
 
     function __construct() {
         parent::__construct();
@@ -16,10 +16,10 @@ class Penyaki_Model extends Model {
     }
     
     function getgrouppedpenyakit($groupped) {
-        $statement = $this->db->prepare("SELECT nama_penyakit , deskripsi_penyakit FROM penyakit "
-                . "WHERE nama_penyakit = :penyakit");
-        $statement->execute(array("penyakit" => $groupped));
+        $statement = $this->db->prepare("SELECT nama_penyakit , deskripsi_penyakit FROM penyakit WHERE nama_penyakit LIKE '%".$groupped."%'");
+        
         return $statement->fetchAll();
     }
 
 }
+
