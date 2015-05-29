@@ -21,7 +21,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     private String userName;
     private DefaultTableModel tableOfSales;
     private TransaksiJualObatController transaksijualobatController;
-    String[] namaPegawai; 
+    String[] namaPegawai;
     private int total = 0;
     public int row = 0;
     java.util.Date dateNow = new java.util.Date();
@@ -32,10 +32,22 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         initComponents();
         dateOfSales.setDate(dateNow);
         transaksijualobatController = new TransaksiJualObatController(Client);
+        fieldIdOfSales.setText(transaksijualobatController.getIdTransaksiJualObat());
         labelAoptekerName.setText(this.userName);
         this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
+    public void clearField() {
+        fieldDescription.setText("");
+        int row = jTableOfSales.getRowCount();
+        for (int i = 0; i < row; i++) {
+            tableOfSales = (DefaultTableModel) jTableOfSales.getModel();
+            tableOfSales.setValueAt("", i, 0);
+            tableOfSales.setValueAt("", i, 1);
+            tableOfSales.setValueAt("", i, 2);
+            jTableOfSales.setModel(tableOfSales);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -246,13 +258,8 @@ public class TransaksiJualObat extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int row = jTableOfSales.getSelectedRow();
-
-        //total = total - jumlah;
-        tableOfSales = (DefaultTableModel) jTableOfSales.getModel();
         tableOfSales.removeRow(row);
         jTableOfSales.setModel(tableOfSales);
-
-        //fieldTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -263,11 +270,15 @@ public class TransaksiJualObat extends javax.swing.JFrame {
                 TransaksiJualObatController transaksijual = new TransaksiJualObatController(Client);
                 transaksijual.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), fieldDescription.getText());
                 JOptionPane.showMessageDialog(null, "Data Transaksi Penjualan Obat Tersimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-                int row = jTableOfSales.getRowCount();
+                int row = jTableOfSales.getSelectedRow() + 1;
+                System.out.println(row);
                 for (int i = 0; i < row; i++) {
-                    transaksijual.insertDetailtransaksijualobat(fieldIdOfSales.getText(), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 1))), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
+                    transaksijual.insertDetailtransaksijualobat(fieldIdOfSales.getText(), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 0))), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
                 }
+                clearField();
+                fieldIdOfSales.setText(transaksijualobatController.getIdTransaksiJualObat());
             } catch (Exception e) {
+                System.out.println("through catch " + e);
             }
         }
 
@@ -281,7 +292,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     private void jTableOfSalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableOfSalesMouseClicked
         int colom = jTableOfSales.getSelectedColumn();
         row = jTableOfSales.getSelectedRow();
-		if (colom == 0) {
+        if (colom == 0) {
             try {
                 new TabelObat(this, Client).setVisible(true);
             } catch (RemoteException ex) {
