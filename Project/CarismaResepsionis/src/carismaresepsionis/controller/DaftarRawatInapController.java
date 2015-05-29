@@ -42,6 +42,17 @@ public class DaftarRawatInapController {
        pasienkamarService.insertPasienKamar(pasienkamar);
        return true;
    }
+   
+   public boolean insertDateOut (String dateOut) throws RemoteException{
+      
+       PasienKamar pasienkamar = new PasienKamar ();
+       pasienkamar.setDateoutPasienKamar(dateOut);
+       //pasienkamar.setDateoutPasienKamar();
+
+       pasienkamarService.insertPasienKamar(pasienkamar);
+       return true;
+   }
+   
     
    public String generatePeminjamanId(String idPasien, String namaKamar) {
         String pasienId = Character.toString(idPasien.charAt(0)).toUpperCase() + Character.toString(idPasien.charAt(idPasien.length() - 1)).toUpperCase() + Character.toString(namaKamar.charAt(2)) + Character.toString(namaKamar.charAt(3)) + Character.toString(namaKamar.charAt(5)) + Character.toString(namaKamar.charAt(6)) + Character.toString(namaKamar.charAt(8)) + Character.toString(namaKamar.charAt(9));
@@ -85,7 +96,7 @@ public class DaftarRawatInapController {
    
    public String[] getNamaKelasKamarbyIdpasien (String idPasien) throws RemoteException{
         
-        String[] kamarInfo = new String[2];
+        String[] kamarInfo = new String[3];
         kamarInfo = kamarService.getNamaKelasKamarbyIdpasien(idPasien);
         System.out.println(kamarInfo);
         return kamarInfo;
@@ -99,4 +110,9 @@ public class DaftarRawatInapController {
         Pasien pasien = pasienService.getPasien(idPasien);
         return pasien;
     }
+  
+  public PasienKamar getPasienKamar (String idpeminjaman) throws RemoteException{
+      PasienKamar pasienKamar = pasienkamarService.getPasienKamar(idpeminjaman);
+      return pasienKamar;
+  }
 }

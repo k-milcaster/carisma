@@ -122,14 +122,14 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
     }
 
     @Override
-    public PasienKamar getPasienKamar(String idpeminjaman) throws RemoteException {
-        ui.act.append("Client Execute getPasienKamar (" + idpeminjaman + ") \n");
+    public PasienKamar getPasienKamar(String kamar_id_kamar) throws RemoteException {
+        ui.act.append("Client Execute getPasienKamar (" + kamar_id_kamar + ") \n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM pasien_kamar WHERE id_peminjaman = ?");
-            statement.setString(1, idpeminjaman);
+                    "SELECT * FROM pasien_kamar WHERE kamar_id_kamar = ?");
+            statement.setString(1, kamar_id_kamar);
             ResultSet result = statement.executeQuery();
             PasienKamar pasienKamar = null;
             if (result.next()) {
