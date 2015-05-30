@@ -17,7 +17,7 @@ class Penyakit_Model extends Model {
     
     function getgrouppedpenyakit($groupped) {
         $statement = $this->db->prepare("SELECT nama_penyakit , deskripsi_penyakit FROM penyakit WHERE nama_penyakit LIKE '%".$groupped."%'");
-        
+        $statement->execute();
         return $statement->fetchAll();
     }
 

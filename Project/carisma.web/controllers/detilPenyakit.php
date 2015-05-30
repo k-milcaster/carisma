@@ -18,18 +18,17 @@ class detilPenyakit extends Controller {
         $this->loadModel("Penyakit");
         $ambil = $this->model->getgrouppedpenyakit($us);
         $masukindums = '';
-        $masukan;
+       
+        
+        $i=1;
         foreach ($ambil as $key => $value) {
            $masukindums = $masukindums . '
                             
-                    <table >
+                    
                             <tr>
-                                <td>
-                               Hasil Untuk Penyakit dengan Inisial ' . $us . '
+                            <td >
+                                    '.$i .'
                                 </td>
-                                
-                            </tr>
-                            <tr>
                                 <td >
                                     '.$value[0] .'
                                 </td>
@@ -39,8 +38,9 @@ class detilPenyakit extends Controller {
                               
                             </tr>
 
-                    </table>';
+                    ';
            $masukan = $value[0];
+           $i++;
         }
 //        $this->view->judul=$masukan;
         $this->view->isi=$masukindums;

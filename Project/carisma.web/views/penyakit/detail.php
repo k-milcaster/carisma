@@ -24,7 +24,26 @@
                 
                 
                     <div class="about-grid-info text-center">
-                      <?php echo $this->isi ?>
+                      
+                        
+                        <table >
+                            <tr>
+                                <td>
+                                    Nomor
+                                </td>
+                                <td >
+                                     Nama Penyakit
+                                </td>
+                                <td>
+                                    deskripsi Penyakit
+                                </td>
+                            </tr>
+                            <?php echo $this->isi ?>
+ 
+                        </table>
+                        
+                        
+                        
                     </div>
                 </div>
             </div>
