@@ -48,6 +48,12 @@ public class Poli implements Serializable {
     public Poli() {
     }
 
+    public Poli(Poli poli) {
+        this.idPoli = poli.idPoli;
+        this.namaPoli = poli.namaPoli;
+        this.keterangan = poli.keterangan;
+    }
+    
     public Poli(String idPoli) {
         this.idPoli = idPoli;
     }
