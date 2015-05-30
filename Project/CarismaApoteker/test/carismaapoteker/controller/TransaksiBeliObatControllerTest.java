@@ -97,18 +97,18 @@ public class TransaksiBeliObatControllerTest {
      * Test of insertDetailTransaksiBeliObat method, of class
      * TransaksiBeliObatController.
      */
-//    @Test
-//    public void testInsertDetailTransaksiBeliObat() throws Exception {
-//        System.out.println("insertDetailTransaksiBeliObat");
-//        client = new ClientSocket();
-//        String idTransaksi = "TRANSBUY-20150424-001";
-//        int idObat = 302;
-//        int qtyObat = 201;
-//        TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
-//        boolean result = instance.insertDetailTransaksiBeliObat(idTransaksi, idObat, qtyObat);
-//        assertTrue(result);
-//        instance.deleteDetailTransaksiBeliObat("TRANSBUY-20150524-001", 302);
-//    }
+    @Test
+    public void testInsertDetailTransaksiBeliObat() throws Exception {
+        System.out.println("insertDetailTransaksiBeliObat");
+        client = new ClientSocket();
+        String idTransaksi = "TRANSBUY-20150523-005";
+        int idObat = 1;
+        int qtyObat = 201;
+        TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
+        boolean result = instance.insertDetailTransaksiBeliObat(idTransaksi, idObat, qtyObat);
+        assertTrue(result);
+        instance.deleteDetailTransaksiBeliObat("TRANSBUY-20150523-005", 1);
+    }
 
     /**
      * Test of insertDetailObat method, of class TransaksiBeliObatController.
@@ -149,7 +149,7 @@ public class TransaksiBeliObatControllerTest {
         System.out.println("getidDetailObat");
         client = new ClientSocket();
         TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
-        int expResult = 37;
+        int expResult = 41;
         int result = instance.getidDetailObat();
         assertEquals(expResult, result);
     }
@@ -178,7 +178,6 @@ public class TransaksiBeliObatControllerTest {
         StokObatController instance = new StokObatController(client);
         String[] expResult = new String[2];
         expResult[0] = "Hana";
-        //expResult[1] = null;
         String[] result = instance.getNamaPegawai(username);
         assertArrayEquals(expResult, result);
     }
@@ -192,7 +191,7 @@ public class TransaksiBeliObatControllerTest {
         client = new ClientSocket();
         System.out.println("getIdTransaksiBeliObat");
         TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
-        String expResult = "TRANSBUY-20150524-001";
+        String expResult = "TRANSBUY-20150530-002";
         String result = instance.getIdTransaksiBeliObat();
         assertEquals(expResult, result);
     }
@@ -205,7 +204,7 @@ public class TransaksiBeliObatControllerTest {
         client = new ClientSocket();
         System.out.println("getDateNow");
         TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
-        String expResult = "2015-05-24";
+        String expResult = "2015-05-30";
         String result = instance.getDateNow();
         assertEquals(expResult, result);
     }
