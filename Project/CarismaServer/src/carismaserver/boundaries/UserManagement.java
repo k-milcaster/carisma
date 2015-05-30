@@ -150,7 +150,7 @@ public class UserManagement extends javax.swing.JFrame {
 
         jLabel5.setText("Role :");
 
-        comboRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--", "administrator", "dokter", "staff", "resepsionis", "pasien", "apoteker" }));
+        comboRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--", "administrator", "doctor", "staff", "resepsionis", "pasien", "apoteker" }));
 
         fieldId.setEditable(false);
 

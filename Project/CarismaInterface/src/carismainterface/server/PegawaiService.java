@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface PegawaiService extends Remote {
     
-    void insertPegawai(Pegawai pegawai) throws RemoteException;
+    boolean insertPegawai(Pegawai pegawai) throws RemoteException;
 
-    void updatePegawai(Pegawai pegawai) throws RemoteException;
+    boolean updatePegawai(Pegawai pegawai) throws RemoteException;
 
-    void deletePegawai(String pegawai) throws RemoteException;
+    boolean deletePegawai(String pegawai) throws RemoteException;
 
     Pegawai getPegawai(String pegawai) throws RemoteException;
 
