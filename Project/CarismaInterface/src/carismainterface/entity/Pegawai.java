@@ -111,11 +111,19 @@ public class Pegawai implements Serializable {
         this.namaPegawai = pegawai.namaPegawai;
         this.alamatPegawai = pegawai.alamatPegawai;
         this.nokartuidPegawai = pegawai.nokartuidPegawai;
+        this.telpPegawai = pegawai.telpPegawai;
+        this.hp1Pegawai = pegawai.hp1Pegawai;
+        this.hp2Pegawai = pegawai.hp2Pegawai;
         this.tempatlahirPegawai = pegawai.tempatlahirPegawai;
         this.tgllahirPegawai = pegawai.tgllahirPegawai;
         this.kelaminPegawai = pegawai.kelaminPegawai;
         this.darahPegawai = pegawai.darahPegawai;
         this.jabatanPegawai = pegawai.jabatanPegawai;
+        this.bankPegawai = pegawai.bankPegawai;
+        this.norekPegawai = pegawai.norekPegawai;
+        this.fotoPegawai = pegawai.fotoPegawai;
+        this.gajifixPegawai = pegawai.gajifixPegawai;
+        this.gajilemburPegawai = pegawai.gajilemburPegawai;
         this.userIdUser = pegawai.userIdUser;
     }
 

@@ -54,13 +54,14 @@ public class PegawaiManagement extends javax.swing.JFrame {
                         staffService = new PegawaiEntity(ui);
                         Pegawai selected = new Pegawai(staffService.getPegawai(tablePegawai.getValueAt(row, 1).toString()));
                         fieldId.setText(selected.getIdPegawai());
+                        fieldJabatan.setText(selected.getJabatanPegawai());
                         fieldNama.setText(selected.getNamaPegawai());
                         areaAlamat.setText(selected.getAlamatPegawai());
                         fieldNokartuid.setText(selected.getNokartuidPegawai());
                         fieldTelepon.setText(selected.getTelpPegawai());
                         fieldHP1.setText(selected.getHp1Pegawai());
                         fieldHP2.setText(selected.getHp2Pegawai());
-                        fieldTempat.setText(selected.getTelpPegawai());
+                        fieldTempat.setText(selected.getTempatlahirPegawai());
                         fieldTanggal.setText(selected.getTgllahirPegawai());
                         comboKelamin.setSelectedItem(selected.getKelaminPegawai());
                         comboDarah.setSelectedItem(selected.getDarahPegawai());
@@ -68,7 +69,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
                         fieldNorek.setText(selected.getNorekPegawai());
                         fieldGajiFix.setText((String) selected.getGajifixPegawai().toString());
                         fieldGajiLembur.setText((String) selected.getGajilemburPegawai().toString());
-                        comboUsername.setSelectedItem(userService.getUserById(selected.getUserIdUser()).getUsername());
+                        comboUsername.setSelectedItem((userService.getUserById(selected.getUserIdUser())).getUsername());
                     } catch (RemoteException ex) {
                         Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -78,7 +79,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
         });
     }
 
-    public void clear(){
+    public void clear() {
         this.file = null;
         this.img = null;
         comboUsername.setSelectedItem("--");
@@ -100,7 +101,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
         fieldGajiLembur.setText("");
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/Preview.jpg")));
     }
-    
+
     private byte[] extractBytes(String ImageName) throws IOException {
         File fi = new File(ImageName);
         byte[] fileContent = Files.readAllBytes(fi.toPath());
@@ -485,99 +486,106 @@ public class PegawaiManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAttachActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
-        try {
-            int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();
-            String jabatan = fieldJabatan.getText();
-            String id = fieldId.getText();
-            String nama = fieldNama.getText();
-            String alamat = areaAlamat.getText();
-            String nokartu = fieldNokartuid.getText();
-            String telp = fieldTelepon.getText();
-            String hp1 = fieldHP1.getText();
-            String hp2 = fieldHP2.getText();
-            String tempat = fieldTempat.getText();
-            String tanggal = fieldTanggal.getText();
-            String kelamin = comboKelamin.getSelectedItem().toString();
-            String darah = comboDarah.getSelectedItem().toString();
-            String bank = fieldBank.getText();
-            String norek = fieldNorek.getText();
-            String foto = "";
-            byte[] image = null;
-            if (img != null) {
-                image = img;
-            } else {
-                foto = "Belum memasukkan foto";
+        if (!fieldJabatan.getText().equalsIgnoreCase("") && !fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && areaAlamat.getText().equalsIgnoreCase("")
+                && fieldNokartuid.getText().equalsIgnoreCase("") && fieldTempat.getText().equalsIgnoreCase("") && fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
+            try {
+                int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();
+                String jabatan = fieldJabatan.getText();
+                String id = fieldId.getText();
+                String nama = fieldNama.getText();
+                String alamat = areaAlamat.getText();
+                String nokartu = fieldNokartuid.getText();
+                String telp = fieldTelepon.getText();
+                String hp1 = fieldHP1.getText();
+                String hp2 = fieldHP2.getText();
+                String tempat = fieldTempat.getText();
+                String tanggal = fieldTanggal.getText();
+                String kelamin = comboKelamin.getSelectedItem().toString();
+                String darah = comboDarah.getSelectedItem().toString();
+                String bank = fieldBank.getText();
+                String norek = fieldNorek.getText();
+                String foto = "";
+                byte[] image = null;
+                if (img != null) {
+                    image = img;
+                } else {
+                    foto = "Belum memasukkan foto";
+                }
+                int gfix = Integer.parseInt(fieldGajiFix.getText());
+                int glembur = Integer.parseInt(fieldGajiLembur.getText());
+                boolean success = control.updatePegawai(this, userid, jabatan, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, image);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Update Pegawai berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Update Pegawai gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+                tablePegawai.setModel(control.getPegawai(this));
+                clear();
+            } catch (RemoteException ex) {
+                Logger.getLogger(PegawaiManagement.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(PegawaiManagement.class.getName()).log(Level.SEVERE, null, ex);
             }
-            int gfix = Integer.parseInt(fieldGajiFix.getText());
-            int glembur = Integer.parseInt(fieldGajiLembur.getText());
-            boolean success = control.updatePegawai(this, userid, jabatan, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, image);
-            if (success){
-                JOptionPane.showMessageDialog(this, "Update Pegawai berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else {
-                JOptionPane.showMessageDialog(this, "Update Pegawai gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
-            }
-            tablePegawai.setModel(control.getPegawai(this));
-            clear();
-        } catch (RemoteException ex) {
-            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
-        try {
-            int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();;
-            String jabatan = fieldJabatan.getText();
-            String id = fieldId.getText();
-            String nama = fieldNama.getText();
-            String alamat = areaAlamat.getText();
-            String nokartu = fieldNokartuid.getText();
-            String telp = fieldTelepon.getText();
-            String hp1 = fieldHP1.getText();
-            String hp2 = fieldHP2.getText();
-            String tempat = fieldTempat.getText();
-            String tanggal = fieldTanggal.getText();
-            String kelamin = comboKelamin.getSelectedItem().toString();
-            String darah = comboDarah.getSelectedItem().toString();
-            String bank = fieldBank.getText();
-            String norek = fieldNorek.getText();
-            String foto = "";
-            byte[] image = null;
-            if (img != null) {
-                image = img;
-            } else {
-                foto = "Belum memasukkan foto";
+        if (!fieldJabatan.getText().equalsIgnoreCase("") && !fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && areaAlamat.getText().equalsIgnoreCase("")
+                && fieldNokartuid.getText().equalsIgnoreCase("") && fieldTempat.getText().equalsIgnoreCase("") && fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
+            try {
+                int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();;
+                String jabatan = fieldJabatan.getText();
+                String id = fieldId.getText();
+                String nama = fieldNama.getText();
+                String alamat = areaAlamat.getText();
+                String nokartu = fieldNokartuid.getText();
+                String telp = fieldTelepon.getText();
+                String hp1 = fieldHP1.getText();
+                String hp2 = fieldHP2.getText();
+                String tempat = fieldTempat.getText();
+                String tanggal = fieldTanggal.getText();
+                String kelamin = comboKelamin.getSelectedItem().toString();
+                String darah = comboDarah.getSelectedItem().toString();
+                String bank = fieldBank.getText();
+                String norek = fieldNorek.getText();
+                String foto = "";
+                byte[] image = null;
+                if (img != null) {
+                    image = img;
+                } else {
+                    foto = "Belum memasukkan foto";
+                }
+                int gfix = Integer.parseInt(fieldGajiFix.getText());
+                int glembur = Integer.parseInt(fieldGajiLembur.getText());
+                boolean success = control.insertPegawai(this, userid, jabatan, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, image);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Insert Pegawai berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Insert Pegawai gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+                tablePegawai.setModel(control.getPegawai(this));
+                clear();
+            } catch (RemoteException ex) {
+                Logger.getLogger(PegawaiManagement.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(PegawaiManagement.class.getName()).log(Level.SEVERE, null, ex);
             }
-            int gfix = Integer.parseInt(fieldGajiFix.getText());
-            int glembur = Integer.parseInt(fieldGajiLembur.getText());
-            boolean success = control.insertPegawai(this, userid, jabatan, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, image);
-            if (success){
-                JOptionPane.showMessageDialog(this, "Insert Pegawai berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else {
-                JOptionPane.showMessageDialog(this, "Insert Pegawai gagal" , "Gagal", JOptionPane.ERROR_MESSAGE);
-            }
-            tablePegawai.setModel(control.getPegawai(this));
-            clear();
-        } catch (RemoteException ex) {
-            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_buttonInsertActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        if(!fieldId.getText().equalsIgnoreCase("")){
+        if (!fieldId.getText().equalsIgnoreCase("")) {
             boolean success;
             try {
                 success = control.deletePegawai(this, fieldId.getText());
-                if (success){
+                if (success) {
                     JOptionPane.showMessageDialog(this, "Delete Pegawai berhasil", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(this, "Delete Pegawai gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
                 }
                 tablePegawai.setModel(control.getPegawai(this));
@@ -585,8 +593,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
             } catch (RemoteException ex) {
                 Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(this, "Data kurang lengkap");
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed

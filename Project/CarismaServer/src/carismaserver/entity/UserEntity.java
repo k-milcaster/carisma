@@ -287,6 +287,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
 
     @Override
     public User getUserById(int idUser) throws RemoteException {
+        ui.act.append("Client Execute getUsersbyId("+idUser+") \n");
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
@@ -303,10 +304,9 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
                 users.setLastlogin(result.getString("lastlogin"));
                 users.setRole(result.getString("role"));
             }
-            System.out.println("here is " + users.getUsername());
             return users;
         } catch (SQLException exception) {
-            ui.act.append("getUser Error \n");
+            ui.act.append("getUserbyId Error \n");
             ui.act.append(exception.toString());
             return null;
         } finally {
