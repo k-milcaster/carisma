@@ -445,7 +445,7 @@ div.slide-text-info {
     display: inline-block;
     background: url(../images/top-grid-icons1.png) no-repeat 0px 0px;
     position: absolute;
-    top: 249px;
+    top: 300px;
     left: 40%;
 }
 .about-grid img{
@@ -503,7 +503,7 @@ div.slide-text-info {
 }.about-grid-info table{
     border-collapse: collapse;
     border-spacing: 0;
-    width:100%;
+    width:150%;
     height:20%;
     margin:0px;padding:0px;
 }.about-grid-info tr:last-child td:last-child {
@@ -527,10 +527,10 @@ div.slide-text-info {
 }.about-grid-info tr:hover td{
 
 }
-.about-grid-info tr:nth-child(odd){ background-color:#ffaaaa;text-align:center; }
+.about-grid-info tr:nth-child(odd){ background-color:#ffaaaa;text-align:left; }
 .about-grid-info tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
     vertical-align:middle;
-    text-align:center;
+    text-align:left;
     border:1px solid #7f0000;
     border-width:0px 1px 1px 0px;
     text-align:left;
@@ -541,22 +541,26 @@ div.slide-text-info {
     color:#000000;
 }.about-grid-info tr:last-child td{
     border-width:0px 1px 0px 0px;
-    text-align:center;
+    text-align:left;
 }.about-grid-info tr td:last-child{
     border-width:0px 0px 1px 0px;
-    text-align:center;
+    text-align:right;
 }.about-grid-info tr:last-child td:last-child{
     border-width:0px 0px 0px 0px;
-    text-align:center;
+    padding-right: 5px;
+    text-align:right;
 }
 .about-grid-info tr:first-child td{
     background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
     background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
-
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-right:  5px;
     background-color:#ff5656;
     border:0px solid #7f0000;
-    text-align:center;
+    text-align:left;
     border-width:0px 0px 1px 1px;
     font-size:14px;
     font-family:Arial;
