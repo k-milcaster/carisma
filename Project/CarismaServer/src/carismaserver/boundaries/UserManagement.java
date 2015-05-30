@@ -71,7 +71,7 @@ public class UserManagement extends javax.swing.JFrame {
         comboRole = new javax.swing.JComboBox();
         fieldId = new javax.swing.JTextField();
         fieldPassword = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -198,9 +198,9 @@ public class UserManagement extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(160, 150, 253, 158);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(0, 0, 1360, 680);
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
+        getContentPane().add(background);
+        background.setBounds(0, 0, 1360, 680);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -250,6 +250,7 @@ public class UserManagement extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonInsert;
     private javax.swing.JButton buttonUpdate;
@@ -262,7 +263,6 @@ public class UserManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tableUser;

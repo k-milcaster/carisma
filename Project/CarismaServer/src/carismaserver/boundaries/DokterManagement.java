@@ -175,8 +175,7 @@ public class DokterManagement extends javax.swing.JFrame {
         buttonUpdate = new javax.swing.JButton();
         buttonDelete = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        fieldPoli = new javax.swing.JTextField();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1360, 698));
@@ -513,9 +512,8 @@ public class DokterManagement extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 180, 180));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 700));
-        getContentPane().add(fieldPoli, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 168, -1));
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -685,6 +683,7 @@ public class DokterManagement extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaAlamat;
+    private javax.swing.JLabel background;
     private javax.swing.JButton buttonAttach;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonInsert;
@@ -703,7 +702,6 @@ public class DokterManagement extends javax.swing.JFrame {
     private javax.swing.JTextField fieldNama;
     private javax.swing.JTextField fieldNokartuid;
     private javax.swing.JTextField fieldNorek;
-    private javax.swing.JTextField fieldPoli;
     private javax.swing.JTextField fieldTanggal;
     private javax.swing.JTextField fieldTelepon;
     private javax.swing.JTextField fieldTempat;
@@ -711,7 +709,6 @@ public class DokterManagement extends javax.swing.JFrame {
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
