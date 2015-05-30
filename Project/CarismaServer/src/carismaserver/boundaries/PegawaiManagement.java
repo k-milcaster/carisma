@@ -45,6 +45,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
         userService = new UserEntity(ui);
         tablePegawai.setModel(control.getPegawai(this));
         users = userService.getUser();
+        comboUsernamePopupMenuWillBecomeVisible(null);
         tablePegawai.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
@@ -526,7 +527,8 @@ public class PegawaiManagement extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(PegawaiManagement.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
+        }
+        else {
             JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buttonUpdateActionPerformed
@@ -572,7 +574,8 @@ public class PegawaiManagement extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(PegawaiManagement.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
+        }
+        else {
             JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
         }
 
@@ -593,8 +596,9 @@ public class PegawaiManagement extends javax.swing.JFrame {
             } catch (RemoteException ex) {
                 Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Data kurang lengkap");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
