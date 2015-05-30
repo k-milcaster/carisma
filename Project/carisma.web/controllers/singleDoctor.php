@@ -25,7 +25,7 @@ class singleDoctor extends Controller {
         <div class="about-grids">
             <div class="col-md-4">
                 <div class="about-grid n-about-grid n-about-grid1">
-                    <img src="' . URL . 'public/images/img2.jpg" title="name" />
+                    <img src="data:image/jpeg;base64,'.base64_encode( $value[15] ).'"/>
                     <span class="t-icon2"> </span>
                     <div class="about-grid-info text-center">
                         <h3><a href="#">' . $value[3] . '</a></h3>
