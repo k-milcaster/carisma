@@ -4,7 +4,7 @@ class singleDoctor extends Controller {
 
     function __construct() {
         parent::__construct();
-        Session::init();
+        Session::init();        
 //        $this->single();
     }
 

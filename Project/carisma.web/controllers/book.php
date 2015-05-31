@@ -91,10 +91,9 @@ class Book extends Controller {
                 foreach ($temp as $key => $value) {
                     $noAntrian = $value[0];
                 }
-                $noAntrian = $noAntrian + 1;
-                Redirect::notif($idDokter);
-                //$this->model->insertAntrian($id, $iduser, $idDokter, $noAntrian, 'ONLINE', $tgl);
-                
+                $noAntrian = $noAntrian + 1;                
+                $this->model->insertAntrian($id, $iduser, $idDokter, $noAntrian, 'ONLINE', $tgl);
+                $this->cetak($id);
             } else {
                 echo '<script language="javascript">';
                 echo 'alert("Anda sudah antri pada hari tersebut")';
@@ -102,6 +101,11 @@ class Book extends Controller {
                 Redirect::go('http://localhost/carisma.web/book/form/' . $idDokter);
             }
         }
+    }
+
+    public function cetak($param) {
+        $this->view->no = $param;
+        $this->view->render('doctor/cetak', 0, 0);
     }
 
 }
