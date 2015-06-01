@@ -1,0 +1,22 @@
+Story Card : Mengelola Absensi
+Skenario : Mengelola Absensi Dokter
+
+Controller -> getIdDokter() : List idDokter	                                                                    | assertTrue(resultListIdDokter)
+Entity     -> getDokter() : List idDokter	                                                                    | assertTrue(resultListIdDokter)
+Controller -> getTableAbsensiDokter() : DefaultTableModel tabelAbsensiDokter                                        | assertTrue(resultTableAbsensiDokter)
+Entity     -> getAbsensiDokter() : List absensiDokter                                                               | assertTrue(resultAbsensiDokter)
+Controller -> insertAbsensiDokter(idDokter, kehadiranReguler, kehadiranLembur, tanggalKehadiran) : boolean inserted | assertTrue(resultInserted)
+Entity     -> insertAbsensiDokter(absensiDokter) : boolean inserted                                                 | assertTrue(resultInserted)
+jOptionPane("Dokter xxxxx telah melakukan absensi")                                                                 | -
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Story Card : Mengelola Absensi
+Skenario : Mengelola Absensi Pegawai
+
+Controller -> getIdPegawai() : List idPegawai	                                                                      | assertTrue(resultListIdPegawai)
+Entity     -> getPegawai() : List idPegawai	                                                                      | assertTrue(resultListIdPegawai)
+Controller -> getTableAbsensiPegawai() : DefaultTableModel tabelAbsensiPegawai                                        | assertTrue(resultTableAbsensiPegawai)
+Entity     -> getAbsensiPegawai() : List absensiPegawai                                                               | assertTrue(resultAbsensiPegawai)
+Controller -> insertAbsensiPegawai(idPegawai, kehadiranReguler, kehadiranLembur, tanggalKehadiran) : boolean inserted | assertTrue(resultInserted)
+Entity     -> insertAbsensiPegawai(absensiPegawai) : boolean inserted                                                 | assertTrue(resultInserted)
+jOptionPane("Pegawai xxxxx telah melakukan absensi")
