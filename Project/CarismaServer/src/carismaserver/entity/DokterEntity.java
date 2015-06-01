@@ -244,6 +244,47 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
         }
     }
 
+    
+    //tambahan query dari fiqhi
+        @Override
+        public List<Dokter> getDokterByPoliAsc(String poli) throws RemoteException {
+        ui.act.append("Client Execute getDokterList \n");
+
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT d.id_dokter, d.nama_dokter, jad.`hari_jadwalpegawai`, jad.`shift_jadwalpegawai` FROM `jadwaldokter` AS j, dokter AS d, jadwal AS jad, poli AS p WHERE d.`id_dokter`=j.`dokter_id_dokter` AND jad.id=j.`jadwal_id` AND d.poli_id_poli = p.id_poli AND p.nama_poli = '"+poli+"' ORDER BY `jadwal_id` ASC ");
+
+            List<Dokter> list = new ArrayList<Dokter>();
+
+            while (result.next()) {
+                Dokter dokter = new Dokter();
+                
+                dokter.setIdDokter(result.getString(1));
+                dokter.setNamaDokter(result.getString(2));
+                dokter.setHp1Dokter(result.getString(3));
+                dokter.setHp2Dokter(result.getString(4));
+                
+                list.add(dokter);
+            }
+            result.close();
+            return list;
+
+        } catch (SQLException exception) {
+            ui.act.append("getDokterList Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+    
     @Override
     public String[] getIdNamaDokter(String username) throws RemoteException {
         ui.act.append("Client Execute getIdNamaDokter(" + username + ") \n");
