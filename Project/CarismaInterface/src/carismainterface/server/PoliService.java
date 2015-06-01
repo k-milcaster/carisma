@@ -20,7 +20,7 @@ public interface PoliService extends Remote{
 
     boolean updatePoli(Poli poli) throws RemoteException;
     
-    boolean deletePoli(String idpoli) throws RemoteException;
+    boolean deletePoli(Poli poli) throws RemoteException;
 
     Poli getPoli(String idpoli) throws RemoteException;
 

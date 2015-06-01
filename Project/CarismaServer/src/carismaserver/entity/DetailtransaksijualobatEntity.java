@@ -73,7 +73,7 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "UPDATE detailtransaksijualobat SET qty = ? "
-                    + "WHERE transaksijualobat_id_transaksijual = ? AND obat_id_obat = ?"
+                    + "WHERE transaksijualobat_id_transaksijualobat = ? AND obat_id_obat = ?"
             );
             statement.setString(2, detailtransaksijualobat.getTransaksijualobat());
             statement.setInt(3, detailtransaksijualobat.getObat());
@@ -133,7 +133,7 @@ public class DetailtransaksijualobatEntity extends UnicastRemoteObject implement
             Detailtransaksijualobat detailtransaksijualobat = null;
             if (result.next()) {
                 detailtransaksijualobat = new Detailtransaksijualobat();
-                detailtransaksijualobat.setTransaksijualobat(result.getString("transaksijualobat_transaksijual"));
+                detailtransaksijualobat.setTransaksijualobat(result.getString("transaksijualobat_transaksijualobat"));
                 detailtransaksijualobat.setObat(result.getInt("obat_id_obat"));
                 detailtransaksijualobat.setQty(result.getInt("qty"));
             }

@@ -21,8 +21,33 @@ public class ClientSocket {
     private UserService userService;
     private PembayaranService pembayaranService;
     private KunjunganService kunjunganService;
+
     public ClientSocket() throws RemoteException, NotBoundException {
         this.Connect();
+    }
+
+    public ClientSocket(String host, int port) throws RemoteException, NotBoundException {
+        this.host = host;
+        this.port = port;
+    }
+
+    public boolean testConnection() {
+        try {
+            Registry registry = null;
+            try {
+                registry = LocateRegistry.getRegistry(host, port);
+            } catch (RemoteException ex) {
+                Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            userService = (UserService) registry.lookup("userRequest");
+            return true;
+        } catch (RemoteException ex) {
+
+            return false;
+        } catch (NotBoundException ex) {
+
+            return false;
+        }
     }
 
     public void Connect() {
@@ -51,8 +76,8 @@ public class ClientSocket {
     public PembayaranService getPembayaranService() {
         return this.pembayaranService;
     }
-    
-    public KunjunganService getKunjunganService(){
+
+    public KunjunganService getKunjunganService() {
         return this.kunjunganService;
     }
 }

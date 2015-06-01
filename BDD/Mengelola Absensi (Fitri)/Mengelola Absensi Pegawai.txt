@@ -1,0 +1,12 @@
+Story Card : Mengelola Absensi
+Skenario : Mengelola Absensi Pegawai
+
+Given : Saya masuk pada menu Absensi
+When : Saya pilih menu Absensi Pegawai
+Then : Saya masuk pada antarmuka Absensi Pegawai
+Then : Saya memilih Id Pegawai dari combo box, memilih jenis Kehadiran dari radio button, dan tanggal kehadiran sudah diset otomatis
+When : Saya klik tombol Save
+Then : Saya Mendapat pertanyaan "Apakah data yang anda masukkan sudah benar?"
+When : Saya memilih tombol Yes
+Then : Data absensi Pegawai tersimpan dalam sistem
+And : Saya mendapatkan konfirmasi "Pegawai xxxxxxx Telah Melakukan Absensi"

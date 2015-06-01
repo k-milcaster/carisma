@@ -287,7 +287,7 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
                 control.insertDetailTransaksiBeliObat(id, Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 1))), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 3))));
                 control.updateStokObat(Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 1))), Integer.parseInt(String.valueOf(jTableOfBuys.getValueAt(i, 3))));
             }
-            JOptionPane.showMessageDialog(null, "Data Obat Sudah Tersimpan", "Obat", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Data Transaksi Pembelian Obat Sudah Tersimpan", "Obat", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } catch (Exception e) {
             System.out.println("Through Catch" + e);
@@ -306,7 +306,7 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
         try {
             control = new TransaksiBeliObatController(this.Client);
             if (fieldHargaBeli.getText().equals("") || fieldQuantity.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Data Transaksi Belum Lengkap", "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Data Transaksi Pembelian Obat Belum Lengkap", "Warning", JOptionPane.WARNING_MESSAGE);
             } else {
                 tableTransaksiBeliObat = (DefaultTableModel) jTableOfBuys.getModel();
                 String[] idObat = String.valueOf(boxNamaObat.getSelectedItem()).split(" ");

@@ -37,8 +37,8 @@ public class Rawatinap extends javax.swing.JFrame {
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        tablePasien = control.getNamaPasien(this);
-        tableKamar = control.getKamar(this);
+        tablelistpasien.setModel(control.getNamaPasien());
+        tablelistkamarpasien.setModel(control.getKamar());
         
         a = namapasien.getText();
         b = idpasien.getText();
@@ -285,10 +285,11 @@ public class Rawatinap extends javax.swing.JFrame {
 
     private void tablelistkamarpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistkamarpasienMouseClicked
          int row = tablelistkamarpasien.getSelectedRow();
-            idkamar.setText(String.valueOf(tableKamar.getValueAt(row, 0)));
-            namaKamar.setText(String.valueOf(tableKamar.getValueAt(row, 1)));
-            kelasKamar.setText(String.valueOf(tableKamar.getValueAt(row, 2)));
-            tarif.setText(String.valueOf(tableKamar.getValueAt(row, 3)));
+         
+            idkamar.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 0)));
+            namaKamar.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 1)));
+            kelasKamar.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 2)));
+            tarif.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 3)));
         /*RawatinapController ambilData;
         try {
             ambilData = new RawatinapController (client);
@@ -329,7 +330,7 @@ public class Rawatinap extends javax.swing.JFrame {
         try {
             RawatinapController control = new RawatinapController(client);
             model = control.getPasienbyName(carnampas.getText());
-            System.out.println(model);
+            //System.out.println(model);
             tablelistpasien.setModel(model);
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
@@ -342,13 +343,13 @@ public class Rawatinap extends javax.swing.JFrame {
         //lek default
         if (((a.equals(namapasien.getText())) && (b.equals(idpasien.getText()))  && (d.equals(namaKamar.getText()))
                 && (e.equals(kelasKamar.getText())) && (f.equals(tarif.getText())))) {
-            JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
+            JOptionPane.showMessageDialog(rootPane, "ada yang belum terisi", "Confirm", WIDTH);
             System.out.println("1");
 
         } //lek kosong
         else  if (((a.equals(namapasien.getText())) || (b.equals(idpasien.getText()))  || (d.equals(namaKamar.getText()))
                 && (e.equals(kelasKamar.getText())) || (f.equals(tarif.getText())))) {
-            JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
+            JOptionPane.showMessageDialog(rootPane, "ada yang belum terisi", "Confirm", WIDTH);
             System.out.println("2");
         } //         int tinggi,bert,umur;
        

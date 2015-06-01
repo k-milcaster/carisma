@@ -22,6 +22,7 @@ public class DataDokterController {
     private DokterService dokterService;
 
     public DataDokterController(ClientSocket client) throws RemoteException {
+        
         this.dokterService = client.getDokterService();
     }
 
@@ -33,6 +34,24 @@ public class DataDokterController {
         model.addColumn("Nama Dokter");
         for (int i = 0; i < list.size(); i++) {
             model.addRow(new Object[]{list.get(i).getIdDokter(), list.get(i).getNamaDokter()});
+        }
+        //ui.TabelDokter.setModel(model);
+        return model;
+    }
+    
+    
+        //tambahan fungsi sorting
+      public DefaultTableModel getDokterListByPoliAsc(String Poli) throws RemoteException {
+        List<Dokter> list = new ArrayList<Dokter>();
+        list = dokterService.getDokterByPoliAsc(Poli);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Dokter");
+        model.addColumn("Nama Dokter");
+        model.addColumn("Hari Kerja");
+        model.addColumn("Jam Kerja");
+        
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdDokter(), list.get(i).getNamaDokter(), list.get(i).getHp1Dokter(), list.get(i).getHp2Dokter()});
         }
         //ui.TabelDokter.setModel(model);
         return model;

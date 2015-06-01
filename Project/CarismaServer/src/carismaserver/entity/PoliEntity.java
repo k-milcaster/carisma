@@ -92,13 +92,13 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
     }
 
     @Override
-    public boolean deletePoli(String idpoli) throws RemoteException {
-        ui.act.append("Client Execute deletePoli (" + idpoli + ") \n");
+    public boolean deletePoli(Poli poli) throws RemoteException {
+        ui.act.append("Client Execute deletePoli (" + poli.getNamaPoli() + ") \n");
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "DELETE FROM poli WHERE id_poli = ?");
-            statement.setString(1, idpoli);
+            statement.setString(1, poli.getIdPoli());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -116,14 +116,14 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
     }
 
     @Override
-    public Poli getPoli(String idpoli) throws RemoteException {
-        ui.act.append("Client Execute getPoli (" + idpoli + ") \n");
+    public Poli getPoli(String namapoli) throws RemoteException {
+        ui.act.append("Client Execute getPoli (" + namapoli + ") \n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM `poli` WHERE id_poli = ?");
-            statement.setString(1, idpoli);
+                    "SELECT * FROM `poli` WHERE nama_poli = ?");
+            statement.setString(1, namapoli);
             ResultSet result = statement.executeQuery();
             Poli poli = null;
             if (result.next()) {

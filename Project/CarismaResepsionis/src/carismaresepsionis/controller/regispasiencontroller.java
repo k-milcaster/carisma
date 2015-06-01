@@ -122,18 +122,7 @@ public class regispasiencontroller {
         } 
     }
     
-     public void setComboBoxPoli(antrianoffline ua) {
-        List<Poli> list = new ArrayList();
-        try {
-            list = poliService.getPoli();
-        } catch (RemoteException ex) {
-            Logger.getLogger(regispasiencontroller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        for (int i = 0; i < list.size(); i++) {
-            ua.polidokter.addItem(list.get(i).getNamaPoli());
-            
-        } 
-    }
+  
     
     public int ambilidkota (int urutan){
        List<Kota> list = new ArrayList();

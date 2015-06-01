@@ -29,4 +29,21 @@ class Antrian_Model extends Model {
         return $statement->fetchAll();
     }
 
+    function cekOnce($pasien, $dokter, $tanggal) {
+        $statement = $this->db->prepare("SELECT * FROM antrian WHERE dokter_id_dokter = :dokter AND pasien_id_pasien = :pasien AND tgl_antrian = :tgl");
+        $statement->execute(array(':dokter' => $dokter,
+            ':pasien' => $pasien,
+            ':tgl' => $tanggal));
+        $temp = $statement->fetchAll();
+        $i = 0;
+        foreach ($temp as $key => $value) {
+            $i++;
+        }
+        if ($i > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

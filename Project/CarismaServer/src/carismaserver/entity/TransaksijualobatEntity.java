@@ -183,6 +183,31 @@ public class TransaksijualobatEntity extends UnicastRemoteObject implements Tran
             }
         }
     }
+    public String getLastIdTransaksiJualObat() throws RemoteException {
+          ui.act.append("Client Execute getLastIdTransaksiJualObat()");
+        
+        String lastIdTransaksiJualObat = " ";
+        PreparedStatement state = null;
+        try {
+            state = DatabaseConnection.getConnection().prepareStatement("SELECT MAX(`id_transaksijual`) FROM `transaksijualobat`");
+            ResultSet resultSet = state.executeQuery();
+            if (resultSet.next()) {
+                lastIdTransaksiJualObat = resultSet.getString(1);
+            }
+            return lastIdTransaksiJualObat;
+        } catch (SQLException exception) {
+            ui.act.append("getLastIdTransaksiJualObat\n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (state != null) {
+                try {
+                    state.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
     
     
 }

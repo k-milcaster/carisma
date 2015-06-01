@@ -55,19 +55,6 @@ public class AbsensiControllerTest {
     }
 
     /**
-     * Test of deleteAbsensiDokter method, of class AbsensiController.
-     */
-    @Test
-    public void testDeleteAbsensiDokter() throws Exception {
-        client = new ClientSocket();
-        System.out.println("deleteAbsensiDokter");
-        String idDokter = "DOK0404994";
-        AbsensiController instance = new AbsensiController(client);
-        boolean result = instance.deleteAbsensiDokter(idDokter);
-        assertTrue(result);
-    }
-
-    /**
      * Test of insertAbsensiPegawai method, of class AbsensiController.
      */
     @Test
@@ -80,19 +67,6 @@ public class AbsensiControllerTest {
         String tanggalKehadiran = "2015-05-15";
         AbsensiController instance = new AbsensiController(client);
         boolean result = instance.insertAbsensiPegawai(idPegawai, kehadiranReguler, kehadiranLembur, tanggalKehadiran);
-        assertTrue(result);
-    }
-
-    /**
-     * Test of deleteAbsensiPegawai method, of class AbsensiController.
-     */
-    @Test
-    public void testDeleteAbsensiPegawai() throws Exception {
-        client = new ClientSocket();
-        System.out.println("deleteAbsensiPegawai");
-        String idPegawai = "EMP19880319001";
-        AbsensiController instance = new AbsensiController(client);
-        boolean result = instance.deleteAbsensiPegawai(idPegawai);
         assertTrue(result);
     }
 

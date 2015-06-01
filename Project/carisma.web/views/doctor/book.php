@@ -9,19 +9,17 @@
                     <div class="col-md-5 contact-grid-left">
                         <h4>Booking details</h4>
                         <ul>
-                            <li><label>Booking ID : UIA0002</label></li>
-                            <li><label>Patient Name : PatientUIA</label></li>
-                            <li><label>Doctor Name : Doctor001</label></li>
-                            <li><label>Specialist : Pediatric</label></li>                            
+                            <li><label>Patient    : <?php echo $this->namaPasien; ?></label></li>
+                            <li><label>Doctor     : <?php echo $this->namaDokter; ?></label></li>
+                            <li><label>Specialist : <?php echo $this->poli; ?></label></li>                            
                         </ul>
                     </div>
                     <div class="col-md-7 contact-grid-right">
                         <h4>Available Date</h4>
-                        <form>
-                            <h2 style="color:whitesmoke"><input type="radio" name="av"> Date 1</h2><br>
-                            <h2 style="color:whitesmoke"><input type="radio" name="av"> Date 2</h2><br>
-                            <h2 style="color:whitesmoke"><input type="radio" name="av"> Date 3</h2><br>
-                            <h2 style="color:whitesmoke"><input type="radio" name="av"> Date 4</h2><br>
+                        <form method="POST" action="<?php echo URL; ?>book/doBook">
+                            <input type="hidden" name="idDokter" value="<?php echo $this->idDokter ?>">
+                            <input type="hidden" name="idDokter" value="<?php echo $this->idDokter ?>">
+                            <?php echo $this->choose; ?>
                             <input type="submit" value="SUBMIT" />
                         </form>
                     </div>

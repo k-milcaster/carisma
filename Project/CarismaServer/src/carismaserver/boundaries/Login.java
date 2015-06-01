@@ -1,6 +1,7 @@
 package carismaserver.boundaries;
 
 import carismaserver.controllers.LogIn;
+import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +37,11 @@ public class Login extends javax.swing.JFrame {
         username.setBounds(180, 350, 240, 40);
 
         password.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordKeyPressed(evt);
+            }
+        });
         getContentPane().add(password);
         password.setBounds(180, 400, 240, 40);
 
@@ -83,6 +89,13 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyPressed
+        //char c = evt.getKeyChar();
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+            loginButtonActionPerformed(null);
+        }
+    }//GEN-LAST:event_passwordKeyPressed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

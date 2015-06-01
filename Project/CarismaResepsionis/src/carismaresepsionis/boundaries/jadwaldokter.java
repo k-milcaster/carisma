@@ -31,20 +31,20 @@ public class jadwaldokter extends javax.swing.JFrame {
         System.out.println(jadwal.get(0).getHariJadwalpegawai());
         for (int i = 0; i < jadwal.size(); i++) {
             String hari = jadwal.get(i).getHariJadwalpegawai();
-            if (hari.equals("Senin")) {
+            if (hari.equals("SENIN")) {
                 senin.setText(jadwal.get(i).getShiftJadwalpegawai());
                 System.out.println(jadwal.get(i).getShiftJadwalpegawai()+" yang di GUI");
-            } else if (hari.equals("Selasa")) {
+            } else if (hari.equals("SELASA")) {
                 selasa.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("Rabu")) {
+            } else if (hari.equals("RABU")) {
                 rabu.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("Kamis")) {
+            } else if (hari.equals("KAMIS")) {
                 kamis.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("Jumat")) {
+            } else if (hari.equals("JUMAT")) {
                 jumat.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("Sabtu")) {
+            } else if (hari.equals("SABTU")) {
                 sabtu.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("Minggu")) {
+            } else if (hari.equals("MINGGU")) {
                 minggu.setText(jadwal.get(i).getShiftJadwalpegawai());
             }
 

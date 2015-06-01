@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +28,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
     private DefaultTableModel tablePasienRawat = new DefaultTableModel();
-    String a, b,bb,  c,c1,c2, d, e, f, g, h, i, j, k,l,m;
+    String a, b,bb,  c,c1, d, e, f, g, h, i, j, k,l,m;
     settergetter simpanan = new settergetter();
 
     /*String hitungumur() {
@@ -41,20 +42,24 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     public DaftarRawatInap(ClientSocket client, String userName) throws RemoteException {
         setJam();
         this.client = client;
-        DaftarRawatInapController control = new DaftarRawatInapController(this.client);
         this.userName = userName;
+        
+        
         initComponents();
+        
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        DaftarRawatInapController control = new DaftarRawatInapController(this.client);
         TabelPasien.setModel(control.getNamaPasienRawatInap());
- 
-        Tempat_ID.setEditable(false);
+        
+        
+        regDate.setEditable(false);
         //UmurPasien.setEditable(false);
         a = Nama_Pasien.getText();
         b = Tempat_Lahir.getText();
         bb = tglLahir.getText();
         c = Alamat.getText();
         c1 = Kota.getText();
-        c2 = Provinsi.getText();
+        //c2 = Provinsi.getText();
         d = No_Hp.getText();
         e = No_tele.getText();
         f = TinggiPasien.getText();
@@ -75,12 +80,11 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         Nama_Pasien = new javax.swing.JTextField();
         Tempat_Lahir = new javax.swing.JTextField();
         ID = new javax.swing.JLabel();
-        Tempat_ID = new javax.swing.JTextField();
+        regDate = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Alamat = new javax.swing.JTextArea();
         No_Hp = new javax.swing.JTextField();
         No_tele = new javax.swing.JTextField();
-        UmurPasien = new javax.swing.JTextField();
         TinggiPasien = new javax.swing.JTextField();
         BeratPasien = new javax.swing.JTextField();
         konfirmKeluar = new javax.swing.JButton();
@@ -98,25 +102,24 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         Jenis_Kartu = new javax.swing.JTextField();
         No_Kartu = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        tampilTanggal = new javax.swing.JLabel();
+        tanggalKeluar = new javax.swing.JLabel();
         tampilJam = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         tglLahir = new javax.swing.JTextField();
         Kota = new javax.swing.JTextField();
-        Provinsi = new javax.swing.JTextField();
         jenis_kelamin = new javax.swing.JTextField();
         goldar = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        Tempat_ID1 = new javax.swing.JTextField();
+        ID1 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -150,17 +153,17 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(Tempat_Lahir);
         Tempat_Lahir.setBounds(631, 288, 180, 32);
 
-        ID.setText("ID PASIEN");
+        ID.setText("TANGGAL REGISTRASI");
         getContentPane().add(ID);
-        ID.setBounds(1140, 110, 79, 32);
+        ID.setBounds(920, 110, 130, 32);
 
-        Tempat_ID.addActionListener(new java.awt.event.ActionListener() {
+        regDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Tempat_IDActionPerformed(evt);
+                regDateActionPerformed(evt);
             }
         });
-        getContentPane().add(Tempat_ID);
-        Tempat_ID.setBounds(1220, 110, 99, 32);
+        getContentPane().add(regDate);
+        regDate.setBounds(1050, 110, 99, 32);
 
         Alamat.setColumns(20);
         Alamat.setRows(5);
@@ -212,15 +215,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         });
         getContentPane().add(No_tele);
         No_tele.setBounds(1086, 326, 230, 32);
-
-        UmurPasien.setText("Umur");
-        UmurPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UmurPasienActionPerformed(evt);
-            }
-        });
-        getContentPane().add(UmurPasien);
-        UmurPasien.setBounds(1220, 560, 100, 32);
 
         TinggiPasien.setText("Tinggi Badan");
         TinggiPasien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -390,10 +384,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(630, 410, 100, 14);
 
-        jLabel9.setText("Provinsi");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(970, 480, 80, 14);
-
         jLabel10.setText("Golongan Darah");
         getContentPane().add(jLabel10);
         jLabel10.setBounds(780, 540, 90, 14);
@@ -405,10 +395,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         jLabel12.setText("Berat");
         getContentPane().add(jLabel12);
         jLabel12.setBounds(1090, 540, 40, 14);
-
-        jLabel13.setText("Umur");
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(1220, 540, 25, 14);
 
         Jenis_Kartu.setText("Jenis Kartu");
         Jenis_Kartu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -446,12 +432,12 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(jLabel16);
         jLabel16.setBounds(980, 380, 60, 14);
 
-        tampilTanggal.setBackground(new java.awt.Color(0, 0, 0));
-        tampilTanggal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tampilTanggal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tampilTanggal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tanggal", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, null, new java.awt.Color(0, 0, 0)));
-        getContentPane().add(tampilTanggal);
-        tampilTanggal.setBounds(1050, 50, 130, 40);
+        tanggalKeluar.setBackground(new java.awt.Color(0, 0, 0));
+        tanggalKeluar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tanggalKeluar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tanggalKeluar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tanggal", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, null, new java.awt.Color(0, 0, 0)));
+        getContentPane().add(tanggalKeluar);
+        tanggalKeluar.setBounds(1050, 50, 130, 40);
 
         tampilJam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tampilJam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -502,20 +488,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(Kota);
         Kota.setBounds(630, 500, 320, 30);
 
-        Provinsi.setText("Provinsi");
-        Provinsi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ProvinsiMouseClicked(evt);
-            }
-        });
-        Provinsi.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ProvinsiFocusGained(evt);
-            }
-        });
-        getContentPane().add(Provinsi);
-        Provinsi.setBounds(970, 500, 350, 30);
-
         jenis_kelamin.setText("Jenis Kelamin");
         jenis_kelamin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -552,9 +524,21 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(jLabel18);
         jLabel18.setBounds(630, 480, 80, 14);
 
+        Tempat_ID1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Tempat_ID1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Tempat_ID1);
+        Tempat_ID1.setBounds(740, 110, 99, 32);
+
+        ID1.setText("ID PASIEN");
+        getContentPane().add(ID1);
+        ID1.setBounds(630, 110, 79, 32);
+
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel19);
-        jLabel19.setBounds(4, 4, 1360, 690);
+        jLabel19.setBounds(0, 0, 1360, 690);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -659,14 +643,23 @@ public class DaftarRawatInap extends javax.swing.JFrame {
 
     private void konfirmKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_konfirmKeluarActionPerformed
         int select = TabelPasien.getSelectedRow();
-        DaftarRawatInapController kamar = new DaftarRawatInapController (client);
-        try {
-            String [] infokamar = {};
-            kamar.getNamaKelasKamarbyIdpasien(String.valueOf(tablePasienRawat.getValueAt(select, 0)));
-            System.out.println(infokamar[3]);
-            kamar.deletePasienKamar(infokamar[3]);
-        } catch (RemoteException ex) {
-            Logger.getLogger(DaftarRawatInap.class.getName()).log(Level.SEVERE, null, ex);
+        String dateOut = tanggalKeluar.getText();
+        int pilihan = JOptionPane.showConfirmDialog(null, "Yakin menghapus dari Daftar Rawat Inap?", "Konfirmasi Keluar", JOptionPane.YES_NO_OPTION);
+        
+        if (pilihan == 0) {
+            
+            
+        
+            try {
+                DaftarRawatInapController control = new DaftarRawatInapController (client);
+                String [] infokamar = control.getNamaKelasKamarbyIdpasien(String.valueOf(TabelPasien.getValueAt(select, 0)));
+                String idPinjam = String.valueOf(control.getPasienKamar(infokamar[0]).getIdPeminjaman());
+                control.deletePasienKamar(idPinjam);
+                control.insertDateOut(dateOut);
+                JOptionPane.showMessageDialog(null, "Berhasil", "Konfirmasi Keluar", JOptionPane.ERROR_MESSAGE);
+            } catch (RemoteException ex) {
+                Logger.getLogger(DaftarRawatInap.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_konfirmKeluarActionPerformed
 
@@ -738,32 +731,41 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private void TabelPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelPasienMouseClicked
         
         int row = TabelPasien.getSelectedRow();
-        DaftarRawatInapController kamar = new DaftarRawatInapController (client);
+        
+             // try {
+                 //String [] infokamar = {};
+                // infokamar = kamar.getNamaKelasKamarbyIdpasien(String.valueOf(TabelPasien.getValueAt(row, 0)));
+                 
+            //String idPas;
         try {
-            String [] infokamar = {};
-            infokamar = kamar.getNamaKelasKamarbyIdpasien(String.valueOf(TabelPasien.getValueAt(row, 0)));
-            
-            Tempat_ID.setText(String.valueOf(tablePasienRawat.getValueAt(row, 0)));
-            Kota.setText(String.valueOf(tablePasienRawat.getValueAt(row, 1)));
-            //Tempat_Lahir.setText(String.valueOf(tablePasienRawat.getValueAt(row, 2)));
-            Nama_Pasien.setText(String.valueOf(tablePasienRawat.getValueAt(row, 3)));
-            Alamat.setText(String.valueOf(tablePasienRawat.getValueAt(row, 4)));
-            Jenis_Kartu.setText(String.valueOf(tablePasienRawat.getValueAt(row, 5)));
-            No_Kartu.setText(String.valueOf(tablePasienRawat.getValueAt(row, 6)));
-            No_tele.setText(String.valueOf(tablePasienRawat.getValueAt(row, 7)));
-            No_Hp.setText(String.valueOf(tablePasienRawat.getValueAt(row, 8)));
-            Tempat_Lahir.setText(String.valueOf(tablePasienRawat.getValueAt(row, 9)));
-            tglLahir.setText(String.valueOf(tablePasienRawat.getValueAt(row, 10)));
-            jenis_kelamin.setText(String.valueOf(tablePasienRawat.getValueAt(row, 11)));
-            goldar.setText(String.valueOf(tablePasienRawat.getValueAt(row, 12)));
-            BeratPasien.setText(String.valueOf(tablePasienRawat.getValueAt(row, 13)));
-            TinggiPasien.setText(String.valueOf(tablePasienRawat.getValueAt(row, 14)));
-            Kamar.setText(infokamar[0]);
-            KelasKamar.setText(infokamar[1]);
-            
+            DaftarRawatInapController control = new DaftarRawatInapController (client);
+            String idPas = String.valueOf(TabelPasien.getValueAt(row, 0));
+            String [] infokamar = control.getNamaKelasKamarbyIdpasien(idPas);
+            Tempat_ID1.setText(String.valueOf(control.getIdPasien(idPas).getIdPasien()));
+            Kota.setText(String.valueOf(control.getIdPasien(idPas).getKotaIdKota()));
+            Nama_Pasien.setText(String.valueOf(control.getIdPasien(idPas).getNamaPasien()));
+            Alamat.setText(String.valueOf(control.getIdPasien(idPas).getAlamatPasien()));
+            Jenis_Kartu.setText(String.valueOf(control.getIdPasien(idPas).getKartupasien()));
+            No_Kartu.setText(String.valueOf(control.getIdPasien(idPas).getKartuidPasien()));
+            No_tele.setText(String.valueOf(control.getIdPasien(idPas).getTelpPasien()));
+            No_Hp.setText(String.valueOf(control.getIdPasien(idPas).getHpPasien()));
+            Tempat_Lahir.setText(String.valueOf(control.getIdPasien(idPas).getTempatlahirPasien()));
+            tglLahir.setText(String.valueOf(control.getIdPasien(idPas).getTgllahirPasien()));
+            jenis_kelamin.setText(String.valueOf(control.getIdPasien(idPas).getKelaminPasien()));
+            goldar.setText(String.valueOf(control.getIdPasien(idPas).getDarahPasien()));
+            BeratPasien.setText(String.valueOf(control.getIdPasien(idPas).getBeratPasien()));
+            TinggiPasien.setText(String.valueOf(control.getIdPasien(idPas).getTinggiPasien()));
+            regDate.setText(String.valueOf(control.getIdPasien(idPas).getRegdatePasien()));
+            Kamar.setText(String.valueOf(infokamar[1]));
+            KelasKamar.setText(String.valueOf(infokamar[2]));
         } catch (RemoteException ex) {
             Logger.getLogger(DaftarRawatInap.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+            //Kamar.setText(infokamar[0]);
+            //KelasKamar.setText(infokamar[1]);
+            
+      
        
     }//GEN-LAST:event_TabelPasienMouseClicked
 
@@ -777,9 +779,9 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_kembaliActionPerformed
 
-    private void Tempat_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tempat_IDActionPerformed
+    private void regDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Tempat_IDActionPerformed
+    }//GEN-LAST:event_regDateActionPerformed
 
     private void tglLahirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglLahirActionPerformed
         // TODO add your handling code here:
@@ -812,18 +814,6 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         } // TODO add your handling code here:
     }//GEN-LAST:event_KotaMouseClicked
 
-    private void ProvinsiFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ProvinsiFocusGained
-        if (c2.equals(Provinsi.getText())) {
-            Provinsi.setText("");
-        } // TODO add your handling code here:
-    }//GEN-LAST:event_ProvinsiFocusGained
-
-    private void ProvinsiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProvinsiMouseClicked
-        if (c2.equals(Provinsi.getText())) {
-            Provinsi.setText("");
-        }// TODO add your handling code here:
-    }//GEN-LAST:event_ProvinsiMouseClicked
-
     private void jenis_kelaminFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jenis_kelaminFocusGained
         if (l.equals(jenis_kelamin.getText())) {
             jenis_kelamin.setText("");
@@ -848,9 +838,9 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         }// TODO add your handling code here:
     }//GEN-LAST:event_goldarMouseClicked
 
-    private void UmurPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UmurPasienActionPerformed
+    private void Tempat_ID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tempat_ID1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UmurPasienActionPerformed
+    }//GEN-LAST:event_Tempat_ID1ActionPerformed
 public void setJam() {
     ActionListener taskPerformer = new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
@@ -904,7 +894,7 @@ public void setJam() {
         String tahun = nolTahun + Integer.toString(nilaiTahun);
         // Menampilkan pada Layar
         tampilJam.setText(jam+":"+menit+":"+detik);
-        tampilTanggal.setText(tahun+"-"+bulan+"-"+tanggal);
+        tanggalKeluar.setText(tahun+"-"+bulan+"-"+tanggal);
       }
     };
     // Timer
@@ -915,6 +905,7 @@ public void setJam() {
     private javax.swing.JTextField BeratPasien;
     private javax.swing.JTextField CariPasien;
     private javax.swing.JLabel ID;
+    private javax.swing.JLabel ID1;
     private javax.swing.JTextField Jenis_Kartu;
     private javax.swing.JTextField Kamar;
     private javax.swing.JTextField KelasKamar;
@@ -923,18 +914,15 @@ public void setJam() {
     private javax.swing.JTextField No_Hp;
     private javax.swing.JTextField No_Kartu;
     private javax.swing.JTextField No_tele;
-    private javax.swing.JTextField Provinsi;
     public javax.swing.JTable TabelPasien;
-    private javax.swing.JTextField Tempat_ID;
+    private javax.swing.JTextField Tempat_ID1;
     private javax.swing.JTextField Tempat_Lahir;
     private javax.swing.JTextField TinggiPasien;
-    private javax.swing.JTextField UmurPasien;
     private javax.swing.JTextField goldar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -948,14 +936,14 @@ public void setJam() {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jenis_kelamin;
     private javax.swing.JButton kembali;
     private javax.swing.JButton konfirmKeluar;
+    private javax.swing.JTextField regDate;
     private javax.swing.JLabel tampilJam;
-    private javax.swing.JLabel tampilTanggal;
+    private javax.swing.JLabel tanggalKeluar;
     private javax.swing.JTextField tglLahir;
     // End of variables declaration//GEN-END:variables
 }

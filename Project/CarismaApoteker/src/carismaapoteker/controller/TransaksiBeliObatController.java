@@ -108,13 +108,13 @@ public class TransaksiBeliObatController {
     }
     
     public int getidDetailObat() throws RemoteException{
-        int lastIdDetailObat = detailobatService.getLastIdDetailObat() + 1;
-        return lastIdDetailObat;
+        int idDetailObatFix = detailobatService.getLastIdDetailObat() + 1;
+        return idDetailObatFix;
     }
     
     public int getidObat() throws RemoteException{
-        int lastIdObat = obatService.getLastIdObat() +1;
-        return lastIdObat;    
+        int idObatFix = obatService.getLastIdObat() +1;
+        return idObatFix;    
     }
     
     public String[] getNamaPegawai (String username) throws RemoteException{

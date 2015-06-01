@@ -25,6 +25,5 @@ public interface ObatService extends Remote {
     int getLastIdObat() throws RemoteException;
     
     boolean updateQtyObat(int id, int qty) throws RemoteException;
-    
-    int cekStokObat(int idObat)throws RemoteException;
+  
 }

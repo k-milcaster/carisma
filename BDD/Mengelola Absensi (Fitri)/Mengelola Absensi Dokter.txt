@@ -1,0 +1,12 @@
+Story Card : Mengelola Absensi
+Skenario : Mengelola Absensi Dokter
+
+Given : Saya masuk pada menu Absensi
+When : Saya pilih menu Absensi Dokter
+Then : Saya masuk pada antarmuka Absensi Dokter
+Then : Saya memilih Id Dokter dari combo box, memilih jenis Kehadiran dari radio button, dan tanggal kehadiran sudah diset        otomatis
+When : Saya klik tombol Save
+Then : Saya Mendapat pertanyaan "Apakah data yang anda masukkan sudah benar?"
+When : Saya memilih tombol Yes
+Then : Data absensi dokter tersimpan dalam sistem
+And : Saya mendapatkan konfirmasi "Dokter xxxxxxx Telah Melakukan Absensi"

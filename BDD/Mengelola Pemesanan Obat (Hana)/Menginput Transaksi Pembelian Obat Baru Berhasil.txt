@@ -1,0 +1,47 @@
+Fitur: Mengelola Pemesanan Obat
+Skenario: Menginput Transaksi Pembelian Obat Baru Berhasil
+
+Given apoteker masuk ke menu utama apoteker
+When apoteker memilih transaksi pembelian
+Then apoteker berada pada menu transaksi pembelian obat
+And nama apoteker muncul dilayar
+And tanggal hari ini muncul pada field tanggal beli obat
+And list nama obat muncul pada box nama obat
+When apoteker mengklik button obat baru
+Then apoteker berada pada menu insert obat baru 
+When apoteker menginput nama obat
+And apoteker menginput jenis obat
+And apoteker menginput keterangan
+And apoteker menginput harga jual
+And apoteker menginput stok ktitis
+And menglik button add
+Then nama obat muncul ditabel
+And qty obat muncul ditabel
+And jenis obat muncul ditabel
+And keterangan muncul ditabel
+And harga jual muncul ditabel
+And stok kritis muncul ditabel
+When apoteker mengklik button save
+Then muncul pesan Data Obat Sudah Tersimpan
+And data obat tersimpan pada database
+When apoteker klik ok
+Then apoteker berada pada menu transaksi pembelian obat
+And id dan nama obat baru yang diinputkan tadi muncul pada box nama obat
+When apoteker menginputkan nama obat
+And apoteker menginputkan harga beli
+And apoteker menginputkan quantity
+And apoteker menginputkan tanggal kadaluarsa
+And apoteker menginputkan keterangan
+And mengklik button add
+Then tanggal beli obat muncul ditabel
+And id obat muncul ditabel
+And harga beli muncul ditabel
+And quantity muncul ditabel
+And tanggal kadaluarsa muncul ditabel
+And keterangan muncul ditabel
+When apoteker mengklik button save
+Then muncul pesan Data Obat Sudah Tersimpan
+And data transaksi pembelian obat tersimpan di database
+And data detail transaksi pembelian obat tersimpan di database
+And data obat terupdate pada database
+And data detail obat tersimpan pada database

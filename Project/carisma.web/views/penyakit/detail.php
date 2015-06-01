@@ -1,6 +1,5 @@
 
 
-
 <div id="about" class="about">
     <div class="container">
         <div class="header about-header text-center">
@@ -17,7 +16,7 @@
                         <h3><a href="https://www.facebook.com/indra.kharisma.r"><?php
                 echo  Session::get('id');
                 ?></a></h3>
-                        <p>Deskripsi Penyakit <?php echo $this->judul ?></p>
+                        <p>Deskripsi Penyakit </p>
                     </div>
                 </div>
             </div>
@@ -25,16 +24,26 @@
                 
                 
                     <div class="about-grid-info text-center">
+                      
+                        
                         <table >
                             <tr>
                                 <td>
-                                   <?php echo $this->judul ?>
+                                    Nomor
                                 </td>
-                                
+                                <td >
+                                     Nama Penyakit
+                                </td>
+                                <td>
+                                    deskripsi Penyakit
+                                </td>
                             </tr>
-                            
-<?php echo $this->isi ?> 
+                            <?php echo $this->isi ?>
+ 
                         </table>
+                        
+                        
+                        
                     </div>
                 </div>
             </div>

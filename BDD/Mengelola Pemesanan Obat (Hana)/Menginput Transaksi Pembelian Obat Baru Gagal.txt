@@ -1,0 +1,17 @@
+Fitur: Mengelola Pemesanan Obat
+Skenario: Menginput Transaksi Pembelian Obat Baru Gagal
+
+Given apoteker masuk ke menu utama apoteker
+When apoteker memilih transaksi pembelian
+Then apoteker berada pada menu transaksi pembelian obat
+And nama apoteker muncul dilayar
+And tanggal hari ini muncul pada field tanggal beli obat
+And list nama obat muncul pada box nama obat
+When apoteker mengklik button obat baru
+Then apoteker berada pada menu insert obat baru 
+When apoteker menginput nama obat
+And apoteker menginput jenis obat
+And apoteker menginput keterangan
+And apoteker menginput stok ktitis
+And menglik button add
+Then muncul pesan Data Obat Belum Lengkap

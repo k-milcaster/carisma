@@ -23,6 +23,7 @@ public class MenuApoteker extends javax.swing.JFrame {
         initComponents();
         namaPegawai = controller.getNamaPegawai(userName);
         labelApoteker.setText(namaPegawai[0]);
+        setSize(515, 535);
         setLocationRelativeTo(this);
     }
 
@@ -41,7 +42,7 @@ public class MenuApoteker extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Apoteker", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
@@ -62,7 +63,8 @@ public class MenuApoteker extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 50, 212, 57);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tanggal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
@@ -89,7 +91,8 @@ public class MenuApoteker extends javax.swing.JFrame {
                 .addGap(0, 1, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(310, 50, 183, 59);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "MENU", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18))); // NOI18N
@@ -142,10 +145,12 @@ public class MenuApoteker extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, -1));
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(140, 160, 212, 258);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/Menu Absensi.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, -1));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 500, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

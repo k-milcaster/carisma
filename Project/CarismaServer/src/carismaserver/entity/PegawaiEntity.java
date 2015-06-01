@@ -30,7 +30,7 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
      
     
     @Override
-    public void insertPegawai(Pegawai pegawai) throws RemoteException {
+    public boolean insertPegawai(Pegawai pegawai) throws RemoteException {
         ui.act.append("Client Execute insertPegawai " + pegawai.getIdPegawai() + "\n");
 
         PreparedStatement statement = null;
@@ -39,7 +39,6 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
                     "INSERT INTO pegawai (jabatan_pegawai, user_id_user, id_pegawai, nama_pegawai, alamat_pegawai, nokartuid_pegawai, telp_pegawai, hp1_pegawai, hp2_pegawai, tempatlahir_pegawai, tgllahir_pegawai, kelamin_pegawai, darah_pegawai, bank_pegawai, norek_pegawai, foto_pegawai, gajifix_pegawai, gajilembur_pegawai) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
             );
             statement.setString(1, pegawai.getJabatanPegawai());
-            //statement.setInt(2, Integer.parseInt((pegawai.getUserIdUser()).toString()));
             statement.setInt(2, pegawai.getUserIdUser());
             statement.setString(3, pegawai.getIdPegawai());
             statement.setString(4, pegawai.getNamaPegawai());
@@ -58,9 +57,11 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
             statement.setInt(17, pegawai.getGajifixPegawai());
             statement.setInt(18, pegawai.getGajilemburPegawai());
             statement.executeUpdate();
+            return true;
         } catch (SQLException exception) {
             ui.act.append("InsertUser Error \n");
             ui.act.append(exception.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -73,7 +74,7 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
     }
 
     @Override
-    public void updatePegawai(Pegawai pegawai) throws RemoteException {
+    public boolean updatePegawai(Pegawai pegawai) throws RemoteException {
         ui.act.append("Client Execute updateCustomers(" + pegawai.toString() + ") \n");
 
         PreparedStatement statement = null;
@@ -104,10 +105,11 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
             statement.setInt(17, pegawai.getGajilemburPegawai());
             //System.out.println(statement);
             statement.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             ui.act.append("UpdatePegawai Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -119,7 +121,7 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
     }
 
     @Override
-    public void deletePegawai(String pegawai) throws RemoteException {
+    public boolean deletePegawai(String pegawai) throws RemoteException {
         ui.act.append("Client Execute deleteUser (" + pegawai+ ") \n");
         PreparedStatement statement = null;
         try {
@@ -127,9 +129,11 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
                     "DELETE FROM pegawai WHERE id_pegawai = ?");
             statement.setString(1, pegawai);
             statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             ui.act.append("deletePegawai Error \n");
             ui.act.append(e.toString());
+            return false;
         } finally {
             if (statement != null) {
                 try {
@@ -141,14 +145,14 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
     }
 
     @Override
-    public Pegawai getPegawai(String staff) throws RemoteException {
-        ui.act.append("Client Execute getPegawai (" + staff + ") \n");
+    public Pegawai getPegawai(String namapegawai) throws RemoteException {
+        ui.act.append("Client Execute getPegawai (" + namapegawai + ") \n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "SELECT * FROM pegawai WHERE nama_pegawai = ?");
-            statement.setString(1, staff);
+            statement.setString(1, namapegawai);
             ResultSet result = statement.executeQuery();
             Pegawai pegawai = null;
             if (result.next()) {
@@ -170,6 +174,7 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
                 pegawai.setNorekPegawai(result.getString("norek_pegawai"));
                 pegawai.setGajifixPegawai(result.getInt("gajifix_pegawai"));
                 pegawai.setGajilemburPegawai(result.getInt("gajilembur_pegawai"));
+                pegawai.setFotoPegawai(result.getBytes("foto_pegawai"));
             }
             System.out.println("here is getPegawai");
             return pegawai;

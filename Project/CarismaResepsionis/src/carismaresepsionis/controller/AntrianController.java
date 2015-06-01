@@ -67,6 +67,7 @@ public class AntrianController extends Thread {
         return antrianService.antrianTidakHadir(idAntrian);
     }
 
+    //tambahan disini
     public DefaultTableModel getAntrian() throws RemoteException {
         List<Antrian> list = new ArrayList<Antrian>();
         list = antrianService.getAntrian();
@@ -74,6 +75,8 @@ public class AntrianController extends Thread {
         tabelAntrian.addColumn("No Antrian");
         tabelAntrian.addColumn("Id");
         tabelAntrian.addColumn("Nama Pasien");
+        tabelAntrian.addColumn("Poli");
+        tabelAntrian.addColumn("Dokter");
         for (int i = 0; i < list.size(); i++) {
             tabelAntrian.addRow(new Object[]{list.get(i).getNomorAntrian(), list.get(i).getIdAntrian(), pasienService.getPasien(list.get(i).getPasienIdPasien()).getNamaPasien()});
         }
@@ -94,8 +97,4 @@ public class AntrianController extends Thread {
         Kunjungan kunjungan = kunjunganService.getKunjungan(idKunjungan);
         return kunjungan;
     }
-    
-//    public String tglTerakhirKunjungan(String idPasien) throws RemoteException{
-//        return kunjunganService.TerakhirPeriksa(idPasien);
-//    }
 }

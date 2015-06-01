@@ -1,5 +1,6 @@
 package carismadokter.boundaries;
 
+import carismadokter.controller.AntrianController;
 import carismadokter.controller.ClientSocket;
 import carismadokter.controller.IsiRekamMedisController;
 import carismadokter.controller.LoginController;
@@ -23,10 +24,12 @@ public class isirekammedis extends javax.swing.JFrame {
     private UserService login;
     private String username;
     public String idResep;
-
+    public String idAntrian;
+            
     public isirekammedis(ClientSocket client, final String username) throws RemoteException {
         this.client = client;
         IsiRekamMedisController isiRekamMedisController = new IsiRekamMedisController(this.client);
+        
         this.login = this.client.getUserService();
         this.username = username;
 
@@ -604,12 +607,14 @@ public class isirekammedis extends javax.swing.JFrame {
         } else {
             try {
                 IsiRekamMedisController rekamMedisController = new IsiRekamMedisController(client);
+                AntrianController antrianController = new AntrianController(client);
 
                 int pilihan = JOptionPane.showConfirmDialog(null, "Apakah Data yang Anda Isi Sudah Benar?", "Rekam Medis", JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
                     boolean insertRekamMedis = false;
                     boolean insertRekamMedisPenyakit = false;
                     boolean insertKunjungan = false;
+                    boolean antrianHadir = false;
 
                     insertRekamMedis = rekamMedisController.insertRekamMedis(fieldIdRekamMedis.getText(), fieldIdDokter.getText(), fieldIdPasien.getText(), String.valueOf(new java.sql.Date(dateRekamMedis.getDate().getTime())),
                             textAreaKeluhan.getText(), textAreaPemeriksaan.getText(), textAreaTerapi.getText(), textAreaAlergiObat.getText(),
@@ -625,6 +630,8 @@ public class isirekammedis extends javax.swing.JFrame {
                     if (insertKunjungan == true && insertRekamMedis == true && insertRekamMedisPenyakit == true) {
                         JOptionPane.showMessageDialog(null, "Data Rekam Medis Sudah Tersimpan", "Rekam Medik", JOptionPane.INFORMATION_MESSAGE);
                         clearField();
+                        //panggil antrianhadir
+                        antrianHadir = antrianController.antrianHadir(idAntrian); 
                         fieldIdRekamMedis.setText(rekamMedisController.getIdRekamMedis());
                     } else {
                         JOptionPane.showMessageDialog(null, "Data Rekam Medik Tidak Dapat Disimpan", "Rekam Medik", JOptionPane.ERROR_MESSAGE);

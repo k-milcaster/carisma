@@ -8,8 +8,10 @@ class dashboard extends Controller {
         if (Session::get('id') != NULL) {
             $this->index();
         } else {
+            $this->view->ini = "Anda perlu log in untuk mengakses halaman yang anda tuju";
             $this->view->title = "Login";
             $this->view->render('login/index', 1, 0);
+            die();
         }
     }
 
@@ -17,8 +19,8 @@ class dashboard extends Controller {
         $this->loadModel("Kunjungan");
         $username = Session::get('id');
         $password = Session::get('pas');
-        
-        $rak = $this->model->getkunjunganpasien($username,$password);
+
+        $rak = $this->model->getkunjunganpasien($username, $password);
 
         $masukindums = "";
         $i = 1;
@@ -29,17 +31,17 @@ class dashboard extends Controller {
             $masukindums = $masukindums . '
                             <tr>
                                 <td >
-                                    '.$value[0] .'
+                                    ' . $value[0] . '
                                 </td>
                                 <td>
-                                    '.$value[1].'
+                                    ' . $value[1] . '
                                 </td>
                                 <td>
-                                    '.$value[2].'
+                                    ' . $value[2] . '
                                 </td>
                             </tr>';
         }
-        $this->view->ini=$masukindums;
+        $this->view->ini = $masukindums;
         $this->view->title = "Dashboard";
         $this->view->render('dashboard/index', 1, 0);
     }

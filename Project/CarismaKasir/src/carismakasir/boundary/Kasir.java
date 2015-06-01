@@ -17,11 +17,11 @@ import javax.swing.JOptionPane;
  * @author User
  */
 public class Kasir extends javax.swing.JFrame {
-    
+
     private ClientSocket client;
     private UserService login;
     private KasirController control;
-    
+
     public Kasir(ClientSocket client, final String username) {
         this.client = client;
         this.login = client.getUserService();
@@ -41,7 +41,7 @@ public class Kasir extends javax.swing.JFrame {
             }
         });
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -256,7 +256,7 @@ public class Kasir extends javax.swing.JFrame {
 
     private void buttonShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowActionPerformed
         if (fieldKunjungan.getText().equalsIgnoreCase("")) {
-            
+
         } else {
             try {
                 jTable1.setModel(control.showBiaya(fieldKunjungan.getText()));
@@ -273,17 +273,22 @@ public class Kasir extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonShowActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {            
-            boolean pembayaranDone = control.doBayar(Integer.parseInt(jTextField6.getText()), Integer.parseInt(fieldTotal.getText()));
-            if (pembayaranDone) {
-                jTextField7.setText(Integer.parseInt(jTextField6.getText()) - Integer.parseInt(fieldTotal.getText()) + "");
-                control.cetak();                
-            } else {
+        if ((!jTextField6.getText().equalsIgnoreCase("")) && (!fieldTotal.getText().equalsIgnoreCase(""))) {
+            try {
+                boolean pembayaranDone = control.doBayar(Integer.parseInt(jTextField6.getText()), Integer.parseInt(fieldTotal.getText()));
+                if (pembayaranDone) {
+                    jTextField7.setText(Integer.parseInt(jTextField6.getText()) - Integer.parseInt(fieldTotal.getText()) + "");
+                    control.cetak();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nominal pembayaran salah");
+                }
+            } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "Nominal pembayaran salah");
             }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Kasir.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nominal pembayaran salah");
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

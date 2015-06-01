@@ -44,6 +44,8 @@ public class Menursepsionis extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
         Namanya.setText(String.valueOf(this.userName));
+//        tableAntri = control.getAntrian();
+        tableDaftarAntrian.setModel(control.getAntrian());
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 LoginController log = new LoginController(userService, userName);
@@ -58,39 +60,39 @@ public class Menursepsionis extends javax.swing.JFrame {
     }
 
     
-      public Menursepsionis(ClientSocket client, String username, String idPasien, String namaPasien) throws RemoteException {
-        this.client = client;
-        this.userName = username;
-        control = new AntrianController(this.client, this);
-        ps = client.getPasienService();
-        kamarService = client.getKamarService();
-        userService = client.getUserService();
-        initComponents();
-        control.start();
-        
-        this.setExtendedState(this.MAXIMIZED_BOTH);
-        Namanya.setEditable(false);
-        Namanya.setText(username);
-        Object rowData[] = new Object[3]; 
-          System.out.println("PASIEN = "+idPasien);
-          System.out.println("NAMA PASIEN = "+namaPasien);
-        rowData[0]=tableDaftarAntrian.getRowCount()+1;
-        rowData[1]=idPasien;
-        rowData[2]=namaPasien;
-        tableAntri.addRow(rowData);
-        tableDaftarAntrian.setModel(tableAntri);
-        this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                LoginController log = new LoginController(userService, userName);
-                try {
-                    log.logOut();
-                } catch (RemoteException ex) {
-                    Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        //   tanggalkustom();
-    }
+//      public Menursepsionis(ClientSocket client, String username, String idPasien, String namaPasien) throws RemoteException {
+//        this.client = client;
+//        this.userName = username;
+//        control = new AntrianController(this.client, this);
+//        ps = client.getPasienService();
+//        kamarService = client.getKamarService();
+//        userService = client.getUserService();
+//        initComponents();
+//        control.start();
+//        
+//        this.setExtendedState(this.MAXIMIZED_BOTH);
+//        Namanya.setEditable(false);
+//        Namanya.setText(username);
+////        Object rowData[] = new Object[3]; 
+////          System.out.println("PASIEN = "+idPasien);
+////          System.out.println("NAMA PASIEN = "+namaPasien);
+////        rowData[0]=tableDaftarAntrian.getRowCount()+1;
+////        rowData[1]=idPasien;
+////        rowData[2]=namaPasien;
+////        tableAntri.addRow(rowData);
+////        tableDaftarAntrian.setModel(tableAntri);
+//        this.addWindowListener(new WindowAdapter() {
+//            public void windowClosing(WindowEvent e) {
+//                LoginController log = new LoginController(userService, userName);
+//                try {
+//                    log.logOut();
+//                } catch (RemoteException ex) {
+//                    Logger.getLogger(Menursepsionis.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        });
+//        //   tanggalkustom();
+//    }
         
         
     @SuppressWarnings("unchecked")
@@ -245,7 +247,7 @@ public class Menursepsionis extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1090, 610);
+        jLabel2.setBounds(0, -10, 1360, 720);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

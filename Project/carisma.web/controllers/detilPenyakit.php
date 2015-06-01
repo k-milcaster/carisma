@@ -16,22 +16,38 @@ class detilPenyakit extends Controller {
         $us = $_POST['masukan'];
         
         $this->loadModel("Penyakit");
-        $ambil = $this->model->getpenyakit($us);
+        $ambil = $this->model->getgrouppedpenyakit($us);
         $masukindums = '';
-        $masukan;
+       
+        
+        $i=1;
         foreach ($ambil as $key => $value) {
            $masukindums = $masukindums . '
+                            
+                    
                             <tr>
+                            <td >
+                                    '.$i .'
+                                </td>
+                                <td >
+                                    '.$value[0] .'
+                                </td>
                                 <td >
                                     '.$value[1] .'
                                 </td>
                               
-                            </tr>';
+                            </tr>
+
+                    ';
            $masukan = $value[0];
+           $i++;
         }
-        $this->view->judul=$masukan;
+//        $this->view->judul=$masukan;
         $this->view->isi=$masukindums;
         $this->view->title = "Service";
         $this->view->render('penyakit/detail', 1, 0);
     }
 }
+
+
+//

@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import carismaserver.controllers.ServerSocket;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,9 +15,10 @@ import java.sql.SQLException;
 public class Main extends javax.swing.JFrame {
 
     private ServerSocket socket;
-
+    private String administrator = "";
     public Main(String administrator) {
         initComponents();
+        this.administrator = administrator;
         this.setLocationRelativeTo(null);
         this.who.setText(administrator);
         this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -42,12 +44,12 @@ public class Main extends javax.swing.JFrame {
         iPLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         portLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        userButton = new javax.swing.JButton();
+        doctorButton = new javax.swing.JButton();
+        staffButton = new javax.swing.JButton();
+        poliButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         loggedInList = new javax.swing.JList();
@@ -104,44 +106,49 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(portLabel);
         portLabel.setBounds(740, 170, 90, 30);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428233228_conference.png"))); // NOI18N
-        jButton1.setText("User Management");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        userButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        userButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428233228_conference.png"))); // NOI18N
+        userButton.setText("User Management");
+        userButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                userButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(640, 280, 190, 40);
+        getContentPane().add(userButton);
+        userButton.setBounds(640, 280, 190, 40);
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428233388_doctor.png"))); // NOI18N
-        jButton4.setText("Doctor Management");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        doctorButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        doctorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428233388_doctor.png"))); // NOI18N
+        doctorButton.setText("Doctor Management");
+        doctorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                doctorButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(640, 330, 190, 40);
+        getContentPane().add(doctorButton);
+        doctorButton.setBounds(640, 330, 190, 40);
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428233519_icon-ios7-people-32.png"))); // NOI18N
-        jButton5.setText("Staff Management");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        staffButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        staffButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428233519_icon-ios7-people-32.png"))); // NOI18N
+        staffButton.setText("Staff Management");
+        staffButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                staffButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5);
-        jButton5.setBounds(640, 380, 190, 40);
+        getContentPane().add(staffButton);
+        staffButton.setBounds(640, 380, 190, 40);
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428233570_doctor_suitecase.png"))); // NOI18N
-        jButton6.setText("Poli Management");
-        getContentPane().add(jButton6);
-        jButton6.setBounds(640, 430, 190, 40);
+        poliButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        poliButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428233570_doctor_suitecase.png"))); // NOI18N
+        poliButton.setText("Poli Management");
+        poliButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                poliButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(poliButton);
+        poliButton.setBounds(640, 430, 190, 40);
 
         jLabel7.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,11 +156,16 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(70, 30, 120, 50);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428228543_unlock.png"))); // NOI18N
-        jButton2.setText("Log Out");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(850, 590, 130, 50);
+        logoutButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        logoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428228543_unlock.png"))); // NOI18N
+        logoutButton.setText("Log Out");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logoutButton);
+        logoutButton.setBounds(850, 590, 130, 50);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -186,15 +198,15 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userButtonActionPerformed
         try {
             new UserManagement(this).show();
         } catch (RemoteException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_userButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void doctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorButtonActionPerformed
         try {
             new DokterManagement(this).show();
         } catch (RemoteException ex) {
@@ -202,9 +214,9 @@ public class Main extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_doctorButtonActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void staffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffButtonActionPerformed
         try {
             new PegawaiManagement(this).show();
         } catch (RemoteException ex) {
@@ -212,7 +224,24 @@ public class Main extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_staffButtonActionPerformed
+
+    private void poliButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poliButtonActionPerformed
+        try {
+            new PoliManagement(this).show();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }//GEN-LAST:event_poliButtonActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        this.dispose();
+        new Login().setVisible(true);
+        JOptionPane.showMessageDialog(this, "Terima kasih "+administrator+"\nHave a nice day :)", "LogOut", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,12 +249,8 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextArea act;
+    private javax.swing.JButton doctorButton;
     public javax.swing.JLabel iPLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -237,7 +262,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JList loggedInList;
+    private javax.swing.JButton logoutButton;
+    private javax.swing.JButton poliButton;
     public javax.swing.JLabel portLabel;
+    private javax.swing.JButton staffButton;
+    private javax.swing.JButton userButton;
     private javax.swing.JLabel who;
     // End of variables declaration//GEN-END:variables
 }
