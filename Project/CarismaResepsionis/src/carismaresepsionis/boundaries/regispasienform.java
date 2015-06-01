@@ -136,6 +136,8 @@ public class regispasienform extends javax.swing.JFrame {
         ID.setText("ID PASIEN");
         getContentPane().add(ID);
         ID.setBounds(1080, 90, 79, 32);
+
+        Tempat_ID.setText("DN15050123");
         getContentPane().add(Tempat_ID);
         Tempat_ID.setBounds(1170, 90, 99, 32);
 
@@ -242,7 +244,7 @@ public class regispasienform extends javax.swing.JFrame {
         getContentPane().add(TambahAntri);
         TambahAntri.setBounds(310, 540, 170, 40);
 
-        Kartu_id.setText("Kartu Id Pasien");
+        Kartu_id.setText("KTP Pasien");
         Kartu_id.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Kartu_idMouseClicked(evt);
@@ -590,7 +592,7 @@ public class regispasienform extends javax.swing.JFrame {
 
     private void TambahAntriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahAntriActionPerformed
         try {
-            new antrianoffline(this.client, userName, tabelpasien.getValueAt(tabelpasien.getSelectedRow(), 0).toString(),tabelpasien.getValueAt(tabelpasien.getSelectedRow(), 1).toString()).show();
+            new antrianoffline(this.client, userName, tabelpasien.getValueAt(tabelpasien.getSelectedRow(), 0).toString(), tabelpasien.getValueAt(tabelpasien.getSelectedRow(), 1).toString()).show();
     //        System.out.println(tabelpasien.getValueAt(tabelpasien.getSelectedRow(), 0).toString());
         } catch (RemoteException ex) {
             Logger.getLogger(regispasienform.class.getName()).log(Level.SEVERE, null, ex);

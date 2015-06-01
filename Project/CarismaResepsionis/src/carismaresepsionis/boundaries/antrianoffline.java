@@ -8,7 +8,9 @@ import carismainterface.server.DokterService;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.DataDokterController;
 import carismaresepsionis.controller.regispasiencontroller;
+import carismaresepsionis.controller.AntrianOfflineController;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -21,9 +23,11 @@ public class antrianoffline extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
     private regispasiencontroller registrasicontrol;
+    private AntrianOfflineController antrianofflinecontrol;
     private DokterService ds;
     private DefaultTableModel tabeldokter = new DefaultTableModel();
     private DataDokterController DataDokterController;
+    DataDokterController control;
     /**
      * Creates new form antrianoffline
      */
@@ -34,8 +38,8 @@ public class antrianoffline extends javax.swing.JFrame {
          initComponents();
          this.client = client;
          registrasicontrol = new regispasiencontroller(this.client);
-         
-         registrasicontrol.setComboBoxPoli(this);
+         antrianofflinecontrol = new AntrianOfflineController(this.client);
+         antrianofflinecontrol.setComboBoxPoli(this);
          idpasien.setText(idPasien);
          namapasien.setText(namaPasien);
          this.userName=username;
@@ -43,10 +47,10 @@ public class antrianoffline extends javax.swing.JFrame {
          
          
 //          this.client = client;
-        DataDokterController control = new DataDokterController(this.client);
+          control = new DataDokterController(this.client);
 //        ds = client.getDokterService();
 //        this.userName = userName; 
-        tabeldokter_.setModel(control.getDokterList());
+         tabeldokter_.setModel(control.getDokterList());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,6 +72,8 @@ public class antrianoffline extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabeldokter_ = new javax.swing.JTable();
         tambahantrian = new javax.swing.JButton();
+        tanggal_antri = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -88,6 +94,11 @@ public class antrianoffline extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(50, 110, 16, 14);
 
+        polidokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                polidokterActionPerformed(evt);
+            }
+        });
         getContentPane().add(polidokter);
         polidokter.setBounds(150, 110, 140, 30);
 
@@ -99,13 +110,13 @@ public class antrianoffline extends javax.swing.JFrame {
 
         tabeldokter_.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Id Dokter", "Nama Dokter", "Jam/Hari Kerja"
+                "Id Dokter", "Nama Dokter", "Hari Kerja", "Jam Kerja"
             }
         ));
         tabeldokter_.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,7 +127,7 @@ public class antrianoffline extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabeldokter_);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(30, 270, 452, 130);
+        jScrollPane1.setBounds(30, 270, 570, 130);
 
         tambahantrian.setText("Tambah Antrian");
         tambahantrian.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +136,13 @@ public class antrianoffline extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tambahantrian);
-        tambahantrian.setBounds(370, 420, 110, 40);
+        tambahantrian.setBounds(490, 420, 110, 40);
+        getContentPane().add(tanggal_antri);
+        tanggal_antri.setBounds(440, 60, 110, 30);
+
+        jLabel5.setText("tgl sekarang'");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(370, 70, 70, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -136,11 +153,27 @@ public class antrianoffline extends javax.swing.JFrame {
 
     private void tambahantrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahantrianActionPerformed
         try {
-            new Menursepsionis(this.client, this.userName, idpasien.getText().toString(), namapasien.getText().toString()).show();
+            
+             String format_tanggal = "yyyy-MM-dd";
+             SimpleDateFormat format = new SimpleDateFormat(format_tanggal);
+             String tanggal = String.valueOf(format.format(tanggal_antri.getDate()));
+//             tabeldokter_.getV
+            antrianofflinecontrol.InsertAntrian(idpasien.getText().toString(), tabeldokter_.getValueAt(tabeldokter_.getSelectedRow(), 0).toString(), tanggal);
+            new Menursepsionis(this.client, this.userName).show();
         } catch (RemoteException ex) {
             Logger.getLogger(antrianoffline.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tambahantrianActionPerformed
+
+    private void polidokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_polidokterActionPerformed
+        if(polidokter.getSelectedIndex()!=0){
+            try {
+                tabeldokter_.setModel(control.getDokterListByPoliAsc(polidokter.getSelectedItem().toString()));
+            } catch (RemoteException ex) {
+                Logger.getLogger(antrianoffline.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_polidokterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,11 +185,13 @@ public class antrianoffline extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField namadokter;
     private javax.swing.JTextField namapasien;
     public javax.swing.JComboBox polidokter;
     private javax.swing.JTable tabeldokter_;
     private javax.swing.JButton tambahantrian;
+    private com.toedter.calendar.JDateChooser tanggal_antri;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,6 +18,10 @@ public interface AntrianService extends Remote {
     boolean antrianHadir(String antrian) throws RemoteException;
 
     boolean antrianTidakHadir(String antrian) throws RemoteException;
+    
+    int generateNomorAntrian(String tanggal) throws RemoteException; //tambah
+    
+    String generateIDAntrian() throws RemoteException;//tambah
 
     Antrian getAntrian(String antrian) throws RemoteException;
 

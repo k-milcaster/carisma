@@ -28,14 +28,15 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
         this.ui = ui;
     }
 
+    //tambahan
     @Override
     public boolean insertAntrian(Antrian antrian) throws RemoteException {
         ui.act.append("Client Execute insertAntrian " + antrian.getIdAntrian() + "\n");
-
         PreparedStatement statement = null;
         try {
+            
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO antrian (id_antrian, pasien_id_pasien, dokter_id_dokter, nomor_antrian, jenis_antrian, tgl_antrian, hadir) values (?,?,?,?,?,?,?)"
+                    "INSERT INTO `antrian`(`id_antrian`, `pasien_id_pasien`, `dokter_id_dokter`, `nomor_antrian`, `jenis_antrian`, `tgl_antrian`, `hadir`) VALUES (?,?,?,?,?,?,?)"
             );
             statement.setString(1, antrian.getIdAntrian());
             statement.setString(2, antrian.getPasienIdPasien());
@@ -44,10 +45,11 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
             statement.setString(5, antrian.getJenisAntrian());
             statement.setString(6, antrian.getTglAntrian());
             statement.setString(7, antrian.getHadir());
-            System.out.println(statement);
+
+//            System.out.println(statement);
             statement.executeUpdate();
             return true;
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             ui.act.append("InsertUser Error \n");
             ui.act.append(exception.toString());
             exception.printStackTrace();
@@ -56,8 +58,7 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
             if (statement != null) {
                 try {
                     statement.close();
-                } catch (SQLException exception) {
-
+                } catch (Exception exception) {
                 }
             }
         }
@@ -188,6 +189,81 @@ public class AntrianEntity extends UnicastRemoteObject implements AntrianService
         }
     }
 
+        //tambahan query
+    @Override
+     public String generateIDAntrian() throws RemoteException {
+        ui.act.append("Client Execute getAntrianList \n");
+        
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT COUNT(`id_antrian`) AS hasil FROM `antrian` WHERE `id_antrian` LIKE '%A%' ");
+            ResultSet result = statement.executeQuery();
+            List<Antrian> list = new ArrayList<Antrian>();
+            Antrian antri = null;
+            int hasil = 0;
+            String kode="A00";
+            while (result.next()) {
+                
+                hasil = result.getInt("hasil")+1;
+                
+                
+            }
+            kode=kode+String.valueOf(hasil);
+            return kode;
+            
+        } catch (SQLException exception) {
+            ui.act.append("getAntrianList Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+     
+    //tambahan query
+     @Override
+      public int generateNomorAntrian(String tanggal) throws RemoteException {
+        ui.act.append("Client Execute getAntrianList \n");
+        
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT COUNT(`nomor_antrian`) AS hasil FROM `antrian` WHERE `tgl_antrian`='"+tanggal+"' ");
+            ResultSet result = statement.executeQuery();
+            List<Antrian> list = new ArrayList<Antrian>();
+            Antrian antri = null;
+            int hasil = 0;
+//            String kode="A00";
+            while (result.next()) {
+                
+                hasil = result.getInt("hasil")+1;
+                
+                
+            }
+//            kode=kode+String.valueOf(hasil);
+            return hasil;
+            
+        } catch (SQLException exception) {
+            ui.act.append("getAntrianList Error \n");
+            ui.act.append(exception.toString());
+            return 0;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+     
+     
     @Override
     public boolean antrianTidakHadir(String antrian) throws RemoteException {
         ui.act.append("Client Execute antrianHadir(" + antrian + ") \n");
