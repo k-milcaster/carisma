@@ -11,6 +11,7 @@ import carismaserver.entity.PoliEntity;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -182,39 +183,69 @@ public class PoliManagement extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
-        try {
-            String idpoli = fieldId.getText();
-            String namapoli = fieldNama.getText();
-            String keterangan = fieldKeterangan.getText();
-            control.insertPoli(this, idpoli, namapoli, keterangan);
-            tablePoli.setModel(control.getPolis(this));
-            clear();
-        } catch (RemoteException ex) {
-            Logger.getLogger(PoliManagement.class.getName()).log(Level.SEVERE, null, ex);
+        if(!fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("")){
+            try {
+                String idpoli = fieldId.getText();
+                String namapoli = fieldNama.getText();
+                String keterangan = fieldKeterangan.getText();
+                boolean success = control.insertPoli(this, idpoli, namapoli, keterangan);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Insert Poli berhasil", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Insert Poli gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+                tablePoli.setModel(control.getPolis(this));
+                clear();
+            } catch (RemoteException ex) {
+                Logger.getLogger(PoliManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buttonInsertActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
-        try {
-            String idpoli = fieldId.getText();
-            String namapoli = fieldNama.getText();
-            String keterangan = fieldKeterangan.getText();
-            control.updatePoli(this, idpoli, namapoli, keterangan);
-            tablePoli.setModel(control.getPolis(this));
-            clear();
-        } catch (RemoteException ex) {
-            Logger.getLogger(PoliManagement.class.getName()).log(Level.SEVERE, null, ex);
+        if(!fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("")){
+            try {
+                String idpoli = fieldId.getText();
+                String namapoli = fieldNama.getText();
+                String keterangan = fieldKeterangan.getText();
+                boolean success = control.updatePoli(this, idpoli, namapoli, keterangan);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Update Poli berhasil", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Update Poli gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+                tablePoli.setModel(control.getPolis(this));
+                clear();
+            } catch (RemoteException ex) {
+                Logger.getLogger(PoliManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        try {
-            String idpoli = fieldId.getText();;
-            control.deletePoli(this, idpoli);
-            tablePoli.setModel(control.getPolis(this));
-            clear();
-        } catch (RemoteException ex) {
-            Logger.getLogger(PoliManagement.class.getName()).log(Level.SEVERE, null, ex);
+        if(!fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("")){
+            try {
+                String idpoli = fieldId.getText();;
+                boolean success = control.deletePoli(this, idpoli);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Delete Poli berhasil", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Delete Poli gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+                tablePoli.setModel(control.getPolis(this));
+                clear();
+            } catch (RemoteException ex) {
+                Logger.getLogger(PoliManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
