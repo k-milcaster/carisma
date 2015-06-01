@@ -228,17 +228,20 @@ public class AbsensiDokter extends javax.swing.JFrame {
             }
 
             try {
-                String[] idDokter = String.valueOf(comboBoxIdDokter.getSelectedItem()).split(" ");
-                String namaDokter="";
-                for (int i = 1; i < idDokter.length; i++) {
-                    namaDokter = namaDokter.concat(" ").concat(idDokter[i]);
-                }
-                System.out.println("nama :"+namaDokter);
-                boolean inserted = absensiController.insertAbsensiDokter(String.valueOf(idDokter[0]), hadirReguler, hadirLembur, String.valueOf(new java.sql.Date(jDateChooser1.getDate().getTime())));
-                if (inserted == true) {
-                    JOptionPane.showMessageDialog(null, "Dokter "+namaDokter+" Telah Melakukan Absensi", "Absensi Dokter", JOptionPane.INFORMATION_MESSAGE);
-                    tabelModelAbsensi = absensiController.getTabelAbsensiDokter();
-                    tableAbsensi.setModel(tabelModelAbsensi);
+                int pilihan = JOptionPane.showConfirmDialog(null, "Apakah data yang anda masukkan sudah benar?", "Absensi Dokter", JOptionPane.YES_NO_OPTION);
+                if (pilihan == 0) {
+                    String[] idDokter = String.valueOf(comboBoxIdDokter.getSelectedItem()).split(" ");
+                    String namaDokter = "";
+                    for (int i = 1; i < idDokter.length; i++) {
+                        namaDokter = namaDokter.concat(" ").concat(idDokter[i]);
+                    }
+                    System.out.println("nama :" + namaDokter);
+                    boolean inserted = absensiController.insertAbsensiDokter(String.valueOf(idDokter[0]), hadirReguler, hadirLembur, String.valueOf(new java.sql.Date(jDateChooser1.getDate().getTime())));
+                    if (inserted == true) {
+                        JOptionPane.showMessageDialog(null, "Dokter " + namaDokter + " Telah Melakukan Absensi", "Absensi Dokter", JOptionPane.INFORMATION_MESSAGE);
+                        tabelModelAbsensi = absensiController.getTabelAbsensiDokter();
+                        tableAbsensi.setModel(tabelModelAbsensi);
+                    }
                 }
             } catch (RemoteException ex) {
                 Logger.getLogger(AbsensiDokter.class.getName()).log(Level.SEVERE, null, ex);
