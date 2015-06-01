@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -206,45 +207,71 @@ public class UserManagement extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
-        try {
-            String user = fieldUsername.getText();
-            String pass = fieldPassword.getText();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = new Date();
-            String now = dateFormat.format(date);
-            System.out.println(now);
-            String role = (String) comboRole.getItemAt(comboRole.getSelectedIndex());
-            control.insertUser(this, user, pass, now, role);
-            //control.getUsers(this);
-            tableUser.setModel(control.getUsers(this));
-        } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        if(!fieldUsername.getText().equalsIgnoreCase("") && !fieldPassword.getText().equalsIgnoreCase("") && comboRole.getSelectedIndex() != 0){
+            try {
+                String user = fieldUsername.getText();
+                String pass = fieldPassword.getText();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date();
+                String now = dateFormat.format(date);
+                System.out.println(now);
+                String role = (String) comboRole.getItemAt(comboRole.getSelectedIndex());
+                boolean success = control.insertUser(this, user, pass, now, role);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Insert User berhasil", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Insert User gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+                tableUser.setModel(control.getUsers(this));
+            } catch (RemoteException ex) {
+                Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
+        else {
+            JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_buttonInsertActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
-        try {
-            int id = Integer.parseInt(fieldId.getText());
-            String user = fieldUsername.getText();
-            String pass = fieldPassword.getText();
-            String role = (String) comboRole.getItemAt(comboRole.getSelectedIndex());
-            control.updateUser(this, id, user, pass, role);
-            //control.getUsers(this);
-            tableUser.setModel(control.getUsers(this));
-        } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        if(!fieldUsername.getText().equalsIgnoreCase("") && !fieldPassword.getText().equalsIgnoreCase("") && comboRole.getSelectedIndex() != 0){
+            try {
+                int id = Integer.parseInt(fieldId.getText());
+                String user = fieldUsername.getText();
+                String pass = fieldPassword.getText();
+                String role = (String) comboRole.getItemAt(comboRole.getSelectedIndex());
+                boolean success = control.updateUser(this, id, user, pass, role);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Update User berhasil", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Update User gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+                tableUser.setModel(control.getUsers(this));
+            } catch (RemoteException ex) {
+                Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        try {
-            int id = Integer.parseInt(fieldId.getText());;
-            control.deleteUser(this, id);
-            //control.getUsers(this);
-            tableUser.setModel(control.getUsers(this));
-        } catch (RemoteException ex) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        if(!fieldUsername.getText().equalsIgnoreCase("") && !fieldPassword.getText().equalsIgnoreCase("") && comboRole.getSelectedIndex() != 0){
+            try {
+                int id = Integer.parseInt(fieldId.getText());;
+                boolean success = control.deleteUser(this, id);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Delete User berhasil", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Delete User gagal", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+                tableUser.setModel(control.getUsers(this));
+            } catch (RemoteException ex) {
+                Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Ada yang belum terisi", "Data kurang lengkap", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
