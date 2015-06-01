@@ -79,6 +79,9 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="Tempat_ID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="DN15050123"/>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="1170" y="90" width="99" height="32"/>
@@ -225,7 +228,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="Kartu_id">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Kartu Id Pasien"/>
+        <Property name="text" type="java.lang.String" value="KTP Pasien"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Kartu_idMouseClicked"/>
