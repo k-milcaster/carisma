@@ -11,6 +11,7 @@ import carismaresepsionis.controller.regispasiencontroller;
 import carismaresepsionis.controller.AntrianOfflineController;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Fiqhi Darmawan
  */
 public class antrianoffline extends javax.swing.JFrame {
+
     private ClientSocket client;
     private String userName;
     private regispasiencontroller registrasicontrol;
@@ -28,30 +30,31 @@ public class antrianoffline extends javax.swing.JFrame {
     private DefaultTableModel tabeldokter = new DefaultTableModel();
     private DataDokterController DataDokterController;
     DataDokterController control;
+
     /**
      * Creates new form antrianoffline
      */
 //    public antrianoffline() {
 //        initComponents();
 //    }
-     public antrianoffline(ClientSocket client, String username, String idPasien, String namaPasien) throws RemoteException {
-         initComponents();
-         this.client = client;
-         registrasicontrol = new regispasiencontroller(this.client);
-         antrianofflinecontrol = new AntrianOfflineController(this.client);
-         antrianofflinecontrol.setComboBoxPoli(this);
-         idpasien.setText(idPasien);
-         namapasien.setText(namaPasien);
-         this.userName=username;
-         this.setExtendedState(this.MAXIMIZED_BOTH);
-         
-         
+    public antrianoffline(ClientSocket client, String username, String idPasien, String namaPasien) throws RemoteException {
+        initComponents();
+        this.client = client;
+        registrasicontrol = new regispasiencontroller(this.client);
+        antrianofflinecontrol = new AntrianOfflineController(this.client);
+        antrianofflinecontrol.setComboBoxPoli(this);
+        idpasien.setText(idPasien);
+        namapasien.setText(namaPasien);
+        this.userName = username;
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+
 //          this.client = client;
-          control = new DataDokterController(this.client);
+        control = new DataDokterController(this.client);
 //        ds = client.getDokterService();
 //        this.userName = userName; 
-         tabeldokter_.setModel(control.getDokterList());
+        tabeldokter_.setModel(control.getDokterList());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,10 +75,8 @@ public class antrianoffline extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabeldokter_ = new javax.swing.JTable();
         tambahantrian = new javax.swing.JButton();
-        tanggal_antri = new com.toedter.calendar.JDateChooser();
-        jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabel1.setText("Nama Dokter");
@@ -137,12 +138,6 @@ public class antrianoffline extends javax.swing.JFrame {
         });
         getContentPane().add(tambahantrian);
         tambahantrian.setBounds(490, 420, 110, 40);
-        getContentPane().add(tanggal_antri);
-        tanggal_antri.setBounds(440, 60, 110, 30);
-
-        jLabel5.setText("tgl sekarang'");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(370, 70, 70, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,10 +148,11 @@ public class antrianoffline extends javax.swing.JFrame {
 
     private void tambahantrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahantrianActionPerformed
         try {
-            
-             String format_tanggal = "yyyy-MM-dd";
-             SimpleDateFormat format = new SimpleDateFormat(format_tanggal);
-             String tanggal = String.valueOf(format.format(tanggal_antri.getDate()));
+
+            String format_tanggal = "yyyy-MM-dd";
+            SimpleDateFormat format = new SimpleDateFormat(format_tanggal);
+            Calendar cal = Calendar.getInstance();
+            String tanggal = String.valueOf(format.format(cal.getTime()));
 //             tabeldokter_.getV
             antrianofflinecontrol.InsertAntrian(idpasien.getText().toString(), tabeldokter_.getValueAt(tabeldokter_.getSelectedRow(), 0).toString(), tanggal);
             new Menursepsionis(this.client, this.userName).show();
@@ -166,7 +162,7 @@ public class antrianoffline extends javax.swing.JFrame {
     }//GEN-LAST:event_tambahantrianActionPerformed
 
     private void polidokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_polidokterActionPerformed
-        if(polidokter.getSelectedIndex()!=0){
+        if (polidokter.getSelectedIndex() != 0) {
             try {
                 tabeldokter_.setModel(control.getDokterListByPoliAsc(polidokter.getSelectedItem().toString()));
             } catch (RemoteException ex) {
@@ -178,20 +174,18 @@ public class antrianoffline extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField idpasien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField namadokter;
     private javax.swing.JTextField namapasien;
     public javax.swing.JComboBox polidokter;
     private javax.swing.JTable tabeldokter_;
     private javax.swing.JButton tambahantrian;
-    private com.toedter.calendar.JDateChooser tanggal_antri;
     // End of variables declaration//GEN-END:variables
 }

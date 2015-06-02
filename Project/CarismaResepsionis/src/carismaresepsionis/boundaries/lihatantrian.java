@@ -180,12 +180,6 @@ public class lihatantrian extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        this.dispose();
-       try {
-           Menursepsionis menu = new Menursepsionis(client, userName);
-           menu.setVisible(true);
-        } catch (RemoteException ex) {
-            Logger.getLogger(lihatantrian.class.getName()).log(Level.SEVERE, null, ex);
-        }                
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void AlamatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlamatPasienActionPerformed

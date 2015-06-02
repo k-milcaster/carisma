@@ -33,6 +33,6 @@ public class LoginController {
     }
 
     public void logOut() throws RemoteException {
-        user.userLogOut(this.userName, "dokter");
+        user.userLogOut(this.userName, "doctor");
     }
 }

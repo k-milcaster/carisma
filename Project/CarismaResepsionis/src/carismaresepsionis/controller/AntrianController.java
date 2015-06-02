@@ -12,6 +12,7 @@ import carismainterface.server.AntrianService;
 import carismainterface.server.DokterService;
 import carismainterface.server.PasienService;
 import carismainterface.server.KunjunganService;
+import carismainterface.server.PoliService;
 import carismaresepsionis.boundaries.Menursepsionis;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -29,11 +30,13 @@ public class AntrianController extends Thread {
     private AntrianService antrianService;
     private PasienService pasienService;
     private DokterService dokterService;
+    private PoliService poliService;
     private KunjunganService kunjunganService;
     private Menursepsionis ui;
 
     public AntrianController(ClientSocket client) throws RemoteException {
         this.ui = null;
+        this.poliService = client.getPoliService();
         this.antrianService = client.getAntrianService();
         this.dokterService = client.getDokterService();
         this.pasienService = client.getPasienService();
@@ -42,6 +45,7 @@ public class AntrianController extends Thread {
 
     public AntrianController(ClientSocket client, Menursepsionis ui) throws RemoteException {
         this.ui = ui;
+        this.poliService = client.getPoliService();
         this.antrianService = client.getAntrianService();
         this.dokterService = client.getDokterService();
         this.pasienService = client.getPasienService();
@@ -76,9 +80,10 @@ public class AntrianController extends Thread {
         tabelAntrian.addColumn("Id");
         tabelAntrian.addColumn("Nama Pasien");
         tabelAntrian.addColumn("Poli");
-        tabelAntrian.addColumn("Dokter");
+        tabelAntrian.addColumn("Dokter");        
         for (int i = 0; i < list.size(); i++) {
-            tabelAntrian.addRow(new Object[]{list.get(i).getNomorAntrian(), list.get(i).getIdAntrian(), pasienService.getPasien(list.get(i).getPasienIdPasien()).getNamaPasien()});
+            
+            tabelAntrian.addRow(new Object[]{list.get(i).getNomorAntrian(), list.get(i).getIdAntrian(), pasienService.getPasien(list.get(i).getPasienIdPasien()).getNamaPasien(), dokterService.getDokterById(list.get(i).getDokterIdDokter()).get(2), dokterService.getDokterById(list.get(i).getDokterIdDokter()).get(1)});
         }
         return tabelAntrian;
     }
