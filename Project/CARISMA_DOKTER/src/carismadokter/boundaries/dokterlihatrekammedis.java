@@ -28,24 +28,20 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
     private RekammedikService rs;
-    private DefaultTableModel tabelrekammedik = new DefaultTableModel();
+    private DefaultTableModel tabelrekammedik;
     private LihatRekamMedisController LihatRekamMedisController;
     private UserService login;
     
     
-    public dokterlihatrekammedis(ClientSocket client, final String userName) throws RemoteException {
+public dokterlihatrekammedis(ClientSocket client, final String userName) throws RemoteException {
+        
         this.client = client;
-        LihatRekamMedisController control = new LihatRekamMedisController(this.client);
-        rs = client.getRekamMedikService();        
         this.userName = userName;
         this.login = client.getUserService();
+        LihatRekamMedisController = new LihatRekamMedisController(this.client);
         initComponents();
-        setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        TabelRekammedik.setModel(control.getRekamMedik());
-              
-        
-                this.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 LoginController log = new LoginController(login, userName);
                 try {
@@ -76,16 +72,16 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         jTextField14 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         namaPasien = new javax.swing.JLabel();
+        IdPasien = new javax.swing.JTextField();
         NamaPasien = new javax.swing.JTextField();
-        TempatLahirPasien = new javax.swing.JTextField();
+        AlamatPasien = new javax.swing.JTextField();
         TglLahirPasien = new javax.swing.JTextField();
-        KelaminPasien = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        DarahPasien = new javax.swing.JTextField();
+        KelaminPasien = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        AlamatPasien = new javax.swing.JTextField();
+        DarahPasien = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         CariNamaPasien = new javax.swing.JTextField();
@@ -96,7 +92,7 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelRekammedik = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Back = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -152,45 +148,45 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 18))); // NOI18N
         jPanel1.setLayout(null);
 
-        namaPasien.setText("Nama Pasien");
+        namaPasien.setText("Id Pasien");
         jPanel1.add(namaPasien);
         namaPasien.setBounds(40, 100, 80, 16);
+        jPanel1.add(IdPasien);
+        IdPasien.setBounds(150, 80, 180, 40);
         jPanel1.add(NamaPasien);
-        NamaPasien.setBounds(150, 80, 180, 40);
-        jPanel1.add(TempatLahirPasien);
-        TempatLahirPasien.setBounds(150, 130, 180, 40);
+        NamaPasien.setBounds(150, 130, 180, 40);
 
-        TglLahirPasien.addActionListener(new java.awt.event.ActionListener() {
+        AlamatPasien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TglLahirPasienActionPerformed(evt);
+                AlamatPasienActionPerformed(evt);
             }
         });
+        jPanel1.add(AlamatPasien);
+        AlamatPasien.setBounds(150, 180, 180, 40);
         jPanel1.add(TglLahirPasien);
-        TglLahirPasien.setBounds(150, 180, 180, 40);
-        jPanel1.add(KelaminPasien);
-        KelaminPasien.setBounds(150, 230, 180, 40);
+        TglLahirPasien.setBounds(150, 230, 180, 40);
 
-        jLabel2.setText("Tempat Lahir");
+        jLabel2.setText("Nama Pasien");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(40, 140, 80, 16);
 
-        jLabel3.setText("Tgl Lahir");
+        jLabel3.setText("Alamat");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(40, 190, 80, 16);
 
-        jLabel4.setText("Jenis Kelamin");
+        jLabel4.setText("Tgl Lahir");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(40, 240, 100, 16);
-        jPanel1.add(DarahPasien);
-        DarahPasien.setBounds(480, 80, 160, 40);
+        jPanel1.add(KelaminPasien);
+        KelaminPasien.setBounds(480, 80, 160, 40);
 
-        jLabel5.setText("Gol. Darah");
+        jLabel5.setText("Jenis Kelamin");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(360, 90, 90, 16);
-        jPanel1.add(AlamatPasien);
-        AlamatPasien.setBounds(480, 130, 160, 40);
+        jPanel1.add(DarahPasien);
+        DarahPasien.setBounds(480, 130, 160, 40);
 
-        jLabel6.setText("Alamat");
+        jLabel6.setText("Golongan Darah");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(361, 140, 120, 16);
 
@@ -338,10 +334,15 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(140, 390, 850, 30);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
-        jButton1.setText("Back");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(930, 650, 90, 40);
+        Back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
+        Back.setText("Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Back);
+        Back.setBounds(930, 650, 90, 40);
 
         jLabel11.setFont(new java.awt.Font("Trajan Pro", 1, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -360,95 +361,70 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField12ActionPerformed
 
-    private void TglLahirPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TglLahirPasienActionPerformed
+    private void AlamatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlamatPasienActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TglLahirPasienActionPerformed
+    }//GEN-LAST:event_AlamatPasienActionPerformed
 
     private void CariNamaPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariNamaPasienActionPerformed
-//        int row = TabelRekammedik.getSelectedRow();
-//        try {
-// 
-//            LihatRekamMedisController control = new LihatRekamMedisController(client);
-//
-//            String idPasien = String.valueOf(control.getDetailPasien(idPasien).getIdPasien());
-//            NamaPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getNamaPasien()));
-//            TempatLahirPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getTempatlahirPasien()));
-//            TglLahirPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getTgllahirPasien()));
-//            KelaminPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getKelaminPasien()));
-//            DarahPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getDarahPasien()));
-//            AlamatPasien.setText(String.valueOf(control.getDetailPasien(idPasien).getAlamatPasien()));
-//            
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(dokterlihatrekammedis.class.getName()).log(Level.SEVERE, null, ex);
-//            System.out.println(ex);
-//        }
+       try {
+            IdPasien.setText(CariNamaPasien.getText());
+            NamaPasien.setText(LihatRekamMedisController.getPasien(CariNamaPasien.getText()).getNamaPasien());
+            AlamatPasien.setText(LihatRekamMedisController.getPasien(CariNamaPasien.getText()).getAlamatPasien());
+            TglLahirPasien.setText(LihatRekamMedisController.getPasien(CariNamaPasien.getText()).getTgllahirPasien());
+            KelaminPasien.setText(LihatRekamMedisController.getPasien(CariNamaPasien.getText()).getKelaminPasien());
+            DarahPasien.setText(LihatRekamMedisController.getPasien(CariNamaPasien.getText()).getDarahPasien());
+            tabelrekammedik = LihatRekamMedisController.getRekamMedik(CariNamaPasien.getText());
+            TabelRekammedik.setModel(tabelrekammedik);
+            CariNamaPasien.setText("");
+        } catch (Exception e) {
+            System.out.println("Through Catch " + e);
+        }
     }//GEN-LAST:event_CariNamaPasienActionPerformed
 
     private void CariNamaPasienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CariNamaPasienFocusGained
-        if (CariNamaPasien.getText().equals("Cari Nama Pasien")) {
+       if ( CariNamaPasien.getText().equals("Masukkan Id Pasien")) {
             CariNamaPasien.setText("");
+            CariNamaPasien.setFont(new Font("Tahoma", 0, 12));
+            CariNamaPasien.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_CariNamaPasienFocusGained
 
     private void CariNamaPasienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CariNamaPasienFocusLost
-        if (CariNamaPasien.getText().equals("")) {
-            CariNamaPasien.setText("Cari Nama Dokter");
-            CariNamaPasien.setForeground(Color.gray);
+         if (rootPaneCheckingEnabled) {
+            CariNamaPasien.setText("Masukkan Id Pasien");
             CariNamaPasien.setFont(new Font("Tahoma", 2, 12));
+            CariNamaPasien.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_CariNamaPasienFocusLost
 
     private void CariNamaPasienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CariNamaPasienKeyReleased
-//        CariNamaPasien.setForeground(Color.black);
-//        CariNamaPasien.setFont(new Font("Tahoma", 0, 12));
-//
-//        DefaultTableModel model = new DefaultTableModel();
-//        try {
-//            LihatRekamMedisController control = new LihatRekamMedisController(client);
-//            model = control.getPasienbyName(CariNamaPasien.getText());
-//
-//            TabelRekammedik.setModel(model);
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(dokterlihatrekammedis.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
     }//GEN-LAST:event_CariNamaPasienKeyReleased
 
     private void TabelRekammedikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelRekammedikMouseClicked
-//        int row = TabelPasien.getSelectedRow();
-//        try {
-//            LihatRekamMedisController control = new LihatRekamMedisController(client);
-//            ArrayList infoRekammedik = control.getRekammedikById(String.valueOf(TabelPasien.getValueAt(row, 0)));
-//            id_rekammedik.setText(infoRekammedik.get(0).toString());
-//            NamaDokter.setText(infoRekammedik.get(1).toString());
-//            NamaPasien.setText(infoRekammedik.get(2).toString());
-//            Tgl_Pemeriksaan.setText(infoRekammedik.get(3).toString());
-//            Keluhan.setText(infoRekammedik.get(4).toString());
-//            PemeriksaanDokter.setText(infoRekammedik.get(5).toString());
-//            AlergiObat.setText(infoRekammedik.get(6).toString());
-//            Kesimpulan.setText(infoRekammedik.get(7).toString());
-////            byte[] content = null;
-////            content = (byte[]) infoRekammedik.get(10);
-////            Image imgs = Toolkit.getDefaultToolkit().createImage(content);
-////            ImageIcon icon = new ImageIcon(imgs);
-////            FotoPasien.setIcon(icon);
-//
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(dokterlihatrekammedis.class.getName()).log(Level.SEVERE, null, ex);
-//            System.out.println(ex);
-//        }
 
     }//GEN-LAST:event_TabelRekammedikMouseClicked
 
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+    try {
+            new isirekammedis(this.client, this.userName).show();
+        
+        } catch (RemoteException ex) {
+            Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();       
+    }//GEN-LAST:event_BackActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AlamatPasien;
+    private javax.swing.JButton Back;
     private javax.swing.JTextField CariNamaPasien;
     private javax.swing.JTextField DarahPasien;
+    private javax.swing.JTextField IdPasien;
     private javax.swing.JTextField KelaminPasien;
     private javax.swing.JTextField NamaPasien;
     private javax.swing.JTable TabelRekammedik;
-    private javax.swing.JTextField TempatLahirPasien;
     private javax.swing.JTextField TglLahirPasien;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
