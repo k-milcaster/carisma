@@ -3,6 +3,8 @@ package carismaresepsionis.boundaries;
 import carismainterface.entity.Pasien;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.regispasiencontroller;
+import java.awt.Color;
+import java.awt.Font;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,7 +43,7 @@ public class regispasienform extends javax.swing.JFrame {
       
         registrasicontrol.getTabelPasien(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        Find.requestFocus();
+        
         Tempat_ID.setEditable(false);
         a = Nama_Pasien.getText();
         b = Tempat_Lahir.getText();
@@ -83,7 +85,6 @@ public class regispasienform extends javax.swing.JFrame {
         No_Kartu = new javax.swing.JTextField();
         CariPasien = new javax.swing.JTextField();
         UpdatePasien = new javax.swing.JButton();
-        Find = new javax.swing.JButton();
         Kota = new javax.swing.JComboBox();
         Confirm = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -109,6 +110,11 @@ public class regispasienform extends javax.swing.JFrame {
         Nama_Pasien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Nama_PasienMouseClicked(evt);
+            }
+        });
+        Nama_Pasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Nama_PasienActionPerformed(evt);
             }
         });
         Nama_Pasien.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -188,6 +194,11 @@ public class regispasienform extends javax.swing.JFrame {
         No_tele.setBounds(930, 210, 335, 32);
 
         Jenis_Kelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Jenis Kelamin-", "L", "P" }));
+        Jenis_Kelamin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Jenis_KelaminActionPerformed(evt);
+            }
+        });
         getContentPane().add(Jenis_Kelamin);
         Jenis_Kelamin.setBounds(580, 390, 134, 32);
 
@@ -272,10 +283,22 @@ public class regispasienform extends javax.swing.JFrame {
         getContentPane().add(No_Kartu);
         No_Kartu.setBounds(930, 250, 335, 32);
 
-        CariPasien.setText("- Cari Nama Pasien -");
         CariPasien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CariPasienActionPerformed(evt);
+            }
+        });
+        CariPasien.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CariPasienFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CariPasienFocusLost(evt);
+            }
+        });
+        CariPasien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                CariPasienKeyReleased(evt);
             }
         });
         getContentPane().add(CariPasien);
@@ -286,10 +309,6 @@ public class regispasienform extends javax.swing.JFrame {
         UpdatePasien.setText("Cetak Bukti Antrian");
         getContentPane().add(UpdatePasien);
         UpdatePasien.setBounds(130, 540, 180, 40);
-
-        Find.setText("FIND");
-        getContentPane().add(Find);
-        Find.setBounds(480, 60, 95, 32);
 
         Kota.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- KOTA -" }));
         getContentPane().add(Kota);
@@ -314,6 +333,11 @@ public class regispasienform extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
         jButton2.setText("Back");
         jButton2.setPreferredSize(new java.awt.Dimension(89, 23));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(1170, 550, 90, 40);
 
@@ -586,6 +610,9 @@ public class regispasienform extends javax.swing.JFrame {
         Alamat.setText(pasien.getAlamatPasien());
         TinggiPasien.setText(Integer.toString(pasien.getTinggiPasien()));
         BeratPasien.setText(Integer.toString(pasien.getBeratPasien()));
+        Jenis_Kelamin.setSelectedItem(pasien.getKelaminPasien());
+        goldar.setSelectedItem(pasien.getDarahPasien());
+        Kota.setSelectedItem(pasien.getKotaIdKota()); //masi salah
         tgl_regpasien.setDate(java.sql.Date.valueOf(pasien.getRegdatePasien()));
         
     }//GEN-LAST:event_tabelpasienMouseClicked
@@ -600,15 +627,62 @@ public class regispasienform extends javax.swing.JFrame {
     }//GEN-LAST:event_TambahAntriActionPerformed
 
     private void CariPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariPasienActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_CariPasienActionPerformed
 
+    private void CariPasienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CariPasienFocusGained
+        if (CariPasien.getText().equals("Cari Nama Pasien")) {
+            CariPasien.setText("");
+    }//GEN-LAST:event_CariPasienFocusGained
+    }
+    private void CariPasienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CariPasienFocusLost
+       if (CariPasien.getText().equals("")) {
+            CariPasien.setText("Cari Nama Pasien");
+            CariPasien.setForeground(Color.gray);
+            CariPasien.setFont(new Font("Tahoma", 2, 12));
+        }
+    }//GEN-LAST:event_CariPasienFocusLost
+
+    private void CariPasienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CariPasienKeyReleased
+        CariPasien.setForeground(Color.black);
+        CariPasien.setFont(new Font("Tahoma", 0, 12));
+
+        DefaultTableModel model = new DefaultTableModel();
+        try {
+            regispasiencontroller control = new regispasiencontroller(client);
+            model = control.getPasienByName(CariPasien.getText());
+
+            tabelpasien.setModel(model);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_CariPasienKeyReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            new Menursepsionis (this.client, this.userName).show();
+        
+        } catch (RemoteException ex) {
+            Logger.getLogger(regispasienform.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void Jenis_KelaminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jenis_KelaminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Jenis_KelaminActionPerformed
+
+    private void Nama_PasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nama_PasienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Nama_PasienActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alamat;
     private javax.swing.JTextField BeratPasien;
     private javax.swing.JTextField CariPasien;
     private javax.swing.JButton Confirm;
-    private javax.swing.JButton Find;
     private javax.swing.JLabel ID;
     private javax.swing.JComboBox Jenis_Kelamin;
     private javax.swing.JTextField Kartu_id;
