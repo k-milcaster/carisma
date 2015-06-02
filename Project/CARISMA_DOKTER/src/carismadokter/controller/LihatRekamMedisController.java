@@ -16,7 +16,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 /**
  *
- * @author Anes Dirsi
+ * @author Anes Dirsi 
  */
 public class LihatRekamMedisController {
     
@@ -30,38 +30,37 @@ public class LihatRekamMedisController {
         this.dokterService = client.getDokterService();     
     }
     
-    public Pasien getDetailPasien(String idPasien) throws RemoteException {
-        Pasien pasien = pasienService.getPasien(idPasien);
-        return pasien;
+    public Pasien getPasien(String idPasien) throws RemoteException{
+        Pasien pasien = new Pasien();
+        return pasien = pasienService.getPasien(idPasien);
     }
     
-    public Dokter getDokterDetail(String idDokter) throws RemoteException {
-        Dokter dokter = dokterService.getDokter(idDokter);
-        return dokter;
-    }
-    
-    public DefaultTableModel getRekamMedik() throws RemoteException {
+    public DefaultTableModel getRekamMedik(String idPasien) throws RemoteException {
+        DefaultTableModel TabelRekammedik = new DefaultTableModel();
+        TabelRekammedik.addColumn("Id RekamMedik");
+        TabelRekammedik.addColumn("Id Dokter");
+        TabelRekammedik.addColumn("Id Pasien");
+        TabelRekammedik.addColumn("Tgl Pemeriksaan");
+        TabelRekammedik.addColumn("Keluhan");
+        TabelRekammedik.addColumn("Pemeriksaan Dokter");
+        TabelRekammedik.addColumn("Terapi");
+        TabelRekammedik.addColumn("Alergi Obat");
+        TabelRekammedik.addColumn("Kesimpulan");
+        TabelRekammedik.addColumn("Kondisi Pasien Keluar");
+        TabelRekammedik.addColumn("Id Resep");
         List<Rekammedik> list = new ArrayList<Rekammedik>();
-        list = rekamMedik.getRekamMedik();
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Id RekamMedik");
-        model.addColumn("Id Dokter");
-        model.addColumn("Id Pasien");
-        model.addColumn("Tgl Pemeriksaan");
-        model.addColumn("Keluhan");
-        model.addColumn("Pemeriksaan Dokter");
-        model.addColumn("Terapi");
-        model.addColumn("Alergi Obat");
-        model.addColumn("Kesimpulan");
-        model.addColumn("Kondisi Pasien Keluar");
-        model.addColumn("Id Resep");
-        
+        Pasien pasien = new Pasien();
+       
+        list = rekamMedik.getRekamMedikByPasien(idPasien);
+        pasien = pasienService.getPasien(idPasien);
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{list.get(i).getIdRekammedik(), list.get(i).getDokterIdDokter(), list.get(i).getPasienIdPasien(), list.get(i).getTglRekammedik(), list.get(i).getKeluhanRekammedik(), list.get(i).getPemeriksaanRekammedik(), list.get(i).getTerapiRekammedik(), list.get(i).getAlergiobatRekammedik(), list.get(i).getKesimpulanRekammedis(), list.get(i).getKondisipasienkeluarRekammedis(), list.get(i).getResepIdResep() });
+            TabelRekammedik.addRow(new Object[]{list.get(i).getIdRekammedik(), list.get(i).getDokterIdDokter(), list.get(i).getPasienIdPasien(), list.get(i).getTglRekammedik(), list.get(i).getKeluhanRekammedik(), list.get(i).getPemeriksaanRekammedik(), list.get(i).getTerapiRekammedik(), list.get(i).getAlergiobatRekammedik(), list.get(i).getKesimpulanRekammedis(), list.get(i).getKondisipasienkeluarRekammedis(), list.get(i).getResepIdResep() });
         }
-        //ui.TabelRekammedik.setModel(model);
-        return model;
+        
+        return TabelRekammedik;
     }    
+    
+    
 
 } 
 
