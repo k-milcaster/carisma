@@ -10,10 +10,15 @@ import javax.swing.table.DefaultTableModel;
 import java.io.FileOutputStream;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.Doc;
+import javax.print.DocPrintJob;
+import javax.print.SimpleDoc;
+import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
@@ -78,7 +83,7 @@ public class KasirController {
     }
 
     public boolean doBayar(int pembayaran, int biaya) throws FileNotFoundException {
-        if (pembayaran >= biaya) {            
+        if (pembayaran >= biaya) {
             return true;
         } else {
             return false;
@@ -116,6 +121,11 @@ public class KasirController {
             document.add(total);
             document.close();
             JOptionPane.showMessageDialog(null, "Pembayaran Berhasil");
+            try {
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler D:\\Invoice.pdf");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
             return true;
         } catch (DocumentException ex) {
             Logger.getLogger(KasirController.class.getName()).log(Level.SEVERE, null, ex);

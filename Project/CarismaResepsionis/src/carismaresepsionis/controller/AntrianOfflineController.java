@@ -19,7 +19,6 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
-import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 
@@ -31,8 +30,6 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -120,7 +117,7 @@ public class AntrianOfflineController {
         PdfPCell cell = new PdfPCell();
         Font font = new Font(FontFamily.HELVETICA, 72, Font.NORMAL, BaseColor.BLACK);
         Paragraph p = new Paragraph(" ", font);
-        cell.addElement(p);                
+        cell.addElement(p);
         p = new Paragraph(idAntrean, font);
         p.setAlignment(cell.ALIGN_CENTER);
         cell.addElement(p);
@@ -130,5 +127,10 @@ public class AntrianOfflineController {
         table.addCell(cell);
         document.add(table);
         document.close();
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + dest);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
