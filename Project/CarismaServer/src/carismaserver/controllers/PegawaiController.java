@@ -51,7 +51,7 @@ public class PegawaiController {
         return model;
     }
 
-    public boolean insertPegawai(carismaserver.boundaries.PegawaiManagement ui, int username, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String jabatan, String bank, String norek, int gfix, int glembur, byte[] foto) throws RemoteException {
+    public boolean insertPegawai(carismaserver.boundaries.PegawaiManagement ui, int username, String jabatan, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, byte[] foto) throws RemoteException {
         PegawaiEntity pegawaiService = new PegawaiEntity(ui.ui);
         try {
             User user = new User();
@@ -87,7 +87,7 @@ public class PegawaiController {
         }
     }
 
-    public boolean updatePegawai(carismaserver.boundaries.PegawaiManagement ui, int username, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String jabatan, String bank, String norek, int gfix, int glembur, byte[] foto) throws RemoteException {
+    public boolean updatePegawai(carismaserver.boundaries.PegawaiManagement ui, int username, String jabatan, String id, String nama, String alamat, String nokartu, String telp, String hp1, String hp2, String tempat, String tanggal, String kelamin, String darah, String bank, String norek, int gfix, int glembur, byte[] foto) throws RemoteException {
         PegawaiEntity pegawaiService = new PegawaiEntity(ui.ui);
         try {
             User user = new User();

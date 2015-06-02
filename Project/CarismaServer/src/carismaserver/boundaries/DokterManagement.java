@@ -79,7 +79,7 @@ public class DokterManagement extends javax.swing.JFrame {
                         fieldGajiLembur.setText((String) selected.getGajilemburDokter().toString());
                         fieldGajiKonsul.setText((String) selected.getGajikonsulDokter().toString());
                         comboUsername.setSelectedItem(userService.getUserById(selected.getUserIdUser()).getUsername());
-                        comboPoli.setSelectedItem(poliService.getPoli(selected.getPoliIdPoli()).getNamaPoli());
+                        comboPoli.setSelectedItem(poliService.getPolibyId(selected.getPoliIdPoli()).getNamaPoli());
                         img = selected.getFotoDokter();
                         if (img != null) {
                             Image imgs = Toolkit.getDefaultToolkit().createImage(img);
@@ -519,8 +519,8 @@ public class DokterManagement extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
-        if (!fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && areaAlamat.getText().equalsIgnoreCase("")
-                && fieldNokartuid.getText().equalsIgnoreCase("") && fieldTempat.getText().equalsIgnoreCase("") && fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
+        if (!fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && !areaAlamat.getText().equalsIgnoreCase("")
+                && !fieldNokartuid.getText().equalsIgnoreCase("") && !fieldTempat.getText().equalsIgnoreCase("") && !fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
             try {
                 int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();
                 String poliid = polis.get(comboPoli.getSelectedIndex()).getIdPoli();
@@ -544,9 +544,18 @@ public class DokterManagement extends javax.swing.JFrame {
                 } else {
                     foto = "Belum memasukkan foto";
                 }
-                int gfix = Integer.parseInt(fieldGajiFix.getText());
-                int glembur = Integer.parseInt(fieldGajiLembur.getText());
-                double gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
+                int gfix = 0;
+                if(!fieldGajiFix.getText().equalsIgnoreCase("")){
+                    gfix = Integer.parseInt(fieldGajiFix.getText());
+                }
+                int glembur = 0;
+                if(!fieldGajiLembur.getText().equalsIgnoreCase("")){
+                    glembur = Integer.parseInt(fieldGajiLembur.getText());
+                }
+                double gkonsul = 0;
+                if(!fieldGajiKonsul.getText().equalsIgnoreCase("")){
+                    gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
+                }
                 boolean success = control.insertDokter(this, userid, poliid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, image);
                 if (success) {
                     JOptionPane.showMessageDialog(this, "Insert Dokter berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
@@ -592,9 +601,18 @@ public class DokterManagement extends javax.swing.JFrame {
                 } else {
                     foto = "Belum memasukkan foto";
                 }
-                int gfix = Integer.parseInt(fieldGajiFix.getText());
-                int glembur = Integer.parseInt(fieldGajiLembur.getText());
-                double gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
+                int gfix = 0;
+                if(!fieldGajiFix.getText().equalsIgnoreCase("")){
+                    gfix = Integer.parseInt(fieldGajiFix.getText());
+                }
+                int glembur = 0;
+                if(!fieldGajiLembur.getText().equalsIgnoreCase("")){
+                    glembur = Integer.parseInt(fieldGajiLembur.getText());
+                }
+                double gkonsul = 0;
+                if(!fieldGajiKonsul.getText().equalsIgnoreCase("")){
+                    gkonsul = Double.parseDouble(fieldGajiKonsul.getText());
+                }
                 boolean success = control.updateDokter(this, userid, poliid, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, gkonsul, image);
                 if (success) {
                     JOptionPane.showMessageDialog(this, "Update Dokter berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);

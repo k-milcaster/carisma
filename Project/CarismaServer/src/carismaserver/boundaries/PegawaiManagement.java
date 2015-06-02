@@ -487,8 +487,8 @@ public class PegawaiManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAttachActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
-        if (!fieldJabatan.getText().equalsIgnoreCase("") && !fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && areaAlamat.getText().equalsIgnoreCase("")
-                && fieldNokartuid.getText().equalsIgnoreCase("") && fieldTempat.getText().equalsIgnoreCase("") && fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
+        if (!fieldJabatan.getText().equalsIgnoreCase("") && !fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && !areaAlamat.getText().equalsIgnoreCase("")
+                && !fieldNokartuid.getText().equalsIgnoreCase("") && !fieldTempat.getText().equalsIgnoreCase("") && !fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
             try {
                 int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();
                 String jabatan = fieldJabatan.getText();
@@ -512,8 +512,14 @@ public class PegawaiManagement extends javax.swing.JFrame {
                 } else {
                     foto = "Belum memasukkan foto";
                 }
-                int gfix = Integer.parseInt(fieldGajiFix.getText());
-                int glembur = Integer.parseInt(fieldGajiLembur.getText());
+                int gfix = 0;
+                if(!fieldGajiFix.getText().equalsIgnoreCase("")){
+                    gfix = Integer.parseInt(fieldGajiFix.getText());
+                }
+                int glembur = 0;
+                if(!fieldGajiLembur.getText().equalsIgnoreCase("")){
+                    glembur = Integer.parseInt(fieldGajiLembur.getText());
+                }
                 boolean success = control.updatePegawai(this, userid, jabatan, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, image);
                 if (success) {
                     JOptionPane.showMessageDialog(this, "Update Pegawai berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
@@ -534,8 +540,8 @@ public class PegawaiManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
-        if (!fieldJabatan.getText().equalsIgnoreCase("") && !fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && areaAlamat.getText().equalsIgnoreCase("")
-                && fieldNokartuid.getText().equalsIgnoreCase("") && fieldTempat.getText().equalsIgnoreCase("") && fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
+        if (!fieldJabatan.getText().equalsIgnoreCase("") && !fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && !areaAlamat.getText().equalsIgnoreCase("")
+                && !fieldNokartuid.getText().equalsIgnoreCase("") && !fieldTempat.getText().equalsIgnoreCase("") && !fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
             try {
                 int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();;
                 String jabatan = fieldJabatan.getText();
@@ -549,6 +555,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
                 String tempat = fieldTempat.getText();
                 String tanggal = fieldTanggal.getText();
                 String kelamin = comboKelamin.getSelectedItem().toString();
+                System.out.println(kelamin);
                 String darah = comboDarah.getSelectedItem().toString();
                 String bank = fieldBank.getText();
                 String norek = fieldNorek.getText();
@@ -559,8 +566,14 @@ public class PegawaiManagement extends javax.swing.JFrame {
                 } else {
                     foto = "Belum memasukkan foto";
                 }
-                int gfix = Integer.parseInt(fieldGajiFix.getText());
-                int glembur = Integer.parseInt(fieldGajiLembur.getText());
+                int gfix = 0;
+                if(!fieldGajiFix.getText().equalsIgnoreCase("")){
+                    gfix = Integer.parseInt(fieldGajiFix.getText());
+                }
+                int glembur = 0;
+                if(!fieldGajiLembur.getText().equalsIgnoreCase("")){
+                    glembur = Integer.parseInt(fieldGajiLembur.getText());
+                }
                 boolean success = control.insertPegawai(this, userid, jabatan, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, image);
                 if (success) {
                     JOptionPane.showMessageDialog(this, "Insert Pegawai berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
