@@ -5,14 +5,12 @@ import carismainterface.entity.User;
 import carismaserver.controllers.DatabaseConnection;
 import carismaserver.entity.PegawaiEntity;
 import carismaserver.entity.UserEntity;
-import com.mysql.jdbc.Statement;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.rmi.RemoteException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +69,15 @@ public class PegawaiManagement extends javax.swing.JFrame {
                         fieldGajiFix.setText((String) selected.getGajifixPegawai().toString());
                         fieldGajiLembur.setText((String) selected.getGajilemburPegawai().toString());
                         comboUsername.setSelectedItem((userService.getUserById(selected.getUserIdUser())).getUsername());
+                        img = selected.getFotoPegawai();
+                        if (img != null) {
+                            Image imgs = Toolkit.getDefaultToolkit().createImage(img);
+                            Image dimg = imgs.getScaledInstance(160, 160, Image.SCALE_SMOOTH);
+                            ImageIcon icon = new ImageIcon(dimg);
+                            foto.setIcon(icon);
+                        } else {
+                            foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/Preview.jpg")));
+                        }
                     } catch (RemoteException ex) {
                         Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
                     }

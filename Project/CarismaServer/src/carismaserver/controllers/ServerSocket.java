@@ -30,7 +30,7 @@ public class ServerSocket {
         ui.iPLabel.setText("" + InetAddress.getLocalHost());
         try {
             server = LocateRegistry.createRegistry(port);
-
+            
             AbsensidokterEntity absensiDokter = new AbsensidokterEntity(ui);
             AbsensipegawaiEntity absensiPegawai = new AbsensipegawaiEntity(ui);
             AntrianEntity antrian = new AntrianEntity(ui);
@@ -127,8 +127,8 @@ public class ServerSocket {
         server.unbind("kotaRequest");
         server.unbind("provinsiRequest");
         server.unbind("poliRequest");
-        server.unbind("pembayaranRequest");
-
+        server.unbind("pembayaranRequest");       
+        server = null;
         ui.act.append("Server Stopped \n");
     }
 }
