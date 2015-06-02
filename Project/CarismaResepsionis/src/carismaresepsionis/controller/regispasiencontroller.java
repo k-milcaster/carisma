@@ -156,4 +156,18 @@ public class regispasiencontroller {
             return null;
         }
   }
+
+
+    public DefaultTableModel getPasienByName (String nama) throws RemoteException{
+        List<Pasien> list = new ArrayList<Pasien>();
+        DefaultTableModel model = new DefaultTableModel();
+        list = pasienService.getPasienByName(nama);
+        model.addColumn("Id Pasien");
+        model.addColumn("Nama Pasien");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdPasien(), list.get(i).getNamaPasien()});
+        }
+        return model;
+}
+    
 }
