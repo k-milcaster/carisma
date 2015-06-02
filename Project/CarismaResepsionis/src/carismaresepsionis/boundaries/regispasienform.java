@@ -84,7 +84,6 @@ public class regispasienform extends javax.swing.JFrame {
         Kartu_id = new javax.swing.JTextField();
         No_Kartu = new javax.swing.JTextField();
         CariPasien = new javax.swing.JTextField();
-        UpdatePasien = new javax.swing.JButton();
         Kota = new javax.swing.JComboBox();
         Confirm = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -304,12 +303,6 @@ public class regispasienform extends javax.swing.JFrame {
         getContentPane().add(CariPasien);
         CariPasien.setBounds(20, 60, 457, 32);
 
-        UpdatePasien.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        UpdatePasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428227236_card_in_use.png"))); // NOI18N
-        UpdatePasien.setText("Cetak Bukti Antrian");
-        getContentPane().add(UpdatePasien);
-        UpdatePasien.setBounds(130, 540, 180, 40);
-
         Kota.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- KOTA -" }));
         getContentPane().add(Kota);
         Kota.setBounds(940, 390, 325, 32);
@@ -413,7 +406,7 @@ public class regispasienform extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 10, 1359, 700);
+        jLabel4.setBounds(0, 0, 1359, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -695,7 +688,6 @@ public class regispasienform extends javax.swing.JFrame {
     private javax.swing.JTextField Tempat_ID;
     private javax.swing.JTextField Tempat_Lahir;
     private javax.swing.JTextField TinggiPasien;
-    private javax.swing.JButton UpdatePasien;
     private javax.swing.JComboBox goldar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
