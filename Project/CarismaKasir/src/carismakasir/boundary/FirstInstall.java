@@ -1,15 +1,12 @@
 package carismakasir.boundary;
 
 import carismakasir.controller.ClientSocket;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -28,6 +25,7 @@ public class FirstInstall extends javax.swing.JFrame {
 
     public FirstInstall() throws IOException {
         initComponents();
+        this.setLocationRelativeTo(null);
         createFile();
     }
 

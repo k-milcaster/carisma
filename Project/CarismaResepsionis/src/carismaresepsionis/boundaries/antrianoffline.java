@@ -9,6 +9,8 @@ import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.DataDokterController;
 import carismaresepsionis.controller.regispasiencontroller;
 import carismaresepsionis.controller.AntrianOfflineController;
+import com.itextpdf.text.DocumentException;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,6 +49,7 @@ public class antrianoffline extends javax.swing.JFrame {
         namapasien.setText(namaPasien);
         this.userName = username;
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        
 
 //          this.client = client;
         control = new DataDokterController(this.client);
@@ -155,8 +158,12 @@ public class antrianoffline extends javax.swing.JFrame {
             String tanggal = String.valueOf(format.format(cal.getTime()));
 //             tabeldokter_.getV
             antrianofflinecontrol.InsertAntrian(idpasien.getText().toString(), tabeldokter_.getValueAt(tabeldokter_.getSelectedRow(), 0).toString(), tanggal);
-            new Menursepsionis(this.client, this.userName).show();
+            this.dispose();
         } catch (RemoteException ex) {
+            Logger.getLogger(antrianoffline.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(antrianoffline.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(antrianoffline.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tambahantrianActionPerformed

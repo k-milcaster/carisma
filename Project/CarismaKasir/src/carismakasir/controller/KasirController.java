@@ -87,7 +87,7 @@ public class KasirController {
     }
 
     public boolean cetak() throws FileNotFoundException {
-        String FILE = this.printTo + "test" + this.fileName;
+        String FILE = this.printTo + "invoice" + this.fileName;
 
         Document document = new Document();
         try {
