@@ -38,8 +38,9 @@ public class LihatRekamMedisController {
     public DefaultTableModel getRekamMedik(String idPasien) throws RemoteException {
         DefaultTableModel TabelRekammedik = new DefaultTableModel();
         TabelRekammedik.addColumn("Id RekamMedik");
-        TabelRekammedik.addColumn("Id Dokter");
+        TabelRekammedik.addColumn("Nama Dokter");
         TabelRekammedik.addColumn("Id Pasien");
+        TabelRekammedik.addColumn("Nama Pasien");        
         TabelRekammedik.addColumn("Tgl Pemeriksaan");
         TabelRekammedik.addColumn("Keluhan");
         TabelRekammedik.addColumn("Pemeriksaan Dokter");
@@ -52,9 +53,11 @@ public class LihatRekamMedisController {
         Pasien pasien = new Pasien();
        
         list = rekamMedik.getRekamMedikByPasien(idPasien);
-        pasien = pasienService.getPasien(idPasien);
         for (int i = 0; i < list.size(); i++) {
-            TabelRekammedik.addRow(new Object[]{list.get(i).getIdRekammedik(), list.get(i).getDokterIdDokter(), list.get(i).getPasienIdPasien(), list.get(i).getTglRekammedik(), list.get(i).getKeluhanRekammedik(), list.get(i).getPemeriksaanRekammedik(), list.get(i).getTerapiRekammedik(), list.get(i).getAlergiobatRekammedik(), list.get(i).getKesimpulanRekammedis(), list.get(i).getKondisipasienkeluarRekammedis(), list.get(i).getResepIdResep() });
+            TabelRekammedik.addRow(new Object[]{list.get(i).getIdRekammedik(), dokterService.getDokterById(list.get(i).getDokterIdDokter()).get(1), list.get(i).getPasienIdPasien(), 
+                pasienService.getPasien(list.get(i).getPasienIdPasien()).getNamaPasien(), list.get(i).getTglRekammedik(), list.get(i).getKeluhanRekammedik(), 
+                list.get(i).getPemeriksaanRekammedik(), list.get(i).getTerapiRekammedik(), list.get(i).getAlergiobatRekammedik(), list.get(i).getKesimpulanRekammedis(), 
+                list.get(i).getKondisipasienkeluarRekammedis(), list.get(i).getResepIdResep() });
         }
         
         return TabelRekammedik;
