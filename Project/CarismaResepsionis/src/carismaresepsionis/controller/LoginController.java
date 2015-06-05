@@ -31,7 +31,7 @@ public class LoginController {
         }
         return success;
     }
-    
+
     public void logOut() throws RemoteException {
         user.userLogOut(this.userName, "resepsionis");
     }
