@@ -7,6 +7,7 @@ class Antrian_Model extends Model {
     }
 
     function insertAntrian($id, $pasien, $dokter, $antrian, $jenis, $tgl) {
+        echo $id . " " . $pasien . " " . $dokter . " " . $antrian . " " . $jenis . " " . $tgl;
         $statement = $this->db->prepare("INSERT INTO antrian (id_antrian, pasien_id_pasien, dokter_id_dokter, nomor_antrian, jenis_antrian, tgl_antrian) VALUES (:id, :pasien, :dokter, :antrian, :jenis, :tgl)");
         $statement->execute(array(':id' => $id,
             ':pasien' => $pasien,
@@ -14,7 +15,7 @@ class Antrian_Model extends Model {
             ':antrian' => $antrian,
             ':jenis' => $jenis,
             ':tgl' => $tgl));
-        return $statement->fetchAll();
+        //return $statement->fetchAll();
     }
 
     function getCountAntrian() {
