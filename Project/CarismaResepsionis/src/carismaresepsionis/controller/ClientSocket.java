@@ -15,8 +15,8 @@ import java.util.logging.Logger;
  */
 public class ClientSocket {
 
-    private String host = "localhost";
-    private int port = 2015;
+    private String host = "";
+    private int port = 0;
     public Login login;
     private UserService userService;
     private PasienService pasienService;
@@ -31,8 +31,28 @@ public class ClientSocket {
     private PasienKamarService pasienkamarService;
     private PegawaiService pegawaiService;
 
-    public ClientSocket() throws RemoteException, NotBoundException {
-        this.Connect();
+    public ClientSocket(String host, int port) throws RemoteException, NotBoundException {
+        this.host = host;
+        this.port = port;
+    }
+
+    public boolean testConnection() {
+        try {
+            Registry registry = null;
+            try {
+                registry = LocateRegistry.getRegistry(host, port);
+            } catch (RemoteException ex) {
+                Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            userService = (UserService) registry.lookup("userRequest");
+            return true;
+        } catch (RemoteException ex) {
+
+            return false;
+        } catch (NotBoundException ex) {
+
+            return false;
+        }
     }
 
     public void Connect() {

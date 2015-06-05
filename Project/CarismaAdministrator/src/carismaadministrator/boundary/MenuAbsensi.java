@@ -2,19 +2,23 @@ package carismaadministrator.boundary;
 
 import carismaadministrator.controller.AbsensiController;
 import carismaadministrator.controller.ClientSocket;
+import carismaadministrator.controller.LoginController;
 import carismainterface.server.UserService;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MenuAbsensi extends javax.swing.JFrame {
-    
+
     private AbsensiController absensiController;
     private ClientSocket clientSocket;
     private UserService login;
     private String userName;
     String[] namaPegawai;
-    public MenuAbsensi(ClientSocket client, String userName) throws RemoteException{
+
+    public MenuAbsensi(ClientSocket client, final String userName) throws RemoteException {
         clientSocket = client;
         this.userName = userName;
         login = clientSocket.getUserService();
@@ -23,6 +27,16 @@ public class MenuAbsensi extends javax.swing.JFrame {
         namaPegawai = absensiController.getNamaPegawai(this.userName);
         labelAdministrator.setText(namaPegawai[0]);
         setLocationRelativeTo(this);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                LoginController log = new LoginController(login, userName);
+                try {
+                    log.logOut();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(MenuAbsensi.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -155,10 +169,6 @@ public class MenuAbsensi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public static void main(String args[]) {
-
-       
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

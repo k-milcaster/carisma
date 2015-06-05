@@ -1,7 +1,11 @@
 package carismaapoteker.boundaries;
 
 import carismaapoteker.controller.ClientSocket;
+import carismaapoteker.controller.LoginController;
 import carismaapoteker.controller.StokObatController;
+import carismainterface.server.UserService;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,18 +19,30 @@ public class MenuApoteker extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
     private StokObatController controller;
+    private UserService login;
     private String[] namaPegawai;
-    public MenuApoteker(ClientSocket Client, String username) throws RemoteException {
+
+    public MenuApoteker(ClientSocket Client, final String username) throws RemoteException {
         this.client = Client;
         this.userName = username;
         controller = new StokObatController(client);
+        login = client.getUserService();
         initComponents();
         namaPegawai = controller.getNamaPegawai(userName);
         labelApoteker.setText(namaPegawai[0]);
         setSize(515, 535);
         setLocationRelativeTo(this);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                LoginController log = new LoginController(login, username);
+                try {
+                    log.logOut();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(MenuApoteker.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -169,7 +185,6 @@ public class MenuApoteker extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(MenuApoteker.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -177,10 +192,7 @@ public class MenuApoteker extends javax.swing.JFrame {
             new TransaksiBeliObat(this.client, namaPegawai[0]).setVisible(true);
         } catch (RemoteException ex) {
             Logger.getLogger(MenuApoteker.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //this.dispose();
-
-
+        }        
     }//GEN-LAST:event_jButton3ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
