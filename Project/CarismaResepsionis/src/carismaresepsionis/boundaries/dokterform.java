@@ -433,10 +433,11 @@ public class dokterform extends javax.swing.JFrame {
             Hp2Dokter.setText(infoDokter.get(9).toString());
             byte[] content = null;
             content = (byte[]) infoDokter.get(10);
-            Image imgs = Toolkit.getDefaultToolkit().createImage(content);
-            ImageIcon icon = new ImageIcon(imgs);
-            FotoDokter.setIcon(icon);
-
+            if (content != null) {
+                Image imgs = Toolkit.getDefaultToolkit().createImage(content);
+                ImageIcon icon = new ImageIcon(imgs);
+                FotoDokter.setIcon(icon);
+            }
         } catch (RemoteException ex) {
             Logger.getLogger(dokterform.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
@@ -457,9 +458,9 @@ public class dokterform extends javax.swing.JFrame {
     }//GEN-LAST:event_TglLahirDokterActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       try {
-            new Menursepsionis (this.client, this.userName).show();
-        
+        try {
+            new Menursepsionis(this.client, this.userName).show();
+
         } catch (RemoteException ex) {
             Logger.getLogger(DaftarRawatInap.class.getName()).log(Level.SEVERE, null, ex);
         }
