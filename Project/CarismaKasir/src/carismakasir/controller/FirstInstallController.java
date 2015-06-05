@@ -8,6 +8,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.UIManager;
 
 /**
  *
@@ -16,6 +17,11 @@ import java.util.Scanner;
 public class FirstInstallController {
 
     public static void main(String[] args) throws NotBoundException, RemoteException, IOException {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            System.out.println("Look & Feel exception");
+        }
         if (fileCheck()) {
             new Login().setVisible(true);
         } else {

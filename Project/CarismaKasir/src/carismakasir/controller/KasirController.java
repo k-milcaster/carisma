@@ -2,6 +2,7 @@ package carismakasir.controller;
 
 import carismainterface.entity.Kunjungan;
 import carismainterface.server.KunjunganService;
+import carismainterface.server.PegawaiService;
 import carismainterface.server.PembayaranService;
 import carismakasir.boundary.Kasir;
 import java.rmi.RemoteException;
@@ -10,15 +11,10 @@ import javax.swing.table.DefaultTableModel;
 import java.io.FileOutputStream;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.print.Doc;
-import javax.print.DocPrintJob;
-import javax.print.SimpleDoc;
-import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
@@ -31,12 +27,14 @@ public class KasirController {
     private PembayaranService pembayaranService;
     private KunjunganService kunjunganService;
     private Kasir ui;
+    private PegawaiService pegawaiService;
     private String printTo = "D:\\";
     private String fileName = ".pdf";
 
     public KasirController(ClientSocket Client, Kasir ui) {
         this.pembayaranService = Client.getPembayaranService();
         this.kunjunganService = Client.getKunjunganService();
+        this.pegawaiService = Client.getPegawaiService();
         this.ui = ui;
     }
 
@@ -136,6 +134,11 @@ public class KasirController {
             JOptionPane.showMessageDialog(null, "Cetak Gagal");
             return false;
         }
+    }
+
+    public String getNamaPegawai(String username) throws RemoteException {
+        String[] namaPegawai = pegawaiService.getIdNamaPegawai(username);
+        return namaPegawai[0];
     }
 
 }

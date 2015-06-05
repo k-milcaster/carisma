@@ -1,4 +1,5 @@
 package carismaresepsionis.controller;
+
 import carismainterface.server.*;
 import carismaresepsionis.boundaries.*;
 import java.rmi.NotBoundException;
@@ -12,7 +13,8 @@ import java.util.logging.Logger;
  *
  * @author K-MiL Caster
  */
-public class ClientSocket {    
+public class ClientSocket {
+
     private String host = "localhost";
     private int port = 2015;
     public Login login;
@@ -27,21 +29,24 @@ public class ClientSocket {
     private PoliService poliService;
     private KamarService kamarService;
     private PasienKamarService pasienkamarService;
-    public ClientSocket() throws RemoteException, NotBoundException{
+    private PegawaiService pegawaiService;
+
+    public ClientSocket() throws RemoteException, NotBoundException {
         this.Connect();
     }
-    public void Connect(){
+
+    public void Connect() {
         try {
             Registry registry = null;
             try {
                 registry = LocateRegistry.getRegistry(host, port);
             } catch (RemoteException ex) {
                 Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
-            }            
+            }
             userService = (UserService) registry.lookup("userRequest");
-            pasienService = (PasienService) registry.lookup("pasienRequest");                                   
+            pasienService = (PasienService) registry.lookup("pasienRequest");
             antrianService = (AntrianService) registry.lookup("antrianRequest");
-            kunjunganService = (KunjunganService)registry.lookup("kunjunganRequest"); 
+            kunjunganService = (KunjunganService) registry.lookup("kunjunganRequest");
             kotaService = (KotaService) registry.lookup("kotaRequest");
             dokterService = (DokterService) registry.lookup("dokterRequest");
             jadwalService = (JadwalService) registry.lookup("jadwalRequest");
@@ -49,46 +54,60 @@ public class ClientSocket {
             poliService = (PoliService) registry.lookup("poliRequest");
             kamarService = (KamarService) registry.lookup("kamarRequest");
             pasienkamarService = (PasienKamarService) registry.lookup("pasienkamarRequest");
-            
+            pegawaiService = (PegawaiService) registry.lookup("pegawaiRequest");
+
         } catch (RemoteException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public UserService getUserService(){
-        return this.userService;        
+
+    public UserService getUserService() {
+        return this.userService;
     }
-    
-    public PasienService getPasienService(){
-        return this.pasienService;        
+
+    public PasienService getPasienService() {
+        return this.pasienService;
     }
-    public AntrianService getAntrianService(){
+
+    public AntrianService getAntrianService() {
         return this.antrianService;
     }
-    public KunjunganService getKunjunganService(){
+
+    public KunjunganService getKunjunganService() {
         return this.kunjunganService;
     }
-    public KotaService getKotaService(){
+
+    public KotaService getKotaService() {
         return this.kotaService;
     }
-    public DokterService getDokterService(){
+
+    public DokterService getDokterService() {
         return this.dokterService;
     }
-    public JadwalService getJadwalService(){
+
+    public JadwalService getJadwalService() {
         return this.jadwalService;
     }
-    public JadwaldokterService getJadwaldokterService(){
+
+    public JadwaldokterService getJadwaldokterService() {
         return this.jadwaldokterService;
     }
-    public PoliService getPoliService(){
+
+    public PoliService getPoliService() {
         return this.poliService;
     }
-    public KamarService getKamarService(){
+
+    public KamarService getKamarService() {
         return this.kamarService;
     }
-    public PasienKamarService getPasienKamarService(){
+
+    public PasienKamarService getPasienKamarService() {
         return this.pasienkamarService;
+    }
+
+    public PegawaiService getPegawaiService() {
+        return this.pegawaiService;
     }
 }

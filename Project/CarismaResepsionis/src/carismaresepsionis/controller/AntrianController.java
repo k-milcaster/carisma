@@ -1,17 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismaresepsionis.controller;
 
 import carismainterface.entity.Antrian;
-import carismainterface.entity.Dokter;
 import carismainterface.entity.Kunjungan;
 import carismainterface.entity.Pasien;
 import carismainterface.server.AntrianService;
 import carismainterface.server.DokterService;
 import carismainterface.server.PasienService;
 import carismainterface.server.KunjunganService;
+import carismainterface.server.PegawaiService;
 import carismainterface.server.PoliService;
 import carismaresepsionis.boundaries.Menursepsionis;
 import java.rmi.RemoteException;
@@ -32,6 +28,7 @@ public class AntrianController extends Thread {
     private DokterService dokterService;
     private PoliService poliService;
     private KunjunganService kunjunganService;
+    private PegawaiService pegawaiService;
     private Menursepsionis ui;
 
     public AntrianController(ClientSocket client) throws RemoteException {
@@ -41,6 +38,7 @@ public class AntrianController extends Thread {
         this.dokterService = client.getDokterService();
         this.pasienService = client.getPasienService();
         this.kunjunganService = client.getKunjunganService();
+        this.pegawaiService = client.getPegawaiService();
     }
 
     public AntrianController(ClientSocket client, Menursepsionis ui) throws RemoteException {
@@ -50,6 +48,7 @@ public class AntrianController extends Thread {
         this.dokterService = client.getDokterService();
         this.pasienService = client.getPasienService();
         this.kunjunganService = client.getKunjunganService();
+        this.pegawaiService = client.getPegawaiService();
     }
 
     public void run() {
@@ -80,9 +79,9 @@ public class AntrianController extends Thread {
         tabelAntrian.addColumn("Id");
         tabelAntrian.addColumn("Nama Pasien");
         tabelAntrian.addColumn("Poli");
-        tabelAntrian.addColumn("Dokter");        
+        tabelAntrian.addColumn("Dokter");
         for (int i = 0; i < list.size(); i++) {
-            
+
             tabelAntrian.addRow(new Object[]{list.get(i).getNomorAntrian(), list.get(i).getIdAntrian(), pasienService.getPasien(list.get(i).getPasienIdPasien()).getNamaPasien(), dokterService.getDokterById(list.get(i).getDokterIdDokter()).get(2), dokterService.getDokterById(list.get(i).getDokterIdDokter()).get(1)});
         }
         return tabelAntrian;
@@ -101,5 +100,10 @@ public class AntrianController extends Thread {
     public Kunjungan getDetailKunjungan(String idKunjungan) throws RemoteException {
         Kunjungan kunjungan = kunjunganService.getKunjungan(idKunjungan);
         return kunjungan;
+    }
+
+    public String getNamaPegawai(String username) throws RemoteException {
+        String[] namaPegawai = pegawaiService.getIdNamaPegawai(username);
+        return namaPegawai[0];
     }
 }

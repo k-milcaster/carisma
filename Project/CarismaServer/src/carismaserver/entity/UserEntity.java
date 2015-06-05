@@ -287,7 +287,7 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
 
     @Override
     public User getUserById(int idUser) throws RemoteException {
-        ui.act.append("Client Execute getUsersbyId("+idUser+") \n");
+        ui.act.append("Client Execute getUsersbyId(" + idUser + ") \n");
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
@@ -327,7 +327,47 @@ public class UserEntity extends UnicastRemoteObject implements UserService {
         try {
             statement = DatabaseConnection.getConnection().createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT * FROM user WHERE role = '"+role+"' ORDER BY id_user");
+            ResultSet result = statement.executeQuery("SELECT * FROM user WHERE role = '" + role + "' ORDER BY id_user");
+
+            List<User> list = new ArrayList<User>();
+
+            while (result.next()) {
+                User users = new User();
+                users.setIdUser(result.getInt("id_user"));
+                users.setUsername(result.getString("username"));
+                users.setPassword(result.getString("password"));
+                users.setRegistered(result.getString("registered"));
+                users.setLastlogin(result.getString("lastlogin"));
+                users.setRole(result.getString("role"));
+                list.add(users);
+            }
+            result.close();
+
+            return list;
+
+        } catch (SQLException exception) {
+            ui.act.append("getUserListbyRoles Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<User> getUserNonDoctor() throws RemoteException {
+        //ui.act.append("Client Execute getUsersListbyRole \n");
+
+        Statement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT * FROM user WHERE role != 'doctor' ORDER BY id_user");
 
             List<User> list = new ArrayList<User>();
 

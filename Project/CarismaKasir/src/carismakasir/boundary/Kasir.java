@@ -22,14 +22,14 @@ public class Kasir extends javax.swing.JFrame {
     private UserService login;
     private KasirController control;
 
-    public Kasir(ClientSocket client, final String username) {
+    public Kasir(ClientSocket client, final String username) throws RemoteException {
         this.client = client;
         this.login = client.getUserService();
         initComponents();
         control = new KasirController(client, this);
         setLocationRelativeTo(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        this.jLabel8.setText(username);
+        this.jLabel8.setText(control.getNamaPegawai(username));
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 LoginController log = new LoginController(login, username);
@@ -131,7 +131,7 @@ public class Kasir extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(10, 110, 88, 22);
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         getContentPane().add(jLabel8);
         jLabel8.setBounds(128, 110, 200, 22);
 
@@ -144,7 +144,6 @@ public class Kasir extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         jLabel10.setText("Rp");
 
-        jTextField6.setBackground(new java.awt.Color(255, 255, 255));
         jTextField6.setFont(new java.awt.Font("Agency FB", 1, 60)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));

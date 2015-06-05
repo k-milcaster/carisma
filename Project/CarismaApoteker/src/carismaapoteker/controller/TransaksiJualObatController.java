@@ -64,7 +64,6 @@ public class TransaksiJualObatController {
         insertDetail = detailtransaksijual.insertDetailtransaksijualobat(detailtransaksi);
         return insertDetail;
 
-
     }
 
     public boolean deleteDetailTransaksiJualObat(String idTransaksi, int idobat) throws RemoteException {
@@ -117,6 +116,7 @@ public class TransaksiJualObatController {
         }
         return model;
     }
+
     public String getIdTransaksiJualObat() throws RemoteException {
         String lastIdTransaksiJualObat = transaksijualobat.getLastIdTransaksiJualObat();
         String[] splitDateNow = getDateNow().split("-");
@@ -124,8 +124,9 @@ public class TransaksiJualObatController {
         String awalan = "TRANSSELL-".concat(dateNow).concat("-");
         String idTransaksiJualObatFix = " ";
         String getDateOnly = " ";
+        System.out.println(lastIdTransaksiJualObat);
         //TRANSSELL-20150528-001
-        if (lastIdTransaksiJualObat != null) {
+        if (lastIdTransaksiJualObat != null && !"kosong".equals(lastIdTransaksiJualObat)) {
             char[] charDate = lastIdTransaksiJualObat.toCharArray();
             char[] newCharDate = new char[8];
             for (int i = 0; i < 8; i++) {
@@ -133,7 +134,7 @@ public class TransaksiJualObatController {
             }
             getDateOnly = String.valueOf(newCharDate);
         }
-        if (lastIdTransaksiJualObat == null || (!dateNow.equals(getDateOnly))) {
+        if ((lastIdTransaksiJualObat == null && lastIdTransaksiJualObat != "kosong") || (!dateNow.equals(getDateOnly))) {
             idTransaksiJualObatFix = awalan.concat("001");
         } else {
             char[] lastDigit = lastIdTransaksiJualObat.toCharArray();
@@ -152,6 +153,7 @@ public class TransaksiJualObatController {
         }
         return idTransaksiJualObatFix;
     }
+
     public String getDateNow() throws RemoteException {
         DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
         String date = df.format(new java.util.Date());

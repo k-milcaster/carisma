@@ -25,7 +25,7 @@ public class FirstInstall extends javax.swing.JFrame {
 
     public FirstInstall() throws IOException {
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(this);
         createFile();
     }
 
@@ -92,7 +92,7 @@ public class FirstInstall extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismakasir/image/FS.jpg"))); // NOI18N
         jLabel6.setText(" ");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 580, 290));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 550, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
