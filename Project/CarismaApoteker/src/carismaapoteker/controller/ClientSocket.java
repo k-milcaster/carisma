@@ -26,9 +26,33 @@ public class ClientSocket {
     private DetailobatService detailobatService;
     private DetailtransaksibeliobatService detailtransaksibeliobatService;
     private PegawaiService pegawaiService;
-    
+
     public ClientSocket() throws RemoteException, NotBoundException {
         this.Connect();
+    }
+
+    public ClientSocket(String host, int port) throws RemoteException, NotBoundException {
+        this.host = host;
+        this.port = port;
+    }
+
+    public boolean testConnection() {
+        try {
+            Registry registry = null;
+            try {
+                registry = LocateRegistry.getRegistry(host, port);
+            } catch (RemoteException ex) {
+                Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            userService = (UserService) registry.lookup("userRequest");
+            return true;
+        } catch (RemoteException ex) {
+
+            return false;
+        } catch (NotBoundException ex) {
+
+            return false;
+        }
     }
 
     public void Connect() {
@@ -43,11 +67,11 @@ public class ClientSocket {
             transaksibeliobatService = (TransaksibeliobatService) registry.lookup("transaksibeliobatRequest");
             obatService = (ObatService) registry.lookup("obatRequest");
             transaksijualobatService = (TransaksijualobatService) registry.lookup("transaksijualobatRequest");
-            detailtransaksiService = (DetailtransaksijualobatService) registry.lookup("detailtransaksijualobatRequest"); 
+            detailtransaksiService = (DetailtransaksijualobatService) registry.lookup("detailtransaksijualobatRequest");
             detailobatService = (DetailobatService) registry.lookup("detailobatRequest");
             detailtransaksibeliobatService = (DetailtransaksibeliobatService) registry.lookup("detailtransaksibeliobatRequest");
             pegawaiService = (PegawaiService) registry.lookup("pegawaiRequest");
-            
+
         } catch (RemoteException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
@@ -58,26 +82,33 @@ public class ClientSocket {
     public UserService getUserService() {
         return this.userService;
     }
-    public TransaksibeliobatService getTransaksibeliobatService(){
+
+    public TransaksibeliobatService getTransaksibeliobatService() {
         return this.transaksibeliobatService;
     }
-    public ObatService getObatService(){
+
+    public ObatService getObatService() {
         return this.obatService;
     }
-    public TransaksijualobatService getTransaksijualobatService(){
+
+    public TransaksijualobatService getTransaksijualobatService() {
         return this.transaksijualobatService;
     }
-    public DetailtransaksijualobatService getDetailtransaksijualobatService(){
+
+    public DetailtransaksijualobatService getDetailtransaksijualobatService() {
         return this.detailtransaksiService;
     }
-    public DetailobatService getDetailonatSerivice(){
+
+    public DetailobatService getDetailonatSerivice() {
         return this.detailobatService;
     }
-    public DetailtransaksibeliobatService getDetailtransaksibeliobatService(){
+
+    public DetailtransaksibeliobatService getDetailtransaksibeliobatService() {
         return this.detailtransaksibeliobatService;
     }
-    public PegawaiService getPegawaiService(){
+
+    public PegawaiService getPegawaiService() {
         return this.pegawaiService;
     }
-    
+
 }
