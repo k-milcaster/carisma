@@ -63,27 +63,25 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
 
     @Override
     public List<Detailresep> getDetailresep(String idResep) throws RemoteException {
-        ui.act.append("Client Execute getDetailresepList  \n");
+        ui.act.append("Client Execute getResepObat  \n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM detailresep WHERE resep_id_resep = " + idResep);
+                    "SELECT dr.`namaobat_resep` "
+                    + "FROM resep AS r, detailresep AS dr "
+                    + "WHERE dr.`resep_id_resep` = r.id_resep AND r.id_resep = '"+idResep+"'");
             ResultSet result = statement.executeQuery();
             List<Detailresep> list = new ArrayList<Detailresep>();
             Detailresep dR = null;
-            if (result.next()) {
+            while (result.next()) {
                 dR = new Detailresep();
-                dR.setIdDetailresep(result.getString("id_detailresep"));
-                dR.setResepIdResep(result.getString("resep_id_resep"));
                 dR.setNamaobatResep(result.getString("namaobat_resep"));
-                dR.setQtyResep(result.getInt("qty_resep"));
-                dR.setAturanpakaiResep(result.getString("aturanpakai_resep"));
                 list.add(dR);
             }
             return list;
         } catch (SQLException exception) {
-            ui.act.append("getDetaiResep Error \n");
+            ui.act.append("getResepObat Error \n");
             ui.act.append(exception.toString());
             return null;
         } finally {
