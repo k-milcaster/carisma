@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package carismaapoteker.controller;
 
 import carismaapoteker.boundaries.StokObat;
@@ -67,7 +61,7 @@ public class StokObatControllerTest {
     public void testGetDetailObat() throws Exception {
         System.out.println("getDetailObat");
         client = new ClientSocket();
-        int id = 1;
+        int id = 199;
         StokObatController instance = new StokObatController(client);
         DefaultTableModel result = instance.getDetailObat(id);
         boolean resultCondition = false;
@@ -128,8 +122,7 @@ public class StokObatControllerTest {
         String username = "apotek1";
         StokObatController instance =  new StokObatController(client);
         String[] expResult = new String[2];
-        expResult[0] = "Hana";
-        //expResult[1] = null;
+        expResult[0] = "Hana Mahrifah";
         String[] result = instance.getNamaPegawai(username);
         assertArrayEquals(expResult, result);
     }
