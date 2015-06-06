@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismaapoteker.controller;
 
 import javax.swing.DefaultComboBoxModel;
@@ -101,13 +96,13 @@ public class TransaksiBeliObatControllerTest {
     public void testInsertDetailTransaksiBeliObat() throws Exception {
         System.out.println("insertDetailTransaksiBeliObat");
         client = new ClientSocket();
-        String idTransaksi = "TRANSBUY-20150523-005";
-        int idObat = 1;
-        int qtyObat = 201;
+        String idTransaksi = "TRANSBUY-20150602-001";
+        int idObat = 198;
+        int qtyObat = 50;
         TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
         boolean result = instance.insertDetailTransaksiBeliObat(idTransaksi, idObat, qtyObat);
         assertTrue(result);
-        instance.deleteDetailTransaksiBeliObat("TRANSBUY-20150523-005", 1);
+        instance.deleteDetailTransaksiBeliObat("TRANSBUY-20150602-001", 198);
     }
 
     /**
@@ -117,14 +112,14 @@ public class TransaksiBeliObatControllerTest {
     public void testInsertDetailObat() throws Exception {
         System.out.println("insertDetailObat");
         client = new ClientSocket();
-        int idDetail = 100;
-        int idObat = 9;
-        String TglKadaluarsa = "2017-05-13";
+        int idDetail = 2;
+        int idObat = 199;
+        String TglKadaluarsa = "2018-06-09";
         TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
         boolean result = instance.insertDetailObat(idDetail, idObat, TglKadaluarsa);
         assertTrue(result);
-        instance.deleteDetailObat(100);
-        instance.deleteStokObat(9);
+        instance.deleteDetailObat(2);
+        instance.deleteStokObat(199);
     }
 
     /**
@@ -149,7 +144,7 @@ public class TransaksiBeliObatControllerTest {
         System.out.println("getidDetailObat");
         client = new ClientSocket();
         TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
-        int expResult = 41;
+        int expResult = 2;
         int result = instance.getidDetailObat();
         assertEquals(expResult, result);
     }
@@ -162,7 +157,7 @@ public class TransaksiBeliObatControllerTest {
         System.out.println("getidObat");
         client = new ClientSocket();
         TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
-        int expResult =218;
+        int expResult =200;
         int result = instance.getidObat();
         assertEquals(expResult, result);
     }
@@ -177,7 +172,7 @@ public class TransaksiBeliObatControllerTest {
         String username = "apotek1";
         StokObatController instance = new StokObatController(client);
         String[] expResult = new String[2];
-        expResult[0] = "Hana";
+        expResult[0] = "Hana Mahrifah";
         String[] result = instance.getNamaPegawai(username);
         assertArrayEquals(expResult, result);
     }
@@ -191,7 +186,7 @@ public class TransaksiBeliObatControllerTest {
         client = new ClientSocket();
         System.out.println("getIdTransaksiBeliObat");
         TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
-        String expResult = "TRANSBUY-20150530-002";
+        String expResult = "TRANSBUY-20150606-001";
         String result = instance.getIdTransaksiBeliObat();
         assertEquals(expResult, result);
     }
@@ -204,7 +199,7 @@ public class TransaksiBeliObatControllerTest {
         client = new ClientSocket();
         System.out.println("getDateNow");
         TransaksiBeliObatController instance = new TransaksiBeliObatController(client);
-        String expResult = "2015-05-30";
+        String expResult = "2015-06-06";
         String result = instance.getDateNow();
         assertEquals(expResult, result);
     }
