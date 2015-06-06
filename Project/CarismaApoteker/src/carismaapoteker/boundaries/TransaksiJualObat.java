@@ -38,6 +38,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
 
     public void clearField() {
         fieldDescription.setText("");
+        fieldKunjungan.setText("");
         int row = jTableOfSales.getRowCount();
         for (int i = 0; i < row; i++) {
             tableOfSales = (DefaultTableModel) jTableOfSales.getModel();
@@ -90,6 +91,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         fieldDescription.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldDescription.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
+        fieldIdOfSales.setEditable(false);
         fieldIdOfSales.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldIdOfSales.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
         fieldIdOfSales.addActionListener(new java.awt.event.ActionListener() {
@@ -144,12 +146,11 @@ public class TransaksiJualObat extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(fieldIdOfSales)
-                        .addComponent(fieldKunjungan, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldKunjungan)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addGap(21, 21, 21)))
+                        .addGap(21, 21, 21))
+                    .addComponent(fieldIdOfSales))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -281,21 +282,25 @@ public class TransaksiJualObat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
         if (fieldIdOfSales.getText().equals("") || fieldDescription.getText().equals("") || fieldKunjungan.getText().equals("--")) {
             JOptionPane.showMessageDialog(null, "Field yang Anda Isi Kurang Lengkap", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
-                transaksijualobatController.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), fieldDescription.getText());
-                JOptionPane.showMessageDialog(null, "Data Transaksi Penjualan Obat Tersimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-                int row = jTableOfSales.getSelectedRow() + 1;
-                System.out.println(row);
-                for (int i = 0; i < row; i++) {
-                    transaksijualobatController.insertDetailtransaksijualobat(fieldIdOfSales.getText(), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 0))), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
+                boolean testKunjungan = transaksijualobatController.cekKunjungan(fieldKunjungan.getText());
+                if (testKunjungan) {
+                    transaksijualobatController.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), fieldDescription.getText());
+                    JOptionPane.showMessageDialog(null, "Data Transaksi Penjualan Obat Tersimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                    int row = jTableOfSales.getSelectedRow() + 1;
+                    System.out.println(row);
+                    for (int i = 0; i < row; i++) {
+                        transaksijualobatController.insertDetailtransaksijualobat(fieldIdOfSales.getText(), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 0))), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
+                    }
+                    transaksijualobatController.updateKunjungan(fieldIdOfSales.getText(), fieldKunjungan.getText());
+                    clearField();
+                    fieldIdOfSales.setText(transaksijualobatController.getIdTransaksiJualObat());
+                } else {
+                    JOptionPane.showMessageDialog(null, "ID Kunjungan tidak ditemukan", "Peringatan", JOptionPane.INFORMATION_MESSAGE);
                 }
-                transaksijualobatController.updateKunjungan(fieldIdOfSales.getText(), fieldKunjungan.getText());
-                clearField();
-                fieldIdOfSales.setText(transaksijualobatController.getIdTransaksiJualObat());
             } catch (RemoteException | HeadlessException | NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Bermasalah", e.toString(), JOptionPane.INFORMATION_MESSAGE);
             }
