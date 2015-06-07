@@ -175,7 +175,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jLabel7.setText("Apoteker :");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(10, 130, 79, 29);
+        jLabel7.setBounds(10, 130, 117, 32);
 
         labelAoptekerName.setBackground(new java.awt.Color(0, 0, 0));
         labelAoptekerName.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
@@ -186,7 +186,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         bindingGroup.addBinding(binding);
 
         getContentPane().add(labelAoptekerName);
-        labelAoptekerName.setBounds(110, 130, 176, 26);
+        labelAoptekerName.setBounds(130, 130, 176, 26);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1426717770_circle_close_delete-24.png"))); // NOI18N

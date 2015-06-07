@@ -245,7 +245,7 @@
       </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="110" y="130" width="176" height="26"/>
+          <AbsoluteConstraints x="130" y="130" width="176" height="26"/>
         </Constraint>
       </Constraints>
     </Component>
