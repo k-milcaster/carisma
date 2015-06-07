@@ -46,7 +46,7 @@ public class TransaksiJualObatControllerTest {
         client = new ClientSocket();
         System.out.println("insertTransaksijualobat");
         String idTransaksijual = "cccc";
-        String dateTransaksijual = "2015-05-11";
+        String dateTransaksijual = "2015-06-07";
         String keterangan = "rrr";
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
         boolean result = instance.insertTransaksijualobat(idTransaksijual, dateTransaksijual, keterangan);
@@ -116,7 +116,7 @@ public class TransaksiJualObatControllerTest {
         String username = "apotek1";
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
         String[] expResult = new String [2];
-        expResult[0] = "Sinta";
+        expResult[0] = "Hana Mahrifah";
         expResult[1] = null;
         String[] result = instance.namaPegawai(username);
         assertArrayEquals(expResult, result);
@@ -149,7 +149,7 @@ public class TransaksiJualObatControllerTest {
         client = new ClientSocket();
         System.out.println("getIdTransaksiJualObat");
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
-        String expResult = "TRANSSELL-20150529-002";
+        String expResult = "TRANSSELL-20150607-002";
         String result = instance.getIdTransaksiJualObat();
         assertEquals(expResult, result);
     }
@@ -162,7 +162,7 @@ public class TransaksiJualObatControllerTest {
         client = new ClientSocket();
         System.out.println("getDateNow");
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
-        String expResult = "2015-05-29";
+        String expResult = "2015-06-07";
         String result = instance.getDateNow();
         assertEquals(expResult, result);
     }
