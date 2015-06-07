@@ -1,4 +1,5 @@
 package carismaadministrator.controller;
+
 import carismainterface.server.*;
 import carismaadministrator.boundary.*;
 import java.rmi.NotBoundException;
@@ -12,7 +13,8 @@ import java.util.logging.Logger;
  *
  * @author K-MiL Caster
  */
-public class ClientSocket {    
+public class ClientSocket {
+
     private String host = "localhost";
     private int port = 2015;
     public Login login;
@@ -21,48 +23,73 @@ public class ClientSocket {
     private AbsensipegawaiService absensiPegawaiService;
     private DokterService dokterService;
     private PegawaiService pegawaiService;
-    
-    public ClientSocket() throws RemoteException, NotBoundException{
+
+    public ClientSocket() throws RemoteException, NotBoundException {
         this.Connect();
     }
-    public void Connect(){
+
+    public ClientSocket(String host, int port) throws RemoteException, NotBoundException {
+        this.host = host;
+        this.port = port;
+    }
+
+    public boolean testConnection() {
         try {
             Registry registry = null;
             try {
                 registry = LocateRegistry.getRegistry(host, port);
             } catch (RemoteException ex) {
                 Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
-            }            
+            }
+            userService = (UserService) registry.lookup("userRequest");
+            return true;
+        } catch (RemoteException ex) {
+
+            return false;
+        } catch (NotBoundException ex) {
+
+            return false;
+        }
+    }
+
+    public void Connect() {
+        try {
+            Registry registry = null;
+            try {
+                registry = LocateRegistry.getRegistry(host, port);
+            } catch (RemoteException ex) {
+                Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
+            }
             userService = (UserService) registry.lookup("userRequest");
             absensiDokterService = (AbsensidokterService) registry.lookup("absensiDokterRequest");
             absensiPegawaiService = (AbsensipegawaiService) registry.lookup("absensiPegawaiRequest");
             dokterService = (DokterService) registry.lookup("dokterRequest");
             pegawaiService = (PegawaiService) registry.lookup("pegawaiRequest");
-                       
+
         } catch (RemoteException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public UserService getUserService(){
+
+    public UserService getUserService() {
         return this.userService;
     }
-    
-    public AbsensidokterService getAbsensiDokterService(){
+
+    public AbsensidokterService getAbsensiDokterService() {
         return absensiDokterService;
     }
-    
-    public AbsensipegawaiService getAbsensiPegawaiService(){
+
+    public AbsensipegawaiService getAbsensiPegawaiService() {
         return absensiPegawaiService;
     }
-    
-    public DokterService getDokterService(){
+
+    public DokterService getDokterService() {
         return dokterService;
     }
-    
-    public PegawaiService getPegawaiService(){
+
+    public PegawaiService getPegawaiService() {
         return pegawaiService;
     }
 }

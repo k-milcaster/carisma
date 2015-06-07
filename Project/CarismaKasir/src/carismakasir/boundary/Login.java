@@ -97,8 +97,12 @@ public class Login extends javax.swing.JFrame {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (success) {
-                new Kasir(this.client, username.getText()).show();
-                this.dispose();
+                try {
+                    new Kasir(this.client, username.getText()).show();
+                    this.dispose();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "User Name atau Password anda salah!");
             }
@@ -118,8 +122,12 @@ public class Login extends javax.swing.JFrame {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (success) {
-                    new Kasir(this.client, username.getText()).show();
-                    this.dispose();
+                    try {
+                        new Kasir(this.client, username.getText()).show();
+                        this.dispose();
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "User Name atau Password anda salah!");
                 }
@@ -142,24 +150,6 @@ public class Login extends javax.swing.JFrame {
             client = new ClientSocket(list.get(0), Integer.parseInt(list.get(1)));
             client.Connect();
     }
-//    public static void main(String args[]) {
-//        try {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//        } catch (Exception ex) {
-//            System.out.println("Look & Feel exception");
-//        }
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    new Login().setVisible(true);
-//                } catch (RemoteException ex) {
-//                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//                } catch (NotBoundException ex) {
-//                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
-//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

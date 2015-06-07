@@ -15,8 +15,8 @@
         <script type="text/javascript" src="<?php echo URL; ?>public/js/move-top.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>public/js/easing.js"></script>
         <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                $(".scroll").click(function(event) {
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
@@ -29,15 +29,15 @@
         <!---//webfonts--->
         <!----start-top-nav-script---->
         <script>
-            $(function() {
+            $(function () {
                 var pull = $('#pull');
                 menu = $('nav ul');
                 menuHeight = menu.height();
-                $(pull).on('click', function(e) {
+                $(pull).on('click', function (e) {
                     e.preventDefault();
                     menu.slideToggle();
                 });
-                $(window).resize(function() {
+                $(window).resize(function () {
                     var w = $(window).width();
                     if (w > 320 && menu.is(':hidden')) {
                         menu.removeAttr('style');
@@ -55,9 +55,9 @@
                     <div class="logo">
                         <a href="#"><img src="<?php echo URL; ?>public/images/logo.png" title="doctor" /></a>
                         <?php
-                        if (Session::get('id') != NULL) {
+                        if (Session::get('namaPas') != NULL) {
 
-                            echo '<a href= "' . URL . 'dashboard"><font size = "5">Selamat Datang ' . Session::get('id') . '</a></font>';
+                            echo '<a href= "' . URL . 'dashboard"><font size = "5">Selamat Datang, ' . Session::get('namaPas') . '</a></font>';
                         }
                         ?>
                     </div>
@@ -69,7 +69,7 @@
                             <li <?php if ($this->title == "Service") echo 'class="active"' ?>><a href="<?php echo URL; ?>index#services" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Services</a></li>
                             <li><a href="<?php echo URL; ?>index#about" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>About us</a></li>
                             <li><a href="<?php echo URL; ?>index#contact" <?php if ($this->title == "Home") echo 'class="scroll"' ?>>Contact</a></li>
-                            
+
                             <?php
                             if (Session::get('id') != NULL) {
                                 ?>   <li <?php if ($this->title == "Login") echo 'class="active"' ?>><a href="<?php echo URL; ?>verifikasi/dologout">Log Out</a></li>

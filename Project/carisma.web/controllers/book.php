@@ -37,12 +37,10 @@ class Book extends Controller {
         }
         $this->view->idUser = $iduser;
         $this->view->idDokter = $idDokter;
-        $this->loadModel('Pasien');
-        $pasien = $this->model->getPasien($iduser);
-        foreach ($pasien as $key => $value) {
-            $this->view->namaPasien = $value[0];
-            $this->view->idPasien = $value[1];
-        }
+
+        $this->view->namaPasien = Session::get('namaPas');
+        $this->view->idPasien = Session::get('id');
+
         $rak = '';
         $this->loadModel('Jadwaldokter');
         $day = $this->model->dayJadwal($idDokter);
@@ -67,12 +65,8 @@ class Book extends Controller {
         } else {
             $tgl = $_POST['av'];
             $this->loadModel('Login');
-            $temp = $this->model->getIdUser(Session::get('id'));
-            $iduser = '';
-            foreach ($temp as $key => $value) {
-                $iduser = $value[0];
-            }
             $this->loadModel('antrian');
+            $iduser = Session::get('id');
             $getCount = $this->model->getCountAntrian();
             $cek = $this->model->cekOnce($iduser, $idDokter, $tgl);
             if ($cek) {
@@ -91,7 +85,7 @@ class Book extends Controller {
                 foreach ($temp as $key => $value) {
                     $noAntrian = $value[0];
                 }
-                $noAntrian = $noAntrian + 1;                
+                $noAntrian = $noAntrian + 1;
                 $this->model->insertAntrian($id, $iduser, $idDokter, $noAntrian, 'ONLINE', $tgl);
                 $this->cetak($id);
             } else {

@@ -61,6 +61,32 @@ public class KunjunganEntity extends UnicastRemoteObject implements KunjunganSer
     }
 
     @Override
+    public boolean updateKunjungan(Kunjungan kunjungan) {
+        ui.act.append("Client Execute updateKunjungan (" + kunjungan.getIdKunjungan() + " \n");
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "UPDATE kunjungan SET transaksijualobat_id_transaksijual = ?, pasien_kamar_id_peminjaman = ? WHERE id_kunjungan = ?");
+            statement.setString(1, kunjungan.getTransaksijualobatIdTransaksijual());
+            statement.setString(2, kunjungan.getPasienKamarIdPeminjaman());
+            statement.setString(3, kunjungan.getIdKunjungan());
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException exception) {
+            ui.act.append("UpdateKunjungan Error \n");
+            ui.act.append(exception.toString());
+            return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
     public boolean deleteKunjungan(String idKunjungan) throws RemoteException {
         ui.act.append("Client Execute deleteKunjungan (" + idKunjungan + " \n");
         PreparedStatement statement = null;

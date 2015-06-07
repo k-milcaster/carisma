@@ -60,46 +60,71 @@ public class ClientSocket {
         }
     }
 
+    public ClientSocket(String host, int port) throws RemoteException, NotBoundException {
+        this.host = host;
+        this.port = port;
+    }
+
+    public boolean testConnection() {
+        try {
+            Registry registry = null;
+            try {
+                registry = LocateRegistry.getRegistry(host, port);
+            } catch (RemoteException ex) {
+                Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            userService = (UserService) registry.lookup("userRequest");
+            return true;
+        } catch (RemoteException ex) {
+
+            return false;
+        } catch (NotBoundException ex) {
+
+            return false;
+        }
+    }
+
     public UserService getUserService() {
         return this.userService;
     }
-    
-    public RekammedikService getRekamMedikService(){
+
+    public RekammedikService getRekamMedikService() {
         return this.rekamMedik;
     }
-    
-    public ResepService getResepService(){
+
+    public ResepService getResepService() {
         return this.resepService;
     }
-    
-    public DetailresepService getDetailResepService(){
+
+    public DetailresepService getDetailResepService() {
         return detailResepService;
     }
-    
-    public RekammedikpenyakitService getRekamMedisPenyakitService(){
+
+    public RekammedikpenyakitService getRekamMedisPenyakitService() {
         return rekamMedisPenyakit;
     }
-    
-    public ObatService getObatService(){
+
+    public ObatService getObatService() {
         return obatService;
     }
-    
-    public PenyakitService getPenyakitService(){
+
+    public PenyakitService getPenyakitService() {
         return penyakitService;
     }
 
-    public DokterService getDokterService(){
+    public DokterService getDokterService() {
         return dokterService;
     }
-    
-    public PasienService getPasienService(){
+
+    public PasienService getPasienService() {
         return pasienService;
     }
-    
-    public KunjunganService getKunjunganService(){
+
+    public KunjunganService getKunjunganService() {
         return kunjunganService;
     }
-    public AntrianService getAntrianService(){
+
+    public AntrianService getAntrianService() {
         return antrianService;
     }
 }

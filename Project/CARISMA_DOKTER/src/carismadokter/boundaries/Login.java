@@ -6,10 +6,13 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import carismadokter.controller.ClientSocket;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.rmi.NotBoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 
 /**
  *
@@ -21,7 +24,7 @@ public class Login extends javax.swing.JFrame {
     private UserService login;
 
     public Login() throws RemoteException, NotBoundException {
-        client = new ClientSocket();
+        setHostPort();
         this.login = client.getUserService();
         initComponents();
         this.setLocationRelativeTo(null);
@@ -131,23 +134,20 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_passwordActionPerformed
-    public static void main(String args[]) {
+    private void setHostPort() throws RemoteException, NotBoundException {
+        Scanner s = null;
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            System.out.println("Look & Feel exception");
+            s = new Scanner(new File("D:/carismaconfig"));
+        } catch (FileNotFoundException ex) {
+
         }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Login().setVisible(true);
-                } catch (RemoteException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (NotBoundException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+        ArrayList<String> list = new ArrayList<String>();
+        while (s.hasNext()) {
+            list.add(s.next());
+        }
+        s.close();
+        client = new ClientSocket(list.get(0), Integer.parseInt(list.get(1)));
+        client.Connect();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
