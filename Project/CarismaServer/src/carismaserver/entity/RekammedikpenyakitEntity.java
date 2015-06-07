@@ -1,6 +1,7 @@
 package carismaserver.entity;
 
 import carismainterface.entity.Kunjungan;
+import carismainterface.entity.Rekammedik;
 import carismainterface.server.RekammedikpenyakitService;
 import carismainterface.entity.Rekammedikpenyakit;
 import carismaserver.boundaries.Main;
@@ -58,25 +59,25 @@ public class RekammedikpenyakitEntity extends UnicastRemoteObject implements Rek
     }
 
     @Override
-    public List<Rekammedikpenyakit> getRekamMedikPenyakit(String idRm) throws RemoteException {
-        ui.act.append("Client Execute getRekamMedikPenyakit + " + idRm + " \n");
+    public List<Rekammedikpenyakit> getPenyakitPasien(String idRm) throws RemoteException {
+        ui.act.append("Client Execute getPenyakitPasien + " + idRm + " \n");
 
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM rekammedis_penyakit WHERE rekammedik_id_rekammedik = " + idRm);
+                    "SELECT rm.`penyakit_id_penyakit` FROM `rekammedis_penyakit` AS rm, penyakit AS p "
+                    + "WHERE rm.`penyakit_id_penyakit` = p.id_penyakit AND rm.`rekammedik_id_rekammedik` = '"+idRm+"'");
             ResultSet result = statement.executeQuery();
             List<Rekammedikpenyakit> list = new ArrayList<Rekammedikpenyakit>();
             Rekammedikpenyakit rmP = null;
             if (result.next()) {
                 rmP = new Rekammedikpenyakit();
-                rmP.setRekammedikIdRekammedik(result.getString("rekammedik_id_rekammedik"));
                 rmP.setPenyakitIdPenyakit(result.getString("penyakit_id_penyakit"));
                 list.add(rmP);
             }
             return list;
         } catch (SQLException exception) {
-            ui.act.append("getRekamMedikPenyakit Error \n");
+            ui.act.append("getPenyakitPasien Error \n");
             ui.act.append(exception.toString());
             return null;
         } finally {
@@ -112,4 +113,5 @@ public class RekammedikpenyakitEntity extends UnicastRemoteObject implements Rek
             }
         }
     }
+
 }

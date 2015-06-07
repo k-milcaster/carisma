@@ -58,11 +58,11 @@ public class ResepEntity extends UnicastRemoteObject implements ResepService {
 
     @Override
     public String getLastIdResep() throws RemoteException {
-         ui.act.append("Client Execute getLastIdResep");
+         ui.act.append("Client Execute getLastIdResep\n");
         String idResep = " ";
         PreparedStatement statement = null;
         try {
-            statement = DatabaseConnection.getConnection().prepareStatement("SELECT MAX(`id_detailresep`) FROM `detailresep`");
+            statement = DatabaseConnection.getConnection().prepareStatement("SELECT MAX(`id_resep`) FROM `resep`");
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 idResep = resultSet.getString(1);
