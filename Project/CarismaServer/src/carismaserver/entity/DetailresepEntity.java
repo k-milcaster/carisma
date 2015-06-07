@@ -23,7 +23,6 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
     public Main ui;
 
     public DetailresepEntity() throws RemoteException {
-
     }
 
     public DetailresepEntity(Main ui) throws RemoteException {
@@ -37,8 +36,7 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO detailresep (id_detailresep, resep_id_resep, namaobat_resep, qty_resep, aturanpakai_resep) values (?,?,?,?,?)"
-            );
+                    "INSERT INTO detailresep (id_detailresep, resep_id_resep, namaobat_resep, qty_resep, aturanpakai_resep) values (?,?,?,?,?)");
             statement.setString(1, detailResep.getIdDetailresep());
             statement.setString(2, detailResep.getResepIdResep());
             statement.setString(3, detailResep.getNamaobatResep());
@@ -55,7 +53,6 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
                 try {
                     statement.close();
                 } catch (SQLException exception) {
-
                 }
             }
         }
@@ -70,7 +67,7 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "SELECT dr.`namaobat_resep` "
                     + "FROM resep AS r, detailresep AS dr "
-                    + "WHERE dr.`resep_id_resep` = r.id_resep AND r.id_resep = '"+idResep+"'");
+                    + "WHERE dr.`resep_id_resep` = r.id_resep AND r.id_resep = '" + idResep + "'");
             ResultSet result = statement.executeQuery();
             List<Detailresep> list = new ArrayList<Detailresep>();
             Detailresep dR = null;
@@ -141,7 +138,7 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 idDetailResep = resultSet.getString(1);
-            }         
+            }
             return idDetailResep;
         } catch (SQLException exception) {
             ui.act.append("getLastIdDetailResep Error\n");
@@ -156,8 +153,8 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
             }
         }
     }
-	
-	@Override
+
+    @Override
     public boolean deleteDetailResep(String idDetailResep) throws RemoteException {
         ui.act.append("Client Execute deleteDetailResep (" + idDetailResep + " \n");
         PreparedStatement statement = null;
@@ -171,6 +168,39 @@ public class DetailresepEntity extends UnicastRemoteObject implements Detailrese
             ui.act.append("deleteDetailResep Error \n");
             ui.act.append(e.toString());
             return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<Detailresep> getNamaObatQtyByIdKunjungan(String idKunjungan) throws RemoteException {
+        ui.act.append("Client Execute getNamaObatQtyByIdKunjungan\n");
+
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT dr.`namaobat_resep`, dr.`qty_resep` FROM rekammedik AS rm, resep AS r, detailresep AS dr, kunjungan AS k "
+                    + "WHERE r.id_resep = dr.`resep_id_resep` AND r.id_resep = rm.`resep_id_resep` AND rm.id_rekammedik = k.rekammedik_id_rekammedik AND k.id_kunjungan = '"+idKunjungan+"'");
+            ResultSet result = statement.executeQuery();
+            List<Detailresep> list = new ArrayList<Detailresep>();
+            Detailresep dR = null;
+            if (result.next()) {
+                dR = new Detailresep();
+                dR.setNamaobatResep(result.getString("namaobat_resep"));
+                dR.setQtyResep(result.getInt("qty_resep"));
+                list.add(dR);
+            }
+            return list;
+        } catch (SQLException exception) {
+            ui.act.append("getNamaObatQtyByIdKunjungan\n");
+            ui.act.append(exception.toString());
+            return null;
         } finally {
             if (statement != null) {
                 try {

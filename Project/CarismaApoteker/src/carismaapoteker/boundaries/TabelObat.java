@@ -26,6 +26,7 @@ public class TabelObat extends javax.swing.JFrame {
         DefaultTableModel tabelObat = new DefaultTableModel();
         tabelObat = control.getTableObat();
         setSize(515, 535);
+        setLocationRelativeTo(this);
         tableMedicine.setModel(tabelObat);
     }
 

@@ -356,12 +356,6 @@ public class Rawatinap extends javax.swing.JFrame {
         else {
 
             try {
-                //Date date = new Date(tgl_lahir.getDate().getTime());
-                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                //String lah = sdf.format(date);
-                //Date now = tgl_regpasien.getDate();
-                //String hariIni = sdf.format(now);
-
                 int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
                     //daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(),   namaKamar.getText(), kelasKamar.getText(), tarif.getText());

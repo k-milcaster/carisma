@@ -39,7 +39,7 @@ public class Menursepsionis extends javax.swing.JFrame {
         
         initComponents();
         control.start();
-        Namanya.setText(control.getNamaPegawai(userName)+"");
+        Namanya.setText(control.getNamaPegawai(this.userName)+"");
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
         //Namanya.setText(String.valueOf(this.userName));

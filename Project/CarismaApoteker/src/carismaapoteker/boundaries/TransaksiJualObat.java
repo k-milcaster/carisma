@@ -92,13 +92,9 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         fieldDescription.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
         fieldIdOfSales.setEditable(false);
+        fieldIdOfSales.setBackground(new java.awt.Color(255, 255, 255));
         fieldIdOfSales.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldIdOfSales.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
-        fieldIdOfSales.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldIdOfSalesActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Tanggal");
@@ -126,17 +122,17 @@ public class TransaksiJualObat extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fieldIdOfSales, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateOfSales, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(fieldIdOfSales, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addGap(10, 10, 10)
                         .addComponent(fieldKunjungan, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(dateOfSales, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(23, 23, 23)
                         .addComponent(fieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -146,17 +142,17 @@ public class TransaksiJualObat extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldKunjungan)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(21, 21, 21))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(fieldKunjungan, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addComponent(jLabel8))
                     .addComponent(fieldIdOfSales))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateOfSales, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(fieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(fieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -194,7 +190,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jLabel7.setText("Apoteker :");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(10, 130, 117, 32);
+        jLabel7.setBounds(10, 130, 79, 29);
 
         labelAoptekerName.setBackground(new java.awt.Color(0, 0, 0));
         labelAoptekerName.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
@@ -205,7 +201,7 @@ public class TransaksiJualObat extends javax.swing.JFrame {
         bindingGroup.addBinding(binding);
 
         getContentPane().add(labelAoptekerName);
-        labelAoptekerName.setBounds(130, 130, 176, 26);
+        labelAoptekerName.setBounds(110, 130, 176, 26);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaapoteker/image/1426717770_circle_close_delete-24.png"))); // NOI18N
@@ -253,8 +249,10 @@ public class TransaksiJualObat extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableOfSalesMouseClicked(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTableOfSalesMouseReleased(evt);
+        });
+        jTableOfSales.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTableOfSalesKeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(jTableOfSales);
@@ -288,12 +286,17 @@ public class TransaksiJualObat extends javax.swing.JFrame {
             try {
                 boolean testKunjungan = transaksijualobatController.cekKunjungan(fieldKunjungan.getText());
                 if (testKunjungan) {
-                    transaksijualobatController.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), fieldDescription.getText());
-                    JOptionPane.showMessageDialog(null, "Data Transaksi Penjualan Obat Tersimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                    boolean inserted1 = transaksijualobatController.insertTransaksijualobat(fieldIdOfSales.getText(), String.valueOf(new java.sql.Date(dateNow.getTime())), fieldDescription.getText());
                     int row = jTableOfSales.getSelectedRow() + 1;
                     System.out.println(row);
+                    boolean inserted2 = false;
+                    boolean updated = false;
                     for (int i = 0; i < row; i++) {
-                        transaksijualobatController.insertDetailtransaksijualobat(fieldIdOfSales.getText(), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 0))), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
+                        inserted2 = transaksijualobatController.insertDetailtransaksijualobat(fieldIdOfSales.getText(), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 0))), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
+                        updated = transaksijualobatController.updateStokObat(Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 0))), Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(i, 2))));
+                    }
+                    if (inserted1 == true && inserted2 == true && updated == true) {
+                        JOptionPane.showMessageDialog(null, "Data Penjualan Obat Telah Tersimpan","Transaksi Penjualan Obat",JOptionPane.INFORMATION_MESSAGE);
                     }
                     transaksijualobatController.updateKunjungan(fieldIdOfSales.getText(), fieldKunjungan.getText());
                     clearField();
@@ -308,11 +311,6 @@ public class TransaksiJualObat extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void fieldIdOfSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdOfSalesActionPerformed
-        if (evt.getSource() instanceof JTextField) {
-    }//GEN-LAST:event_fieldIdOfSalesActionPerformed
-    }
-
     private void jTableOfSalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableOfSalesMouseClicked
         int colom = jTableOfSales.getSelectedColumn();
         row = jTableOfSales.getSelectedRow();
@@ -322,27 +320,26 @@ public class TransaksiJualObat extends javax.swing.JFrame {
             } catch (RemoteException ex) {
                 Logger.getLogger(TransaksiJualObat.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
-
     }//GEN-LAST:event_jTableOfSalesMouseClicked
 
-    private void jTableOfSalesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableOfSalesMouseReleased
+    private void jTableOfSalesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableOfSalesKeyReleased
         try {
             int coloumn = jTableOfSales.getSelectedColumn();
             int row = jTableOfSales.getSelectedRow();
             if (coloumn == 2) {
                 int qty = Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(row, coloumn)));
                 TransaksiJualObatController control = new TransaksiJualObatController(Client);
-                int stock = control.cekStok(Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(row, 0))));
+                int stock = control.cekStok(Integer.parseInt(String.valueOf(jTableOfSales.getValueAt(row, 0)))).getQtyObat();
+                System.out.println(stock);
                 if (stock < qty) {
                     JOptionPane.showMessageDialog(null, "Stok Obat Tidak Cukup!!!");
                 }
             }
         } catch (Exception e) {
+            System.out.println("Through Catch (there is an error when checking stok obat) "+e);
         }
-
-    }//GEN-LAST:event_jTableOfSalesMouseReleased
+    }//GEN-LAST:event_jTableOfSalesKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser dateOfSales;

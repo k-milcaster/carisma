@@ -4,6 +4,7 @@
  */
 package carismaapoteker.controller;
 
+import carismainterface.entity.Obat;
 import javax.swing.table.DefaultTableModel;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -46,7 +47,7 @@ public class TransaksiJualObatControllerTest {
         client = new ClientSocket();
         System.out.println("insertTransaksijualobat");
         String idTransaksijual = "cccc";
-        String dateTransaksijual = "2015-06-07";
+        String dateTransaksijual = "2015-05-11";
         String keterangan = "rrr";
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
         boolean result = instance.insertTransaksijualobat(idTransaksijual, dateTransaksijual, keterangan);
@@ -101,7 +102,7 @@ public class TransaksiJualObatControllerTest {
         int idObat = 2;
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
         int expResult = 50;
-        int result = instance.cekStok(idObat);
+        int result = instance.cekStok(idObat).getQtyObat();
         assertEquals(expResult, result);
         
     }
@@ -116,7 +117,7 @@ public class TransaksiJualObatControllerTest {
         String username = "apotek1";
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
         String[] expResult = new String [2];
-        expResult[0] = "Hana Mahrifah";
+        expResult[0] = "Sinta";
         expResult[1] = null;
         String[] result = instance.namaPegawai(username);
         assertArrayEquals(expResult, result);
@@ -149,7 +150,7 @@ public class TransaksiJualObatControllerTest {
         client = new ClientSocket();
         System.out.println("getIdTransaksiJualObat");
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
-        String expResult = "TRANSSELL-20150607-002";
+        String expResult = "TRANSSELL-20150529-002";
         String result = instance.getIdTransaksiJualObat();
         assertEquals(expResult, result);
     }
@@ -162,7 +163,7 @@ public class TransaksiJualObatControllerTest {
         client = new ClientSocket();
         System.out.println("getDateNow");
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
-        String expResult = "2015-06-07";
+        String expResult = "2015-05-29";
         String result = instance.getDateNow();
         assertEquals(expResult, result);
     }

@@ -250,6 +250,7 @@ public class FirstInstall extends javax.swing.JFrame {
             try {
                 if (testConnection(hostField.getText(), Integer.parseInt(portField.getText()), namaField.getText(), userField.getText(), passField.getText(), Integer.parseInt(portSField.getText()))) {
                     JOptionPane.showMessageDialog(null, "Selamat konfigurasi anda berhasil! restart aplikasi untuk memulai");
+                    this.dispose();
                     if (passField.getText().equals("")){
                         saveConfig(hostField.getText(), Integer.parseInt(portField.getText()), namaField.getText(), userField.getText(), null, Integer.parseInt(portSField.getText()));
                     }

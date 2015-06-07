@@ -18,6 +18,8 @@ public interface ObatService extends Remote {
 
     Obat getObat(int idobat) throws RemoteException;
     
+    Obat getIdObat(String namaObat) throws RemoteException;
+    
     List<Obat> getObatbyName(String namaobat) throws RemoteException;
 
     List<Obat> getObat() throws RemoteException;
@@ -25,5 +27,7 @@ public interface ObatService extends Remote {
     int getLastIdObat() throws RemoteException;
     
     boolean updateQtyObat(int id, int qty) throws RemoteException;
+    
+    boolean updateStokJualObat(int idObat, int qty) throws RemoteException;
   
 }
