@@ -1,6 +1,7 @@
 package carismaresepsionis.boundaries;
 
 import carismainterface.entity.Pasien;
+import carismainterface.server.KotaService;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.regispasiencontroller;
 import java.awt.Color;
@@ -11,8 +12,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,6 +23,7 @@ public class regispasienform extends javax.swing.JFrame {
     private ClientSocket client;
     private String userName;
     private regispasiencontroller registrasicontrol;
+    private KotaService kotaService;
     String a, b, c, d, e, f, g, h, i;
     settergetter simpanan = new settergetter();
 
@@ -33,6 +33,7 @@ public class regispasienform extends javax.swing.JFrame {
     public regispasienform(ClientSocket client, String userName) throws RemoteException {
         this.client = client;
         registrasicontrol = new regispasiencontroller(this.client);
+        kotaService = client.getKotaService();
         //regispasiencontroller control = new regispasiencontroller(this.client);
         //control.getIdUser(this);
         this.userName = userName;
@@ -500,14 +501,14 @@ public class regispasienform extends javax.swing.JFrame {
                 || (b.equals(Tempat_Lahir.getText())) || (c.equals(Alamat.getText())) || (Kota.getSelectedIndex() == 0) || (Jenis_Kelamin.getSelectedIndex() == 0) || (goldar.getSelectedIndex() == 0)
                 || (d.equals(No_Hp.getText())) && (e.equals(No_tele.getText())) || (h.equals(Kartu_id.getText())) && (i.equals(No_Kartu.getText()))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
-            System.out.println("1");
+            //System.out.println("1");
 
         } //lek kosong
         else if ("".equals(TinggiPasien.getText()) || ("".equals(BeratPasien.getText())) || ("".equals(Tempat_ID.getText())) || ("".equals(Nama_Pasien.getText()))
                 || ("".equals(Tempat_Lahir.getText())) || ("".equals(Alamat.getText())) || (Kota.getSelectedIndex() == 0) || (Jenis_Kelamin.getSelectedIndex() == 0) || (goldar.getSelectedIndex() == 0)
                 || ("".equals(No_Hp.getText())) && ("".equals(No_tele.getText())) || ("".equals(Kartu_id.getText())) && ("".equals(No_Kartu.getText()))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
-            System.out.println("2");
+            //System.out.println("2");
         } else {
 
             try {
@@ -519,7 +520,9 @@ public class regispasienform extends javax.swing.JFrame {
                 String hariIni = sdf.format(now);
 
                 int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
-                if (pilihan == 0) {
+
+                boolean avail = registrasicontrol.cekKartuId(No_Kartu.getText());
+                if (pilihan == 0 && avail) {
                     String userNameandPassword = registrasicontrol.generateUserName(Nama_Pasien.getText(), String.valueOf(tgl_lahir.getDate()));
                     // insert ke table user (id, userbaneadnpasword, usernameandpassword
                     registrasicontrol.InsertUser(userNameandPassword, userNameandPassword, "pasien");
@@ -541,7 +544,9 @@ public class regispasienform extends javax.swing.JFrame {
                     BeratPasien.setText("");
                     TinggiPasien.setText("");
                     tgl_regpasien.setDate(null);
-
+                }
+                else {
+                    JOptionPane.showConfirmDialog(null, "Pasien sudah pernah terdaftar disini", "Konfirmasi", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception e) {
                 System.out.println(e.toString());
@@ -583,25 +588,29 @@ public class regispasienform extends javax.swing.JFrame {
 
     private void tabelpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelpasienMouseClicked
 
-        int row = tabelpasien.getSelectedRow();
-        Pasien pasien = new Pasien();
-        Date date = new Date();
-        pasien = registrasicontrol.getDataPasien(String.valueOf(tabelpasien.getValueAt(row, 0)));
-        Nama_Pasien.setText(pasien.getNamaPasien());
-        Tempat_ID.setText(pasien.getIdPasien());
-        Tempat_Lahir.setText(pasien.getTempatlahirPasien());
-        tgl_lahir.setDate(java.sql.Date.valueOf(pasien.getTgllahirPasien()));
-        No_Hp.setText(pasien.getHpPasien());
-        No_tele.setText(pasien.getTelpPasien());
-        Kartu_id.setText(pasien.getNokartuidPasien());
-        No_Kartu.setText(pasien.getKartuidPasien());
-        Alamat.setText(pasien.getAlamatPasien());
-        TinggiPasien.setText(Integer.toString(pasien.getTinggiPasien()));
-        BeratPasien.setText(Integer.toString(pasien.getBeratPasien()));
-        Jenis_Kelamin.setSelectedItem(pasien.getKelaminPasien());
-        goldar.setSelectedItem(pasien.getDarahPasien());
-        Kota.setSelectedItem(pasien.getKotaIdKota()); //masi salah
-        tgl_regpasien.setDate(java.sql.Date.valueOf(pasien.getRegdatePasien()));
+        try {
+            int row = tabelpasien.getSelectedRow();
+            Pasien pasien = new Pasien();
+            Date date = new Date();
+            pasien = registrasicontrol.getDataPasien(String.valueOf(tabelpasien.getValueAt(row, 0)));
+            Nama_Pasien.setText(pasien.getNamaPasien());
+            Tempat_ID.setText(pasien.getIdPasien());
+            Tempat_Lahir.setText(pasien.getTempatlahirPasien());
+            tgl_lahir.setDate(java.sql.Date.valueOf(pasien.getTgllahirPasien()));
+            No_Hp.setText(pasien.getHpPasien());
+            No_tele.setText(pasien.getTelpPasien());
+            Kartu_id.setText(pasien.getNokartuidPasien());
+            No_Kartu.setText(pasien.getKartuidPasien());
+            Alamat.setText(pasien.getAlamatPasien());
+            TinggiPasien.setText(Integer.toString(pasien.getTinggiPasien()));
+            BeratPasien.setText(Integer.toString(pasien.getBeratPasien()));
+            Jenis_Kelamin.setSelectedItem(pasien.getKelaminPasien());
+            goldar.setSelectedItem(pasien.getDarahPasien());
+            Kota.setSelectedItem(kotaService.getKota(pasien.getKotaIdKota()).getNamaKota());
+            tgl_regpasien.setDate(java.sql.Date.valueOf(pasien.getRegdatePasien()));
+        } catch (RemoteException ex) {
+            Logger.getLogger(regispasienform.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_tabelpasienMouseClicked
 

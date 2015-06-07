@@ -62,6 +62,9 @@ public class regispasiencontroller {
         pasienService.insertPasien(pasien);
     }
 
+    public boolean cekKartuId(String idCard) throws RemoteException{
+        return pasienService.isUsedNokartuPasien(idCard);
+    }
     public void InsertUser(String username, String Password, String role) throws RemoteException {
 
         User user = new User();
