@@ -35,7 +35,11 @@ public class ClientSocket {
         this.host = host;
         this.port = port;
     }
-
+    
+    public ClientSocket() throws RemoteException{
+        this.Connect();
+    }
+    
     public boolean testConnection() {
         try {
             Registry registry = null;

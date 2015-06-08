@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author devan
  */
 public class Rawatinap extends javax.swing.JFrame {
+
     private ClientSocket client;
     private String userName;
     private PasienService ps;
@@ -28,18 +29,19 @@ public class Rawatinap extends javax.swing.JFrame {
     private DaftarRawatInapController daftarRawatInapController;
     settergetter simpanan = new settergetter();
     String a, b, c, d, e, f;
-    
+
     public Rawatinap(ClientSocket client, String userName) throws RemoteException {
-        
+
         this.client = client;
         RawatinapController control = new RawatinapController(this.client);
+        daftarRawatInapController = new DaftarRawatInapController(this.client);
         ps = client.getPasienService();
         this.userName = userName;
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         tablelistpasien.setModel(control.getNamaPasien());
         tablelistkamarpasien.setModel(control.getKamar());
-        
+
         a = namapasien.getText();
         b = idpasien.getText();
         d = namaKamar.getText();
@@ -47,7 +49,7 @@ public class Rawatinap extends javax.swing.JFrame {
         f = tarif.getText();
         Date tanggal = new Date();
         tgl_regpasien.setDate(tanggal);
-       
+
     }
 
 //    void awalan
@@ -274,8 +276,7 @@ public class Rawatinap extends javax.swing.JFrame {
     }//GEN-LAST:event_tarifActionPerformed
 
     private void carnampasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carnampasActionPerformed
-       if (evt.getSource() instanceof JTextField) {
-            
+        if (evt.getSource() instanceof JTextField) {
         }
     }//GEN-LAST:event_carnampasActionPerformed
 
@@ -284,27 +285,27 @@ public class Rawatinap extends javax.swing.JFrame {
     }//GEN-LAST:event_idpasienActionPerformed
 
     private void tablelistkamarpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistkamarpasienMouseClicked
-         int row = tablelistkamarpasien.getSelectedRow();
-         
-            idkamar.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 0)));
-            namaKamar.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 1)));
-            kelasKamar.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 2)));
-            tarif.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 3)));
+        int row = tablelistkamarpasien.getSelectedRow();
+
+        idkamar.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 0)));
+        namaKamar.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 1)));
+        kelasKamar.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 2)));
+        tarif.setText(String.valueOf(tablelistkamarpasien.getValueAt(row, 3)));
         /*RawatinapController ambilData;
-        try {
-            ambilData = new RawatinapController (client);
+         try {
+         ambilData = new RawatinapController (client);
             
-            int row = tablelistkamarpasien.getSelectedRow();
-            String listKamar = " ";
-            listKamar = String.valueOf(tablelistkamarpasien.getValueAt(row, 0));
-            namaKamar.setText(ambilData.getNamaKamar());
-            kelasKamar.setText(ambilData.getKelasKamar());
-            tarif.setText(ambilData.getTarifKamar());
+         int row = tablelistkamarpasien.getSelectedRow();
+         String listKamar = " ";
+         listKamar = String.valueOf(tablelistkamarpasien.getValueAt(row, 0));
+         namaKamar.setText(ambilData.getNamaKamar());
+         kelasKamar.setText(ambilData.getKelasKamar());
+         tarif.setText(ambilData.getTarifKamar());
             
             
-        } catch (RemoteException ex) {
-            Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, "ada salah disini", ex);
-        }*/
+         } catch (RemoteException ex) {
+         Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, "ada salah disini", ex);
+         }*/
     }//GEN-LAST:event_tablelistkamarpasienMouseClicked
 
     private void carnampasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_carnampasFocusGained
@@ -319,13 +320,13 @@ public class Rawatinap extends javax.swing.JFrame {
             carnampas.setForeground(Color.gray);
             carnampas.setFont(new Font("Tahoma", 2, 12));
         }
-        
+
     }//GEN-LAST:event_carnampasFocusLost
 
     private void carnampasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_carnampasKeyReleased
         carnampas.setForeground(Color.black);
         carnampas.setFont(new Font("Tahoma", 0, 12));
-        
+
         DefaultTableModel model = new DefaultTableModel();
         try {
             RawatinapController control = new RawatinapController(client);
@@ -335,68 +336,53 @@ public class Rawatinap extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(Rawatinap.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_carnampasKeyReleased
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
         //lek default
-        if (((a.equals(namapasien.getText())) && (b.equals(idpasien.getText()))  && (d.equals(namaKamar.getText()))
+        if (((a.equals(namapasien.getText())) && (b.equals(idpasien.getText())) && (d.equals(namaKamar.getText()))
                 && (e.equals(kelasKamar.getText())) && (f.equals(tarif.getText())))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum terisi", "Confirm", WIDTH);
             System.out.println("1");
 
-        } //lek kosong
-        else  if (((a.equals(namapasien.getText())) || (b.equals(idpasien.getText()))  || (d.equals(namaKamar.getText()))
+        } else if (((a.equals(namapasien.getText())) || (b.equals(idpasien.getText())) || (d.equals(namaKamar.getText()))
                 && (e.equals(kelasKamar.getText())) || (f.equals(tarif.getText())))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum terisi", "Confirm", WIDTH);
             System.out.println("2");
-        } //         int tinggi,bert,umur;
-       
-        else {
-
+        }
+         else {
             try {
                 int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
                 if (pilihan == 0) {
-                    //daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(),   namaKamar.getText(), kelasKamar.getText(), tarif.getText());
-                    daftarRawatInapController.insertNamaPasien(namapasien.getText(), idpasien.getText(), Integer.valueOf(idkamar.getText()),   namaKamar.getText(), kelasKamar.getText(), tarif.getText(), String.valueOf(new java.sql.Date(tgl_regpasien.getDate().getTime())));
-
+                    boolean succes = daftarRawatInapController.insertNamaPasien(idpasien.getText(), Integer.parseInt(idkamar.getText()), namaKamar.getText(), String.valueOf(new java.sql.Date(tgl_regpasien.getDate().getTime())));
+                    if (succes == true) {
+                        JOptionPane.showMessageDialog(null, "Data Pasien Rawat Inap Telah berhasil");
+                    }
                     System.out.println("3");
-                    //JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
-                    //ListPasien.add(Nama_Pasien.getText());
-                    
-                    namapasien.setText("");
                     idpasien.setText("");
                     idkamar.setText("");
                     tgl_regpasien.setDate(null);
                     namaKamar.setText("");
                     kelasKamar.setText("");
                     tarif.setText("");
-                    
-
                 }
             } catch (Exception e) {
-                System.out.println(e.toString());
+                System.out.println("there is an error -> " + e.toString());
             }
         }
     }//GEN-LAST:event_okActionPerformed
 
     private void tablelistpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistpasienMouseClicked
-         int row = tablelistpasien.getSelectedRow();
-            
-            idpasien.setText(String.valueOf(tablelistpasien.getValueAt(row, 0)));
-            namapasien.setText(String.valueOf(tablelistpasien.getValueAt(row, 1)));
-            
-            
-       
+        int row = tablelistpasien.getSelectedRow();
+        idpasien.setText(String.valueOf(tablelistpasien.getValueAt(row, 0)));
+        namapasien.setText(String.valueOf(tablelistpasien.getValueAt(row, 1)));
     }//GEN-LAST:event_tablelistpasienMouseClicked
-
 
     private void idkamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idkamarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idkamarActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField carnampas;
     private javax.swing.JTextField idkamar;

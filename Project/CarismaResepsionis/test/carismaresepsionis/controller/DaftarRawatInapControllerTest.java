@@ -56,7 +56,7 @@ public class DaftarRawatInapControllerTest {
         setHostPort();
         DaftarRawatInapController instance = new DaftarRawatInapController(client);
         boolean expResult = true;
-        boolean result = instance.insertNamaPasien(namaPasien, idPasien, idKamar, namaKamar, kelasKamar, tarif, tanggal);
+        boolean result = instance.insertNamaPasien( idPasien, idKamar, namaKamar,  tanggal);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
