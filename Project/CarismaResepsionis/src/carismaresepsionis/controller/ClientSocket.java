@@ -30,6 +30,7 @@ public class ClientSocket {
     private KamarService kamarService;
     private PasienKamarService pasienkamarService;
     private PegawaiService pegawaiService;
+    //private KunjunganService kunjunganService;
 
     public ClientSocket(String host, int port) throws RemoteException, NotBoundException {
         this.host = host;
@@ -79,7 +80,7 @@ public class ClientSocket {
             kamarService = (KamarService) registry.lookup("kamarRequest");
             pasienkamarService = (PasienKamarService) registry.lookup("pasienkamarRequest");
             pegawaiService = (PegawaiService) registry.lookup("pegawaiRequest");
-
+            //kunjunganService = (KunjunganService) registry.lookup("kunjunganRequest");
         } catch (RemoteException ex) {
             Logger.getLogger(ClientSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
@@ -134,4 +135,6 @@ public class ClientSocket {
     public PegawaiService getPegawaiService() {
         return this.pegawaiService;
     }
+    
+    
 }

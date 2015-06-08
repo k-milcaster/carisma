@@ -110,6 +110,11 @@ public class TransaksiJualObat extends javax.swing.JFrame {
 
         fieldKunjungan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fieldKunjungan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        fieldKunjungan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldKunjunganActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -340,6 +345,10 @@ public class TransaksiJualObat extends javax.swing.JFrame {
             System.out.println("Through Catch (there is an error when checking stok obat) "+e);
         }
     }//GEN-LAST:event_jTableOfSalesKeyReleased
+
+    private void fieldKunjunganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldKunjunganActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldKunjunganActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser dateOfSales;

@@ -21,11 +21,13 @@ public class DaftarRawatInapController {
     private PasienService pasienService;
     private PasienKamarService pasienkamarService;
     private KamarService kamarService;
+    private KunjunganService kunjunganService;
 
     public DaftarRawatInapController(ClientSocket client) {
         this.pasienService = client.getPasienService();
         this.pasienkamarService = client.getPasienKamarService();
         this.kamarService = client.getKamarService();
+        this.kunjunganService = client.getKunjunganService();
 
     }
 
@@ -34,7 +36,7 @@ public class DaftarRawatInapController {
         pasienkamar.setIdPeminjaman(generatePeminjamanId(idPasien, namaKamar));
         pasienkamar.setKamarIdKamar(idKamar);
         pasienkamar.setDateinPasienKamar(date);
-        pasienkamar.setDateoutPasienKamar("0000-00-00");
+        pasienkamar.setDateoutPasienKamar("1945-08-17");
         pasienkamar.setKeterangan("kosong");
         pasienkamarService.insertPasienKamar(pasienkamar);
         return true;
@@ -44,7 +46,7 @@ public class DaftarRawatInapController {
 
         PasienKamar pasienkamar = new PasienKamar();
         pasienkamar.setDateoutPasienKamar(dateOut);
-        //pasienkamar.setDateoutPasienKamar();
+        
 
         pasienkamarService.insertPasienKamar(pasienkamar);
         return true;
@@ -62,11 +64,10 @@ public class DaftarRawatInapController {
     public DefaultTableModel getNamaPasienRawatInap() throws RemoteException {
 
         List<Pasien> list = new ArrayList<Pasien>();
-
         list = pasienService.getPasienRawatinap();
-
         DefaultTableModel model = new DefaultTableModel();
-
+        
+       
         model.addColumn("ID Pasien");
         model.addColumn("nama_pasien");
 
@@ -93,6 +94,8 @@ public class DaftarRawatInapController {
 
         return model;
     }
+    
+    
 
     public String[] getNamaKelasKamarbyIdpasien(String idPasien) throws RemoteException {
 
@@ -101,12 +104,38 @@ public class DaftarRawatInapController {
         System.out.println(kamarInfo);
         return kamarInfo;
     }
-
-    public boolean deletePasienKamar(String unPinjam) throws RemoteException {
-        pasienkamarService.deletePasienKamar(unPinjam);
+    
+    public boolean updateKunjungan(String idpeminjaman, String idKunjungan) throws RemoteException {
+        Kunjungan kun = new Kunjungan();
+        kun = kunjunganService.getKunjungan(idKunjungan);
+        if (kun != null) {
+            kun.setPasienKamarIdPeminjaman(idpeminjaman);
+            return kunjunganService.updateKunjungan(kun);
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean cekKunjungan(String idKunjungan) throws RemoteException {
+        Kunjungan kun = new Kunjungan();
+        kun = kunjunganService.getKunjungan(idKunjungan);
+        if (kun != null) {         
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean updateDateOut(String dateOut, String idPinjam) throws RemoteException {
+       
+        PasienKamar pasienkamar = new PasienKamar();        
+        pasienkamar.setDateoutPasienKamar(dateOut);
+        pasienkamar.setIdPeminjaman(idPinjam);
+        pasienkamarService.updatePasienKamar(pasienkamar);
         return true;
     }
 
+    
     public Pasien getIdPasien(String idPasien) throws RemoteException {
         Pasien pasien = pasienService.getPasien(idPasien);
         return pasien;

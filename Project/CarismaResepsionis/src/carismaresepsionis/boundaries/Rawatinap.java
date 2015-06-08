@@ -28,7 +28,7 @@ public class Rawatinap extends javax.swing.JFrame {
     private DefaultTableModel tableKamar = new DefaultTableModel();
     private DaftarRawatInapController daftarRawatInapController;
     settergetter simpanan = new settergetter();
-    String a, b, c, d, e, f;
+    String a, b, c, d, e, f, g;
 
     public Rawatinap(ClientSocket client, String userName) throws RemoteException {
 
@@ -47,6 +47,7 @@ public class Rawatinap extends javax.swing.JFrame {
         d = namaKamar.getText();
         e = kelasKamar.getText();
         f = tarif.getText();
+        g = kunjungan.getText();
         Date tanggal = new Date();
         tgl_regpasien.setDate(tanggal);
 
@@ -75,7 +76,9 @@ public class Rawatinap extends javax.swing.JFrame {
         idkamar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         tgl_regpasien = new com.toedter.calendar.JDateChooser();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        kunjungan = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -159,19 +162,19 @@ public class Rawatinap extends javax.swing.JFrame {
             }
         });
         getContentPane().add(idpasien);
-        idpasien.setBounds(990, 190, 360, 32);
+        idpasien.setBounds(990, 290, 360, 32);
 
         namapasien.setText("Nama Pasien");
         getContentPane().add(namapasien);
-        namapasien.setBounds(990, 230, 360, 32);
+        namapasien.setBounds(990, 330, 360, 32);
 
         kelasKamar.setText("Kelas Kamar");
         getContentPane().add(kelasKamar);
-        kelasKamar.setBounds(990, 370, 170, 32);
+        kelasKamar.setBounds(990, 470, 170, 32);
 
         namaKamar.setText("Nama Kamar");
         getContentPane().add(namaKamar);
-        namaKamar.setBounds(990, 330, 170, 32);
+        namaKamar.setBounds(990, 430, 170, 32);
 
         ok.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1428228446_ok.png"))); // NOI18N
@@ -182,7 +185,7 @@ public class Rawatinap extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ok);
-        ok.setBounds(990, 460, 110, 41);
+        ok.setBounds(990, 560, 110, 41);
 
         jLabel2.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -197,15 +200,15 @@ public class Rawatinap extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tarif);
-        tarif.setBounds(990, 410, 170, 30);
+        tarif.setBounds(990, 510, 170, 30);
 
         jLabel3.setText("Data Kamar");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(990, 270, 90, 14);
+        jLabel3.setBounds(990, 370, 90, 14);
 
         jLabel4.setText("Data Pasien");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(990, 170, 90, 14);
+        jLabel4.setBounds(990, 270, 90, 14);
 
         tablelistpasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -256,17 +259,29 @@ public class Rawatinap extends javax.swing.JFrame {
             }
         });
         getContentPane().add(idkamar);
-        idkamar.setBounds(990, 290, 170, 30);
+        idkamar.setBounds(990, 390, 170, 30);
 
         jLabel5.setText("Tgl Registrasi Pasien");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(990, 140, 120, 20);
+        jLabel5.setBounds(990, 240, 120, 20);
         getContentPane().add(tgl_regpasien);
-        tgl_regpasien.setBounds(1110, 130, 140, 30);
+        tgl_regpasien.setBounds(1110, 230, 140, 30);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(4, 4, 1360, 690);
+        jLabel7.setText("Id Kunjungan");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(990, 200, 70, 14);
+
+        kunjungan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kunjunganActionPerformed(evt);
+            }
+        });
+        getContentPane().add(kunjungan);
+        kunjungan.setBounds(1110, 190, 140, 30);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2_1.png"))); // NOI18N
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(0, 0, 1360, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -343,23 +358,27 @@ public class Rawatinap extends javax.swing.JFrame {
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
         //lek default
         if (((a.equals(namapasien.getText())) && (b.equals(idpasien.getText())) && (d.equals(namaKamar.getText()))
-                && (e.equals(kelasKamar.getText())) && (f.equals(tarif.getText())))) {
+                && (e.equals(kelasKamar.getText())) && (f.equals(tarif.getText())) && (g.equals(kunjungan.getText())))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum terisi", "Confirm", WIDTH);
             System.out.println("1");
 
         } else if (((a.equals(namapasien.getText())) || (b.equals(idpasien.getText())) || (d.equals(namaKamar.getText()))
-                && (e.equals(kelasKamar.getText())) || (f.equals(tarif.getText())))) {
+                && (e.equals(kelasKamar.getText())) || (f.equals(tarif.getText()))|| g.equals(kunjungan.getText()))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum terisi", "Confirm", WIDTH);
             System.out.println("2");
         }
          else {
             try {
-                int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
-                if (pilihan == 0) {
+                
+                boolean testKunjungan = daftarRawatInapController.cekKunjungan(kunjungan.getText());
+                
+                if (testKunjungan) {
+                    JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
                     boolean succes = daftarRawatInapController.insertNamaPasien(idpasien.getText(), Integer.parseInt(idkamar.getText()), namaKamar.getText(), String.valueOf(new java.sql.Date(tgl_regpasien.getDate().getTime())));
                     if (succes == true) {
                         JOptionPane.showMessageDialog(null, "Data Pasien Rawat Inap Telah berhasil");
                     }
+                    daftarRawatInapController.updateKunjungan(daftarRawatInapController.generatePeminjamanId(idpasien.getText(), namaKamar.getText()), kunjungan.getText());
                     System.out.println("3");
                     idpasien.setText("");
                     idkamar.setText("");
@@ -367,6 +386,9 @@ public class Rawatinap extends javax.swing.JFrame {
                     namaKamar.setText("");
                     kelasKamar.setText("");
                     tarif.setText("");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "ID Kunjungan tidak ditemukan", "Peringatan", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (Exception e) {
                 System.out.println("there is an error -> " + e.toString());
@@ -383,6 +405,11 @@ public class Rawatinap extends javax.swing.JFrame {
     private void idkamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idkamarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idkamarActionPerformed
+
+    private void kunjunganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kunjunganActionPerformed
+        
+    }//GEN-LAST:event_kunjunganActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField carnampas;
     private javax.swing.JTextField idkamar;
@@ -392,10 +419,12 @@ public class Rawatinap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField kelasKamar;
+    private javax.swing.JTextField kunjungan;
     private javax.swing.JTextField namaKamar;
     private javax.swing.JTextField namapasien;
     private javax.swing.JButton ok;

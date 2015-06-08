@@ -224,6 +224,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fieldKunjunganActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

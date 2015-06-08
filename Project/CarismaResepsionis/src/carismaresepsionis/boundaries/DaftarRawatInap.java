@@ -1,5 +1,6 @@
 package carismaresepsionis.boundaries;
 
+import carismainterface.entity.PasienKamar;
 import carismainterface.server.UserService;
 import carismaresepsionis.boundaries.*;
 import carismaresepsionis.controller.ClientSocket;
@@ -120,7 +121,8 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         Tempat_ID1 = new javax.swing.JTextField();
         ID1 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        ID2 = new javax.swing.JLabel();
+        idPeminjaman = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -155,7 +157,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
 
         ID.setText("TANGGAL REGISTRASI");
         getContentPane().add(ID);
-        ID.setBounds(920, 110, 130, 32);
+        ID.setBounds(870, 620, 130, 32);
 
         regDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,7 +165,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
             }
         });
         getContentPane().add(regDate);
-        regDate.setBounds(1050, 110, 99, 32);
+        regDate.setBounds(869, 650, 110, 32);
 
         Alamat.setColumns(20);
         Alamat.setRows(5);
@@ -437,18 +439,18 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         tanggalKeluar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tanggalKeluar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tanggal", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, null, new java.awt.Color(0, 0, 0)));
         getContentPane().add(tanggalKeluar);
-        tanggalKeluar.setBounds(1050, 50, 130, 40);
+        tanggalKeluar.setBounds(1050, 20, 130, 40);
 
         tampilJam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tampilJam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tampilJam.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Jam", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
         getContentPane().add(tampilJam);
-        tampilJam.setBounds(1210, 50, 110, 40);
+        tampilJam.setBounds(1210, 20, 110, 40);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel17.setText("||");
         getContentPane().add(jLabel17);
-        jLabel17.setBounds(1190, 50, 18, 40);
+        jLabel17.setBounds(1190, 20, 18, 40);
 
         tglLahir.setText("Tanggal Lahir");
         tglLahir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -532,13 +534,21 @@ public class DaftarRawatInap extends javax.swing.JFrame {
         getContentPane().add(Tempat_ID1);
         Tempat_ID1.setBounds(740, 110, 99, 32);
 
-        ID1.setText("ID PASIEN");
+        ID1.setText("ID PEMINJAMAN");
         getContentPane().add(ID1);
-        ID1.setBounds(630, 110, 79, 32);
+        ID1.setBounds(960, 110, 79, 32);
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/background2.png"))); // NOI18N
-        getContentPane().add(jLabel19);
-        jLabel19.setBounds(0, 0, 1360, 690);
+        ID2.setText("ID PASIEN");
+        getContentPane().add(ID2);
+        ID2.setBounds(630, 110, 79, 32);
+
+        idPeminjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idPeminjamanActionPerformed(evt);
+            }
+        });
+        getContentPane().add(idPeminjaman);
+        idPeminjaman.setBounds(1050, 110, 110, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -643,19 +653,15 @@ public class DaftarRawatInap extends javax.swing.JFrame {
 
     private void konfirmKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_konfirmKeluarActionPerformed
         int select = TabelPasien.getSelectedRow();
+        String idPinjam = idPeminjaman.getText();
         String dateOut = tanggalKeluar.getText();
-        int pilihan = JOptionPane.showConfirmDialog(null, "Yakin menghapus dari Daftar Rawat Inap?", "Konfirmasi Keluar", JOptionPane.YES_NO_OPTION);
+        int pilihan = JOptionPane.showConfirmDialog(null, "Yakin konfirm keluar dari Daftar Rawat Inap?", "Konfirmasi Keluar", JOptionPane.YES_NO_OPTION);
         
         if (pilihan == 0) {
             
-            
-        
             try {
                 DaftarRawatInapController control = new DaftarRawatInapController (client);
-                String [] infokamar = control.getNamaKelasKamarbyIdpasien(String.valueOf(TabelPasien.getValueAt(select, 0)));
-                String idPinjam = String.valueOf(control.getPasienKamar(infokamar[0]).getIdPeminjaman());
-                control.deletePasienKamar(idPinjam);
-                control.insertDateOut(dateOut);
+                control.updateDateOut(dateOut, idPinjam);
                 JOptionPane.showMessageDialog(null, "Berhasil", "Konfirmasi Keluar", JOptionPane.ERROR_MESSAGE);
             } catch (RemoteException ex) {
                 Logger.getLogger(DaftarRawatInap.class.getName()).log(Level.SEVERE, null, ex);
@@ -739,8 +745,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
             //String idPas;
         try {
             DaftarRawatInapController control = new DaftarRawatInapController (client);
+            
             String idPas = String.valueOf(TabelPasien.getValueAt(row, 0));
             String [] infokamar = control.getNamaKelasKamarbyIdpasien(idPas);
+            
             Tempat_ID1.setText(String.valueOf(control.getIdPasien(idPas).getIdPasien()));
             Kota.setText(String.valueOf(control.getIdPasien(idPas).getKotaIdKota()));
             Nama_Pasien.setText(String.valueOf(control.getIdPasien(idPas).getNamaPasien()));
@@ -758,6 +766,7 @@ public class DaftarRawatInap extends javax.swing.JFrame {
             regDate.setText(String.valueOf(control.getIdPasien(idPas).getRegdatePasien()));
             Kamar.setText(String.valueOf(infokamar[1]));
             KelasKamar.setText(String.valueOf(infokamar[2]));
+            idPeminjaman.setText(infokamar[0]);
         } catch (RemoteException ex) {
             Logger.getLogger(DaftarRawatInap.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -841,6 +850,10 @@ public class DaftarRawatInap extends javax.swing.JFrame {
     private void Tempat_ID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tempat_ID1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Tempat_ID1ActionPerformed
+
+    private void idPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idPeminjamanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idPeminjamanActionPerformed
 public void setJam() {
     ActionListener taskPerformer = new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
@@ -906,6 +919,7 @@ public void setJam() {
     private javax.swing.JTextField CariPasien;
     private javax.swing.JLabel ID;
     private javax.swing.JLabel ID1;
+    private javax.swing.JLabel ID2;
     private javax.swing.JTextField Jenis_Kartu;
     private javax.swing.JTextField Kamar;
     private javax.swing.JTextField KelasKamar;
@@ -919,6 +933,7 @@ public void setJam() {
     private javax.swing.JTextField Tempat_Lahir;
     private javax.swing.JTextField TinggiPasien;
     private javax.swing.JTextField goldar;
+    private javax.swing.JTextField idPeminjaman;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -928,7 +943,6 @@ public void setJam() {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
