@@ -1,0 +1,10 @@
+Fitur	 : Resepsionis menghapus pasien yang tidak hadir
+Skenario : Menandai kehadiran pasien
+
+Given	Resepsionis sudah login ke sistem
+When	Resepsionis buka Antrian Pasien
+Then	Menu Antrian Pasien akan tampil 
+And	Pasien tidak hadir 
+When	Resepsionis select tabel antrian
+And	Resepsionis hapus antrian pasien
+Then 	Antrian pasien terhapus
