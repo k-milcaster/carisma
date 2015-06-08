@@ -1,0 +1,6 @@
+Fitur	: Resepsionis menghapus antrian yang telah keluar rekam medik
+Skenario : Menandai Kehadiran Pasien
+
+
+showAntrian(idAntrian) : TabelAntrian			| assertTrue(resultRowCount);
+getAntrianHadir(id): Antrian antrian			| assertEquals(expectedAntrian, resultAntrian);
