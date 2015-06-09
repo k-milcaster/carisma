@@ -31,6 +31,7 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
     private String userName;
     private DefaultTableModel tabelrekammedik;
     private DefaultListModel listObat;
+    private DefaultListModel listPenyakit;
     private LihatRekamMedisController control;
     private UserService login;
 
@@ -87,11 +88,13 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         listNamaObat = new javax.swing.JList();
         jLabel5 = new javax.swing.JLabel();
         fieldDoctorName = new javax.swing.JTextField();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        listNamaPenyakit = new javax.swing.JList();
+        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelRekammedik = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        Back = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -206,6 +209,11 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         fieldDoctorName.setBackground(new java.awt.Color(255, 255, 255));
         fieldDoctorName.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
 
+        listNamaPenyakit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jScrollPane9.setViewportView(listNamaPenyakit);
+
+        jLabel6.setText("Penyakit");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -235,10 +243,14 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
                             .addComponent(jScrollPane6)
                             .addComponent(jScrollPane7)
                             .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -288,26 +300,34 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
                                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel5)
+                                        .addGap(35, 35, 35)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jLabel6))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(28, 28, 28)))
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(30, 30, 30))))
+                        .addGap(22, 22, 22))))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(140, 90, 860, 290);
+        jPanel1.setBounds(140, 90, 860, 310);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -346,24 +366,14 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
         getContentPane().add(jPanel3);
         jPanel3.setBounds(140, 440, 860, 250);
 
-        jLabel7.setFont(new java.awt.Font("Trajan Pro", 1, 36)); // NOI18N
-        jLabel7.setText("daftar riwayat dan rekam medis pasien");
+        jLabel7.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        jLabel7.setText("Daftar Rekam Medik Pasien");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(140, 390, 850, 50);
 
-        Back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismadokter/image/1426718664_circle_back_arrow_-24.png"))); // NOI18N
-        Back.setText("Back");
-        Back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Back);
-        Back.setBounds(1010, 650, 90, 40);
-
         jLabel11.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Rekam Medis Pasien");
+        jLabel11.setText("Rekam Medik Pasien");
         getContentPane().add(jLabel11);
         jLabel11.setBounds(140, 40, 250, 30);
 
@@ -412,28 +422,19 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
             textAreaKesimpulan.setText(control.getDetailRekamMedik(String.valueOf(TabelRekammedik.getValueAt(row, 0))).getKesimpulanRekammedis());
             textAreaKondisi.setText(control.getDetailRekamMedik(String.valueOf(TabelRekammedik.getValueAt(row, 0))).getKondisipasienkeluarRekammedis());
             listObat = control.getNamaObat(String.valueOf(TabelRekammedik.getValueAt(row, 5)));
+            listPenyakit = control.getPenyakitPasien(String.valueOf(TabelRekammedik.getValueAt(row, 0)));
             listNamaObat.setModel(listObat);
+            listNamaPenyakit.setModel(listPenyakit);
         } catch (RemoteException ex) {
             Logger.getLogger(dokterlihatrekammedis.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_TabelRekammedikMouseClicked
-
-    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        try {
-            new isirekammedis(this.client, this.userName).show();
-
-        } catch (RemoteException ex) {
-            Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.dispose();
-    }//GEN-LAST:event_BackActionPerformed
 
     private void CariNamaPasienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CariNamaPasienKeyReleased
         CariNamaPasien.setForeground(Color.BLACK);
         CariNamaPasien.setFont(new Font("Tahoma", 0, 12));
     }//GEN-LAST:event_CariNamaPasienKeyReleased
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Back;
     private javax.swing.JTextField CariNamaPasien;
     private javax.swing.JTable TabelRekammedik;
     private javax.swing.JTextField fieldDoctorName;
@@ -446,6 +447,7 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -460,7 +462,9 @@ public class dokterlihatrekammedis extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JList listNamaObat;
+    private javax.swing.JList listNamaPenyakit;
     private javax.swing.JLabel namaPasien;
     private javax.swing.JTextArea textAreaAlergi;
     private javax.swing.JTextArea textAreaKeluhan;
