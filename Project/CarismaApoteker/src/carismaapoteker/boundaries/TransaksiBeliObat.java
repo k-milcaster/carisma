@@ -303,9 +303,10 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         TransaksiBeliObatController control;
+        System.out.println(String.valueOf(new java.sql.Date(jDateChooser1.getDate().getTime())));
         try {
             control = new TransaksiBeliObatController(this.Client);
-            if (fieldHargaBeli.getText().equals("") || fieldQuantity.getText().equals("")) {
+            if (fieldHargaBeli.getText().equals("") || fieldQuantity.getText().equals("") || jDateChooser1.toString().equals("")) {
                 JOptionPane.showMessageDialog(null, "Data Transaksi Pembelian Obat Belum Lengkap", "Warning", JOptionPane.WARNING_MESSAGE);
             } else {
                 tableTransaksiBeliObat = (DefaultTableModel) jTableOfBuys.getModel();
@@ -334,17 +335,17 @@ public class TransaksiBeliObat extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldHargaBeliKeyTyped
 
     private void fieldQuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldQuantityKeyTyped
-       typeOnlyNumber(evt);
+        typeOnlyNumber(evt);
     }//GEN-LAST:event_fieldQuantityKeyTyped
-    
-    public void typeOnlyNumber(KeyEvent evt){
+
+    public void typeOnlyNumber(KeyEvent evt) {
         char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)||c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE){
+        if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE) {
             getToolkit().beep();
             evt.consume();
         }
     }
-    
+
     public void TambahCombo(Object anobject) {
         combo.addElement(anobject);
     }

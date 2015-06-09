@@ -2,7 +2,6 @@ package carismaresepsionis.boundaries;
 
 //import carismainterface.server.DokterService;
 import carismainterface.server.*;
-import carismainterface.entity.*;
 import carismaresepsionis.controller.AntrianController;
 import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.LoginController;
@@ -10,12 +9,9 @@ import carismaresepsionis.controller.RawatinapController;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +27,7 @@ public class Menursepsionis extends javax.swing.JFrame {
     private KamarService kamarService;
     private AntrianController control;
     private UserService userService;
+    
      
     public Menursepsionis(ClientSocket client, final String userName) throws RemoteException {
         this.client = client;
@@ -39,11 +36,13 @@ public class Menursepsionis extends javax.swing.JFrame {
         ps = client.getPasienService();
         kamarService = client.getKamarService();
         userService = client.getUserService();
+        
         initComponents();
         control.start();
+        Namanya.setText(control.getNamaPegawai(this.userName)+"");
         this.setExtendedState(this.MAXIMIZED_BOTH);
         Namanya.setEditable(false);
-        Namanya.setText(String.valueOf(this.userName));
+        //Namanya.setText(String.valueOf(this.userName));
 //        tableAntri = control.getAntrian();
         tableDaftarAntrian.setModel(control.getAntrian());
         this.addWindowListener(new WindowAdapter() {
@@ -218,6 +217,8 @@ public class Menursepsionis extends javax.swing.JFrame {
         getContentPane().add(buttonHapusAntrian);
         buttonHapusAntrian.setBounds(657, 510, 120, 41);
 
+        Namanya.setEditable(false);
+        Namanya.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
         Namanya.setText("Salma Indridinnanti");
         getContentPane().add(Namanya);
         Namanya.setBounds(80, 60, 296, 34);

@@ -31,20 +31,19 @@ public class jadwaldokter extends javax.swing.JFrame {
         System.out.println(jadwal.get(0).getHariJadwalpegawai());
         for (int i = 0; i < jadwal.size(); i++) {
             String hari = jadwal.get(i).getHariJadwalpegawai();
-            if (hari.equals("SENIN")) {
-                senin.setText(jadwal.get(i).getShiftJadwalpegawai());
-                System.out.println(jadwal.get(i).getShiftJadwalpegawai()+" yang di GUI");
-            } else if (hari.equals("SELASA")) {
+            if (hari.equals("Monday")) {
+                senin.setText(jadwal.get(i).getShiftJadwalpegawai());                
+            } else if (hari.equals("Tuesday")) {
                 selasa.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("RABU")) {
+            } else if (hari.equals("Wednesday")) {
                 rabu.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("KAMIS")) {
+            } else if (hari.equals("Thursday")) {
                 kamis.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("JUMAT")) {
+            } else if (hari.equals("Friday")) {
                 jumat.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("SABTU")) {
+            } else if (hari.equals("Saturday")) {
                 sabtu.setText(jadwal.get(i).getShiftJadwalpegawai());
-            } else if (hari.equals("MINGGU")) {
+            } else if (hari.equals("Sunday")) {
                 minggu.setText(jadwal.get(i).getShiftJadwalpegawai());
             }
 

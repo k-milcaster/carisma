@@ -182,6 +182,38 @@ public class PoliEntity extends UnicastRemoteObject implements PoliService{
             }
         }
     }
+
+    @Override
+    public Poli getPolibyId(String idpoli) throws RemoteException {
+        ui.act.append("Client Execute getPoli (" + idpoli + ") \n");
+
+        PreparedStatement statement = null;
+        try {
+            statement = DatabaseConnection.getConnection().prepareStatement(
+                    "SELECT * FROM `poli` WHERE id_poli = ?");
+            statement.setString(1, idpoli);
+            ResultSet result = statement.executeQuery();
+            Poli poli = null;
+            if (result.next()) {
+                poli = new Poli();
+                poli.setIdPoli(result.getString("id_poli"));
+                poli.setNamaPoli(result.getString("nama_poli"));
+                poli.setKeterangan(result.getString("keterangan"));
+            }
+            return poli;
+        } catch (SQLException exception) {
+            ui.act.append("getPoli Error \n");
+            ui.act.append(exception.toString());
+            return null;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+    }
     
     
 }

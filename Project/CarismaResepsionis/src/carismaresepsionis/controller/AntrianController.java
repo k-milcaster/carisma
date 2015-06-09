@@ -1,17 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismaresepsionis.controller;
 
 import carismainterface.entity.Antrian;
-import carismainterface.entity.Dokter;
 import carismainterface.entity.Kunjungan;
 import carismainterface.entity.Pasien;
 import carismainterface.server.AntrianService;
 import carismainterface.server.DokterService;
 import carismainterface.server.PasienService;
 import carismainterface.server.KunjunganService;
+import carismainterface.server.PegawaiService;
+import carismainterface.server.PoliService;
 import carismaresepsionis.boundaries.Menursepsionis;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -29,23 +26,29 @@ public class AntrianController extends Thread {
     private AntrianService antrianService;
     private PasienService pasienService;
     private DokterService dokterService;
+    private PoliService poliService;
     private KunjunganService kunjunganService;
+    private PegawaiService pegawaiService;
     private Menursepsionis ui;
 
     public AntrianController(ClientSocket client) throws RemoteException {
         this.ui = null;
+        this.poliService = client.getPoliService();
         this.antrianService = client.getAntrianService();
         this.dokterService = client.getDokterService();
         this.pasienService = client.getPasienService();
         this.kunjunganService = client.getKunjunganService();
+        this.pegawaiService = client.getPegawaiService();
     }
 
     public AntrianController(ClientSocket client, Menursepsionis ui) throws RemoteException {
         this.ui = ui;
+        this.poliService = client.getPoliService();
         this.antrianService = client.getAntrianService();
         this.dokterService = client.getDokterService();
         this.pasienService = client.getPasienService();
         this.kunjunganService = client.getKunjunganService();
+        this.pegawaiService = client.getPegawaiService();
     }
 
     public void run() {
@@ -78,7 +81,8 @@ public class AntrianController extends Thread {
         tabelAntrian.addColumn("Poli");
         tabelAntrian.addColumn("Dokter");
         for (int i = 0; i < list.size(); i++) {
-            tabelAntrian.addRow(new Object[]{list.get(i).getNomorAntrian(), list.get(i).getIdAntrian(), pasienService.getPasien(list.get(i).getPasienIdPasien()).getNamaPasien()});
+
+            tabelAntrian.addRow(new Object[]{list.get(i).getNomorAntrian(), list.get(i).getIdAntrian(), pasienService.getPasien(list.get(i).getPasienIdPasien()).getNamaPasien(), dokterService.getDokterById(list.get(i).getDokterIdDokter()).get(2), dokterService.getDokterById(list.get(i).getDokterIdDokter()).get(1)});
         }
         return tabelAntrian;
     }
@@ -96,5 +100,10 @@ public class AntrianController extends Thread {
     public Kunjungan getDetailKunjungan(String idKunjungan) throws RemoteException {
         Kunjungan kunjungan = kunjunganService.getKunjungan(idKunjungan);
         return kunjungan;
+    }
+
+    public String getNamaPegawai(String username) throws RemoteException {
+        String[] namaPegawai = pegawaiService.getIdNamaPegawai(username);
+        return namaPegawai[0];
     }
 }

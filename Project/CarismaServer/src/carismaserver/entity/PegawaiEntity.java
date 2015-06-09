@@ -81,13 +81,13 @@ public class PegawaiEntity extends UnicastRemoteObject implements PegawaiService
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "UPDATE pegawai SET jabatan_pegawai = ?, user_id_user = ?, nama_pegawai = ?, alamat_pegawai = ?, nokartuid_pegawai = ?, telp_pegawai = ?,"
-                    + "hp1_pegawai = ?, hp2_pegawai = ?, tempatlahir = ?, tgllahir_pegawai = ?, kelamin_pegawai = ?, darah_pegawai = ?, "
-                    + "bank_pegawai = ?, norek_pegawai = ?, foto_pegawai = ?, gajifix_pegawai = ?, gajilembur_pegawai = ?, gajikonsul = ? "
+                    + "hp1_pegawai = ?, hp2_pegawai = ?, tempatlahir_pegawai = ?, tgllahir_pegawai = ?, kelamin_pegawai = ?, darah_pegawai = ?, "
+                    + "bank_pegawai = ?, norek_pegawai = ?, foto_pegawai = ?, gajifix_pegawai = ?, gajilembur_pegawai = ? "
                     + "WHERE id_pegawai = ?"
             );
             statement.setString(1, (pegawai.getJabatanPegawai()).toString());
             statement.setInt(2, pegawai.getUserIdUser());
-            statement.setString(19, pegawai.getIdPegawai());
+            statement.setString(18, pegawai.getIdPegawai());
             statement.setString(3, pegawai.getNamaPegawai());
             statement.setString(4, pegawai.getAlamatPegawai());
             statement.setString(5, pegawai.getNokartuidPegawai());

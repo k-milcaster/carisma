@@ -73,14 +73,11 @@ public class PasienKamarEntity extends UnicastRemoteObject implements PasienKama
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "UPDATE pasien_kamar SET kamar_id_kamar = ?, datein_pasien_kamar = ?, dateout_pasien_kamar = ?, keterangan = ? "
+                    "UPDATE pasien_kamar SET dateout_pasien_kamar = ? "
                     + "WHERE id_peminjaman = ?"
             );
-            statement.setString(5, pasienKamar.getIdPeminjaman());
-            statement.setInt(1, pasienKamar.getKamarIdKamar());
-            statement.setString(2, pasienKamar.getDateinPasienKamar());
-            statement.setString(3, pasienKamar.getDateoutPasienKamar());
-            statement.setString(4, pasienKamar.getKeterangan());
+            statement.setString(2, pasienKamar.getIdPeminjaman());
+            statement.setString(1, pasienKamar.getDateoutPasienKamar());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {

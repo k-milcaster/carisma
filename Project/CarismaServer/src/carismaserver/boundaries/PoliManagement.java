@@ -71,6 +71,8 @@ public class PoliManagement extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1360, 698));
@@ -105,7 +107,7 @@ public class PoliManagement extends javax.swing.JFrame {
                 buttonInsertActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(832, 197, 120, -1));
+        getContentPane().add(buttonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, 120, -1));
 
         buttonUpdate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1428222456_icon-compose-32.png"))); // NOI18N
@@ -115,7 +117,7 @@ public class PoliManagement extends javax.swing.JFrame {
                 buttonUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(832, 247, 120, 40));
+        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 260, 120, 40));
 
         buttonDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/1426717770_circle_close_delete-24.png"))); // NOI18N
@@ -125,59 +127,40 @@ public class PoliManagement extends javax.swing.JFrame {
                 buttonDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(832, 297, 120, 40));
+        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 310, 120, 40));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setOpaque(false);
+        jPanel1.setLayout(null);
+        jPanel1.add(fieldNama);
+        fieldNama.setBounds(80, 80, 229, 39);
+        jPanel1.add(fieldId);
+        fieldId.setBounds(80, 20, 230, 40);
 
         jLabel3.setText("Keterangan :");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(10, 150, 63, 14);
+        jPanel1.add(fieldKeterangan);
+        fieldKeterangan.setBounds(80, 140, 229, 36);
 
         jLabel1.setText("Id Poli :");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(10, 40, 36, 14);
 
         jLabel2.setText("Nama Poli :");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(10, 100, 53, 14);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldKeterangan, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(fieldKeterangan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 208, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 340, 190));
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 100, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("POLI MANAGEMENT");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/background2.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -261,6 +244,8 @@ public class PoliManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablePoli;

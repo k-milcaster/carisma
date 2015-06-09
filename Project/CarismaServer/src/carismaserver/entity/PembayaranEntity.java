@@ -34,12 +34,10 @@ public class PembayaranEntity extends UnicastRemoteObject implements PembayaranS
         try {
             statement = DatabaseConnection.getConnection().createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT r.tarif, (DATE(dateout_pasien_kamar) - DATE(datein_pasien_kamar)) as lama_menginap, (DATE(dateout_pasien_kamar) - DATE(datein_pasien_kamar)) * (SELECT r.tarif from kamar r, pasien_kamar p where p.kamar_id_kamar = r.id_kamar) as total "
+            ResultSet result = statement.executeQuery("SELECT r.tarif, (DATE(dateout_pasien_kamar) - DATE(datein_pasien_kamar)) as lama_menginap, (DATE(dateout_pasien_kamar) - DATE(datein_pasien_kamar)) * (SELECT r.tarif from kamar r, pasien_kamar p where p.kamar_id_kamar = r.id_kamar AND p.id_peminjaman = '" + idPeminjaman + "') as total "
                     + "FROM pasien_kamar p, kamar r "
                     + "WHERE r.id_kamar = p.kamar_id_kamar AND p.id_peminjaman = \"" + idPeminjaman + "\";");
-
             ArrayList list = new ArrayList();
-
             while (result.next()) {
                 list.add(result.getInt(1));
                 list.add(result.getInt(2));

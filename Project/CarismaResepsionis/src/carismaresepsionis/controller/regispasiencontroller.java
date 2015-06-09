@@ -38,7 +38,7 @@ public class regispasiencontroller {
         this.poliService = client.getPoliService();
     }
 
-    public void InsertNamaPasien(String id_pasien, String kota_id_kota,  String nama_pasien, String alamat_pasien, String kartuid_pasien, String nokartuid_pasien, String telp_pasien, String hp_pasien, String tempatlahirpasien, String tgllahir_pasien, String kelamin_pasien, String darah_pasien, int berat_pasien, int tinggi_Pasien, String regdate_pasien, String username) throws RemoteException {
+    public void InsertNamaPasien(String id_pasien, String kota_id_kota, String nama_pasien, String alamat_pasien, String kartuid_pasien, String nokartuid_pasien, String telp_pasien, String hp_pasien, String tempatlahirpasien, String tgllahir_pasien, String kelamin_pasien, String darah_pasien, int berat_pasien, int tinggi_Pasien, String regdate_pasien, String username) throws RemoteException {
         Pasien pasien = new Pasien();
         User user = new User();
         System.out.println(generatePasienId(nama_pasien, tgllahir_pasien, nokartuid_pasien));
@@ -50,7 +50,7 @@ public class regispasiencontroller {
         pasien.setNokartuidPasien(nokartuid_pasien);
         pasien.setTelpPasien(telp_pasien);
         pasien.setHpPasien(hp_pasien);
-        pasien.setTempatlahirPasien(tempatlahirpasien);  
+        pasien.setTempatlahirPasien(tempatlahirpasien);
         pasien.setTgllahirPasien(tgllahir_pasien);
         pasien.setKelaminPasien(kelamin_pasien);
         pasien.setDarahPasien(darah_pasien);
@@ -62,47 +62,49 @@ public class regispasiencontroller {
         pasienService.insertPasien(pasien);
     }
 
-    public void InsertUser (  String username , String Password, String role) throws RemoteException {
-       
-        User user = new User ();
+    public boolean cekKartuId(String idCard) throws RemoteException{
+        return pasienService.isUsedNokartuPasien(idCard);
+    }
+    public void InsertUser(String username, String Password, String role) throws RemoteException {
+
+        User user = new User();
         user.setUsername(username);
         user.setPassword(Password);
         user.setRegistered(generatetanggal());
-        System.out.println("hasil generate password=" +Password);
+        System.out.println("hasil generate password=" + Password);
         user.setRole(role);
-        System.out.println("hasil role=" +role);
+        System.out.println("hasil role=" + role);
         userService.insertUser(user);
     }
-    
-    public String generatetanggal ( ){
+
+    public String generatetanggal() {
         String tanggal;
         String bulan;
-        Date date = new Date ();
+        Date date = new Date();
         if (date.getMonth() > 8) {
-            bulan = Integer.toString((date.getMonth()+1));
+            bulan = Integer.toString((date.getMonth() + 1));
+        } else {
+            bulan = "0" + Integer.toString((date.getMonth() + 1));
         }
-        else {
-            bulan = "0"+ Integer.toString((date.getMonth()+1));
-        }
-        tanggal = Integer.toString((date.getYear()+1900))+"-"+bulan+"-"+Integer.toString(date.getDate())+" "+Integer.toString(date.getHours())+":"+Integer.toString(date.getMinutes())+";"+Integer.toString(date.getSeconds());
+        tanggal = Integer.toString((date.getYear() + 1900)) + "-" + bulan + "-" + Integer.toString(date.getDate()) + " " + Integer.toString(date.getHours()) + ":" + Integer.toString(date.getMinutes()) + ";" + Integer.toString(date.getSeconds());
         return tanggal;
     }
-    
+
     public String generateUserName(String nama, String tgl) {
-        
+
         String[] firstName = nama.split(" ");
         char[] tglLahir = tgl.toCharArray();
         char[] dateOnly = new char[2];
         //2015-01-01
         for (int i = 0; i < 2; i++) {
-            dateOnly[i] = tglLahir[i+8];
+            dateOnly[i] = tglLahir[i + 8];
         }
         String userName = firstName[0].concat(String.valueOf(dateOnly));
-        System.out.println("hasil generate username = "+userName);
-        
-       //String NamaUser = Character.toString(nama.split(tgl)
+        System.out.println("hasil generate username = " + userName);
+
+        //String NamaUser = Character.toString(nama.split(tgl)
         return userName;
-        
+
     }
 
     public String generatePasienId(String Nama, String tgl, String end) {
@@ -119,23 +121,21 @@ public class regispasiencontroller {
         }
         for (int i = 0; i < list.size(); i++) {
             ui.Kota.addItem(list.get(i).getNamaKota());
-        } 
+        }
     }
-    
-  
-    
-    public int ambilidkota (int urutan){
-       List<Kota> list = new ArrayList();
+
+    public int ambilidkota(int urutan) {
+        List<Kota> list = new ArrayList();
         try {
             list = kotaService.getKota();
         } catch (RemoteException ex) {
             Logger.getLogger(regispasiencontroller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return Integer.parseInt(list.get(urutan-1).getId_kota());
+        return Integer.parseInt(list.get(urutan - 1).getId_kota());
     }
-            
-   public void getTabelPasien(regispasienform ui) throws RemoteException{
-        
+
+    public void getTabelPasien(regispasienform ui) throws RemoteException {
+
         List<Pasien> list = new ArrayList<Pasien>();
         list = pasienService.getPasien();
         DefaultTableModel model = new DefaultTableModel();
@@ -143,17 +143,29 @@ public class regispasiencontroller {
         model.addColumn("Nama Pasien");
         for (int i = 0; i < list.size(); i++) {
             model.addRow(new Object[]{list.get(i).getIdPasien(), list.get(i).getNamaPasien()});
-          }
+        }
         ui.tabelpasien.setModel(model);
-        
+
     }
-  
-  public Pasien getDataPasien (String id ){
+
+    public Pasien getDataPasien(String id) {
         try {
             return pasienService.getPasien(id);
         } catch (RemoteException ex) {
             Logger.getLogger(regispasiencontroller.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-  }
+    }
+
+    public DefaultTableModel getPasienByName(String nama) throws RemoteException {
+        List<Pasien> list = new ArrayList<Pasien>();
+        DefaultTableModel model = new DefaultTableModel();
+        list = pasienService.getPasienByName(nama);
+        model.addColumn("Id Pasien");
+        model.addColumn("Nama Pasien");
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{list.get(i).getIdPasien(), list.get(i).getNamaPasien()});
+        }
+        return model;
+    }
 }

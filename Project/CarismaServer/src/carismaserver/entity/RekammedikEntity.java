@@ -142,22 +142,18 @@ public class RekammedikEntity extends UnicastRemoteObject implements RekammedikS
         PreparedStatement statement = null;
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
-                    "SELECT * FROM rekammedik WHERE pasien_id_pasien = ?");
-            statement.setString(1, pasien);
+                    "SELECT rm.`id_rekammedik`, rm.`dokter_id_dokter`, d.nama_dokter, rm.`pasien_id_pasien`, "
+                    + "p.nama_pasien, rm.`tgl_rekammedik`, "
+                    + "rm.`resep_id_resep` FROM rekammedik AS rm, pasien AS p, dokter AS d WHERE rm.`pasien_id_pasien` = p.id_pasien "
+                    + "AND p.id_pasien = '"+pasien+"' GROUP BY rm.id_rekammedik");
             ResultSet result = statement.executeQuery();
             List<Rekammedik> rms = new ArrayList<Rekammedik>();
-            if (result.next()) {
+            while (result.next()) {
                 Rekammedik rm = new Rekammedik();
                 rm.setIdRekammedik(result.getString("id_rekammedik"));
                 rm.setDokterIdDokter(result.getString("dokter_id_dokter"));
                 rm.setPasienIdPasien(result.getString("pasien_id_pasien"));
                 rm.setTglRekammedik(result.getString("tgl_rekammedik"));
-                rm.setKeluhanRekammedik(result.getString("keluhan_rekammedik"));
-                rm.setPemeriksaanRekammedik(result.getString("pemeriksaan_rekammedik"));
-                rm.setTerapiRekammedik(result.getString("terapi_rekammedik"));
-                rm.setAlergiobatRekammedik(result.getString("alergiobat_rekammedik"));
-                rm.setKesimpulanRekammedis(result.getString("kesimpulan_rekammedis"));
-                rm.setKondisipasienkeluarRekammedis(result.getString("kondisipasienkeluar_rekammedis"));
                 rm.setResepIdResep(result.getString("resep_id_resep"));
                 rms.add(rm);
             }

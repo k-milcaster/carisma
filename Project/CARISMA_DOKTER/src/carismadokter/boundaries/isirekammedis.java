@@ -25,7 +25,7 @@ public class isirekammedis extends javax.swing.JFrame {
     private String username;
     public String idResep;
     public String idAntrian;
-            
+    private String[] dokterInfor;
     public isirekammedis(ClientSocket client, final String username) throws RemoteException {
         this.client = client;
         IsiRekamMedisController isiRekamMedisController = new IsiRekamMedisController(this.client);
@@ -38,7 +38,7 @@ public class isirekammedis extends javax.swing.JFrame {
         dateRekamMedis.setDate(date);
 
         this.jLabel1.setText(username);
-        String[] dokterInfor = isiRekamMedisController.getIdNamaDokter(this.username);
+        dokterInfor = isiRekamMedisController.getIdNamaDokter(this.username);
         fieldIdDokter.setText(dokterInfor[0]);
         labelNamaDokter.setText(dokterInfor[1]);
         fieldIdRekamMedis.setText(isiRekamMedisController.getIdRekamMedis());
@@ -596,7 +596,11 @@ public class isirekammedis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new dokterlihatrekammedis(this.client, this.username).show();
+        try {
+            new dokterlihatrekammedis(this.client, dokterInfor[1]).show();
+        } catch (RemoteException ex) {
+            Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

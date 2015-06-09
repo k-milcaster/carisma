@@ -4,7 +4,6 @@ import carismaapoteker.controller.ClientSocket;
 import carismaapoteker.controller.TransaksiBeliObatController;
 import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -46,12 +45,10 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
         fieldStokKritis = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         fieldNamaObat = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         fieldJenisObat = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        fieldQuantity = new javax.swing.JTextField();
         fieldKeterangan = new javax.swing.JTextField();
         fieldHarga = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -110,9 +107,6 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
         fieldNamaObat.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fieldNamaObat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Qty Obat");
-
         fieldJenisObat.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fieldJenisObat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
@@ -124,12 +118,6 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Keterangan");
-
-        fieldQuantity.setEditable(false);
-        fieldQuantity.setBackground(new java.awt.Color(255, 255, 255));
-        fieldQuantity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        fieldQuantity.setText("0");
-        fieldQuantity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         fieldKeterangan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fieldKeterangan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
@@ -152,14 +140,15 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(20, 20, 20)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(20, 20, 20))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(24, 24, 24)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(fieldJenisObat, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldQuantity, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldNamaObat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fieldJenisObat)
+                            .addComponent(fieldNamaObat, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -187,7 +176,10 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(fieldHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(fieldJenisObat, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)))
                         .addGap(36, 36, 36))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(fieldStokKritis, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,14 +188,7 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(fieldNamaObat, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fieldJenisObat, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
+                        .addGap(70, 70, 70)))
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -238,7 +223,7 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Data Obat Belum Lengkap", "Obat", JOptionPane.INFORMATION_MESSAGE);
         } else {
             tabel = (DefaultTableModel) jTable1.getModel();
-            tabel.addRow(new Object[]{fieldNamaObat.getText(), fieldQuantity.getText(), fieldJenisObat.getText(), fieldKeterangan.getText(), fieldHarga.getText(), fieldStokKritis.getText()});
+            tabel.addRow(new Object[]{fieldNamaObat.getText(), 0, fieldJenisObat.getText(), fieldKeterangan.getText(), fieldHarga.getText(), fieldStokKritis.getText()});
             jTable1.setModel(tabel);
             reset();
         }
@@ -279,12 +264,10 @@ public class TransaksiBeliObatBaru extends javax.swing.JFrame {
     private javax.swing.JTextField fieldJenisObat;
     private javax.swing.JTextField fieldKeterangan;
     private javax.swing.JTextField fieldNamaObat;
-    private javax.swing.JTextField fieldQuantity;
     private javax.swing.JTextField fieldStokKritis;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

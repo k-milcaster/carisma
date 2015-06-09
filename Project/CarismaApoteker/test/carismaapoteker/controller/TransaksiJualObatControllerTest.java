@@ -4,6 +4,7 @@
  */
 package carismaapoteker.controller;
 
+import carismainterface.entity.Obat;
 import javax.swing.table.DefaultTableModel;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -101,7 +102,7 @@ public class TransaksiJualObatControllerTest {
         int idObat = 2;
         TransaksiJualObatController instance = new TransaksiJualObatController(client);
         int expResult = 50;
-        int result = instance.cekStok(idObat);
+        int result = instance.cekStok(idObat).getQtyObat();
         assertEquals(expResult, result);
         
     }

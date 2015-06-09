@@ -4,8 +4,13 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import carismaserver.controllers.ServerSocket;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,14 +27,33 @@ public class Main extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.who.setText(administrator);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        socket = new ServerSocket(this);
         try {
-            socket.Start();
+            setConfig();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotBoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnknownHostException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    private void setConfig() throws RemoteException, NotBoundException, UnknownHostException {
+            Scanner s = null;
+            try {
+                s = new Scanner(new File("D:/carismaserverconfig"));
+            } catch (FileNotFoundException ex) {
 
+            }
+            ArrayList<String> list = new ArrayList<String>();
+            while (s.hasNext()) {
+                list.add(s.next());
+            }
+            s.close();
+            socket = new ServerSocket(this, Integer.parseInt(list.get(5)));
+            socket.Start();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

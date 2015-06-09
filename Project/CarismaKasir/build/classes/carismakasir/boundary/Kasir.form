@@ -159,7 +159,7 @@
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="1"/>
+          <Font name="Agency FB" size="24" style="1"/>
         </Property>
       </Properties>
       <Constraints>
@@ -280,9 +280,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField6">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Agency FB" size="60" style="1"/>
             </Property>

@@ -2,6 +2,7 @@ package carismakasir.controller;
 
 import carismainterface.entity.Kunjungan;
 import carismainterface.server.KunjunganService;
+import carismainterface.server.PegawaiService;
 import carismainterface.server.PembayaranService;
 import carismakasir.boundary.Kasir;
 import java.rmi.RemoteException;
@@ -26,12 +27,14 @@ public class KasirController {
     private PembayaranService pembayaranService;
     private KunjunganService kunjunganService;
     private Kasir ui;
+    private PegawaiService pegawaiService;
     private String printTo = "D:\\";
     private String fileName = ".pdf";
 
     public KasirController(ClientSocket Client, Kasir ui) {
         this.pembayaranService = Client.getPembayaranService();
         this.kunjunganService = Client.getKunjunganService();
+        this.pegawaiService = Client.getPegawaiService();
         this.ui = ui;
     }
 
@@ -78,7 +81,7 @@ public class KasirController {
     }
 
     public boolean doBayar(int pembayaran, int biaya) throws FileNotFoundException {
-        if (pembayaran >= biaya) {            
+        if (pembayaran >= biaya) {
             return true;
         } else {
             return false;
@@ -87,7 +90,7 @@ public class KasirController {
     }
 
     public boolean cetak() throws FileNotFoundException {
-        String FILE = this.printTo + "test" + this.fileName;
+        String FILE = this.printTo + "invoice" + this.fileName;
 
         Document document = new Document();
         try {
@@ -116,6 +119,11 @@ public class KasirController {
             document.add(total);
             document.close();
             JOptionPane.showMessageDialog(null, "Pembayaran Berhasil");
+            try {
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler D:\\Invoice.pdf");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
             return true;
         } catch (DocumentException ex) {
             Logger.getLogger(KasirController.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,6 +134,11 @@ public class KasirController {
             JOptionPane.showMessageDialog(null, "Cetak Gagal");
             return false;
         }
+    }
+
+    public String getNamaPegawai(String username) throws RemoteException {
+        String[] namaPegawai = pegawaiService.getIdNamaPegawai(username);
+        return namaPegawai[0];
     }
 
 }

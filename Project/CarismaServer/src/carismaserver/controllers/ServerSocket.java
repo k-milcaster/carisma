@@ -17,20 +17,37 @@ import carismaserver.entity.*;
  */
 public class ServerSocket {
 
-    private final int port = 2015;
+    private int port = 2015;
     public Main ui;
     private Registry server = null;
 
-    public ServerSocket(Main ui) {
+    public ServerSocket(Main ui, int port) {
         this.ui = ui;
+        this.port = port;
     }
-
+    
+    public ServerSocket(int port) {
+        this.port = port;
+    }
+    
+    public boolean testConnection() {
+        try {
+            server = LocateRegistry.createRegistry(port);
+            UserEntity user = new UserEntity();
+            server.rebind("userRequest", user);
+            return true;
+        } catch (RemoteException ex) {
+            Logger.getLogger(ServerSocket.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
     public void Start() throws UnknownHostException {
         ui.portLabel.setText("" + port);
         ui.iPLabel.setText("" + InetAddress.getLocalHost());
         try {
             server = LocateRegistry.createRegistry(port);
-
+            
             AbsensidokterEntity absensiDokter = new AbsensidokterEntity(ui);
             AbsensipegawaiEntity absensiPegawai = new AbsensipegawaiEntity(ui);
             AntrianEntity antrian = new AntrianEntity(ui);
@@ -127,8 +144,8 @@ public class ServerSocket {
         server.unbind("kotaRequest");
         server.unbind("provinsiRequest");
         server.unbind("poliRequest");
-        server.unbind("pembayaranRequest");
-
+        server.unbind("pembayaranRequest");       
+        server = null;
         ui.act.append("Server Stopped \n");
     }
 }

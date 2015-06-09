@@ -170,6 +170,10 @@
     </Component>
     <Component class="javax.swing.JTextField" name="Namanya">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Agency FB" size="24" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Salma Indridinnanti"/>
       </Properties>
       <Constraints>

@@ -1,20 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package carismaapoteker.controller;
 
-import carismaapoteker.boundaries.TransaksiJualObat;
+import carismainterface.entity.Detailresep;
 import carismainterface.entity.Detailtransaksijualobat;
+import carismainterface.entity.Kunjungan;
 import carismainterface.entity.Obat;
 import carismainterface.entity.Transaksijualobat;
+import carismainterface.server.DetailresepService;
 import carismainterface.server.DetailtransaksijualobatService;
+import carismainterface.server.KunjunganService;
 import carismainterface.server.ObatService;
 import carismainterface.server.TransaksijualobatService;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-import carismaapoteker.boundaries.TabelObat;
 import carismainterface.server.PegawaiService;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,6 +28,7 @@ public class TransaksiJualObatController {
     private DetailtransaksijualobatService detailtransaksijual;
     private ObatService obatService;
     private PegawaiService pegawaiService;
+    private KunjunganService kunjunganService;
 
     public TransaksiJualObatController(ClientSocket client) throws RemoteException {
 
@@ -37,6 +36,7 @@ public class TransaksiJualObatController {
         obatService = client.getObatService();
         pegawaiService = client.getPegawaiService();
         detailtransaksijual = client.getDetailtransaksijualobatService();
+        kunjunganService = client.getKunjunganService();
     }
 
     public boolean insertTransaksijualobat(String idTransaksijual, String dateTransaksijual, String keterangan) throws RemoteException {
@@ -47,7 +47,27 @@ public class TransaksiJualObatController {
         transaksijual.setKeterangan(keterangan);
         insert = transaksijualobat.insertTransaksijualobat(transaksijual);
         return insert;
+    }
 
+    public boolean updateKunjungan(String idTransaksi, String idKunjungan) throws RemoteException {
+        Kunjungan kun = new Kunjungan();
+        kun = kunjunganService.getKunjungan(idKunjungan);
+        if (kun != null) {
+            kun.setTransaksijualobatIdTransaksijual(idTransaksi);
+            return kunjunganService.updateKunjungan(kun);
+        } else {
+            return false;
+        }
+    }
+
+    public boolean cekKunjungan(String idKunjungan) throws RemoteException {
+        Kunjungan kun = new Kunjungan();
+        kun = kunjunganService.getKunjungan(idKunjungan);
+        if (kun != null) {         
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean deleteTransaksiJualObat(String idTransaksi) throws RemoteException {
@@ -62,8 +82,8 @@ public class TransaksiJualObatController {
         detailtransaksi.setObat(idObat);
         detailtransaksi.setQty(qty);
         insertDetail = detailtransaksijual.insertDetailtransaksijualobat(detailtransaksi);
-        return insertDetail;
 
+        return insertDetail;
 
     }
 
@@ -89,10 +109,14 @@ public class TransaksiJualObatController {
         }
         return model;
     }
-
-    public int cekStok(int idObat) throws RemoteException {
-        int stok = obatService.getObat(idObat).getQtyObat();
-        return stok;
+    
+    public Obat cekStok(int idObat) throws RemoteException {
+        Obat obat = obatService.getObat(idObat);
+        return obat;
+    }
+    
+    public boolean updateStokObat(int idObat, int qty) throws RemoteException{
+        return obatService.updateStokJualObat(idObat, qty);
     }
 
     public String[] namaPegawai(String username) throws RemoteException {
@@ -117,6 +141,7 @@ public class TransaksiJualObatController {
         }
         return model;
     }
+
     public String getIdTransaksiJualObat() throws RemoteException {
         String lastIdTransaksiJualObat = transaksijualobat.getLastIdTransaksiJualObat();
         String[] splitDateNow = getDateNow().split("-");
@@ -124,8 +149,9 @@ public class TransaksiJualObatController {
         String awalan = "TRANSSELL-".concat(dateNow).concat("-");
         String idTransaksiJualObatFix = " ";
         String getDateOnly = " ";
+        System.out.println(lastIdTransaksiJualObat);
         //TRANSSELL-20150528-001
-        if (lastIdTransaksiJualObat != null) {
+        if (lastIdTransaksiJualObat != null && !"kosong".equals(lastIdTransaksiJualObat)) {
             char[] charDate = lastIdTransaksiJualObat.toCharArray();
             char[] newCharDate = new char[8];
             for (int i = 0; i < 8; i++) {
@@ -133,7 +159,7 @@ public class TransaksiJualObatController {
             }
             getDateOnly = String.valueOf(newCharDate);
         }
-        if (lastIdTransaksiJualObat == null || (!dateNow.equals(getDateOnly))) {
+        if ((lastIdTransaksiJualObat == null && lastIdTransaksiJualObat != "kosong") || (!dateNow.equals(getDateOnly))) {
             idTransaksiJualObatFix = awalan.concat("001");
         } else {
             char[] lastDigit = lastIdTransaksiJualObat.toCharArray();
@@ -152,6 +178,7 @@ public class TransaksiJualObatController {
         }
         return idTransaksiJualObatFix;
     }
+
     public String getDateNow() throws RemoteException {
         DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
         String date = df.format(new java.util.Date());

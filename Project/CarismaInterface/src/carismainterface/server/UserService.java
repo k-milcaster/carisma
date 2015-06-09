@@ -30,4 +30,6 @@ public interface UserService extends Remote {
     List<User> getUser() throws RemoteException;
     
     List<User> getUserbyRole(String role) throws RemoteException;
+    
+    List<User> getUserNonDoctor() throws RemoteException;
 }

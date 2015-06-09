@@ -22,9 +22,12 @@ class verifikasi extends Controller {
 
 
             if ($ambil == TRUE) {
-//                echo 'Username Anda : ' . $us . ' || Password Anda : ' . $usa;
-                Session::set('id', $us);
-                Session::set('pas', $usa);
+                $this->loadModel('Pasien');
+                $emp = $this->model->getPasienByUserName($us);
+                foreach ($emp as $key => $valuess) {
+                    Session::set('namaPas', $valuess[0]);
+                    Session::set('id', $valuess[1]);
+                }
                 Redirect::go(URL);
             } else {
                 $masukindums = 'Salah Password';
@@ -47,7 +50,6 @@ class verifikasi extends Controller {
     function dologout() {
         Session::kill();
         Redirect::go(URL);
-        
     }
 
 }

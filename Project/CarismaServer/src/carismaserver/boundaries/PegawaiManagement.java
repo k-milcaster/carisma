@@ -5,14 +5,12 @@ import carismainterface.entity.User;
 import carismaserver.controllers.DatabaseConnection;
 import carismaserver.entity.PegawaiEntity;
 import carismaserver.entity.UserEntity;
-import com.mysql.jdbc.Statement;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.rmi.RemoteException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +69,15 @@ public class PegawaiManagement extends javax.swing.JFrame {
                         fieldGajiFix.setText((String) selected.getGajifixPegawai().toString());
                         fieldGajiLembur.setText((String) selected.getGajilemburPegawai().toString());
                         comboUsername.setSelectedItem((userService.getUserById(selected.getUserIdUser())).getUsername());
+                        img = selected.getFotoPegawai();
+                        if (img != null) {
+                            Image imgs = Toolkit.getDefaultToolkit().createImage(img);
+                            Image dimg = imgs.getScaledInstance(160, 160, Image.SCALE_SMOOTH);
+                            ImageIcon icon = new ImageIcon(dimg);
+                            foto.setIcon(icon);
+                        } else {
+                            foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carismaserver/image/Preview.jpg")));
+                        }
                     } catch (RemoteException ex) {
                         Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -487,8 +494,8 @@ public class PegawaiManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAttachActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
-        if (!fieldJabatan.getText().equalsIgnoreCase("") && !fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && areaAlamat.getText().equalsIgnoreCase("")
-                && fieldNokartuid.getText().equalsIgnoreCase("") && fieldTempat.getText().equalsIgnoreCase("") && fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
+        if (!fieldJabatan.getText().equalsIgnoreCase("") && !fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && !areaAlamat.getText().equalsIgnoreCase("")
+                && !fieldNokartuid.getText().equalsIgnoreCase("") && !fieldTempat.getText().equalsIgnoreCase("") && !fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
             try {
                 int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();
                 String jabatan = fieldJabatan.getText();
@@ -512,8 +519,14 @@ public class PegawaiManagement extends javax.swing.JFrame {
                 } else {
                     foto = "Belum memasukkan foto";
                 }
-                int gfix = Integer.parseInt(fieldGajiFix.getText());
-                int glembur = Integer.parseInt(fieldGajiLembur.getText());
+                int gfix = 0;
+                if(!fieldGajiFix.getText().equalsIgnoreCase("")){
+                    gfix = Integer.parseInt(fieldGajiFix.getText());
+                }
+                int glembur = 0;
+                if(!fieldGajiLembur.getText().equalsIgnoreCase("")){
+                    glembur = Integer.parseInt(fieldGajiLembur.getText());
+                }
                 boolean success = control.updatePegawai(this, userid, jabatan, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, image);
                 if (success) {
                     JOptionPane.showMessageDialog(this, "Update Pegawai berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
@@ -534,8 +547,8 @@ public class PegawaiManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
-        if (!fieldJabatan.getText().equalsIgnoreCase("") && !fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && areaAlamat.getText().equalsIgnoreCase("")
-                && fieldNokartuid.getText().equalsIgnoreCase("") && fieldTempat.getText().equalsIgnoreCase("") && fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
+        if (!fieldJabatan.getText().equalsIgnoreCase("") && !fieldId.getText().equalsIgnoreCase("") && !fieldNama.getText().equalsIgnoreCase("") && !areaAlamat.getText().equalsIgnoreCase("")
+                && !fieldNokartuid.getText().equalsIgnoreCase("") && !fieldTempat.getText().equalsIgnoreCase("") && !fieldTanggal.getText().equalsIgnoreCase("yyyy/mm/dd")) {
             try {
                 int userid = users.get(comboUsername.getSelectedIndex()).getIdUser();;
                 String jabatan = fieldJabatan.getText();
@@ -549,6 +562,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
                 String tempat = fieldTempat.getText();
                 String tanggal = fieldTanggal.getText();
                 String kelamin = comboKelamin.getSelectedItem().toString();
+                System.out.println(kelamin);
                 String darah = comboDarah.getSelectedItem().toString();
                 String bank = fieldBank.getText();
                 String norek = fieldNorek.getText();
@@ -559,8 +573,14 @@ public class PegawaiManagement extends javax.swing.JFrame {
                 } else {
                     foto = "Belum memasukkan foto";
                 }
-                int gfix = Integer.parseInt(fieldGajiFix.getText());
-                int glembur = Integer.parseInt(fieldGajiLembur.getText());
+                int gfix = 0;
+                if(!fieldGajiFix.getText().equalsIgnoreCase("")){
+                    gfix = Integer.parseInt(fieldGajiFix.getText());
+                }
+                int glembur = 0;
+                if(!fieldGajiLembur.getText().equalsIgnoreCase("")){
+                    glembur = Integer.parseInt(fieldGajiLembur.getText());
+                }
                 boolean success = control.insertPegawai(this, userid, jabatan, id, nama, alamat, nokartu, telp, hp1, hp2, tempat, tanggal, kelamin, darah, bank, norek, gfix, glembur, image);
                 if (success) {
                     JOptionPane.showMessageDialog(this, "Insert Pegawai berhasil\n" + foto, "Sukses", JOptionPane.INFORMATION_MESSAGE);
@@ -605,7 +625,7 @@ public class PegawaiManagement extends javax.swing.JFrame {
     private void comboUsernamePopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboUsernamePopupMenuWillBecomeVisible
         comboUsername.removeAllItems();
         try {
-            users = userService.getUserbyRole("staff");
+            users = userService.getUserNonDoctor();
         } catch (RemoteException ex) {
             Logger.getLogger(DokterManagement.class.getName()).log(Level.SEVERE, null, ex);
         }

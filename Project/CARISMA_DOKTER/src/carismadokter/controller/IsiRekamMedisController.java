@@ -2,6 +2,20 @@ package carismadokter.controller;
 
 import carismainterface.entity.*;
 import carismainterface.server.*;
+import com.itextpdf.text.*;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -49,7 +63,7 @@ public class IsiRekamMedisController {
         rekamMedik.setAlergiobatRekammedik(alergiObat);
         rekamMedik.setKesimpulanRekammedis(kesimpulanPemeriksaan);
         rekamMedik.setKondisipasienkeluarRekammedis(kondisiPasien);
-        rekamMedik.setResepIdResep(idResep);        
+        rekamMedik.setResepIdResep(idResep);
         return rekamMedikService.insertRekamMedik(rekamMedik);
     }
 
@@ -76,8 +90,8 @@ public class IsiRekamMedisController {
         inserted = resepService.insertResep(resep);
         return inserted;
     }
-    
-    public boolean deleteResep(String idResep) throws RemoteException{
+
+    public boolean deleteResep(String idResep) throws RemoteException {
         return resepService.deletedResep(idResep);
     }
 
@@ -92,12 +106,12 @@ public class IsiRekamMedisController {
         inserted = detailResepService.insertDetailresep(detailResep);
         return inserted;
     }
-    
-    public boolean deleteDetailResep(String idDetailResep) throws RemoteException{
+
+    public boolean deleteDetailResep(String idDetailResep) throws RemoteException {
         return detailResepService.deleteDetailResep(idDetailResep);
     }
 
-    public boolean insertKunjungan(String idKunjungan, String idPasien, String idRekamMedik, String tglKunjungan, int biaya) throws RemoteException {
+    public boolean insertKunjungan(String idKunjungan, String idPasien, String idRekamMedik, String tglKunjungan, int biaya) throws RemoteException, DocumentException, FileNotFoundException, BadElementException, IOException {
         boolean inserted = false;
         Kunjungan kunjungan = new Kunjungan();
         kunjungan.setIdKunjungan(idKunjungan);
@@ -108,10 +122,21 @@ public class IsiRekamMedisController {
         kunjungan.setTanggaljamKunjungan(tglKunjungan);
         kunjungan.setBiayaKunjungan(biaya);
         inserted = kunjunganService.insertKunjungan(kunjungan);
+
+        if (inserted == true) {
+            String dest = "D:\\antrean" + idKunjungan + ".pdf";
+            File file = new File(dest);
+            file.getParentFile().mkdirs();
+            cetak(idKunjungan, dest);
+            System.out.println("SUKSES");
+        } else {
+            System.out.println("FALSE");
+
+        }
         return inserted;
     }
-    
-    public boolean deleteKunjungan(String idKunjungan) throws RemoteException{
+
+    public boolean deleteKunjungan(String idKunjungan) throws RemoteException {
         return kunjunganService.deleteKunjungan(idKunjungan);
     }
 
@@ -157,6 +182,7 @@ public class IsiRekamMedisController {
         //RES-2015-04-14-001
         String idResepFix = " ";
         String getDateOnly = " ";
+
         if (lastIdResep != null) {
             char[] charDate = lastIdResep.toCharArray();
             char[] newCharDate = new char[10];
@@ -165,6 +191,7 @@ public class IsiRekamMedisController {
             }
             getDateOnly = String.valueOf(newCharDate);
         }
+
         if (lastIdResep == null || (!getDateNow().equals(getDateOnly))) {
             idResepFix = awalan.concat("001");
         } else {
@@ -294,5 +321,40 @@ public class IsiRekamMedisController {
         DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
         String date = df.format(new java.util.Date());
         return date;
+    }
+
+    private void cetak(String idKunjungan, String dest) throws DocumentException, FileNotFoundException, BadElementException, IOException {
+        String IMG1 = "Kunjungan.png";
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
+        document.open();
+        PdfPTable table = new PdfPTable(1);
+        table.setTotalWidth(300);
+        table.setLockedWidth(true);
+        PdfPCell cell = new PdfPCell();
+        Font font1 = new Font(Font.FontFamily.HELVETICA, 25, Font.NORMAL, BaseColor.RED);
+        Font font2 = new Font(Font.FontFamily.HELVETICA, 20, Font.NORMAL, BaseColor.RED);
+        Font space = new Font(Font.FontFamily.HELVETICA, 65, Font.NORMAL, BaseColor.RED);
+        Paragraph kunjungan = new Paragraph(" ", font1);
+        Paragraph tanggal = new Paragraph(" ", font2);
+        cell.addElement(kunjungan);
+        cell.addElement(tanggal);
+        tanggal = new Paragraph(getDateNow(), font2);
+        kunjungan = new Paragraph(idKunjungan, font1);
+        tanggal.setAlignment(cell.ALIGN_RIGHT);
+        kunjungan.setAlignment(cell.ALIGN_CENTER);
+        cell.addElement(tanggal);
+        cell.addElement(kunjungan);
+        Image image = Image.getInstance(IMG1);
+        cell.setCellEvent(new ImageBackgroundEvent(image));
+        cell.setFixedHeight(300 * image.getScaledHeight() / image.getScaledWidth());
+        table.addCell(cell);
+        document.add(table);
+        document.close();
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + dest);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

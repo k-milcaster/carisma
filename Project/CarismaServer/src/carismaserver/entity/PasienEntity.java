@@ -281,7 +281,7 @@ public class PasienEntity extends UnicastRemoteObject implements PasienService {
         try {
             statement = DatabaseConnection.getConnection().prepareStatement(
                     "SELECT P.* FROM `pasien` AS P , `kunjungan` AS K , `pasien_kamar` AS PK "
-                            + "WHERE P.id_pasien = K.pasien_id_pasien AND K.pasien_kamar_id_peminjaman = PK.id_peminjaman");
+                            + "WHERE P.id_pasien = K.pasien_id_pasien AND K.pasien_kamar_id_peminjaman = PK.id_peminjaman" + "group by P.id_pasien");
             ResultSet result = statement.executeQuery();
             List<Pasien> list = new ArrayList<Pasien>();
             Pasien pasi = null;
