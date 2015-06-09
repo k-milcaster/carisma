@@ -7,11 +7,14 @@ import carismainterface.entity.Detailresep;
 import carismainterface.entity.Dokter;
 import carismainterface.entity.Pasien;
 import carismainterface.entity.Rekammedik;
+import carismainterface.entity.Rekammedikpenyakit;
 import carismainterface.server.DetailresepService;
 import carismainterface.server.DokterService;
 import carismainterface.server.PasienService;
+import carismainterface.server.PenyakitService;
 import carismainterface.server.PoliService;
 import carismainterface.server.RekammedikService;
+import carismainterface.server.RekammedikpenyakitService;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +30,16 @@ public class LihatRekamMedisController {
     private DokterService dokterService;
     private RekammedikService rekamMedikService;
     private DetailresepService detailResepService;
+    private RekammedikpenyakitService rekammedikPenyakitService;
+    private PenyakitService penyakitService;
     
     public LihatRekamMedisController(ClientSocket client) throws RemoteException {
         this.pasienService = client.getPasienService();
         this.rekamMedikService = client.getRekamMedikService();
         detailResepService = client.getDetailResepService();
-        this.dokterService = client.getDokterService();     
+        this.dokterService = client.getDokterService(); 
+        rekammedikPenyakitService = client.getRekamMedisPenyakitService();
+        penyakitService = client.getPenyakitService();
     }
     
     public Pasien getPasien(String idPasien) throws RemoteException{
@@ -73,7 +80,15 @@ public class LihatRekamMedisController {
         }
         return listNamaObat;
     }
-    
+    public DefaultListModel getPenyakitPasien(String idRekamMedik) throws RemoteException{
+        DefaultListModel listPenyakitPasien = new DefaultListModel();
+        List<Rekammedikpenyakit> list = new ArrayList<Rekammedikpenyakit>();
+        list = rekammedikPenyakitService.getPenyakitPasien(idRekamMedik);
+        for (int i = 0; i < list.size(); i++) {
+            listPenyakitPasien.addElement(penyakitService.getPenyakit(list.get(i).getPenyakitIdPenyakit()).getNamaPenyakit());
+        }
+        return listPenyakitPasien;
+    }
     
 
 } 
