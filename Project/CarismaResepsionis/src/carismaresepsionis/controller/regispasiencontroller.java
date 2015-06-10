@@ -52,7 +52,7 @@ public class regispasiencontroller {
         this.poliService = client.getPoliService();
     }
 
-    public void InsertNamaPasien(String kota_id_kota, String nama_pasien, String alamat_pasien, String kartuid_pasien, String nokartuid_pasien, String telp_pasien, String hp_pasien, String tempatlahirpasien, String tgllahir_pasien, String kelamin_pasien, String darah_pasien, int berat_pasien, int tinggi_Pasien, String regdate_pasien, String username) throws RemoteException {
+    public void InsertNamaPasien(String kota_id_kota, String nama_pasien, String alamat_pasien, String kartuid_pasien, String nokartuid_pasien, String telp_pasien, String hp_pasien, String tempatlahirpasien, String tgllahir_pasien, String kelamin_pasien, String darah_pasien, int berat_pasien, int tinggi_Pasien, String regdate_pasien, String username) throws RemoteException, DocumentException, FileNotFoundException, BadElementException, IOException {
         Pasien pasien = new Pasien();
         User user = new User();
 		String idPasien = generatePasienId(nama_pasien, tgllahir_pasien, nokartuid_pasien);
