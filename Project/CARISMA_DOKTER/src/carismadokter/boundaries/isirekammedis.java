@@ -7,6 +7,7 @@ import carismadokter.controller.LoginController;
 import carismainterface.server.UserService;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
@@ -26,10 +27,11 @@ public class isirekammedis extends javax.swing.JFrame {
     public String idResep;
     public String idAntrian;
     private String[] dokterInfor;
+
     public isirekammedis(ClientSocket client, final String username) throws RemoteException {
         this.client = client;
         IsiRekamMedisController isiRekamMedisController = new IsiRekamMedisController(this.client);
-        
+
         this.login = this.client.getUserService();
         this.username = username;
 
@@ -380,6 +382,11 @@ public class isirekammedis extends javax.swing.JFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Biaya", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
 
         fieldBiaya.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        fieldBiaya.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldBiayaKeyTyped(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jLabel2.setText("Rp");
@@ -389,7 +396,7 @@ public class isirekammedis extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(11, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(fieldBiaya, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -418,7 +425,7 @@ public class isirekammedis extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 7, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -635,7 +642,7 @@ public class isirekammedis extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Data Rekam Medis Sudah Tersimpan", "Rekam Medik", JOptionPane.INFORMATION_MESSAGE);
                         clearField();
                         //panggil antrianhadir
-                        antrianHadir = antrianController.antrianHadir(idAntrian); 
+                        antrianHadir = antrianController.antrianHadir(idAntrian);
                         fieldIdRekamMedis.setText(rekamMedisController.getIdRekamMedis());
                     } else {
                         JOptionPane.showMessageDialog(null, "Data Rekam Medik Tidak Dapat Disimpan", "Rekam Medik", JOptionPane.ERROR_MESSAGE);
@@ -691,6 +698,18 @@ public class isirekammedis extends javax.swing.JFrame {
             Logger.getLogger(isirekammedis.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_fieldIdPasienFocusLost
+
+    private void fieldBiayaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldBiayaKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_fieldBiayaKeyTyped
+
+    public void typeOnlyNumber(KeyEvent evt) {
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonTambahPenyakit;
     private javax.swing.JButton buttonTambahResep;
