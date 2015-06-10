@@ -11,6 +11,20 @@ import carismainterface.server.UserService;
 import carismaresepsionis.boundaries.Rawatinap;
 import carismaresepsionis.boundaries.antrianoffline;
 import carismaresepsionis.boundaries.regispasienform;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,9 +52,10 @@ public class regispasiencontroller {
         this.poliService = client.getPoliService();
     }
 
-    public void InsertNamaPasien(String id_pasien, String kota_id_kota, String nama_pasien, String alamat_pasien, String kartuid_pasien, String nokartuid_pasien, String telp_pasien, String hp_pasien, String tempatlahirpasien, String tgllahir_pasien, String kelamin_pasien, String darah_pasien, int berat_pasien, int tinggi_Pasien, String regdate_pasien, String username) throws RemoteException {
+    public void InsertNamaPasien(String kota_id_kota, String nama_pasien, String alamat_pasien, String kartuid_pasien, String nokartuid_pasien, String telp_pasien, String hp_pasien, String tempatlahirpasien, String tgllahir_pasien, String kelamin_pasien, String darah_pasien, int berat_pasien, int tinggi_Pasien, String regdate_pasien, String username) throws RemoteException {
         Pasien pasien = new Pasien();
         User user = new User();
+		String idPasien = generatePasienId(nama_pasien, tgllahir_pasien, nokartuid_pasien);
         System.out.println(generatePasienId(nama_pasien, tgllahir_pasien, nokartuid_pasien));
         pasien.setIdPasien(generatePasienId(nama_pasien, tgllahir_pasien, nokartuid_pasien));
         pasien.setKotaIdKota(kota_id_kota);
@@ -59,21 +74,31 @@ public class regispasiencontroller {
         pasien.setRegdatePasien(regdate_pasien);
         user = userService.getUser(username);
         pasien.setUserIdUser(Integer.toString(user.getIdUser()));
-        pasienService.insertPasien(pasien);
+        boolean inserted = pasienService.insertPasien(pasien);
+
+        if (inserted == true) {
+            String dest = "D:\\Kartu Pasien" + idPasien + ".pdf";
+            File file = new File(dest);
+            file.getParentFile().mkdirs();
+            cetak(idPasien, nama_pasien, alamat_pasien, tgllahir_pasien, kelamin_pasien, dest);
+            System.out.println("SUKSES");
+        } else {
+            System.out.println("FALSE");
+
+        }
     }
 
     public boolean cekKartuId(String idCard) throws RemoteException{
         return pasienService.isUsedNokartuPasien(idCard);
     }
+	
     public void InsertUser(String username, String Password, String role) throws RemoteException {
 
         User user = new User();
         user.setUsername(username);
         user.setPassword(Password);
         user.setRegistered(generatetanggal());
-        System.out.println("hasil generate password=" + Password);
         user.setRole(role);
-        System.out.println("hasil role=" + role);
         userService.insertUser(user);
     }
 
@@ -100,9 +125,6 @@ public class regispasiencontroller {
             dateOnly[i] = tglLahir[i + 8];
         }
         String userName = firstName[0].concat(String.valueOf(dateOnly));
-        System.out.println("hasil generate username = " + userName);
-
-        //String NamaUser = Character.toString(nama.split(tgl)
         return userName;
 
     }
@@ -167,5 +189,55 @@ public class regispasiencontroller {
             model.addRow(new Object[]{list.get(i).getIdPasien(), list.get(i).getNamaPasien()});
         }
         return model;
+    }
+	
+	private void cetak(String idPasien, String namaPasien, String alamat, String tanggalLahir, String jenisKelamin, String dest) throws DocumentException, FileNotFoundException, BadElementException, IOException {
+        String IMG1 = "Kartu Pasien.png";
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
+        document.open();
+        PdfPTable table = new PdfPTable(1);
+        table.setTotalWidth(280);
+        table.setLockedWidth(true);
+        PdfPCell cell = new PdfPCell();
+        Font font = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
+        Font space = new Font(Font.FontFamily.HELVETICA, 25, Font.NORMAL, BaseColor.RED);
+        Font space1 = new Font(Font.FontFamily.HELVETICA, 1, Font.NORMAL, BaseColor.RED);
+        Paragraph idPasienPar;
+        Paragraph namaPasienPar;
+        Paragraph alamatPar;
+        Paragraph tanggalLahirPar;
+        Paragraph jenisKelaminPar;
+        Paragraph spasi = new Paragraph(" ", space);
+        Paragraph spasi1 = new Paragraph(" ", space1);
+        idPasienPar = new Paragraph("                                      " + idPasien, font);
+        namaPasienPar = new Paragraph("                                      " + namaPasien, font);
+        tanggalLahirPar = new Paragraph("                                      " + tanggalLahir, font);
+        jenisKelaminPar = new Paragraph("                                      " + jenisKelamin, font);
+        alamatPar = new Paragraph("                                      " + alamat, font);
+        idPasienPar.setAlignment(cell.ALIGN_LEFT);
+        namaPasienPar.setAlignment(cell.ALIGN_LEFT);
+        alamatPar.setAlignment(cell.ALIGN_LEFT);
+        tanggalLahirPar.setAlignment(cell.ALIGN_LEFT);
+        jenisKelaminPar.setAlignment(cell.ALIGN_LEFT);
+        cell.addElement(spasi);
+        cell.addElement(idPasienPar);
+        cell.addElement(namaPasienPar);
+        cell.addElement(spasi1);
+        cell.addElement(tanggalLahirPar);
+        cell.addElement(jenisKelaminPar);
+        cell.addElement(spasi1);
+        cell.addElement(alamatPar);
+        Image image = Image.getInstance(IMG1);
+        cell.setCellEvent(new ImageBackgroundEvent(image));
+        cell.setFixedHeight(259 * image.getScaledHeight() / image.getScaledWidth());
+        table.addCell(cell);
+        document.add(table);
+        document.close();
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + dest);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

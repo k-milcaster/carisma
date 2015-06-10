@@ -6,6 +6,7 @@ import carismaresepsionis.controller.ClientSocket;
 import carismaresepsionis.controller.regispasiencontroller;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,7 +43,6 @@ public class regispasienform extends javax.swing.JFrame {
         registrasicontrol.getTabelPasien(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
 
-        Tempat_ID.setEditable(false);
         a = Nama_Pasien.getText();
         b = Tempat_Lahir.getText();
         c = Alamat.getText();
@@ -67,8 +67,6 @@ public class regispasienform extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Nama_Pasien = new javax.swing.JTextField();
         Tempat_Lahir = new javax.swing.JTextField();
-        ID = new javax.swing.JLabel();
-        Tempat_ID = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Alamat = new javax.swing.JTextArea();
         No_Hp = new javax.swing.JTextField();
@@ -108,14 +106,14 @@ public class regispasienform extends javax.swing.JFrame {
                 Nama_PasienMouseClicked(evt);
             }
         });
-        Nama_Pasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Nama_PasienActionPerformed(evt);
-            }
-        });
         Nama_Pasien.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 Nama_PasienFocusGained(evt);
+            }
+        });
+        Nama_Pasien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Nama_PasienKeyTyped(evt);
             }
         });
         getContentPane().add(Nama_Pasien);
@@ -132,16 +130,13 @@ public class regispasienform extends javax.swing.JFrame {
                 Tempat_LahirFocusGained(evt);
             }
         });
+        Tempat_Lahir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Tempat_LahirKeyTyped(evt);
+            }
+        });
         getContentPane().add(Tempat_Lahir);
         Tempat_Lahir.setBounds(580, 170, 215, 32);
-
-        ID.setText("ID PASIEN");
-        getContentPane().add(ID);
-        ID.setBounds(1080, 90, 79, 32);
-
-        Tempat_ID.setText("DN15050123");
-        getContentPane().add(Tempat_ID);
-        Tempat_ID.setBounds(1170, 90, 99, 32);
 
         Alamat.setColumns(20);
         Alamat.setRows(5);
@@ -172,6 +167,11 @@ public class regispasienform extends javax.swing.JFrame {
                 No_HpFocusGained(evt);
             }
         });
+        No_Hp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                No_HpKeyTyped(evt);
+            }
+        });
         getContentPane().add(No_Hp);
         No_Hp.setBounds(580, 210, 340, 32);
 
@@ -186,24 +186,19 @@ public class regispasienform extends javax.swing.JFrame {
                 No_teleFocusGained(evt);
             }
         });
+        No_tele.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                No_teleKeyTyped(evt);
+            }
+        });
         getContentPane().add(No_tele);
         No_tele.setBounds(930, 210, 335, 32);
 
         Jenis_Kelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Jenis Kelamin-", "L", "P" }));
-        Jenis_Kelamin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Jenis_KelaminActionPerformed(evt);
-            }
-        });
         getContentPane().add(Jenis_Kelamin);
         Jenis_Kelamin.setBounds(580, 390, 134, 32);
 
         goldar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Golongan Darah-", "A", "B", "AB", "O" }));
-        goldar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goldarActionPerformed(evt);
-            }
-        });
         getContentPane().add(goldar);
         goldar.setBounds(720, 390, 160, 32);
 
@@ -218,6 +213,11 @@ public class regispasienform extends javax.swing.JFrame {
                 TinggiPasienFocusGained(evt);
             }
         });
+        TinggiPasien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TinggiPasienKeyTyped(evt);
+            }
+        });
         getContentPane().add(TinggiPasien);
         TinggiPasien.setBounds(580, 440, 134, 32);
 
@@ -227,14 +227,14 @@ public class regispasienform extends javax.swing.JFrame {
                 BeratPasienMouseClicked(evt);
             }
         });
-        BeratPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BeratPasienActionPerformed(evt);
-            }
-        });
         BeratPasien.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 BeratPasienFocusGained(evt);
+            }
+        });
+        BeratPasien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                BeratPasienKeyTyped(evt);
             }
         });
         getContentPane().add(BeratPasien);
@@ -262,6 +262,11 @@ public class regispasienform extends javax.swing.JFrame {
                 Kartu_idFocusGained(evt);
             }
         });
+        Kartu_id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Kartu_idKeyTyped(evt);
+            }
+        });
         getContentPane().add(Kartu_id);
         Kartu_id.setBounds(580, 250, 340, 32);
 
@@ -276,14 +281,14 @@ public class regispasienform extends javax.swing.JFrame {
                 No_KartuFocusGained(evt);
             }
         });
+        No_Kartu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                No_KartuKeyTyped(evt);
+            }
+        });
         getContentPane().add(No_Kartu);
         No_Kartu.setBounds(930, 250, 335, 32);
 
-        CariPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CariPasienActionPerformed(evt);
-            }
-        });
         CariPasien.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 CariPasienFocusGained(evt);
@@ -497,14 +502,14 @@ public class regispasienform extends javax.swing.JFrame {
     private void ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmActionPerformed
 
         //lek default
-        if (f.equals(TinggiPasien.getText()) || (g.equals(BeratPasien.getText())) || ("".equals(Tempat_ID.getText())) || (a.equals(Nama_Pasien.getText()))
+        if (f.equals(TinggiPasien.getText()) || (g.equals(BeratPasien.getText())) || (a.equals(Nama_Pasien.getText()))
                 || (b.equals(Tempat_Lahir.getText())) || (c.equals(Alamat.getText())) || (Kota.getSelectedIndex() == 0) || (Jenis_Kelamin.getSelectedIndex() == 0) || (goldar.getSelectedIndex() == 0)
                 || (d.equals(No_Hp.getText())) && (e.equals(No_tele.getText())) || (h.equals(Kartu_id.getText())) && (i.equals(No_Kartu.getText()))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
             //System.out.println("1");
 
         } //lek kosong
-        else if ("".equals(TinggiPasien.getText()) || ("".equals(BeratPasien.getText())) || ("".equals(Tempat_ID.getText())) || ("".equals(Nama_Pasien.getText()))
+        else if ("".equals(TinggiPasien.getText()) || ("".equals(BeratPasien.getText())) || ("".equals(Nama_Pasien.getText()))
                 || ("".equals(Tempat_Lahir.getText())) || ("".equals(Alamat.getText())) || (Kota.getSelectedIndex() == 0) || (Jenis_Kelamin.getSelectedIndex() == 0) || (goldar.getSelectedIndex() == 0)
                 || ("".equals(No_Hp.getText())) && ("".equals(No_tele.getText())) || ("".equals(Kartu_id.getText())) && ("".equals(No_Kartu.getText()))) {
             JOptionPane.showMessageDialog(rootPane, "ada yang belum keisi", "Confirm", WIDTH);
@@ -522,14 +527,13 @@ public class regispasienform extends javax.swing.JFrame {
                 int pilihan = JOptionPane.showConfirmDialog(null, "Yakin Ingin Menyimpan Data?", "Konfirmasi Penyimpanan", JOptionPane.YES_NO_OPTION);
 
                 boolean avail = registrasicontrol.cekKartuId(No_Kartu.getText());
-                if (pilihan == 0 && avail) {
+                if (pilihan == 0 && !avail) {
                     String userNameandPassword = registrasicontrol.generateUserName(Nama_Pasien.getText(), String.valueOf(tgl_lahir.getDate()));
                     // insert ke table user (id, userbaneadnpasword, usernameandpassword
                     registrasicontrol.InsertUser(userNameandPassword, userNameandPassword, "pasien");
-                    registrasicontrol.InsertNamaPasien(Tempat_ID.getText(), String.valueOf(registrasicontrol.ambilidkota(Kota.getSelectedIndex())), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), lah, String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), hariIni, userNameandPassword);
-                    JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + Tempat_ID.getText() + "/n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
+                    registrasicontrol.InsertNamaPasien(String.valueOf(registrasicontrol.ambilidkota(Kota.getSelectedIndex())), Nama_Pasien.getText(), Alamat.getText(), Kartu_id.getText(), No_Kartu.getText(), No_tele.getText(), No_Hp.getText(), Tempat_Lahir.getText(), lah, String.valueOf(Jenis_Kelamin.getSelectedItem()), String.valueOf(goldar.getSelectedItem()), Integer.parseInt(BeratPasien.getText()), Integer.parseInt(TinggiPasien.getText()), hariIni, userNameandPassword);
+                    JOptionPane.showMessageDialog(null, "" + Nama_Pasien.getText() + "\n" + Alamat.getText() + "\n" + String.valueOf(Jenis_Kelamin.getSelectedItem()), "Cetak Pasien", JOptionPane.INFORMATION_MESSAGE);
                     registrasicontrol.getTabelPasien(this);
-                    Tempat_ID.setText("");
                     Kota.setSelectedItem(0);
                     Nama_Pasien.setText("");
                     Alamat.setText("");
@@ -578,14 +582,6 @@ public class regispasienform extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_No_KartuMouseClicked
 
-    private void goldarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goldarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_goldarActionPerformed
-
-    private void BeratPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeratPasienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BeratPasienActionPerformed
-
     private void tabelpasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelpasienMouseClicked
 
         try {
@@ -594,7 +590,6 @@ public class regispasienform extends javax.swing.JFrame {
             Date date = new Date();
             pasien = registrasicontrol.getDataPasien(String.valueOf(tabelpasien.getValueAt(row, 0)));
             Nama_Pasien.setText(pasien.getNamaPasien());
-            Tempat_ID.setText(pasien.getIdPasien());
             Tempat_Lahir.setText(pasien.getTempatlahirPasien());
             tgl_lahir.setDate(java.sql.Date.valueOf(pasien.getTgllahirPasien()));
             No_Hp.setText(pasien.getHpPasien());
@@ -622,10 +617,6 @@ public class regispasienform extends javax.swing.JFrame {
             Logger.getLogger(regispasienform.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_TambahAntriActionPerformed
-
-    private void CariPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariPasienActionPerformed
-
-    }//GEN-LAST:event_CariPasienActionPerformed
 
     private void CariPasienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CariPasienFocusGained
         if (CariPasien.getText().equals("Cari Nama Pasien")) {
@@ -660,21 +651,59 @@ public class regispasienform extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void Jenis_KelaminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jenis_KelaminActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Jenis_KelaminActionPerformed
+    private void Nama_PasienKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Nama_PasienKeyTyped
+        typeOnlyCharacter(evt);
+    }//GEN-LAST:event_Nama_PasienKeyTyped
 
-    private void Nama_PasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nama_PasienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Nama_PasienActionPerformed
+    private void Tempat_LahirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tempat_LahirKeyTyped
+        typeOnlyCharacter(evt);
+    }//GEN-LAST:event_Tempat_LahirKeyTyped
 
+    private void No_HpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_No_HpKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_No_HpKeyTyped
+
+    private void No_teleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_No_teleKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_No_teleKeyTyped
+
+    private void Kartu_idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kartu_idKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_Kartu_idKeyTyped
+
+    private void No_KartuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_No_KartuKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_No_KartuKeyTyped
+
+    private void TinggiPasienKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TinggiPasienKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_TinggiPasienKeyTyped
+
+    private void BeratPasienKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BeratPasienKeyTyped
+        typeOnlyNumber(evt);
+    }//GEN-LAST:event_BeratPasienKeyTyped
+
+    public void typeOnlyCharacter(KeyEvent evt) {
+        char c = evt.getKeyChar();
+        if ((Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }
+    
+    public void typeOnlyNumber(KeyEvent evt) {
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Alamat;
     private javax.swing.JTextField BeratPasien;
     private javax.swing.JTextField CariPasien;
     private javax.swing.JButton Confirm;
-    private javax.swing.JLabel ID;
     private javax.swing.JComboBox Jenis_Kelamin;
     private javax.swing.JTextField Kartu_id;
     public javax.swing.JComboBox Kota;
@@ -683,7 +712,6 @@ public class regispasienform extends javax.swing.JFrame {
     private javax.swing.JTextField No_Kartu;
     private javax.swing.JTextField No_tele;
     private javax.swing.JButton TambahAntri;
-    private javax.swing.JTextField Tempat_ID;
     private javax.swing.JTextField Tempat_Lahir;
     private javax.swing.JTextField TinggiPasien;
     private javax.swing.JComboBox goldar;
