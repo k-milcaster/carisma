@@ -334,8 +334,8 @@ public class IsiRekamMedisController {
         PdfPCell cell = new PdfPCell();
         Font font1 = new Font(Font.FontFamily.HELVETICA, 25, Font.NORMAL, BaseColor.RED);
         Font font2 = new Font(Font.FontFamily.HELVETICA, 20, Font.NORMAL, BaseColor.RED);
-        Font space = new Font(Font.FontFamily.HELVETICA, 25, Font.NORMAL, BaseColor.RED);
-        Font spaceTgl = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
+        Font space = new Font(Font.FontFamily.HELVETICA, 15, Font.NORMAL, BaseColor.RED);
+        Font spaceTgl = new Font(Font.FontFamily.HELVETICA, 15, Font.NORMAL, BaseColor.RED);
         Paragraph kunjungan = new Paragraph(" ", font1);
         Paragraph tanggal = new Paragraph(" ", font2);
         Paragraph ss = new Paragraph(" ", space);
