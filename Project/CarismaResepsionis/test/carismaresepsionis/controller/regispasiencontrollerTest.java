@@ -46,7 +46,6 @@ public class regispasiencontrollerTest {
     @Test
     public void testInsertNamaPasien() throws Exception {
         System.out.println("InsertNamaPasien");
-        String id_pasien = "EO15040698";
         String kota_id_kota = "10020";
         String nama_pasien = "Muhammad Fiqhi Darmawan";
         String alamat_pasien = "Jln. Wisma Permai Tengah No.10 Blok AA";
@@ -64,7 +63,7 @@ public class regispasiencontrollerTest {
         String username = "muhammad06";
         setHostPort();
         regispasiencontroller instance = new regispasiencontroller(client);
-        instance.InsertNamaPasien(id_pasien, kota_id_kota, nama_pasien, alamat_pasien, kartuid_pasien, nokartuid_pasien, telp_pasien, hp_pasien, tempatlahirpasien, tgllahir_pasien, kelamin_pasien, darah_pasien, berat_pasien, tinggi_Pasien, regdate_pasien, username);
+        instance.InsertNamaPasien(kota_id_kota, nama_pasien, alamat_pasien, kartuid_pasien, nokartuid_pasien, telp_pasien, hp_pasien, tempatlahirpasien, tgllahir_pasien, kelamin_pasien, darah_pasien, berat_pasien, tinggi_Pasien, regdate_pasien, username);
         // TODO review the generated test code and remove the default call to fail.
         // fail("The test case is a prototype.");
     }
