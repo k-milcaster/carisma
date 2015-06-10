@@ -326,7 +326,7 @@ public class DokterEntity extends UnicastRemoteObject implements DokterService {
             ResultSet result = statement.executeQuery();
             List<Dokter> list = new ArrayList<Dokter>();
             Dokter dok = null;
-            if (result.next()) {
+            while (result.next()) {
                 dok = new Dokter();
                 dok.setIdDokter(result.getString("id_dokter"));
                 dok.setNamaDokter(result.getString("nama_dokter"));
